@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5ED9E87A1B71279F0073FB7B /* FlappyScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5ED9E8791B71279F0073FB7B /* FlappyScene.sks */; };
 		5ED9E87C1B7127DC0073FB7B /* FlappyGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */; };
 		5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */; };
 		DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B721B5409B90066B38C /* AppDelegate.swift */; };
@@ -30,7 +29,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5ED9E8791B71279F0073FB7B /* FlappyScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FlappyScene.sks; sourceTree = "<group>"; };
 		5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameViewController.swift; sourceTree = "<group>"; };
 		5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameScene.swift; sourceTree = "<group>"; };
 		DB458B6D1B5409B90066B38C /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,7 +65,6 @@
 		5ED9E8771B7127760073FB7B /* FlappyGame */ = {
 			isa = PBXGroup;
 			children = (
-				5ED9E8791B71279F0073FB7B /* FlappyScene.sks */,
 				5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */,
 				5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */,
 			);
@@ -220,7 +217,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ED9E87A1B71279F0073FB7B /* FlappyScene.sks in Resources */,
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
