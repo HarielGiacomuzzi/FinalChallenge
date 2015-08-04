@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5ED9E87A1B71279F0073FB7B /* FlappyScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5ED9E8791B71279F0073FB7B /* FlappyScene.sks */; };
+		5ED9E87C1B7127DC0073FB7B /* FlappyGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */; };
+		5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */; };
 		DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B721B5409B90066B38C /* AppDelegate.swift */; };
 		DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB458B741B5409B90066B38C /* FinalChallenge.xcdatamodeld */; };
 		DB458B781B5409B90066B38C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B771B5409B90066B38C /* ViewController.swift */; };
@@ -27,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5ED9E8791B71279F0073FB7B /* FlappyScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FlappyScene.sks; sourceTree = "<group>"; };
+		5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameViewController.swift; sourceTree = "<group>"; };
+		5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameScene.swift; sourceTree = "<group>"; };
 		DB458B6D1B5409B90066B38C /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB458B711B5409B90066B38C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB458B721B5409B90066B38C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +64,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5ED9E8771B7127760073FB7B /* FlappyGame */ = {
+			isa = PBXGroup;
+			children = (
+				5ED9E8791B71279F0073FB7B /* FlappyScene.sks */,
+				5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */,
+				5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */,
+			);
+			name = FlappyGame;
+			sourceTree = "<group>";
+		};
+		5ED9E8781B7127830073FB7B /* Minigames */ = {
+			isa = PBXGroup;
+			children = (
+				5ED9E8771B7127760073FB7B /* FlappyGame */,
+			);
+			name = Minigames;
+			sourceTree = "<group>";
+		};
 		DB458B641B5409B90066B38C = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +103,7 @@
 		DB458B6F1B5409B90066B38C /* FinalChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				5ED9E8781B7127830073FB7B /* Minigames */,
 				DB458B721B5409B90066B38C /* AppDelegate.swift */,
 				DB458B771B5409B90066B38C /* ViewController.swift */,
 				DB458B791B5409B90066B38C /* Main.storyboard */,
@@ -195,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ED9E87A1B71279F0073FB7B /* FlappyScene.sks in Resources */,
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
@@ -215,8 +241,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
 				DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */,
+				5ED9E87C1B7127DC0073FB7B /* FlappyGameViewController.swift in Sources */,
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +443,7 @@
 				DB458B911B5409B90066B38C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB458B921B5409B90066B38C /* Build configuration list for PBXNativeTarget "FinalChallengeTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +452,7 @@
 				DB458B941B5409B90066B38C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
