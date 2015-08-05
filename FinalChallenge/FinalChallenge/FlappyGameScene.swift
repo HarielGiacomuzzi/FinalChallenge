@@ -31,4 +31,13 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         self.addChild(bird)
     }
+    
+    func sendDataToOtherPlayers(){
+        
+    }
+    
+    func getDataFromPlayer(data:NSNotification){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil)
+    }
+    
 }
