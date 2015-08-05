@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, MCBrowserViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,29 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func findGame(sender: AnyObject) {
+        
+        ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true);
+        ConnectionManager.sharedInstance.setupBrowser();
+        ConnectionManager.sharedInstance.browser?.delegate = self;
+        
+        self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in}
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
+        
+    }
+    
+    // Notifies the delegate, when the user taps the done button
+    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!){
+        ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
+    }
+    
+    // Notifies delegate that the user taps the cancel button.
+    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!){
+        ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
+    }
 
 }
 
