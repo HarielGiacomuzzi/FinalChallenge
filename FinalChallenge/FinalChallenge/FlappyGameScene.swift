@@ -51,7 +51,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let groundTexture = SKTexture(imageNamed: "land")
         groundTexture.filteringMode = .Nearest
         
-        //creates ground movement
+        //creates ground movement (essa parte eu ainda nao entendi)
         let moveGroundSprite = SKAction.moveByX(-groundTexture.size().width * 2.0, y: 0, duration: NSTimeInterval(0.02 * groundTexture.size().width * 2.0))
         let resetGroundSprite = SKAction.moveByX(groundTexture.size().width * 2.0, y: 0, duration: 0.0)
         let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
@@ -63,11 +63,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             sprite.setScale(2.0)
             sprite.position = CGPointMake(i * sprite.size.width, sprite.size.height / 2) // sprite.position = CENTER POINT
             
-            //inserts physics
-            sprite.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(sprite.size.width, sprite.size.height))
-            sprite.physicsBody?.dynamic = false
-            sprite.physicsBody?.categoryBitMask = worldCategory
-            
             //sets up movement
             sprite.runAction(moveGroundSpritesForever)
             
@@ -75,6 +70,13 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             self.addChild(sprite)
         }
 
+        //adds imovable ground physics
+        var ground = SKNode()
+        ground.position = CGPointMake(0, groundTexture.size().height) //ground.position = CENTER POINT
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture.size().height * 2.0))
+        ground.physicsBody?.dynamic = false
+        ground.physicsBody?.categoryBitMask = worldCategory
+        self.addChild(ground)
         
     }
     
