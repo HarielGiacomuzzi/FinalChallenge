@@ -12,7 +12,7 @@ import SpriteKit
 class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     var player:SKSpriteNode!
-    let verticalPipeGap = 150.0
+    let verticalPipeGap = 100
 
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
@@ -29,7 +29,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         
         // setup physics
-        self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
+        self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
         self.physicsWorld.contactDelegate = self
         
         // setup background color
@@ -44,7 +44,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         //draws player
         let playerTexture = SKTexture(imageNamed: "bird-02")
         player = SKSpriteNode(texture: playerTexture)
-        player.setScale(2.0)
+        player.setScale(1.0)
         player.position = CGPoint(x: self.frame.size.width * 0.35, y:self.frame.size.height * 0.6)
         
         //adds player physics
@@ -65,16 +65,16 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         groundTexture.filteringMode = .Nearest
         
         //creates ground movement (essa parte eu ainda nao entendi)
-        let moveGroundSprite = SKAction.moveByX(-groundTexture.size().width * 2.0, y: 0, duration: NSTimeInterval(0.02 * groundTexture.size().width * 2.0))
-        let resetGroundSprite = SKAction.moveByX(groundTexture.size().width * 2.0, y: 0, duration: 0.0)
+        let moveGroundSprite = SKAction.moveByX(-groundTexture.size().width * 0.5, y: 0, duration: NSTimeInterval(0.02 * groundTexture.size().width * 0.5))
+        let resetGroundSprite = SKAction.moveByX(groundTexture.size().width * 0.5, y: 0, duration: 0.0)
         let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
-        
+
         // this loop draws the texture side by side until it fills the ground
         for var i:CGFloat = 0; i < 2.0 + self.frame.size.width / ( groundTexture.size().width * 2.0 ); ++i {
             // draws sprite
             let sprite = SKSpriteNode(texture: groundTexture)
-            sprite.setScale(2.0)
-            sprite.position = CGPointMake(i * sprite.size.width, sprite.size.height / 2)
+            sprite.setScale(1.0)
+            sprite.position = CGPointMake(i * sprite.size.width, sprite.size.height/2)
             // sprite.position = CENTER POINT
             
             //sets up movement
@@ -87,11 +87,10 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         //adds imovable ground physics
         var ground = SKNode()
         ground.position = CGPointMake(0, groundTexture.size().height) //ground.position = CENTER POINT
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture.size().height * 2.0))
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture.size().height * 0.5))
         ground.physicsBody?.dynamic = false
         ground.physicsBody?.categoryBitMask = worldCategory
         self.addChild(ground)
-        
         
         // create the pipes textures
         pipeTextureUp = SKTexture(imageNamed: "PipeUp")
@@ -124,8 +123,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         let pipeDown = SKSpriteNode(texture: pipeTextureDown)
         pipeDown.setScale(2.0)
-        pipeDown.position = CGPointMake(0.0, CGFloat(Double(y)) + pipeDown.size.height + CGFloat(verticalPipeGap))
         
+        pipeDown.position = CGPointMake(0.0, CGFloat(Double(y)) + pipeDown.size.height)
         
         pipeDown.physicsBody = SKPhysicsBody(rectangleOfSize: pipeDown.size)
         pipeDown.physicsBody?.dynamic = false
@@ -135,7 +134,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         let pipeUp = SKSpriteNode(texture: pipeTextureUp)
         pipeUp.setScale(2.0)
-        pipeUp.position = CGPointMake(0.0, CGFloat(Double(y)))
+        pipeUp.position = CGPointMake(0.0, CGFloat(Double(y))-CGFloat(verticalPipeGap))
+        
         
         pipeUp.physicsBody = SKPhysicsBody(rectangleOfSize: pipeUp.size)
         pipeUp.physicsBody?.dynamic = false
@@ -160,14 +160,22 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func resiveIPhoneNotification(data:NSNotification){
+        
+        
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-                
             player.physicsBody?.velocity = CGVectorMake(0, 0)
-            player.physicsBody?.applyImpulse(CGVectorMake(0, 30))
-                
+            player.physicsBody?.applyImpulse(CGVectorMake(0, -30))
         }
+    }
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+            player.physicsBody?.velocity = CGVectorMake(0, 0)
+            player.physicsBody?.applyImpulse(CGVectorMake(0, 0))
+        
     }
     
 }
