@@ -25,12 +25,39 @@
                                     <action selector="findGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="72l-1R-4rc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-Bw-YUQ">
+                                <rect key="frame" x="76" y="321" width="78" height="30"/>
+                                <state key="normal" title="GoToBoard">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="yjU-Gf-ViB" kind="show" id="6sM-84-9Gd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Board View Controller-->
+        <scene sceneID="EA1-a0-mz0">
+            <objects>
+                <viewController id="yjU-Gf-ViB" customClass="BoardViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3V9-Tu-dGb"/>
+                        <viewControllerLayoutGuide type="bottom" id="IxB-Pz-EIv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ej0-a6-mcY" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A9n-FO-hs1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1874" y="1023"/>
         </scene>
         <!--Flappy Game View Controller-->
         <scene sceneID="u08-or-TA0">

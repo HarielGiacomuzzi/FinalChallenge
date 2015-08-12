@@ -17,6 +17,9 @@
 		DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB458B7E1B5409B90066B38C /* LaunchScreen.xib */; };
 		DB458B8C1B5409B90066B38C /* FinalChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B8B1B5409B90066B38C /* FinalChallengeTests.swift */; };
 		DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4E51FE1B714194008333D3 /* ConnectionManager.swift */; };
+		DB73E8121B72834400F7D7C7 /* BoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73E8111B72834400F7D7C7 /* BoardController.swift */; };
+		DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB73E8131B72838D00F7D7C7 /* Board.sks */; };
+		DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		DB458B8A1B5409B90066B38C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB458B8B1B5409B90066B38C /* FinalChallengeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalChallengeTests.swift; sourceTree = "<group>"; };
 		DB4E51FE1B714194008333D3 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
+		DB73E8111B72834400F7D7C7 /* BoardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardController.swift; sourceTree = "<group>"; };
+		DB73E8131B72838D00F7D7C7 /* Board.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Board.sks; sourceTree = "<group>"; };
+		DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +158,9 @@
 		DB4E52001B714A10008333D3 /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				DB73E8111B72834400F7D7C7 /* BoardController.swift */,
+				DB73E8131B72838D00F7D7C7 /* Board.sks */,
+				DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */,
 			);
 			name = Board;
 			sourceTree = "<group>";
@@ -238,6 +247,7 @@
 			files = (
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
+				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +268,8 @@
 			files = (
 				5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */,
 				DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */,
+				DB73E8121B72834400F7D7C7 /* BoardController.swift in Sources */,
+				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
 				DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */,
 				5ED9E87C1B7127DC0073FB7B /* FlappyGameViewController.swift in Sources */,
