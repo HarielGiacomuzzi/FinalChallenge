@@ -13,10 +13,9 @@ import MultipeerConnectivity
 
 class ConnectionManager: NSObject, MCSessionDelegate{
     var peerID: MCPeerID = MCPeerID();
-    var session: MCSession!
+    var session: MCSession = MCSession();
     var browser: MCBrowserViewController?;
     var advertiser: MCAdvertiserAssistant = MCAdvertiserAssistant();
-    let ServiceID = "iFiesta";
     static let sharedInstance = ConnectionManager();
     
     func setupConnectionWithOptions(displayName : String, active : Bool){
@@ -35,35 +34,18 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     }
     
     func setupBrowser(){
-        browser = MCBrowserViewController(serviceType: self.ServiceID, session: session)
-    }
-    
-    func closeConections(){
-        session.disconnect();
+        browser = MCBrowserViewController(serviceType: "pingponghero", session: session)
     }
     
     func advertiseSelf(advertise:Bool){
         if advertise{
-            advertiser = MCAdvertiserAssistant(serviceType: self.ServiceID, discoveryInfo: nil, session: session)
+            advertiser = MCAdvertiserAssistant(serviceType: "pingponghero", discoveryInfo: nil, session: session)
             advertiser.start()
         }else{
             advertiser.stop()
             advertiser = MCAdvertiserAssistant();
         }
         
-    }
-    
-    func sendStringToPeer(message : String, reliable : Bool) -> Bool{
-        let error = NSErrorPointer();
-        if (reliable){
-            return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
-        }
-        
-        return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
-    }
-    
-    func session(session: MCSession!, didReceiveCertificate certificate: [AnyObject]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
-        certificateHandler(true)
     }
     
     // Remote peer changed state

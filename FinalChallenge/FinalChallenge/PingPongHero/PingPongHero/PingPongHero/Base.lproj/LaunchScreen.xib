@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pingponglogo" translatesAutoresizingMaskIntoConstraints="NO" id="biH-d1-VKP">
+                    <rect key="frame" x="100" y="0.0" width="251" height="480"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="biH-d1-VKP" secondAttribute="bottom" id="9y1-7X-Dpj"/>
+                <constraint firstAttribute="trailing" secondItem="biH-d1-VKP" secondAttribute="trailing" id="muZ-bQ-Z9Z"/>
+                <constraint firstItem="biH-d1-VKP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="z9o-oD-vhX"/>
+                <constraint firstItem="biH-d1-VKP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zm0-Aq-fpF"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="548" y="455"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="pingponglogo" width="187" height="333"/>
+    </resources>
+</document>
