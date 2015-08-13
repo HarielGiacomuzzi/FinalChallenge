@@ -38,6 +38,10 @@ class ConnectionManager: NSObject, MCSessionDelegate{
         browser = MCBrowserViewController(serviceType: self.ServiceID, session: session)
     }
     
+    func closeConections(){
+        session.disconnect();
+    }
+    
     func advertiseSelf(advertise:Bool){
         if advertise{
             advertiser = MCAdvertiserAssistant(serviceType: self.ServiceID, discoveryInfo: nil, session: session)
@@ -49,9 +53,13 @@ class ConnectionManager: NSObject, MCSessionDelegate{
         
     }
     
-    func sendStringToPeer(message : String) -> Bool{
+    func sendStringToPeer(message : String, reliable : Bool) -> Bool{
         let error = NSErrorPointer();
-        return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
+        if (reliable){
+            return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
+        }
+        
+        return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
     }
     
     func session(session: MCSession!, didReceiveCertificate certificate: [AnyObject]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
