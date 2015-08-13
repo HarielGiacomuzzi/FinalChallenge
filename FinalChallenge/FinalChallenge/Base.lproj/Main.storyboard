@@ -34,6 +34,15 @@
                                     <segue destination="yjU-Gf-ViB" kind="show" id="6sM-84-9Gd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boo-zp-P0z">
+                                <rect key="frame" x="65" y="235" width="75" height="30"/>
+                                <state key="normal" title="GotoGame">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="tYi-IB-zqG" kind="show" id="0KN-Yi-5Xt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -75,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qaV-sh-fkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="379" y="1006"/>
+            <point key="canvasLocation" x="1105" y="1515"/>
         </scene>
     </scenes>
 </document>
