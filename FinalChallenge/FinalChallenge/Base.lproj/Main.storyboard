@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -26,12 +26,6 @@
                                     <action selector="findGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="72l-1R-4rc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-Bw-YUQ">
-                                <rect key="frame" x="76" y="321" width="78" height="30"/>
-                                <state key="normal" title="GoToBoard">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boo-zp-P0z">
                                 <rect key="frame" x="65" y="235" width="75" height="30"/>
                                 <state key="normal" title="GotoGame">
@@ -41,12 +35,74 @@
                                     <segue destination="tYi-IB-zqG" kind="show" id="0KN-Yi-5Xt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h78-bK-YKq">
+                                <rect key="frame" x="65" y="72" width="102" height="30"/>
+                                <state key="normal" title="GotoGamePad">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="zUZ-IC-i5H" kind="show" id="5Y1-9d-Y7S"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-Bw-YUQ">
+                                <rect key="frame" x="65" y="320" width="78" height="30"/>
+                                <state key="normal" title="GoToBoard">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--GamePad-->
+        <scene sceneID="eJh-1k-LCr">
+            <objects>
+                <viewController title="GamePad" id="zUZ-IC-i5H" customClass="GamePadController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YYL-gx-0Wh"/>
+                        <viewControllerLayoutGuide type="bottom" id="rXn-SR-f4e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KVC-2X-hxM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0Z-zd-xsx">
+                                <rect key="frame" x="35" y="163" width="541" height="274"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="274" id="SdW-HZ-D4c"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="72"/>
+                                <state key="normal" title="Jump">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="JumpDataSender:" destination="zUZ-IC-i5H" eventType="touchUpInside" id="crH-LH-Ogj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="S0Z-zd-xsx" secondAttribute="trailing" constant="8" id="Mzq-tt-rJZ"/>
+                            <constraint firstItem="S0Z-zd-xsx" firstAttribute="leading" secondItem="KVC-2X-hxM" secondAttribute="leadingMargin" constant="19" id="Rpo-h9-Mij"/>
+                            <constraint firstAttribute="centerX" secondItem="S0Z-zd-xsx" secondAttribute="centerX" constant="-0.5" id="Syc-ur-4e0"/>
+                            <constraint firstAttribute="centerY" secondItem="S0Z-zd-xsx" secondAttribute="centerY" id="hGy-7L-OM8"/>
+                            <constraint firstAttribute="centerY" secondItem="S0Z-zd-xsx" secondAttribute="centerY" id="jy0-LB-po6"/>
+                            <constraint firstAttribute="centerX" secondItem="S0Z-zd-xsx" secondAttribute="centerX" constant="-5.5" id="ymS-sU-Tyc"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Syc-ur-4e0"/>
+                                <exclude reference="hGy-7L-OM8"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R0w-ig-Xg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1456" y="335"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="oWV-na-dXX">
@@ -226,7 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qaV-sh-fkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="508" y="1114"/>
+            <point key="canvasLocation" x="1105" y="1515"/>
         </scene>
     </scenes>
 </document>
