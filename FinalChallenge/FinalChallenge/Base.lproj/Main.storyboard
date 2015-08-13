@@ -56,6 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1105" y="663"/>
         </scene>
         <!--GamePad-->
         <scene sceneID="eJh-1k-LCr">
@@ -228,6 +229,9 @@
                             <constraint firstItem="Qqn-Av-zy8" firstAttribute="top" secondItem="EWh-2Z-sg3" secondAttribute="bottom" constant="8" id="yMd-bi-w5U"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="SVf-RS-hUS" id="Pu3-GY-JDy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvJ-sc-ePn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
