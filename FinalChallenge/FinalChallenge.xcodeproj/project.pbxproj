@@ -119,6 +119,7 @@
 		DB458B6F1B5409B90066B38C /* FinalChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				DB4E52001B714A10008333D3 /* Board */,
 				DB4E51FD1B714149008333D3 /* Utils */,
 				5ED9E8781B7127830073FB7B /* Minigames */,
 				DB458B721B5409B90066B38C /* AppDelegate.swift */,
@@ -163,6 +164,13 @@
 				DB4E51FE1B714194008333D3 /* ConnectionManager.swift */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		DB4E52001B714A10008333D3 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Board;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
