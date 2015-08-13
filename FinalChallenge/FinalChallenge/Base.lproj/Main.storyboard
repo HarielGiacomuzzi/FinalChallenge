@@ -162,10 +162,10 @@
             </objects>
             <point key="canvasLocation" x="-1104" y="-409"/>
         </scene>
-        <!--View Controller-->
+        <!--Iphone Connection View Controller-->
         <scene sceneID="YJc-zg-dwn">
             <objects>
-                <viewController id="Y9w-QZ-R0C" sceneMemberID="viewController">
+                <viewController id="Y9w-QZ-R0C" customClass="IphoneConnectionViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="feY-Ki-ZXY"/>
                         <viewControllerLayoutGuide type="bottom" id="ebL-Iy-27c"/>
@@ -179,6 +179,9 @@
                                 <state key="normal" title="Browse Boards">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="browseButtonPressed" destination="Y9w-QZ-R0C" eventType="touchUpInside" id="kRE-Yo-fl2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
