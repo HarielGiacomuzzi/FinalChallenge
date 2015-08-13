@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -25,13 +26,19 @@
                                     <action selector="findGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="72l-1R-4rc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2V-h0-feC">
-                                <rect key="frame" x="58" y="257" width="79" height="30"/>
-                                <state key="normal" title="Start Game">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2l-Bw-YUQ">
+                                <rect key="frame" x="76" y="321" width="78" height="30"/>
+                                <state key="normal" title="GoToBoard">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boo-zp-P0z">
+                                <rect key="frame" x="65" y="235" width="75" height="30"/>
+                                <state key="normal" title="GotoGame">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="tYi-IB-zqG" kind="show" id="zg3-lC-vdF"/>
+                                    <segue destination="tYi-IB-zqG" kind="show" id="0KN-Yi-5Xt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -40,6 +47,168 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Initial View Controller-->
+        <scene sceneID="oWV-na-dXX">
+            <objects>
+                <viewController id="1Vb-KC-f6p" customClass="InitialViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gC9-Lj-Hnv"/>
+                        <viewControllerLayoutGuide type="bottom" id="gFo-J2-5jM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZcK-a9-FJg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUk-Cf-6K3">
+                                <rect key="frame" x="72" y="63" width="450" height="150"/>
+                                <color key="backgroundColor" red="0.99215686270000003" green="0.67450980390000004" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="kgM-VI-uBx"/>
+                                    <constraint firstAttribute="width" constant="450" id="rNG-aM-e4o"/>
+                                </constraints>
+                                <state key="normal" title="Party Mode">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="partyModeButton" destination="1Vb-KC-f6p" eventType="touchUpInside" id="lLx-fD-CVe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-ta-Slj">
+                                <rect key="frame" x="72" y="398" width="450" height="150"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="XC0-Po-MBV"/>
+                                    <constraint firstAttribute="width" constant="450" id="gHm-dP-amR"/>
+                                </constraints>
+                                <state key="normal" title="Single Player">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gFo-J2-5jM" firstAttribute="top" secondItem="xYA-ta-Slj" secondAttribute="bottom" constant="52" id="L7E-dm-ngr"/>
+                            <constraint firstAttribute="centerX" secondItem="BUk-Cf-6K3" secondAttribute="centerX" constant="3" id="Qmm-yD-XgW"/>
+                            <constraint firstAttribute="centerX" secondItem="xYA-ta-Slj" secondAttribute="centerX" constant="3" id="UMD-jn-UbX"/>
+                            <constraint firstItem="BUk-Cf-6K3" firstAttribute="top" secondItem="gC9-Lj-Hnv" secondAttribute="bottom" constant="43" id="ile-7R-lyt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="nrX-X9-ixP" kind="show" identifier="ipadSegue" id="zJz-Vo-ogW"/>
+                        <segue destination="Y9w-QZ-R0C" kind="show" identifier="iphoneSegue" id="FnE-Bj-SsS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g3O-K9-r4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2032" y="188"/>
+        </scene>
+        <!--Ipad Connection View Controller-->
+        <scene sceneID="Few-re-9Vu">
+            <objects>
+                <viewController id="nrX-X9-ixP" customClass="IpadConnectionViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EWh-2Z-sg3"/>
+                        <viewControllerLayoutGuide type="bottom" id="M0p-l6-B14"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ocQ-NJ-NDZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players Connected" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqn-Av-zy8">
+                                <rect key="frame" x="16" y="28" width="146" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SVf-RS-hUS">
+                                <rect key="frame" x="16" y="66" width="568" height="514"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" rowHeight="66" id="GhH-Jc-KI3">
+                                        <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GhH-Jc-KI3" id="Tak-QM-hNr">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B18-8g-crY">
+                                                    <rect key="frame" x="8" y="22" width="46" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="B18-8g-crY" secondAttribute="centerY" constant="0.25" id="Tev-So-xJL"/>
+                                                <constraint firstItem="B18-8g-crY" firstAttribute="leading" secondItem="Tak-QM-hNr" secondAttribute="leadingMargin" id="vYY-SF-DMu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="nrX-X9-ixP" id="69M-8a-ifh"/>
+                                    <outlet property="delegate" destination="nrX-X9-ixP" id="5nH-1r-yvI"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMF-OH-01g">
+                                <rect key="frame" x="505" y="28" width="79" height="30"/>
+                                <state key="normal" title="Start Game">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startGameButtonPressed" destination="nrX-X9-ixP" eventType="touchUpInside" id="0sj-9K-gee"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SVf-RS-hUS" firstAttribute="trailing" secondItem="ocQ-NJ-NDZ" secondAttribute="trailingMargin" id="6TG-Pv-5xl"/>
+                            <constraint firstItem="SVf-RS-hUS" firstAttribute="leading" secondItem="ocQ-NJ-NDZ" secondAttribute="leadingMargin" id="7YK-34-qCF"/>
+                            <constraint firstItem="Qqn-Av-zy8" firstAttribute="leading" secondItem="ocQ-NJ-NDZ" secondAttribute="leadingMargin" id="7y0-Bg-eQT"/>
+                            <constraint firstItem="SVf-RS-hUS" firstAttribute="top" secondItem="Qqn-Av-zy8" secondAttribute="bottom" constant="17" id="BMU-ei-Zee"/>
+                            <constraint firstItem="hMF-OH-01g" firstAttribute="trailing" secondItem="ocQ-NJ-NDZ" secondAttribute="trailingMargin" id="c38-Qf-W6h"/>
+                            <constraint firstItem="hMF-OH-01g" firstAttribute="top" secondItem="EWh-2Z-sg3" secondAttribute="bottom" constant="8" id="ihV-St-Keu"/>
+                            <constraint firstItem="M0p-l6-B14" firstAttribute="top" secondItem="SVf-RS-hUS" secondAttribute="bottom" constant="20" id="ucT-nw-7cs"/>
+                            <constraint firstItem="Qqn-Av-zy8" firstAttribute="top" secondItem="EWh-2Z-sg3" secondAttribute="bottom" constant="8" id="yMd-bi-w5U"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rvJ-sc-ePn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1104" y="-409"/>
+        </scene>
+        <!--Iphone Connection View Controller-->
+        <scene sceneID="YJc-zg-dwn">
+            <objects>
+                <viewController id="Y9w-QZ-R0C" customClass="IphoneConnectionViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="feY-Ki-ZXY"/>
+                        <viewControllerLayoutGuide type="bottom" id="ebL-Iy-27c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5Ru-4q-AtX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QG2-Sl-fAY">
+                                <rect key="frame" x="248" y="285" width="105" height="30"/>
+                                <state key="normal" title="Browse Boards">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="browseButtonPressed" destination="Y9w-QZ-R0C" eventType="touchUpInside" id="kRE-Yo-fl2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="QG2-Sl-fAY" secondAttribute="centerY" id="PGp-74-75T"/>
+                            <constraint firstAttribute="centerX" secondItem="QG2-Sl-fAY" secondAttribute="centerX" constant="-0.5" id="VXf-gg-A5Q"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uuh-9S-k9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1104" y="618"/>
         </scene>
         <!--Flappy Game View Controller-->
         <scene sceneID="u08-or-TA0">

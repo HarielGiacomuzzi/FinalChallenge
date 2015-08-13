@@ -13,7 +13,12 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true);
+        ConnectionManager.sharedInstance.setupBrowser();
+        ConnectionManager.sharedInstance.browser?.delegate = self;
+        
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,17 +27,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
 
     @IBAction func findGame(sender: AnyObject) {
-        
-        ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true);
-        ConnectionManager.sharedInstance.setupBrowser();
-        ConnectionManager.sharedInstance.browser?.delegate = self;
-        
         self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in}
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
-        
     }
     
     // Notifies the delegate, when the user taps the done button
