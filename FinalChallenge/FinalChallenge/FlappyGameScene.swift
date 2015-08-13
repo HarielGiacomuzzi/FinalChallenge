@@ -50,7 +50,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         player0 = SKSpriteNode(texture: playerTexture)
         spawnPlayer(player0, framePosition: 0)
         
-        player1 = SKSpriteNode(texture: playerTexture)
+        let playerTexture0 = SKTexture(imageNamed: "bird-01")
+        player1 = SKSpriteNode(texture: playerTexture0)
         spawnPlayer(player1, framePosition: 100)
         
         player2 = SKSpriteNode(texture: playerTexture)
@@ -69,7 +70,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
 
         // this loop draws the texture side by side until it fills the ground
-        for var i:CGFloat = 0; i < 2.0 + self.frame.size.width / ( groundTexture.size().width * 2.0 ); ++i {
+        for var i:CGFloat = 0; i < 3.0 + self.frame.size.width / ( groundTexture.size().width * 2.0 ); ++i {
             // draws sprite
             let sprite = SKSpriteNode(texture: groundTexture)
             sprite.setScale(1.0)
@@ -86,7 +87,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         //adds imovable ground physics
         var ground = SKNode()
         ground.position = CGPointMake(0, groundTexture.size().height) //ground.position = CENTER POINT
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture.size().height * 0.5))
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture.size().height * 0.01))
         ground.physicsBody?.dynamic = false
         ground.physicsBody?.categoryBitMask = worldCategory
         self.addChild(ground)
