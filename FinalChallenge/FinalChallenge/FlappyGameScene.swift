@@ -11,8 +11,11 @@ import SpriteKit
 
 class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
-    var player:SKSpriteNode!
-    let verticalPipeGap = 100
+    var player0:SKSpriteNode!
+    var player1:SKSpriteNode!
+    var player2:SKSpriteNode!
+    var player3:SKSpriteNode!
+    let verticalPipeGap = 70
 
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
@@ -29,7 +32,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         
         // setup physics
-        self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
+        self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         
         // setup background color
@@ -41,24 +44,20 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         pipes = SKNode()
         moving.addChild(pipes)
         
-        //draws player
+        
+        
         let playerTexture = SKTexture(imageNamed: "bird-02")
-        player = SKSpriteNode(texture: playerTexture)
-        player.setScale(1.0)
-        player.position = CGPoint(x: self.frame.size.width * 0.35, y:self.frame.size.height * 0.6)
+        player0 = SKSpriteNode(texture: playerTexture)
+        spawnPlayer(player0, framePosition: 0)
         
-        //adds player physics
-        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.height / 2.0)
-        player.physicsBody?.dynamic = true
-        player.physicsBody?.allowsRotation = false
+        player1 = SKSpriteNode(texture: playerTexture)
+        spawnPlayer(player1, framePosition: 100)
         
-        player.physicsBody?.categoryBitMask = playerCategory
-        player.physicsBody?.collisionBitMask = worldCategory | pipeCategory
-        player.physicsBody?.contactTestBitMask = worldCategory | pipeCategory
+        player2 = SKSpriteNode(texture: playerTexture)
+        spawnPlayer(player2, framePosition: -50)
         
-        //adds player to game
-        self.addChild(player)
-        
+        player3 = SKSpriteNode(texture: playerTexture)
+        spawnPlayer(player3, framePosition: 50)
         
         // creates ground texture
         let groundTexture = SKTexture(imageNamed: "land")
@@ -113,6 +112,26 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     }
     
     
+    func spawnPlayer(player:SKSpriteNode, framePosition:CGFloat){
+        //draws player
+        let playerTexture = SKTexture(imageNamed: "bird-02")
+        var player = player
+        player.setScale(1.0)
+        player.position = CGPoint(x: self.frame.size.width * 0.35, y:self.frame.size.height * 0.6 + framePosition)
+        
+        //adds player physics
+        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.height / 2.0)
+        player.physicsBody?.dynamic = true
+        player.physicsBody?.allowsRotation = false
+        
+        player.physicsBody?.categoryBitMask = playerCategory
+        player.physicsBody?.collisionBitMask = worldCategory | pipeCategory
+        player.physicsBody?.contactTestBitMask = worldCategory | pipeCategory
+        
+        //adds player to game
+        self.addChild(player)
+    }
+    
     func spawnPipes() {
         let pipePair = SKNode()
         pipePair.position = CGPointMake( self.frame.size.width + pipeTextureUp.size().width * 2, 0 )
@@ -144,7 +163,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         pipePair.addChild(pipeUp)
         
         var contactNode = SKNode()
-        contactNode.position = CGPointMake( pipeDown.size.width + player.size.width / 2, CGRectGetMidY( self.frame ) )
+        contactNode.position = CGPointMake( pipeDown.size.width + player0.size.width / 2, CGRectGetMidY( self.frame ) )
         contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake( pipeUp.size.width, self.frame.size.height ))
         contactNode.physicsBody?.dynamic = false
         contactNode.physicsBody?.categoryBitMask = scoreCategory
@@ -168,13 +187,13 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-            player.physicsBody?.velocity = CGVectorMake(0, 0)
-            player.physicsBody?.applyImpulse(CGVectorMake(0, -30))
+            player0.physicsBody?.velocity = CGVectorMake(0, 0)
+            player0.physicsBody?.applyImpulse(CGVectorMake(0, 5))
         }
     }
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-            player.physicsBody?.velocity = CGVectorMake(0, 0)
-            player.physicsBody?.applyImpulse(CGVectorMake(0, 0))
+           // player.physicsBody?.velocity = CGVectorMake(0, 0)
+            //player.physicsBody?.applyImpulse(CGVectorMake(0, 0))
         
     }
     
