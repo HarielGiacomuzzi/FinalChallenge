@@ -68,8 +68,6 @@ class IpadConnectionViewController: UIViewController, UITableViewDataSource, UIT
             tableView.reloadData()
             
         }
-
-        
         
     }
     
