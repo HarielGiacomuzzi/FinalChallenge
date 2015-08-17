@@ -119,7 +119,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let y = arc4random() % height + height
         
         let pipeDown = SKSpriteNode(texture: pipeTextureDown)
-        pipeDown.setScale(2.0)
+        pipeDown.setScale(3.0)
         
         pipeDown.position = CGPointMake(0.0, CGFloat(Double(y)) + pipeDown.size.height)
         
@@ -130,7 +130,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         pipePair.addChild(pipeDown)
         
         let pipeUp = SKSpriteNode(texture: pipeTextureUp)
-        pipeUp.setScale(2.0)
+        pipeUp.setScale(3.0)
         pipeUp.position = CGPointMake(0.0, CGFloat(Double(y))-CGFloat(verticalPipeGap))
         
         
