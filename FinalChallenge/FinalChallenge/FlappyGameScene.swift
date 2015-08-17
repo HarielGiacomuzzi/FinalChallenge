@@ -19,6 +19,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     let worldCategory: UInt32 = 1 << 1
     let pipeCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
+    let endScreenCategory: UInt32 = 1 << 4
     
     var pipeTextureUp:SKTexture!
     var pipeTextureDown:SKTexture!
@@ -43,6 +44,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         moving.addChild(pipes)
         
         self.spawnPlayers()
+        self.gameLimit()
         
         //nobody connected
         if players.count == 0 {
@@ -50,6 +52,35 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         }
 
         
+        // create the pipes textures
+        pipeTextureUp = SKTexture(imageNamed: "PipeUp")
+        pipeTextureUp.filteringMode = .Nearest
+        pipeTextureDown = SKTexture(imageNamed: "PipeDown")
+        pipeTextureDown.filteringMode = .Nearest
+        
+        // create the pipes movement actions
+        let distanceToMove = CGFloat(self.frame.size.width + 2.0 * pipeTextureUp.size().width)
+        let movePipes = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
+        let removePipes = SKAction.removeFromParent()
+        movePipesAndRemove = SKAction.sequence([movePipes, removePipes])
+        
+        // spawn the pipes
+        let spawn = SKAction.runBlock({() in self.spawnPipes()})
+        let delay = SKAction.waitForDuration(NSTimeInterval(2.0))
+        let spawnThenDelay = SKAction.sequence([spawn, delay])
+        let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
+        self.runAction(spawnThenDelayForever)
+        
+        var contactNode = SKNode()
+        contactNode.position = CGPointMake(0, 0)
+        contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        contactNode.physicsBody?.dynamic = false
+        contactNode.physicsBody?.categoryBitMask = endScreenCategory
+        contactNode.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(contactNode)
+    }
+    
+    func gameLimit(){
         // creates ground texture
         let groundTexture = SKTexture(imageNamed: "land")
         groundTexture.filteringMode = .Nearest
@@ -58,7 +89,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let moveGroundSprite = SKAction.moveByX(-groundTexture.size().width * 0.5, y: 0, duration: NSTimeInterval(0.02 * groundTexture.size().width * 0.5))
         let resetGroundSprite = SKAction.moveByX(groundTexture.size().width * 0.5, y: 0, duration: 0.0)
         let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
-
+        
         // this loop draws the texture side by side until it fills the ground
         for var i:CGFloat = 0; i < 3.0 + self.frame.size.width / ( groundTexture.size().width * 2.0 ); ++i {
             // draws sprite
@@ -73,7 +104,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             //adds sprite to game
             self.addChild(sprite)
         }
-
+        
         //adds imovable ground physics
         var ground = SKNode()
         ground.position = CGPointMake(0, groundTexture.size().height) //ground.position = CENTER POINT
@@ -131,7 +162,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
-            
         }
     }
     
@@ -141,7 +171,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         testPlayer.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
         self.addChild(testPlayer)
     }
-    
+
     func playerJump(identifier:String) {
         for player in players {
             if player.identifier == identifier {
@@ -158,5 +188,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             
         }
     }
+    
     
 }
