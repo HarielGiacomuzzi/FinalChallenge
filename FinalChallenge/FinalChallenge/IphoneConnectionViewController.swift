@@ -37,7 +37,7 @@ class IphoneConnectionViewController: UIViewController, MCBrowserViewControllerD
     }
     
     func connectionChanged(data : NSNotification){
-        var a = data.userInfo?.values.array[1];
+        var a: AnyObject? = data.userInfo?.values.array[1];
         println("Connection Status : \(a)");
     }
 

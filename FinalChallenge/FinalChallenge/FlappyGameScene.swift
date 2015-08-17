@@ -41,7 +41,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         pipes = SKNode()
         moving.addChild(pipes)
         
-        self.spawnPlayers(3)
+        self.spawnPlayers()
         
         
         // creates ground texture
@@ -96,9 +96,13 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         self.runAction(spawnThenDelayForever)
     }
     
-    func spawnPlayers(number:Int) {
-        for i in 0...number {
+    func spawnPlayers() {
+        let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
+        
+        for connectedPeer in connectedPeers {
             var player = FlappyPlayerNode()
+            player.identifier = connectedPeer.displayName
+            println(player.identifier)
             player.position = CGPoint(x: self.frame.size.width * 0.35, y:self.frame.size.height * 0.6)
             self.addChild(player)
             players.append(player)
@@ -149,10 +153,18 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func playerJump(identifier:String) {
+        for player in players {
+            if player.identifier == identifier {
+                player.jump()
+            }
+        }
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-            players[0].jump()
+            //players[0].jump()
             
         }
     }
