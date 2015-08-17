@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */; };
+		5E7DCE931B82500500229F04 /* FlappyPipeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DCE921B82500500229F04 /* FlappyPipeNode.swift */; };
 		5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */; };
 		5E8F9DDC1B7D0305004514D0 /* IpadConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DDB1B7D0305004514D0 /* IpadConnectionViewController.swift */; };
 		5E8F9DDE1B7D0986004514D0 /* IphoneConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DDD1B7D0986004514D0 /* IphoneConnectionViewController.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPlayerNode.swift; sourceTree = "<group>"; };
+		5E7DCE921B82500500229F04 /* FlappyPipeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPipeNode.swift; sourceTree = "<group>"; };
 		5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		5E8F9DDB1B7D0305004514D0 /* IpadConnectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IpadConnectionViewController.swift; sourceTree = "<group>"; };
 		5E8F9DDD1B7D0986004514D0 /* IphoneConnectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IphoneConnectionViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 			children = (
 				5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */,
 				5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */,
+				5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */,
+				5E7DCE921B82500500229F04 /* FlappyPipeNode.swift */,
 			);
 			name = FlappyGame;
 			sourceTree = "<group>";
@@ -308,10 +314,12 @@
 				5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */,
 				5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */,
 				DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */,
+				5E7DCE931B82500500229F04 /* FlappyPipeNode.swift in Sources */,
 				DB73E8121B72834400F7D7C7 /* BoardController.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
 				5E8F9DDC1B7D0305004514D0 /* IpadConnectionViewController.swift in Sources */,
+				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
 				DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */,
 				5ED9E87C1B7127DC0073FB7B /* FlappyGameViewController.swift in Sources */,
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,

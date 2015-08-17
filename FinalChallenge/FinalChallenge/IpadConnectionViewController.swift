@@ -27,7 +27,6 @@ class IpadConnectionViewController: UIViewController, UITableViewDataSource, UIT
     // MARK: - IBActions
     
     @IBAction func startGameButtonPressed() {
-        
     }
     
 
@@ -69,8 +68,6 @@ class IpadConnectionViewController: UIViewController, UITableViewDataSource, UIT
             tableView.reloadData()
             
         }
-
-        
         
     }
     

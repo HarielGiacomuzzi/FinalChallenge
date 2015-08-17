@@ -38,8 +38,13 @@ class FlappyGameViewController: UIViewController {
         
     }
     
-    func messageReceived(data:NSNotification){
-        var data = data.userInfo?.values.array[0]
-        scene.playerJump()
+
+    func messageReceived(data : NSNotification){
+        var a = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
+        var message = String(NSString(data: a, encoding: NSUTF8StringEncoding)!);
+        scene.playerJump(message)
+        
+        var value = ConnectionManager.sharedInstance.session.connectedPeers
+        println(value)
     }
 }

@@ -11,16 +11,14 @@ import SpriteKit
 
 class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
-    var player0:SKSpriteNode!
-    var player1:SKSpriteNode!
-    var player2:SKSpriteNode!
-    var player3:SKSpriteNode!
+    var players:[FlappyPlayerNode] = []
     let verticalPipeGap = 70
 
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
     let pipeCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
+    let endScreenCategory: UInt32 = 1 << 4
     
     var pipeTextureUp:SKTexture!
     var pipeTextureDown:SKTexture!
@@ -44,52 +42,9 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         pipes = SKNode()
         moving.addChild(pipes)
         
+        self.spawnPlayers()
+        self.gameLimit()
         
-        
-        let playerTexture = SKTexture(imageNamed: "bird-02")
-        player0 = SKSpriteNode(texture: playerTexture)
-        spawnPlayer(player0, framePosition: 0)
-        
-        player1 = SKSpriteNode(texture: playerTexture)
-        spawnPlayer(player1, framePosition: 100)
-        
-        player2 = SKSpriteNode(texture: playerTexture)
-        spawnPlayer(player2, framePosition: -50)
-        
-        player3 = SKSpriteNode(texture: playerTexture)
-        spawnPlayer(player3, framePosition: 50)
-        
-        // creates ground texture
-        let groundTexture = SKTexture(imageNamed: "land")
-        groundTexture.filteringMode = .Nearest
-        
-        //creates ground movement (essa parte eu ainda nao entendi)
-        let moveGroundSprite = SKAction.moveByX(-groundTexture.size().width * 0.5, y: 0, duration: NSTimeInterval(0.02 * groundTexture.size().width * 0.5))
-        let resetGroundSprite = SKAction.moveByX(groundTexture.size().width * 0.5, y: 0, duration: 0.0)
-        let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
-
-        // this loop draws the texture side by side until it fills the ground
-        for var i:CGFloat = 0; i < 2.0 + self.frame.size.width / ( groundTexture.size().width * 2.0 ); ++i {
-            // draws sprite
-            let sprite = SKSpriteNode(texture: groundTexture)
-            sprite.setScale(1.0)
-            sprite.position = CGPointMake(i * sprite.size.width, sprite.size.height/2)
-            // sprite.position = CENTER POINT
-            
-            //sets up movement
-            sprite.runAction(moveGroundSpritesForever)
-            
-            //adds sprite to game
-            self.addChild(sprite)
-        }
-
-        //adds imovable ground physics
-        var ground = SKNode()
-        ground.position = CGPointMake(0, groundTexture.size().height) //ground.position = CENTER POINT
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture.size().height * 0.5))
-        ground.physicsBody?.dynamic = false
-        ground.physicsBody?.categoryBitMask = worldCategory
-        self.addChild(ground)
         
         // create the pipes textures
         pipeTextureUp = SKTexture(imageNamed: "PipeUp")
@@ -109,27 +64,97 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
         self.runAction(spawnThenDelayForever)
+        
+        var contactNode = SKNode()
+        contactNode.position = CGPointMake(0, 0)
+        contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        contactNode.physicsBody?.dynamic = false
+        contactNode.physicsBody?.categoryBitMask = endScreenCategory
+        contactNode.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(contactNode)
     }
     
+    func gameLimit(){
+        // creates ground texture
+        let groundTexture = SKTexture(imageNamed: "land")
+        groundTexture.filteringMode = .Nearest
+        
+        //creates ground movement (essa parte eu ainda nao entendi)
+        let moveGroundSprite = SKAction.moveByX(-groundTexture.size().width * 0.5, y: 0, duration: NSTimeInterval(0.02 * groundTexture.size().width * 0.5))
+        let resetGroundSprite = SKAction.moveByX(groundTexture.size().width * 0.5, y: 0, duration: 0.0)
+        let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([moveGroundSprite,resetGroundSprite]))
+        
+        // this loop draws the texture side by side until it fills the ground
+        for var i:CGFloat = 0; i < 3.0 + self.frame.size.width / ( groundTexture.size().width * 2.0 ); ++i {
+            // draws sprite
+            let sprite = SKSpriteNode(texture: groundTexture)
+            sprite.setScale(1.0)
+            sprite.position = CGPointMake(i * sprite.size.width, sprite.size.height/2)
+            // sprite.position = CENTER POINT
+            
+            //sets up movement
+            sprite.runAction(moveGroundSpritesForever)
+            
+            //adds sprite to game
+            self.addChild(sprite)
+        }
+        
+        //adds imovable ground physics
+        var ground = SKNode()
+        ground.position = CGPointMake(0, groundTexture.size().height) //ground.position = CENTER POINT
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture.size().height * 0.01))
+        ground.physicsBody?.dynamic = false
+        ground.physicsBody?.categoryBitMask = worldCategory
+        self.addChild(ground)
+        
+        
+        //create roof texture
+        let roofTexture = SKTexture(imageNamed: "land")
+        roofTexture.filteringMode = .Nearest
+        
+        //creates roof movement
+        let moveRoofSprite = SKAction.moveByX(-roofTexture.size().width * 0.5, y: 0, duration: NSTimeInterval(0.02 * roofTexture.size().width*0.5))
+        let resetRoofSprite = SKAction.moveByX(roofTexture.size().width * 0.5, y: 0, duration: 0.0)
+        let moveRoofSpritesForever = SKAction.repeatActionForever(SKAction.sequence([moveRoofSprite,resetRoofSprite]))
+        
+        // this loop draws the texture side by side until it fills the roof
+        for var i:CGFloat = 0; i < 3.0 + self.frame.size.width / ( roofTexture.size().width * 2.0 ); ++i {
+            // draws sprite
+            let sprite = SKSpriteNode(texture: roofTexture)
+            sprite.setScale(1.0)
+            sprite.position = CGPointMake(i * sprite.size.width, self.frame.size.height-sprite.size.height/2)
+            // sprite.position = CENTER POINT
+            
+            //sets up movement
+            sprite.runAction(moveRoofSpritesForever)
+            
+            //adds sprite to game
+            self.addChild(sprite)
+        }
+        
+        
+        //adds imovable roof physics
+        var roof = SKNode()
+        roof.position = CGPointMake(0, self.frame.size.height-roofTexture.size().height) //roof.position = CENTER POINT
+        roof.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, roofTexture.size().height * 0.01))
+        roof.physicsBody?.dynamic = false
+        roof.physicsBody?.categoryBitMask = worldCategory
+        self.addChild(roof)
+        
+        
+    }
     
-    func spawnPlayer(player:SKSpriteNode, framePosition:CGFloat){
-        //draws player
-        let playerTexture = SKTexture(imageNamed: "bird-02")
-        var player = player
-        player.setScale(1.0)
-        player.position = CGPoint(x: self.frame.size.width * 0.35, y:self.frame.size.height * 0.6 + framePosition)
+    func spawnPlayers() {
+        let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
         
-        //adds player physics
-        player.physicsBody = SKPhysicsBody(circleOfRadius: player.size.height / 2.0)
-        player.physicsBody?.dynamic = true
-        player.physicsBody?.allowsRotation = false
-        
-        player.physicsBody?.categoryBitMask = playerCategory
-        player.physicsBody?.collisionBitMask = worldCategory | pipeCategory
-        player.physicsBody?.contactTestBitMask = worldCategory | pipeCategory
-        
-        //adds player to game
-        self.addChild(player)
+        for connectedPeer in connectedPeers {
+            var player = FlappyPlayerNode()
+            player.identifier = connectedPeer.displayName
+            println(player.identifier)
+            player.position = CGPoint(x: self.frame.size.width * 0.35, y:self.frame.size.height * 0.6)
+            self.addChild(player)
+            players.append(player)
+        }
     }
     
     func spawnPipes() {
@@ -141,7 +166,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let y = arc4random() % height + height
         
         let pipeDown = SKSpriteNode(texture: pipeTextureDown)
-        pipeDown.setScale(2.0)
+        pipeDown.setScale(3.0)
         
         pipeDown.position = CGPointMake(0.0, CGFloat(Double(y)) + pipeDown.size.height)
         
@@ -152,7 +177,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         pipePair.addChild(pipeDown)
         
         let pipeUp = SKSpriteNode(texture: pipeTextureUp)
-        pipeUp.setScale(2.0)
+        pipeUp.setScale(3.0)
         pipeUp.position = CGPointMake(0.0, CGFloat(Double(y))-CGFloat(verticalPipeGap))
         
         
@@ -163,7 +188,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         pipePair.addChild(pipeUp)
         
         var contactNode = SKNode()
-        contactNode.position = CGPointMake( pipeDown.size.width + player0.size.width / 2, CGRectGetMidY( self.frame ) )
+        contactNode.position = CGPointMake( pipeDown.size.width + players[0].size.width / 2, CGRectGetMidY( self.frame ) )
         contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake( pipeUp.size.width, self.frame.size.height ))
         contactNode.physicsBody?.dynamic = false
         contactNode.physicsBody?.categoryBitMask = scoreCategory
@@ -174,23 +199,30 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         pipes.addChild(pipePair)
         
     }
-    
-    func playerJump(){
-        player0.physicsBody?.velocity = CGVectorMake(0, 0)
-        player0.physicsBody?.applyImpulse(CGVectorMake(0, 5))
+
+    func playerJump(identifier:String) {
+        for player in players {
+            if player.identifier == identifier {
+                player.jump()
+            }
+        }
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-            player0.physicsBody?.velocity = CGVectorMake(0, 0)
-            player0.physicsBody?.applyImpulse(CGVectorMake(0, 5))
+            //players.jump()
+            
         }
     }
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-           // player.physicsBody?.velocity = CGVectorMake(0, 0)
-            //player.physicsBody?.applyImpulse(CGVectorMake(0, 0))
-        
+    
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        if ( contact.bodyA.categoryBitMask & endScreenCategory ) == endScreenCategory || ( contact.bodyB.categoryBitMask & endScreenCategory ) == endScreenCategory {
+            println("Será que bate?")
+            
+        }
     }
+    
     
 }
