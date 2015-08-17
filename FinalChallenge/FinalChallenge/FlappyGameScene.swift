@@ -12,6 +12,7 @@ import SpriteKit
 class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
+    var testPlayer:FlappyPlayerNode!
     let verticalPipeGap = 70
 
     let playerCategory: UInt32 = 1 << 0
@@ -43,6 +44,11 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         self.spawnPlayers()
         
+        //nobody connected
+        if players.count == 0 {
+            spawnSinglePlayer()
+        }
+
         
         // creates ground texture
         let groundTexture = SKTexture(imageNamed: "land")
@@ -75,25 +81,44 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         ground.physicsBody?.dynamic = false
         ground.physicsBody?.categoryBitMask = worldCategory
         self.addChild(ground)
+
         
-        // create the pipes textures
-        pipeTextureUp = SKTexture(imageNamed: "PipeUp")
-        pipeTextureUp.filteringMode = .Nearest
-        pipeTextureDown = SKTexture(imageNamed: "PipeDown")
-        pipeTextureDown.filteringMode = .Nearest
+        // create the stones movement actions
+        let distanceToMove = CGFloat(self.frame.size.width)
+        let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
+        let removeStones = SKAction.removeFromParent()
+        movePipesAndRemove = SKAction.sequence([moveStones, removeStones])
         
-        // create the pipes movement actions
-        let distanceToMove = CGFloat(self.frame.size.width + 2.0 * pipeTextureUp.size().width)
-        let movePipes = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
-        let removePipes = SKAction.removeFromParent()
-        movePipesAndRemove = SKAction.sequence([movePipes, removePipes])
-        
-        // spawn the pipes
-        let spawn = SKAction.runBlock({() in self.spawnPipes()})
+        // spawn the stones
+        let spawn = SKAction.runBlock({() in self.spawnStones()})
         let delay = SKAction.waitForDuration(NSTimeInterval(2.0))
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
         self.runAction(spawnThenDelayForever)
+    }
+    
+    func spawnStones() {
+        var stone = FlappyStoneNode()
+        var scale = getDoubleCGFloat(1, end: 3)
+        //var position = random inicio do chao ate o fim do chao
+        stone.setScale(scale)
+        println(scale)
+        stone.position = CGPointMake(self.frame.size.width, self.frame.size.height / 2 )
+        
+        stone.runAction(movePipesAndRemove)
+        pipes.addChild(stone)
+    }
+    
+    func getDoubleCGFloat(begin:UInt32,end:UInt32) -> CGFloat {
+        var begin = begin * 100
+        var end = end * 100
+        var numInt32 = (arc4random() % end) + begin
+        var numInt = Int(numInt32)
+        var num = CGFloat(numInt)
+
+        num = num / 100.0
+        return num
+        
     }
     
     func spawnPlayers() {
@@ -103,54 +128,18 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             var player = FlappyPlayerNode()
             player.identifier = connectedPeer.displayName
             println(player.identifier)
-            player.position = CGPoint(x: self.frame.size.width * 0.35, y:self.frame.size.height * 0.6)
+            player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
             
         }
     }
     
-    func spawnPipes() {
-        let pipePair = SKNode()
-        pipePair.position = CGPointMake( self.frame.size.width + pipeTextureUp.size().width * 2, 0 )
-        pipePair.zPosition = -10
-        
-        let height = UInt32( UInt(self.frame.size.height / 4) )
-        let y = arc4random() % height + height
-        
-        let pipeDown = SKSpriteNode(texture: pipeTextureDown)
-        pipeDown.setScale(3.0)
-        
-        pipeDown.position = CGPointMake(0.0, CGFloat(Double(y)) + pipeDown.size.height)
-        
-        pipeDown.physicsBody = SKPhysicsBody(rectangleOfSize: pipeDown.size)
-        pipeDown.physicsBody?.dynamic = false
-        pipeDown.physicsBody?.categoryBitMask = pipeCategory
-        pipeDown.physicsBody?.contactTestBitMask = playerCategory
-        pipePair.addChild(pipeDown)
-        
-        let pipeUp = SKSpriteNode(texture: pipeTextureUp)
-        pipeUp.setScale(3.0)
-        pipeUp.position = CGPointMake(0.0, CGFloat(Double(y))-CGFloat(verticalPipeGap))
-        
-        
-        pipeUp.physicsBody = SKPhysicsBody(rectangleOfSize: pipeUp.size)
-        pipeUp.physicsBody?.dynamic = false
-        pipeUp.physicsBody?.categoryBitMask = pipeCategory
-        pipeUp.physicsBody?.contactTestBitMask = playerCategory
-        pipePair.addChild(pipeUp)
-        
-        var contactNode = SKNode()
-        contactNode.position = CGPointMake( pipeDown.size.width + players[0].size.width / 2, CGRectGetMidY( self.frame ) )
-        contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake( pipeUp.size.width, self.frame.size.height ))
-        contactNode.physicsBody?.dynamic = false
-        contactNode.physicsBody?.categoryBitMask = scoreCategory
-        contactNode.physicsBody?.contactTestBitMask = playerCategory
-        pipePair.addChild(contactNode)
-        
-        pipePair.runAction(movePipesAndRemove)
-        pipes.addChild(pipePair)
-        
+    func spawnSinglePlayer() {
+        testPlayer = FlappyPlayerNode()
+        testPlayer.identifier = "test player"
+        testPlayer.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
+        self.addChild(testPlayer)
     }
     
     func playerJump(identifier:String) {
@@ -159,12 +148,13 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
                 player.jump()
             }
         }
+        
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-            //players[0].jump()
+            testPlayer.jump()
             
         }
     }

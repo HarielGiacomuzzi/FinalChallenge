@@ -1,5 +1,5 @@
 //
-//  FlappyPlayerNode.swift
+//  FlappyStoneNode.swift
 //  FinalChallenge
 //
 //  Created by Daniel Amarante on 8/17/15.
@@ -9,13 +9,12 @@
 import UIKit
 import SpriteKit
 
-class FlappyPlayerNode: SKSpriteNode {
+class FlappyStoneNode: SKSpriteNode {
     
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
     let stoneCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
-    var identifier:String?
     
     init() {
         let texture = SKTexture(imageNamed: "bird-02")
@@ -27,17 +26,13 @@ class FlappyPlayerNode: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func setupPhysics() {
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.height / 2)
-        self.physicsBody?.dynamic = true
+        self.physicsBody?.dynamic = false
         self.physicsBody?.allowsRotation = false
-        self.physicsBody?.categoryBitMask = playerCategory
-        self.physicsBody?.collisionBitMask = worldCategory | stoneCategory
-        self.physicsBody?.contactTestBitMask = worldCategory | stoneCategory
+        self.physicsBody?.categoryBitMask = stoneCategory
+        self.physicsBody?.contactTestBitMask = playerCategory
     }
-    
-    func jump () {
-        self.physicsBody?.velocity = CGVectorMake(0, 0)
-        self.physicsBody?.applyImpulse(CGVectorMake(0, 5))
-    }
+   
 }
