@@ -150,8 +150,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     }
     
     func playerJump(playerID:String){
-        player0.physicsBody?.velocity = CGVectorMake(0, 0)
-        player0.physicsBody?.applyImpulse(CGVectorMake(0, 5))
+      //  player0.physicsBody?.velocity = CGVectorMake(0, 0)
+      //  player0.physicsBody?.applyImpulse(CGVectorMake(0, 5))
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

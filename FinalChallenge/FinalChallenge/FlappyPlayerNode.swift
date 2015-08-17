@@ -15,7 +15,6 @@ class FlappyPlayerNode: SKSpriteNode {
     let worldCategory: UInt32 = 1 << 1
     let pipeCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
-    
     var identifier:String?
     
     init() {
@@ -23,7 +22,6 @@ class FlappyPlayerNode: SKSpriteNode {
         super.init(texture: texture, color: nil, size: texture.size())
         self.setScale(1.0)
         setupPhysics()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
