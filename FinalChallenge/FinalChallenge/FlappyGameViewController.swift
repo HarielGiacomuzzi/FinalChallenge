@@ -40,6 +40,6 @@ class FlappyGameViewController: UIViewController {
     
     func messageReceived(data:NSNotification){
         var data = data.userInfo?.values.array[0]
-        scene.playerJump()
+//        scene.playerJump()
     }
 }
