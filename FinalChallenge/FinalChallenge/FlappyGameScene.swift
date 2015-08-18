@@ -9,11 +9,11 @@
 import Foundation
 import SpriteKit
 
+
 class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode!
-    let verticalPipeGap = 70
 
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
@@ -29,7 +29,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         
         // setup physics
-        self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
+        self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
         self.physicsWorld.contactDelegate = self
         
         // setup background color
@@ -50,7 +50,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         }
 
         // create the stones movement actions
-        let distanceToMove = CGFloat(self.frame.size.width)
+        let distanceToMove = CGFloat(self.frame.size.width + self.frame.size.width / 2)
         let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
         let removeStones = SKAction.removeFromParent()
         moveStonesAndRemove = SKAction.sequence([moveStones, removeStones])
@@ -58,7 +58,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         // spawn the stones
         let spawn = SKAction.runBlock({() in self.spawnStones()})
         
-        let delay = SKAction.waitForDuration(1, withRange: 1)
+        let delay = SKAction.waitForDuration(2.5, withRange: 1)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
         self.runAction(spawnThenDelayForever)
@@ -151,10 +151,9 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         var top = self.frame.size.height - testTexture.size().height
 
         var pos = getRandomCGFloat(bottom, end: top)
-       // println("pos = \(pos)")
         
         stone.setScale(scale)
-        stone.position = CGPointMake(self.frame.size.width, pos)
+        stone.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
         
         stone.runAction(moveStonesAndRemove)
         stones.addChild(stone)
@@ -199,10 +198,27 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func playerSwim(identifier:String, way:String) {
+        for player in players {
+            if player.identifier == identifier {
+                if way == "up" {
+                    player.goUp()
+                } else {
+                    player.goDown()
+                }
+            }
+        }
+        
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-            testPlayer.jump()
+            if location.y > self.frame.size.height / 2 {
+                testPlayer.goUp()
+            } else {
+                testPlayer.goDown()
+            }
             
         }
     }

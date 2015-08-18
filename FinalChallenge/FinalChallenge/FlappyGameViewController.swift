@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import MultipeerConnectivity
 
 class FlappyGameViewController: UIViewController {
     
@@ -19,7 +20,8 @@ class FlappyGameViewController: UIViewController {
        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
         
-        scene = FlappyGameScene(size: view.bounds.size)
+//        scene = FlappyGameScene(size: view.bounds.size)
+        scene = FlappyGameScene(size: CGSize(width: 1024, height: 768))
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
@@ -41,11 +43,19 @@ class FlappyGameViewController: UIViewController {
     
 
     func messageReceived(data : NSNotification){
-        var a = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
-        var message = String(NSString(data: a, encoding: NSUTF8StringEncoding)!);
-        scene.playerJump(message)
+        var peerID = ((data.userInfo as! NSDictionary).valueForKey("peerID") as! MCPeerID);
+        var data = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
+        var b = peerID.displayName
+//        scene.move
+        println(b)
+
         
-        var value = ConnectionManager.sharedInstance.session.connectedPeers
-        println(value)
+        var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
+        println(message)
+        
+        scene.playerSwim(b, way: message)
+//        scene.playerJump(message)
+
+//        var value = ConnectionManager.sharedInstance.session.connectedPeers
     }
 }

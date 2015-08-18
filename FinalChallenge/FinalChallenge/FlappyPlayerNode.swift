@@ -40,4 +40,14 @@ class FlappyPlayerNode: SKSpriteNode {
         self.physicsBody?.velocity = CGVectorMake(0, 0)
         self.physicsBody?.applyImpulse(CGVectorMake(0, 5))
     }
+    
+    func goUp() {
+ 
+        self.physicsBody?.applyImpulse(CGVectorMake(0, 0.5))
+    }
+    
+    func goDown() {
+ 
+        self.physicsBody?.applyImpulse(CGVectorMake(0, -0.5))
+    }
 }
