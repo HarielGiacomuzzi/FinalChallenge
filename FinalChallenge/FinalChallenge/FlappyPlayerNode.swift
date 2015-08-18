@@ -15,6 +15,8 @@ class FlappyPlayerNode: SKSpriteNode {
     let worldCategory: UInt32 = 1 << 1
     let stoneCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
+    let endScreenCategory: UInt32 = 1 << 4
+    
     var identifier:String?
     
     init() {

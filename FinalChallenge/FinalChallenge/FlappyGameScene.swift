@@ -71,6 +71,20 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         contactNode.physicsBody?.categoryBitMask = endScreenCategory
         contactNode.physicsBody?.contactTestBitMask = playerCategory
         self.addChild(contactNode)
+        
+            if (UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+            {
+                // Ipad
+                if players.count == 1{
+                    //end game
+                    println("Fim de jogo")
+                }
+            }
+            else
+            {
+                // Iphone
+            }
+        
     }
     
     func gameLimit(){
@@ -220,8 +234,16 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
         if ( contact.bodyA.categoryBitMask & endScreenCategory ) == endScreenCategory || ( contact.bodyB.categoryBitMask & endScreenCategory ) == endScreenCategory {
             println("Será que bate?")
-            
+            for player in players{
+                println("entrou aqui")
+                if player.physicsBody == contact.bodyA || player.physicsBody == contact.bodyB{
+                    println(player.identifier)
+                    players.removeObject(player)
+                
+                }
+            }
         }
+        
     }
     
     

@@ -20,28 +20,61 @@ class BoardGraph : NSObject{
         
     }
     
-    private func createNode(x: Double, y : Double){
-        
+    // creates a node and insert it on the graph dictionary with the specified name
+    private func createNode(x: Double, y : Double, name : String, father : BoardNode?){
+        var aux = BoardNode(posX: x, posY: y, father: father);
+        nodes.updateValue(aux, forKey: name);
     }
     
     private func setNeighbors(){
     
     }
     
-    func whereIs(Player : NSObject){
-    
+    // returns the node name where the given player is located
+    // if the player can't be found returns nil
+    func whereIs(Player : NSObject) -> String?{
+        for aux in nodes{
+            if (aux.1.hasPlayer(Player)){
+                return aux.0;
+            }
+        }
+        return nil;
     }
     
-    func nodeFor(Player : NSObject){
+    // returns the node where the given player is located
+    // if the player can't be found returns nil
+    func nodeFor(Player : NSObject) -> BoardNode?{
+        for aux in nodes{
+            if (aux.1.hasPlayer(Player)){
+                return aux.1;
+            }
+        }
+        return nil;
+    }
+
+    // check if there's an item on that node...
+    func haveItem(NodeName : String) ->Bool{
+        if nodes[NodeName]?.item != nil{
+            return true;
+        }
+        return false;
     }
     
-    func haveItem(NodeName : String) {
+    // returns the item of the specified node or nil if there's no item on that node
+    func getItem(nodeName : String) -> NSObject?{
+        if haveItem(nodeName) {
+            return nodes[nodeName]?.item;
+        }
+        return nil;
     }
     
-    func getItem(nodeName : String){
-    }
-    
-    func setItem(Item : NSObject, nodeName : String){
+    // sets the item of a node, return true if it was successfull and false otherwise
+    func setItem(Item : NSObject, nodeName : String) ->Bool{
+        if !haveItem(nodeName){
+            nodes[nodeName]?.item = Item;
+            return true;
+        }
+        return false;
     }
     
     func walk(quantity : Int){
@@ -67,16 +100,27 @@ class BoardGraph : NSObject{
         var nextMoves : [BoardNode] = [];
         var posX = 0.0;
         var posY = 0.0;
-        var item : NSObject!
+        var item : NSObject?
         var currentPlayers : [NSObject] = [];
-        var father : BoardNode!
+        var father : BoardNode?
         
         override init() {
             super.init();
         }
         
-        init(posX : Double, posY : Double) {
+        func hasPlayer(player : NSObject) -> Bool{
+            for aux in currentPlayers{
+                if aux.isEqual(player){
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+        
+        init(posX : Double, posY : Double, father : BoardNode?) {
             super.init();
+            self.father = father;
             self.posX = posX;
             self.posY = posY;
             

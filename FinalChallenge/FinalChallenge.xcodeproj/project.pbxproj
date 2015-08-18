@@ -28,6 +28,8 @@
 		DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB73E8131B72838D00F7D7C7 /* Board.sks */; };
 		DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */; };
 		DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */ = {isa = PBXBuildFile; fileRef = DB98FEA51B825ED300AD5098 /* board_1.xml */; };
+		DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC57FE11B83AEA200CA0232 /* XMLParser.swift */; };
+		DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC57FE31B83AEC300CA0232 /* BoardScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		DB73E8131B72838D00F7D7C7 /* Board.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Board.sks; sourceTree = "<group>"; };
 		DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		DB98FEA51B825ED300AD5098 /* board_1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = board_1.xml; sourceTree = "<group>"; };
+		DBC57FE11B83AEA200CA0232 /* XMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
+		DBC57FE31B83AEC300CA0232 /* BoardScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +194,7 @@
 			children = (
 				DB4E51FE1B714194008333D3 /* ConnectionManager.swift */,
 				B51663EE1B7D0D720040A1B4 /* GamePadController.swift */,
+				DBC57FE11B83AEA200CA0232 /* XMLParser.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -201,6 +206,7 @@
 				DB73E8111B72834400F7D7C7 /* BoardController.swift */,
 				DB73E8131B72838D00F7D7C7 /* Board.sks */,
 				DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */,
+				DBC57FE31B83AEC300CA0232 /* BoardScene.swift */,
 			);
 			name = Board;
 			sourceTree = "<group>";
@@ -254,7 +260,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZX7GUMJ35C;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -315,7 +321,9 @@
 				5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */,
 				DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */,
 				DB73E8121B72834400F7D7C7 /* BoardController.swift in Sources */,
+				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
+				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
 				5E8F9DDC1B7D0305004514D0 /* IpadConnectionViewController.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,

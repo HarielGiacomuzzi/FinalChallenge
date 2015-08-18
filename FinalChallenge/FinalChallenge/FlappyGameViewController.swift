@@ -29,7 +29,6 @@ class FlappyGameViewController: UIViewController {
         skView.showsPhysics = true
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,5 +56,10 @@ class FlappyGameViewController: UIViewController {
 //        scene.playerJump(message)
 
 //        var value = ConnectionManager.sharedInstance.session.connectedPeers
+    }
+    
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.LandscapeRight.rawValue)
     }
 }
