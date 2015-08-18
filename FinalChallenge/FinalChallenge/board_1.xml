@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BOARD>
+	<HOUSE x="1" y="1">
+	</HOUSE>
+
+	<STORE x="2" y="2">
+	</STORE>
+
+	<NODES>
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+        
+        <node x="0" y="0" name"01">
+            <next name="01"/>
+        </node>
+
+	</NODES>
+
+</BOARD>
