@@ -24,7 +24,8 @@ class FlappyGameViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-        scene.scaleMode = .ResizeFill
+        skView.showsPhysics = true
+        scene.scaleMode = .AspectFill
         skView.presentScene(scene)
         
     }
