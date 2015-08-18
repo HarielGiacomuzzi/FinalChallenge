@@ -27,6 +27,7 @@
 		DB73E8121B72834400F7D7C7 /* BoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73E8111B72834400F7D7C7 /* BoardController.swift */; };
 		DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB73E8131B72838D00F7D7C7 /* Board.sks */; };
 		DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */; };
+		DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */ = {isa = PBXBuildFile; fileRef = DB98FEA51B825ED300AD5098 /* board_1.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		DB73E8111B72834400F7D7C7 /* BoardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardController.swift; sourceTree = "<group>"; };
 		DB73E8131B72838D00F7D7C7 /* Board.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Board.sks; sourceTree = "<group>"; };
 		DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		DB98FEA51B825ED300AD5098 /* board_1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = board_1.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 		DB4E52001B714A10008333D3 /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				DB98FEA51B825ED300AD5098 /* board_1.xml */,
 				DB73E8111B72834400F7D7C7 /* BoardController.swift */,
 				DB73E8131B72838D00F7D7C7 /* Board.sks */,
 				DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */,
@@ -285,6 +288,7 @@
 			files = (
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
+				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
 			);
@@ -447,7 +451,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -460,7 +463,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
