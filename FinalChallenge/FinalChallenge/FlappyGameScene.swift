@@ -13,7 +13,7 @@ import SpriteKit
 class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
-    var testPlayer:FlappyPlayerNode!
+    var testPlayer:FlappyPlayerNode?
 
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
@@ -184,18 +184,9 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     func spawnSinglePlayer() {
         testPlayer = FlappyPlayerNode()
-        testPlayer.identifier = "test player"
-        testPlayer.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
-        self.addChild(testPlayer)
-    }
-
-    func playerJump(identifier:String) {
-        for player in players {
-            if player.identifier == identifier {
-                player.jump()
-            }
-        }
-        
+        testPlayer!.identifier = "test player"
+        testPlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
+        self.addChild(testPlayer!)
     }
     
     func playerSwim(identifier:String, way:String) {
@@ -214,10 +205,12 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-            if location.y > self.frame.size.height / 2 {
-                testPlayer.goUp()
-            } else {
-                testPlayer.goDown()
+            if let player = testPlayer {
+                if location.y > self.frame.size.height / 2 {
+                    player.goUp()
+                } else {
+                    player.goDown()
+                }
             }
             
         }
