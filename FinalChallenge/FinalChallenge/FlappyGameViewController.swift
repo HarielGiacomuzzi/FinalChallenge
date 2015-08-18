@@ -44,18 +44,10 @@ class FlappyGameViewController: UIViewController {
     func messageReceived(data : NSNotification){
         var peerID = ((data.userInfo as! NSDictionary).valueForKey("peerID") as! MCPeerID);
         var data = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
-        var b = peerID.displayName
-//        scene.move
-        println(b)
-
-        
+        var peerDisplayName = peerID.displayName
         var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
-        println(message)
         
-        scene.playerSwim(b, way: message)
-//        scene.playerJump(message)
-
-//        var value = ConnectionManager.sharedInstance.session.connectedPeers
+        scene.playerSwim(peerDisplayName, way: message)
     }
     
     
