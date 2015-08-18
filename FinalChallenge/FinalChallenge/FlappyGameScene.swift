@@ -21,11 +21,9 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     let scoreCategory: UInt32 = 1 << 3
     let endScreenCategory: UInt32 = 1 << 4
     
-    var pipeTextureUp:SKTexture!
-    var pipeTextureDown:SKTexture!
-    var movePipesAndRemove:SKAction!
+    var moveStonesAndRemove:SKAction!
     var moving:SKNode!
-    var pipes:SKNode!
+    var stones:SKNode!
     
     
     override func didMoveToView(view: SKView) {
@@ -40,8 +38,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         moving = SKNode()
         self.addChild(moving)
-        pipes = SKNode()
-        moving.addChild(pipes)
+        stones = SKNode()
+        moving.addChild(stones)
         
         self.spawnPlayers()
         self.gameLimit()
@@ -51,28 +49,23 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             spawnSinglePlayer()
         }
 
+        // create the stones movement actions
+        let distanceToMove = CGFloat(self.frame.size.width)
+        let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
+        let removeStones = SKAction.removeFromParent()
+        moveStonesAndRemove = SKAction.sequence([moveStones, removeStones])
         
-        // create the pipes textures
-        pipeTextureUp = SKTexture(imageNamed: "PipeUp")
-        pipeTextureUp.filteringMode = .Nearest
-        pipeTextureDown = SKTexture(imageNamed: "PipeDown")
-        pipeTextureDown.filteringMode = .Nearest
+        // spawn the stones
+        let spawn = SKAction.runBlock({() in self.spawnStones()})
         
-        // create the pipes movement actions
-        let distanceToMove = CGFloat(self.frame.size.width + 2.0 * pipeTextureUp.size().width)
-        let movePipes = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
-        let removePipes = SKAction.removeFromParent()
-        movePipesAndRemove = SKAction.sequence([movePipes, removePipes])
-        
-        // spawn the pipes
-        let spawn = SKAction.runBlock({() in self.spawnPipes()})
-        let delay = SKAction.waitForDuration(NSTimeInterval(2.0))
+        let delay = SKAction.waitForDuration(1, withRange: 1)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
         self.runAction(spawnThenDelayForever)
+
         
         var contactNode = SKNode()
-        contactNode.position = CGPointMake(0, 0)
+        contactNode.position = CGPointMake(0, self.frame.size.height / 2)
         contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
         contactNode.physicsBody?.dynamic = false
         contactNode.physicsBody?.categoryBitMask = endScreenCategory
@@ -107,47 +100,72 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         //adds imovable ground physics
         var ground = SKNode()
-        ground.position = CGPointMake(0, groundTexture.size().height) //ground.position = CENTER POINT
+        ground.position = CGPointMake(self.frame.size.width / 2, groundTexture.size().height) //ground.position = CENTER POINT
         ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture.size().height * 0.01))
         ground.physicsBody?.dynamic = false
         ground.physicsBody?.categoryBitMask = worldCategory
         self.addChild(ground)
 
+        //create roof texture
+        let roofTexture = SKTexture(imageNamed: "land")
+        roofTexture.filteringMode = .Nearest
         
-        // create the stones movement actions
-        let distanceToMove = CGFloat(self.frame.size.width)
-        let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
-        let removeStones = SKAction.removeFromParent()
-        movePipesAndRemove = SKAction.sequence([moveStones, removeStones])
+        //creates roof movement
+        let moveRoofSprite = SKAction.moveByX(-roofTexture.size().width * 0.5, y: 0, duration: NSTimeInterval(0.02 * roofTexture.size().width*0.5))
+        let resetRoofSprite = SKAction.moveByX(roofTexture.size().width * 0.5, y: 0, duration: 0.0)
+        let moveRoofSpritesForever = SKAction.repeatActionForever(SKAction.sequence([moveRoofSprite,resetRoofSprite]))
         
-        // spawn the stones
-        let spawn = SKAction.runBlock({() in self.spawnStones()})
-        let delay = SKAction.waitForDuration(NSTimeInterval(2.0))
-        let spawnThenDelay = SKAction.sequence([spawn, delay])
-        let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
-        self.runAction(spawnThenDelayForever)
+        // this loop draws the texture side by side until it fills the roof
+        for var i:CGFloat = 0; i < 3.0 + self.frame.size.width / ( roofTexture.size().width * 2.0 ); ++i {
+            // draws sprite
+            let sprite = SKSpriteNode(texture: roofTexture)
+            sprite.setScale(1.0)
+            sprite.position = CGPointMake(i * sprite.size.width, self.frame.size.height-sprite.size.height/2)
+            // sprite.position = CENTER POINT
+            
+            //sets up movement
+            sprite.runAction(moveRoofSpritesForever)
+            
+            //adds sprite to game
+            self.addChild(sprite)
+        }
+        
+        
+        //adds imovable roof physics
+        var roof = SKNode()
+        roof.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height-roofTexture.size().height) //roof.position = CENTER POINT
+        roof.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, roofTexture.size().height * 0.01))
+        roof.physicsBody?.dynamic = false
+        roof.physicsBody?.categoryBitMask = worldCategory
+        self.addChild(roof)
+        
+        
     }
     
     func spawnStones() {
         var stone = FlappyStoneNode()
-        var scale = getDoubleCGFloat(1, end: 3)
-        //var position = random inicio do chao ate o fim do chao
-        stone.setScale(scale)
-        println(scale)
-        stone.position = CGPointMake(self.frame.size.width, self.frame.size.height / 2 )
+        var scale = getRandomCGFloat(1.0, end: 5.0)
+        let testTexture = SKTexture(imageNamed: "land")
         
-        stone.runAction(movePipesAndRemove)
-        pipes.addChild(stone)
+        var bottom = testTexture.size().height
+        var top = self.frame.size.height - testTexture.size().height
+
+        var pos = getRandomCGFloat(bottom, end: top)
+       // println("pos = \(pos)")
+        
+        stone.setScale(scale)
+        stone.position = CGPointMake(self.frame.size.width, pos)
+        
+        stone.runAction(moveStonesAndRemove)
+        stones.addChild(stone)
     }
     
-    func getDoubleCGFloat(begin:UInt32,end:UInt32) -> CGFloat {
-        var begin = begin * 100
-        var end = end * 100
-        var numInt32 = (arc4random() % end) + begin
-        var numInt = Int(numInt32)
-        var num = CGFloat(numInt)
-
-        num = num / 100.0
+    func getRandomCGFloat(begin:CGFloat,end:CGFloat) -> CGFloat {
+        var beginUint = UInt32(Int(begin))
+        var endUint = UInt32(Int(end))
+        var random = (arc4random() % (endUint - beginUint)) + beginUint
+        var num = CGFloat(Int(random))
+        
         return num
         
     }
@@ -185,6 +203,14 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             testPlayer.jump()
+            
+        }
+    }
+    
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        if ( contact.bodyA.categoryBitMask & endScreenCategory ) == endScreenCategory || ( contact.bodyB.categoryBitMask & endScreenCategory ) == endScreenCategory {
+            println("Será que bate?")
             
         }
     }
