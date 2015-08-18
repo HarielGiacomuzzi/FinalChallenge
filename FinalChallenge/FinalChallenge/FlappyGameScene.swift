@@ -220,7 +220,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
         if ( contact.bodyA.categoryBitMask & endScreenCategory ) == endScreenCategory || ( contact.bodyB.categoryBitMask & endScreenCategory ) == endScreenCategory {
             println("Será que bate?")
-            
+            var c = contact. as! FlappyPlayerNode
+            println(c.identifier)
         }
     }
     
