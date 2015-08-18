@@ -1,0 +1,29 @@
+<BOARD>
+	<HOUSE x="1" y="1">
+	</HOUSE>
+
+	<STORE x="2" y="2">
+	</STORE>
+
+	<NODES>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+		<node x="0" y="0"/>
+	</NODES>
+
+</BOARD>

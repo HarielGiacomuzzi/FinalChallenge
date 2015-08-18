@@ -77,9 +77,9 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     // Received data from remote peer
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!){
         let userInfo = ["data":data, "peerID":peerID]
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        //dispatch_async(dispatch_get_main_queue(), { () -> Void in
             NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)
-        })
+        //})
     }
     
     // Received a byte stream from remote peer
