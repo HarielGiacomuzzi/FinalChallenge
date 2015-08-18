@@ -7,11 +7,6 @@
 //
 
 import Foundation
-import SpriteKit
-
-class BoardController: SKScene, SKPhysicsContactDelegate {
-
-}
 
 class BoardGraph : NSObject{
     
@@ -22,8 +17,8 @@ class BoardGraph : NSObject{
     }
     
     // creates a node and insert it on the graph dictionary with the specified name
-    private func createNode(x: Double, y : Double, name : String){
-        var aux = BoardNode(posX: x, posY: y);
+    private func createNode(x: Double, y : Double, name : String, father : BoardNode?){
+        var aux = BoardNode(posX: x, posY: y, father: father);
         nodes.updateValue(aux, forKey: name);
     }
     
@@ -103,7 +98,7 @@ class BoardGraph : NSObject{
         var posY = 0.0;
         var item : NSObject?
         var currentPlayers : [NSObject] = [];
-        var father : BoardNode!
+        var father : BoardNode?
         
         override init() {
             super.init();
@@ -119,8 +114,9 @@ class BoardGraph : NSObject{
             return false;
         }
         
-        init(posX : Double, posY : Double) {
+        init(posX : Double, posY : Double, father : BoardNode?) {
             super.init();
+            self.father = father;
             self.posX = posX;
             self.posY = posY;
             
