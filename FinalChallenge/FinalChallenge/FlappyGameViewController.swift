@@ -19,7 +19,7 @@ class FlappyGameViewController: UIViewController {
        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
         
-        scene = FlappyGameScene(size: view.bounds.size)
+        scene = FlappyGameScene(size: CGSize(width: 1024, height: 768))
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
@@ -27,7 +27,6 @@ class FlappyGameViewController: UIViewController {
         skView.showsPhysics = true
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,5 +46,10 @@ class FlappyGameViewController: UIViewController {
         
         var value = ConnectionManager.sharedInstance.session.connectedPeers
         println(value)
+    }
+    
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.LandscapeRight.rawValue)
     }
 }

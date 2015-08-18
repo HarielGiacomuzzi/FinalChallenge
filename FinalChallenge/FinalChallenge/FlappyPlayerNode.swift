@@ -34,8 +34,8 @@ class FlappyPlayerNode: SKSpriteNode {
         self.physicsBody?.dynamic = true
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.categoryBitMask = playerCategory
-        self.physicsBody?.collisionBitMask = worldCategory | pipeCategory | endScreenCategory
-        self.physicsBody?.contactTestBitMask = worldCategory | pipeCategory | endScreenCategory
+        self.physicsBody?.collisionBitMask = worldCategory | stoneCategory
+        self.physicsBody?.contactTestBitMask = worldCategory | stoneCategory
     }
     
     func jump () {
