@@ -58,7 +58,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let spawnDelayForeverPU = SKAction.repeatActionForever(spawnThenDelayPU)
         self.runAction(spawnDelayForeverPU)
 
-        
+        // left wall , if you hit you are dead
         var contactNode = SKNode()
         contactNode.position = CGPointMake(0, self.frame.size.height / 2)
         contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
@@ -158,22 +158,31 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         self.addChild(roof)
         
     }
-    
+
     func spawnStone() {
         var stone = FlappyStoneNode()
         var scale = getRandomCGFloat(1.0, end: 5.0)
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
-        
         var bottom = testTexture.size().height
         var top = self.frame.size.height - testTexture.size().height
-
         var pos = getRandomCGFloat(bottom, end: top)
-        
         stone.setScale(scale)
         stone.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
-        
         stone.setupMovement(self.frame)
         self.addChild(stone)
+        
+       // var path = NSBundle.mainBundle().pathForResource("MyParticle", ofType: "sks")
+        //var stoneParticle = NSKeyedUnarchiver.unarchiveObjectWithFile(path!) as! SKEmitterNode
+        
+        
+        var stoneParticle = FlappyParticleNode.fromFile("MyParticle")
+        stoneParticle!.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
+        stoneParticle!.name = "stoneParticle"
+        stoneParticle!.targetNode = self.scene
+        
+        stoneParticle!.setupMovement(self.frame, node: stone)
+        self.addChild(stoneParticle!)
+        
     }
     
     func spawnPowerUp() {
@@ -181,14 +190,10 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
         var bottom = testTexture.size().height
         var top = self.frame.size.height - testTexture.size().height
-        
         var pos = getRandomCGFloat(bottom, end: top)
-        
         powerUp.position = CGPointMake(self.frame.size.width + powerUp.size.width / 2, pos)
-        
         powerUp.setupMovement(self.frame)
         self.addChild(powerUp)
-        
     }
     
     func getRandomCGFloat(begin:CGFloat,end:CGFloat) -> CGFloat {
@@ -252,7 +257,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
         //checks colision with end of screen
         if ( contact.bodyA.categoryBitMask & endScreenCategory ) == endScreenCategory || ( contact.bodyB.categoryBitMask & endScreenCategory ) == endScreenCategory {
-            println("Será que bate?")
             for player in players{
                 println("entrou aqui")
                 if player.physicsBody == contact.bodyA || player.physicsBody == contact.bodyB{
