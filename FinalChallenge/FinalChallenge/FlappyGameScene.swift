@@ -270,7 +270,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         } else if contact.bodyB.categoryBitMask == powerUpCategory && contact.bodyA.categoryBitMask == playerCategory {
             handleColisionPlayerPowerup(player:contact.bodyA, powerup: contact.bodyB)
         }
-
         
     }
     

@@ -38,7 +38,7 @@ class FlappyStoneNode: SKSpriteNode {
     
     func setupMovement(frame:CGRect) {
         let distanceToMove = CGFloat(frame.size.width + self.size.width)
-        let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
+        let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(4))
         let removeStones = SKAction.removeFromParent()
         let moveStonesAndRemove = SKAction.sequence([moveStones, removeStones])
         self.runAction(moveStonesAndRemove)
