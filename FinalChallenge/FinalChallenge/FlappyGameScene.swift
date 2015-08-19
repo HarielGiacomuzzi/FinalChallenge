@@ -162,7 +162,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
 
     func spawnStone() {
         var stone = FlappyStoneNode()
-        var scale = getRandomCGFloat(1.0, end: 5.0)
+        var scale = getRandomCGFloat(1.0, end: 3.0)
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
         var bottom = testTexture.size().height
         var top = self.frame.size.height - testTexture.size().height
