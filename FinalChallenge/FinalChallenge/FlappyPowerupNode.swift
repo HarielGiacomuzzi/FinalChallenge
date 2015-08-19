@@ -11,10 +11,19 @@ import SpriteKit
 
 class FlappyPowerupNode: SKSpriteNode {
     
+    
+    let playerCategory: UInt32 = 1 << 0
+    let worldCategory: UInt32 = 1 << 1
+    let stoneCategory: UInt32 = 1 << 2
+    let scoreCategory: UInt32 = 1 << 3
+    let endScreenCategory: UInt32 = 1 << 4
+    let powerUpCategory: UInt32 = 1 << 5
+    
     init() {
         let texture = SKTexture(imageNamed: "bubble 0")
         super.init(texture: texture, color: nil, size: texture.size())
         setupAliveAnimation()
+        setupPhysics()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,5 +62,13 @@ class FlappyPowerupNode: SKSpriteNode {
         
         self.runAction(blowAndRemove)
         
+    }
+    
+    func setupPhysics() {
+        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.height / 2)
+        self.physicsBody?.dynamic = false
+        self.physicsBody?.allowsRotation = false
+        self.physicsBody?.categoryBitMask = powerUpCategory
+        self.physicsBody?.contactTestBitMask = playerCategory
     }
 }

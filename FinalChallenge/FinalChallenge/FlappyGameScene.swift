@@ -17,15 +17,20 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
 
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
-    let pipeCategory: UInt32 = 1 << 2
+    let stoneCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
     let endScreenCategory: UInt32 = 1 << 4
+    let powerUpCategory: UInt32 = 1 << 5
     
     var moving:SKNode!
     var stones:SKNode!
     
     
     override func didMoveToView(view: SKView) {
+        
+        var pw = FlappyPowerupNode()
+        pw.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
+        self.addChild(pw)
         
         // setup physics
         self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
@@ -233,6 +238,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     
     func didBeginContact(contact: SKPhysicsContact) {
+        //checks colision with end of screen
         if ( contact.bodyA.categoryBitMask & endScreenCategory ) == endScreenCategory || ( contact.bodyB.categoryBitMask & endScreenCategory ) == endScreenCategory {
             println("Será que bate?")
             for player in players{
@@ -240,11 +246,27 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
                 if player.physicsBody == contact.bodyA || player.physicsBody == contact.bodyB{
                     println(player.identifier)
                     players.removeObject(player)
+                    player.removeFromParent()
                 
                 }
             }
         }
         
+        //checks colision player / powerup
+        if contact.bodyA.categoryBitMask == powerUpCategory && contact.bodyB.categoryBitMask == playerCategory {
+            handleColisionPlayerPowerup(player:contact.bodyB, powerup: contact.bodyA)
+        } else if contact.bodyB.categoryBitMask == powerUpCategory && contact.bodyA.categoryBitMask == playerCategory {
+            handleColisionPlayerPowerup(player:contact.bodyA, powerup: contact.bodyB)
+        }
+
+        
+    }
+    
+    func handleColisionPlayerPowerup(#player:SKPhysicsBody,powerup:SKPhysicsBody) {
+        var playerNode:FlappyPlayerNode = player.node as! FlappyPlayerNode
+        var powerupNode:FlappyPowerupNode = powerup.node as! FlappyPowerupNode
+        println("boom")
+        powerupNode.blowUp()
     }
     
     
