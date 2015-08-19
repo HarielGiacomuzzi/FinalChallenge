@@ -16,11 +16,12 @@ class FlappyPlayerNode: SKSpriteNode {
     let stoneCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
     let endScreenCategory: UInt32 = 1 << 4
+    let powerUpCategory: UInt32 = 1 << 5
     
     var identifier:String?
     
     init() {
-        let texture = SKTexture(imageNamed: "bird-02")
+        let texture = SKTexture(imageNamed: "bird-01")
         super.init(texture: texture, color: nil, size: texture.size())
         setupPhysics()
     }
