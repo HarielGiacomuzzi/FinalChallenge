@@ -19,8 +19,10 @@ class FlappyPowerupNode: SKSpriteNode {
     let endScreenCategory: UInt32 = 1 << 4
     let powerUpCategory: UInt32 = 1 << 5
     
+    let atlas = SKTextureAtlas(named: "bubble")
+    
     init() {
-        let texture = SKTexture(imageNamed: "bubble 0")
+        let texture = atlas.textureNamed("bubble%201")
         super.init(texture: texture, color: nil, size: texture.size())
         setupAliveAnimation()
         setupPhysics()
@@ -31,32 +33,26 @@ class FlappyPowerupNode: SKSpriteNode {
     }
     
     func setupAliveAnimation() {
-        let sequence = [ SKTexture(imageNamed: "bubble 0"),
-                        SKTexture(imageNamed: "bubble 1"),
-                        SKTexture(imageNamed: "bubble 2"),
-                        SKTexture(imageNamed: "bubble 3"),
-                        SKTexture(imageNamed: "bubble 4"),
-                        SKTexture(imageNamed: "bubble 5"),
-                        SKTexture(imageNamed: "bubble 6"),
-                        SKTexture(imageNamed: "bubble 7")
-                    ]
-        let animation = SKAction.animateWithTextures(sequence, timePerFrame: 0.2)
+        var sequence:[SKTexture] = []
+        for i in 0...7 {
+            var texture = atlas.textureNamed("bubble%20\(i)")
+            sequence.append(texture)
+        }
+        let animation = SKAction.animateWithTextures(sequence, timePerFrame: 0.1)
         let aliveAnimation = SKAction.repeatActionForever(animation)
         self.runAction(aliveAnimation)
         
     }
     
     func blowUp() {
-        let sequence = [ SKTexture(imageNamed: "bubble disapear 0"),
-            SKTexture(imageNamed: "bubble disapear 1"),
-            SKTexture(imageNamed: "bubble disapear 2"),
-            SKTexture(imageNamed: "bubble disapear 3"),
-            SKTexture(imageNamed: "bubble disapear 4"),
-            SKTexture(imageNamed: "bubble disapear 5"),
-            SKTexture(imageNamed: "bubble disapear 6")
-        ]
         
-        let blowUp = SKAction.animateWithTextures(sequence, timePerFrame: 0.1)
+        var sequence:[SKTexture] = []
+        for i in 0...6 {
+            var texture = atlas.textureNamed("bubble%20disapear%20\(i)")
+            sequence.append(texture)
+        }
+        
+        let blowUp = SKAction.animateWithTextures(sequence, timePerFrame: 0.07)
         let remove = SKAction.removeFromParent()
         let blowAndRemove = SKAction.sequence([blowUp,remove])
         
@@ -69,12 +65,13 @@ class FlappyPowerupNode: SKSpriteNode {
         self.physicsBody?.dynamic = false
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.categoryBitMask = powerUpCategory
+        self.physicsBody?.collisionBitMask = stoneCategory
         self.physicsBody?.contactTestBitMask = playerCategory
     }
     
     func setupMovement(frame:CGRect) {
         let distanceToMove = CGFloat(frame.size.width + self.size.width)
-        let movePowerUps = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
+        let movePowerUps = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(5))
         let removePowerUps = SKAction.removeFromParent()
         let movePowerUpsAndRemove = SKAction.sequence([movePowerUps, removePowerUps])
         self.runAction(movePowerUpsAndRemove)

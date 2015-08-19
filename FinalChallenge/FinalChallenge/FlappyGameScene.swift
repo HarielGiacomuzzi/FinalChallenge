@@ -284,16 +284,14 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         } else if contact.bodyB.categoryBitMask == powerUpCategory && contact.bodyA.categoryBitMask == playerCategory {
             handleColisionPlayerPowerup(player:contact.bodyA, powerup: contact.bodyB)
         }
-
         
     }
     
     func handleColisionPlayerPowerup(#player:SKPhysicsBody,powerup:SKPhysicsBody) {
         var playerNode:FlappyPlayerNode = player.node as! FlappyPlayerNode
         var powerupNode:FlappyPowerupNode = powerup.node as! FlappyPowerupNode
-        println("boom")
+        playerNode.boost()
         powerupNode.blowUp()
     }
-    
     
 }

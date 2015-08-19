@@ -33,7 +33,7 @@ class FlappyPlayerNode: SKSpriteNode {
     func setupPhysics() {
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.height / 2)
         self.physicsBody?.dynamic = true
-        self.physicsBody?.allowsRotation = false
+        self.physicsBody?.allowsRotation = true
         self.physicsBody?.categoryBitMask = playerCategory
         self.physicsBody?.collisionBitMask = worldCategory | stoneCategory
         self.physicsBody?.contactTestBitMask = worldCategory | stoneCategory
@@ -44,13 +44,35 @@ class FlappyPlayerNode: SKSpriteNode {
         self.physicsBody?.applyImpulse(CGVectorMake(0, 5))
     }
     
+    func boost() {
+        self.physicsBody?.applyImpulse(CGVectorMake(5, 0))
+        self.physicsBody?.velocity = CGVectorMake(0, 0)
+    }
+    
     func goUp() {
  
         self.physicsBody?.applyImpulse(CGVectorMake(0, 0.5))
+        self.updateRotation()
     }
     
     func goDown() {
  
         self.physicsBody?.applyImpulse(CGVectorMake(0, -0.5))
+        self.updateRotation()
+    }
+    
+    func clamp(min: CGFloat, max: CGFloat, value: CGFloat) -> CGFloat {
+        if( value > max ) {
+            return max
+        } else if( value < min ) {
+            return min
+        } else {
+            return value
+        }
+    }
+    
+    func updateRotation() {
+        self.zRotation = self.clamp( -1, max: 0.5, value: self.physicsBody!.velocity.dy * ( self.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 ) )
+        println(self.zRotation)
     }
 }
