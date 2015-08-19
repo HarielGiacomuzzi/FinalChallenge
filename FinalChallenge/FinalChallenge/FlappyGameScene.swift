@@ -162,7 +162,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
 
     func spawnStone() {
         var stone = FlappyStoneNode()
-        var scale = getRandomCGFloat(1.0, end: 3.0)
+        var scale = getRandomCGFloat(100.0, end: 300.0)
+        scale = scale / 100
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
         var bottom = testTexture.size().height
         var top = self.frame.size.height - testTexture.size().height
@@ -170,11 +171,11 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         stone.setScale(scale)
         stone.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
         stone.setupMovement(self.frame, vel: stoneVel)
+        
+        var rotation = getRandomCGFloat(1, end: 4)
+        stone.zRotation = rotation
+        
         self.addChild(stone)
-        
-       // var path = NSBundle.mainBundle().pathForResource("MyParticle", ofType: "sks")
-        //var stoneParticle = NSKeyedUnarchiver.unarchiveObjectWithFile(path!) as! SKEmitterNode
-        
         
         var stoneParticle = FlappyParticleNode.fromFile("MyParticle2")
         stoneParticle!.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
@@ -248,10 +249,12 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
                     player.goUp()
                 } else {
                     player.goDown()
+                  
                 }
             }
             
         }
+
     }
     
     

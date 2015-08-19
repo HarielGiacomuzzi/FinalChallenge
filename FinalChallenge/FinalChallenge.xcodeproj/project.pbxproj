@@ -341,6 +341,7 @@
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
+				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
 				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
