@@ -9,9 +9,6 @@
 import Foundation
 import SpriteKit
 
-class BoardController: SKScene, SKPhysicsContactDelegate {
-
-
 class BoardGraph : NSObject{
     
     static let SharedInstance = BoardGraph();
@@ -146,7 +143,4 @@ class BoardGraph : NSObject{
         }
     }
     
-}
-
-
 }
