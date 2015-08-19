@@ -60,13 +60,22 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         self.runAction(spawnDelayForeverPU)
 
         // left wall , if you hit you are dead
-        var contactNode = SKNode()
-        contactNode.position = CGPointMake(0, self.frame.size.height / 2)
-        contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
-        contactNode.physicsBody?.dynamic = false
-        contactNode.physicsBody?.categoryBitMask = endScreenCategory
-        contactNode.physicsBody?.contactTestBitMask = playerCategory
-        self.addChild(contactNode)
+        var wallLeft = SKNode()
+        wallLeft.position = CGPointMake(0, self.frame.size.height / 2)
+        wallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        wallLeft.physicsBody?.dynamic = false
+        wallLeft.physicsBody?.categoryBitMask = endScreenCategory
+        wallLeft.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(wallLeft)
+        
+        //right wall, if you hit you win
+        var wallRight = SKNode()
+        wallRight.position = CGPointMake(self.frame.width, self.frame.size.height / 2)
+        wallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        wallRight.physicsBody?.dynamic = false
+        wallRight.physicsBody?.categoryBitMask = endScreenCategory
+        wallRight.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(wallRight)
         
     }
     
