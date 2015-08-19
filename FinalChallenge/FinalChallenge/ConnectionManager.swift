@@ -9,8 +9,6 @@
 import Foundation
 import MultipeerConnectivity
 
-
-
 class ConnectionManager: NSObject, MCSessionDelegate{
     var peerID: MCPeerID = MCPeerID();
     var session: MCSession!

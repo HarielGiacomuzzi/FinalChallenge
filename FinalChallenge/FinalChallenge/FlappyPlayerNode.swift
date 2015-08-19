@@ -15,10 +15,13 @@ class FlappyPlayerNode: SKSpriteNode {
     let worldCategory: UInt32 = 1 << 1
     let stoneCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
+    let endScreenCategory: UInt32 = 1 << 4
+    let powerUpCategory: UInt32 = 1 << 5
+    
     var identifier:String?
     
     init() {
-        let texture = SKTexture(imageNamed: "bird-02")
+        let texture = SKTexture(imageNamed: "bird-01")
         super.init(texture: texture, color: nil, size: texture.size())
         setupPhysics()
     }
@@ -36,8 +39,45 @@ class FlappyPlayerNode: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = worldCategory | stoneCategory
     }
     
-    func jump () {
-        self.physicsBody?.velocity = CGVectorMake(0, 0)
-        self.physicsBody?.applyImpulse(CGVectorMake(0, 5))
+    
+    func boostAndStop() {
+        let boost = SKAction.runBlock({() in
+            self.physicsBody?.applyImpulse(CGVectorMake(2, 0))
+        })
+        let stop = SKAction.runBlock({() in
+            self.physicsBody?.velocity = CGVectorMake(0, 0)
+        })
+        
+        let wait = SKAction.waitForDuration(1)
+        
+        let sequence = SKAction.sequence([boost,wait,stop])
+        self.runAction(sequence)
+    }
+    
+    func goUp() {
+ 
+        self.physicsBody?.applyImpulse(CGVectorMake(0, 0.5))
+        self.updateRotation()
+    }
+    
+    func goDown() {
+ 
+        self.physicsBody?.applyImpulse(CGVectorMake(0, -0.5))
+        self.updateRotation()
+    }
+    
+    func clamp(min: CGFloat, max: CGFloat, value: CGFloat) -> CGFloat {
+        if( value > max ) {
+            return max
+        } else if( value < min ) {
+            return min
+        } else {
+            return value
+        }
+    }
+    
+    func updateRotation() {
+        self.zRotation = self.clamp( -1, max: 0.5, value: self.physicsBody!.velocity.dy * ( self.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 ) )
+        //println(self.zRotation)
     }
 }

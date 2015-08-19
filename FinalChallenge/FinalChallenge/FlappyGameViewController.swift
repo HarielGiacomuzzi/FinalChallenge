@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import MultipeerConnectivity
 
 class FlappyGameViewController: UIViewController {
     
@@ -19,7 +20,8 @@ class FlappyGameViewController: UIViewController {
        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
         
-        scene = FlappyGameScene(size: view.bounds.size)
+//        scene = FlappyGameScene(size: view.bounds.size)
+        scene = FlappyGameScene(size: CGSize(width: 1024, height: 768))
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
@@ -27,7 +29,6 @@ class FlappyGameViewController: UIViewController {
         skView.showsPhysics = true
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,11 +42,16 @@ class FlappyGameViewController: UIViewController {
     
 
     func messageReceived(data : NSNotification){
-        var a = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
-        var message = String(NSString(data: a, encoding: NSUTF8StringEncoding)!);
-        scene.playerJump(message)
+        var peerID = ((data.userInfo as! NSDictionary).valueForKey("peerID") as! MCPeerID);
+        var data = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
+        var peerDisplayName = peerID.displayName
+        var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
         
-        var value = ConnectionManager.sharedInstance.session.connectedPeers
-        println(value)
+        scene.playerSwim(peerDisplayName, way: message)
+    }
+    
+    
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.LandscapeRight.rawValue)
     }
 }

@@ -7,6 +7,10 @@
 //
 
 import Foundation
+import SpriteKit
+
+class BoardController: SKScene, SKPhysicsContactDelegate {
+
 
 class BoardGraph : NSObject{
     
@@ -145,3 +149,4 @@ class BoardGraph : NSObject{
 }
 
 
+}
