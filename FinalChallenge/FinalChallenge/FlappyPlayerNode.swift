@@ -20,9 +20,8 @@ class FlappyPlayerNode: SKSpriteNode {
     var identifier:String?
     
     init() {
-        let texture = SKTexture(imageNamed: "bird-02")
+        let texture = SKTexture(imageNamed: "bird-01")
         super.init(texture: texture, color: nil, size: texture.size())
-        self.setScale(3)
         setupPhysics()
     }
     

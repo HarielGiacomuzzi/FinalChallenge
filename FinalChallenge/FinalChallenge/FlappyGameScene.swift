@@ -21,7 +21,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     let scoreCategory: UInt32 = 1 << 3
     let endScreenCategory: UInt32 = 1 << 4
     
-    var moveStonesAndRemove:SKAction!
     var moving:SKNode!
     var stones:SKNode!
     
@@ -42,21 +41,15 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         moving.addChild(stones)
         
         self.spawnPlayers()
-        self.gameLimit()
+        self.setupWalls()
         
         //nobody connected
         if players.count == 0 {
             spawnSinglePlayer()
         }
-
-        // create the stones movement actions
-        let distanceToMove = CGFloat(self.frame.size.width + self.frame.size.width / 2)
-        let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
-        let removeStones = SKAction.removeFromParent()
-        moveStonesAndRemove = SKAction.sequence([moveStones, removeStones])
         
         // spawn the stones
-        let spawn = SKAction.runBlock({() in self.spawnStones()})
+        let spawn = SKAction.runBlock({() in self.spawnStone()})
         
         let delay = SKAction.waitForDuration(2.5, withRange: 1)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
@@ -74,7 +67,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func gameLimit(){
+    func setupWalls(){
         // creates ground texture
         let groundTexture1 = SKTexture(imageNamed: "ffparalaxe1")
         let groundTexture2 = SKTexture(imageNamed: "ffparalaxe2")
@@ -155,7 +148,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         self.addChild(roofSprite3)
         
         //adds imovable roof physics
-        //adds imovable roof physics
         var roof = SKNode()
         roof.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height-roofTexture1.size().height * 0.7) //roof.position = CENTER POINT
         roof.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, roofTexture1.size().height * 0.01))
@@ -165,7 +157,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func spawnStones() {
+    func spawnStone() {
         var stone = FlappyStoneNode()
         var scale = getRandomCGFloat(1.0, end: 5.0)
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
@@ -178,7 +170,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         stone.setScale(scale)
         stone.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
         
-        stone.runAction(moveStonesAndRemove)
+        stone.setupMovement(self.frame)
         stones.addChild(stone)
     }
     
