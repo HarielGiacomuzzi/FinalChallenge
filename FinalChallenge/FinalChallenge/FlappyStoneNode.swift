@@ -17,6 +17,7 @@ class FlappyStoneNode: SKSpriteNode {
     let scoreCategory: UInt32 = 1 << 3
     let powerUpCategory: UInt32 = 1 << 5
     
+    
     init() {
         let texture = SKTexture(imageNamed: "bird-02")
         super.init(texture: texture, color: nil, size: texture.size())
