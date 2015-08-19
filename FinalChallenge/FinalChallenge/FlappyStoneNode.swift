@@ -37,9 +37,9 @@ class FlappyStoneNode: SKSpriteNode {
         self.physicsBody?.contactTestBitMask = playerCategory
     }
     
-    func setupMovement(frame:CGRect) {
+    func setupMovement(frame:CGRect, vel:Double) {
         let distanceToMove = CGFloat(frame.size.width + self.size.width)
-        let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
+        let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(vel))
         let removeStones = SKAction.removeFromParent()
         let moveStonesAndRemove = SKAction.sequence([moveStones, removeStones])
         self.runAction(moveStonesAndRemove)
