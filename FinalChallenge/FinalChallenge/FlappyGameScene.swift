@@ -14,7 +14,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
-
+    let stoneVel = 4.0
+    
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
     let stoneCategory: UInt32 = 1 << 2
@@ -168,14 +169,14 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         var pos = getRandomCGFloat(bottom, end: top)
         stone.setScale(scale)
         stone.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
-        stone.setupMovement(self.frame)
+        stone.setupMovement(self.frame, vel: stoneVel)
         self.addChild(stone)
         
        // var path = NSBundle.mainBundle().pathForResource("MyParticle", ofType: "sks")
         //var stoneParticle = NSKeyedUnarchiver.unarchiveObjectWithFile(path!) as! SKEmitterNode
         
         
-        var stoneParticle = FlappyParticleNode.fromFile("MyParticle")
+        var stoneParticle = FlappyParticleNode.fromFile("MyParticle2")
         stoneParticle!.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
         stoneParticle!.name = "stoneParticle"
         stoneParticle!.targetNode = self.scene
