@@ -73,6 +73,6 @@ class FlappyPlayerNode: SKSpriteNode {
     
     func updateRotation() {
         self.zRotation = self.clamp( -1, max: 0.5, value: self.physicsBody!.velocity.dy * ( self.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 ) )
-        println(self.zRotation)
+        //println(self.zRotation)
     }
 }
