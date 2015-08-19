@@ -162,7 +162,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
 
     func spawnStone() {
         var stone = FlappyStoneNode()
-        var scale = getRandomCGFloat(100.0, end: 300.0)
+        var scale = getRandomCGFloat(100.0, end: 200.0)
         scale = scale / 100
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
         var bottom = testTexture.size().height
@@ -284,7 +284,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     func handleColisionPlayerPowerup(#player:SKPhysicsBody,powerup:SKPhysicsBody) {
         var playerNode:FlappyPlayerNode = player.node as! FlappyPlayerNode
         var powerupNode:FlappyPowerupNode = powerup.node as! FlappyPowerupNode
-        playerNode.boost()
+        playerNode.boostAndStop()
         powerupNode.blowUp()
     }
     
