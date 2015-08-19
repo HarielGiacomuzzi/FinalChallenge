@@ -22,15 +22,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     let endScreenCategory: UInt32 = 1 << 4
     let powerUpCategory: UInt32 = 1 << 5
     
-    var moving:SKNode!
-    var stones:SKNode!
-    
-    
     override func didMoveToView(view: SKView) {
-        
-        var pw = FlappyPowerupNode()
-        pw.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
-        self.addChild(pw)
         
         // setup physics
         self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
@@ -39,11 +31,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         // setup background color
         var skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
         self.backgroundColor = skyColor
-        
-        moving = SKNode()
-        self.addChild(moving)
-        stones = SKNode()
-        moving.addChild(stones)
+
         
         self.spawnPlayers()
         self.setupWalls()
@@ -60,6 +48,15 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
         self.runAction(spawnThenDelayForever)
+        
+        //spawn the powerups
+        
+        let spawnPowerups = SKAction.runBlock({() in self.spawnPowerUp()})
+        
+        let delayPowerUp = SKAction.waitForDuration(5, withRange: 2)
+        let spawnThenDelayPU = SKAction.sequence([spawnPowerups,delayPowerUp])
+        let spawnDelayForeverPU = SKAction.repeatActionForever(spawnThenDelayPU)
+        self.runAction(spawnDelayForeverPU)
 
         
         var contactNode = SKNode()
@@ -176,7 +173,22 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         stone.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
         
         stone.setupMovement(self.frame)
-        stones.addChild(stone)
+        self.addChild(stone)
+    }
+    
+    func spawnPowerUp() {
+        var powerUp = FlappyPowerupNode()
+        let testTexture = SKTexture(imageNamed: "ffparalaxe1")
+        var bottom = testTexture.size().height
+        var top = self.frame.size.height - testTexture.size().height
+        
+        var pos = getRandomCGFloat(bottom, end: top)
+        
+        powerUp.position = CGPointMake(self.frame.size.width + powerUp.size.width / 2, pos)
+        
+        powerUp.setupMovement(self.frame)
+        self.addChild(powerUp)
+        
     }
     
     func getRandomCGFloat(begin:CGFloat,end:CGFloat) -> CGFloat {

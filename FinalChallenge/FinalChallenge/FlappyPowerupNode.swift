@@ -71,4 +71,12 @@ class FlappyPowerupNode: SKSpriteNode {
         self.physicsBody?.categoryBitMask = powerUpCategory
         self.physicsBody?.contactTestBitMask = playerCategory
     }
+    
+    func setupMovement(frame:CGRect) {
+        let distanceToMove = CGFloat(frame.size.width + self.size.width)
+        let movePowerUps = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(0.01 * distanceToMove))
+        let removePowerUps = SKAction.removeFromParent()
+        let movePowerUpsAndRemove = SKAction.sequence([movePowerUps, removePowerUps])
+        self.runAction(movePowerUpsAndRemove)
+    }
 }
