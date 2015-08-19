@@ -279,9 +279,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     func handleColisionPlayerPowerup(#player:SKPhysicsBody,powerup:SKPhysicsBody) {
         var playerNode:FlappyPlayerNode = player.node as! FlappyPlayerNode
         var powerupNode:FlappyPowerupNode = powerup.node as! FlappyPowerupNode
-        println("boom")
+        playerNode.boost()
         powerupNode.blowUp()
     }
-    
     
 }

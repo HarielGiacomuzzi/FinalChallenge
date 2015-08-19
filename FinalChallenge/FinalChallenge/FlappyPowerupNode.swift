@@ -71,7 +71,7 @@ class FlappyPowerupNode: SKSpriteNode {
     
     func setupMovement(frame:CGRect) {
         let distanceToMove = CGFloat(frame.size.width + self.size.width)
-        let movePowerUps = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(2))
+        let movePowerUps = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(5))
         let removePowerUps = SKAction.removeFromParent()
         let movePowerUpsAndRemove = SKAction.sequence([movePowerUps, removePowerUps])
         self.runAction(movePowerUpsAndRemove)
