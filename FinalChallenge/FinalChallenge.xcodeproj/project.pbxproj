@@ -331,6 +331,7 @@
 			files = (
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
+				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,

@@ -180,7 +180,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         stoneParticle!.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
         stoneParticle!.name = "stoneParticle"
         stoneParticle!.targetNode = self.scene
-        stoneParticle!.setupMovement(self.frame, node: stone)
+        
+        stoneParticle!.setupMovement(self.frame, node: stone, vel: stoneVel)
         self.addChild(stoneParticle!)
         
     }
