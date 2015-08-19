@@ -40,5 +40,8 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
     }
 
+    @IBAction func loadBoard(sender: AnyObject) {
+        BoardGraph.SharedInstance.loadBoard("The Zueira Never Ends !");
+    }
 }
 

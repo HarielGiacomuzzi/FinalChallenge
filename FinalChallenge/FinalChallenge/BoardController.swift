@@ -10,20 +10,30 @@ import Foundation
 
 class BoardGraph : NSObject{
     
-    var nodes : [String : BoardNode] = [:];
+    static let SharedInstance = BoardGraph();
+    private var nodes : [String : BoardNode] = [:];
 
     func loadBoard(fromFile : String){
+        var a = XMLParser();
+        a.loadBoardFrom("/Users/harielgiacomuzzi/Documents/BEPiD/FinalChallenge/FinalChallenge/FinalChallenge/board_2.xml");
+        println("Board Loaded")
         
+        for aux in nodes{
+            println("Nodinho gostoso : \(aux.1.posX)  -  \(aux.1.posY)")
+        }
     }
     
     // creates a node and insert it on the graph dictionary with the specified name
-    private func createNode(x: Double, y : Double, name : String, father : BoardNode?){
+    func createNode(x: Double, y : Double, name : String?, father : BoardNode?){
         var aux = BoardNode(posX: x, posY: y, father: father);
-        nodes.updateValue(aux, forKey: name);
+        nodes.updateValue(aux, forKey: name!);
     }
     
-    private func setNeighbors(){
-    
+    // sets the next node on the graph
+    func setNeighbors(currentNode : String, nextNode : String ){
+        if nodes[currentNode] != nil && nodes[nextNode] != nil {
+            nodes[currentNode]?.nextMoves.append(nodes[nextNode]!);
+        }
     }
     
     // returns the node name where the given player is located
@@ -46,6 +56,14 @@ class BoardGraph : NSObject{
             }
         }
         return nil;
+    }
+    
+    func setFather(fatherName : String?, sonName : String!) -> Bool{
+        if nodes[fatherName!] != nil && nodes[sonName] != nil {
+            nodes[sonName]?.father = nodes[fatherName!];
+            return true;
+        }
+        return false;
     }
 
     // check if there's an item on that node...
@@ -76,6 +94,10 @@ class BoardGraph : NSObject{
     func walk(quantity : Int){
     }
     
+    // check if there's a alternative path
+    private func havePath(from : String, to : String){
+    }
+    
     private func sendPathChosenNotification(){
     
     }
@@ -84,9 +106,6 @@ class BoardGraph : NSObject{
     }
     
     func continueWalking(direction : String){
-    }
-    
-    private func havePath(from : String, to : String){
     }
     
     private func gotoNode(){
