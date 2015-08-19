@@ -17,11 +17,13 @@ class FlappyStoneNode: SKSpriteNode {
     let scoreCategory: UInt32 = 1 << 3
     let powerUpCategory: UInt32 = 1 << 5
     
+    let atlas = SKTextureAtlas(named: "rock")
     
     init() {
-        let texture = SKTexture(imageNamed: "bird-02")
+        var aux = arc4random() % 3 + 1
+        let texture = atlas.textureNamed("bigrock\(aux)")
         super.init(texture: texture, color: nil, size: texture.size())
-        setupPhysics()
+        setupPhysics(texture)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,8 +31,8 @@ class FlappyStoneNode: SKSpriteNode {
     }
     
     
-    func setupPhysics() {
-        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.height / 2)
+    func setupPhysics(texture:SKTexture) {
+        self.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
         self.physicsBody?.dynamic = false
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.categoryBitMask = stoneCategory
@@ -44,5 +46,4 @@ class FlappyStoneNode: SKSpriteNode {
         let moveStonesAndRemove = SKAction.sequence([moveStones, removeStones])
         self.runAction(moveStonesAndRemove)
     }
-   
 }

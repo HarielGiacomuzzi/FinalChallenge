@@ -33,20 +33,25 @@ class FlappyPlayerNode: SKSpriteNode {
     func setupPhysics() {
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.height / 2)
         self.physicsBody?.dynamic = true
-        self.physicsBody?.allowsRotation = true
+        self.physicsBody?.allowsRotation = false
         self.physicsBody?.categoryBitMask = playerCategory
         self.physicsBody?.collisionBitMask = worldCategory | stoneCategory
         self.physicsBody?.contactTestBitMask = worldCategory | stoneCategory
     }
     
-    func jump () {
-        self.physicsBody?.velocity = CGVectorMake(0, 0)
-        self.physicsBody?.applyImpulse(CGVectorMake(0, 5))
-    }
     
-    func boost() {
-        self.physicsBody?.applyImpulse(CGVectorMake(5, 0))
-        self.physicsBody?.velocity = CGVectorMake(0, 0)
+    func boostAndStop() {
+        let boost = SKAction.runBlock({() in
+            self.physicsBody?.applyImpulse(CGVectorMake(2, 0))
+        })
+        let stop = SKAction.runBlock({() in
+            self.physicsBody?.velocity = CGVectorMake(0, 0)
+        })
+        
+        let wait = SKAction.waitForDuration(1)
+        
+        let sequence = SKAction.sequence([boost,wait,stop])
+        self.runAction(sequence)
     }
     
     func goUp() {
