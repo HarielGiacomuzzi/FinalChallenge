@@ -63,7 +63,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
         self.runAction(spawnThenDelayForever)
 
-        
+        // left wall , if you hit you are dead
         var contactNode = SKNode()
         contactNode.position = CGPointMake(0, self.frame.size.height / 2)
         contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
@@ -171,6 +171,16 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         stone.runAction(moveStonesAndRemove)
         stones.addChild(stone)
+        
+        var path = NSBundle.mainBundle().pathForResource("MyParticle", ofType: "sks")
+        var stoneParticle = NSKeyedUnarchiver.unarchiveObjectWithFile(path!) as! SKEmitterNode
+        stoneParticle.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
+        stoneParticle.name = "stoneParticle"
+        stoneParticle.targetNode = self.scene
+        stoneParticle.runAction(moveStonesAndRemove)
+        stones.addChild(stoneParticle)
+        
+        
     }
     
     func getRandomCGFloat(begin:CGFloat,end:CGFloat) -> CGFloat {
@@ -233,7 +243,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         if ( contact.bodyA.categoryBitMask & endScreenCategory ) == endScreenCategory || ( contact.bodyB.categoryBitMask & endScreenCategory ) == endScreenCategory {
-            println("Será que bate?")
             for player in players{
                 println("entrou aqui")
                 if player.physicsBody == contact.bodyA || player.physicsBody == contact.bodyB{
