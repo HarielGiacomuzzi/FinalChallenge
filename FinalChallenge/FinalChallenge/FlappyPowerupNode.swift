@@ -22,7 +22,7 @@ class FlappyPowerupNode: SKSpriteNode {
     let atlas = SKTextureAtlas(named: "bubble")
     
     init() {
-        let texture = SKTexture(imageNamed: "bubble 0")
+        let texture = atlas.textureNamed("bubble%201")
         super.init(texture: texture, color: nil, size: texture.size())
         setupAliveAnimation()
         setupPhysics()
