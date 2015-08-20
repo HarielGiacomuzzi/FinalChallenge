@@ -156,7 +156,9 @@
 			children = (
 				B5F60BB81B83B76E00786728 /* MyParticle.sks */,
 				26D019771B84FF0400C5C73D /* bubbleparticle.png */,
+				5E6039731B85017700F63DC3 /* rock.atlas */,
 				B5F60BB91B83B76E00786728 /* spark.png */,
+				5E60396B1B84F03100F63DC3 /* bubble.atlas */,
 				B5F60BC11B84FA0400786728 /* MyParticle2.sks */,
 			);
 			name = Resources;
@@ -199,10 +201,8 @@
 				DB458B721B5409B90066B38C /* AppDelegate.swift */,
 				5E8F9DD81B7D0093004514D0 /* ViewControllers */,
 				DB458B791B5409B90066B38C /* Main.storyboard */,
-				5E60396B1B84F03100F63DC3 /* bubble.atlas */,
 				DB458B7C1B5409B90066B38C /* Images.xcassets */,
 				DB458B7E1B5409B90066B38C /* LaunchScreen.xib */,
-				5E6039731B85017700F63DC3 /* rock.atlas */,
 				DB458B741B5409B90066B38C /* FinalChallenge.xcdatamodeld */,
 				DB458B701B5409B90066B38C /* Supporting Files */,
 			);
