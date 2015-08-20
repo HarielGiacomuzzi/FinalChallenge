@@ -49,6 +49,10 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         
+        startGame()
+        
+        self.setupWalls()
+        
         // setup physics
         self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
         self.physicsWorld.contactDelegate = self
@@ -57,9 +61,56 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         var skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
         self.backgroundColor = skyColor
 
+
+        // left wall , if you hit you are dead
+        var wallLeft = SKNode()
+        wallLeft.position = CGPointMake(0, self.frame.size.height / 2)
+        wallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        wallLeft.physicsBody?.dynamic = false
+        wallLeft.physicsBody?.categoryBitMask = endScreenCategory
+        wallLeft.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(wallLeft)
         
+        //right wall, if you hit you win
+        var wallRight = SKNode()
+        wallRight.position = CGPointMake(self.frame.width, self.frame.size.height / 2)
+        wallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        wallRight.physicsBody?.dynamic = false
+        wallRight.physicsBody?.categoryBitMask = endScreenCategory
+        wallRight.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(wallRight)
+        
+    }
+    
+    func startGame() {
+        var countDownNode = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        countDownNode.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
+        countDownNode.zPosition = 100
+        countDownNode.fontSize = 100.0
+        var actions:[SKAction] = []
+        self.addChild(countDownNode)
+        
+        for i in reverse(1...3) {
+            var changeNumber = SKAction.runBlock({() in
+                countDownNode.text = "\(i)"
+            })
+            var wait = SKAction.waitForDuration(1)
+            actions += [changeNumber,wait]
+        }
+        
+        var removeNode = SKAction.runBlock({() in
+            countDownNode.removeFromParent()
+        })
+        actions.append(removeNode)
+        var actionSequence = SKAction.sequence(actions)
+        countDownNode.runAction(actionSequence, completion: {() -> Void in
+            self.createPlayersAndObstacles()
+        })
+
+    }
+    
+    func createPlayersAndObstacles() {
         self.spawnPlayers()
-        self.setupWalls()
         
         //nobody connected
         if players.count == 0 {
@@ -82,25 +133,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let spawnThenDelayPU = SKAction.sequence([spawnPowerups,delayPowerUp])
         let spawnDelayForeverPU = SKAction.repeatActionForever(spawnThenDelayPU)
         self.runAction(spawnDelayForeverPU)
-
-        // left wall , if you hit you are dead
-        var wallLeft = SKNode()
-        wallLeft.position = CGPointMake(0, self.frame.size.height / 2)
-        wallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
-        wallLeft.physicsBody?.dynamic = false
-        wallLeft.physicsBody?.categoryBitMask = endScreenCategory
-        wallLeft.physicsBody?.contactTestBitMask = playerCategory
-        self.addChild(wallLeft)
-        
-        //right wall, if you hit you win
-        var wallRight = SKNode()
-        wallRight.position = CGPointMake(self.frame.width, self.frame.size.height / 2)
-        wallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
-        wallRight.physicsBody?.dynamic = false
-        wallRight.physicsBody?.categoryBitMask = endScreenCategory
-        wallRight.physicsBody?.contactTestBitMask = playerCategory
-        self.addChild(wallRight)
-        
     }
     
     func setupWalls(){
@@ -127,7 +159,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             let firstMovement = SKAction.moveTo(endPosition, duration: NSTimeInterval(2.0 * Double(i) * worldVelMultiplier))
             
             sprite.runAction(SKAction.sequence([firstMovement,moveGroundSpritesForever]))
-            sprite.zPosition = 11
+            sprite.zPosition = 12
             
             self.addChild(sprite)
             currentWidth += sprite.size.width
@@ -193,19 +225,19 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         var rotation = getRandomCGFloat(1, end: 4)
         stone.zRotation = rotation
-        
+        stone.zPosition = 9
         self.addChild(stone)
         
         var particleScales = 0.3 * scale
         var stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
-        stoneParticleLow!.position = CGPointMake(stone.position.x, stone.position.y - stone.size.height/2)
+        stoneParticleLow!.position = CGPointMake(stone.position.x, stone.position.y - (5 + stone.size.height/2))
         stoneParticleLow!.name = "stoneParticleLow"
         stoneParticleLow!.particleScale = particleScales
         stoneParticleLow!.targetNode = self.scene
         stoneParticleLow!.setupMovement(self.frame, node: stone, vel: stoneVel * worldVelMultiplier)
         self.addChild(stoneParticleLow!)
     
-        var stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle2")
+        var stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle")
         stoneParticleHigh!.position = CGPointMake(stone.position.x, stone.position.y + stone.size.height/2)
         stoneParticleHigh!.name = "stoneParticleHigh"
         stoneParticleHigh!.particleScale = particleScales

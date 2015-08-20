@@ -42,6 +42,8 @@ class FlappyPlayerNode: SKSpriteNode {
         super.init(texture: texture, color: nil, size: texture.size())
         setupPhysics()
         self.runAction(SKAction.repeatActionForever( firstAction   ))
+        self.color = UIColor( red: 0.9, green: 0.6, blue: 0.3, alpha: 1 )
+        self.colorBlendFactor = 0.4//How much of the color will be applied to the texture 0..1
 
     }
     
@@ -56,18 +58,44 @@ class FlappyPlayerNode: SKSpriteNode {
         self.physicsBody?.categoryBitMask = playerCategory
         self.physicsBody?.collisionBitMask = worldCategory | stoneCategory | playerCategory
         self.physicsBody?.contactTestBitMask = worldCategory | stoneCategory
+        self.physicsBody?.mass =  0.05
+
     }
     
     
     func boostAndStop() {
+        let spriteAnimatedAtlas = SKTextureAtlas(named: "wind")//sprites
+
+        var runFrames = [SKTexture]()
+        for var i=0; i<4; i++
+        {
+            //let runTextureName = "running\(i)"
+            let runTextureName = "wind\(i)"
+            runFrames.append(spriteAnimatedAtlas.textureNamed(runTextureName))
+        }
+        
+        let texture = runFrames[0]
+        
+        let firstAction = SKAction.repeatAction(SKAction.animateWithTextures(runFrames, timePerFrame: 0.07), count: 3)
+        let windNode = SKSpriteNode(texture: texture)
+       
+        self.addChild(windNode)
+
+        windNode.position = CGPoint(x: 0, y: 0)
+        
+        windNode.runAction(firstAction, completion: {
+            () in
+            windNode.removeFromParent()
+        })
+        
         let boost = SKAction.runBlock({() in
-            self.physicsBody?.applyImpulse(CGVectorMake(2, 0))
+            self.physicsBody?.applyImpulse(CGVectorMake(0.9, 0))
         })
         let stop = SKAction.runBlock({() in
             self.physicsBody?.velocity = CGVectorMake(0, 0)
         })
         
-        let wait = SKAction.waitForDuration(1)
+        let wait = SKAction.waitForDuration(1.5)
         
         let sequence = SKAction.sequence([boost,wait,stop])
         self.runAction(sequence)
@@ -75,13 +103,13 @@ class FlappyPlayerNode: SKSpriteNode {
     
     func goUp() {
  
-        self.physicsBody?.applyImpulse(CGVectorMake(0, 0.5))
+        self.physicsBody?.applyImpulse(CGVectorMake(0, 0.8))
         self.updateRotation()
     }
     
     func goDown() {
  
-        self.physicsBody?.applyImpulse(CGVectorMake(0, -0.5))
+        self.physicsBody?.applyImpulse(CGVectorMake(0, -0.8))
         self.updateRotation()
     }
     
