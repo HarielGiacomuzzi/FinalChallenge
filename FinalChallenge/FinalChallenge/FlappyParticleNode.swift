@@ -28,8 +28,9 @@ class FlappyParticleNode : SKEmitterNode{
     }
     
     func setupMovement(frame:CGRect, node:SKSpriteNode, vel:Double) {
-        let distanceToMove = CGFloat(frame.size.width + node.size.width)
-        let moveStones = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(vel))
+        let distanceToMove = CGFloat(-frame.size.width / 2)
+        
+        let moveStones = SKAction.moveToX(distanceToMove, duration:NSTimeInterval(vel))
         let removeStones = SKAction.removeFromParent()
         let moveStonesAndRemove = SKAction.sequence([moveStones, removeStones])
         self.runAction(moveStonesAndRemove)
