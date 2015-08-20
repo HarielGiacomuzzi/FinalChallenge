@@ -60,13 +60,22 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         self.runAction(spawnDelayForeverPU)
 
         // left wall , if you hit you are dead
-        var contactNode = SKNode()
-        contactNode.position = CGPointMake(0, self.frame.size.height / 2)
-        contactNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
-        contactNode.physicsBody?.dynamic = false
-        contactNode.physicsBody?.categoryBitMask = endScreenCategory
-        contactNode.physicsBody?.contactTestBitMask = playerCategory
-        self.addChild(contactNode)
+        var wallLeft = SKNode()
+        wallLeft.position = CGPointMake(0, self.frame.size.height / 2)
+        wallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        wallLeft.physicsBody?.dynamic = false
+        wallLeft.physicsBody?.categoryBitMask = endScreenCategory
+        wallLeft.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(wallLeft)
+        
+        //right wall, if you hit you win
+        var wallRight = SKNode()
+        wallRight.position = CGPointMake(self.frame.width, self.frame.size.height / 2)
+        wallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        wallRight.physicsBody?.dynamic = false
+        wallRight.physicsBody?.categoryBitMask = endScreenCategory
+        wallRight.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(wallRight)
         
     }
     
@@ -175,15 +184,22 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         var rotation = getRandomCGFloat(1, end: 4)
         stone.zRotation = rotation
         
-        self.addChild(stone)
-        
-        var stoneParticle = FlappyParticleNode.fromFile("MyParticle2")
-        stoneParticle!.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
-        stoneParticle!.name = "stoneParticle"
-        stoneParticle!.targetNode = self.scene
-        
-        stoneParticle!.setupMovement(self.frame, node: stone, vel: stoneVel)
-        self.addChild(stoneParticle!)
+        var particleScales = 0.3 * scale
+        var stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
+        stoneParticleLow!.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos - stone.size.height/2)
+        stoneParticleLow!.name = "stoneParticleLow"
+        stoneParticleLow!.particleScale = particleScales
+        stoneParticleLow!.targetNode = self.scene
+        stoneParticleLow!.setupMovement(self.frame, node: stone, vel: stoneVel)
+        self.addChild(stoneParticleLow!)
+    
+        var stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle2")
+        stoneParticleHigh!.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos + stone.size.height/2)
+        stoneParticleHigh!.name = "stoneParticleHigh"
+        stoneParticleHigh!.particleScale = particleScales
+        stoneParticleHigh!.targetNode = self.scene
+        stoneParticleHigh!.setupMovement(self.frame, node: stone, vel: stoneVel)
+        self.addChild(stoneParticleHigh!)
         
     }
     
