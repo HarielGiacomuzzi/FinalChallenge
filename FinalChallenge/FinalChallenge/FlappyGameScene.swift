@@ -80,93 +80,76 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     }
     
     func setupWalls(){
+        
+        let dummyTexture = SKTexture(imageNamed: "ffparalaxe1")
+        
+        var currentWidth: CGFloat = 0.0
+        
         // creates ground texture
-        let groundTexture1 = SKTexture(imageNamed: "ffparalaxe1")
-        let groundTexture2 = SKTexture(imageNamed: "ffparalaxe2")
-        let groundTexture3 = SKTexture(imageNamed: "ffparalaxe3")
-        groundTexture1.filteringMode = .Nearest
-        groundTexture2.filteringMode = .Nearest
-        groundTexture3.filteringMode = .Nearest
         
-        let groundSprite1 = SKSpriteNode(texture: groundTexture1)
-        groundSprite1.position = CGPointMake(groundSprite1.size.width / 2, groundSprite1.size.height / 2)
-        let groundSprite2 = SKSpriteNode(texture: groundTexture2)
-        groundSprite2.position = CGPointMake(groundSprite1.size.width + groundSprite2.size.width / 2, groundSprite2.size.height / 2)
-        let groundSprite3 = SKSpriteNode(texture: groundTexture3)
-        groundSprite3.position = CGPointMake(groundSprite2.size.width + groundSprite3.size.width / 2, groundSprite3.size.height / 2)
+        for i in 1...3 {
+            let texture = SKTexture(imageNamed: "ffparalaxe\(i)")
+            texture.filteringMode = .Nearest
+            
+            let sprite = SKSpriteNode(texture: texture)
+            sprite.position = CGPointMake(currentWidth + sprite.size.width / 2, sprite.size.height / 2)
+            
+            let endPosition = CGPointMake(-(sprite.size.width / 2), sprite.size.height / 2)
+            let startPosition = CGPointMake(frame.size.width + sprite.size.width / 2, sprite.size.height / 2)
+            
+            let moveGroundSprite = SKAction.moveTo(endPosition, duration: NSTimeInterval(6))
+            let resetGroundSprite = SKAction.moveTo(startPosition, duration: 0.0)
+            let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([resetGroundSprite,moveGroundSprite]))
+            let firstMovement = SKAction.moveTo(endPosition, duration: NSTimeInterval(2 * i))
+            
+            sprite.runAction(SKAction.sequence([firstMovement,moveGroundSpritesForever]))
+            
+            self.addChild(sprite)
+            currentWidth += sprite.size.width
+            
+        }
         
-        let endPosition = CGPointMake(-(groundSprite1.size.width / 2), groundSprite1.size.height / 2)
-        let startPosition = CGPointMake(frame.size.width + groundSprite3.size.width / 2, groundSprite1.size.height / 2)
+        currentWidth = 0.0
 
-        let moveGroundSprite = SKAction.moveTo(endPosition, duration: NSTimeInterval(6))
-        let resetGroundSprite = SKAction.moveTo(startPosition, duration: 0.0)
-        let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([resetGroundSprite,moveGroundSprite]))
-        
-        let startGroundSprite1 = SKAction.moveTo(endPosition, duration: NSTimeInterval(2))
-        let startGroundSprite2 = SKAction.moveTo(endPosition, duration: NSTimeInterval(4))
-        
-        groundSprite1.runAction(SKAction.sequence([startGroundSprite1, moveGroundSpritesForever]))
-        groundSprite2.runAction(SKAction.sequence([startGroundSprite2, moveGroundSpritesForever]))
-        groundSprite3.runAction(moveGroundSpritesForever)
-        
-        self.addChild(groundSprite1)
-        self.addChild(groundSprite2)
-        self.addChild(groundSprite3)
-
-        
         //adds imovable ground physics
         var ground = SKNode()
-        ground.position = CGPointMake(self.frame.size.width / 2, groundTexture1.size().height * 0.7) //ground.position = CENTER POINT
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture1.size().height * 0.01))
+        ground.position = CGPointMake(self.frame.size.width / 2, dummyTexture.size().height * 0.7)
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, dummyTexture.size().height * 0.01))
         ground.physicsBody?.dynamic = false
         ground.physicsBody?.categoryBitMask = worldCategory
         self.addChild(ground)
-
+        
         //create roof texture
-        let roofTexture1 = SKTexture(imageNamed: "ffparalaxe1")
-        let roofTexture2 = SKTexture(imageNamed: "ffparalaxe2")
-        let roofTexture3 = SKTexture(imageNamed: "ffparalaxe3")
-        roofTexture1.filteringMode = .Nearest
-        roofTexture2.filteringMode = .Nearest
-        roofTexture3.filteringMode = .Nearest
-        
-        let roofSprite1 = SKSpriteNode(texture: groundTexture1)
-        roofSprite1.position = CGPointMake(groundSprite1.size.width / 2, self.frame.size.height - groundSprite1.size.height / 2)
-        let roofSprite2 = SKSpriteNode(texture: groundTexture2)
-        roofSprite2.position = CGPointMake(groundSprite1.size.width + groundSprite2.size.width / 2, self.frame.size.height - groundSprite1.size.height / 2)
-        let roofSprite3 = SKSpriteNode(texture: groundTexture3)
-        roofSprite3.position = CGPointMake(groundSprite2.size.width + groundSprite3.size.width / 2, self.frame.size.height - groundSprite1.size.height / 2)
-        
-        let roofEndPosition = CGPointMake(-(groundSprite1.size.width / 2), self.frame.size.height - groundSprite1.size.height / 2)
-        let roofStartPosition = CGPointMake(frame.size.width + groundSprite3.size.width / 2, self.frame.size.height - groundSprite1.size.height / 2)
-        
-        let moveRoofSprite = SKAction.moveTo(roofEndPosition, duration: NSTimeInterval(6))
-        let resetRoofSprite = SKAction.moveTo(roofStartPosition, duration: 0.0)
-        let moveRoofSpritesForever = SKAction.repeatActionForever(SKAction.sequence([resetRoofSprite,moveRoofSprite]))
-        
-        let startRoofSprite1 = SKAction.moveTo(roofEndPosition, duration: NSTimeInterval(2))
-        let startRoofSprite2 = SKAction.moveTo(roofEndPosition, duration: NSTimeInterval(4))
-        
-        roofSprite1.runAction(SKAction.sequence([startRoofSprite1, moveRoofSpritesForever]))
-        roofSprite2.runAction(SKAction.sequence([startRoofSprite2, moveRoofSpritesForever]))
-        roofSprite3.runAction(moveRoofSpritesForever)
-        
-        roofSprite1.yScale = -1
-        roofSprite2.yScale = -1
-        roofSprite3.yScale = -1
-        
-        self.addChild(roofSprite1)
-        self.addChild(roofSprite2)
-        self.addChild(roofSprite3)
-        
+        for i in 1...3 {
+            let texture = SKTexture(imageNamed: "ffparalaxe\(i)")
+            texture.filteringMode = .Nearest
+            
+            let sprite = SKSpriteNode(texture: texture)
+            sprite.position = CGPointMake(currentWidth + sprite.size.width / 2, self.frame.size.height - sprite.size.height / 2)
+            
+            let endPosition = CGPointMake(-(sprite.size.width / 2), self.frame.size.height - sprite.size.height / 2)
+            let startPosition = CGPointMake(frame.size.width + sprite.size.width / 2, self.frame.size.height - sprite.size.height / 2)
+            
+            let moveGroundSprite = SKAction.moveTo(endPosition, duration: NSTimeInterval(6))
+            let resetGroundSprite = SKAction.moveTo(startPosition, duration: 0.0)
+            let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([resetGroundSprite,moveGroundSprite]))
+            let firstMovement = SKAction.moveTo(endPosition, duration: NSTimeInterval(2 * i))
+            
+            sprite.runAction(SKAction.sequence([firstMovement,moveGroundSpritesForever]))
+            sprite.yScale = -1
+            
+            self.addChild(sprite)
+            currentWidth += sprite.size.width
+            
+        }
+
         //adds imovable roof physics
         var roof = SKNode()
-        roof.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height-roofTexture1.size().height * 0.7) //roof.position = CENTER POINT
-        roof.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, roofTexture1.size().height * 0.01))
+        roof.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height-dummyTexture.size().height * 0.7)
+        roof.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, dummyTexture.size().height * 0.01))
         roof.physicsBody?.dynamic = false
         roof.physicsBody?.categoryBitMask = worldCategory
         self.addChild(roof)
-        
     }
 
     func spawnStone() {
@@ -183,6 +166,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         var rotation = getRandomCGFloat(1, end: 4)
         stone.zRotation = rotation
+        
+        self.addChild(stone)
         
         var particleScales = 0.3 * scale
         var stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
