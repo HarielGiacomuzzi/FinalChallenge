@@ -30,6 +30,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         
+        startGame()
+        
         // setup physics
         self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
         self.physicsWorld.contactDelegate = self
@@ -81,6 +83,37 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         wallRight.physicsBody?.categoryBitMask = endScreenCategory
         wallRight.physicsBody?.contactTestBitMask = playerCategory
         self.addChild(wallRight)
+        
+    }
+    
+    func startGame() {
+        var countDownNode = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        countDownNode.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
+        countDownNode.zPosition = 100
+        countDownNode.fontSize = 100.0
+        var actions:[SKAction] = []
+        self.addChild(countDownNode)
+        
+        for i in reverse(1...3) {
+            var changeNumber = SKAction.runBlock({() in
+                countDownNode.text = "\(i)"
+            })
+            var wait = SKAction.waitForDuration(1)
+            actions += [changeNumber,wait]
+        }
+        
+        var removeNode = SKAction.runBlock({() in
+            countDownNode.removeFromParent()
+        })
+        actions.append(removeNode)
+        var actionSequence = SKAction.sequence(actions)
+        countDownNode.runAction(actionSequence, completion: {() -> Void in
+            println("pq n")
+        })
+
+    }
+    
+    func teste() {
         
     }
     
