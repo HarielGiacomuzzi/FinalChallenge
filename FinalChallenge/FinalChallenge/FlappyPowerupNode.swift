@@ -54,6 +54,7 @@ class FlappyPowerupNode: SKSpriteNode {
         
         let blowUp = SKAction.animateWithTextures(sequence, timePerFrame: 0.07)
         let remove = SKAction.removeFromParent()
+        self.physicsBody = SKPhysicsBody()
         let blowAndRemove = SKAction.sequence([blowUp,remove])
         
         self.runAction(blowAndRemove)

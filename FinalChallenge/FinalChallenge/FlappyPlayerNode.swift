@@ -35,7 +35,7 @@ class FlappyPlayerNode: SKSpriteNode {
         self.physicsBody?.dynamic = true
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.categoryBitMask = playerCategory
-        self.physicsBody?.collisionBitMask = worldCategory | stoneCategory
+        self.physicsBody?.collisionBitMask = worldCategory | stoneCategory | playerCategory
         self.physicsBody?.contactTestBitMask = worldCategory | stoneCategory
     }
     
