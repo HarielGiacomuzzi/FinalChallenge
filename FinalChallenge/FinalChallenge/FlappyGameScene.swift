@@ -32,6 +32,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         startGame()
         
+        self.setupWalls()
+        
         // setup physics
         self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
         self.physicsWorld.contactDelegate = self
@@ -40,31 +42,6 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         var skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
         self.backgroundColor = skyColor
 
-        
-        self.spawnPlayers()
-        self.setupWalls()
-        
-        //nobody connected
-        if players.count == 0 {
-            spawnSinglePlayer()
-        }
-        
-        // spawn the stones
-        let spawn = SKAction.runBlock({() in self.spawnStone()})
-        
-        let delay = SKAction.waitForDuration(2.5, withRange: 1)
-        let spawnThenDelay = SKAction.sequence([spawn, delay])
-        let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
-        self.runAction(spawnThenDelayForever)
-        
-        //spawn the powerups
-        
-        let spawnPowerups = SKAction.runBlock({() in self.spawnPowerUp()})
-        
-        let delayPowerUp = SKAction.waitForDuration(5, withRange: 2)
-        let spawnThenDelayPU = SKAction.sequence([spawnPowerups,delayPowerUp])
-        let spawnDelayForeverPU = SKAction.repeatActionForever(spawnThenDelayPU)
-        self.runAction(spawnDelayForeverPU)
 
         // left wall , if you hit you are dead
         var wallLeft = SKNode()
@@ -108,13 +85,35 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         actions.append(removeNode)
         var actionSequence = SKAction.sequence(actions)
         countDownNode.runAction(actionSequence, completion: {() -> Void in
-            println("pq n")
+            self.createPlayersAndObstacles()
         })
 
     }
     
-    func teste() {
+    func createPlayersAndObstacles() {
+        self.spawnPlayers()
         
+        //nobody connected
+        if players.count == 0 {
+            spawnSinglePlayer()
+        }
+        
+        // spawn the stones
+        let spawn = SKAction.runBlock({() in self.spawnStone()})
+        
+        let delay = SKAction.waitForDuration(2.5, withRange: 1)
+        let spawnThenDelay = SKAction.sequence([spawn, delay])
+        let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
+        self.runAction(spawnThenDelayForever)
+        
+        //spawn the powerups
+        
+        let spawnPowerups = SKAction.runBlock({() in self.spawnPowerUp()})
+        
+        let delayPowerUp = SKAction.waitForDuration(5, withRange: 2)
+        let spawnThenDelayPU = SKAction.sequence([spawnPowerups,delayPowerUp])
+        let spawnDelayForeverPU = SKAction.repeatActionForever(spawnThenDelayPU)
+        self.runAction(spawnDelayForeverPU)
     }
     
     func setupWalls(){
