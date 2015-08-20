@@ -28,6 +28,18 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     let endScreenCategory: UInt32 = 1 << 4
     let powerUpCategory: UInt32 = 1 << 5
     
+    override func update(currentTime: NSTimeInterval) {
+        /*var gameOver = UIView(frame: CGRectMake(100, 100, 0, 0))
+        gameOver.backgroundColor = UIColor.redColor()
+        self.view!.addSubview(gameOver)
+        
+        //Call whenever you want to show it and change the size to whatever size you want
+        UIView.animateWithDuration(2, animations: {
+            gameOver.frame.size = CGSizeMake(self.frame.width/2, self.frame.height/2)
+        })*/
+        
+    }
+    
     override func didMoveToView(view: SKView) {
         
         // setup physics
@@ -227,6 +239,13 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
+            var particleTexture = SKTexture(imageNamed: "spark.png")
+            var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
+            playerParticle!.position = CGPointMake(testPlayer!.size.width/2-100,testPlayer!.size.height/2)
+            playerParticle!.name = "PlayerParticle"
+            playerParticle!.targetNode = self.scene
+            //playerParticle!.setupPhysics(particleTexture)
+            testPlayer!.addChild(playerParticle!)
         }
     }
     
@@ -235,6 +254,14 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         testPlayer!.identifier = "test player"
         testPlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
         self.addChild(testPlayer!)
+        
+        var particleTexture = SKTexture(imageNamed: "spark.png")
+        var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
+        playerParticle!.position = CGPointMake(testPlayer!.frame.size.width,testPlayer!.frame.size.height)
+        playerParticle!.name = "PlayerParticle"
+        playerParticle!.targetNode = self.scene
+        //playerParticle!.setupPhysics(particleTexture)
+        testPlayer!.addChild(playerParticle!)
     }
     
     func playerSwim(identifier:String, way:String) {
