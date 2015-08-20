@@ -42,6 +42,8 @@ class FlappyPlayerNode: SKSpriteNode {
         super.init(texture: texture, color: nil, size: texture.size())
         setupPhysics()
         self.runAction(SKAction.repeatActionForever( firstAction   ))
+        self.color = UIColor( red: 0.9, green: 0.6, blue: 0.3, alpha: 1 )
+        self.colorBlendFactor = 0.4//How much of the color will be applied to the texture 0..1
 
     }
     
@@ -75,13 +77,13 @@ class FlappyPlayerNode: SKSpriteNode {
     
     func goUp() {
  
-        self.physicsBody?.applyImpulse(CGVectorMake(0, 0.5))
+        self.physicsBody?.applyImpulse(CGVectorMake(0, 1))
         self.updateRotation()
     }
     
     func goDown() {
  
-        self.physicsBody?.applyImpulse(CGVectorMake(0, -0.5))
+        self.physicsBody?.applyImpulse(CGVectorMake(0, -01))
         self.updateRotation()
     }
     

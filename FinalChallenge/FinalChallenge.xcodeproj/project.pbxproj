@@ -158,11 +158,11 @@
 			children = (
 				26442B971B86406F00FC276A /* fish.atlas */,
 				B5F60BB81B83B76E00786728 /* MyParticle.sks */,
+				B5F60BC11B84FA0400786728 /* MyParticle2.sks */,
 				26D019771B84FF0400C5C73D /* bubbleparticle.png */,
 				5E6039731B85017700F63DC3 /* rock.atlas */,
 				B5F60BB91B83B76E00786728 /* spark.png */,
 				5E60396B1B84F03100F63DC3 /* bubble.atlas */,
-				B5F60BC11B84FA0400786728 /* MyParticle2.sks */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
