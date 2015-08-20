@@ -29,10 +29,17 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     let powerUpCategory: UInt32 = 1 << 5
     
     override func update(currentTime: NSTimeInterval) {
-        /*var gameOver = UIView(frame: CGRectMake(100, 100, 0, 0))
-        gameOver.backgroundColor = UIColor.redColor()
-        self.view!.addSubview(gameOver)
+        /*
+        let gameOverXib: UIView = NSBundle.mainBundle().loadNibNamed("GameOver", owner: nil, options: nil)[0] as! UIView
+        gameOverXib.frame.size.width = self.frame.size.width/2
+        gameOverXib.frame.size.height = self.frame.size.height/2
+        gameOverXib.center = self.view!.center
+        self.view?.addSubview(gameOverXib)
         
+        
+        var gameOver = GameOverXib()
+        //gameOver.backgroundColor = UIColor.redColor()
+        self.view!.addSubview(gameOver)
         //Call whenever you want to show it and change the size to whatever size you want
         UIView.animateWithDuration(2, animations: {
             gameOver.frame.size = CGSizeMake(self.frame.width/2, self.frame.height/2)
