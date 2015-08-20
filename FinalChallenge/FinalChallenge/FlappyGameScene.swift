@@ -141,7 +141,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             let firstMovement = SKAction.moveTo(endPosition, duration: NSTimeInterval(2.0 * Double(i) * worldVelMultiplier))
             
             sprite.runAction(SKAction.sequence([firstMovement,moveGroundSpritesForever]))
-            sprite.zPosition = 11
+            sprite.zPosition = 12
             
             self.addChild(sprite)
             currentWidth += sprite.size.width
@@ -207,19 +207,19 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         var rotation = getRandomCGFloat(1, end: 4)
         stone.zRotation = rotation
-        
+        stone.zPosition = 9
         self.addChild(stone)
         
         var particleScales = 0.3 * scale
         var stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
-        stoneParticleLow!.position = CGPointMake(stone.position.x, stone.position.y - stone.size.height/2)
+        stoneParticleLow!.position = CGPointMake(stone.position.x, stone.position.y - (5 + stone.size.height/2))
         stoneParticleLow!.name = "stoneParticleLow"
         stoneParticleLow!.particleScale = particleScales
         stoneParticleLow!.targetNode = self.scene
         stoneParticleLow!.setupMovement(self.frame, node: stone, vel: stoneVel * worldVelMultiplier)
         self.addChild(stoneParticleLow!)
     
-        var stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle2")
+        var stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle")
         stoneParticleHigh!.position = CGPointMake(stone.position.x, stone.position.y + stone.size.height/2)
         stoneParticleHigh!.name = "stoneParticleHigh"
         stoneParticleHigh!.particleScale = particleScales

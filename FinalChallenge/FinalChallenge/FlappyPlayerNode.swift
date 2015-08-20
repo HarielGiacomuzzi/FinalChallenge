@@ -21,9 +21,30 @@ class FlappyPlayerNode: SKSpriteNode {
     var identifier:String?
     
     init() {
-        let texture = SKTexture(imageNamed: "bird-01")
+        
+        
+        let spriteAnimatedAtlas = SKTextureAtlas(named: "fish")//sprites
+        //let spriteAnimatedAtlas = SKTextureAtlas(named: "sprites")
+        // inicializa corrida
+        var runFrames = [SKTexture]()
+        for var i=1; i<12; i++
+        {
+            //let runTextureName = "running\(i)"
+            let runTextureName = "fish\(i)"
+            runFrames.append(spriteAnimatedAtlas.textureNamed(runTextureName))
+        }
+        
+        let texture = runFrames[1]
+        
+        let firstAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.07)
+        
+
         super.init(texture: texture, color: nil, size: texture.size())
         setupPhysics()
+        self.runAction(SKAction.repeatActionForever( firstAction   ))
+        self.color = UIColor( red: 0.9, green: 0.6, blue: 0.3, alpha: 1 )
+        self.colorBlendFactor = 0.4//How much of the color will be applied to the texture 0..1
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +52,7 @@ class FlappyPlayerNode: SKSpriteNode {
     }
     
     func setupPhysics() {
-        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.height / 2)
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width * 0.65, height: self.size.height*0.4), center: CGPoint(x: self.position.x+7, y: self.position.y)   )
         self.physicsBody?.dynamic = true
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.categoryBitMask = playerCategory
@@ -56,13 +77,13 @@ class FlappyPlayerNode: SKSpriteNode {
     
     func goUp() {
  
-        self.physicsBody?.applyImpulse(CGVectorMake(0, 0.5))
+        self.physicsBody?.applyImpulse(CGVectorMake(0, 1))
         self.updateRotation()
     }
     
     func goDown() {
  
-        self.physicsBody?.applyImpulse(CGVectorMake(0, -0.5))
+        self.physicsBody?.applyImpulse(CGVectorMake(0, -01))
         self.updateRotation()
     }
     

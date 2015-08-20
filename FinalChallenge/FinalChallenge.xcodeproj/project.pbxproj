@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26442B981B86406F00FC276A /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26442B971B86406F00FC276A /* fish.atlas */; };
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E60396B1B84F03100F63DC3 /* bubble.atlas */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26442B971B86406F00FC276A /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E60396B1B84F03100F63DC3 /* bubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bubble.atlas; sourceTree = "<group>"; };
@@ -154,12 +156,13 @@
 		B5F60BB71B83B73100786728 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				26442B971B86406F00FC276A /* fish.atlas */,
 				B5F60BB81B83B76E00786728 /* MyParticle.sks */,
+				B5F60BC11B84FA0400786728 /* MyParticle2.sks */,
 				26D019771B84FF0400C5C73D /* bubbleparticle.png */,
 				5E6039731B85017700F63DC3 /* rock.atlas */,
 				B5F60BB91B83B76E00786728 /* spark.png */,
 				5E60396B1B84F03100F63DC3 /* bubble.atlas */,
-				B5F60BC11B84FA0400786728 /* MyParticle2.sks */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
+				26442B981B86406F00FC276A /* fish.atlas in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
 				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
