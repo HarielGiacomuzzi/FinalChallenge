@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		26442B981B86406F00FC276A /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26442B971B86406F00FC276A /* fish.atlas */; };
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
+		26B4D6CE1B866A5000BDBF23 /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B4D6CD1B866A5000BDBF23 /* teste.sks */; };
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E60396B1B84F03100F63DC3 /* bubble.atlas */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		26442B971B86406F00FC276A /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
+		26B4D6CD1B866A5000BDBF23 /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E60396B1B84F03100F63DC3 /* bubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bubble.atlas; sourceTree = "<group>"; };
@@ -167,7 +169,6 @@
 				269F18AF1B86583000EAD94F /* wind.atlas */,
 				26442B971B86406F00FC276A /* fish.atlas */,
 				B5F60BB81B83B76E00786728 /* MyParticle.sks */,
-				B5F60BC11B84FA0400786728 /* MyParticle2.sks */,
 				26D019771B84FF0400C5C73D /* bubbleparticle.png */,
 				5E6039731B85017700F63DC3 /* rock.atlas */,
 				B5F60BB91B83B76E00786728 /* spark.png */,
@@ -176,6 +177,7 @@
 				B57B33641B864EC7000E5F53 /* PlayerParticle.sks */,
 				B57B33661B86566E000E5F53 /* GameOver.xib */,
 				B57B33681B8656D7000E5F53 /* GameOverXib.swift */,
+				26B4D6CD1B866A5000BDBF23 /* teste.sks */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -359,6 +361,7 @@
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
 				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
+				26B4D6CE1B866A5000BDBF23 /* teste.sks in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,

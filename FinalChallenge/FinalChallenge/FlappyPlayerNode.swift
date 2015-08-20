@@ -44,7 +44,7 @@ class FlappyPlayerNode: SKSpriteNode {
         self.runAction(SKAction.repeatActionForever( firstAction   ))
         self.color = UIColor( red: 0.9, green: 0.6, blue: 0.3, alpha: 1 )
         self.colorBlendFactor = 0.4//How much of the color will be applied to the texture 0..1
-
+        self.zPosition = 7
     }
     
     required init?(coder aDecoder: NSCoder) {
