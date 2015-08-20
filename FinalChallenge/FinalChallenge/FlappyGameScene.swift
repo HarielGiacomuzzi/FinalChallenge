@@ -144,6 +144,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             sprite.runAction(SKAction.sequence([firstMovement,moveGroundSpritesForever]))
             sprite.yScale = -1
             
+            sprite.zPosition = 11
+            
             self.addChild(sprite)
             currentWidth += sprite.size.width
             
