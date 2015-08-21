@@ -12,12 +12,11 @@ import Foundation
 import SpriteKit
 
 
-class BombTGameScene : SKScene, SKPhysicsContactDelegate {
+class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
     var playersRank:[FlappyPlayerNode] = []
-    var gameController : MiniGamesViewController? = nil
     
     //dont touch this variable:
     let stoneVel = 8.0

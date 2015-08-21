@@ -18,11 +18,11 @@ class MiniGamesViewController: UIViewController {
     var scene = FlappyGameScene()
     
     
+    var minigame = Minigame.FlappyFish
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
         
         //        scene = FlappyGameScene(size: view.bounds.size)
@@ -39,26 +39,14 @@ class MiniGamesViewController: UIViewController {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func connectionChanged(){
-        
-    }
-    
     
     func messageReceived(data : NSNotification){
         var peerID = ((data.userInfo as! NSDictionary).valueForKey("peerID") as! MCPeerID);
         var data = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
         var peerDisplayName = peerID.displayName
         var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
-        
+        let messageEnum = PlayerAction(rawValue: message)
+        scene.messageReceived(peerDisplayName, action: messageEnum!)
     }
     
-    
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.LandscapeRight.rawValue)
-    }
 }

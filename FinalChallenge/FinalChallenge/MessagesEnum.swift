@@ -16,3 +16,8 @@ enum PlayerAction : String  {
     case Up = "Up"
     case Down = "Down"
 }
+
+enum Minigame : String {
+    case FlappyFish = "FlappyFish"
+    case BombGame = "BombGame"
+}
