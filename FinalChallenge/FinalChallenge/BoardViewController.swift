@@ -19,7 +19,13 @@ extension SKNode {
         let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData!)
         
         archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
-        let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! BoardScene
+        
+        var scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! SKNode
+        if(true){
+            scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! BoardScene
+        }else{
+            scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! MainBoard
+        }
         archiver.finishDecoding()
         return scene
     }
@@ -28,8 +34,8 @@ extension SKNode {
 class BoardViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let scene = BoardScene.unarchiveFromFile("Board") as? BoardScene {
+        //let scene = MainBoard(size: self.view.frame.size)
+        if let scene = MainBoard.unarchiveFromFile("MainBoard") as? MainBoard {
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true
@@ -40,7 +46,7 @@ class BoardViewController : UIViewController {
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
-            
+        
             skView.presentScene(scene)
         }
     }

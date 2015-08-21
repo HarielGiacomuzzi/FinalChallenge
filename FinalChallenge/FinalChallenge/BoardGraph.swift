@@ -12,16 +12,16 @@ import SpriteKit
 class BoardGraph : NSObject{
     
     static let SharedInstance = BoardGraph();
-    private var nodes : [String : BoardNode] = [:];
+    var nodes : [String : BoardNode] = [:];
 
     func loadBoard(fromFile : String){
         var a = XMLParser();
-        a.loadBoardFrom("/Users/harielgiacomuzzi/Documents/BEPiD/FinalChallenge/FinalChallenge/FinalChallenge/board_2.xml");
-        println("Board Loaded")
-        
-        for aux in nodes{
-            println("Nodinho gostoso : \(aux.1.posX)  -  \(aux.1.posY)")
-        }
+        a.loadBoardFrom(NSBundle.mainBundle().pathForResource(fromFile, ofType: "xml")!);
+    }
+    
+    // returns the total amount of nodes
+    func getNodesCount()->Int{
+        return nodes.count;
     }
     
     // creates a node and insert it on the graph dictionary with the specified name

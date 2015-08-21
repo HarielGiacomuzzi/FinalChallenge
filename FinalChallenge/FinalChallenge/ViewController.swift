@@ -41,7 +41,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
 
     @IBAction func loadBoard(sender: AnyObject) {
-        BoardGraph.SharedInstance.loadBoard("The Zueira Never Ends !");
+        BoardGraph.SharedInstance.loadBoard("board_2");
     }
 }
 
