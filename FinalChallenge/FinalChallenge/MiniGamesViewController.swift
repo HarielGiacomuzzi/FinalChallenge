@@ -15,7 +15,7 @@ class MiniGamesViewController: UIViewController {
     
     @IBOutlet weak var GameOverView: UIView!
     
-    var scene = BombTGameScene()
+    var scene = FlappyGameScene()
     
     
     
@@ -26,13 +26,13 @@ class MiniGamesViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
         
         //        scene = FlappyGameScene(size: view.bounds.size)
-        scene = BombTGameScene(size: CGSize(width: 1024, height: 768))
+        scene = FlappyGameScene(size: CGSize(width: 1024, height: 768))
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         //    skView.showsPhysics = true
-        scene.gameController = self
+        //scene.gameController = self
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
         

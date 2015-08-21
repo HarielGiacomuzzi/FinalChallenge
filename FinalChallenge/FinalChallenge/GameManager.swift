@@ -10,12 +10,17 @@ import Foundation
 
 class GameManager {
     static let sharedInstance = GameManager();
+    var gameActive = String()
     var playerRank = [String]()
     var isMultiplayer : Bool?
-    
     
     func setPlayerOrder()->[String]{
         return playerRank.reverse()
     }
     
+    func cleanManager(){
+        gameActive = ""
+        playerRank.removeAll(keepCapacity: false)
+        isMultiplayer = nil
+    }
 }
