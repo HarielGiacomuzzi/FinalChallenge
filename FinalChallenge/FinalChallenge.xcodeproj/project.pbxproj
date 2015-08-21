@@ -11,6 +11,8 @@
 		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
 		26B2D9C51B87AB110056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C41B87AB110056015F /* teste.sks */; };
+		26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C61B87AC030056015F /* BombTGameScene.swift */; };
+		26B2D9C91B87AE570056015F /* MiniGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C81B87AE570056015F /* MiniGamesViewController.swift */; };
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E60396B1B84F03100F63DC3 /* bubble.atlas */; };
@@ -65,8 +67,10 @@
 /* Begin PBXFileReference section */
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
 		26B2D9BE1B87A8920056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
-		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = teste.sks; path = FinalChallenge/teste.sks; sourceTree = "<group>"; };
+		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
 		26B2D9C41B87AB110056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
+		26B2D9C61B87AC030056015F /* BombTGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombTGameScene.swift; sourceTree = "<group>"; };
+		26B2D9C81B87AE570056015F /* MiniGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGamesViewController.swift; sourceTree = "<group>"; };
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E60396B1B84F03100F63DC3 /* bubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bubble.atlas; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		5ED9E8781B7127830073FB7B /* Minigames */ = {
 			isa = PBXGroup;
 			children = (
+				26B2D9C81B87AE570056015F /* MiniGamesViewController.swift */,
+				26B2D9C61B87AC030056015F /* BombTGameScene.swift */,
 				5ED9E8771B7127760073FB7B /* FlappyGame */,
 			);
 			name = Minigames;
@@ -186,6 +192,7 @@
 				B57B33641B864EC7000E5F53 /* PlayerParticle.sks */,
 				B57B33661B86566E000E5F53 /* GameOver.xib */,
 				B57B33681B8656D7000E5F53 /* GameOverXib.swift */,
+				26B2D9C01B87A8B20056015F /* teste.sks */,
 				B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */,
 			);
 			name = Resources;
@@ -202,7 +209,6 @@
 		DB458B641B5409B90066B38C = {
 			isa = PBXGroup;
 			children = (
-				26B2D9C01B87A8B20056015F /* teste.sks */,
 				DB458B6F1B5409B90066B38C /* FinalChallenge */,
 				DB458B881B5409B90066B38C /* FinalChallengeTests */,
 				DB458B6E1B5409B90066B38C /* Products */,
@@ -414,8 +420,10 @@
 				5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */,
 				DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */,
 				DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */,
+				26B2D9C91B87AE570056015F /* MiniGamesViewController.swift in Sources */,
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
+				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,
 				B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
