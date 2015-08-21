@@ -14,6 +14,8 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
+    var playersRank:[FlappyPlayerNode] = []
+    var gameController : FlappyGameViewController? = nil
     
     //dont touch this variable:
     let stoneVel = 8.0
@@ -29,14 +31,21 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     let powerUpCategory: UInt32 = 1 << 5
     
     override func update(currentTime: NSTimeInterval) {
+        self.gameOver()
+        /*self.gameOver()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let settingController: UIViewController = storyboard.instantiateViewControllerWithIdentifier("GameOver") as! UIViewController
+        let vc = self.view?.window?.rootViewController
+        vc?.presentViewController(settingController, animated: false, completion: nil)
+        */
         /*
-        let gameOverXib: UIView = NSBundle.mainBundle().loadNibNamed("GameOver", owner: nil, options: nil)[0] as! UIView
+        let gameOverXib: UIView = GameOverXib()
         gameOverXib.frame.size.width = self.frame.size.width/2
-        gameOverXib.frame.size.height = self.frame.size.height/2
+        gameOverXib.frame.size.height = self.frame.size.height/3
         gameOverXib.center = self.view!.center
         self.view?.addSubview(gameOverXib)
-        
-        
+        */
+         /*
         var gameOver = GameOverXib()
         //gameOver.backgroundColor = UIColor.redColor()
         self.view!.addSubview(gameOver)
@@ -280,11 +289,11 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             players.append(player)
             var particleTexture = SKTexture(imageNamed: "spark.png")
             var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
-            playerParticle!.position = CGPointMake(testPlayer!.size.width/2-100,testPlayer!.size.height/2)
+            playerParticle!.position = CGPointMake(player.size.width,player.size.height)
             playerParticle!.name = "PlayerParticle"
             playerParticle!.targetNode = self.scene
             //playerParticle!.setupPhysics(particleTexture)
-            testPlayer!.addChild(playerParticle!)
+            player.addChild(playerParticle!)
         }
     }
     
@@ -316,6 +325,12 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func gameOver(){
+        //gameController = self.view?.window?.rootViewController as! FlappyGameViewController
+        //gameController!.GameOverView.alpha = 1;
+        
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
@@ -342,7 +357,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
                     println(player.identifier)
                     players.removeObject(player)
                     player.removeFromParent()
-                
+                    playersRank.append(player)
                 }
             }
         }

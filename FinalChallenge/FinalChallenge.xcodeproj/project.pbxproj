@@ -25,6 +25,7 @@
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
 		B57B33671B86566E000E5F53 /* GameOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57B33661B86566E000E5F53 /* GameOver.xib */; };
 		B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B33681B8656D7000E5F53 /* GameOverXib.swift */; };
+		B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */; };
 		B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BB81B83B76E00786728 /* MyParticle.sks */; };
 		B5F60BBB1B83B76E00786728 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BB91B83B76E00786728 /* spark.png */; };
 		B5F60BBE1B83C36C00786728 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBD1B83C36C00786728 /* Player.swift */; };
@@ -76,6 +77,7 @@
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
 		B57B33661B86566E000E5F53 /* GameOver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameOver.xib; sourceTree = "<group>"; };
 		B57B33681B8656D7000E5F53 /* GameOverXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverXib.swift; sourceTree = "<group>"; };
+		B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		B5F60BB81B83B76E00786728 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		B5F60BB91B83B76E00786728 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		B5F60BBD1B83C36C00786728 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -167,7 +169,6 @@
 				269F18AF1B86583000EAD94F /* wind.atlas */,
 				26442B971B86406F00FC276A /* fish.atlas */,
 				B5F60BB81B83B76E00786728 /* MyParticle.sks */,
-				B5F60BC11B84FA0400786728 /* MyParticle2.sks */,
 				26D019771B84FF0400C5C73D /* bubbleparticle.png */,
 				5E6039731B85017700F63DC3 /* rock.atlas */,
 				B5F60BB91B83B76E00786728 /* spark.png */,
@@ -176,6 +177,7 @@
 				B57B33641B864EC7000E5F53 /* PlayerParticle.sks */,
 				B57B33661B86566E000E5F53 /* GameOver.xib */,
 				B57B33681B8656D7000E5F53 /* GameOverXib.swift */,
+				B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -361,6 +363,7 @@
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
+				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
 				B57B33671B86566E000E5F53 /* GameOver.xib in Resources */,
 				26442B981B86406F00FC276A /* fish.atlas in Resources */,

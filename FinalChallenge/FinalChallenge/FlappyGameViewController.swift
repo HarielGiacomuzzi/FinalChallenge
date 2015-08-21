@@ -12,6 +12,8 @@ import MultipeerConnectivity
 
 class FlappyGameViewController: UIViewController {
     
+    @IBOutlet weak var GameOverView: UIView!
+    
     var scene = FlappyGameScene()
     
     override func viewDidLoad() {
@@ -27,6 +29,7 @@ class FlappyGameViewController: UIViewController {
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
     //    skView.showsPhysics = true
+        scene.gameController = self
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
     }

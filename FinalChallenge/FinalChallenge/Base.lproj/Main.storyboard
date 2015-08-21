@@ -221,6 +221,34 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3O-K9-r4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6FZ-Kr-6FD">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <prototypes>
+                        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bsO-SA-QWn">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bsO-SA-QWn" id="Jna-41-KKG">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HT-W1-lCa">
+                                        <rect key="frame" x="8" y="11" width="48" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5K-K2-DAh">
+                                        <rect key="frame" x="563" y="11" width="29" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </tableViewCellContentView>
+                        </tableViewCell>
+                    </prototypes>
+                </tableView>
             </objects>
             <point key="canvasLocation" x="-2032" y="188"/>
         </scene>
@@ -345,12 +373,29 @@
                     <view key="view" contentMode="scaleToFill" id="5lL-ja-Op9" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.0" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KbS-az-LyU">
+                                <rect key="frame" x="58" y="131" width="484" height="338"/>
+                                <color key="backgroundColor" red="1" green="0.53199833793634121" blue="0.61037134775719148" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UaF-yA-c0n" firstAttribute="top" relation="lessThanOrEqual" secondItem="KbS-az-LyU" secondAttribute="bottom" constant="131" id="RuT-hd-xjM"/>
+                            <constraint firstItem="KbS-az-LyU" firstAttribute="leading" secondItem="5lL-ja-Op9" secondAttribute="leadingMargin" constant="42" id="ZMg-hE-AHv"/>
+                            <constraint firstAttribute="centerY" secondItem="KbS-az-LyU" secondAttribute="centerY" id="cAf-g1-Djx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KbS-az-LyU" secondAttribute="trailing" constant="42" id="cyV-Gt-f3X"/>
+                            <constraint firstAttribute="centerX" secondItem="KbS-az-LyU" secondAttribute="centerX" id="hLa-Mi-CNW"/>
+                            <constraint firstItem="KbS-az-LyU" firstAttribute="top" relation="lessThanOrEqual" secondItem="zXE-Pp-OYU" secondAttribute="bottom" constant="111" id="wz9-L1-DFp"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="GameOverView" destination="KbS-az-LyU" id="cnn-rV-Nvc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qaV-sh-fkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1105" y="1515"/>
+            <point key="canvasLocation" x="805" y="-480"/>
         </scene>
         <!--Board View Controller-->
         <scene sceneID="8sQ-R9-V61">
