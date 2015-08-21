@@ -19,6 +19,7 @@ class XMLParser: NSObject, NSXMLParserDelegate {
         var parser = NSXMLParser(contentsOfURL: url);
         parser?.delegate = self;
         parser?.parse();
+        BoardGraph.SharedInstance.setNeighborsReference();
     }
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
