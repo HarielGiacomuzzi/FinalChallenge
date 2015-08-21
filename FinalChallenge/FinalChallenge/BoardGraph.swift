@@ -30,18 +30,30 @@ class BoardGraph : NSObject{
         nodes.updateValue(aux, forKey: name!);
     }
     
+    func setNeighborsReference(){
+        for aux in nodes{
+            for x in aux.1.nextNames{
+                aux.1.nextMoves.append(nodes[x]!)
+//                println("from : \(aux.0) to : \(x)");
+            }
+        }
+    }
+    
     // sets the next node on the graph
     func setNeighbors(currentNode : String, nextNode : String ){
         if nodes[currentNode] != nil && nodes[nextNode] != nil {
             nodes[currentNode]?.nextMoves.append(nodes[nextNode]!);
         }
+        if nodes[currentNode] != nil {
+            nodes[currentNode]?.nextNames.append(nextNode);
+        }
     }
     
     // returns the node name where the given player is located
     // if the player can't be found returns nil
-    func whereIs(Player : NSObject) -> String?{
+    func whereIs(player : Player) -> String?{
         for aux in nodes{
-            if (aux.1.hasPlayer(Player)){
+            if (aux.1.hasPlayer(player)){
                 return aux.0;
             }
         }
@@ -50,9 +62,9 @@ class BoardGraph : NSObject{
     
     // returns the node where the given player is located
     // if the player can't be found returns nil
-    func nodeFor(Player : NSObject) -> BoardNode?{
+    func nodeFor(player : Player) -> BoardNode?{
         for aux in nodes{
-            if (aux.1.hasPlayer(Player)){
+            if (aux.1.hasPlayer(player)){
                 return aux.1;
             }
         }
@@ -92,7 +104,13 @@ class BoardGraph : NSObject{
         return false;
     }
     
-    func walk(quantity : Int){
+    func walk(quantity : Int, player: Player){
+        for i in 1...quantity{
+            var aux = nodeFor(player)?.nextMoves[0]
+            player.x = aux!.posX
+            player.y = aux!.posY
+        
+        }
     }
     
     // check if there's a alternative path
@@ -117,7 +135,8 @@ class BoardGraph : NSObject{
         var posX = 0.0;
         var posY = 0.0;
         var item : NSObject?
-        var currentPlayers : [NSObject] = [];
+        var nextNames : [String] = [];
+        var currentPlayers : [Player] = [];
         var father : BoardNode?
         
         override init() {
