@@ -320,10 +320,10 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func playerSwim(identifier:String, way:String) {
+    func playerSwim(identifier:String, way:PlayerAction) {
         for player in players {
             if player.identifier == identifier {
-                if way == "up" {
+                if way == .Up {
                     player.goUp()
                 } else {
                     player.goDown()
