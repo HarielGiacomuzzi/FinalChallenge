@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class MinigameScene: SKScene {
-    var gameController : FlappyGameViewController? = nil
+    var gameController : MiniGamesViewController? = nil
     
     func messageReceived(identifier:String, action:PlayerAction) {
         
