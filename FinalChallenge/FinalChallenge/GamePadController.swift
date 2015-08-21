@@ -16,11 +16,11 @@ class GamePadController : UIViewController{
     }
     
     @IBAction func upDataSender() {
-        ConnectionManager.sharedInstance.sendStringToPeer("up", reliable: false)
+        ConnectionManager.sharedInstance.sendStringToPeer(PlayerAction.Up.rawValue, reliable: false)
     }
 
     @IBAction func downDataSender() {
-        ConnectionManager.sharedInstance.sendStringToPeer("down", reliable: false)
+        ConnectionManager.sharedInstance.sendStringToPeer(PlayerAction.Down.rawValue, reliable: false)
     }
     
 }
