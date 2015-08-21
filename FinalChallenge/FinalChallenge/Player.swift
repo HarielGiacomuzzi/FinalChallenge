@@ -12,6 +12,9 @@ class Player : NSObject {
     var playerName:String!
     var playerIdentifier:String!
     var coins:Int!
+    var x:Double!
+    var y:Double!
+    
         
     
 }
