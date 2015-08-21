@@ -174,6 +174,7 @@
 			children = (
 				269F18AF1B86583000EAD94F /* wind.atlas */,
 				B5F60BB81B83B76E00786728 /* MyParticle.sks */,
+				26B2D9AC1B879BD60056015F /* fish.atlas */,
 				26D019771B84FF0400C5C73D /* bubbleparticle.png */,
 				5E6039731B85017700F63DC3 /* rock.atlas */,
 				B5F60BB91B83B76E00786728 /* spark.png */,
@@ -183,6 +184,7 @@
 				B57B33661B86566E000E5F53 /* GameOver.xib */,
 				B57B33681B8656D7000E5F53 /* GameOverXib.swift */,
 				B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */,
+				26B4D6CD1B866A5000BDBF23 /* teste.sks */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
