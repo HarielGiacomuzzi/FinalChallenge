@@ -23,7 +23,7 @@ class BoardScene: SKScene, SKPhysicsContactDelegate {
             }
             
             println("<node x=\"\(aux.position.x)\" y=\"\(aux.position.y)\" name=\"\(aux.name!)\" father=\"\">");
-            println("<next name=\"01\"/>");
+            println("<next name=\"\((aux.name! as NSString).integerValue+1 )\"/>");
             println("</node>")
         }
         println("</BOARD>")

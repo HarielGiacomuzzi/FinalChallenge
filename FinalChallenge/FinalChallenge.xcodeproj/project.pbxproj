@@ -40,6 +40,8 @@
 		DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC57FE11B83AEA200CA0232 /* XMLParser.swift */; };
 		DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC57FE31B83AEC300CA0232 /* BoardScene.swift */; };
 		DBE862051B850DB700C8099E /* board_2.xml in Resources */ = {isa = PBXBuildFile; fileRef = DBE862041B850DB700C8099E /* board_2.xml */; };
+		DBE862071B8552C800C8099E /* MainBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE862061B8552C800C8099E /* MainBoard.swift */; };
+		DBE862091B863BD400C8099E /* MainBoard.sks in Resources */ = {isa = PBXBuildFile; fileRef = DBE862081B863BD400C8099E /* MainBoard.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,8 @@
 		DBC57FE11B83AEA200CA0232 /* XMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
 		DBC57FE31B83AEC300CA0232 /* BoardScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardScene.swift; sourceTree = "<group>"; };
 		DBE862041B850DB700C8099E /* board_2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = board_2.xml; sourceTree = "<group>"; };
+		DBE862061B8552C800C8099E /* MainBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainBoard.swift; sourceTree = "<group>"; };
+		DBE862081B863BD400C8099E /* MainBoard.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainBoard.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,8 +255,10 @@
 				DBE862041B850DB700C8099E /* board_2.xml */,
 				DB73E8111B72834400F7D7C7 /* BoardGraph.swift */,
 				DB73E8131B72838D00F7D7C7 /* Board.sks */,
+				DBE862081B863BD400C8099E /* MainBoard.sks */,
 				DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */,
 				DBC57FE31B83AEC300CA0232 /* BoardScene.swift */,
+				DBE862061B8552C800C8099E /* MainBoard.swift */,
 			);
 			name = Board;
 			sourceTree = "<group>";
@@ -306,7 +312,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
+						DevelopmentTeam = DVXNNDG4U4;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -350,6 +356,7 @@
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
 				DBE862051B850DB700C8099E /* board_2.xml in Resources */,
+				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */,
+				DBE862071B8552C800C8099E /* MainBoard.swift in Sources */,
 				B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */,
 				5E8F9DDE1B7D0986004514D0 /* IphoneConnectionViewController.swift in Sources */,
 				5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */,
@@ -515,7 +523,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				/*CODE_SIGN_IDENTITY = "iPhone Developer";*/
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
@@ -529,7 +537,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				/*CODE_SIGN_IDENTITY = "iPhone Developer";*/
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
