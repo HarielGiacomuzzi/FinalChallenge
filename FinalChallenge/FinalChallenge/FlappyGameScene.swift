@@ -90,10 +90,10 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         self.addChild(wallRight)
         
         var newParticle = FlappyParticleNode.fromFile("teste")
-        newParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 100 , frame.size.height/2)
+        newParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 20 , frame.size.height/2)
         newParticle!.targetNode = self.scene
         self.addChild(newParticle!)
-        newParticle?.zPosition = 0
+        newParticle?.zPosition = 10
         
     }
     
