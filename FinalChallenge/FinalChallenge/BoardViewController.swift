@@ -20,7 +20,7 @@ extension SKNode {
         
         archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
         
-        var scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! BoardScene
+        var scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! SKNode
         if(true){
             scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! BoardScene
         }else{

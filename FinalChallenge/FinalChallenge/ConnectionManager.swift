@@ -51,6 +51,7 @@ class ConnectionManager: NSObject, MCSessionDelegate{
         
     }
     
+    //sends a String to the other peer
     func sendStringToPeer(message : String, reliable : Bool) -> Bool{
         let error = NSErrorPointer();
         if (reliable){
@@ -60,13 +61,14 @@ class ConnectionManager: NSObject, MCSessionDelegate{
         return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
     }
     
-    func sendDictionaryToPeer(message : String, reliable : Bool) -> Bool{
+    //sends a NSDictionary to the other peer
+    func sendDictionaryToPeer(message : NSDictionary?, reliable : Bool) -> Bool{
         let error = NSErrorPointer();
         if (reliable){
-            return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
+            return self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
         }
         
-        return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
+        return self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
     }
     
     func session(session: MCSession!, didReceiveCertificate certificate: [AnyObject]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
