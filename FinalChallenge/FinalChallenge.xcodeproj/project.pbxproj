@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26442B981B86406F00FC276A /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26442B971B86406F00FC276A /* fish.atlas */; };
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
+		26B2D9AD1B879BD60056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9AC1B879BD60056015F /* fish.atlas */; };
 		26B4D6CE1B866A5000BDBF23 /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B4D6CD1B866A5000BDBF23 /* teste.sks */; };
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
@@ -61,8 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		26442B971B86406F00FC276A /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
+		26B2D9AC1B879BD60056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		26B4D6CD1B866A5000BDBF23 /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
@@ -171,8 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				269F18AF1B86583000EAD94F /* wind.atlas */,
-				26442B971B86406F00FC276A /* fish.atlas */,
 				B5F60BB81B83B76E00786728 /* MyParticle.sks */,
+				26B2D9AC1B879BD60056015F /* fish.atlas */,
 				26D019771B84FF0400C5C73D /* bubbleparticle.png */,
 				5E6039731B85017700F63DC3 /* rock.atlas */,
 				B5F60BB91B83B76E00786728 /* spark.png */,
@@ -362,6 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26B2D9AD1B879BD60056015F /* fish.atlas in Resources */,
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
@@ -372,7 +373,6 @@
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
 				B57B33671B86566E000E5F53 /* GameOver.xib in Resources */,
-				26442B981B86406F00FC276A /* fish.atlas in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
 				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
