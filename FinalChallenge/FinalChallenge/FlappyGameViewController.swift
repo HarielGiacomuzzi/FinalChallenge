@@ -15,6 +15,7 @@ class FlappyGameViewController: UIViewController {
     @IBOutlet weak var GameOverView: UIView!
     
     var scene = FlappyGameScene()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,7 @@ class FlappyGameViewController: UIViewController {
         var peerDisplayName = peerID.displayName
         var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
         let messageEnum = PlayerAction(rawValue: message)
-        scene.playerSwim(peerDisplayName, way: messageEnum!)
+        scene.messageReceived(peerDisplayName, action: messageEnum!)
     }
     
 

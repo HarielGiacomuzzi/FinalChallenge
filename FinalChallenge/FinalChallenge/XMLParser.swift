@@ -27,14 +27,14 @@ class XMLParser: NSObject, NSXMLParserDelegate {
         }
         if elementName == "STORE"{
             BoardGraph.SharedInstance.createNode((attributeDict["x"] as! NSString).doubleValue, y: (attributeDict["y"] as! NSString).doubleValue, name: "Store", father: nil);
-            BoardGraph.SharedInstance.setFather(attributeDict["father"] as! String, sonName: "Store");
+            BoardGraph.SharedInstance.setFather(attributeDict["father"] as? String, sonName: "Store");
         }
         if elementName == "node"{
             isOnNode = true;
             currentElement = elementName;
-            currentNode = attributeDict["name"] as! String;
-            BoardGraph.SharedInstance.createNode((attributeDict["x"] as! NSString).doubleValue, y: (attributeDict["y"] as! NSString).doubleValue, name: attributeDict["name"] as! String, father: nil);
-            BoardGraph.SharedInstance.setFather(attributeDict["father"] as! String, sonName: "Store");
+            currentNode = attributeDict["name"] as? String;
+            BoardGraph.SharedInstance.createNode((attributeDict["x"] as! NSString).doubleValue, y: (attributeDict["y"] as! NSString).doubleValue, name: attributeDict["name"] as? String, father: nil);
+            BoardGraph.SharedInstance.setFather(attributeDict["father"] as? String, sonName: "Store");
         }
         if elementName == "next" && isOnNode {
             BoardGraph.SharedInstance.setNeighbors(currentNode!, nextNode: attributeDict["name"] as! String)

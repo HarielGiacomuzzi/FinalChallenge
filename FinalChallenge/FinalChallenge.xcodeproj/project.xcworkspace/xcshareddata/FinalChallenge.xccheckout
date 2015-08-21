@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>82E7988B-C6B4-4CA7-B38E-9E7D11CD2120</string>
 	<key>IDESourceControlProjectName</key>
-	<string>FinalChallenge</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>FE9D8853CADB077CD77438AB65722E579F154C1A</key>
 		<string>https://github.com/HarielGiacomuzzi/FinalChallenge</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FinalChallenge/FinalChallenge.xcodeproj</string>
+	<string>FinalChallenge/FinalChallenge.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>FE9D8853CADB077CD77438AB65722E579F154C1A</key>

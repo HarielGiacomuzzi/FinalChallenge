@@ -10,12 +10,12 @@ import Foundation
 import SpriteKit
 
 
-class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
+class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
     var playersRank:[FlappyPlayerNode] = []
-    var gameController : FlappyGameViewController? = nil
+   // var gameController : FlappyGameViewController? = nil
     
     //dont touch this variable:
     let stoneVel = 8.0
@@ -320,10 +320,10 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func playerSwim(identifier:String, way:PlayerAction) {
+    override func messageReceived(identifier:String, action:PlayerAction) {
         for player in players {
             if player.identifier == identifier {
-                if way == .Up {
+                if action == .Up {
                     player.goUp()
                 } else {
                     player.goDown()
