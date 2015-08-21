@@ -1,199 +1,198 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BOARD>
-    <HOUSE x="774.119" y="1388.52" father="nil" />
+    <HOUSE x="774.119" y="1388.52" father="nil">
+        <next name="01"/>
+    </HOUSE>
     <NODES>
-        <node x="1801.77" y="1269.31" name="25" father="">
-            <next name="01" />
+        <node x="930.301" y="1387.23" name="01" father="House">
+            <next name="2"/>
         </node>
-        <node x="774.119" y="1388.52" name="house" father="">
-            <next name="01" />
+        <node x="1054.34" y="1389.64" name="02" father="1">
+            <next name="3"/>
         </node>
-        <node x="1800.52" y="1391.69" name="24" father="">
-            <next name="01" />
+        <node x="1171.5" y="1386.94" name="03" father="2">
+            <next name="4"/>
         </node>
-        <node x="1675.25" y="1392.17" name="23" father="">
-            <next name="01" />
+        <node x="1293.47" y="1388.61" name="04" father="3">
+            <next name="5"/>
         </node>
-        <node x="1545.36" y="1391.59" name="22" father="">
-            <next name="01" />
+        <node x="1419.55" y="1390.78" name="05" father="4">
+            <next name="6"/>
+            <next name="22"/>
         </node>
-        <node x="1419.55" y="1390.78" name="05" father="">
-            <next name="01" />
+        <node x="1414.36" y="1267.96" name="06" father="5">
+            <next name="7"/>
         </node>
-        <node x="1293.47" y="1388.61" name="04" father="">
-            <next name="01" />
+        <node x="1414.76" y="1151.85" name="07" father="6">
+            <next name="8"/>
         </node>
-        <node x="1171.5" y="1386.94" name="03" father="">
-            <next name="01" />
+        <node x="1416.18" y="1037.9" name="08" father="7">
+            <next name="9"/>
         </node>
-        <node x="1416.18" y="1037.9" name="08" father="">
-            <next name="01" />
+        <node x="1418.12" y="926.88" name="09" father="8">
+            <next name="10"/>
         </node>
-        <node x="1414.76" y="1151.85" name="07" father="">
-            <next name="01" />
+        <node x="1420.25" y="815.448" name="10" father="9">
+            <next name="11"/>
         </node>
-        <node x="1414.36" y="1267.96" name="06" father="">
-            <next name="01" />
+        <node x="1419.51" y="703.831" name="11" father="10">
+            <next name="12"/>
         </node>
-        <node x="1054.34" y="1389.64" name="02" father="">
-            <next name="01" />
+        <node x="1301.71" y="596.009" name="12" father="11">
+            <next name="13"/>
         </node>
-        <node x="930.301" y="1387.23" name="01" father="">
-            <next name="01" />
+        <node x="1183.87" y="599.766" name="13" father="12">
+            <next name="14"/>
         </node>
-        <node x="1827.13" y="350.831" name="33" father="">
-            <next name="01" />
+        <node x="1066.96" y="600.346" name="14" father="13">
+            <next name="15"/>
         </node>
-        <node x="1823.28" y="464.137" name="32" father="">
-            <next name="01" />
+        <node x="951.652" y="600.902" name="15" father="14">
+            <next name="16"/>
         </node>
-        <node x="1420.25" y="815.448" name="10" father="">
-            <next name="01" />
+        <node x="841.424" y="700.693" name="16" father="15">
+            <next name="17"/>
         </node>
-        <node x="1418.12" y="926.88" name="09" father="">
-            <next name="01" />
+        <node x="743.819" y="807.745" name="17" father="16">
+            <next name="18"/>
         </node>
-        <node x="1301.71" y="596.009" name="12" father="">
-            <next name="01" />
+        <node x="647.588" y="917.949" name="18" father="17">
+            <next name="19"/>
         </node>
-        <node x="1183.87" y="599.766" name="13" father="">
-            <next name="01" />
+        <node x="569.195" y="1023.93" name="19" father="18">
+            <next name="20"/>
         </node>
-        <node x="1419.51" y="703.831" name="11" father="">
-            <next name="01" />
+        <node x="488.144" y="1133.66" name="20" father="19">
+            <next name="21"/>
         </node>
-        <node x="1824.47" y="236.872" name="34" father="">
-            <next name="01" />
+        <node x="410.855" y="1241.52" name="21" father="20">
+            <next name="60"/>
         </node>
-        <node x="1817.0" y="698.364" name="30" father="">
-            <next name="01" />
+        <node x="1545.36" y="1391.59" name="22" father="21">
+            <next name="23"/>
         </node>
-        <node x="1805.08" y="1153.14" name="26" father="">
-            <next name="01" />
+        <node x="1675.25" y="1392.17" name="23" father="22">
+            <next name="24"/>
         </node>
-        <node x="1813.68" y="811.282" name="29" father="">
-            <next name="01" />
+        <node x="1800.52" y="1391.69" name="24" father="23">
+            <next name="25"/>
         </node>
-        <node x="1820.53" y="581.307" name="31" father="">
-            <next name="01" />
+        <node x="1801.77" y="1269.31" name="25" father="24">
+            <next name="26"/>
         </node>
-        <node x="1813.7" y="923.702" name="28" father="">
-            <next name="01" />
+        <node x="1805.08" y="1153.14" name="26" father="25">
+            <next name="27"/>
         </node>
-        <node x="1811.07" y="1039.76" name="27" father="">
-            <next name="01" />
+        <node x="1811.07" y="1039.76" name="27" father="26">
+            <next name="28"/>
         </node>
-        <node x="951.652" y="600.902" name="15" father="">
-            <next name="01" />
+        <node x="1813.7" y="923.702" name="28" father="27">
+            <next name="29"/>
         </node>
-        <node x="647.588" y="917.949" name="18" father="">
-            <next name="01" />
+        <node x="1813.68" y="811.282" name="29" father="28">
+            <next name="30"/>
         </node>
-        <node x="743.819" y="807.745" name="17" father="">
-            <next name="01" />
+        <node x="1817.0" y="698.364" name="30" father="29">
+            <next name="31"/>
         </node>
-        <node x="569.195" y="1023.93" name="19" father="">
-            <next name="01" />
+        <node x="1820.53" y="581.307" name="31" father="30">
+            <next name="32"/>
         </node>
-        <node x="1122.17" y="118.249" name="41" father="">
-            <next name="01" />
+        <node x="1823.28" y="464.137" name="32" father="31">
+            <next name="33"/>
         </node>
-        <node x="1066.96" y="600.346" name="14" father="">
-            <next name="01" />
+        <node x="1827.13" y="350.831" name="33" father="32">
+            <next name="34"/>
         </node>
-        <node x="841.424" y="700.693" name="16" father="">
-            <next name="01" />
+        <node x="1824.47" y="236.872" name="34" father="33">
+            <next name="35"/>
         </node>
-        <node x="1006.6" y="119.347" name="42" father="">
-            <next name="01" />
+        <node x="1826.45" y="125.507" name="35" father="34">
+            <next name="36"/>
         </node>
-        <node x="1238.59" y="117.805" name="40" father="">
-            <next name="01" />
+        <node x="1707.17" y="125.545" name="36" father="35">
+            <next name="37"/>
         </node>
-        <node x="1353.95" y="118.731" name="39" father="">
-            <next name="01" />
+        <node x="1590.79" y="123.094" name="37" father="36">
+            <next name="38"/>
         </node>
-        <node x="1471.46" y="122.132" name="38" father="">
-            <next name="01" />
+        <node x="1471.46" y="122.132" name="38" father="37">
+            <next name="39"/>
         </node>
-        <node x="1590.79" y="123.094" name="37" father="">
-            <next name="01" />
+        <node x="1353.95" y="118.731" name="39" father="38">
+            <next name="40"/>
         </node>
-        <node x="1707.17" y="125.545" name="36" father="">
-            <next name="01" />
+        <node x="1238.59" y="117.805" name="40" father="39">
+            <next name="41"/>
         </node>
-        <node x="1826.45" y="125.507" name="35" father="">
-            <next name="01" />
+        <node x="1122.17" y="118.249" name="41" father="40">
+            <next name="42"/>
         </node>
-        <node x="871.797" y="107.285" name="store" father="">
-            <next name="01" />
+        <node x="1006.6" y="119.347" name="42" father="41">
+            <next name="Store"/>
         </node>
-        <node x="410.855" y="1241.52" name="21" father="">
-            <next name="01" />
+        <node x="739.202" y="113.32" name="43" father="Store">
+            <next name="44"/>
         </node>
-        <node x="632.484" y="1360.69" name="62" father="">
-            <next name="01" />
+        <node x="626.78" y="116.342" name="44" father="43">
+            <next name="45"/>
         </node>
-        <node x="516.369" y="1355.95" name="61" father="">
-            <next name="01" />
+        <node x="514.705" y="114.484" name="45" father="44">
+            <next name="46"/>
         </node>
-        <node x="488.144" y="1133.66" name="20" father="">
-            <next name="01" />
+        <node x="414.167" y="231.334" name="46" father="45">
+            <next name="47"/>
         </node>
-        <node x="514.705" y="114.484" name="45" father="">
-            <next name="01" />
+        <node x="415.12" y="341.571" name="47" father="46">
+            <next name="48"/>
         </node>
-        <node x="739.202" y="113.32" name="43" father="">
-            <next name="01" />
+        <node x="417.452" y="451.864" name="48" father="47">
+            <next name="49"/>
         </node>
-        <node x="415.12" y="341.571" name="47" father="">
-            <next name="01" />
+        <node x="416.369" y="562.953" name="49" father="48">
+            <next name="50"/>
         </node>
-        <node x="414.167" y="231.334" name="46" father="">
-            <next name="01" />
+        <node x="417.41" y="672.913" name="50" father="49">
+            <next name="51"/>
         </node>
-        <node x="626.78" y="116.342" name="44" father="">
-            <next name="01" />
+        <node x="304.72" y="673.058" name="51" father="50">
+            <next name="52"/>
         </node>
-        <node x="417.452" y="451.864" name="48" father="">
-            <next name="01" />
+        <node x="189.577" y="675.034" name="52" father="51">
+            <next name="53"/>
         </node>
-        <node x="304.72" y="673.058" name="51" father="">
-            <next name="01" />
+        <node x="187.07" y="785.875" name="53" father="52">
+            <next name="54"/>
         </node>
-        <node x="417.41" y="672.913" name="50" father="">
-            <next name="01" />
+        <node x="187.119" y="895.389" name="54" father="53">
+            <next name="55"/>
         </node>
-        <node x="187.07" y="785.875" name="53" father="">
-            <next name="01" />
+        <node x="187.793" y="1003.56" name="55" father="54">
+            <next name="56"/>
         </node>
-        <node x="416.369" y="562.953" name="49" father="">
-            <next name="01" />
+        <node x="186.809" y="1116.8" name="56" father="55">
+            <next name="57"/>
         </node>
-        <node x="189.577" y="675.034" name="52" father="">
-            <next name="01" />
+        <node x="181.759" y="1232.51" name="57" father="56">
+            <next name="58"/>
         </node>
-        <node x="187.119" y="895.389" name="54" father="">
-            <next name="01" />
+        <node x="179.463" y="1352.43" name="58" father="57">
+            <next name="59"/>
         </node>
-        <node x="186.809" y="1116.8" name="56" father="">
-            <next name="01" />
+        <node x="289.235" y="1353.74" name="59" father="58">
+            <next name="60"/>
         </node>
-        <node x="181.759" y="1232.51" name="57" father="">
-            <next name="01" />
+        <node x="403.344" y="1355.04" name="60" father="59">
+            <next name="61"/>
         </node>
-        <node x="187.793" y="1003.56" name="55" father="">
-            <next name="01" />
+        <node x="516.369" y="1355.95" name="61" father="60">
+            <next name="62"/>
         </node>
-        <node x="179.463" y="1352.43" name="58" father="">
-            <next name="01" />
-        </node>
-        <node x="289.235" y="1353.74" name="59" father="">
-            <next name="01" />
-        </node>
-        <node x="403.344" y="1355.04" name="60" father="">
-            <next name="01" />
+        <node x="632.484" y="1360.69" name="62" father="61">
+            <next name="House"/>
         </node>
     </NODES>
-    <STORE x="871.797" y="107.285" father="" />
+    <STORE x="871.797" y="107.285" father="nil">
+        <next name="43">
+    </STORE>
 </BOARD>
