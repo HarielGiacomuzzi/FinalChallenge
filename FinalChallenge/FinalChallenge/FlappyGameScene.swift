@@ -14,7 +14,12 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
-    let stoneVel = 4.0
+    
+    //dont touch this variable:
+    let stoneVel = 8.0
+    
+    //change this variable to change world speed:
+    let worldVelMultiplier = 1.0
     
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
@@ -23,19 +28,95 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     let endScreenCategory: UInt32 = 1 << 4
     let powerUpCategory: UInt32 = 1 << 5
     
+    override func update(currentTime: NSTimeInterval) {
+        /*
+        let gameOverXib: UIView = NSBundle.mainBundle().loadNibNamed("GameOver", owner: nil, options: nil)[0] as! UIView
+        gameOverXib.frame.size.width = self.frame.size.width/2
+        gameOverXib.frame.size.height = self.frame.size.height/2
+        gameOverXib.center = self.view!.center
+        self.view?.addSubview(gameOverXib)
+        
+        
+        var gameOver = GameOverXib()
+        //gameOver.backgroundColor = UIColor.redColor()
+        self.view!.addSubview(gameOver)
+        //Call whenever you want to show it and change the size to whatever size you want
+        UIView.animateWithDuration(2, animations: {
+            gameOver.frame.size = CGSizeMake(self.frame.width/2, self.frame.height/2)
+        })*/
+        
+    }
+    
     override func didMoveToView(view: SKView) {
+        
+        startGame()
+        
+        self.setupWalls()
         
         // setup physics
         self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
         self.physicsWorld.contactDelegate = self
         
         // setup background color
-        var skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
+        var skyColor = SKColor(red: 79/255.0, green: 146/255.0, blue: 201.0/255.0, alpha: 1.0)
         self.backgroundColor = skyColor
 
+
+        // left wall , if you hit you are dead
+        var wallLeft = SKNode()
+        wallLeft.position = CGPointMake(0, self.frame.size.height / 2)
+        wallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        wallLeft.physicsBody?.dynamic = false
+        wallLeft.physicsBody?.categoryBitMask = endScreenCategory
+        wallLeft.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(wallLeft)
         
+        //right wall, if you hit you win
+        var wallRight = SKNode()
+        wallRight.position = CGPointMake(self.frame.width, self.frame.size.height / 2)
+        wallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
+        wallRight.physicsBody?.dynamic = false
+        wallRight.physicsBody?.categoryBitMask = endScreenCategory
+        wallRight.physicsBody?.contactTestBitMask = playerCategory
+        self.addChild(wallRight)
+        
+        var newParticle = FlappyParticleNode.fromFile("teste")
+        newParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 100 , frame.size.height/2)
+        newParticle!.targetNode = self.scene
+        self.addChild(newParticle!)
+        newParticle?.zPosition = 0
+        
+    }
+    
+    func startGame() {
+        var countDownNode = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        countDownNode.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
+        countDownNode.zPosition = 100
+        countDownNode.fontSize = 100.0
+        var actions:[SKAction] = []
+        self.addChild(countDownNode)
+        
+        for i in reverse(1...3) {
+            var changeNumber = SKAction.runBlock({() in
+                countDownNode.text = "\(i)"
+            })
+            var wait = SKAction.waitForDuration(1)
+            actions += [changeNumber,wait]
+        }
+        
+        var removeNode = SKAction.runBlock({() in
+            countDownNode.removeFromParent()
+        })
+        actions.append(removeNode)
+        var actionSequence = SKAction.sequence(actions)
+        countDownNode.runAction(actionSequence, completion: {() -> Void in
+            self.createPlayersAndObstacles()
+        })
+
+    }
+    
+    func createPlayersAndObstacles() {
         self.spawnPlayers()
-        self.setupWalls()
         
         //nobody connected
         if players.count == 0 {
@@ -58,115 +139,82 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         let spawnThenDelayPU = SKAction.sequence([spawnPowerups,delayPowerUp])
         let spawnDelayForeverPU = SKAction.repeatActionForever(spawnThenDelayPU)
         self.runAction(spawnDelayForeverPU)
-
-        // left wall , if you hit you are dead
-        var wallLeft = SKNode()
-        wallLeft.position = CGPointMake(0, self.frame.size.height / 2)
-        wallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
-        wallLeft.physicsBody?.dynamic = false
-        wallLeft.physicsBody?.categoryBitMask = endScreenCategory
-        wallLeft.physicsBody?.contactTestBitMask = playerCategory
-        self.addChild(wallLeft)
-        
-        //right wall, if you hit you win
-        var wallRight = SKNode()
-        wallRight.position = CGPointMake(self.frame.width, self.frame.size.height / 2)
-        wallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
-        wallRight.physicsBody?.dynamic = false
-        wallRight.physicsBody?.categoryBitMask = endScreenCategory
-        wallRight.physicsBody?.contactTestBitMask = playerCategory
-        self.addChild(wallRight)
-        
     }
     
     func setupWalls(){
+        
+        let dummyTexture = SKTexture(imageNamed: "ffparalaxe1")
+        
+        var currentWidth: CGFloat = 0.0
+        
         // creates ground texture
-        let groundTexture1 = SKTexture(imageNamed: "ffparalaxe1")
-        let groundTexture2 = SKTexture(imageNamed: "ffparalaxe2")
-        let groundTexture3 = SKTexture(imageNamed: "ffparalaxe3")
-        groundTexture1.filteringMode = .Nearest
-        groundTexture2.filteringMode = .Nearest
-        groundTexture3.filteringMode = .Nearest
         
-        let groundSprite1 = SKSpriteNode(texture: groundTexture1)
-        groundSprite1.position = CGPointMake(groundSprite1.size.width / 2, groundSprite1.size.height / 2)
-        let groundSprite2 = SKSpriteNode(texture: groundTexture2)
-        groundSprite2.position = CGPointMake(groundSprite1.size.width + groundSprite2.size.width / 2, groundSprite2.size.height / 2)
-        let groundSprite3 = SKSpriteNode(texture: groundTexture3)
-        groundSprite3.position = CGPointMake(groundSprite2.size.width + groundSprite3.size.width / 2, groundSprite3.size.height / 2)
+        for i in 1...3 {
+            let texture = SKTexture(imageNamed: "ffparalaxe\(i)")
+            texture.filteringMode = .Nearest
+            
+            let sprite = SKSpriteNode(texture: texture)
+            sprite.position = CGPointMake(currentWidth + sprite.size.width / 2, sprite.size.height / 2)
+            
+            let endPosition = CGPointMake(-(sprite.size.width / 2), sprite.size.height / 2)
+            let startPosition = CGPointMake(frame.size.width + sprite.size.width / 2, sprite.size.height / 2)
+            
+            let moveGroundSprite = SKAction.moveTo(endPosition, duration: NSTimeInterval(6.0 * worldVelMultiplier))
+            let resetGroundSprite = SKAction.moveTo(startPosition, duration: 0.0)
+            let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([resetGroundSprite,moveGroundSprite]))
+            let firstMovement = SKAction.moveTo(endPosition, duration: NSTimeInterval(2.0 * Double(i) * worldVelMultiplier))
+            
+            sprite.runAction(SKAction.sequence([firstMovement,moveGroundSpritesForever]))
+            sprite.zPosition = 12
+            
+            self.addChild(sprite)
+            currentWidth += sprite.size.width
+            
+        }
         
-        let endPosition = CGPointMake(-(groundSprite1.size.width / 2), groundSprite1.size.height / 2)
-        let startPosition = CGPointMake(frame.size.width + groundSprite3.size.width / 2, groundSprite1.size.height / 2)
+        currentWidth = 0.0
 
-        let moveGroundSprite = SKAction.moveTo(endPosition, duration: NSTimeInterval(6))
-        let resetGroundSprite = SKAction.moveTo(startPosition, duration: 0.0)
-        let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([resetGroundSprite,moveGroundSprite]))
-        
-        let startGroundSprite1 = SKAction.moveTo(endPosition, duration: NSTimeInterval(2))
-        let startGroundSprite2 = SKAction.moveTo(endPosition, duration: NSTimeInterval(4))
-        
-        groundSprite1.runAction(SKAction.sequence([startGroundSprite1, moveGroundSpritesForever]))
-        groundSprite2.runAction(SKAction.sequence([startGroundSprite2, moveGroundSpritesForever]))
-        groundSprite3.runAction(moveGroundSpritesForever)
-        
-        self.addChild(groundSprite1)
-        self.addChild(groundSprite2)
-        self.addChild(groundSprite3)
-
-        
         //adds imovable ground physics
         var ground = SKNode()
-        ground.position = CGPointMake(self.frame.size.width / 2, groundTexture1.size().height * 0.7) //ground.position = CENTER POINT
-        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, groundTexture1.size().height * 0.01))
+        ground.position = CGPointMake(self.frame.size.width / 2, dummyTexture.size().height * 0.7)
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, dummyTexture.size().height * 0.01))
         ground.physicsBody?.dynamic = false
         ground.physicsBody?.categoryBitMask = worldCategory
         self.addChild(ground)
-
+        
         //create roof texture
-        let roofTexture1 = SKTexture(imageNamed: "ffparalaxe1")
-        let roofTexture2 = SKTexture(imageNamed: "ffparalaxe2")
-        let roofTexture3 = SKTexture(imageNamed: "ffparalaxe3")
-        roofTexture1.filteringMode = .Nearest
-        roofTexture2.filteringMode = .Nearest
-        roofTexture3.filteringMode = .Nearest
-        
-        let roofSprite1 = SKSpriteNode(texture: groundTexture1)
-        roofSprite1.position = CGPointMake(groundSprite1.size.width / 2, self.frame.size.height - groundSprite1.size.height / 2)
-        let roofSprite2 = SKSpriteNode(texture: groundTexture2)
-        roofSprite2.position = CGPointMake(groundSprite1.size.width + groundSprite2.size.width / 2, self.frame.size.height - groundSprite1.size.height / 2)
-        let roofSprite3 = SKSpriteNode(texture: groundTexture3)
-        roofSprite3.position = CGPointMake(groundSprite2.size.width + groundSprite3.size.width / 2, self.frame.size.height - groundSprite1.size.height / 2)
-        
-        let roofEndPosition = CGPointMake(-(groundSprite1.size.width / 2), self.frame.size.height - groundSprite1.size.height / 2)
-        let roofStartPosition = CGPointMake(frame.size.width + groundSprite3.size.width / 2, self.frame.size.height - groundSprite1.size.height / 2)
-        
-        let moveRoofSprite = SKAction.moveTo(roofEndPosition, duration: NSTimeInterval(6))
-        let resetRoofSprite = SKAction.moveTo(roofStartPosition, duration: 0.0)
-        let moveRoofSpritesForever = SKAction.repeatActionForever(SKAction.sequence([resetRoofSprite,moveRoofSprite]))
-        
-        let startRoofSprite1 = SKAction.moveTo(roofEndPosition, duration: NSTimeInterval(2))
-        let startRoofSprite2 = SKAction.moveTo(roofEndPosition, duration: NSTimeInterval(4))
-        
-        roofSprite1.runAction(SKAction.sequence([startRoofSprite1, moveRoofSpritesForever]))
-        roofSprite2.runAction(SKAction.sequence([startRoofSprite2, moveRoofSpritesForever]))
-        roofSprite3.runAction(moveRoofSpritesForever)
-        
-        roofSprite1.yScale = -1
-        roofSprite2.yScale = -1
-        roofSprite3.yScale = -1
-        
-        self.addChild(roofSprite1)
-        self.addChild(roofSprite2)
-        self.addChild(roofSprite3)
-        
+        for i in 1...3 {
+            let texture = SKTexture(imageNamed: "ffparalaxe\(i)")
+            texture.filteringMode = .Nearest
+            
+            let sprite = SKSpriteNode(texture: texture)
+            sprite.position = CGPointMake(currentWidth + sprite.size.width / 2, self.frame.size.height - sprite.size.height / 2)
+            
+            let endPosition = CGPointMake(-(sprite.size.width / 2), self.frame.size.height - sprite.size.height / 2)
+            let startPosition = CGPointMake(frame.size.width + sprite.size.width / 2, self.frame.size.height - sprite.size.height / 2)
+            
+            let moveGroundSprite = SKAction.moveTo(endPosition, duration: NSTimeInterval(6.0 * worldVelMultiplier))
+            let resetGroundSprite = SKAction.moveTo(startPosition, duration: 0.0)
+            let moveGroundSpritesForever = SKAction.repeatActionForever(SKAction.sequence([resetGroundSprite,moveGroundSprite]))
+            let firstMovement = SKAction.moveTo(endPosition, duration: NSTimeInterval(2.0 * Double(i) * worldVelMultiplier))
+            
+            sprite.runAction(SKAction.sequence([firstMovement,moveGroundSpritesForever]))
+            sprite.yScale = -1
+            
+            sprite.zPosition = 11
+            
+            self.addChild(sprite)
+            currentWidth += sprite.size.width
+            
+        }
+
         //adds imovable roof physics
         var roof = SKNode()
-        roof.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height-roofTexture1.size().height * 0.7) //roof.position = CENTER POINT
-        roof.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, roofTexture1.size().height * 0.01))
+        roof.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height-dummyTexture.size().height * 0.7)
+        roof.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, dummyTexture.size().height * 0.01))
         roof.physicsBody?.dynamic = false
         roof.physicsBody?.categoryBitMask = worldCategory
         self.addChild(roof)
-        
     }
 
     func spawnStone() {
@@ -178,27 +226,29 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         var top = self.frame.size.height - testTexture.size().height
         var pos = getRandomCGFloat(bottom, end: top)
         stone.setScale(scale)
-        stone.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos)
-        stone.setupMovement(self.frame, vel: stoneVel)
+        stone.position = CGPointMake(self.frame.size.width + self.frame.size.width / 2, pos)
+        stone.setupMovement(self.frame, vel: stoneVel * worldVelMultiplier)
         
         var rotation = getRandomCGFloat(1, end: 4)
         stone.zRotation = rotation
+        stone.zPosition = 9
+        self.addChild(stone)
         
         var particleScales = 0.3 * scale
         var stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
-        stoneParticleLow!.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos - stone.size.height/2)
+        stoneParticleLow!.position = CGPointMake(stone.position.x, stone.position.y - (stone.size.height/2) + 10)
         stoneParticleLow!.name = "stoneParticleLow"
         stoneParticleLow!.particleScale = particleScales
         stoneParticleLow!.targetNode = self.scene
-        stoneParticleLow!.setupMovement(self.frame, node: stone, vel: stoneVel)
+        stoneParticleLow!.setupMovement(self.frame, node: stone, vel: stoneVel * worldVelMultiplier)
         self.addChild(stoneParticleLow!)
     
-        var stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle2")
-        stoneParticleHigh!.position = CGPointMake(self.frame.size.width + stone.size.width / 2, pos + stone.size.height/2)
+        var stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle")
+        stoneParticleHigh!.position = CGPointMake(stone.position.x, stone.position.y + stone.size.height/2)
         stoneParticleHigh!.name = "stoneParticleHigh"
         stoneParticleHigh!.particleScale = particleScales
         stoneParticleHigh!.targetNode = self.scene
-        stoneParticleHigh!.setupMovement(self.frame, node: stone, vel: stoneVel)
+        stoneParticleHigh!.setupMovement(self.frame, node: stone, vel: stoneVel * worldVelMultiplier)
         self.addChild(stoneParticleHigh!)
         
     }
@@ -234,6 +284,13 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
+            var particleTexture = SKTexture(imageNamed: "spark.png")
+            var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
+            playerParticle!.position = CGPointMake(testPlayer!.size.width/2-100,testPlayer!.size.height/2)
+            playerParticle!.name = "PlayerParticle"
+            playerParticle!.targetNode = self.scene
+            //playerParticle!.setupPhysics(particleTexture)
+            testPlayer!.addChild(playerParticle!)
         }
     }
     
@@ -242,6 +299,16 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         testPlayer!.identifier = "test player"
         testPlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
         self.addChild(testPlayer!)
+        
+        var particleTexture = SKTexture(imageNamed: "spark.png")
+        var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
+    //    playerParticle!.position = CGPointMake(testPlayer!.frame.size.width,testPlayer!.frame.size.height)
+        playerParticle!.name = "PlayerParticle"
+        playerParticle!.targetNode = self.scene
+        //playerParticle!.setupPhysics(particleTexture)
+        testPlayer!.addChild(playerParticle!)
+        playerParticle?.position = CGPoint(x: -43, y: 0)
+        
     }
     
     func playerSwim(identifier:String, way:String) {

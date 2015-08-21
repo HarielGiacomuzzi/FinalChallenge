@@ -54,6 +54,7 @@ class FlappyPowerupNode: SKSpriteNode {
         
         let blowUp = SKAction.animateWithTextures(sequence, timePerFrame: 0.07)
         let remove = SKAction.removeFromParent()
+        self.physicsBody = SKPhysicsBody()
         let blowAndRemove = SKAction.sequence([blowUp,remove])
         
         self.runAction(blowAndRemove)
@@ -62,7 +63,7 @@ class FlappyPowerupNode: SKSpriteNode {
     
     func setupPhysics() {
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.height / 2)
-        self.physicsBody?.dynamic = false
+        self.physicsBody?.dynamic = true
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.categoryBitMask = powerUpCategory
         self.physicsBody?.collisionBitMask = stoneCategory
@@ -71,7 +72,7 @@ class FlappyPowerupNode: SKSpriteNode {
     
     func setupMovement(frame:CGRect) {
         let distanceToMove = CGFloat(frame.size.width + self.size.width)
-        let movePowerUps = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(5))
+        let movePowerUps = SKAction.moveByX(-distanceToMove, y:0.0, duration:NSTimeInterval(3))
         let removePowerUps = SKAction.removeFromParent()
         let movePowerUpsAndRemove = SKAction.sequence([movePowerUps, removePowerUps])
         self.runAction(movePowerUpsAndRemove)
