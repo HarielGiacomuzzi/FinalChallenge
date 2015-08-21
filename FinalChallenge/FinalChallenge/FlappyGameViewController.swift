@@ -22,7 +22,6 @@ class FlappyGameViewController: UIViewController {
        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
         
-//        scene = FlappyGameScene(size: view.bounds.size)
         scene = FlappyGameScene(size: CGSize(width: 1024, height: 768))
         let skView = view as! SKView
         skView.showsFPS = true
@@ -49,12 +48,9 @@ class FlappyGameViewController: UIViewController {
         var data = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
         var peerDisplayName = peerID.displayName
         var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
-        
-        scene.playerSwim(peerDisplayName, way: message)
+        let messageEnum = PlayerAction(rawValue: message)
+        scene.playerSwim(peerDisplayName, way: messageEnum!)
     }
     
-    
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.LandscapeRight.rawValue)
-    }
+
 }
