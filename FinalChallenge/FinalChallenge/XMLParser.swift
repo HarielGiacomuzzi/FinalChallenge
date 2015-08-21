@@ -16,10 +16,9 @@ class XMLParser: NSObject, NSXMLParserDelegate {
     
     func loadBoardFrom(fileName : String){
         var url = NSURL(fileURLWithPath: fileName)!
-        println(url.filePathURL!.description);
         var parser = NSXMLParser(contentsOfURL: url);
         parser?.delegate = self;
-        println(parser?.parse());
+        parser?.parse();
     }
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {

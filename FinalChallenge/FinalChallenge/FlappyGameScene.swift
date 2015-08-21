@@ -67,7 +67,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         // setup background color
-        var skyColor = SKColor(red: 81.0/255.0, green: 192.0/255.0, blue: 201.0/255.0, alpha: 1.0)
+        var skyColor = SKColor(red: 79/255.0, green: 146/255.0, blue: 201.0/255.0, alpha: 1.0)
         self.backgroundColor = skyColor
 
 
@@ -88,6 +88,12 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         wallRight.physicsBody?.categoryBitMask = endScreenCategory
         wallRight.physicsBody?.contactTestBitMask = playerCategory
         self.addChild(wallRight)
+        
+        var newParticle = FlappyParticleNode.fromFile("teste")
+        newParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 100 , frame.size.height/2)
+        newParticle!.targetNode = self.scene
+        self.addChild(newParticle!)
+        newParticle?.zPosition = 0
         
     }
     
@@ -239,7 +245,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         var particleScales = 0.3 * scale
         var stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
-        stoneParticleLow!.position = CGPointMake(stone.position.x, stone.position.y - (5 + stone.size.height/2))
+        stoneParticleLow!.position = CGPointMake(stone.position.x, stone.position.y - (stone.size.height/2) + 10)
         stoneParticleLow!.name = "stoneParticleLow"
         stoneParticleLow!.particleScale = particleScales
         stoneParticleLow!.targetNode = self.scene
@@ -305,11 +311,13 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
         var particleTexture = SKTexture(imageNamed: "spark.png")
         var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
-        playerParticle!.position = CGPointMake(testPlayer!.frame.size.width,testPlayer!.frame.size.height)
+    //    playerParticle!.position = CGPointMake(testPlayer!.frame.size.width,testPlayer!.frame.size.height)
         playerParticle!.name = "PlayerParticle"
         playerParticle!.targetNode = self.scene
         //playerParticle!.setupPhysics(particleTexture)
         testPlayer!.addChild(playerParticle!)
+        playerParticle?.position = CGPoint(x: -43, y: 0)
+        
     }
     
     func playerSwim(identifier:String, way:String) {
