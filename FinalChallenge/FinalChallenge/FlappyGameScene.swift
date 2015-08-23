@@ -15,7 +15,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
     var playersRank:[FlappyPlayerNode] = []
-    var gameController : FlappyGameViewController? = nil
     var gameManager = GameManager()
     
     //dont touch this variable:
