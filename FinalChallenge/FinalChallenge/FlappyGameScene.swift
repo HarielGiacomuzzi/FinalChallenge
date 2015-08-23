@@ -15,7 +15,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
     var playersRank:[FlappyPlayerNode] = []
-   // var gameController : FlappyGameViewController? = nil
+    var gameController : FlappyGameViewController? = nil
+    var gameManager = GameManager()
     
     //dont touch this variable:
     let stoneVel = 8.0
@@ -31,28 +32,11 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     let powerUpCategory: UInt32 = 1 << 5
     
     override func update(currentTime: NSTimeInterval) {
-        self.gameOver()
-        /*self.gameOver()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let settingController: UIViewController = storyboard.instantiateViewControllerWithIdentifier("GameOver") as! UIViewController
-        let vc = self.view?.window?.rootViewController
-        vc?.presentViewController(settingController, animated: false, completion: nil)
-        */
-        /*
-        let gameOverXib: UIView = GameOverXib()
-        gameOverXib.frame.size.width = self.frame.size.width/2
-        gameOverXib.frame.size.height = self.frame.size.height/3
-        gameOverXib.center = self.view!.center
-        self.view?.addSubview(gameOverXib)
-        */
-         /*
-        var gameOver = GameOverXib()
-        //gameOver.backgroundColor = UIColor.redColor()
-        self.view!.addSubview(gameOver)
-        //Call whenever you want to show it and change the size to whatever size you want
-        UIView.animateWithDuration(2, animations: {
-            gameOver.frame.size = CGSizeMake(self.frame.width/2, self.frame.height/2)
-        })*/
+        println(gameManager.isMultiplayer)
+        if players.count == 0 && gameManager.isMultiplayer == true{
+            self.gameOver()
+            self.paused = true
+        }
         
     }
     
@@ -284,6 +268,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func spawnPlayers() {
+        
+        gameManager.isMultiplayer = true
+        
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
         
         for connectedPeer in connectedPeers {
@@ -304,6 +291,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func spawnSinglePlayer() {
+        
+        gameManager.isMultiplayer = false
+        
         testPlayer = FlappyPlayerNode()
         testPlayer!.identifier = "test player"
         testPlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
@@ -365,7 +355,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
                     println(player.identifier)
                     players.removeObject(player)
                     player.removeFromParent()
-                    playersRank.append(player)
+                    gameManager.playerRank.append(player.identifier!)
                 }
             }
         }
