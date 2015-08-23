@@ -12,7 +12,7 @@
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
 		26B2D9C51B87AB110056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C41B87AB110056015F /* teste.sks */; };
 		26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C61B87AC030056015F /* BombTGameScene.swift */; };
-		26B2D9C91B87AE570056015F /* MiniGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C81B87AE570056015F /* MiniGamesViewController.swift */; };
+		26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C81B87AE570056015F /* MiniGameViewController.swift */; };
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
@@ -71,7 +71,7 @@
 		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
 		26B2D9C41B87AB110056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
 		26B2D9C61B87AC030056015F /* BombTGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombTGameScene.swift; sourceTree = "<group>"; };
-		26B2D9C81B87AE570056015F /* MiniGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGamesViewController.swift; sourceTree = "<group>"; };
+		26B2D9C81B87AE570056015F /* MiniGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGameViewController.swift; sourceTree = "<group>"; };
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
@@ -155,6 +155,22 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		5EA49E0B1B87BB9000AC51F8 /* BombGame */ = {
+			isa = PBXGroup;
+			children = (
+				5EA49E0C1B87BB9C00AC51F8 /* Resources */,
+				26B2D9C61B87AC030056015F /* BombTGameScene.swift */,
+			);
+			name = BombGame;
+			sourceTree = "<group>";
+		};
+		5EA49E0C1B87BB9C00AC51F8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		5ED9E8771B7127760073FB7B /* FlappyGame */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,9 +187,9 @@
 		5ED9E8781B7127830073FB7B /* Minigames */ = {
 			isa = PBXGroup;
 			children = (
-				26B2D9C81B87AE570056015F /* MiniGamesViewController.swift */,
-				26B2D9C61B87AC030056015F /* BombTGameScene.swift */,
+				26B2D9C81B87AE570056015F /* MiniGameViewController.swift */,
 				5EA49E091B87B59100AC51F8 /* MinigameScene.swift */,
+				5EA49E0B1B87BB9000AC51F8 /* BombGame */,
 				5ED9E8771B7127760073FB7B /* FlappyGame */,
 			);
 			name = Minigames;
@@ -234,9 +250,9 @@
 				DB4E52001B714A10008333D3 /* Board */,
 				DB4E51FD1B714149008333D3 /* Utils */,
 				5ED9E8781B7127830073FB7B /* Minigames */,
-				DB458B721B5409B90066B38C /* AppDelegate.swift */,
 				5E8F9DD81B7D0093004514D0 /* ViewControllers */,
 				DB458B791B5409B90066B38C /* Main.storyboard */,
+				DB458B721B5409B90066B38C /* AppDelegate.swift */,
 				DB458B7C1B5409B90066B38C /* Images.xcassets */,
 				DB458B7E1B5409B90066B38C /* LaunchScreen.xib */,
 				DB458B741B5409B90066B38C /* FinalChallenge.xcdatamodeld */,
@@ -425,7 +441,7 @@
 				DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */,
 				5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */,
 				DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */,
-				26B2D9C91B87AE570056015F /* MiniGamesViewController.swift in Sources */,
+				26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */,
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,

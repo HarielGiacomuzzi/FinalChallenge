@@ -11,7 +11,7 @@ import SpriteKit
 import MultipeerConnectivity
 import Foundation
 
-class MiniGamesViewController: UIViewController {
+class MiniGameViewController: UIViewController {
     
     @IBOutlet weak var GameOverView: UIView!
     
@@ -46,8 +46,10 @@ class MiniGamesViewController: UIViewController {
     
     
     func messageReceived(data : NSNotification){
-        var peerID = ((data.userInfo as! NSDictionary).valueForKey("peerID") as! MCPeerID);
-        var data = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
+        var peerID = data.userInfo!["peerID"] as! MCPeerID
+        var data = data.userInfo!["data"] as! NSData
+//        var peerID = ((data.userInfo as! NSDictionary).valueForKey("peerID") as! MCPeerID);
+//        var data = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
         var peerDisplayName = peerID.displayName
         var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
         let messageEnum = PlayerAction(rawValue: message)
