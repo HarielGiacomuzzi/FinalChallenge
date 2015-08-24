@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Player : NSObject {
     var playerName:String!
@@ -14,7 +15,6 @@ class Player : NSObject {
     var coins:Int!
     var x:Double!
     var y:Double!
-    
-        
+    var color = UIColor.blueColor()
     
 }

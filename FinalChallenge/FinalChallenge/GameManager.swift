@@ -13,6 +13,7 @@ class GameManager {
     var gameActive = String()
     var playerRank = [String]()
     var isMultiplayer : Bool?
+    var players = [Player]()
     
     func setPlayerOrder()->[String]{
         return playerRank.reverse()

@@ -31,7 +31,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     let powerUpCategory: UInt32 = 1 << 5
     
     override func update(currentTime: NSTimeInterval) {
-        println(gameManager.isMultiplayer)
+//        println(gameManager.isMultiplayer)
         if players.count == 0 && gameManager.isMultiplayer == true{
             self.gameOver()
             self.paused = true
@@ -271,21 +271,27 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         gameManager.isMultiplayer = true
         
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
+        let boardPlayers = GameManager.sharedInstance.players
         
         for connectedPeer in connectedPeers {
             var player = FlappyPlayerNode()
             player.identifier = connectedPeer.displayName
-            println(player.identifier)
+            
+            for boardPlayer in boardPlayers {
+                if player.identifier == boardPlayer.playerIdentifier {
+                    player.color = boardPlayer.color
+                }
+            }
+
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
             var particleTexture = SKTexture(imageNamed: "spark.png")
             var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
-            playerParticle!.position = CGPointMake(player.size.width,player.size.height)
             playerParticle!.name = "PlayerParticle"
-            playerParticle!.targetNode = self.scene
-            //playerParticle!.setupPhysics(particleTexture)
+            playerParticle!.targetNode = player
             player.addChild(playerParticle!)
+            playerParticle?.position = CGPoint(x: -43, y: 0)
         }
     }
     
@@ -300,10 +306,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         var particleTexture = SKTexture(imageNamed: "spark.png")
         var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
-    //    playerParticle!.position = CGPointMake(testPlayer!.frame.size.width,testPlayer!.frame.size.height)
         playerParticle!.name = "PlayerParticle"
         playerParticle!.targetNode = self.scene
-        //playerParticle!.setupPhysics(particleTexture)
         testPlayer!.addChild(playerParticle!)
         playerParticle?.position = CGPoint(x: -43, y: 0)
         

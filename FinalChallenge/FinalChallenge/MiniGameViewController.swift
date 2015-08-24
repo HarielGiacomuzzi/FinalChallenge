@@ -41,19 +41,26 @@ class MiniGameViewController: UIViewController {
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
         
-        
     }
     
     
     func messageReceived(data : NSNotification){
         var peerID = data.userInfo!["peerID"] as! MCPeerID
-        var data = data.userInfo!["data"] as! NSData
-//        var peerID = ((data.userInfo as! NSDictionary).valueForKey("peerID") as! MCPeerID);
-//        var data = ((data.userInfo as! NSDictionary).valueForKey("data") as! NSData);
         var peerDisplayName = peerID.displayName
-        var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
-        let messageEnum = PlayerAction(rawValue: message)
-        scene.messageReceived(peerDisplayName, action: messageEnum!)
+        var data = data.userInfo!["data"] as! NSData
+        
+        if minigame == .FlappyFish {
+            var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
+            if let messageEnum = PlayerAction(rawValue: message) {
+                scene.messageReceived(peerDisplayName, action: messageEnum)
+            }
+            
+        } else {
+            var message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
+            println(message.objectForKey("x"))
+            println(message.objectForKey("y"))
+        }
+
     }
     
 }
