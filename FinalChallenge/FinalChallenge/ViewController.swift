@@ -33,6 +33,14 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     // Notifies the delegate, when the user taps the done button
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!){
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
+        let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
+        var connectedPlayers:[Player] = []
+        for peer in connectedPeers {
+            let player = Player()
+            player.playerIdentifier = peer.displayName
+            connectedPlayers.append(player)
+        }
+        GameManager.sharedInstance.players = connectedPlayers
     }
     
     // Notifies delegate that the user taps the cancel button.

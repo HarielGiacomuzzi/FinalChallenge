@@ -15,6 +15,7 @@ enum LoadGamePad : String {
 enum PlayerAction : String  {
     case Up = "Up"
     case Down = "Down"
+    case Swipe = "Swipe"
 }
 
 enum Minigame : String {
