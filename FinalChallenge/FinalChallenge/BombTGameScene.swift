@@ -211,9 +211,18 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(bomb)
         
         let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
-        bombSpark.position = CGPointMake(bomb.position.x + 10, bomb.position.y + 10)
+        bombSpark.position = CGPointMake(bomb.position.x + 30, bomb.position.y + 30)
+
+        self.addChild(bombSpark)
         bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
-        bomb.addChild(bombSpark)
+        bombSpark.physicsBody?.dynamic = true
+        bombSpark.physicsBody?.mass = 0
+        bombSpark.physicsBody?.applyImpulse(CGVector(dx: 2, dy: 10), atPoint: bombSpark.position)
+        
+        
+        let jointTeste = SKPhysicsJointLimit.jointWithBodyA(bomb.physicsBody, bodyB: bombSpark.physicsBody, anchorA: bomb.position, anchorB: bombSpark.position)
+        self.physicsWorld.addJoint(jointTeste)
+        
         
         
     }
