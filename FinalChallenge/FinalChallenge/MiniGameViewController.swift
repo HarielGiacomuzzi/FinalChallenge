@@ -17,7 +17,7 @@ class MiniGameViewController: UIViewController {
     
     var scene = MinigameScene()
     
-    var minigame = Minigame.FlappyFish
+    var minigame = Minigame.BombGame
     
     override func viewDidLoad() {
         super.viewDidLoad()

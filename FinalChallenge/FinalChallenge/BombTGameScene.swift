@@ -38,35 +38,35 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func startGame() {
-        setupWalls()
         self.physicsWorld.gravity = CGVectorMake(0, 0)
-        
-        let bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 35, height: 35))
-        bomb.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
-        bomb.physicsBody = SKPhysicsBody(rectangleOfSize: bomb.size)
-        self.addChild(bomb)
-                bomb.physicsBody?.categoryBitMask = bombCategory
-        bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
+        setupWalls()
+        createPlayersAndObstacles()
+        spawnSinglePlayer()
+        generateBomb(nil, bombTimer: 100)
         
 
         
     }
     
     func createPlayersAndObstacles() {
+
+        // cria jogadores
+        
+        
     
     }
     
     func setupWalls(){
         
         let wallWest = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        wallWest.position = CGPointMake((self.frame.size.width/2)/2.5, self.frame.size.height / 2)
+        wallWest.position = CGPointMake((self.frame.size.width/2)/2.65, self.frame.size.height / 2)
         wallWest.physicsBody = SKPhysicsBody(rectangleOfSize: wallWest.size)
         wallWest.physicsBody?.dynamic = false
         self.addChild(wallWest)
         
         
         let WallEast = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        WallEast.position = CGPointMake((self.frame.size.width - (self.frame.size.width/2)/2.5) , (self.frame.size.height / 2))
+        WallEast.position = CGPointMake((self.frame.size.width - (self.frame.size.width/2)/2.65) , (self.frame.size.height / 2))
         WallEast.physicsBody = SKPhysicsBody(rectangleOfSize: WallEast.size)
         WallEast.physicsBody?.dynamic = false
         self.addChild(WallEast)
@@ -94,7 +94,24 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func spawnSinglePlayer() {
+        // criar a bomba
+
         
+        // spawn um player no sul
+        let player = SKSpriteNode (color: UIColor.blueColor(), size: CGSize(width: 55   , height: 60))
+        player.position = CGPointMake(self.frame.size.width/2 - self.frame.size.width/3.5, 140)
+        player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
+        player.physicsBody?.dynamic = false
+        player.physicsBody?.categoryBitMask = playerCategory
+        self.addChild(player)
+        
+        let playerMovementDir = SKAction.moveTo(CGPointMake(self.frame.size.width/2 + self.frame.size.width/3.5, player.position.y), duration: 3.5)
+        let playerMovementEsq = SKAction.moveTo(CGPointMake(self.frame.size.width/2 - self.frame.size.width/3.5, player.position.y), duration: 3.5)
+        player.runAction(SKAction.repeatActionForever(SKAction.sequence([playerMovementDir, playerMovementEsq])))
+        
+        
+        
+
     }
     
     func gameOver(){
@@ -109,12 +126,57 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     
     func didBeginContact(contact: SKPhysicsContact) {
-        //checks colision player / powerup
+        var firstBody: SKPhysicsBody
+        var secondBody: SKPhysicsBody
+        // acerta qual corpo é qual
+        if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        }
+        else{
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        // verifica se a colisao eh entre monstro e projetil e entao chama a colisao
+        if ((firstBody.categoryBitMask & playerCategory != 0) &&
+            (secondBody.categoryBitMask & bombCategory != 0)){
+                
+                
+        }
+   
+    }
+    
+    func generateBomb(grabbedBy : SKNode? , bombTimer : Double ){
+        var x : CGFloat?
+        var y : CGFloat?
+        
+        if let initialNode = grabbedBy {
+            x = initialNode.position.x
+            y = initialNode.position.y
+            
+        }
+        else {
+            x = self.frame.size.width/2
+            y = self.frame.size.height/2
+        }
+        let bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 35, height: 35))
+        bomb.position = CGPointMake(x!, y!)
+        
+        bomb.physicsBody = SKPhysicsBody(rectangleOfSize: bomb.size)
+        self.addChild(bomb)
+        bomb.physicsBody?.categoryBitMask = bombCategory
+        bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
+        
+        let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
+        bombSpark.position = CGPointMake(bomb.position.x + 10, bomb.position.y + 10)
+        bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
+        bomb.addChild(bombSpark)
+        
         
     }
+        
+        
     
-    func handleColisionPlayerPowerup(#player:SKPhysicsBody,powerup:SKPhysicsBody) {
     
-    }
-    
+
 }
