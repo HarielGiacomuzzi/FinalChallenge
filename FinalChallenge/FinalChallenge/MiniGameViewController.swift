@@ -17,7 +17,7 @@ class MiniGameViewController: UIViewController {
     
     var scene = MinigameScene()
     
-    var minigame = Minigame.FlappyFish
+    var minigame = Minigame.BombGame
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +46,21 @@ class MiniGameViewController: UIViewController {
     
     func messageReceived(data : NSNotification){
         var peerID = data.userInfo!["peerID"] as! MCPeerID
-        var data = data.userInfo!["data"] as! NSData
         var peerDisplayName = peerID.displayName
-        var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
-        if let messageEnum = PlayerAction(rawValue: message) {
-            scene.messageReceived(peerDisplayName, action: messageEnum)
+        var data = data.userInfo!["data"] as! NSData
+        
+        if minigame == .FlappyFish {
+            var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
+            if let messageEnum = PlayerAction(rawValue: message) {
+                scene.messageReceived(peerDisplayName, action: messageEnum)
+            }
+            
+        } else {
+            var message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
+            println(message.objectForKey("x"))
+            println(message.objectForKey("y"))
         }
+
     }
     
 }

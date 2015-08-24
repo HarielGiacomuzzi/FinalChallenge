@@ -10,11 +10,6 @@ import UIKit
 
 class GamePadController : UIViewController{
     
-    @IBAction func JumpDataSender(sender: AnyObject) {
-        ConnectionManager.sharedInstance.sendStringToPeer("jump", reliable: false)
-        
-    }
-    
     @IBAction func upDataSender() {
         ConnectionManager.sharedInstance.sendStringToPeer(PlayerAction.Up.rawValue, reliable: false)
     }
