@@ -10,10 +10,12 @@ import Foundation
 import SpriteKit
 
 
-class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
+class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
+    var playersRank:[FlappyPlayerNode] = []
+    var gameManager = GameManager()
     
     //dont touch this variable:
     let stoneVel = 8.0
@@ -29,21 +31,11 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     let powerUpCategory: UInt32 = 1 << 5
     
     override func update(currentTime: NSTimeInterval) {
-        /*
-        let gameOverXib: UIView = NSBundle.mainBundle().loadNibNamed("GameOver", owner: nil, options: nil)[0] as! UIView
-        gameOverXib.frame.size.width = self.frame.size.width/2
-        gameOverXib.frame.size.height = self.frame.size.height/2
-        gameOverXib.center = self.view!.center
-        self.view?.addSubview(gameOverXib)
-        
-        
-        var gameOver = GameOverXib()
-        //gameOver.backgroundColor = UIColor.redColor()
-        self.view!.addSubview(gameOver)
-        //Call whenever you want to show it and change the size to whatever size you want
-        UIView.animateWithDuration(2, animations: {
-            gameOver.frame.size = CGSizeMake(self.frame.width/2, self.frame.height/2)
-        })*/
+        println(gameManager.isMultiplayer)
+        if players.count == 0 && gameManager.isMultiplayer == true{
+            self.gameOver()
+            self.paused = true
+        }
         
     }
     
@@ -81,10 +73,10 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         self.addChild(wallRight)
         
         var newParticle = FlappyParticleNode.fromFile("teste")
-        newParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 100 , frame.size.height/2)
+        newParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 20 , frame.size.height/2)
         newParticle!.targetNode = self.scene
         self.addChild(newParticle!)
-        newParticle?.zPosition = 0
+        newParticle?.zPosition = 10
         
     }
     
@@ -275,6 +267,9 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
     }
     
     func spawnPlayers() {
+        
+        gameManager.isMultiplayer = true
+        
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
         
         for connectedPeer in connectedPeers {
@@ -286,15 +281,18 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
             players.append(player)
             var particleTexture = SKTexture(imageNamed: "spark.png")
             var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
-            playerParticle!.position = CGPointMake(testPlayer!.size.width/2-100,testPlayer!.size.height/2)
+            playerParticle!.position = CGPointMake(player.size.width,player.size.height)
             playerParticle!.name = "PlayerParticle"
             playerParticle!.targetNode = self.scene
             //playerParticle!.setupPhysics(particleTexture)
-            testPlayer!.addChild(playerParticle!)
+            player.addChild(playerParticle!)
         }
     }
     
     func spawnSinglePlayer() {
+        
+        gameManager.isMultiplayer = false
+        
         testPlayer = FlappyPlayerNode()
         testPlayer!.identifier = "test player"
         testPlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
@@ -311,16 +309,22 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func playerSwim(identifier:String, way:String) {
+    override func messageReceived(identifier:String, action:PlayerAction) {
         for player in players {
             if player.identifier == identifier {
-                if way == "up" {
+                if action == .Up {
                     player.goUp()
                 } else {
                     player.goDown()
                 }
             }
         }
+        
+    }
+    
+    func gameOver(){
+        //gameController = self.view?.window?.rootViewController as! FlappyGameViewController
+        //gameController!.GameOverView.alpha = 1;
         
     }
     
@@ -350,7 +354,7 @@ class FlappyGameScene : SKScene, SKPhysicsContactDelegate {
                     println(player.identifier)
                     players.removeObject(player)
                     player.removeFromParent()
-                
+                    gameManager.playerRank.append(player.identifier!)
                 }
             }
         }

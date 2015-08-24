@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
-		26B2D9AD1B879BD60056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9AC1B879BD60056015F /* fish.atlas */; };
-		26B4D6CE1B866A5000BDBF23 /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B4D6CD1B866A5000BDBF23 /* teste.sks */; };
+		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
+		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
+		26B2D9C51B87AB110056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C41B87AB110056015F /* teste.sks */; };
+		26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C61B87AC030056015F /* BombTGameScene.swift */; };
+		26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C81B87AE570056015F /* MiniGameViewController.swift */; };
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
+		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
 		5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E60396B1B84F03100F63DC3 /* bubble.atlas */; };
 		5E6039741B85017700F63DC3 /* rock.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E6039731B85017700F63DC3 /* rock.atlas */; };
 		5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */; };
@@ -19,13 +23,15 @@
 		5E8F9DDC1B7D0305004514D0 /* IpadConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DDB1B7D0305004514D0 /* IpadConnectionViewController.swift */; };
 		5E8F9DDE1B7D0986004514D0 /* IphoneConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DDD1B7D0986004514D0 /* IphoneConnectionViewController.swift */; };
 		5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */; };
+		5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA49E091B87B59100AC51F8 /* MinigameScene.swift */; };
 		5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */; };
-		5ED9E87C1B7127DC0073FB7B /* FlappyGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */; };
 		5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */; };
 		B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51663EE1B7D0D720040A1B4 /* GamePadController.swift */; };
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
 		B57B33671B86566E000E5F53 /* GameOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57B33661B86566E000E5F53 /* GameOver.xib */; };
 		B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B33681B8656D7000E5F53 /* GameOverXib.swift */; };
+		B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */; };
+		B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */; };
 		B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BB81B83B76E00786728 /* MyParticle.sks */; };
 		B5F60BBB1B83B76E00786728 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BB91B83B76E00786728 /* spark.png */; };
 		B5F60BBE1B83C36C00786728 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBD1B83C36C00786728 /* Player.swift */; };
@@ -62,10 +68,14 @@
 
 /* Begin PBXFileReference section */
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
-		26B2D9AC1B879BD60056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
-		26B4D6CD1B866A5000BDBF23 /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
+		26B2D9BE1B87A8920056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
+		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
+		26B2D9C41B87AB110056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
+		26B2D9C61B87AC030056015F /* BombTGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombTGameScene.swift; sourceTree = "<group>"; };
+		26B2D9C81B87AE570056015F /* MiniGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiniGameViewController.swift; sourceTree = "<group>"; };
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
+		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
 		5E60396B1B84F03100F63DC3 /* bubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bubble.atlas; sourceTree = "<group>"; };
 		5E6039731B85017700F63DC3 /* rock.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = rock.atlas; sourceTree = "<group>"; };
 		5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPlayerNode.swift; sourceTree = "<group>"; };
@@ -73,13 +83,15 @@
 		5E8F9DDB1B7D0305004514D0 /* IpadConnectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IpadConnectionViewController.swift; sourceTree = "<group>"; };
 		5E8F9DDD1B7D0986004514D0 /* IphoneConnectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IphoneConnectionViewController.swift; sourceTree = "<group>"; };
 		5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		5EA49E091B87B59100AC51F8 /* MinigameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameScene.swift; sourceTree = "<group>"; };
 		5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPowerupNode.swift; sourceTree = "<group>"; };
-		5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameViewController.swift; sourceTree = "<group>"; };
 		5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameScene.swift; sourceTree = "<group>"; };
 		B51663EE1B7D0D720040A1B4 /* GamePadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadController.swift; sourceTree = "<group>"; };
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
 		B57B33661B86566E000E5F53 /* GameOver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameOver.xib; sourceTree = "<group>"; };
 		B57B33681B8656D7000E5F53 /* GameOverXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverXib.swift; sourceTree = "<group>"; };
+		B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		B5F60BB81B83B76E00786728 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		B5F60BB91B83B76E00786728 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		B5F60BBD1B83C36C00786728 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -145,11 +157,26 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
+		5EA49E0B1B87BB9000AC51F8 /* BombGame */ = {
+			isa = PBXGroup;
+			children = (
+				5EA49E0C1B87BB9C00AC51F8 /* Resources */,
+				26B2D9C61B87AC030056015F /* BombTGameScene.swift */,
+			);
+			name = BombGame;
+			sourceTree = "<group>";
+		};
+		5EA49E0C1B87BB9C00AC51F8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		5ED9E8771B7127760073FB7B /* FlappyGame */ = {
 			isa = PBXGroup;
 			children = (
 				B5F60BB71B83B73100786728 /* Resources */,
-				5ED9E87B1B7127DC0073FB7B /* FlappyGameViewController.swift */,
 				5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */,
 				5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */,
 				5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */,
@@ -162,6 +189,9 @@
 		5ED9E8781B7127830073FB7B /* Minigames */ = {
 			isa = PBXGroup;
 			children = (
+				26B2D9C81B87AE570056015F /* MiniGameViewController.swift */,
+				5EA49E091B87B59100AC51F8 /* MinigameScene.swift */,
+				5EA49E0B1B87BB9000AC51F8 /* BombGame */,
 				5ED9E8771B7127760073FB7B /* FlappyGame */,
 			);
 			name = Minigames;
@@ -170,18 +200,20 @@
 		B5F60BB71B83B73100786728 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				26B2D9C41B87AB110056015F /* teste.sks */,
 				269F18AF1B86583000EAD94F /* wind.atlas */,
 				B5F60BB81B83B76E00786728 /* MyParticle.sks */,
-				26B2D9AC1B879BD60056015F /* fish.atlas */,
 				26D019771B84FF0400C5C73D /* bubbleparticle.png */,
 				5E6039731B85017700F63DC3 /* rock.atlas */,
 				B5F60BB91B83B76E00786728 /* spark.png */,
+				26B2D9BE1B87A8920056015F /* fish.atlas */,
 				5E60396B1B84F03100F63DC3 /* bubble.atlas */,
 				B5F60BC11B84FA0400786728 /* MyParticle2.sks */,
 				B57B33641B864EC7000E5F53 /* PlayerParticle.sks */,
 				B57B33661B86566E000E5F53 /* GameOver.xib */,
 				B57B33681B8656D7000E5F53 /* GameOverXib.swift */,
-				26B4D6CD1B866A5000BDBF23 /* teste.sks */,
+				26B2D9C01B87A8B20056015F /* teste.sks */,
+				B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -220,9 +252,9 @@
 				DB4E52001B714A10008333D3 /* Board */,
 				DB4E51FD1B714149008333D3 /* Utils */,
 				5ED9E8781B7127830073FB7B /* Minigames */,
-				DB458B721B5409B90066B38C /* AppDelegate.swift */,
 				5E8F9DD81B7D0093004514D0 /* ViewControllers */,
 				DB458B791B5409B90066B38C /* Main.storyboard */,
+				DB458B721B5409B90066B38C /* AppDelegate.swift */,
 				DB458B7C1B5409B90066B38C /* Images.xcassets */,
 				DB458B7E1B5409B90066B38C /* LaunchScreen.xib */,
 				DB458B741B5409B90066B38C /* FinalChallenge.xcdatamodeld */,
@@ -262,6 +294,8 @@
 				DB4E51FE1B714194008333D3 /* ConnectionManager.swift */,
 				B51663EE1B7D0D720040A1B4 /* GamePadController.swift */,
 				DBC57FE11B83AEA200CA0232 /* XMLParser.swift */,
+				5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */,
+				B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -330,7 +364,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = DVXNNDG4U4;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -362,18 +396,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26B2D9AD1B879BD60056015F /* fish.atlas in Resources */,
+				26B2D9C11B87A8B20056015F /* teste.sks in Resources */,
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
 				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
-				26B4D6CE1B866A5000BDBF23 /* teste.sks in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
+				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
+				26B2D9BF1B87A8920056015F /* fish.atlas in Resources */,
 				B57B33671B86566E000E5F53 /* GameOver.xib in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
+				26B2D9C51B87AB110056015F /* teste.sks in Resources */,
 				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				269F18B01B86583000EAD94F /* wind.atlas in Resources */,
@@ -398,16 +434,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */,
+				B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */,
 				DBE862071B8552C800C8099E /* MainBoard.swift in Sources */,
 				B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */,
+				5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */,
 				5E8F9DDE1B7D0986004514D0 /* IphoneConnectionViewController.swift in Sources */,
 				5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */,
 				5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */,
 				5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */,
 				DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */,
+				5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */,
 				DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */,
+				26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */,
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
+				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,
 				B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
@@ -415,7 +456,6 @@
 				B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
 				DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */,
-				5ED9E87C1B7127DC0073FB7B /* FlappyGameViewController.swift in Sources */,
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,
 				B5F60BBE1B83C36C00786728 /* Player.swift in Sources */,
 				5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */,
@@ -547,7 +587,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				/*CODE_SIGN_IDENTITY = "iPhone Developer";*/
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
@@ -561,7 +601,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				/*CODE_SIGN_IDENTITY = "iPhone Developer";*/
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;

@@ -8,6 +8,11 @@
 
 import Foundation
 import UIKit
-class GameOverXib: UIView {
+class GameOverXib: UIViewController {
     
+    @IBOutlet weak var gameOverView: UIView!
+    
+    override func viewDidAppear(animated: Bool) {
+        gameOverView = UIView(frame: CGRectMake(100, 200, 100, 100))
+    }
 }

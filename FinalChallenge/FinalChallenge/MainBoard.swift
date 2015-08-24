@@ -9,6 +9,9 @@
 import SpriteKit
 
 class MainBoard: SKScene, SKPhysicsContactDelegate {
+    var player = SKShapeNode(circleOfRadius: 10.0);
+    var realPlayer = Player();
+    
     override func didMoveToView(view: SKView) {
         var scaleFactorX = Double(2048/self.size.width);
         var scaleFactorY = Double(1536/self.size.height);
@@ -25,7 +28,29 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             self.addChild(x);
         }
         
+
+        realPlayer.x = BoardGraph.SharedInstance.nodes["01"]?.posX;
+        realPlayer.y = BoardGraph.SharedInstance.nodes["01"]?.posY;
+        BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(realPlayer)
         
-        //TODO: implement this
+        println("\(realPlayer.x) - \(realPlayer.y)")
+
+//        player.position.x = CGFloat(realPlayer.x);
+//        player.position.y = CGFloat(realPlayer.y);
+        player.zPosition = 100
+        player.position = CGPointMake(CGFloat(realPlayer.x/2), CGFloat(realPlayer.y/2))
+        player.fillColor = UIColor.blueColor();
+        
+        self.addChild(player);
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        BoardGraph.SharedInstance.walk(3, player: realPlayer);
+    }
+    
+    override func didFinishUpdate() {
+        super.didFinishUpdate();
+        player.position.x = CGFloat(realPlayer.x/2);
+        player.position.y = CGFloat(realPlayer.y/2);
     }
 }
