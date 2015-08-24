@@ -19,18 +19,13 @@ class BombTGameScene : SKScene, SKPhysicsContactDelegate {
     var playersRank:[FlappyPlayerNode] = []
     var gameController : MiniGamesViewController? = nil
     
-    //dont touch this variable:
-    let stoneVel = 8.0
-    
-    //change this variable to change world speed:
-    let worldVelMultiplier = 1.0
     
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
-    let stoneCategory: UInt32 = 1 << 2
-    let scoreCategory: UInt32 = 1 << 3
-    let endScreenCategory: UInt32 = 1 << 4
-    let powerUpCategory: UInt32 = 1 << 5
+    let bombCategory: UInt32 = 1 << 2
+  //  let scoreCategory: UInt32 = 1 << 3
+  //  let endScreenCategory: UInt32 = 1 << 4
+  //  let powerUpCategory: UInt32 = 1 << 5
     
     override func update(currentTime: NSTimeInterval) {
         self.gameOver()
@@ -44,18 +39,16 @@ class BombTGameScene : SKScene, SKPhysicsContactDelegate {
     }
     
     func startGame() {
-        let parede = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        parede.position = CGPointMake(0, self.frame.size.height / 2)
-        self.addChild(parede)
+        setupWalls()
+        self.physicsWorld.gravity = CGVectorMake(0, 0)
         
-        let parede2 = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        parede2.position = CGPointMake(self.frame.size.width , (self.frame.size.height / 2))
-        self.addChild(parede2)
-
-        let parede3 = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        parede3.zRotation = 1.57079633
-        parede3.position = CGPointMake(0, 0)
-        self.addChild(parede3)
+        let bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 35, height: 35))
+        bomb.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
+        bomb.physicsBody = SKPhysicsBody(rectangleOfSize: bomb.size)
+        self.addChild(bomb)
+                bomb.physicsBody?.categoryBitMask = bombCategory
+        bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
+        
 
         
     }
@@ -66,6 +59,32 @@ class BombTGameScene : SKScene, SKPhysicsContactDelegate {
     
     func setupWalls(){
         
+        let wallWest = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
+        wallWest.position = CGPointMake((self.frame.size.width/2)/2.5, self.frame.size.height / 2)
+        wallWest.physicsBody = SKPhysicsBody(rectangleOfSize: wallWest.size)
+        wallWest.physicsBody?.dynamic = false
+        self.addChild(wallWest)
+        
+        
+        let WallEast = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
+        WallEast.position = CGPointMake((self.frame.size.width - (self.frame.size.width/2)/2.5) , (self.frame.size.height / 2))
+        WallEast.physicsBody = SKPhysicsBody(rectangleOfSize: WallEast.size)
+        WallEast.physicsBody?.dynamic = false
+        self.addChild(WallEast)
+        
+        let wallNorth = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
+        wallNorth.position = CGPointMake(self.frame.size.width/2, self.frame.size.height-100)
+        wallNorth.zRotation = 1.57079633
+        wallNorth.physicsBody = SKPhysicsBody(rectangleOfSize: wallNorth.size)
+        wallNorth.physicsBody?.dynamic = false
+        self.addChild(wallNorth)
+        
+        let WallSouth = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
+        WallSouth.position = CGPointMake(self.frame.size.width/2, 100)
+        WallSouth.zRotation = 1.57079633
+        WallSouth.physicsBody = SKPhysicsBody(rectangleOfSize: WallSouth.size)
+        WallSouth.physicsBody?.dynamic = false
+        self.addChild(WallSouth)
     }
     
     func spawnPlayers() {
