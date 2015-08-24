@@ -11,13 +11,15 @@ import SpriteKit
 import MultipeerConnectivity
 import Foundation
 
-class MiniGameViewController: UIViewController {
+class MiniGameViewController: UIViewController{
     
     @IBOutlet weak var GameOverView: UIView!
     
     var scene = MinigameScene()
     
     var minigame = Minigame.FlappyFish
+    
+    var playerRank:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +43,9 @@ class MiniGameViewController: UIViewController {
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
         
+       // GameManager.sharedInstance.playerRank.append("Oh Yeah");
         
     }
-    
     
     func messageReceived(data : NSNotification){
         var peerID = data.userInfo!["peerID"] as! MCPeerID
@@ -56,4 +58,13 @@ class MiniGameViewController: UIViewController {
         scene.messageReceived(peerDisplayName, action: messageEnum!)
     }
     
+    func gameOverController(playerArray:[String]){
+        self.playerRank = playerArray
+        self.performSegueWithIdentifier("gotoGameOver", sender: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var go : MinigameGameOverController = (segue.destinationViewController) as! MinigameGameOverController
+        go.player = self.playerRank
+    }
 }

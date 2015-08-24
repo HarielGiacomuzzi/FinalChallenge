@@ -15,4 +15,5 @@ class MinigameScene: SKScene {
     func messageReceived(identifier:String, action:PlayerAction) {
         
     }
+    
 }

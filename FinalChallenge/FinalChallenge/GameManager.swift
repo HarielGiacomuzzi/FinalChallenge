@@ -17,10 +17,10 @@ class GameManager {
     func setPlayerOrder()->[String]{
         return playerRank.reverse()
     }
-    
+    /*
     func cleanManager(){
         gameActive = ""
         playerRank.removeAll(keepCapacity: false)
         isMultiplayer = nil
-    }
+    }*/
 }
