@@ -36,7 +36,7 @@ class MiniGameViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-            skView.showsPhysics = true
+        skView.showsPhysics = true
         scene.gameController = self
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)
@@ -57,8 +57,7 @@ class MiniGameViewController: UIViewController {
             
         } else {
             var message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
-            println(message.objectForKey("x"))
-            println(message.objectForKey("y"))
+            scene.messageReceived(peerDisplayName, dictionary: message)
         }
 
     }
