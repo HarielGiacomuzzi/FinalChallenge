@@ -176,7 +176,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
         bombSpark.physicsBody?.dynamic = true
         bombSpark.physicsBody?.mass = 0
-        bombSpark.physicsBody?.applyImpulse(CGVector(dx: 2, dy: 10), atPoint: bombSpark.position)
         
         
         let jointTeste = SKPhysicsJointLimit.jointWithBodyA(bomb.physicsBody, bodyB: bombSpark.physicsBody, anchorA: bomb.position, anchorB: bombSpark.position)
