@@ -26,6 +26,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
   //  let endScreenCategory: UInt32 = 1 << 4
   //  let powerUpCategory: UInt32 = 1 << 5
     
+    
+    
     override func update(currentTime: NSTimeInterval) {
         self.gameOver()
 
@@ -168,9 +170,18 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
         
         let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
-        bombSpark.position = CGPointMake(bomb.position.x + 10, bomb.position.y + 10)
+        bombSpark.position = CGPointMake(bomb.position.x + 30, bomb.position.y + 30)
+
+        self.addChild(bombSpark)
         bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
-        bomb.addChild(bombSpark)
+        bombSpark.physicsBody?.dynamic = true
+        bombSpark.physicsBody?.mass = 0
+        bombSpark.physicsBody?.applyImpulse(CGVector(dx: 2, dy: 10), atPoint: bombSpark.position)
+        
+        
+        let jointTeste = SKPhysicsJointLimit.jointWithBodyA(bomb.physicsBody, bodyB: bombSpark.physicsBody, anchorA: bomb.position, anchorB: bombSpark.position)
+        self.physicsWorld.addJoint(jointTeste)
+        
         
         
     }
