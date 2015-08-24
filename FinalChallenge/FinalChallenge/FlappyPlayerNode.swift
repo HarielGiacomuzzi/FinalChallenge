@@ -22,14 +22,12 @@ class FlappyPlayerNode: SKSpriteNode {
     
     init() {
         
-        
         let spriteAnimatedAtlas = SKTextureAtlas(named: "fish")//sprites
-        //let spriteAnimatedAtlas = SKTextureAtlas(named: "sprites")
+
         // inicializa corrida
         var runFrames = [SKTexture]()
         for var i=1; i<12; i++
         {
-            //let runTextureName = "running\(i)"
             let runTextureName = "fish\(i)"
             runFrames.append(spriteAnimatedAtlas.textureNamed(runTextureName))
         }
@@ -69,7 +67,6 @@ class FlappyPlayerNode: SKSpriteNode {
         var runFrames = [SKTexture]()
         for var i=0; i<4; i++
         {
-            //let runTextureName = "running\(i)"
             let runTextureName = "wind\(i)"
             runFrames.append(spriteAnimatedAtlas.textureNamed(runTextureName))
         }
@@ -125,6 +122,5 @@ class FlappyPlayerNode: SKSpriteNode {
     
     func updateRotation() {
         self.zRotation = self.clamp( -1, max: 0.5, value: self.physicsBody!.velocity.dy * ( self.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 ) )
-        //println(self.zRotation)
     }
 }
