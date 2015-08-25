@@ -27,12 +27,4 @@ class FireBombSpark : SKEmitterNode{
         return nil
     }
     
-    func setupMovement(frame:CGRect, node:SKSpriteNode, vel:Double) {
-        let distanceToMove = CGFloat(-frame.size.width / 2)
-        
-        let moveStones = SKAction.moveToX(distanceToMove, duration:NSTimeInterval(vel))
-        let removeStones = SKAction.removeFromParent()
-        let moveStonesAndRemove = SKAction.sequence([moveStones, removeStones])
-        self.runAction(moveStonesAndRemove)
-    }
 }
