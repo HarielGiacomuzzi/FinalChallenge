@@ -201,24 +201,18 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             x = self.frame.size.width/2
             y = self.frame.size.height/2
         }
-        bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 35, height: 35))
+        bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 40, height: 45))
         bomb.position = CGPointMake(x!, y!)
         
-        bomb.physicsBody = SKPhysicsBody(rectangleOfSize: bomb.size)
+        bomb.physicsBody = SKPhysicsBody(circleOfRadius: 41/2, center: CGPointMake(self.position.x, self.position.y - 2))
         bomb.physicsBody?.categoryBitMask = bombCategory
         bomb.physicsBody?.collisionBitMask = worldCategory
         bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
         self.addChild(bomb)
         bomb.physicsBody?.mass = 1
         
-//        let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
-//        bombSpark.position = CGPointMake(bomb.position.x + 30, bomb.position.y + 30)
-//
-//        self.addChild(bombSpark)
-//        bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
-//        bombSpark.physicsBody?.dynamic = true
-//        bombSpark.physicsBody?.mass = 0.001
-//
+            //SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width * 0.65, height: self.size.height*0.4), center: CGPoint(x: self.position.x+7, y: self.position.y)   )
+            self.physicsBody?.dynamic = true
         
         var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
         pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
@@ -233,7 +227,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         // teste cordinha louca
         
-        for var index = 0; index < 10; ++index {
+        for var index = 0; index < 7; ++index {
             let pavioNovo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
             pavioNovo.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)+2)
             pavioNovo.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
