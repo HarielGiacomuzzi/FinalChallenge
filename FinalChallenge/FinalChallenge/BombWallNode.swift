@@ -33,10 +33,10 @@ class BombWallNode: SKSpriteNode {
     func setupPosition(pos:BombTGameScene.Position, frame:CGRect) {
         switch pos {
         case .North:
-            self.position = CGPointMake(frame.size.width/2, frame.size.height-100)
+            self.position = CGPointMake(frame.size.width/2, frame.size.height-85)
             self.zRotation = 1.57079633
         case .South:
-            self.position = CGPointMake(frame.size.width/2, 100)
+            self.position = CGPointMake(frame.size.width/2, 85)
             self.zRotation = 1.57079633
         case .East:
             self.position = CGPointMake((frame.size.width - (frame.size.width/2)/2.65) , (frame.size.height / 2))

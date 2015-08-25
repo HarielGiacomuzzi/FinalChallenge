@@ -29,7 +29,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: NSTimeInterval) {
         //println(gameManager.isMultiplayer)
-        if players.count == 0 && gameManager.isMultiplayer == true && !self.paused{
+        if players.count == 1 && gameManager.isMultiplayer == true && !self.paused{
             println(self.gameManager.playerRank.count)
             for p in players{
                 self.playerRank.append(p.identifier!)
