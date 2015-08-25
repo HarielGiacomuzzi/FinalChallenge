@@ -59,21 +59,21 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         var data = data.userInfo!["data"] as! NSData
         
         if minigame == .FlappyFish {
+            //movimento pelo gamePad
             var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
             if let messageEnum = PlayerAction(rawValue: message) {
-                scene.messageReceived(peerDisplayName, action: messageEnum)
+               scene.messageReceived(peerDisplayName, action: messageEnum)
             }
             
         } else {
             var message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
             //scene.messageReceived(peerDisplayName, dictionary: message)
         }
-
     }
     
     func gameOverController(playerArray:[String]){
         self.playerRank = playerArray
-        popup.player = playerRank
+        popup.player = playerRank.reverse()
         let popoverMenuViewController = popup.popoverPresentationController
         popoverMenuViewController?.permittedArrowDirections = .Any
         popoverMenuViewController?.delegate = self

@@ -35,6 +35,7 @@
 		B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */; };
 		B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */; };
 		B5DD1B421B8BA75300AA1EB6 /* MinigameGameOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B411B8BA75300AA1EB6 /* MinigameGameOverController.swift */; };
+		B5DD1B441B8CD53400AA1EB6 /* AccelerometerGamePadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B431B8CD53400AA1EB6 /* AccelerometerGamePadController.swift */; };
 		B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BB81B83B76E00786728 /* MyParticle.sks */; };
 		B5F60BBB1B83B76E00786728 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BB91B83B76E00786728 /* spark.png */; };
 		B5F60BBE1B83C36C00786728 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBD1B83C36C00786728 /* Player.swift */; };
@@ -98,6 +99,7 @@
 		B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGameOverCell.swift; sourceTree = "<group>"; };
 		B5DD1B411B8BA75300AA1EB6 /* MinigameGameOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameGameOverController.swift; sourceTree = "<group>"; };
+		B5DD1B431B8CD53400AA1EB6 /* AccelerometerGamePadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerGamePadController.swift; sourceTree = "<group>"; };
 		B5F60BB81B83B76E00786728 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		B5F60BB91B83B76E00786728 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		B5F60BBD1B83C36C00786728 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */,
 				B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */,
 				5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */,
+				B5DD1B431B8CD53400AA1EB6 /* AccelerometerGamePadController.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -373,7 +376,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZX7GUMJ35C;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -471,6 +474,7 @@
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,
 				B5F60BBE1B83C36C00786728 /* Player.swift in Sources */,
 				5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */,
+				B5DD1B441B8CD53400AA1EB6 /* AccelerometerGamePadController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

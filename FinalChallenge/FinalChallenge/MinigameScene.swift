@@ -11,6 +11,8 @@ import SpriteKit
 
 class MinigameScene: SKScene {
     var gameController : MiniGameViewController? = nil
+    var playerRank:[String] = []
+    var gameManager = GameManager()
     
     func messageReceived(identifier:String, action:PlayerAction) {
         
