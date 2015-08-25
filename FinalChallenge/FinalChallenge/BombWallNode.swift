@@ -20,7 +20,7 @@ class BombWallNode: SKSpriteNode {
     var generalPosition = BombTGameScene.Position.Undefined
     
     init(pos:BombTGameScene.Position,frame:CGRect) {
-        super.init(texture: nil, color: UIColor.whiteColor(), size: CGSize(width: 20, height: frame.size.height * 0.8))
+        super.init(texture: nil, color: UIColor.whiteColor(), size: CGSize(width: 20, height: frame.size.height - 19 ))
         generalPosition = pos
         setupPosition(pos, frame: frame)
         setupPhysics()
@@ -31,17 +31,18 @@ class BombWallNode: SKSpriteNode {
     }
     
     func setupPosition(pos:BombTGameScene.Position, frame:CGRect) {
+        var restoHorizontal = frame.size.width - (frame.size.height)
         switch pos {
         case .North:
-            self.position = CGPointMake(frame.size.width/2, frame.size.height-100)
+            self.position = CGPointMake(frame.size.width/2, frame.size.height)
             self.zRotation = 1.57079633
         case .South:
-            self.position = CGPointMake(frame.size.width/2, 100)
+            self.position = CGPointMake(frame.size.width/2, 0)
             self.zRotation = 1.57079633
         case .East:
-            self.position = CGPointMake((frame.size.width - (frame.size.width/2)/2.65) , (frame.size.height / 2))
+            self.position = CGPointMake(frame.size.width - (restoHorizontal/2) , frame.size.height/2 )
         case .West:
-            self.position = CGPointMake((frame.size.width/2)/2.65, frame.size.height / 2)
+            self.position = CGPointMake(restoHorizontal/2, frame.size.height / 2)
         default:
             ()
         }
