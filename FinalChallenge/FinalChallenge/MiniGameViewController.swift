@@ -36,7 +36,7 @@ class MiniGameViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-        skView.showsPhysics = true
+        skView.showsPhysics = false
         scene.gameController = self
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)

@@ -211,45 +211,48 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(bomb)
         bomb.physicsBody?.mass = 1
         
-        let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
-        bombSpark.position = CGPointMake(bomb.position.x + 30, bomb.position.y + 30)
-
-        self.addChild(bombSpark)
-        bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
-        bombSpark.physicsBody?.dynamic = true
-        bombSpark.physicsBody?.mass = 0.001
-//        
+//        let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
+//        bombSpark.position = CGPointMake(bomb.position.x + 30, bomb.position.y + 30)
+//
+//        self.addChild(bombSpark)
+//        bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
+//        bombSpark.physicsBody?.dynamic = true
+//        bombSpark.physicsBody?.mass = 0.001
+//
         
-        var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 5, height: 5))
+        var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
         pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
-        pavioAntigo.position = CGPointMake(bomb.position.x + 10, bomb.position.y + 10)
-        var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody, bodyB: pavioAntigo.physicsBody, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMinY(bomb.frame)))
-      
-        bomb.addChild(pavioAntigo)
+        pavioAntigo.position = CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)+2)
+        
+        var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody, bodyB: pavioAntigo.physicsBody, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)))
+        
+        self.addChild(pavioAntigo)
+
         
         self.physicsWorld.addJoint(jointPavio)
         
         // teste cordinha louca
         
         for var index = 0; index < 10; ++index {
-//            let pavio = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 5, height: 5))
-//            pavio.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
-//            pavio.physicsBody?.mass = 0.0001
-//            pavio.position = CGPointMake(CGRectGetMidY(pavioAntigo.frame), CGRectGetMinX(pavioAntigo.frame))
-//            pavioAntigo.addChild(pavio)
-//            let joint = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavio.physicsBody, anchor: CGPointMake(pavioAntigo.position.x , pavioAntigo.position.y))
-//            
-//            pavioAntigo = pavio
-//            
-//            self.physicsWorld.addJoint(joint)
-        
-        }
-//        
-//        let jointFinal = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: bombSpark.physicsBody, anchor: pavioAntigo.position)
-//        self.physicsWorld.addJoint(jointFinal)
+            let pavioNovo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
+            pavioNovo.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)+2)
+            pavioNovo.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
+            var jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavioNovo.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
+            self.addChild(pavioNovo)
+            self.physicsWorld.addJoint(jointPavios)
 
+            pavioNovo.zPosition = 0
+            pavioAntigo = pavioNovo
+        }
+        let fagulha = FireBombSpark(fileNamed: "fireBombParticle")
+        fagulha.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
+        fagulha.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame))
+        self.addChild(fagulha)
         
-        
+        let fagulhaJoint = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: fagulha.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
+        self.physicsWorld.addJoint(fagulhaJoint)
+        fagulha.zPosition = 2
+        bomb.zPosition = 1
     }
         
         
