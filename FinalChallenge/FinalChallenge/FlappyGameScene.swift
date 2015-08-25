@@ -14,8 +14,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
-    var gameManager = GameManager()
-    var playerRank:[String] = []
     //dont touch this variable:
     let stoneVel = 8.0
     
@@ -33,6 +31,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         //println(gameManager.isMultiplayer)
         if players.count == 0 && gameManager.isMultiplayer == true && !self.paused{
             println(self.gameManager.playerRank.count)
+            for p in players{
+                self.playerRank.append(p.identifier!)
+            }
             self.gameOver()
             self.paused = true
         }
@@ -315,6 +316,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     override func messageReceived(identifier:String, action:PlayerAction) {
         for player in players {
             if player.identifier == identifier {
+
+                //movimento pelo gamepad
                 if action == .Up {
                     player.goUp()
                 } else {

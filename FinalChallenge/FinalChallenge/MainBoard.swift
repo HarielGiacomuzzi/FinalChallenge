@@ -11,6 +11,7 @@ import SpriteKit
 class MainBoard: SKScene, SKPhysicsContactDelegate {
     var player = SKShapeNode(circleOfRadius: 10.0);
     var realPlayer = Player();
+    var viewController: UIViewController?
     
     override func didMoveToView(view: SKView) {
         var scaleFactorX = Double(2048/self.size.width);
@@ -32,8 +33,6 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         realPlayer.x = BoardGraph.SharedInstance.nodes["01"]?.posX;
         realPlayer.y = BoardGraph.SharedInstance.nodes["01"]?.posY;
         BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(realPlayer)
-        
-        println("\(realPlayer.x) - \(realPlayer.y)")
 
 //        player.position.x = CGFloat(realPlayer.x);
 //        player.position.y = CGFloat(realPlayer.y);
@@ -45,7 +44,8 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        BoardGraph.SharedInstance.walk(3, player: realPlayer);
+//        BoardGraph.SharedInstance.walk(1, player: realPlayer,view : self.viewController);
+          BoardGraph.SharedInstance.caminhaAeFera(1, player: realPlayer, view: self.viewController)
     }
     
     override func didFinishUpdate() {

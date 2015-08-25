@@ -24,6 +24,24 @@
             </objects>
             <point key="canvasLocation" x="494" y="-151"/>
         </scene>
+        <!--Accelerometer Game Pad Controller-->
+        <scene sceneID="8zs-pY-9fY">
+            <objects>
+                <viewController id="des-rM-SDy" customClass="AccelerometerGamePadController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DB2-jv-ked"/>
+                        <viewControllerLayoutGuide type="bottom" id="qIG-PW-ZCw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="woW-td-ldl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Cl-JF-hd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="579" y="1411"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -88,6 +106,15 @@
                                 </state>
                                 <connections>
                                     <segue destination="I0t-Fc-Jfd" kind="show" id="Ahl-Ky-SJK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VbZ-FY-6aw">
+                                <rect key="frame" x="207" y="28" width="161" height="30"/>
+                                <state key="normal" title="GotoAccelerometerPad">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="des-rM-SDy" kind="show" id="T9l-u6-hEW"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -528,7 +555,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1S-db-nvY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1970" y="1214"/>
+            <point key="canvasLocation" x="1439" y="1178"/>
         </scene>
     </scenes>
 </document>
