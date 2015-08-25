@@ -232,10 +232,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
         self.addChild(bomb)
         bomb.physicsBody?.mass = 1
-   //     bomb.runAction(SKAction.repeatActionForever( firstAction   ))
-
-            //SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width * 0.65, height: self.size.height*0.4), center: CGPoint(x: self.position.x+7, y: self.position.y)   )
-            self.physicsBody?.dynamic = true
+        self.physicsBody?.dynamic = true
+        
+        
         
         var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
         pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
