@@ -19,6 +19,8 @@
 		5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E60396B1B84F03100F63DC3 /* bubble.atlas */; };
 		5E6039741B85017700F63DC3 /* rock.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E6039731B85017700F63DC3 /* rock.atlas */; };
 		5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */; };
+		5E68AD7B1B8CCD3E00FD4404 /* BombPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */; };
+		5E68AD7F1B8CD57C00FD4404 /* BombWallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */; };
 		5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */; };
 		5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */; };
 		5E8F9DDC1B7D0305004514D0 /* IpadConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DDB1B7D0305004514D0 /* IpadConnectionViewController.swift */; };
@@ -80,6 +82,8 @@
 		5E60396B1B84F03100F63DC3 /* bubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bubble.atlas; sourceTree = "<group>"; };
 		5E6039731B85017700F63DC3 /* rock.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = rock.atlas; sourceTree = "<group>"; };
 		5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeGamePadControllerViewController.swift; sourceTree = "<group>"; };
+		5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombPlayerNode.swift; sourceTree = "<group>"; };
+		5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombWallNode.swift; sourceTree = "<group>"; };
 		5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPlayerNode.swift; sourceTree = "<group>"; };
 		5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		5E8F9DDB1B7D0305004514D0 /* IpadConnectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IpadConnectionViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 			children = (
 				5EA49E0C1B87BB9C00AC51F8 /* Resources */,
 				26B2D9C61B87AC030056015F /* BombTGameScene.swift */,
+				5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */,
+				5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */,
 			);
 			name = BombGame;
 			sourceTree = "<group>";
@@ -443,6 +449,7 @@
 				B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */,
 				5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */,
 				5E8F9DDE1B7D0986004514D0 /* IphoneConnectionViewController.swift in Sources */,
+				5E68AD7F1B8CD57C00FD4404 /* BombWallNode.swift in Sources */,
 				5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */,
 				5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */,
 				5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */,
@@ -454,6 +461,7 @@
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,
+				5E68AD7B1B8CCD3E00FD4404 /* BombPlayerNode.swift in Sources */,
 				B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
 				5E8F9DDC1B7D0305004514D0 /* IpadConnectionViewController.swift in Sources */,
