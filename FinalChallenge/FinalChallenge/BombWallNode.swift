@@ -52,5 +52,6 @@ class BombWallNode: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         self.physicsBody?.dynamic = false
         self.physicsBody?.categoryBitMask = worldCategory
+        self.physicsBody?.collisionBitMask = bombCategory | playerCategory
     }
 }
