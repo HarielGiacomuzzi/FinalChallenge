@@ -106,21 +106,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         wall4.hasPlayer = true
         self.addChild(wall4)
         
-        let wallNorth = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        wallNorth.position = CGPointMake(self.frame.size.width/2, self.frame.size.height)
-        wallNorth.zRotation = 1.57079633
-        wallNorth.physicsBody = SKPhysicsBody(rectangleOfSize: wallNorth.size)
-        wallNorth.physicsBody?.dynamic = false
-        wallNorth.physicsBody?.categoryBitMask = worldCategory
-        self.addChild(wallNorth)
-        
-        let WallSouth = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        WallSouth.position = CGPointMake(self.frame.size.width/2, 0)
-        WallSouth.zRotation = 1.57079633
-        WallSouth.physicsBody = SKPhysicsBody(rectangleOfSize: WallSouth.size)
-        WallSouth.physicsBody?.dynamic = false
-        WallSouth.physicsBody?.categoryBitMask = worldCategory
-        self.addChild(WallSouth)
     }
     
     func spawnPlayers() {
@@ -234,7 +219,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bomb.physicsBody?.mass = 1
         self.physicsBody?.dynamic = true
         
-        
+        var pavioArray:[SKSpriteNode] = []
         
         var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
         pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
@@ -244,6 +229,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody, bodyB: pavioAntigo.physicsBody, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)))
         
         self.addChild(pavioAntigo)
+        pavioArray.append(pavioAntigo)
         
         
         self.physicsWorld.addJoint(jointPavio)
@@ -262,7 +248,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             
             pavioNovo.zPosition = 0
             pavioAntigo = pavioNovo
+            pavioArray.append(pavioNovo)
         }
+        
         let fagulha = FireBombSpark(fileNamed: "fireBombParticle")
         fagulha.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
         fagulha.physicsBody?.categoryBitMask = fireCategory
@@ -274,6 +262,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.physicsWorld.addJoint(fagulhaJoint)
         fagulha.zPosition = 2
         bomb.zPosition = 1
+//        let animation = SKAction.runBlock(<#block: dispatch_block_t##() -> Void#>)
     }
     
 }
