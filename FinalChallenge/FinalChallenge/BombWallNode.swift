@@ -34,13 +34,13 @@ class BombWallNode: SKSpriteNode {
         var restoHorizontal = frame.size.width - (frame.size.height)
         switch pos {
         case .North:
-            self.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+            self.position = CGPointMake(frame.size.width/2, frame.size.height)
             self.zRotation = 1.57079633
         case .South:
             self.position = CGPointMake(frame.size.width/2, 0)
             self.zRotation = 1.57079633
         case .East:
-            self.position = CGPointMake(frame.size.width - (restoHorizontal/2) , frame.size.height )
+            self.position = CGPointMake(frame.size.width - (restoHorizontal/2) , frame.size.height/2 )
         case .West:
             self.position = CGPointMake(restoHorizontal/2, frame.size.height / 2)
         default:
