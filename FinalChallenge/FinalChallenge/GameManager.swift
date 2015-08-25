@@ -13,14 +13,19 @@ class GameManager {
     var gameActive = String()
     var playerRank = [String]()
     var isMultiplayer : Bool?
+    var players = [Player]()
+    
+    init(){
+        
+    }
     
     func setPlayerOrder()->[String]{
         return playerRank.reverse()
     }
-    
+    /*
     func cleanManager(){
         gameActive = ""
         playerRank.removeAll(keepCapacity: false)
         isMultiplayer = nil
-    }
+    }*/
 }

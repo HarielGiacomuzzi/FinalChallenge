@@ -14,9 +14,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
-    var playersRank:[FlappyPlayerNode] = []
-    var gameManager = GameManager()
-    
     //dont touch this variable:
     let stoneVel = 8.0
     
@@ -31,12 +28,15 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     let powerUpCategory: UInt32 = 1 << 5
     
     override func update(currentTime: NSTimeInterval) {
-        println(gameManager.isMultiplayer)
-        if players.count == 0 && gameManager.isMultiplayer == true{
+        //println(gameManager.isMultiplayer)
+        if players.count == 0 && gameManager.isMultiplayer == true && !self.paused{
+            println(self.gameManager.playerRank.count)
+            for p in players{
+                self.playerRank.append(p.identifier!)
+            }
             self.gameOver()
             self.paused = true
         }
-        
     }
     
     override func didMoveToView(view: SKView) {
@@ -271,21 +271,27 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         gameManager.isMultiplayer = true
         
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
+        let boardPlayers = GameManager.sharedInstance.players
         
         for connectedPeer in connectedPeers {
             var player = FlappyPlayerNode()
             player.identifier = connectedPeer.displayName
-            println(player.identifier)
+            
+            for boardPlayer in boardPlayers {
+                if player.identifier == boardPlayer.playerIdentifier {
+                    player.color = boardPlayer.color
+                }
+            }
+
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
             var particleTexture = SKTexture(imageNamed: "spark.png")
             var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
-            playerParticle!.position = CGPointMake(player.size.width,player.size.height)
             playerParticle!.name = "PlayerParticle"
-            playerParticle!.targetNode = self.scene
-            //playerParticle!.setupPhysics(particleTexture)
+            playerParticle!.targetNode = player
             player.addChild(playerParticle!)
+            playerParticle?.position = CGPoint(x: -43, y: 0)
         }
     }
     
@@ -300,10 +306,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         var particleTexture = SKTexture(imageNamed: "spark.png")
         var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
-    //    playerParticle!.position = CGPointMake(testPlayer!.frame.size.width,testPlayer!.frame.size.height)
         playerParticle!.name = "PlayerParticle"
         playerParticle!.targetNode = self.scene
-        //playerParticle!.setupPhysics(particleTexture)
         testPlayer!.addChild(playerParticle!)
         playerParticle?.position = CGPoint(x: -43, y: 0)
         
@@ -312,6 +316,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     override func messageReceived(identifier:String, action:PlayerAction) {
         for player in players {
             if player.identifier == identifier {
+
+                //movimento pelo gamepad
                 if action == .Up {
                     player.goUp()
                 } else {
@@ -323,9 +329,15 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func gameOver(){
-        //gameController = self.view?.window?.rootViewController as! FlappyGameViewController
-        //gameController!.GameOverView.alpha = 1;
+        self
+        //dispatch_async(dispatch_get_main_queue(),{ [unowned self] in
+            //self.gameController!.gameOverTableView.reloadData()
+            //self.gameController?.gameOverTableView.beginUpdates()
+            //self.gameController?.gameOverTableView.beginUpdates()
+      // })
+      //  self.gameController!.GameOverView.hidden = false
         
+        self.gameController!.gameOverController(playerRank.reverse())
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -349,12 +361,13 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         //checks colision with end of screen
         if ( contact.bodyA.categoryBitMask & endScreenCategory ) == endScreenCategory || ( contact.bodyB.categoryBitMask & endScreenCategory ) == endScreenCategory {
             for player in players{
-                println("entrou aqui")
                 if player.physicsBody == contact.bodyA || player.physicsBody == contact.bodyB{
                     println(player.identifier)
                     players.removeObject(player)
                     player.removeFromParent()
-                    gameManager.playerRank.append(player.identifier!)
+                    self.playerRank.append(player.identifier!)
+                    //self.gameManager.playerRank.append(player.identifier!)
+                    //self.gameOver()
                 }
             }
         }
