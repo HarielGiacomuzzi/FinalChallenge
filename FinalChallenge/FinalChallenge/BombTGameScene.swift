@@ -34,6 +34,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
     let bombCategory: UInt32 = 1 << 2
+    let fireCategory: UInt32 = 1 << 3
     
     var beginX:CGFloat = 0.0
     var beginY:CGFloat = 0.0
@@ -209,7 +210,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
         pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
         pavioAntigo.position = CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)+2)
-        
+        pavioAntigo.physicsBody?.categoryBitMask = fireCategory
+        pavioAntigo.physicsBody?.collisionBitMask = fireCategory
         var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody, bodyB: pavioAntigo.physicsBody, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)))
         
         self.addChild(pavioAntigo)
@@ -223,6 +225,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             let pavioNovo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
             pavioNovo.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)+2)
             pavioNovo.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
+            pavioNovo.physicsBody?.categoryBitMask = fireCategory
+            pavioNovo.physicsBody?.collisionBitMask = fireCategory
             var jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavioNovo.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
             self.addChild(pavioNovo)
             self.physicsWorld.addJoint(jointPavios)
@@ -232,6 +236,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
         let fagulha = FireBombSpark(fileNamed: "fireBombParticle")
         fagulha.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
+        fagulha.physicsBody?.categoryBitMask = fireCategory
+        fagulha.physicsBody?.collisionBitMask = fireCategory
         fagulha.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame))
         self.addChild(fagulha)
         

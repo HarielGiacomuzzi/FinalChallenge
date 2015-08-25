@@ -27,6 +27,7 @@ class BombPlayerNode: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         self.physicsBody?.dynamic = false
         self.physicsBody?.categoryBitMask = playerCategory
+        self.physicsBody?.collisionBitMask = worldCategory
         self.physicsBody?.contactTestBitMask = bombCategory
     }
     
