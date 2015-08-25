@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import SpriteKit
 
 class BoardGraph : NSObject{
@@ -70,6 +71,15 @@ class BoardGraph : NSObject{
         }
         return nil;
     }
+
+    func keyFor(node : BoardNode) -> String?{
+        for aux in nodes{
+            if (aux.1 == node){
+                return aux.0;
+            }
+        }
+        return nil;
+    }
     
     func setFather(fatherName : String?, sonName : String!) -> Bool{
         if nodes[fatherName!] != nil && nodes[sonName] != nil {
@@ -104,13 +114,45 @@ class BoardGraph : NSObject{
         return false;
     }
     
-    func walk(quantity : Int, player: Player){
-        for i in 1...quantity{
-            var aux = nodeFor(player)?.nextMoves[0]
-            player.x = aux!.posX
-            player.y = aux!.posY
-        
+    
+    private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
+        var lista : [BoardNode] = [];
+        if qtd == 0{
+            lista.append(node)
+            return lista
         }
+        
+        for nodeAux in node.nextMoves{
+            for j in walkRecursivo(qtd-1, node: nodeAux){
+                lista.append(j)
+            }
+        }
+        return lista
+    }
+    
+    func caminhaAeFera(qtd : Int, player : Player, view : UIViewController?){
+        var playerLastNode = nodeFor(player)
+        var x : [BoardNode] = walkRecursivo(qtd, node: playerLastNode!)
+        playerLastNode?.removePlayer(player);
+        
+        if x.count > 1{
+            var alerta = UIAlertController(title: "Select a Path", message: "escolhe ai fera!", preferredStyle: .Alert)
+            for i in x{
+                var action = UIAlertAction(title: "Path: \(keyFor(i))", style: .Default) { action -> Void in
+                    player.x = i.posX
+                    player.y = i.posY
+                    i.insertPLayer(player)
+                }
+                    alerta.addAction(action)
+                }
+                view?.presentViewController(alerta, animated: true, completion: nil)
+        }else{
+            var i = x[0]
+            player.x = i.posX
+            player.y = i.posY
+            i.insertPLayer(player);
+        }
+    
     }
     
     // check if there's a alternative path
@@ -141,6 +183,14 @@ class BoardGraph : NSObject{
         
         override init() {
             super.init();
+        }
+        
+        func removePlayer(player : Player?){
+            currentPlayers.removeObject(player!);
+        }
+        
+        func insertPLayer(player : Player?){
+            currentPlayers.append(player!);
         }
         
         func hasPlayer(player : NSObject) -> Bool{
