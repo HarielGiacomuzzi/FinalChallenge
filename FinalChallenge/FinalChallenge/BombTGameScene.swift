@@ -14,24 +14,34 @@ import SpriteKit
 
 class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
-    var players:[FlappyPlayerNode] = []
-    var testPlayer:FlappyPlayerNode?
-    var playersRank:[FlappyPlayerNode] = []
+    
+    enum Position {
+        case North
+        case South
+        case East
+        case West
+        case Undefined
+    }
+    
+    var players:[BombPlayerNode] = []
+    var testPlayer:BombPlayerNode?
+    var playersRank:[BombPlayerNode] = []
+    
+    var playerWithBomb:BombPlayerNode?
     
     var bomb:SKSpriteNode!
     
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
     let bombCategory: UInt32 = 1 << 2
-  //  let scoreCategory: UInt32 = 1 << 3
-  //  let endScreenCategory: UInt32 = 1 << 4
-  //  let powerUpCategory: UInt32 = 1 << 5
-    
     
     var beginX:CGFloat = 0.0
     var beginY:CGFloat = 0.0
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if bomb.parent == nil {
+            generateBomb(testPlayer, bombTimer: 0.0)
+        }
         let touch = touches.first as! UITouch
         let location = touch.locationInView(self.view)
         beginX = location.x
@@ -62,6 +72,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func startGame() {
         self.physicsWorld.gravity = CGVectorMake(0, 0)
+        self.physicsWorld.contactDelegate = self
         setupWalls()
         createPlayersAndObstacles()
         spawnSinglePlayer()
@@ -79,36 +90,16 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func setupWalls(){
         
-        let wallWest = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        wallWest.position = CGPointMake((self.frame.size.width/2)/2.65, self.frame.size.height / 2)
-        wallWest.physicsBody = SKPhysicsBody(rectangleOfSize: wallWest.size)
-        wallWest.physicsBody?.dynamic = false
-        wallWest.physicsBody?.categoryBitMask = worldCategory
-        self.addChild(wallWest)
+        let wall = BombWallNode(pos: .North, frame: self.frame)
+        self.addChild(wall)
+        let wall2 = BombWallNode(pos: .South, frame: self.frame)
+        wall2.hasPlayer = true
+        self.addChild(wall2)
+        let wall3 = BombWallNode(pos: .East, frame: self.frame)
+        self.addChild(wall3)
+        let wall4 = BombWallNode(pos: .West, frame: self.frame)
+        self.addChild(wall4)
         
-        let WallEast = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        WallEast.position = CGPointMake((self.frame.size.width - (self.frame.size.width/2)/2.65) , (self.frame.size.height / 2))
-        WallEast.physicsBody = SKPhysicsBody(rectangleOfSize: WallEast.size)
-        WallEast.physicsBody?.dynamic = false
-        WallEast.physicsBody?.categoryBitMask = worldCategory
-        WallEast.physicsBody?.contactTestBitMask = bombCategory
-        self.addChild(WallEast)
-        
-        let wallNorth = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        wallNorth.position = CGPointMake(self.frame.size.width/2, self.frame.size.height-100)
-        wallNorth.zRotation = 1.57079633
-        wallNorth.physicsBody = SKPhysicsBody(rectangleOfSize: wallNorth.size)
-        wallNorth.physicsBody?.dynamic = false
-        wallNorth.physicsBody?.categoryBitMask = worldCategory
-        self.addChild(wallNorth)
-        
-        let WallSouth = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
-        WallSouth.position = CGPointMake(self.frame.size.width/2, 100)
-        WallSouth.zRotation = 1.57079633
-        WallSouth.physicsBody = SKPhysicsBody(rectangleOfSize: WallSouth.size)
-        WallSouth.physicsBody?.dynamic = false
-        WallSouth.physicsBody?.categoryBitMask = worldCategory
-        self.addChild(WallSouth)
     }
     
     func spawnPlayers() {
@@ -120,20 +111,13 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func spawnSinglePlayer() {
         // criar a bomba
-
         
         // spawn um player no sul
-        let player = SKSpriteNode (color: UIColor.blueColor(), size: CGSize(width: 55   , height: 60))
-        player.position = CGPointMake(self.frame.size.width/2 - self.frame.size.width/3.5, 140)
-        player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
-        player.physicsBody?.dynamic = false
-        player.physicsBody?.categoryBitMask = playerCategory
-        self.addChild(player)
-        
-        let playerMovementDir = SKAction.moveTo(CGPointMake(self.frame.size.width/2 + self.frame.size.width/3.5, player.position.y), duration: 3.5)
-        let playerMovementEsq = SKAction.moveTo(CGPointMake(self.frame.size.width/2 - self.frame.size.width/3.5, player.position.y), duration: 3.5)
-        player.runAction(SKAction.repeatActionForever(SKAction.sequence([playerMovementDir, playerMovementEsq])))
-        
+        testPlayer = BombPlayerNode()
+        testPlayer!.setupPhysics()
+        testPlayer!.setupMovement(self.frame)
+        self.addChild(testPlayer!)
+
     }
     
     func gameOver(){
@@ -145,38 +129,47 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     
     func didBeginContact(contact: SKPhysicsContact) {
-        println("contato")
-        var firstBody: SKPhysicsBody
-        var secondBody: SKPhysicsBody
-        // acerta qual corpo é qual
-        if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask){
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
-        }
-        else{
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
-        }
-        // verifica se a colisao eh entre monstro e projetil e entao chama a colisao
-        if ((firstBody.categoryBitMask & playerCategory != 0) &&
-            (secondBody.categoryBitMask & bombCategory != 0)){
-                
-                
+
+        
+        if (contact.bodyA.categoryBitMask == bombCategory && contact.bodyB.categoryBitMask == worldCategory) {
+            handleBombWallContact(contact.bodyA,wall:contact.bodyB)
+        } else if (contact.bodyA.categoryBitMask == worldCategory && contact.bodyB.categoryBitMask == bombCategory) {
+            handleBombWallContact(contact.bodyB,wall:contact.bodyA)
         }
         
-        if (firstBody.categoryBitMask == bombCategory && secondBody.categoryBitMask == worldCategory) {
-            handleBombWallContact(firstBody)
-        } else if (firstBody.categoryBitMask == worldCategory && secondBody.categoryBitMask == worldCategory) {
-            handleBombWallContact(secondBody)
+        if (contact.bodyA.categoryBitMask == bombCategory && contact.bodyB.categoryBitMask == playerCategory) {
+            handlePlayerBombContact(contact.bodyA, player: contact.bodyB)
+                    println("contato")
+        } else if (contact.bodyA.categoryBitMask == playerCategory && contact.bodyB.categoryBitMask == bombCategory) {
+            handlePlayerBombContact(contact.bodyB, player: contact.bodyA)
+                    println("contato")
         }
+        
+
    
     }
     
-    func handleBombWallContact(bomb:SKPhysicsBody) {
-        bomb.velocity = CGVectorMake(0.0, 0.0)
+    func handlePlayerBombContact(bomb:SKPhysicsBody, player:SKPhysicsBody) {
+        let playerNode = player.node as! BombPlayerNode
+//        playerWithBomb = playerNode
+        if playerWithBomb != playerNode {
+            bomb.node!.runAction(SKAction.removeFromParent())
+            playerWithBomb = playerNode
+        }
+        
     }
     
-     func messageReceived(identifier: String, dictionary: NSDictionary) {
+    func handleBombWallContact(bomb:SKPhysicsBody, wall:SKPhysicsBody) {
+        let wallNode = wall.node as! BombWallNode
+        if wallNode.hasPlayer {
+            bomb.velocity = CGVectorMake(0.0, 0.0)
+        } else {
+            playerWithBomb = nil
+        }
+
+    }
+    
+    override func messageReceived(identifier: String, dictionary: NSDictionary) {
         var x = dictionary.objectForKey("x") as! CGFloat
         var y = dictionary.objectForKey("y") as! CGFloat
         throwBomb(x, y: y)
@@ -184,8 +177,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func throwBomb(x:CGFloat, y:CGFloat) {
-        bomb.physicsBody?.velocity = CGVectorMake(0.0, 0.0)
-        bomb.physicsBody?.applyImpulse(CGVectorMake(x, y))
+        bomb.physicsBody?.applyImpulse(CGVectorMake(x * 1, y * 1))
     }
     
     func generateBomb(grabbedBy : SKNode? , bombTimer : Double ){
@@ -201,55 +193,52 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             x = self.frame.size.width/2
             y = self.frame.size.height/2
         }
-        bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 35, height: 35))
+        bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 40, height: 45))
         bomb.position = CGPointMake(x!, y!)
         
-        bomb.physicsBody = SKPhysicsBody(rectangleOfSize: bomb.size)
+        bomb.physicsBody = SKPhysicsBody(circleOfRadius: 41/2, center: CGPointMake(self.position.x, self.position.y - 2))
         bomb.physicsBody?.categoryBitMask = bombCategory
         bomb.physicsBody?.collisionBitMask = worldCategory
         bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
         self.addChild(bomb)
         bomb.physicsBody?.mass = 1
         
-        let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
-        bombSpark.position = CGPointMake(bomb.position.x + 30, bomb.position.y + 30)
-
-        self.addChild(bombSpark)
-        bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
-        bombSpark.physicsBody?.dynamic = true
-        bombSpark.physicsBody?.mass = 0.001
-//        
+        //SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width * 0.65, height: self.size.height*0.4), center: CGPoint(x: self.position.x+7, y: self.position.y)   )
+        self.physicsBody?.dynamic = true
         
-        var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 5, height: 5))
+        var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
         pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
-        pavioAntigo.position = CGPointMake(bomb.position.x + 10, bomb.position.y + 10)
-        var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody, bodyB: pavioAntigo.physicsBody, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMinY(bomb.frame)))
-      
-        bomb.addChild(pavioAntigo)
+        pavioAntigo.position = CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)+2)
+        
+        var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody, bodyB: pavioAntigo.physicsBody, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)))
+        
+        self.addChild(pavioAntigo)
+        
         
         self.physicsWorld.addJoint(jointPavio)
         
         // teste cordinha louca
         
-        for var index = 0; index < 10; ++index {
-//            let pavio = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 5, height: 5))
-//            pavio.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
-//            pavio.physicsBody?.mass = 0.0001
-//            pavio.position = CGPointMake(CGRectGetMidY(pavioAntigo.frame), CGRectGetMinX(pavioAntigo.frame))
-//            pavioAntigo.addChild(pavio)
-//            let joint = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavio.physicsBody, anchor: CGPointMake(pavioAntigo.position.x , pavioAntigo.position.y))
-//            
-//            pavioAntigo = pavio
-//            
-//            self.physicsWorld.addJoint(joint)
-        
+        for var index = 0; index < 7; ++index {
+            let pavioNovo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
+            pavioNovo.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)+2)
+            pavioNovo.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
+            var jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavioNovo.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
+            self.addChild(pavioNovo)
+            self.physicsWorld.addJoint(jointPavios)
+            
+            pavioNovo.zPosition = 0
+            pavioAntigo = pavioNovo
         }
-//        
-//        let jointFinal = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: bombSpark.physicsBody, anchor: pavioAntigo.position)
-//        self.physicsWorld.addJoint(jointFinal)
-
+        let fagulha = FireBombSpark(fileNamed: "fireBombParticle")
+        fagulha.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
+        fagulha.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame))
+        self.addChild(fagulha)
         
-        
+        let fagulhaJoint = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: fagulha.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
+        self.physicsWorld.addJoint(fagulhaJoint)
+        fagulha.zPosition = 2
+        bomb.zPosition = 1
     }
         
         
