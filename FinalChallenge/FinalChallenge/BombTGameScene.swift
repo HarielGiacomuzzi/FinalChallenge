@@ -209,6 +209,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bomb.physicsBody?.collisionBitMask = worldCategory
         bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
         self.addChild(bomb)
+        bomb.physicsBody?.mass = 1
         
         let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
         bombSpark.position = CGPointMake(bomb.position.x + 30, bomb.position.y + 30)
@@ -216,13 +217,37 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(bombSpark)
         bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
         bombSpark.physicsBody?.dynamic = true
-        bombSpark.physicsBody?.mass = 0
-       // bombSpark.physicsBody?.applyImpulse(CGVector(dx: 2, dy: 10), atPoint: bombSpark.position)
+        bombSpark.physicsBody?.mass = 0.001
+//        
         
+        var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 5, height: 5))
+        pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
+        pavioAntigo.position = CGPointMake(bomb.position.x + 10, bomb.position.y + 10)
+        var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody, bodyB: pavioAntigo.physicsBody, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMinY(bomb.frame)))
+      
+        bomb.addChild(pavioAntigo)
         
-        let jointTeste = SKPhysicsJointLimit.jointWithBodyA(bomb.physicsBody, bodyB: bombSpark.physicsBody, anchorA: bomb.position, anchorB: bombSpark.position)
-        self.physicsWorld.addJoint(jointTeste)
+        self.physicsWorld.addJoint(jointPavio)
         
+        // teste cordinha louca
+        
+        for var index = 0; index < 10; ++index {
+//            let pavio = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 5, height: 5))
+//            pavio.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
+//            pavio.physicsBody?.mass = 0.0001
+//            pavio.position = CGPointMake(CGRectGetMidY(pavioAntigo.frame), CGRectGetMinX(pavioAntigo.frame))
+//            pavioAntigo.addChild(pavio)
+//            let joint = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavio.physicsBody, anchor: CGPointMake(pavioAntigo.position.x , pavioAntigo.position.y))
+//            
+//            pavioAntigo = pavio
+//            
+//            self.physicsWorld.addJoint(joint)
+        
+        }
+//        
+//        let jointFinal = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: bombSpark.physicsBody, anchor: pavioAntigo.position)
+//        self.physicsWorld.addJoint(jointFinal)
+
         
         
     }
