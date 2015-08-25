@@ -17,8 +17,8 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     var scene = MinigameScene()
     
-   // var minigame = Minigame.BombGame
-    var minigame = Minigame.FlappyFish
+    var minigame = Minigame.BombGame
+   // var minigame = Minigame.FlappyFish
     
     var playerRank:[String] = []
     
@@ -46,7 +46,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-        skView.showsPhysics = true
+        skView.showsPhysics = false
         scene.gameController = self
         scene.scaleMode = .AspectFill
         skView.presentScene(scene)

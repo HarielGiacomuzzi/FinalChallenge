@@ -98,6 +98,21 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         let wall4 = BombWallNode(pos: .West, frame: self.frame)
         self.addChild(wall4)
         
+        let wallNorth = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
+        wallNorth.position = CGPointMake(self.frame.size.width/2, self.frame.size.height)
+        wallNorth.zRotation = 1.57079633
+        wallNorth.physicsBody = SKPhysicsBody(rectangleOfSize: wallNorth.size)
+        wallNorth.physicsBody?.dynamic = false
+        wallNorth.physicsBody?.categoryBitMask = worldCategory
+        self.addChild(wallNorth)
+        
+        let WallSouth = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 20, height: self.frame.size.height * 0.8))
+        WallSouth.position = CGPointMake(self.frame.size.width/2, 0)
+        WallSouth.zRotation = 1.57079633
+        WallSouth.physicsBody = SKPhysicsBody(rectangleOfSize: WallSouth.size)
+        WallSouth.physicsBody?.dynamic = false
+        WallSouth.physicsBody?.categoryBitMask = worldCategory
+        self.addChild(WallSouth)
     }
     
     func spawnPlayers() {
@@ -191,7 +206,14 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             x = self.frame.size.width/2
             y = self.frame.size.height/2
         }
-        bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 40, height: 45))
+        
+        
+        let spriteAnimatedAtlas = SKTextureAtlas(named: "bombGame")//sprites
+        
+        let texture = spriteAnimatedAtlas.textureNamed("bombModel")
+        
+        
+        bomb = SKSpriteNode(texture: texture, color: nil, size: CGSize(width: 50 , height: 50))
         bomb.position = CGPointMake(x!, y!)
         
         bomb.physicsBody = SKPhysicsBody(circleOfRadius: 41/2, center: CGPointMake(self.position.x, self.position.y - 2))
@@ -200,9 +222,10 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
         self.addChild(bomb)
         bomb.physicsBody?.mass = 1
-        
-        //SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width * 0.65, height: self.size.height*0.4), center: CGPoint(x: self.position.x+7, y: self.position.y)   )
-        self.physicsBody?.dynamic = true
+   //     bomb.runAction(SKAction.repeatActionForever( firstAction   ))
+
+            //SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width * 0.65, height: self.size.height*0.4), center: CGPoint(x: self.position.x+7, y: self.position.y)   )
+            self.physicsBody?.dynamic = true
         
         var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
         pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)

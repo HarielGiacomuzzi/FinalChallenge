@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		263E058E1B8CEFA800110AD6 /* bombGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 263E058D1B8CEFA800110AD6 /* bombGame.atlas */; };
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
 		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
@@ -75,6 +76,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		263E058D1B8CEFA800110AD6 /* bombGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bombGame.atlas; sourceTree = "<group>"; };
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
 		26B2D9BE1B87A8920056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */,
+				263E058D1B8CEFA800110AD6 /* bombGame.atlas */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -388,7 +391,6 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -425,6 +427,7 @@
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
 				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
+				263E058E1B8CEFA800110AD6 /* bombGame.atlas in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,

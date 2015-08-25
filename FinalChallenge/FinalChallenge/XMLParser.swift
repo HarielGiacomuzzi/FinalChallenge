@@ -24,9 +24,13 @@ class XMLParser: NSObject, NSXMLParserDelegate {
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
         if elementName == "HOUSE"{
+            isOnNode = true;
+            currentNode = "House"
             BoardGraph.SharedInstance.createNode((attributeDict["x"] as! NSString).doubleValue, y: (attributeDict["y"] as! NSString).doubleValue, name: "House", father: nil);
         }
         if elementName == "STORE"{
+            isOnNode = true;
+            currentNode = "Store"
             BoardGraph.SharedInstance.createNode((attributeDict["x"] as! NSString).doubleValue, y: (attributeDict["y"] as! NSString).doubleValue, name: "Store", father: nil);
             BoardGraph.SharedInstance.setFather(attributeDict["father"] as? String, sonName: "Store");
         }
