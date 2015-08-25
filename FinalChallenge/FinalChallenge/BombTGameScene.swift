@@ -176,7 +176,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bomb.velocity = CGVectorMake(0.0, 0.0)
     }
     
-    override func messageReceived(identifier: String, dictionary: NSDictionary) {
+     func messageReceived(identifier: String, dictionary: NSDictionary) {
         var x = dictionary.objectForKey("x") as! CGFloat
         var y = dictionary.objectForKey("y") as! CGFloat
         throwBomb(x, y: y)

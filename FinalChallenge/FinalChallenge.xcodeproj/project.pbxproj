@@ -304,6 +304,7 @@
 				5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */,
 				B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */,
 				B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */,
+				5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
