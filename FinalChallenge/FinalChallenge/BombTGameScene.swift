@@ -23,6 +23,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         case Undefined
     }
     
+    var jointBombPlayer:SKPhysicsJoint?
+    
     var players:[BombPlayerNode] = []
     var testPlayer:BombPlayerNode?
     var playersRank:[BombPlayerNode] = []
@@ -40,8 +42,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     var beginY:CGFloat = 0.0
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if bomb.parent == nil {
-            generateBomb(testPlayer, bombTimer: 0.0)
+        if jointBombPlayer != nil {
+            self.physicsWorld.removeJoint(jointBombPlayer!)
         }
         let touch = touches.first as! UITouch
         let location = touch.locationInView(self.view)
@@ -93,12 +95,15 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         let wall = BombWallNode(pos: .North, frame: self.frame)
         self.addChild(wall)
+        wall.hasPlayer = true
         let wall2 = BombWallNode(pos: .South, frame: self.frame)
         wall2.hasPlayer = true
         self.addChild(wall2)
         let wall3 = BombWallNode(pos: .East, frame: self.frame)
+        wall3.hasPlayer = true
         self.addChild(wall3)
         let wall4 = BombWallNode(pos: .West, frame: self.frame)
+        wall4.hasPlayer = true
         self.addChild(wall4)
         
     }
@@ -114,11 +119,15 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         // criar a bomba
         
         // spawn um player no sul
-        testPlayer = BombPlayerNode()
-        testPlayer!.setupPhysics()
-        testPlayer!.setupMovement(self.frame)
-        self.addChild(testPlayer!)
+        testPlayer = BombPlayerNode(pos: .South, frame: self.frame)
 
+        self.addChild(testPlayer!)
+        let player2 = BombPlayerNode(pos: .North, frame: self.frame)
+        self.addChild(player2)
+        let player3 = BombPlayerNode(pos: .East, frame: self.frame)
+        self.addChild(player3)
+        let player4 = BombPlayerNode(pos: .West, frame: self.frame)
+        self.addChild(player4)
     }
     
     func gameOver(){
@@ -140,10 +149,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         if (contact.bodyA.categoryBitMask == bombCategory && contact.bodyB.categoryBitMask == playerCategory) {
             handlePlayerBombContact(contact.bodyA, player: contact.bodyB)
-                    println("contato")
         } else if (contact.bodyA.categoryBitMask == playerCategory && contact.bodyB.categoryBitMask == bombCategory) {
             handlePlayerBombContact(contact.bodyB, player: contact.bodyA)
-                    println("contato")
         }
         
 
@@ -152,9 +159,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func handlePlayerBombContact(bomb:SKPhysicsBody, player:SKPhysicsBody) {
         let playerNode = player.node as! BombPlayerNode
-//        playerWithBomb = playerNode
         if playerWithBomb != playerNode {
-            bomb.node!.runAction(SKAction.removeFromParent())
+            jointBombPlayer = SKPhysicsJointFixed.jointWithBodyA(bomb, bodyB: player, anchor: playerNode.position)
+            self.physicsWorld.addJoint(jointBombPlayer!)
             playerWithBomb = playerNode
         }
         
@@ -246,9 +253,5 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         fagulha.zPosition = 2
         bomb.zPosition = 1
     }
-        
-        
     
-    
-
 }
