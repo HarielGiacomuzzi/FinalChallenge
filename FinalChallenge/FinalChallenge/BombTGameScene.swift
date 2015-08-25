@@ -169,7 +169,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     }
     
-    override func messageReceived(identifier: String, dictionary: NSDictionary) {
+     func messageReceived(identifier: String, dictionary: NSDictionary) {
         var x = dictionary.objectForKey("x") as! CGFloat
         var y = dictionary.objectForKey("y") as! CGFloat
         throwBomb(x, y: y)
@@ -193,14 +193,15 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             x = self.frame.size.width/2
             y = self.frame.size.height/2
         }
-        bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 35, height: 35))
+        bomb = SKSpriteNode(color: UIColor.purpleColor(), size: CGSize(width: 40, height: 45))
         bomb.position = CGPointMake(x!, y!)
         
-        bomb.physicsBody = SKPhysicsBody(rectangleOfSize: bomb.size)
+        bomb.physicsBody = SKPhysicsBody(circleOfRadius: 41/2, center: CGPointMake(self.position.x, self.position.y - 2))
         bomb.physicsBody?.categoryBitMask = bombCategory
         bomb.physicsBody?.collisionBitMask = worldCategory
         bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
         self.addChild(bomb)
+        bomb.physicsBody?.mass = 1
         
         let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
         bombSpark.position = CGPointMake(bomb.position.x + 30, bomb.position.y + 30)
@@ -210,11 +211,30 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bombSpark.physicsBody?.dynamic = true
         bombSpark.physicsBody?.mass = 0.0001
         
-        let jointTeste = SKPhysicsJointLimit.jointWithBodyA(bomb.physicsBody, bodyB: bombSpark.physicsBody, anchorA: bomb.position, anchorB: bombSpark.position)
-        self.physicsWorld.addJoint(jointTeste)
+        self.physicsWorld.addJoint(jointPavio)
         
+        // teste cordinha louca
         
+        for var index = 0; index < 7; ++index {
+            let pavioNovo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
+            pavioNovo.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)+2)
+            pavioNovo.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
+            var jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavioNovo.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
+            self.addChild(pavioNovo)
+            self.physicsWorld.addJoint(jointPavios)
+
+            pavioNovo.zPosition = 0
+            pavioAntigo = pavioNovo
+        }
+        let fagulha = FireBombSpark(fileNamed: "fireBombParticle")
+        fagulha.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
+        fagulha.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame))
+        self.addChild(fagulha)
         
+        let fagulhaJoint = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: fagulha.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
+        self.physicsWorld.addJoint(fagulhaJoint)
+        fagulha.zPosition = 2
+        bomb.zPosition = 1
     }
         
         
