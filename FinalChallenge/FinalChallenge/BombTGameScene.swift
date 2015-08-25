@@ -169,7 +169,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     }
     
-     func messageReceived(identifier: String, dictionary: NSDictionary) {
+    override func messageReceived(identifier: String, dictionary: NSDictionary) {
         var x = dictionary.objectForKey("x") as! CGFloat
         var y = dictionary.objectForKey("y") as! CGFloat
         throwBomb(x, y: y)
@@ -177,7 +177,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func throwBomb(x:CGFloat, y:CGFloat) {
-        bomb.physicsBody?.applyImpulse(CGVectorMake(x * 0.1, y * 0.1))
+        bomb.physicsBody?.applyImpulse(CGVectorMake(x * 1, y * 1))
     }
     
     func generateBomb(grabbedBy : SKNode? , bombTimer : Double ){
@@ -203,13 +203,17 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(bomb)
         bomb.physicsBody?.mass = 1
         
-        let bombSpark = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 10, height: 10))
-        bombSpark.position = CGPointMake(bomb.position.x + 30, bomb.position.y + 30)
-
-        self.addChild(bombSpark)
-        bombSpark.physicsBody = SKPhysicsBody(rectangleOfSize: bombSpark.size)
-        bombSpark.physicsBody?.dynamic = true
-        bombSpark.physicsBody?.mass = 0.0001
+        //SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width * 0.65, height: self.size.height*0.4), center: CGPoint(x: self.position.x+7, y: self.position.y)   )
+        self.physicsBody?.dynamic = true
+        
+        var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
+        pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
+        pavioAntigo.position = CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)+2)
+        
+        var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody, bodyB: pavioAntigo.physicsBody, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)))
+        
+        self.addChild(pavioAntigo)
+        
         
         self.physicsWorld.addJoint(jointPavio)
         
@@ -222,7 +226,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             var jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavioNovo.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
             self.addChild(pavioNovo)
             self.physicsWorld.addJoint(jointPavios)
-
+            
             pavioNovo.zPosition = 0
             pavioAntigo = pavioNovo
         }

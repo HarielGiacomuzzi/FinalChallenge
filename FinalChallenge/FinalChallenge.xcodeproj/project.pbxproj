@@ -176,6 +176,7 @@
 			children = (
 				5EA49E0C1B87BB9C00AC51F8 /* Resources */,
 				26B2D9C61B87AC030056015F /* BombTGameScene.swift */,
+				26CF809B1B8CD67E00DFCB73 /* FireBombSpark.swift */,
 				5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */,
 				5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */,
 			);

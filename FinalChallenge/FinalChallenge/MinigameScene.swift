@@ -16,4 +16,8 @@ class MinigameScene: SKScene {
         
     }
     
+    func messageReceived(identifier: String, dictionary: NSDictionary) {
+        
+    }
+    
 }
