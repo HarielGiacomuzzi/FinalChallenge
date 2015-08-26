@@ -26,6 +26,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     var bombShouldTick = false
     var bombShouldExplode = false
     
+    var playerHoldingBombNow:BombPlayerNode!
+    
     // limits of game area
     var maxX:CGFloat = 0.0
     var minX:CGFloat = 0.0
@@ -34,7 +36,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     let bombSpeedMultiplier:CGFloat = 300.0
 
-    var testPlayer:BombPlayerNode?
     var playersRank:[BombPlayerNode] = []
     
     var playerWithBomb:BombPlayerNode?
@@ -48,9 +49,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     var beginY:CGFloat = 0.0
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-//        if jointBombPlayer != nil {
-//            self.physicsWorld.removeJoint(jointBombPlayer!)
-//        }
         let touch = touches.first as! UITouch
         let location = touch.locationInView(self.view)
         beginX = location.x
@@ -91,11 +89,17 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         //MUST SETUP WALLS BEFORE PLAYERS
         setupWalls()
+
         spawnSinglePlayer()
+        if ConnectionManager.sharedInstance.session.connectedPeers.count > 0 {
+            spawnPlayers()
+        }
         createPlayersAndObstacles()
         generateBomb(nil, bombTimer: 100)
         
     }
+    
+
     
     func createPlayersAndObstacles() {
 
@@ -147,8 +151,24 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func spawnPlayers() {
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
+        let boardPlayers = GameManager.sharedInstance.players
+        
+        var i = 0
         
         for connectedPeer in connectedPeers {
+            var player = players[i]
+            player.identifier = connectedPeer.displayName
+            for boardPlayer in boardPlayers {
+                if player.identifier == boardPlayer.playerIdentifier {
+                    player.color = boardPlayer.color
+                }
+            }
+            i++
+        }
+        while i < players.count {
+            players[i].removeFromParent()
+            walls[i].hasPlayer = false
+            i++
         }
     }
     
@@ -230,7 +250,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             playerWithBomb = playerNode
             bombShouldTick = false
             if bombShouldExplode {
-                explodePlayer(playerNode, explodedBomb: bombNode)
+
+//                explodePlayer(playerNode, explodedBomb: bombNode)
             }
         }
         
@@ -281,13 +302,20 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     override func messageReceived(identifier: String, dictionary: NSDictionary) {
         var x = dictionary.objectForKey("x") as! CGFloat
         var y = dictionary.objectForKey("y") as! CGFloat
-        throwBomb(x, y: y)
+        
+        println("recebeu msg")
+
+        println("idenfifier = \(playerWithBomb?.identifier)")
+
+            throwBomb(x, y: y)
+
         
     }
     
     func throwBomb(x:CGFloat, y:CGFloat) {
         if jointBombPlayer != nil {
             self.physicsWorld.removeJoint(jointBombPlayer!)
+
         }
         bomb.physicsBody?.applyImpulse(CGVectorMake(x * bombSpeedMultiplier, y * bombSpeedMultiplier))
         bomb.physicsBody?.applyAngularImpulse(0.1)

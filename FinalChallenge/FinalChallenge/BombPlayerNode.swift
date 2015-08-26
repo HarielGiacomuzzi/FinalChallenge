@@ -15,6 +15,8 @@ class BombPlayerNode: SKSpriteNode {
     let worldCategory: UInt32 = 1 << 1
     let bombCategory: UInt32 = 1 << 2
     
+    var identifier = ""
+    
     init() {
         super.init(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 55   , height: 60))
         setupPhysics()
