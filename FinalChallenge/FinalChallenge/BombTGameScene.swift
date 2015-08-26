@@ -25,8 +25,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var bombShouldTick = false
     var bombShouldExplode = false
-    
-    var playerHoldingBombNow:BombPlayerNode!
+    var playerActive = ""
     
     // limits of game area
     var maxX:CGFloat = 0.0
@@ -249,9 +248,10 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             self.physicsWorld.addJoint(jointBombPlayer!)
             playerWithBomb = playerNode
             bombShouldTick = false
+            playerActive = playerNode.identifier
             if bombShouldExplode {
 
-//                explodePlayer(playerNode, explodedBomb: bombNode)
+                explodePlayer(playerNode, explodedBomb: bombNode)
             }
         }
         
@@ -305,10 +305,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         println("recebeu msg")
 
-        println("idenfifier = \(playerWithBomb?.identifier)")
-
+        if playerActive == identifier {
             throwBomb(x, y: y)
-
+        }
         
     }
     
@@ -319,6 +318,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
         bomb.physicsBody?.applyImpulse(CGVectorMake(x * bombSpeedMultiplier, y * bombSpeedMultiplier))
         bomb.physicsBody?.applyAngularImpulse(0.1)
+        playerActive = ""
         bombShouldTick = true
         animateFagulha()
     }
