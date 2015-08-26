@@ -17,7 +17,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     var scene = MinigameScene()
     
-   // var minigame = Minigame.BombGame
+   // var minigame = Minigame.FlappyFish
     var minigame = Minigame.BombGame
     
     var playerRank:[String] = []
