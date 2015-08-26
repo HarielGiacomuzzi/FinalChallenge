@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 class GameManager {
     static let sharedInstance = GameManager();
     var gameActive = String()
+    var boardViewController : UIViewController?
     var playerRank = [String]()
     var isMultiplayer : Bool?
     var players = [Player]()
@@ -18,6 +20,26 @@ class GameManager {
     init(){
 
     }
+    
+    func playerTurnEnded(player : Player){
+      //chama aqui o próximo player :D 
+    }
+    
+    func messageReceived(data : NSNotification){
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data.object as! NSData) as? NSDictionary{
+            if message.valueForKey("diceResult") != nil {
+                var diceResult = message.valueForKey("diceResult") as! Int;
+                for p in players{
+                    if p.playerIdentifier == (message.valueForKey("playerID") as! String){
+                        BoardGraph.SharedInstance.walk(diceResult, player: p, view: boardViewController);
+                        playerTurnEnded(p)
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
     
     func setPlayerOrder()->[String]{
         return playerRank.reverse()

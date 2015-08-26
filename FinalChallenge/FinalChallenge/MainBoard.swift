@@ -14,6 +14,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     var viewController: UIViewController?
     
     override func didMoveToView(view: SKView) {
+        GameManager.sharedInstance
         var scaleFactorX = Double(2048/self.size.width);
         var scaleFactorY = Double(1536/self.size.height);
         
@@ -28,14 +29,11 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             x.position.y = CGFloat(i.1.posY/scaleFactorY);
             self.addChild(x);
         }
-        
 
         realPlayer.x = BoardGraph.SharedInstance.nodes["01"]?.posX;
         realPlayer.y = BoardGraph.SharedInstance.nodes["01"]?.posY;
         BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(realPlayer)
 
-//        player.position.x = CGFloat(realPlayer.x);
-//        player.position.y = CGFloat(realPlayer.y);
         player.zPosition = 100
         player.position = CGPointMake(CGFloat(realPlayer.x/2), CGFloat(realPlayer.y/2))
         player.fillColor = UIColor.blueColor();
@@ -44,8 +42,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-//        BoardGraph.SharedInstance.walk(1, player: realPlayer,view : self.viewController);
-          BoardGraph.SharedInstance.caminhaAeFera(1, player: realPlayer, view: self.viewController)
+          //BoardGraph.SharedInstance.walk(1, player: realPlayer, view: self.viewController)
     }
     
     override func didFinishUpdate() {

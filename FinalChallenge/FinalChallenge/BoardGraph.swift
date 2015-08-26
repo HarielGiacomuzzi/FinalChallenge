@@ -130,7 +130,7 @@ class BoardGraph : NSObject{
         return lista
     }
     
-    func caminhaAeFera(qtd : Int, player : Player, view : UIViewController?){
+    func walk(qtd : Int, player : Player, view : UIViewController?){
         var playerLastNode = nodeFor(player)
         var x : [BoardNode] = walkRecursivo(qtd, node: playerLastNode!)
         playerLastNode?.removePlayer(player);
