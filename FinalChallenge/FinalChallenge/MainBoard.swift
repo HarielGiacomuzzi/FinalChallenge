@@ -14,7 +14,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     var viewController: UIViewController?
     
     override func didMoveToView(view: SKView) {
-        GameManager.sharedInstance
+        GameManager.sharedInstance.boardViewController = self.viewController;
         var scaleFactorX = Double(2048/self.size.width);
         var scaleFactorY = Double(1536/self.size.height);
         
@@ -39,6 +39,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         player.fillColor = UIColor.blueColor();
         
         self.addChild(player);
+        GameManager.sharedInstance.playerTurnEnded(nil)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

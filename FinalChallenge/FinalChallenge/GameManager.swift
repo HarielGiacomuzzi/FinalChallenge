@@ -16,14 +16,17 @@ class GameManager {
     var playerRank = [String]()
     var isMultiplayer : Bool?
     var players = [Player]()
+    var controlesDeTurno = 0
     
     init(){
-
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
     }
     
-    func playerTurnEnded(player : Player){
-      //chama aqui o próximo player :D 
-    }
+    func playerTurnEnded(player : Player?){
+      //chama aqui o próximo player :D controlar ternario Hariel :D
+        controlesDeTurno >= 4 ? 0 : controlesDeTurno++
+        selectPlayers(controlesDeTurno)
+     }
     
     func messageReceived(data : NSNotification){
         if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data.object as! NSData) as? NSDictionary{
