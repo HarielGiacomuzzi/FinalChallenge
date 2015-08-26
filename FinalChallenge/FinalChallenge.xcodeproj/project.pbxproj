@@ -17,6 +17,7 @@
 		26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */; };
 		26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF809B1B8CD67E00DFCB73 /* FireBombSpark.swift */; };
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
+		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
 		5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E60396B1B84F03100F63DC3 /* bubble.atlas */; };
@@ -86,6 +87,7 @@
 		26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fireBombParticle.sks; sourceTree = "<group>"; };
 		26CF809B1B8CD67E00DFCB73 /* FireBombSpark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireBombSpark.swift; sourceTree = "<group>"; };
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
+		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
 		5E60396B1B84F03100F63DC3 /* bubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bubble.atlas; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */,
+				5E0E06091B8E384300CE166E /* CGVector+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
 				B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */,
 				5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */,
+				5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */,
 				DBE862071B8552C800C8099E /* MainBoard.swift in Sources */,
 				B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */,
 				B5DD1B421B8BA75300AA1EB6 /* MinigameGameOverController.swift in Sources */,

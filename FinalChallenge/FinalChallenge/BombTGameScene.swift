@@ -31,6 +31,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     var minX:CGFloat = 0.0
     var maxY:CGFloat = 0.0
     var minY:CGFloat = 0.0
+    
+    let bombSpeedMultiplier:CGFloat = 300.0
 
     var testPlayer:BombPlayerNode?
     var playersRank:[BombPlayerNode] = []
@@ -46,9 +48,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     var beginY:CGFloat = 0.0
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        if jointBombPlayer != nil {
-            self.physicsWorld.removeJoint(jointBombPlayer!)
-        }
+//        if jointBombPlayer != nil {
+//            self.physicsWorld.removeJoint(jointBombPlayer!)
+//        }
         let touch = touches.first as! UITouch
         let location = touch.locationInView(self.view)
         beginX = location.x
@@ -63,7 +65,13 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         var x = endX - beginX
         var y = (endY - beginY) * -1
         
-        throwBomb(x, y: y)
+        var vector = CGVectorMake(x, y)
+        
+        vector.normalize()
+        
+        
+        
+        throwBomb(vector.dx, y: vector.dy)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -180,6 +188,10 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         west.runAction(SKAction.repeatActionForever(westMovement))
         self.addChild(west)
         players.append(west)
+        
+        for wall in walls {
+            wall.physicsBody?.usesPreciseCollisionDetection = true
+        }
     }
     
     func gameOver(){
@@ -234,8 +246,11 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             }
         } else {
             playerWithBomb = nil
-        }
+            var velocity = bomb.velocity
+            velocity.normalize()
+            bomb.velocity = CGVectorMake(velocity.dx * bombSpeedMultiplier, velocity.dy * bombSpeedMultiplier)
 
+        }
     }
     
     func explodePlayer(explodedPlayer:BombPlayerNode, explodedBomb:SKSpriteNode ) {
@@ -271,7 +286,10 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func throwBomb(x:CGFloat, y:CGFloat) {
-        bomb.physicsBody?.applyImpulse(CGVectorMake(x * 1, y * 1))
+        if jointBombPlayer != nil {
+            self.physicsWorld.removeJoint(jointBombPlayer!)
+        }
+        bomb.physicsBody?.applyImpulse(CGVectorMake(x * bombSpeedMultiplier, y * bombSpeedMultiplier))
         bomb.physicsBody?.applyAngularImpulse(0.1)
         bombShouldTick = true
         animateFagulha()
@@ -313,7 +331,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
         pavioAntigo.position = CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)+2)
         pavioAntigo.physicsBody?.categoryBitMask = fireCategory
-        pavioAntigo.physicsBody?.collisionBitMask = playerCategory | bombCategory
+        pavioAntigo.physicsBody?.collisionBitMask = bombCategory
         var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody, bodyB: pavioAntigo.physicsBody, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)))
 
         self.addChild(pavioAntigo)
@@ -329,7 +347,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             pavioNovo.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)+2)
             pavioNovo.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
             pavioNovo.physicsBody?.categoryBitMask = fireCategory
-            pavioNovo.physicsBody?.collisionBitMask = playerCategory | bombCategory
+            pavioNovo.physicsBody?.collisionBitMask = bombCategory
             var jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavioNovo.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
             self.addChild(pavioNovo)
             self.physicsWorld.addJoint(jointPavios)
@@ -341,7 +359,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         fagulha = FireBombSpark(fileNamed: "fireBombParticle")
         fagulha.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
         fagulha.physicsBody?.categoryBitMask = fireCategory
-        fagulha.physicsBody?.collisionBitMask = playerCategory | bombCategory
+        fagulha.physicsBody?.collisionBitMask = bombCategory
         fagulha.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame))
         self.addChild(fagulha)
         
@@ -353,17 +371,12 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func animateFagulha() {
-        println()
         if pavioArray.count > 1 {
             let animation = SKAction.runBlock({() in
-                println("array completo = \(self.pavioArray.count)")
                 var pavio = self.pavioArray.last
-                println("ultimo pavio = \(pavio)")
                 pavio?.runAction(SKAction.removeFromParent())
                 self.pavioArray.removeLast()
-                println("array completo pos remocao = \(self.pavioArray.count)")
                 pavio = self.pavioArray.last
-                println("ultimo pavio pos remocao = \(pavio)")
                 self.fagulha.position = pavio!.position
                 self.fagulhaJoint = SKPhysicsJointPin.jointWithBodyA(pavio!.physicsBody, bodyB: self.fagulha.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavio!.frame), CGRectGetMaxY(pavio!.frame)))
                 self.physicsWorld.addJoint(self.fagulhaJoint)
@@ -376,7 +389,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
                 if self.bombShouldTick {
                     self.animateFagulha()
                 }
-                
             })
         } else {
             bombShouldExplode = true
