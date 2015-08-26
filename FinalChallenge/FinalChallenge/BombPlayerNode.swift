@@ -17,7 +17,10 @@ class BombPlayerNode: SKSpriteNode {
     
     init() {
         super.init(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 55   , height: 60))
+        setupPhysics()
     }
+    
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -27,13 +30,8 @@ class BombPlayerNode: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         self.physicsBody?.dynamic = false
         self.physicsBody?.categoryBitMask = playerCategory
+        self.physicsBody?.collisionBitMask = worldCategory
         self.physicsBody?.contactTestBitMask = bombCategory
     }
     
-    func setupMovement(frame:CGRect) {
-        self.position = CGPointMake(frame.size.width/2 - frame.size.width/3.5, 140)
-        let playerMovementDir = SKAction.moveTo(CGPointMake(frame.size.width/2 + frame.size.width/3.5, self.position.y), duration: 3.5)
-        let playerMovementEsq = SKAction.moveTo(CGPointMake(frame.size.width/2 - frame.size.width/3.5, self.position.y), duration: 3.5)
-        self.runAction(SKAction.repeatActionForever(SKAction.sequence([playerMovementDir, playerMovementEsq])))
-    }
 }
