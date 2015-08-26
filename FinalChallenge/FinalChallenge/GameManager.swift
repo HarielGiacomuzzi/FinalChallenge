@@ -16,14 +16,20 @@ class GameManager {
     var players = [Player]()
     
     init(){
-            
+
     }
     
     func setPlayerOrder()->[String]{
         return playerRank.reverse()
     }
     
-    
+    func selectPlayers(i:Int){
+        var p = players[i]
+        var aux = NSDictionary();
+        aux.setValue(p.playerIdentifier, forKey: "playerID");
+        aux.setValue(nil, forKey: "playerTurn");
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+}
     /*
     func cleanManager(){
         gameActive = ""
