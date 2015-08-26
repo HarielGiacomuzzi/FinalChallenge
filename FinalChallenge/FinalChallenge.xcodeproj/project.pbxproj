@@ -17,6 +17,7 @@
 		26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */; };
 		26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF809B1B8CD67E00DFCB73 /* FireBombSpark.swift */; };
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
+		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
 		5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E60396B1B84F03100F63DC3 /* bubble.atlas */; };
@@ -46,6 +47,8 @@
 		B5F60BBE1B83C36C00786728 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBD1B83C36C00786728 /* Player.swift */; };
 		B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */; };
 		B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BC11B84FA0400786728 /* MyParticle2.sks */; };
+		DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */; };
+		DB1748C21B8CF2F100201BA2 /* iPhoneDiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */; };
 		DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B721B5409B90066B38C /* AppDelegate.swift */; };
 		DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB458B741B5409B90066B38C /* FinalChallenge.xcdatamodeld */; };
 		DB458B781B5409B90066B38C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B771B5409B90066B38C /* ViewController.swift */; };
@@ -86,6 +89,7 @@
 		26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fireBombParticle.sks; sourceTree = "<group>"; };
 		26CF809B1B8CD67E00DFCB73 /* FireBombSpark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireBombSpark.swift; sourceTree = "<group>"; };
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
+		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
 		5E60396B1B84F03100F63DC3 /* bubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bubble.atlas; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 		B5F60BBD1B83C36C00786728 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyParticleNode.swift; sourceTree = "<group>"; };
 		B5F60BC11B84FA0400786728 /* MyParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle2.sks; sourceTree = "<group>"; };
+		DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhonePlayerViewController.swift; sourceTree = "<group>"; };
+		DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhoneDiceViewController.swift; sourceTree = "<group>"; };
 		DB458B6D1B5409B90066B38C /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB458B711B5409B90066B38C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB458B721B5409B90066B38C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +169,8 @@
 				5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */,
 				5E8F9DDB1B7D0305004514D0 /* IpadConnectionViewController.swift */,
 				5E8F9DDD1B7D0986004514D0 /* IphoneConnectionViewController.swift */,
+				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
+				DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -171,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */,
+				5E0E06091B8E384300CE166E /* CGVector+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -465,6 +474,7 @@
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
 				B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */,
 				5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */,
+				5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */,
 				DBE862071B8552C800C8099E /* MainBoard.swift in Sources */,
 				B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */,
 				B5DD1B421B8BA75300AA1EB6 /* MinigameGameOverController.swift in Sources */,
@@ -486,11 +496,13 @@
 				5E68AD7B1B8CCD3E00FD4404 /* BombPlayerNode.swift in Sources */,
 				B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
+				DB1748C21B8CF2F100201BA2 /* iPhoneDiceViewController.swift in Sources */,
 				5E8F9DDC1B7D0305004514D0 /* IpadConnectionViewController.swift in Sources */,
 				B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
 				DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */,
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,
+				DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */,
 				B5F60BBE1B83C36C00786728 /* Player.swift in Sources */,
 				5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */,
 				B5DD1B441B8CD53400AA1EB6 /* AccelerometerGamePadController.swift in Sources */,

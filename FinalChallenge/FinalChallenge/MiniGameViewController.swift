@@ -67,7 +67,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
             
         } else {
             var message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
-            //scene.messageReceived(peerDisplayName, dictionary: message)
+            scene.messageReceived(peerDisplayName, dictionary: message)
         }
     }
     
