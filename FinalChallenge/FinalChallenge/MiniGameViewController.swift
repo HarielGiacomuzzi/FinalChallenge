@@ -48,7 +48,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         skView.ignoresSiblingOrder = true
         skView.showsPhysics = false
         scene.gameController = self
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         skView.presentScene(scene)
         
     }
