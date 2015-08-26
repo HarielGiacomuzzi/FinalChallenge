@@ -18,7 +18,6 @@ class IphoneConnectionViewController: UIViewController, MCBrowserViewControllerD
         ConnectionManager.sharedInstance.browser?.delegate = self;
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
 
     }
 

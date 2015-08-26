@@ -16,12 +16,14 @@ class GameManager {
     var players = [Player]()
     
     init(){
-        
+            
     }
     
     func setPlayerOrder()->[String]{
         return playerRank.reverse()
     }
+    
+    
     /*
     func cleanManager(){
         gameActive = ""
