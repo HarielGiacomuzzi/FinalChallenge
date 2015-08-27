@@ -24,10 +24,10 @@ class iPhoneDiceViewController: UIViewController {
     }
     
     func sendResults(){
-        var aux = NSDictionary();
+        var aux = NSMutableDictionary();
         aux.setValue(diceResult, forKey: "diceResult");
         aux.setValue(ConnectionManager.sharedInstance.peerID.displayName, forKey: "playerID");
         ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-        self.dismissViewControllerAnimated(true, completion: nil);
+        //self.dismissViewControllerAnimated(true, completion: nil);
     }
 }

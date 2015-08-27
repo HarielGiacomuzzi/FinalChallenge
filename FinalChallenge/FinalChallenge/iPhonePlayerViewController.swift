@@ -17,9 +17,10 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func messageReceived(data : NSNotification){
-        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data.object as! NSData) as? NSDictionary{
-            if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! MCPeerID  ==  ConnectionManager.sharedInstance.peerID.displayName {
-                self.presentViewController(iPhoneDiceViewController(), animated: true, completion: nil)
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data.userInfo!["data"] as! NSData) as? NSDictionary{
+            if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID.displayName {
+                self.performSegueWithIdentifier("gotoDiceView", sender: nil)
+                //self.presentViewController(viewMarota, animated: true, completion: nil)
             }
         }
     }
