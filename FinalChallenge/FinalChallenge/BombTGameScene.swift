@@ -500,6 +500,18 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.physicsWorld.addJoint(fagulhaJoint)
         fagulha.zPosition = 2
         bomb.zPosition = 1
+        
+        var bombStartX = randomBetweenNumbers(-10, secondNum: 10)
+        
+        var bombStartY = randomBetweenNumbers(-10, secondNum: 10)
+        
+        var vet = CGVector(dx: bombStartX, dy: bombStartY)
+        
+        vet.normalize()
+        
+        throwBomb(vet.dx, y: vet.dy)
+        
+        
 
     }
     
