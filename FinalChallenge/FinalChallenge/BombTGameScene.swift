@@ -353,6 +353,45 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             }
         }
         
+        let partsAtlas = SKTextureAtlas(named: "bombGame")
+        
+        
+        
+        let robopart1 = SKSpriteNode(texture: partsAtlas.textureNamed("roboPart0"))
+        let robopart2 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts1"))
+        let robopart3 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts2"))
+        let robopart4 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts2"))
+        let robopart5 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts3"))
+        let robopart6 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts3"))
+
+        
+        
+        let roboParts : [SKSpriteNode] = [robopart1, robopart2, robopart3, robopart4, robopart5, robopart6]
+        
+
+        
+        for part in roboParts {
+            print("a")
+
+            let randomNumInt1 = randomBetweenNumbers(0.4, secondNum: 5.0)
+            let randomNumInt2 = randomBetweenNumbers(0.4, secondNum: 5.0)
+            let randomNumInt3 = randomBetweenNumbers(0.0, secondNum: 0.01)
+
+
+
+            self.addChild(part)
+            part.zPosition = 0
+            part.position = explodedPlayer.position
+            part.physicsBody = SKPhysicsBody(rectangleOfSize: part.size)
+            part.physicsBody?.applyAngularImpulse(0.04)
+            part.physicsBody?.applyImpulse(CGVectorMake(randomNumInt1 , randomNumInt2))
+            part.physicsBody?.categoryBitMask = explodePartsCategory
+            part.physicsBody?.collisionBitMask = worldCategory
+        
+        }
+
+        
+        
         self.playerRank.append(explodedPlayer.identifier)
         println(playerRank)
         //respawn bomb
@@ -476,11 +515,11 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             
             let wait = SKAction.waitForDuration(0.5)
             let removeAndWait = SKAction.sequence([wait,animation,wait])
-//            self.runAction(removeAndWait, completion: {() in
-//                if self.bombShouldTick {
-//                    self.animateFagulha()
-//                }
-//            })
+            self.runAction(removeAndWait, completion: {() in
+                if self.bombShouldTick {
+                    self.animateFagulha()
+                }
+            })
             
         } else {
             bombShouldExplode = true
