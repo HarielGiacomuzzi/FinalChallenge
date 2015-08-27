@@ -49,12 +49,14 @@ class BombPlayerNode: SKSpriteNode {
     }
     
     func setupPhysics() {
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
+        self.physicsBody = SKPhysicsBody(circleOfRadius: (self.size.height/2)*0.6)
         self.physicsBody?.dynamic = false
         self.physicsBody?.categoryBitMask = playerCategory
         self.physicsBody?.collisionBitMask = worldCategory
         self.physicsBody?.contactTestBitMask = bombCategory
     }
+
+    
 
     
     func initiateRoboBody(){

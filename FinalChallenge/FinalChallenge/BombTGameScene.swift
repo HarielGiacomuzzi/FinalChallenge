@@ -196,6 +196,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         var east = BombPlayerNode()
         east.position = topRight
+        east.zRotation = 1.57079633
+        east.roboBody?.zRotation = -1.57079633
         let eastMovement = SKAction.sequence([SKAction.moveTo(botRight, duration: 3.5),SKAction.moveTo(topRight, duration: 3.5)])
         east.runAction(SKAction.repeatActionForever(eastMovement))
         self.addChild(east)
@@ -203,6 +205,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         var west = BombPlayerNode()
         west.position = botLeft
+        west.zRotation = -1.57079633
+        west.roboBody?.zRotation = -1.57079633
         let westMovement = SKAction.sequence([SKAction.moveTo(topLeft, duration: 3.5),SKAction.moveTo(botLeft, duration: 3.5)])
         west.runAction(SKAction.repeatActionForever(westMovement))
         self.addChild(west)
@@ -253,6 +257,20 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
                 explodePlayer(playerNode, explodedBomb: bombNode)
             }
+            
+
+            
+            let angle : CGFloat = atan2((bombNode.position.y - playerNode.position.y),
+                                        (bombNode.position.x - playerNode.position.x))
+            
+            if( playerNode.zRotation < 0){
+                playerNode.zRotation = playerNode.roboBody!.zRotation + CGFloat(M_PI) * 2
+            }
+                        
+            let rotateToAngle = SKAction.rotateToAngle(angle, duration: 0.1)
+            
+            playerNode.roboBody!.runAction(rotateToAngle)
+            
         }
         
     }
@@ -429,5 +447,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
 
     }
+    
+    
     
 }
