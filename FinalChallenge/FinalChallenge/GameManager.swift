@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class GameManager {
-    static let sharedInstance = GameManager();
-    var gameActive = String()
+    static let sharedInstance = GameManager()
+    var miniGameActive = String()
     var boardViewController : UIViewController?
     var playerRank = [String]()
     var isMultiplayer : Bool?
@@ -54,7 +54,8 @@ class GameManager {
         aux.setValue(p.playerIdentifier, forKey: "playerID");
         aux.setValue(" ", forKey: "playerTurn");
         ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-}
+    }
+    
     /*
     func cleanManager(){
         gameActive = ""

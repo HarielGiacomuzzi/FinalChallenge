@@ -17,8 +17,8 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     var scene = MinigameScene()
     
-   // var minigame = Minigame.FlappyFish
-    var minigame = Minigame.BombGame
+    var minigame = Minigame.FlappyFish
+   // var minigame = Minigame.BombGame
     
     var playerRank:[String] = []
     
@@ -32,7 +32,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         
         popup = stb.instantiateViewControllerWithIdentifier("MinigameGameOverController") as! MinigameGameOverController
         popup.modalPresentationStyle = .Popover
-        popup.preferredContentSize = CGSizeMake(100, 200)
+        //popup.preferredContentSize = CGSizeMake(self.view.frame.size.width/2, self.view.frame.size.height/2)
         
         switch minigame {
         case .FlappyFish:
@@ -79,8 +79,8 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         popoverMenuViewController?.delegate = self
         popoverMenuViewController?.sourceView = self.view
         popoverMenuViewController?.sourceRect = CGRect(
-            x: 50,
-            y: 100,
+            x: 0,
+            y: 0,
             width: 1,
             height: 1)
         presentViewController(popup, animated: true,completion: nil)

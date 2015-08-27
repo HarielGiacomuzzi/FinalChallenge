@@ -74,8 +74,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: NSTimeInterval) {
         self.gameOver()
-
-        
     }
     
     override func didMoveToView(view: SKView) {
