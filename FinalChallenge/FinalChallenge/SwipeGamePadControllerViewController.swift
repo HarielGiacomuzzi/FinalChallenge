@@ -27,8 +27,12 @@ class SwipeGamePadControllerViewController: UIViewController {
         var endY = location.y
         var x = endX - beginX
         var y = (endY - beginY) * -1
-
-        sendVector(x, y: y)
+    
+        var vector = CGVectorMake(x, y)
+        
+        vector.normalize()
+    
+        sendVector(vector.dx, y: vector.dy)
     }
     
     func sendVector(x:CGFloat, y:CGFloat) {

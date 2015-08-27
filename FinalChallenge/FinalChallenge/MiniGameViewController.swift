@@ -17,7 +17,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     var scene = MinigameScene()
     
-   // var minigame = Minigame.BombGame
+   // var minigame = Minigame.FlappyFish
     var minigame = Minigame.BombGame
     
     var playerRank:[String] = []
@@ -48,7 +48,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         skView.ignoresSiblingOrder = true
         skView.showsPhysics = false
         scene.gameController = self
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .AspectFit
         skView.presentScene(scene)
         
     }
@@ -67,7 +67,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
             
         } else {
             var message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
-            //scene.messageReceived(peerDisplayName, dictionary: message)
+            scene.messageReceived(peerDisplayName, dictionary: message)
         }
     }
     
