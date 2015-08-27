@@ -43,6 +43,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     let worldCategory: UInt32 = 1 << 1
     let bombCategory: UInt32 = 1 << 2
     let fireCategory: UInt32 = 1 << 3
+    let explodePartsCategory : UInt32 = 1 << 4
     
     var beginX:CGFloat = 0.0
     var beginY:CGFloat = 0.0
@@ -295,6 +296,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             if bombShouldExplode {
 
                 explodePlayer(playerNode, explodedBomb: bombNode)
+                
             }
             
 
@@ -486,6 +488,12 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
 
     }
+    
+    func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
+        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
+    }
+
+    
     
     
     
