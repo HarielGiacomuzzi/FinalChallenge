@@ -19,7 +19,7 @@ class GameManager {
     var controlesDeTurno = 0
     
     init(){
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
+//            NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
     }
     
     func playerTurnEnded(player : Player?){

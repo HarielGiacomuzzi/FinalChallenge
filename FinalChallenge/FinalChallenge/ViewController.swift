@@ -51,5 +51,30 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     @IBAction func loadBoard(sender: AnyObject) {
         BoardGraph.SharedInstance.loadBoard("board_2");
     }
+    
+    
+    @IBAction func gotoFlapGame() {
+        performSegueWithIdentifier("minigameSegue", sender: "flap")
+    }
+    
+    @IBAction func gotoBombGame() {
+        performSegueWithIdentifier("minigameSegue", sender: "bomb")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "minigameSegue" {
+            let minivc = segue.destinationViewController as! MiniGameViewController
+            switch sender as! String {
+            case "flap":
+                minivc.minigame = .FlappyFish
+            case "bomb":
+                minivc.minigame = .BombGame
+            default:
+                ()
+            }
+        }
+        
+    }
+    
 }
 
