@@ -123,7 +123,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="GcT-Oz-NQ3" kind="show" id="Jwa-KR-dh0"/>
+                                    <segue destination="Nlo-0A-Sfq" kind="show" id="Jwa-KR-dh0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -579,13 +579,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="lPg-7D-jtd"/>
                     <connections>
                         <segue destination="1Zr-eQ-4F0" kind="show" identifier="gotoDiceView" id="V8j-2L-VkD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="STS-k4-Pb1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1350" y="2031"/>
+            <point key="canvasLocation" x="2162" y="2031"/>
         </scene>
         <!--I Phone Dice View Controller-->
         <scene sceneID="MiT-xX-VQX">
@@ -632,7 +633,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L32-wc-KND" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2131" y="2031"/>
+            <point key="canvasLocation" x="2943" y="2031"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kEq-2o-WGQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nlo-0A-Sfq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oXy-QT-e5D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GcT-Oz-NQ3" kind="relationship" relationship="rootViewController" id="f53-mp-8Ri"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RON-hx-AgF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1350" y="2031"/>
         </scene>
     </scenes>
 </document>
