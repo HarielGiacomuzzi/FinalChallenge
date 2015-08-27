@@ -263,7 +263,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             let angle : CGFloat = atan2((bombNode.position.y - playerNode.position.y),
                                         (bombNode.position.x - playerNode.position.x))
             
-            if( playerNode.zRotation < 0){
+            if( playerNode.zRotation > 0){
                 playerNode.zRotation = playerNode.roboBody!.zRotation + CGFloat(M_PI) * 2
             }
                         
