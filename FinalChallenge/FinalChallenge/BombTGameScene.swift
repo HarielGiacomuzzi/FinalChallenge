@@ -43,6 +43,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     let worldCategory: UInt32 = 1 << 1
     let bombCategory: UInt32 = 1 << 2
     let fireCategory: UInt32 = 1 << 3
+    let explodePartsCategory : UInt32 = 1 << 4
     
     var beginX:CGFloat = 0.0
     var beginY:CGFloat = 0.0
@@ -197,7 +198,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         var east = BombPlayerNode()
         east.position = topRight
         east.zRotation = 1.57079633
-        east.roboBody?.zRotation = -1.57079633
         let eastMovement = SKAction.sequence([SKAction.moveTo(botRight, duration: 3.5),SKAction.moveTo(topRight, duration: 3.5)])
         east.runAction(SKAction.repeatActionForever(eastMovement))
         self.addChild(east)
@@ -206,7 +206,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         var west = BombPlayerNode()
         west.position = botLeft
         west.zRotation = -1.57079633
-        west.roboBody?.zRotation = -1.57079633
         let westMovement = SKAction.sequence([SKAction.moveTo(topLeft, duration: 3.5),SKAction.moveTo(botLeft, duration: 3.5)])
         west.runAction(SKAction.repeatActionForever(westMovement))
         self.addChild(west)
@@ -256,6 +255,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             if bombShouldExplode {
 
                 explodePlayer(playerNode, explodedBomb: bombNode)
+                
             }
             
 
@@ -263,10 +263,11 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             let angle : CGFloat = atan2((bombNode.position.y - playerNode.position.y),
                                         (bombNode.position.x - playerNode.position.x))
             
-            if( playerNode.zRotation > 0){
-                playerNode.zRotation = playerNode.roboBody!.zRotation + CGFloat(M_PI) * 2
+            if( playerNode.roboBody!.zRotation < 0){
+                playerNode.roboBody!.zRotation = playerNode.roboBody!.zRotation + CGFloat(M_PI) * 2
             }
-                        
+ 
+            
             let rotateToAngle = SKAction.rotateToAngle(angle, duration: 0.1)
             
             playerNode.roboBody!.runAction(rotateToAngle)
@@ -311,6 +312,45 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
                 walls[i].hasPlayer = false
             }
         }
+        
+        let partsAtlas = SKTextureAtlas(named: "bombGame")
+        
+        
+        
+        let robopart1 = SKSpriteNode(texture: partsAtlas.textureNamed("roboPart0"))
+        let robopart2 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts1"))
+        let robopart3 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts2"))
+        let robopart4 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts2"))
+        let robopart5 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts3"))
+        let robopart6 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts3"))
+
+        
+        
+        let roboParts : [SKSpriteNode] = [robopart1, robopart2, robopart3, robopart4, robopart5, robopart6]
+        
+
+        
+        for part in roboParts {
+            print("a")
+
+            let randomNumInt1 = randomBetweenNumbers(0.4, secondNum: 5.0)
+            let randomNumInt2 = randomBetweenNumbers(0.4, secondNum: 5.0)
+            let randomNumInt3 = randomBetweenNumbers(0.0, secondNum: 0.01)
+
+
+
+            self.addChild(part)
+            part.zPosition = 0
+            part.position = explodedPlayer.position
+            part.physicsBody = SKPhysicsBody(rectangleOfSize: part.size)
+            part.physicsBody?.applyAngularImpulse(0.04)
+            part.physicsBody?.applyImpulse(CGVectorMake(randomNumInt1 , randomNumInt2))
+            part.physicsBody?.categoryBitMask = explodePartsCategory
+            part.physicsBody?.collisionBitMask = worldCategory
+        
+        }
+
+        
         
         //respawn bomb
         generateBomb(nil, bombTimer: 100)
@@ -442,6 +482,12 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
 
     }
+    
+    func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
+        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
+    }
+
+    
     
     
     
