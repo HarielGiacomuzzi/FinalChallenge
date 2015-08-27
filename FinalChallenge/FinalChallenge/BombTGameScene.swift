@@ -294,6 +294,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             }
         }
         
+        self.playerRank.append(explodedPlayer.identifier)
+        println(playerRank)
         //respawn bomb
         generateBomb(nil, bombTimer: 100)
         
@@ -399,6 +401,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func animateFagulha() {
+
+        
         if pavioArray.count > 1 {
             let animation = SKAction.runBlock({() in
                 var pavio = self.pavioArray.last
@@ -418,6 +422,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
                     self.animateFagulha()
                 }
             })
+            
         } else {
             bombShouldExplode = true
             
