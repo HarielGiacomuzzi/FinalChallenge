@@ -10,6 +10,9 @@ import UIKit
 import CoreMotion
 
 class AccelerometerGamePadController: UIViewController {
+    
+    var gameManager : GameManager?
+    
     lazy var motionManager : CMMotionManager = {
         let motion = CMMotionManager()
         motion.accelerometerUpdateInterval = 1.0/10.0
@@ -18,6 +21,8 @@ class AccelerometerGamePadController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //gameManager?.miniGameActive =
         
         if motionManager.accelerometerAvailable{
             let queue = NSOperationQueue()

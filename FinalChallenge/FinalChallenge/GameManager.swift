@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class GameManager {
-    static let sharedInstance = GameManager();
-    var gameActive = String()
+    static let sharedInstance = GameManager()
+    var miniGameActive = String()
     var boardViewController : UIViewController?
     var playerRank = [String]()
     var isMultiplayer : Bool?
@@ -28,20 +28,20 @@ class GameManager {
         selectPlayers(controlesDeTurno)
      }
     
-    func messageReceived(data : NSNotification){
-        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data.userInfo!["data"] as! NSData) as? NSDictionary{
-            if message.valueForKey("diceResult") != nil {
-                var diceResult = message.valueForKey("diceResult") as! Int;
-                for p in players{
-                    if p.playerIdentifier == (message.valueForKey("playerID") as! String){
-                        BoardGraph.SharedInstance.walk(diceResult, player: p, view: boardViewController);
-                        playerTurnEnded(p)
-                        break;
-                    }
-                }
-            }
-        }
-    }
+//    func messageReceived(data : NSNotification){
+//        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data.userInfo!["data"] as! NSData) as? NSDictionary{
+//            if message.valueForKey("diceResult") != nil {
+//                var diceResult = message.valueForKey("diceResult") as! Int;
+//                for p in players{
+//                    if p.playerIdentifier == (message.valueForKey("playerID") as! String){
+//                        BoardGraph.SharedInstance.walk(diceResult, player: p, view: boardViewController);
+//                        playerTurnEnded(p)
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     
     func setPlayerOrder()->[String]{
@@ -54,7 +54,8 @@ class GameManager {
         aux.setValue(p.playerIdentifier, forKey: "playerID");
         aux.setValue(" ", forKey: "playerTurn");
         ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-}
+    }
+    
     /*
     func cleanManager(){
         gameActive = ""

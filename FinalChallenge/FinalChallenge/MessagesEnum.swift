@@ -10,6 +10,7 @@ import Foundation
 
 enum LoadGamePad : String {
     case FlappyFish = "FlappyFish"
+    case BombGame = "BombGame"
 }
 
 enum PlayerAction : String  {
