@@ -27,6 +27,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     var bombShouldExplode = false
     var playerActive = ""
     
+    var fagulhando = false
+    
     // limits of game area
     var maxX:CGFloat = 0.0
     var minX:CGFloat = 0.0
@@ -420,10 +422,15 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bomb.physicsBody?.applyAngularImpulse(0.1)
         playerActive = ""
         bombShouldTick = true
-        animateFagulha()
+        if !fagulhando {
+            animateFagulha()
+        }
+
     }
     
     func generateBomb(grabbedBy : SKNode? , bombTimer : Double ){
+        fagulhando = false
+        
         bombShouldExplode = false
         var x : CGFloat?
         var y : CGFloat?
@@ -500,7 +507,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func animateFagulha() {
 
-        
+        fagulhando = true
         if pavioArray.count > 1 {
             let animation = SKAction.runBlock({() in
                 var pavio = self.pavioArray.last
@@ -518,6 +525,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             self.runAction(removeAndWait, completion: {() in
                 if self.bombShouldTick {
                     self.animateFagulha()
+                } else {
+                    self.fagulhando = false
                 }
             })
             
