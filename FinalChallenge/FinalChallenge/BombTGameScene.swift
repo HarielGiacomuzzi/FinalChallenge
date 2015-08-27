@@ -43,6 +43,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     let worldCategory: UInt32 = 1 << 1
     let bombCategory: UInt32 = 1 << 2
     let fireCategory: UInt32 = 1 << 3
+    let explodePartsCategory : UInt32 = 1 << 4
     
     var beginX:CGFloat = 0.0
     var beginY:CGFloat = 0.0
@@ -65,8 +66,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         var vector = CGVectorMake(x, y)
         
         vector.normalize()
-        
-        
         
         throwBomb(vector.dx, y: vector.dy)
     }
@@ -157,7 +156,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             player.identifier = connectedPeer.displayName
             for boardPlayer in boardPlayers {
                 if player.identifier == boardPlayer.playerIdentifier {
-                    player.color = boardPlayer.color
+                    //player.color = boardPlayer.color
                 }
             }
             i++
@@ -180,28 +179,73 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
         var north = BombPlayerNode()
         north.position = topLeft
-        let northMovement = SKAction.sequence([SKAction.moveTo(topRight, duration: 3.5),SKAction.moveTo(topLeft, duration: 3.5)])
+        var pi = CGFloat(M_PI)
+        var angle = pi
+        
+        let rotN = SKAction.runBlock({() in
+            north.roboBase?.runAction(SKAction.rotateByAngle(pi, duration: 0.3))
+        })
+        
+        let waitN = SKAction.waitForDuration(0.3)
+        
+        let rotActionN = SKAction.group([rotN, waitN])
+
+        let northMovement = SKAction.sequence([SKAction.moveTo(topRight, duration: 3.5),rotActionN,SKAction.moveTo(topLeft, duration: 3.5), rotActionN])
         north.runAction(SKAction.repeatActionForever(northMovement))
         self.addChild(north)
         players.append(north)
         
+        
+        
         var south = BombPlayerNode()
+        
+        let rotS = SKAction.runBlock({() in
+            south.roboBase?.runAction(SKAction.rotateByAngle(pi, duration: 0.3))
+        })
+        
+        let waitS = SKAction.waitForDuration(0.3)
+        
+        let rotActionS = SKAction.group([rotS, waitS])
+        
         south.position = botRight
-        let southMovement = SKAction.sequence([SKAction.moveTo(botLeft, duration: 3.5),SKAction.moveTo(botRight, duration: 3.5)])
+        let southMovement = SKAction.sequence([SKAction.moveTo(botLeft, duration: 3.5),rotActionS,SKAction.moveTo(botRight, duration: 3.5),rotActionS])
         south.runAction(SKAction.repeatActionForever(southMovement))
         self.addChild(south)
         players.append(south)
         
         var east = BombPlayerNode()
+        
+        let rotE = SKAction.runBlock({() in
+            east.roboBase?.runAction(SKAction.rotateByAngle(pi, duration: 0.3))
+        })
+        
+        let waitE = SKAction.waitForDuration(0.3)
+        
+        let rotActionE = SKAction.group([rotE, waitE])
+        
         east.position = topRight
-        let eastMovement = SKAction.sequence([SKAction.moveTo(botRight, duration: 3.5),SKAction.moveTo(topRight, duration: 3.5)])
+        east.roboBase!.zRotation = 1.57079633
+        east.roboBody?.zRotation = -1.57079633
+        let eastMovement = SKAction.sequence([SKAction.moveTo(botRight, duration: 3.5),rotActionE,SKAction.moveTo(topRight, duration: 3.5),rotActionE])
         east.runAction(SKAction.repeatActionForever(eastMovement))
         self.addChild(east)
         players.append(east)
         
+        
         var west = BombPlayerNode()
+        
+        let rotW = SKAction.runBlock({() in
+            west.roboBase?.runAction(SKAction.rotateByAngle(pi, duration: 0.3))
+        })
+        
+        let waitW = SKAction.waitForDuration(0.3)
+        
+        let rotActionW = SKAction.group([rotW, waitW])
+        
         west.position = botLeft
-        let westMovement = SKAction.sequence([SKAction.moveTo(topLeft, duration: 3.5),SKAction.moveTo(botLeft, duration: 3.5)])
+        west.roboBase!.zRotation = -1.57079633
+        west.roboBody?.zRotation = -1.57079633
+        let westMovement = SKAction.sequence([SKAction.moveTo(topLeft, duration: 3.5),rotActionW,SKAction.moveTo(botLeft, duration: 3.5),rotActionW])
         west.runAction(SKAction.repeatActionForever(westMovement))
         self.addChild(west)
         players.append(west)
@@ -250,7 +294,22 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             if bombShouldExplode {
 
                 explodePlayer(playerNode, explodedBomb: bombNode)
+                
             }
+            
+
+            
+            let angle : CGFloat = atan2((bombNode.position.y - playerNode.position.y),
+                                        (bombNode.position.x - playerNode.position.x))
+            
+//            if( playerNode.zRotation > 0){
+//                playerNode.zRotation = playerNode.roboBody!.zRotation + CGFloat(M_PI) * 2
+//            }
+            
+            let rotateToAngle = SKAction.rotateToAngle(angle, duration: 0.1)
+            
+            playerNode.roboBody!.runAction(rotateToAngle)
+            
         }
         
     }
@@ -292,6 +351,47 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             }
         }
         
+        let partsAtlas = SKTextureAtlas(named: "bombGame")
+        
+        
+        
+        let robopart1 = SKSpriteNode(texture: partsAtlas.textureNamed("roboPart0"))
+        let robopart2 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts1"))
+        let robopart3 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts2"))
+        let robopart4 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts2"))
+        let robopart5 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts3"))
+        let robopart6 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts3"))
+
+        
+        
+        let roboParts : [SKSpriteNode] = [robopart1, robopart2, robopart3, robopart4, robopart5, robopart6]
+        
+
+        
+        for part in roboParts {
+            print("a")
+
+            let randomNumInt1 = randomBetweenNumbers(0.4, secondNum: 5.0)
+            let randomNumInt2 = randomBetweenNumbers(0.4, secondNum: 5.0)
+            let randomNumInt3 = randomBetweenNumbers(0.0, secondNum: 0.01)
+
+
+
+            self.addChild(part)
+            part.zPosition = 0
+            part.position = explodedPlayer.position
+            part.physicsBody = SKPhysicsBody(rectangleOfSize: part.size)
+            part.physicsBody?.applyAngularImpulse(0.04)
+            part.physicsBody?.applyImpulse(CGVectorMake(randomNumInt1 , randomNumInt2))
+            part.physicsBody?.categoryBitMask = explodePartsCategory
+            part.physicsBody?.collisionBitMask = worldCategory
+        
+        }
+
+        
+        
+        self.playerRank.append(explodedPlayer.identifier)
+        println(playerRank)
         //respawn bomb
         generateBomb(nil, bombTimer: 100)
         
@@ -397,6 +497,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func animateFagulha() {
+
+        
         if pavioArray.count > 1 {
             let animation = SKAction.runBlock({() in
                 var pavio = self.pavioArray.last
@@ -416,11 +518,20 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
                     self.animateFagulha()
                 }
             })
+            
         } else {
             bombShouldExplode = true
             
         }
 
     }
+    
+    func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
+        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
+    }
+
+    
+    
+    
     
 }
