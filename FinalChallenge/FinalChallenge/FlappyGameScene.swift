@@ -37,7 +37,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             }
             self.gameOver()
             self.paused = true
-            AudioSource.sharedInstance.stopAudio()
+//            AudioSource.sharedInstance.stopAudio()
         }
     }
     
