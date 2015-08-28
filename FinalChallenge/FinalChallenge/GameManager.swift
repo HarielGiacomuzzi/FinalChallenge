@@ -19,28 +19,36 @@ class GameManager {
     var controlesDeTurno = 0
     
     init(){
-//            NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
     }
     
     func playerTurnEnded(player : Player?){
       //chama aqui o próximo player :D controlar ternario Hariel :D
-        controlesDeTurno >= 1 ? 0 : controlesDeTurno++
+        println(players.count)
+        controlesDeTurno >= players.count - 1 ? 0 : controlesDeTurno++
         selectPlayers(controlesDeTurno)
      }
     
     func messageReceived(data : NSNotification){
-        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data.userInfo!["data"] as! NSData) as? NSDictionary{
-            if message.valueForKey("diceResult") != nil {
-                var diceResult = message.valueForKey("diceResult") as! Int;
-                for p in players{
-                    if p.playerIdentifier == (message.valueForKey("playerID") as! String){
-                        BoardGraph.SharedInstance.walk(diceResult, player: p, view: boardViewController);
-                        playerTurnEnded(p)
-                        break;
-                    }
+        if let result = (data.userInfo!["diceResult"] as? Int){
+            for p in players{
+                if p.playerIdentifier == (data.userInfo!["peerID"] as! String){
+                    BoardGraph.SharedInstance.walk(result, player: p, view: boardViewController);
+                    playerTurnEnded(p)
+                    break;
                 }
             }
         }
+    }
+    
+    func messageReceived(data : [String : NSObject]){
+            for p in players{
+                if p.playerIdentifier == (data["peerID"] as! String){
+                    BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
+                    playerTurnEnded(p)
+                    break;
+                }
+            }
     }
     
     
