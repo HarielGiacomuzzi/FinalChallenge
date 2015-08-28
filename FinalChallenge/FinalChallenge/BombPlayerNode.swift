@@ -9,53 +9,58 @@
 import UIKit
 import SpriteKit
 
-class BombPlayerNode: SKSpriteNode {
+class BombPlayerNode: SKNode {
     
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
     let bombCategory: UInt32 = 1 << 2
     
     var roboBody : SKSpriteNode?
+    var roboBase : SKSpriteNode?
     var identifier = ""
     
-    
-    init() {
-        
-        let spriteAnimatedAtlas = SKTextureAtlas(named: "bombGame")//sprites
-        
-        var runFrames = [SKTexture]()
-        for var i=0; i<2; i++
-        {
-            //let runTextureName = "running\(i)"
-            let runTextureName = "roboBase\(i)"
-            runFrames.append(spriteAnimatedAtlas.textureNamed(runTextureName))
-        }
-        
-        
-        super.init(texture: runFrames[0], color: UIColor.blueColor(), size: runFrames[0].size())
-        setupPhysics()
-        
-        var animationAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.15)
-        self.runAction(SKAction.repeatActionForever(animationAction))
-        
+    override init() {
+        super.init()
+        initiateRoboBase()
         initiateRoboBody()
-  
+        setupPhysics()
     }
-    
-
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func setupPhysics() {
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
+        self.physicsBody = SKPhysicsBody(circleOfRadius: (roboBase!.size.height/2)*0.6)
         self.physicsBody?.dynamic = false
         self.physicsBody?.categoryBitMask = playerCategory
         self.physicsBody?.collisionBitMask = worldCategory
         self.physicsBody?.contactTestBitMask = bombCategory
     }
 
+    
+
+    func initiateRoboBase() {
+        
+        let spriteAnimatedAtlas = SKTextureAtlas(named: "bombGame")//sprites
+        
+        var runFrames = [SKTexture]()
+        for var i=0; i<2; i++ {
+            let runTextureName = "roboBase\(i)"
+            runFrames.append(spriteAnimatedAtlas.textureNamed(runTextureName))
+        }
+        
+        
+        roboBase = SKSpriteNode(texture: runFrames[0], color: nil, size: runFrames[0].size())
+        
+        self.addChild(roboBase!)
+        
+        roboBase?.position = CGPointMake(0, 0)
+        
+        var animationAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.25)
+        roboBase!.runAction(SKAction.repeatActionForever(animationAction))
+    }
+    
     
     func initiateRoboBody(){
         
@@ -77,10 +82,6 @@ class BombPlayerNode: SKSpriteNode {
         
         var animationAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.25)
         roboBody!.runAction(SKAction.repeatActionForever(animationAction))
-        
-        
-
-        
         
     }
     

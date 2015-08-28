@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		263E058E1B8CEFA800110AD6 /* bombGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 263E058D1B8CEFA800110AD6 /* bombGame.atlas */; };
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
 		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
@@ -17,6 +16,7 @@
 		26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */; };
 		26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CF809B1B8CD67E00DFCB73 /* FireBombSpark.swift */; };
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
+		26D6DA4C1B8F7BEE00E94400 /* bombGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA4B1B8F7BEE00E94400 /* bombGame.atlas */; };
 		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
@@ -42,6 +42,12 @@
 		B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */; };
 		B5DD1B421B8BA75300AA1EB6 /* MinigameGameOverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B411B8BA75300AA1EB6 /* MinigameGameOverController.swift */; };
 		B5DD1B441B8CD53400AA1EB6 /* AccelerometerGamePadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B431B8CD53400AA1EB6 /* AccelerometerGamePadController.swift */; };
+		B5DD1B471B8F712A00AA1EB6 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B461B8F712A00AA1EB6 /* AudioSource.swift */; };
+		B5DD1B4A1B8F73D300AA1EB6 /* wavesSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B491B8F73D300AA1EB6 /* wavesSound.wav */; };
+		B5DD1B4C1B8F745700AA1EB6 /* explosionSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B4B1B8F745700AA1EB6 /* explosionSound.wav */; };
+		B5DD1B501B8F888200AA1EB6 /* bubbleSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B4F1B8F888200AA1EB6 /* bubbleSound.mp3 */; };
+		B5DD1B521B8F8D0500AA1EB6 /* bubbleSound2.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B511B8F8D0500AA1EB6 /* bubbleSound2.wav */; };
+		B5DD1B541B8F90EC00AA1EB6 /* funMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B531B8F90EC00AA1EB6 /* funMusic.mp3 */; };
 		B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BB81B83B76E00786728 /* MyParticle.sks */; };
 		B5F60BBB1B83B76E00786728 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BB91B83B76E00786728 /* spark.png */; };
 		B5F60BBE1B83C36C00786728 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBD1B83C36C00786728 /* Player.swift */; };
@@ -79,7 +85,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		263E058D1B8CEFA800110AD6 /* bombGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bombGame.atlas; sourceTree = "<group>"; };
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
 		26B2D9BE1B87A8920056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
@@ -89,6 +94,7 @@
 		26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fireBombParticle.sks; sourceTree = "<group>"; };
 		26CF809B1B8CD67E00DFCB73 /* FireBombSpark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FireBombSpark.swift; sourceTree = "<group>"; };
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
+		26D6DA4B1B8F7BEE00E94400 /* bombGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bombGame.atlas; sourceTree = "<group>"; };
 		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
@@ -114,6 +120,13 @@
 		B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGameOverCell.swift; sourceTree = "<group>"; };
 		B5DD1B411B8BA75300AA1EB6 /* MinigameGameOverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameGameOverController.swift; sourceTree = "<group>"; };
 		B5DD1B431B8CD53400AA1EB6 /* AccelerometerGamePadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerGamePadController.swift; sourceTree = "<group>"; };
+		B5DD1B461B8F712A00AA1EB6 /* AudioSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSource.swift; sourceTree = "<group>"; };
+		B5DD1B491B8F73D300AA1EB6 /* wavesSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wavesSound.wav; sourceTree = "<group>"; };
+		B5DD1B4B1B8F745700AA1EB6 /* explosionSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosionSound.wav; sourceTree = "<group>"; };
+		B5DD1B4D1B8F7EDB00AA1EB6 /* bubbleSound.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bubbleSound.aif; sourceTree = "<group>"; };
+		B5DD1B4F1B8F888200AA1EB6 /* bubbleSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bubbleSound.mp3; sourceTree = "<group>"; };
+		B5DD1B511B8F8D0500AA1EB6 /* bubbleSound2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bubbleSound2.wav; sourceTree = "<group>"; };
+		B5DD1B531B8F90EC00AA1EB6 /* funMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = funMusic.mp3; sourceTree = "<group>"; };
 		B5F60BB81B83B76E00786728 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		B5F60BB91B83B76E00786728 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		B5F60BBD1B83C36C00786728 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -199,8 +212,8 @@
 		5EA49E0C1B87BB9C00AC51F8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				26D6DA4B1B8F7BEE00E94400 /* bombGame.atlas */,
 				26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */,
-				263E058D1B8CEFA800110AD6 /* bombGame.atlas */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -228,6 +241,29 @@
 				5ED9E8771B7127760073FB7B /* FlappyGame */,
 			);
 			name = Minigames;
+			sourceTree = "<group>";
+		};
+		B5DD1B451B8F6D8300AA1EB6 /* Pads */ = {
+			isa = PBXGroup;
+			children = (
+				B5DD1B431B8CD53400AA1EB6 /* AccelerometerGamePadController.swift */,
+				5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */,
+				B51663EE1B7D0D720040A1B4 /* GamePadController.swift */,
+			);
+			name = Pads;
+			sourceTree = "<group>";
+		};
+		B5DD1B481B8F73BB00AA1EB6 /* AudioFiles */ = {
+			isa = PBXGroup;
+			children = (
+				B5DD1B531B8F90EC00AA1EB6 /* funMusic.mp3 */,
+				B5DD1B511B8F8D0500AA1EB6 /* bubbleSound2.wav */,
+				B5DD1B4F1B8F888200AA1EB6 /* bubbleSound.mp3 */,
+				B5DD1B4D1B8F7EDB00AA1EB6 /* bubbleSound.aif */,
+				B5DD1B4B1B8F745700AA1EB6 /* explosionSound.wav */,
+				B5DD1B491B8F73D300AA1EB6 /* wavesSound.wav */,
+			);
+			name = AudioFiles;
 			sourceTree = "<group>";
 		};
 		B5F60BB71B83B73100786728 /* Resources */ = {
@@ -280,6 +316,7 @@
 		DB458B6F1B5409B90066B38C /* FinalChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				B5DD1B481B8F73BB00AA1EB6 /* AudioFiles */,
 				B5F60BBC1B83C35800786728 /* Model */,
 				5E8F9DDF1B7D1651004514D0 /* Extensions */,
 				DB4E52001B714A10008333D3 /* Board */,
@@ -324,14 +361,13 @@
 		DB4E51FD1B714149008333D3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B5DD1B451B8F6D8300AA1EB6 /* Pads */,
 				DB4E51FE1B714194008333D3 /* ConnectionManager.swift */,
-				B51663EE1B7D0D720040A1B4 /* GamePadController.swift */,
 				DBC57FE11B83AEA200CA0232 /* XMLParser.swift */,
 				5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */,
 				B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */,
 				B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */,
-				5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */,
-				B5DD1B431B8CD53400AA1EB6 /* AccelerometerGamePadController.swift */,
+				B5DD1B461B8F712A00AA1EB6 /* AudioSource.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -431,12 +467,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5DD1B4C1B8F745700AA1EB6 /* explosionSound.wav in Resources */,
 				26B2D9C11B87A8B20056015F /* teste.sks in Resources */,
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
+				B5DD1B521B8F8D0500AA1EB6 /* bubbleSound2.wav in Resources */,
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
 				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
 				263E058E1B8CEFA800110AD6 /* bombGame.atlas in Resources */,
+				B5DD1B501B8F888200AA1EB6 /* bubbleSound.mp3 in Resources */,
+				B5DD1B4A1B8F73D300AA1EB6 /* wavesSound.wav in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
@@ -451,6 +491,7 @@
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				269F18B01B86583000EAD94F /* wind.atlas in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
+				B5DD1B541B8F90EC00AA1EB6 /* funMusic.mp3 in Resources */,
 				DBE862051B850DB700C8099E /* board_2.xml in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
 			);
@@ -471,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */,
+				B5DD1B471B8F712A00AA1EB6 /* AudioSource.swift in Sources */,
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
 				B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */,
 				5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */,

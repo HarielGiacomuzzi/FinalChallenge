@@ -28,6 +28,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     let powerUpCategory: UInt32 = 1 << 5
     
     override func update(currentTime: NSTimeInterval) {
+        
         //println(gameManager.isMultiplayer)
         if players.count == 0 && gameManager.isMultiplayer == true && !self.paused{
             println(self.gameManager.playerRank.count)
@@ -36,6 +37,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             }
             self.gameOver()
             self.paused = true
+            AudioSource.sharedInstance.stopAudio()
         }
     }
     
@@ -44,6 +46,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         startGame()
         
         self.setupWalls()
+        
+        //AudioSource.sharedInstance.flappyFishSound()
         
         // setup physics
         self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
@@ -329,7 +333,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func gameOver(){
-        self
+        //self
         //dispatch_async(dispatch_get_main_queue(),{ [unowned self] in
             //self.gameController!.gameOverTableView.reloadData()
             //self.gameController?.gameOverTableView.beginUpdates()
@@ -348,7 +352,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
                     player.goUp()
                 } else {
                     player.goDown()
-                  
                 }
             }
             
@@ -366,6 +369,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
                     players.removeObject(player)
                     player.removeFromParent()
                     self.playerRank.append(player.identifier!)
+                    //AudioSource.sharedInstance.readAudioFile("explosionSound", ext: "wav")
                     //self.gameManager.playerRank.append(player.identifier!)
                     //self.gameOver()
                 }
@@ -375,8 +379,12 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         //checks colision player / powerup
         if contact.bodyA.categoryBitMask == powerUpCategory && contact.bodyB.categoryBitMask == playerCategory {
             handleColisionPlayerPowerup(player:contact.bodyB, powerup: contact.bodyA)
+            self.runAction(AudioSource.sharedInstance.playBubbleSound())
+            //AudioSource.sharedInstance.bubbleSound()
         } else if contact.bodyB.categoryBitMask == powerUpCategory && contact.bodyA.categoryBitMask == playerCategory {
             handleColisionPlayerPowerup(player:contact.bodyA, powerup: contact.bodyB)
+            self.runAction(AudioSource.sharedInstance.playBubbleSound())
+            //AudioSource.sharedInstance.bubbleSound()
         }
         
     }
