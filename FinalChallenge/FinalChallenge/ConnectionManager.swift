@@ -13,6 +13,8 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     var peerID: MCPeerID = MCPeerID();
     var session: MCSession!
     var browser: MCBrowserViewController?;
+    private var isIpad = false;
+    private var iPadPeer : MCPeerID?
     var advertiser: MCAdvertiserAssistant = MCAdvertiserAssistant();
     let ServiceID = "iFiesta";
     static let sharedInstance = ConnectionManager();
@@ -24,6 +26,9 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     }
     
     func setupPeerWithDisplayName (displayName:String){
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad{
+            self.isIpad = true;
+        }
         peerID = MCPeerID(displayName: displayName)
     }
     
@@ -64,6 +69,22 @@ class ConnectionManager: NSObject, MCSessionDelegate{
         return true
     }
     
+    private func getIpadPeer(){
+        if self.iPadPeer == nil{
+            var aux = ["whoIs" : "iPad"];
+            self.sendDictionaryToPeer(aux, reliable: true);
+        }
+    }
+    
+    //sends a String to the other peer
+    private func getStreamToIpad() -> NSOutputStream{
+            let error = NSErrorPointer();
+            if self.iPadPeer == nil{
+                self.getIpadPeer();
+            }
+            return self.session.startStreamWithName("ControlTestStream", toPeer: self.iPadPeer, error: error);
+    }
+    
     //sends a NSDictionary to the other peer
     func sendDictionaryToPeer(message : NSDictionary?, reliable : Bool) -> Bool{
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -95,22 +116,71 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     // Received data from remote peer
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!){
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            
         var userInfo = ["data":data, "peerID":peerID.displayName!]
+            
+        // If is someone's turn
         if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
                 if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID.displayName {
                      NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
                     return
             }
         }
+        // if we received the dice results of a player
         if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
             if message.valueForKey("diceResult") != nil {
                 userInfo.updateValue(message.valueForKey("diceResult") as! Int, forKey: "diceResult")
                 GameManager.sharedInstance.messageReceived(userInfo)
-                //NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DiceResult", object: nil, userInfo: userInfo)
+//                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DiceResult", object: nil, userInfo: userInfo)
                 return
             }
         }
-            NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)
+        
+        // if there's a whoIs request
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("whoIs") != nil && message.valueForKey("whoIs") as! String  ==  "iPad" {
+                if self.isIpad{
+                    var response = ["peer" : self.peerID, "whoIs" : "response", "peerRequested" : "iPad"]
+                    self.sendDictionaryToPeer(response, reliable: true);
+                }
+                return
+            }
+        }
+            
+        // if there's a whoIs request
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("whoIs") != nil && message.valueForKey("whoIs") as! String  ==  "response" {
+                if message.valueForKey("peerRequested") as! String == "iPad"{
+                    if self.iPadPeer == nil {
+                        self.iPadPeer = message.valueForKey("peer") as? MCPeerID;
+                    }
+                }
+                return
+            }
+        }
+            
+        // if we receive the commad of a controller
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("controllerAction") != nil {
+                userInfo.updateValue(message.valueForKey("action") as! NSObject, forKey: "actionReceived")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ControlAction", object: nil, userInfo: userInfo)
+                return
+            }
+        }
+            
+        // if it's time to open gamepad
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("openController") != nil {
+                userInfo.updateValue(message.valueForKey("gameName") as! NSObject, forKey: "gameName")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_OpenController", object: nil, userInfo: userInfo)
+                return
+            }
+        }
+            
+            
+        // if I dont know what it is I will send the default message
+        NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)
+            
         })
     }
     

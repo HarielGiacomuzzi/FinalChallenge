@@ -18,8 +18,9 @@ class BombWallNode: SKSpriteNode {
     var hasPlayer = false
     
     
-    init(size:CGSize) {
+    init(size:CGSize, texture: SKTexture ) {
         super.init(texture: nil, color: UIColor.whiteColor(), size: size)
+        self.texture = texture
         setupPhysics()
     }
     
