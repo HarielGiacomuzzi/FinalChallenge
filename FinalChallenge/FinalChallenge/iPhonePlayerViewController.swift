@@ -29,7 +29,7 @@ class iPhonePlayerViewController: UIViewController {
         case .FlappyFish:
             println("flappy")
         case .BombGame:
-            ()
+            println("bombgame")
         default:
             ()
         }
