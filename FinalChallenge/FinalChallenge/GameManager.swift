@@ -70,4 +70,10 @@ class GameManager {
         playerRank.removeAll(keepCapacity: false)
         isMultiplayer = nil
     }*/
+    
+    func beginMinigame() {
+        var minigame = Minigame.FlappyFish
+        var dic = ["openController":"", "gameName":minigame.rawValue]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
 }

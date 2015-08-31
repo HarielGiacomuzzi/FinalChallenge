@@ -23,12 +23,11 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func openController(data : NSNotification) {
-        var gameData = data.userInfo!["gameName"] as! NSDictionary
-        var minigameName = gameData["minigameName"] as! String
-        var minigame = Minigame(rawValue: minigameName)
+        var gameData = data.userInfo!["gameName"] as! String
+        var minigame = Minigame(rawValue: gameData)
         switch minigame! {
         case .FlappyFish:
-            ()
+            println("flappy")
         case .BombGame:
             ()
         default:
