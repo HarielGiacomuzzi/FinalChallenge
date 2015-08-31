@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SpriteKit
 import UIKit
 
 class Player : NSObject {
@@ -16,5 +17,12 @@ class Player : NSObject {
     var x:Double!
     var y:Double!
     var color = UIColor.blueColor()
+    var nodeSprite : SKNode?
+    
+//    init(posX: Double, posY: Double) {
+//        self.x = posX;
+//        self.y = posY;
+//    }
+    
     
 }

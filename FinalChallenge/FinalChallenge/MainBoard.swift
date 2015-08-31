@@ -9,8 +9,6 @@
 import SpriteKit
 
 class MainBoard: SKScene, SKPhysicsContactDelegate {
-    var player = SKShapeNode(circleOfRadius: 10.0);
-    var realPlayer = Player();
     var viewController: UIViewController?
     
     override func didMoveToView(view: SKView) {
@@ -29,16 +27,23 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             x.position.y = CGFloat(i.1.posY/scaleFactorY);
             self.addChild(x);
         }
-
-        realPlayer.x = BoardGraph.SharedInstance.nodes["01"]?.posX;
-        realPlayer.y = BoardGraph.SharedInstance.nodes["01"]?.posY;
-        BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(realPlayer)
-
-        player.zPosition = 100
-        player.position = CGPointMake(CGFloat(realPlayer.x/2), CGFloat(realPlayer.y/2))
-        player.fillColor = UIColor.blueColor();
         
-        self.addChild(player);
+        var x = BoardGraph.SharedInstance.nodes["01"]?.posX;
+        var y = BoardGraph.SharedInstance.nodes["01"]?.posY;
+        
+        for p in GameManager.sharedInstance.players{
+            var sprite = SKShapeNode(circleOfRadius: 10.0);
+            p.x = x;
+            p.y = y;
+            sprite.zPosition = 100;
+            sprite.fillColor = UIColor.blueColor();
+            p.nodeSprite = sprite;
+            BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(p)
+            
+            self.addChild(p.nodeSprite!)
+        }
+        
+
         GameManager.sharedInstance.playerTurnEnded(nil)
     }
     
@@ -48,7 +53,9 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     
     override func didFinishUpdate() {
         super.didFinishUpdate();
-        player.position.x = CGFloat(realPlayer.x/2);
-        player.position.y = CGFloat(realPlayer.y/2);
+        for p in GameManager.sharedInstance.players{
+            p.nodeSprite?.position.x = CGFloat(p.x/2);
+            p.nodeSprite?.position.y = CGFloat(p.y/2);
+        }
     }
 }

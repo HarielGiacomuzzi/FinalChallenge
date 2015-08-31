@@ -27,6 +27,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     var bombShouldExplode = false
     var playerActive = ""
     
+    var fagulhando = false
+    
     // limits of game area
     var maxX:CGFloat = 0.0
     var minX:CGFloat = 0.0
@@ -354,7 +356,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         let partsAtlas = SKTextureAtlas(named: "bombGame")
         
-        
+        // pedaços para todos os lados
         
         let robopart1 = SKSpriteNode(texture: partsAtlas.textureNamed("roboPart0"))
         let robopart2 = SKSpriteNode(texture: partsAtlas.textureNamed("roboParts1"))
@@ -386,7 +388,41 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             part.physicsBody?.applyImpulse(CGVectorMake(randomNumInt1 , randomNumInt2))
             part.physicsBody?.categoryBitMask = explodePartsCategory
             part.physicsBody?.collisionBitMask = worldCategory
-        
+            part.physicsBody?.mass = 2.5
+            part.physicsBody?.friction = 100
+            
+            // animaçao da bomba
+            
+            let outExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion0"))
+            let midExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion1"))
+            let inExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion2"))
+            
+            let explosionParts : [SKSpriteNode] = [outExplosion, midExplosion , inExplosion]
+            
+            for explosion in explosionParts{
+            
+                let tamFinal = explosion.size
+                explosion.size = CGSize(width: explosion.size.width * 0.2, height: explosion.size.height * 0.2)
+                explosion.position = CGPoint(x: explodedPlayer.position.x, y: explodedPlayer.position.y)
+                
+                let crescimento = SKAction.resizeToWidth(tamFinal.width * 2, height: tamFinal.height * 2, duration: 0.7)
+
+                let rotacao = randomBetweenNumbers(0.01, secondNum: 5)
+                explosion.physicsBody = SKPhysicsBody(rectangleOfSize: tamFinal)
+                explosion.physicsBody?.categoryBitMask = 0x0
+                explosion.physicsBody?.applyAngularImpulse(rotacao)
+                explosion.physicsBody?.dynamic = false
+                self.addChild(explosion)
+
+                explosion.runAction(crescimento, completion: { () -> Void in
+                    explosion.removeFromParent()
+                })
+                
+                
+                
+
+                
+            }
         }
 
         
@@ -422,10 +458,15 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bomb.physicsBody?.applyAngularImpulse(0.1)
         playerActive = ""
         bombShouldTick = true
-        animateFagulha()
+        if !fagulhando {
+            animateFagulha()
+        }
+
     }
     
     func generateBomb(grabbedBy : SKNode? , bombTimer : Double ){
+        fagulhando = false
+        
         bombShouldExplode = false
         var x : CGFloat?
         var y : CGFloat?
@@ -497,12 +538,24 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.physicsWorld.addJoint(fagulhaJoint)
         fagulha.zPosition = 2
         bomb.zPosition = 1
+        
+        var bombStartX = randomBetweenNumbers(-10, secondNum: 10)
+        
+        var bombStartY = randomBetweenNumbers(-10, secondNum: 10)
+        
+        var vet = CGVector(dx: bombStartX, dy: bombStartY)
+        
+        vet.normalize()
+        
+        throwBomb(vet.dx, y: vet.dy)
+        
+        
 
     }
     
     func animateFagulha() {
 
-        
+        fagulhando = true
         if pavioArray.count > 1 {
             let animation = SKAction.runBlock({() in
                 var pavio = self.pavioArray.last
@@ -520,6 +573,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             self.runAction(removeAndWait, completion: {() in
                 if self.bombShouldTick {
                     self.animateFagulha()
+                } else {
+                    self.fagulhando = false
                 }
             })
             

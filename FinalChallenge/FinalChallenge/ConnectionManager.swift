@@ -53,42 +53,65 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     
     //sends a String to the other peer
     func sendStringToPeer(message : String, reliable : Bool) -> Bool{
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
         let error = NSErrorPointer();
         if (reliable){
-            return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
+            self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
         }
         
-        return self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
+            self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
+        })
+        return true
     }
     
     //sends a NSDictionary to the other peer
     func sendDictionaryToPeer(message : NSDictionary?, reliable : Bool) -> Bool{
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
         let error = NSErrorPointer();
         if (reliable){
-            return self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
+            self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
+            return
         }
         
-        return self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
+            self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
+        })
+        return true
     }
     
     func session(session: MCSession!, didReceiveCertificate certificate: [AnyObject]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
         certificateHandler(true)
+        })
     }
     
     // Remote peer changed state
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState){
-        let userInfo = ["peerID":peerID, "state":state.rawValue]
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        let userInfo = ["peerID":peerID, "state":state.rawValue]
             NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ConnectionStatusChanged", object: nil, userInfo: userInfo)
         })
     }
     
     // Received data from remote peer
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!){
-        let userInfo = ["data":data, "peerID":peerID]
-        //dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        var userInfo = ["data":data, "peerID":peerID.displayName!]
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+                if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID.displayName {
+                     NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
+                    return
+            }
+        }
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("diceResult") != nil {
+                userInfo.updateValue(message.valueForKey("diceResult") as! Int, forKey: "diceResult")
+                GameManager.sharedInstance.messageReceived(userInfo)
+                //NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DiceResult", object: nil, userInfo: userInfo)
+                return
+            }
+        }
             NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)
-        //})
+        })
     }
     
     // Received a byte stream from remote peer
