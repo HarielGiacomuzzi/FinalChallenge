@@ -11,11 +11,16 @@ import UIKit
 class GamePadController : UIViewController{
     
     @IBAction func upDataSender() {
-        ConnectionManager.sharedInstance.sendStringToPeer(PlayerAction.Up.rawValue, reliable: false)
+        
+        var action = ["way":PlayerAction.Up.rawValue]
+        var dic = ["controllerAction":"", "action":action]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
 
     @IBAction func downDataSender() {
-        ConnectionManager.sharedInstance.sendStringToPeer(PlayerAction.Down.rawValue, reliable: false)
+        var action = ["way":PlayerAction.Down.rawValue]
+        var dic = ["controllerAction":"", "action":action]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     
 }
