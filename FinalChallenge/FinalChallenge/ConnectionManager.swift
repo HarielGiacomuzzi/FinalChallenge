@@ -95,22 +95,48 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     // Received data from remote peer
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!){
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            
         var userInfo = ["data":data, "peerID":peerID.displayName!]
+            
+        // If is someone's turn
         if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
                 if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID.displayName {
                      NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
                     return
             }
         }
+        // if we received the dice results of a player
         if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
             if message.valueForKey("diceResult") != nil {
                 userInfo.updateValue(message.valueForKey("diceResult") as! Int, forKey: "diceResult")
                 GameManager.sharedInstance.messageReceived(userInfo)
-                //NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DiceResult", object: nil, userInfo: userInfo)
+//                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DiceResult", object: nil, userInfo: userInfo)
                 return
             }
         }
-            NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)
+        
+        // if we receive the commad of a controller
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("controllerAction") != nil {
+                userInfo.updateValue(message.valueForKey("action") as! NSObject, forKey: "actionReceived")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ControlAction", object: nil, userInfo: userInfo)
+                return
+            }
+        }
+            
+        // if it's time to open gamepad
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("openController") != nil {
+                userInfo.updateValue(message.valueForKey("gameName") as! NSObject, forKey: "gameName")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_OpenController", object: nil, userInfo: userInfo)
+                return
+            }
+        }
+            
+            
+        // if I dont know what it is I will send the default message
+        NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)
+            
         })
     }
     

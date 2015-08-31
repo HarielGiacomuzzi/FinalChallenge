@@ -135,6 +135,15 @@
                                     <action selector="gotoFlapGame" destination="BYZ-38-t0r" eventType="touchUpInside" id="lGx-ma-mb6"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgT-p9-fzy">
+                                <rect key="frame" x="207" y="100" width="123" height="30"/>
+                                <state key="normal" title="botao de teste xD">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="botaoDeTeste:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wjC-VP-lOB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
