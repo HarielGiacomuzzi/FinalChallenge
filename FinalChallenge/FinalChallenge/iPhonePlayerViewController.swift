@@ -13,11 +13,26 @@ import UIKit
 class iPhonePlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_PlayerTurn", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerTurn:", name: "ConnectionManager_PlayerTurn", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil);
     }
     
-    func messageReceived(data : NSNotification){
+    func playerTurn(data : NSNotification){
         self.performSegueWithIdentifier("gotoDiceView", sender: nil)
         
+    }
+    
+    func openController(data : NSNotification) {
+        var gameData = data.userInfo!["gameName"] as! NSDictionary
+        var minigameName = gameData["minigameName"] as! String
+        var minigame = Minigame(rawValue: minigameName)
+        switch minigame! {
+        case .FlappyFish:
+            ()
+        case .BombGame:
+            ()
+        default:
+            ()
+        }
     }
 }
