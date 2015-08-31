@@ -52,6 +52,7 @@ class BombPlayerNode: SKNode {
         
         
         roboBase = SKSpriteNode(texture: runFrames[0], color: nil, size: runFrames[0].size())
+        roboBase?.zPosition = 2;
         
         self.addChild(roboBase!)
         
@@ -79,7 +80,7 @@ class BombPlayerNode: SKNode {
         
         self.addChild(roboBody!)
         roboBody?.position = CGPointMake(0, 0)
-        
+       roboBody?.zPosition = 4
         var animationAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.25)
         roboBody!.runAction(SKAction.repeatActionForever(animationAction))
         
