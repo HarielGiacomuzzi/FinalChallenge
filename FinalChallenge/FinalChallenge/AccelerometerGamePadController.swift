@@ -48,9 +48,13 @@ class AccelerometerGamePadController: UIViewController {
     func sendData(y:Double) {
         
         if y > 0{
-            ConnectionManager.sharedInstance.sendStringToPeer(PlayerAction.Down.rawValue, reliable: false)
+            var action = ["way":PlayerAction.Down.rawValue]
+            var dic = ["controllerAction":"", "action":action]
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         }else if y < 0{
-            ConnectionManager.sharedInstance.sendStringToPeer(PlayerAction.Up.rawValue, reliable: false)
+            var action = ["way":PlayerAction.Up.rawValue]
+            var dic = ["controllerAction":"", "action":action]
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         } 
     }
 }

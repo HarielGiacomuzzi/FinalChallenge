@@ -131,7 +131,7 @@ class ConnectionManager: NSObject, MCSessionDelegate{
             if message.valueForKey("diceResult") != nil {
                 userInfo.updateValue(message.valueForKey("diceResult") as! Int, forKey: "diceResult")
                 GameManager.sharedInstance.messageReceived(userInfo)
-                //NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DiceResult", object: nil, userInfo: userInfo)
+//                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DiceResult", object: nil, userInfo: userInfo)
                 return
             }
         }
@@ -164,6 +164,15 @@ class ConnectionManager: NSObject, MCSessionDelegate{
             if message.valueForKey("controllerAction") != nil {
                 userInfo.updateValue(message.valueForKey("action") as! NSObject, forKey: "actionReceived")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ControlAction", object: nil, userInfo: userInfo)
+                return
+            }
+        }
+            
+        // if it's time to open gamepad
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("openController") != nil {
+                userInfo.updateValue(message.valueForKey("gameName") as! NSObject, forKey: "gameName")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_OpenController", object: nil, userInfo: userInfo)
                 return
             }
         }

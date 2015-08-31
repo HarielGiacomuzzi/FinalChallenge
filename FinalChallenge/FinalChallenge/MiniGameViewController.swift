@@ -28,7 +28,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_ControlAction", object: nil);
         
         popup = stb.instantiateViewControllerWithIdentifier("MinigameGameOverController") as! MinigameGameOverController
         popup.modalPresentationStyle = .Popover
@@ -54,21 +54,9 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     }
     
     func messageReceived(data : NSNotification){
-        var peerID = data.userInfo!["peerID"] as! MCPeerID
-        var peerDisplayName = peerID.displayName
-        var data = data.userInfo!["data"] as! NSData
-        
-        if minigame == .FlappyFish {
-            //movimento pelo gamePad
-            var message = String(NSString(data: data, encoding: NSUTF8StringEncoding)!);
-            if let messageEnum = PlayerAction(rawValue: message) {
-               scene.messageReceived(peerDisplayName, action: messageEnum)
-            }
-            
-        } else {
-            var message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
-            scene.messageReceived(peerDisplayName, dictionary: message)
-        }
+        var peerDisplayName = data.userInfo!["peerID"] as! String
+        var data = data.userInfo!["actionReceived"] as! NSDictionary
+        scene.messageReceived(peerDisplayName, dictionary: data)
     }
     
     func gameOverController(playerArray:[String]){

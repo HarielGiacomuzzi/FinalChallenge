@@ -37,7 +37,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             }
             self.gameOver()
             self.paused = true
-            AudioSource.sharedInstance.stopAudio()
+//            AudioSource.sharedInstance.stopAudio()
         }
     }
     
@@ -317,19 +317,32 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
     }
     
-    override func messageReceived(identifier:String, action:PlayerAction) {
+//    override func messageReceived(identifier:String, action:PlayerAction) {
+//        for player in players {
+//            if player.identifier == identifier {
+//                //movimento pelo gamepad
+//                if action == .Up {
+//                    player.goUp()
+//                } else {
+//                    player.goDown()
+//                }
+//            }
+//        }
+//        
+//    }
+    
+    override func messageReceived(identifier: String, dictionary: NSDictionary) {
         for player in players {
             if player.identifier == identifier {
-
-                //movimento pelo gamepad
-                if action == .Up {
+                var message = dictionary["way"] as! String
+                var messageEnum = PlayerAction(rawValue: message)
+                if messageEnum == .Up {
                     player.goUp()
                 } else {
                     player.goDown()
                 }
             }
         }
-        
     }
     
     func gameOver(){

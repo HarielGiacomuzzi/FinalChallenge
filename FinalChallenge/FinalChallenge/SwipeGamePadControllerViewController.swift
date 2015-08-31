@@ -36,9 +36,9 @@ class SwipeGamePadControllerViewController: UIViewController {
     }
     
     func sendVector(x:CGFloat, y:CGFloat) {
-        var dic = ["x":x,"y":y]
-        var nsDic = NSDictionary(dictionary: dic)
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(nsDic, reliable: true)
+        var action = ["x":x, "y":y]
+        var dic = ["controllerAction":"", "action":action]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
     }
 
