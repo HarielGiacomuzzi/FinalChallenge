@@ -85,6 +85,14 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVectorMake(0, 0)
         self.physicsWorld.contactDelegate = self
         
+        // fund
+        let fundo = SKSpriteNode(imageNamed: "floor")
+        self.addChild(fundo)
+        fundo.position = CGPoint(x: self.frame.width / 2, y : self.frame.height/2)
+        fundo.zPosition = 1
+        
+        
+        
         //MUST SETUP WALLS BEFORE PLAYERS
         setupWalls()
 
@@ -109,37 +117,55 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func setupWalls(){
         //north wall
-        var size = CGSize(width: self.frame.size.height, height: 30)
-        var north = BombWallNode(size: size)
+        var size = CGSize(width: self.frame.size.height, height: 45)
+        var north = BombWallNode(size: size, texture: SKTexture(imageNamed: "wallh"))
         north.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height - 15)
         self.addChild(north)
+        north.zPosition = 2
         walls.append(north)
         maxY = north.position.y - north.size.height / 2
         north.hasPlayer = true
         
         //south wall
-        size = CGSize(width: self.frame.size.height, height: 30)
-        var south = BombWallNode(size: size)
+        size = CGSize(width: self.frame.size.height, height: 45)
+        var south = BombWallNode(size: size, texture: SKTexture(imageNamed: "wallh"))
         south.position = CGPointMake(self.frame.size.width / 2, 15)
         self.addChild(south)
+        south.zPosition = 2
         walls.append(south)
         minY = south.position.y + south.size.height / 2
         south.hasPlayer = true
         
         //east wall
-        size = CGSize(width: 30, height: self.frame.size.height)
-        var east = BombWallNode(size: size)
+        size = CGSize(width: 45, height: self.frame.size.height)
+        let blackBar = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: (self.frame.width - south.size.width), height: self.frame.height))
+        blackBar.position = CGPoint(x: 0 , y: self.frame.height/2)
+        blackBar.zPosition = 2
+        self.addChild(blackBar)
+        
+        
+        var east = BombWallNode(size: size, texture: SKTexture(imageNamed: "wallv"))
         east.position = CGPointMake(north.position.x + north.size.width / 2, self.frame.size.height / 2)
         self.addChild(east)
+        east.zPosition = 2
         walls.append(east)
         maxX = east.position.x - east.size.width / 2
         east.hasPlayer = true
         
         //west wall
-        size = CGSize(width: 30, height: self.frame.size.height)
-        var west = BombWallNode(size: size)
+        
+        
+        let blackBar2 = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: (self.frame.width - south.size.width), height: self.frame.height))
+        blackBar2.position = CGPoint(x: self.frame.width , y: self.frame.height/2)
+        blackBar2.zPosition = 2
+
+        self.addChild(blackBar2)
+        
+        size = CGSize(width: 45, height: self.frame.size.height)
+        var west = BombWallNode(size: size, texture: SKTexture(imageNamed: "wallv"))
         west.position = CGPointMake(north.position.x - north.size.width / 2, self.frame.size.height / 2)
         self.addChild(west)
+        west.zPosition = 2
         walls.append(west)
         minX = west.position.x + west.size.width / 2
         west.hasPlayer = true
@@ -155,6 +181,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         for connectedPeer in connectedPeers {
             var player = players[i]
+            player.zPosition = 10
             player.identifier = connectedPeer.displayName
             for boardPlayer in boardPlayers {
                 if player.identifier == boardPlayer.playerIdentifier {
@@ -294,7 +321,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             bombShouldTick = false
             playerActive = playerNode.identifier
             if bombShouldExplode {
-
+                
                 explodePlayer(playerNode, explodedBomb: bombNode)
                 
             }
@@ -334,6 +361,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func explodePlayer(explodedPlayer:BombPlayerNode, explodedBomb:SKSpriteNode ) {
+        
         //animate explosion here
         //...
         
@@ -380,15 +408,16 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
 
             self.addChild(part)
-            part.zPosition = 0
+            part.zPosition = 1
             part.position = explodedPlayer.position
             part.physicsBody = SKPhysicsBody(rectangleOfSize: part.size)
             part.physicsBody?.applyAngularImpulse(0.04)
             part.physicsBody?.applyImpulse(CGVectorMake(randomNumInt1 , randomNumInt2))
             part.physicsBody?.categoryBitMask = explodePartsCategory
             part.physicsBody?.collisionBitMask = worldCategory
-            part.physicsBody?.mass = 2.5
-            part.physicsBody?.friction = 100
+            part.physicsBody?.mass = 100
+            part.physicsBody?.density = 100
+            part.physicsBody?.friction = 100000
             
             // animaçao da bomba
             
@@ -404,13 +433,14 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
                 explosion.size = CGSize(width: explosion.size.width * 0.2, height: explosion.size.height * 0.2)
                 explosion.position = CGPoint(x: explodedPlayer.position.x, y: explodedPlayer.position.y)
                 
-                let crescimento = SKAction.resizeToWidth(tamFinal.width * 2, height: tamFinal.height * 2, duration: 0.7)
+                let crescimento = SKAction.resizeToWidth(tamFinal.width * 2, height: tamFinal.height * 2, duration: 0.5)
 
                 let rotacao = randomBetweenNumbers(0.01, secondNum: 5)
                 explosion.physicsBody = SKPhysicsBody(rectangleOfSize: tamFinal)
                 explosion.physicsBody?.categoryBitMask = 0x0
                 explosion.physicsBody?.applyAngularImpulse(rotacao)
                 explosion.physicsBody?.dynamic = false
+                explosion.zPosition = 2
                 self.addChild(explosion)
 
                 explosion.runAction(crescimento, completion: { () -> Void in
@@ -430,6 +460,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         println(playerRank)
         //respawn bomb
         generateBomb(nil, bombTimer: 100)
+        
+        //audio explosion
+        self.runAction(AudioSource.sharedInstance.playExploadSound())
         
     }
     
@@ -504,7 +537,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(pavioAntigo)
         pavioArray.append(pavioAntigo)
         
-        
+        bomb.zPosition = 10
+
         self.physicsWorld.addJoint(jointPavio)
         
         // teste cordinha louca
@@ -518,7 +552,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             var jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavioNovo.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
             self.addChild(pavioNovo)
             self.physicsWorld.addJoint(jointPavios)
-            pavioNovo.zPosition = 0
+            pavioNovo.zPosition = 6
             pavioAntigo = pavioNovo
             pavioArray.append(pavioNovo)
         }

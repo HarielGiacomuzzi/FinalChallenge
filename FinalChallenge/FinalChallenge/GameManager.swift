@@ -28,7 +28,12 @@ class GameManager {
     func playerTurnEnded(player : Player?){
       //chama aqui o próximo player :D controlar ternario Hariel :D
         println(players.count)
-        controlesDeTurno >= players.count - 1 ? 0 : controlesDeTurno++
+        if controlesDeTurno >= players.count - 1{
+            controlesDeTurno = 0;
+            //TODO chama o outro cara...
+        }else{
+            controlesDeTurno = controlesDeTurno+1;
+        }
         selectPlayers(controlesDeTurno)
      }
     
