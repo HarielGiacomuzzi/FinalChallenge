@@ -13,6 +13,8 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     var peerID: MCPeerID = MCPeerID();
     var session: MCSession!
     var browser: MCBrowserViewController?;
+    private var isIpad = false;
+    private var iPadPeer : MCPeerID?
     var advertiser: MCAdvertiserAssistant = MCAdvertiserAssistant();
     let ServiceID = "iFiesta";
     static let sharedInstance = ConnectionManager();
@@ -24,6 +26,9 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     }
     
     func setupPeerWithDisplayName (displayName:String){
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad{
+            self.isIpad = true;
+        }
         peerID = MCPeerID(displayName: displayName)
     }
     
@@ -62,6 +67,22 @@ class ConnectionManager: NSObject, MCSessionDelegate{
             self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
         })
         return true
+    }
+    
+    private func getIpadPeer(){
+        if self.iPadPeer == nil{
+            var aux = ["whoIs" : "iPad"];
+            self.sendDictionaryToPeer(aux, reliable: true);
+        }
+    }
+    
+    //sends a String to the other peer
+    private func getStreamToIpad() -> NSOutputStream{
+            let error = NSErrorPointer();
+            if self.iPadPeer == nil{
+                self.getIpadPeer();
+            }
+            return self.session.startStreamWithName("ControlTestStream", toPeer: self.iPadPeer, error: error);
     }
     
     //sends a NSDictionary to the other peer
@@ -115,6 +136,29 @@ class ConnectionManager: NSObject, MCSessionDelegate{
             }
         }
         
+        // if there's a whoIs request
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("whoIs") != nil && message.valueForKey("whoIs") as! String  ==  "iPad" {
+                if self.isIpad{
+                    var response = ["peer" : self.peerID, "whoIs" : "response", "peerRequested" : "iPad"]
+                    self.sendDictionaryToPeer(response, reliable: true);
+                }
+                return
+            }
+        }
+            
+        // if there's a whoIs request
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("whoIs") != nil && message.valueForKey("whoIs") as! String  ==  "response" {
+                if message.valueForKey("peerRequested") as! String == "iPad"{
+                    if self.iPadPeer == nil {
+                        self.iPadPeer = message.valueForKey("peer") as? MCPeerID;
+                    }
+                }
+                return
+            }
+        }
+            
         // if we receive the commad of a controller
         if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
             if message.valueForKey("controllerAction") != nil {
