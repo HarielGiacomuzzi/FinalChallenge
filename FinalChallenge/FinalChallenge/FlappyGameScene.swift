@@ -380,11 +380,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         if contact.bodyA.categoryBitMask == powerUpCategory && contact.bodyB.categoryBitMask == playerCategory {
             handleColisionPlayerPowerup(player:contact.bodyB, powerup: contact.bodyA)
             self.runAction(AudioSource.sharedInstance.playBubbleSound())
-            //AudioSource.sharedInstance.bubbleSound()
         } else if contact.bodyB.categoryBitMask == powerUpCategory && contact.bodyA.categoryBitMask == playerCategory {
             handleColisionPlayerPowerup(player:contact.bodyA, powerup: contact.bodyB)
             self.runAction(AudioSource.sharedInstance.playBubbleSound())
-            //AudioSource.sharedInstance.bubbleSound()
         }
         
     }

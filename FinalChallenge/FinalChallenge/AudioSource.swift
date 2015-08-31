@@ -15,18 +15,28 @@ class AudioSource: NSObject, AVAudioPlayerDelegate {
     var url : NSURL!
     var avPlayer : AVAudioPlayer!
     var error : NSError?
+    
+    //flappyFish sound effects
     var bubbleSound : SKAction!
+    
+    //BombGames sound effects
+    var exploadSound : SKAction!
     static let sharedInstance = AudioSource()
     
     override init(){
         super.init()
     }
-    
+    //flappyFish sound effects
     func playBubbleSound() -> SKAction{
-         bubbleSound = SKAction.playSoundFileNamed("bubbleSound2.wav", waitForCompletion: false)
+        bubbleSound = SKAction.playSoundFileNamed("bubbleSound2.wav", waitForCompletion: false)
+        
         return bubbleSound
-        //readAudioFile("bubbleSound2", ext: "wav", audioLoop: false)
-        //readAudioFile("explosionSound", ext: "wav", audioLoop: false)
+    }
+    
+    //bombGames sound effect
+    func playExploadSound() -> SKAction{
+        exploadSound = SKAction.playSoundFileNamed("explosionSound.wav", waitForCompletion: false)
+        return exploadSound
     }
     
     func flappyFishSound(){

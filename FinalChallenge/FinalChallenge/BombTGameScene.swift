@@ -292,7 +292,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             bombShouldTick = false
             playerActive = playerNode.identifier
             if bombShouldExplode {
-
+                
                 explodePlayer(playerNode, explodedBomb: bombNode)
                 
             }
@@ -332,6 +332,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func explodePlayer(explodedPlayer:BombPlayerNode, explodedBomb:SKSpriteNode ) {
+        
         //animate explosion here
         //...
         
@@ -394,6 +395,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         println(playerRank)
         //respawn bomb
         generateBomb(nil, bombTimer: 100)
+        
+        //audio explosion
+        self.runAction(AudioSource.sharedInstance.playExploadSound())
         
     }
     
