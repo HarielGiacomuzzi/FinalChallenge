@@ -104,6 +104,7 @@ class ConnectionManager: NSObject, MCSessionDelegate{
                     return
             }
         }
+        // if we received the dice results of a player
         if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
             if message.valueForKey("diceResult") != nil {
                 userInfo.updateValue(message.valueForKey("diceResult") as! Int, forKey: "diceResult")
@@ -112,7 +113,20 @@ class ConnectionManager: NSObject, MCSessionDelegate{
                 return
             }
         }
-            NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)
+        
+        // if we receive the commad of a controller
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("controllerAction") != nil {
+                userInfo.updateValue(message.valueForKey("action") as! NSObject, forKey: "actionReceived")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ControlAction", object: nil, userInfo: userInfo)
+                return
+            }
+        }
+            
+            
+        // if I dont know what it is I will send the default message
+        NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)
+            
         })
     }
     
