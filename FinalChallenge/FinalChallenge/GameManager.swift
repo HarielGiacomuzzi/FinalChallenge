@@ -78,10 +78,10 @@ class GameManager {
         if minigameOrderArray.isEmpty {
             fillMinigameOrderArray()
         }
-        
         var minigame = minigameOrderArray.randomItem()
         var dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: nil)
     }
     
     func fillMinigameOrderArray() {
