@@ -77,6 +77,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
     @IBAction func botaoDeTeste(sender: AnyObject) {
         GameManager.sharedInstance.beginMinigame()
+
     }
     
 }

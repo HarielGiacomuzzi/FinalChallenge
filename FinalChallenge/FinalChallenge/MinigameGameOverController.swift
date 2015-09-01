@@ -24,6 +24,8 @@ class MinigameGameOverController : UIViewController, UITableViewDataSource, UITa
         for p in player {
             println(p)
         }
+        player.reverse()
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

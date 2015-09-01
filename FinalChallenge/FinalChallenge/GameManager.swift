@@ -18,6 +18,9 @@ class GameManager {
     var players = [Player]()
     var controlesDeTurno = 0
     
+    var minigameOrderArray : [Minigame] = []
+    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    
     init(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
     }
@@ -77,8 +80,18 @@ class GameManager {
     }*/
     
     func beginMinigame() {
-        var minigame = Minigame.FlappyFish
+        if minigameOrderArray.isEmpty {
+            fillMinigameOrderArray()
+        }
+        var minigame = minigameOrderArray.randomItem()
         var dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: nil)
+    }
+    
+    func fillMinigameOrderArray() {
+        for minigame in allMinigames {
+            minigameOrderArray.append(minigame)
+        }
     }
 }

@@ -49,7 +49,10 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
           //BoardGraph.SharedInstance.walk(1, player: realPlayer, view: self.viewController)
+//           GameManager.sharedInstance.beginMinigame()
+        
     }
+    
     
     override func didFinishUpdate() {
         super.didFinishUpdate();

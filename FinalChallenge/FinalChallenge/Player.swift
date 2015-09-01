@@ -16,7 +16,7 @@ class Player : NSObject {
     var coins:Int!
     var x:Double!
     var y:Double!
-    var color = UIColor.blueColor()
+    var color = UIColor()
     var nodeSprite : SKNode?
     
 //    init(posX: Double, posY: Double) {
