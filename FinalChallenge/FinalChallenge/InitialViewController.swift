@@ -51,6 +51,7 @@ class InitialViewController: UIViewController , MCBrowserViewControllerDelegate
             connectedPlayers.append(player)
         }
         GameManager.sharedInstance.players = connectedPlayers
+        self.performSegueWithIdentifier("gotoPartyMode", sender: nil)
     }
     
     // Notifies delegate that the user taps the cancel button.
