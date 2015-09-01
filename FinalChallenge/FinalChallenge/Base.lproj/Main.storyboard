@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1Vb-KC-f6p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -23,6 +23,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxP-qb-3xc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="494" y="-151"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cKF-Nn-zEZ">
+            <objects>
+                <viewController id="Ovk-7r-ehi" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="k74-mX-a8Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="dFJ-Xp-Ae5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sNE-Xt-480">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="tYi-IB-zqG" kind="show" identifier="gotoMinigameVC" id="AJH-Zt-9A0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ONt-OX-vCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1268" y="-278"/>
         </scene>
         <!--Accelerometer Game Pad Controller-->
         <scene sceneID="8zs-pY-9fY">
@@ -148,7 +169,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="tYi-IB-zqG" kind="show" identifier="minigameSegue" id="HRp-M0-DrW"/>
+                        <segue destination="Ovk-7r-ehi" kind="show" identifier="minigameSegue" id="Aso-TF-3da"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -252,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R0w-ig-Xg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1456" y="335"/>
+            <point key="canvasLocation" x="1718" y="385"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="oWV-na-dXX">
@@ -411,7 +432,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qaV-sh-fkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1439" y="-326"/>
+            <point key="canvasLocation" x="2041" y="-326"/>
         </scene>
         <!--Minigame Game Over Controller-->
         <scene sceneID="mwK-ob-4fw">
@@ -517,7 +538,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhj-uL-cbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2166" y="-325"/>
+            <point key="canvasLocation" x="2738" y="-326"/>
         </scene>
         <!--Board View Controller-->
         <scene sceneID="8sQ-R9-V61">
