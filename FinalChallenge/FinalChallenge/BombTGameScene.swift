@@ -73,7 +73,16 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: NSTimeInterval) {
-        self.gameOver()
+
+        if playerRank.count == players.count && !self.paused{
+            println(self.gameManager.playerRank.count)
+//            for p in players{
+//                self.playerRank.append(p.identifier)
+//            }
+            self.gameOver()
+            self.paused = true
+            //            AudioSource.sharedInstance.stopAudio()
+        }
     }
     
     override func didMoveToView(view: SKView) {
@@ -285,8 +294,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func gameOver(){
-        //gameController = self.view?.window?.rootViewController as! FlappyGameViewController
-        //gameController!.GameOverView.alpha = 1;
+        self.gameController!.gameOverController(playerRank.reverse())
         
     }
     
@@ -446,11 +454,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
                 explosion.runAction(crescimento, completion: { () -> Void in
                     explosion.removeFromParent()
                 })
-                
-                
-                
-
-                
             }
         }
 
@@ -618,9 +621,4 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
         return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
-
-    
-    
-    
-    
 }

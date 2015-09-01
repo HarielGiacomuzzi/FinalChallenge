@@ -40,7 +40,6 @@ class MinigameGameOverController : UIViewController, UITableViewDataSource, UITa
     }
     
     @IBAction func buttonPressed() {
-        println("oi")
         GameManager.sharedInstance.dismissMinigame()
     }
     
