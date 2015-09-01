@@ -27,16 +27,10 @@ class iPhonePlayerViewController: UIViewController {
         var minigame = Minigame(rawValue: gameData)
         switch minigame! {
         case .FlappyFish:
-            /*
-            aqui vai a segue que manda pro gamepad do flappy
             performSegueWithIdentifier("gotoAcelePad", sender: nil)
-            */
             println("gotoAcelePad")
         case .BombGame:
-            /*
-            aqui vai a segue que manda pro gamepad do flappy
             performSegueWithIdentifier("gotoSwipePad", sender: nil)
-            */
             println("gotoSwipePad")
         default:
             ()

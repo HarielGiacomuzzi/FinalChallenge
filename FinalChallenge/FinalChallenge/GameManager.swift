@@ -35,7 +35,7 @@ class GameManager {
         println(players.count)
         if controlesDeTurno >= players.count - 1{
             controlesDeTurno = 0;
-            //TODO chama o outro cara...
+            beginMinigame()
         }else{
             controlesDeTurno = controlesDeTurno+1;
         }
@@ -91,10 +91,8 @@ class GameManager {
         var minigame = minigameOrderArray.randomItem()
         var dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        /*
-            chama a viewcontroller da descriptionminigame
-            boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: nil)
-        */
+        boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: nil)
+
         println("gotominigame")
     }
     
