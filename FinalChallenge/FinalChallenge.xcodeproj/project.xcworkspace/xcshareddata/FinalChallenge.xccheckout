@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>FE9D8853CADB077CD77438AB65722E579F154C1A</key>
-		<string>https://github.com/HarielGiacomuzzi/FinalChallenge</string>
+		<string>https://github.com/HarielGiacomuzzi/FinalChallenge.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FinalChallenge/FinalChallenge.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/HarielGiacomuzzi/FinalChallenge</string>
+	<string>https://github.com/HarielGiacomuzzi/FinalChallenge.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

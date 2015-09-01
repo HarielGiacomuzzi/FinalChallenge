@@ -77,12 +77,12 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     }
     
     //sends a String to the other peer
-    private func getStreamToIpad() -> NSOutputStream{
+    private func getStreamToIpad(streamName : String, completion : (stream : NSOutputStream)->Void){
             let error = NSErrorPointer();
             if self.iPadPeer == nil{
                 self.getIpadPeer();
             }
-            return self.session.startStreamWithName("ControlTestStream", toPeer: self.iPadPeer, error: error);
+        completion(stream : self.session.startStreamWithName(streamName, toPeer: self.iPadPeer, error: error))
     }
     
     //sends a NSDictionary to the other peer
