@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="494" y="-151"/>
         </scene>
-        <!--View Controller-->
+        <!--Minigame Description View Controller-->
         <scene sceneID="cKF-Nn-zEZ">
             <objects>
-                <viewController id="Ovk-7r-ehi" sceneMemberID="viewController">
+                <viewController id="Ovk-7r-ehi" customClass="MinigameDescriptionViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k74-mX-a8Q"/>
                         <viewControllerLayoutGuide type="bottom" id="dFJ-Xp-Ae5"/>
@@ -35,15 +35,56 @@
                     <view key="view" contentMode="scaleToFill" id="sNE-Xt-480">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RNm-Rr-meh">
+                                <rect key="frame" x="16" y="20" width="568" height="236"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="236" id="YQz-mv-rRl"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxB-o0-ig3">
+                                <rect key="frame" x="16" y="510" width="568" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="ODq-vy-Aot"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="gotoMinigameButtonPressed" destination="Ovk-7r-ehi" eventType="touchUpInside" id="KTm-hH-ONh"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uwm-G4-d35">
+                                <rect key="frame" x="16" y="264" width="568" height="238"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RNm-Rr-meh" firstAttribute="trailing" secondItem="sNE-Xt-480" secondAttribute="trailingMargin" id="0tG-Mz-bch"/>
+                            <constraint firstItem="RxB-o0-ig3" firstAttribute="trailing" secondItem="sNE-Xt-480" secondAttribute="trailingMargin" id="9Ep-CH-dIj"/>
+                            <constraint firstItem="RxB-o0-ig3" firstAttribute="leading" secondItem="sNE-Xt-480" secondAttribute="leadingMargin" id="9ME-PA-9wd"/>
+                            <constraint firstItem="uwm-G4-d35" firstAttribute="top" secondItem="RNm-Rr-meh" secondAttribute="bottom" constant="8" id="IYs-qk-kE7"/>
+                            <constraint firstItem="uwm-G4-d35" firstAttribute="trailing" secondItem="sNE-Xt-480" secondAttribute="trailingMargin" id="ZG9-il-hZV"/>
+                            <constraint firstItem="RNm-Rr-meh" firstAttribute="top" secondItem="k74-mX-a8Q" secondAttribute="bottom" id="eEA-au-QBS"/>
+                            <constraint firstItem="RxB-o0-ig3" firstAttribute="top" secondItem="uwm-G4-d35" secondAttribute="bottom" constant="8" id="hji-Gq-INQ"/>
+                            <constraint firstItem="dFJ-Xp-Ae5" firstAttribute="top" secondItem="RxB-o0-ig3" secondAttribute="bottom" constant="20" id="q3D-DO-bDb"/>
+                            <constraint firstItem="uwm-G4-d35" firstAttribute="leading" secondItem="sNE-Xt-480" secondAttribute="leadingMargin" id="qxq-eR-oyp"/>
+                            <constraint firstItem="RNm-Rr-meh" firstAttribute="leading" secondItem="sNE-Xt-480" secondAttribute="leadingMargin" id="vLc-Lk-0Kl"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="minigameDescription" destination="uwm-G4-d35" id="WoQ-h7-gef"/>
+                        <outlet property="minigameImage" destination="RNm-Rr-meh" id="Hz4-pt-MqP"/>
                         <segue destination="tYi-IB-zqG" kind="show" identifier="gotoMinigameVC" id="AJH-Zt-9A0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONt-OX-vCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1268" y="-278"/>
+            <point key="canvasLocation" x="1270" y="-326"/>
         </scene>
         <!--Accelerometer Game Pad Controller-->
         <scene sceneID="8zs-pY-9fY">
@@ -450,7 +491,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="auW-4M-okC">
-                                        <rect key="frame" x="25" y="25" width="550" height="550"/>
+                                        <rect key="frame" x="25" y="25" width="550" height="472"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="nYs-rE-dbH" customClass="CustomGameOverCell" customModule="FinalChallenge" customModuleProvider="target">
@@ -508,14 +549,31 @@
                                             <outlet property="delegate" destination="eXc-f8-OwA" id="xfm-Hu-AlT"/>
                                         </connections>
                                     </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMi-93-iwd">
+                                        <rect key="frame" x="25" y="505" width="550" height="87"/>
+                                        <color key="backgroundColor" red="0.99215686270000003" green="0.67450980390000004" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="87" id="33o-Z0-mbh"/>
+                                        </constraints>
+                                        <state key="normal" title="Voltar">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonPressed" destination="eXc-f8-OwA" eventType="touchUpInside" id="lIw-Jo-9uZ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.69803921570000005" green="0.0" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="iMi-93-iwd" firstAttribute="leading" secondItem="KbS-az-LyU" secondAttribute="leading" constant="25" id="5YY-xB-Cix"/>
                                     <constraint firstItem="auW-4M-okC" firstAttribute="leading" secondItem="KbS-az-LyU" secondAttribute="leading" constant="25" id="97v-RD-gTa"/>
-                                    <constraint firstAttribute="bottom" secondItem="auW-4M-okC" secondAttribute="bottom" constant="25" id="RtW-1M-Wa0"/>
+                                    <constraint firstItem="iMi-93-iwd" firstAttribute="top" secondItem="auW-4M-okC" secondAttribute="bottom" constant="8" id="Hnw-w6-c3I"/>
                                     <constraint firstAttribute="height" constant="338" id="U1s-oh-Jt0"/>
                                     <constraint firstAttribute="trailing" secondItem="auW-4M-okC" secondAttribute="trailing" constant="25" id="h0C-Jg-h8U"/>
                                     <constraint firstItem="auW-4M-okC" firstAttribute="top" secondItem="KbS-az-LyU" secondAttribute="top" constant="25" id="hwN-0g-w53"/>
+                                    <constraint firstAttribute="bottom" secondItem="iMi-93-iwd" secondAttribute="bottom" constant="8" id="lfO-n9-8cg"/>
+                                    <constraint firstAttribute="trailing" secondItem="iMi-93-iwd" secondAttribute="trailing" constant="25" id="tV3-AD-x3r"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">

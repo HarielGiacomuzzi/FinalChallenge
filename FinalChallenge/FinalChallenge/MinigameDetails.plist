@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BombGame</key>
+	<dict>
+		<key>name</key>
+		<string>Bomb Game</string>
+		<key>description</key>
+		<string>A super fun game where you have to destroy the enemy robots with your bombs</string>
+		<key>image</key>
+		<string></string>
+	</dict>
+	<key>FlappyFish</key>
+	<dict>
+		<key>image</key>
+		<string></string>
+		<key>description</key>
+		<string>A super fun game where you have to lead your fish into the river of stones</string>
+		<key>name</key>
+		<string>Flappy Fish</string>
+	</dict>
+</dict>
+</plist>

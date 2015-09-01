@@ -18,6 +18,11 @@ class GameManager {
     var players = [Player]()
     var controlesDeTurno = 0
     
+    //minigame controllers
+    var minigameDescriptionViewController : MinigameDescriptionViewController?
+    var minigameViewController : MiniGameViewController?
+    var minigameGameOverViewController : MinigameGameOverController?
+    
     var minigameOrderArray : [Minigame] = []
     var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
     
@@ -86,12 +91,33 @@ class GameManager {
         var minigame = minigameOrderArray.randomItem()
         var dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: nil)
+        /*
+            chama a viewcontroller da descriptionminigame
+            boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: nil)
+        */
+        println("gotominigame")
     }
     
     func fillMinigameOrderArray() {
         for minigame in allMinigames {
             minigameOrderArray.append(minigame)
         }
+    }
+    
+    func dismissMinigame() {
+        if let vc = minigameGameOverViewController {
+            vc.dismissViewControllerAnimated(false, completion: {() in
+                if let vc2 = self.minigameViewController {
+                    vc2.dismissViewControllerAnimated(false, completion: {() in
+                        if let vc3 = self.minigameDescriptionViewController {
+                            vc3.dismissViewControllerAnimated(false, completion: nil)
+                        }
+                    })
+                }
+            })
+        }
+        
+        var dic = ["closeController":""]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
 }

@@ -63,7 +63,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "minigameSegue" {
-            let minivc = segue.destinationViewController as! MiniGameViewController
+            let minivc = segue.destinationViewController as! MinigameDescriptionViewController
             switch sender as! String {
             case "flap":
                 minivc.minigame = .FlappyFish
@@ -76,7 +76,8 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         
     }
     @IBAction func botaoDeTeste(sender: AnyObject) {
-        GameManager.sharedInstance.beginMinigame()
+        var dic = ["closeController":""]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
 
     }
     

@@ -14,10 +14,11 @@ class MinigameGameOverController : UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var tableView: UITableView!
     var player:[String]!
-     var gameManager = GameManager()
+    var gameManager = GameManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        GameManager.sharedInstance.minigameGameOverViewController = self
         println("Entrou no nova controller")
         //player = gameManager.playerRank
         println(player.count)
@@ -36,6 +37,11 @@ class MinigameGameOverController : UIViewController, UITableViewDataSource, UITa
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CustomGameOverCell
         cell.playerName.text = player[indexPath.row] as String
         return cell
+    }
+    
+    @IBAction func buttonPressed() {
+        println("oi")
+        GameManager.sharedInstance.dismissMinigame()
     }
     
 }

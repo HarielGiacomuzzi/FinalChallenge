@@ -177,6 +177,15 @@ class ConnectionManager: NSObject, MCSessionDelegate{
             }
         }
             
+        // if it's time to open gamepad
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("closeController") != nil {
+//                userInfo.updateValue(message.valueForKey("gameName") as! NSObject, forKey: "gameName")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_CloseController", object: nil, userInfo: userInfo)
+                return
+                }
+            }
+            
             
         // if I dont know what it is I will send the default message
         NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)

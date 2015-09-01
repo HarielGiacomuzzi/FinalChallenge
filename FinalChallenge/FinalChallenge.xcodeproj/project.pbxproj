@@ -27,6 +27,8 @@
 		5E68AD7B1B8CCD3E00FD4404 /* BombPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */; };
 		5E68AD7F1B8CD57C00FD4404 /* BombWallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */; };
 		5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */; };
+		5E7E45BC1B960AC600249B8A /* MinigameDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7E45BB1B960AC600249B8A /* MinigameDescriptionViewController.swift */; };
+		5E7E45BE1B960CCC00249B8A /* MinigameDetails.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E7E45BD1B960CCC00249B8A /* MinigameDetails.plist */; };
 		5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */; };
 		5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */; };
 		5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA49E091B87B59100AC51F8 /* MinigameScene.swift */; };
@@ -107,6 +109,8 @@
 		5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombPlayerNode.swift; sourceTree = "<group>"; };
 		5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombWallNode.swift; sourceTree = "<group>"; };
 		5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPlayerNode.swift; sourceTree = "<group>"; };
+		5E7E45BB1B960AC600249B8A /* MinigameDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameDescriptionViewController.swift; sourceTree = "<group>"; };
+		5E7E45BD1B960CCC00249B8A /* MinigameDetails.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MinigameDetails.plist; sourceTree = "<group>"; };
 		5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		5EA49E091B87B59100AC51F8 /* MinigameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameScene.swift; sourceTree = "<group>"; };
@@ -239,11 +243,13 @@
 		5ED9E8781B7127830073FB7B /* Minigames */ = {
 			isa = PBXGroup;
 			children = (
+				5E7E45BB1B960AC600249B8A /* MinigameDescriptionViewController.swift */,
 				B5DD1B411B8BA75300AA1EB6 /* MinigameGameOverController.swift */,
 				26B2D9C81B87AE570056015F /* MiniGameViewController.swift */,
 				5EA49E091B87B59100AC51F8 /* MinigameScene.swift */,
 				5EA49E0B1B87BB9000AC51F8 /* BombGame */,
 				5ED9E8771B7127760073FB7B /* FlappyGame */,
+				5E7E45BD1B960CCC00249B8A /* MinigameDetails.plist */,
 			);
 			name = Minigames;
 			sourceTree = "<group>";
@@ -442,7 +448,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
+						DevelopmentTeam = ZX7GUMJ35C;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -478,12 +484,12 @@
 				26D6DA541B94CA7700E94400 /* bombSceneAssets.xcassets in Resources */,
 				26B2D9C11B87A8B20056015F /* teste.sks in Resources */,
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
+				5E7E45BE1B960CCC00249B8A /* MinigameDetails.plist in Resources */,
 				26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */,
 				B5DD1B521B8F8D0500AA1EB6 /* bubbleSound2.wav in Resources */,
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
 				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
-				26D6DA4C1B8F7BEE00E94400 /* bombGame.atlas in Resources */,
 				B5DD1B501B8F888200AA1EB6 /* bubbleSound.mp3 in Resources */,
 				B5DD1B4A1B8F73D300AA1EB6 /* wavesSound.wav in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
@@ -520,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E7E45BC1B960AC600249B8A /* MinigameDescriptionViewController.swift in Sources */,
 				5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */,
 				B5DD1B471B8F712A00AA1EB6 /* AudioSource.swift in Sources */,
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
