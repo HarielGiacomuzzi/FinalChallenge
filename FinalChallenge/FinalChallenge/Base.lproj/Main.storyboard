@@ -206,6 +206,24 @@
                                     <action selector="botaoDeTeste:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wjC-VP-lOB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cm-IY-5BY">
+                                <rect key="frame" x="207" y="150" width="121" height="30"/>
+                                <state key="normal" title="GetStreamToiPad">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getStreamToiPad:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fsU-9U-4z2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3g3-O7-SUk">
+                                <rect key="frame" x="207" y="194" width="68" height="30"/>
+                                <state key="normal" title="Send Test">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendStreamTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uPb-jS-LXb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

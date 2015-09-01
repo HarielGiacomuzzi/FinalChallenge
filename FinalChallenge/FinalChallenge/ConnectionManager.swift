@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class ConnectionManager: NSObject, MCSessionDelegate{
+class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
     var peerID: MCPeerID = MCPeerID();
     var session: MCSession!
     var browser: MCBrowserViewController?;
@@ -69,20 +69,23 @@ class ConnectionManager: NSObject, MCSessionDelegate{
         return true
     }
     
-    private func getIpadPeer(){
+    func getIpadPeer() -> MCPeerID?{
         if self.iPadPeer == nil{
             var aux = ["whoIs" : "iPad"];
             self.sendDictionaryToPeer(aux, reliable: true);
+            return nil
         }
+        return self.iPadPeer;
     }
     
     //sends a String to the other peer
-    private func getStreamToIpad() -> NSOutputStream{
+    func getStreamToIpad(streamName : String)-> NSOutputStream?{
             let error = NSErrorPointer();
             if self.iPadPeer == nil{
                 self.getIpadPeer();
+                return nil;
             }
-            return self.session.startStreamWithName("ControlTestStream", toPeer: self.iPadPeer, error: error);
+        return self.session.startStreamWithName(streamName, toPeer: self.iPadPeer, error: error);
     }
     
     //sends a NSDictionary to the other peer
@@ -147,7 +150,7 @@ class ConnectionManager: NSObject, MCSessionDelegate{
             }
         }
             
-        // if there's a whoIs request
+        // if there's a whoIs request response
         if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
             if message.valueForKey("whoIs") != nil && message.valueForKey("whoIs") as! String  ==  "response" {
                 if message.valueForKey("peerRequested") as! String == "iPad"{
@@ -155,6 +158,7 @@ class ConnectionManager: NSObject, MCSessionDelegate{
                         self.iPadPeer = message.valueForKey("peer") as? MCPeerID;
                     }
                 }
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_WhoIsResponse", object: nil, userInfo: nil)
                 return
             }
         }
@@ -195,6 +199,28 @@ class ConnectionManager: NSObject, MCSessionDelegate{
     
     // Received a byte stream from remote peer
     func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!){
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            stream.delegate = self;
+            stream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode);
+            stream.open();
+        })
+    }
+    
+    //manages the stream incomming messages
+    func stream(aStream: NSStream, handleEvent eventCode: NSStreamEvent){
+        if (eventCode == NSStreamEvent.HasBytesAvailable) {
+            var stream = aStream as! NSInputStream
+            var buffer = [UInt8](count: 8, repeatedValue: 0)
+            // Read a single byte
+            if stream.hasBytesAvailable {
+                let result: Int = stream.read(&buffer, maxLength: buffer.count)
+                println("received: \(result)")
+            }
+        } else if (eventCode == NSStreamEvent.EndEncountered) {
+            // notify application that stream has ended
+        } else if (eventCode == NSStreamEvent.ErrorOccurred) {
+            // notify application that stream has encountered and error
+        }
     
     }
     
