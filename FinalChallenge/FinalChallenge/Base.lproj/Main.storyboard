@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -30,9 +30,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxP-qb-3xc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
-            <point key="canvasLocation" x="629" y="-269"/>
-=======
             <point key="canvasLocation" x="3574" y="1414"/>
         </scene>
         <!--Minigame Description View Controller-->
@@ -96,7 +93,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONt-OX-vCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="950" y="-338"/>
->>>>>>> 0cf3b209501c3d49dc546fff6b7e949781ace4e2
         </scene>
         <!--Accelerometer Game Pad Controller-->
         <scene sceneID="8zs-pY-9fY">
@@ -352,11 +348,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R0w-ig-Xg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
-            <point key="canvasLocation" x="1439" y="349"/>
-=======
             <point key="canvasLocation" x="1718" y="385"/>
->>>>>>> 0cf3b209501c3d49dc546fff6b7e949781ace4e2
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="oWV-na-dXX">
@@ -851,18 +843,15 @@
             <point key="canvasLocation" x="494" y="1987"/>
         </scene>
     </scenes>
-<<<<<<< HEAD
     <resources>
         <image name="Black" width="120" height="120"/>
         <image name="Blue" width="120" height="120"/>
         <image name="Red" width="120" height="120"/>
         <image name="White" width="120" height="120"/>
     </resources>
-=======
     <inferredMetricsTieBreakers>
         <segue reference="Ahl-Ky-SJK"/>
         <segue reference="T9l-u6-hEW"/>
         <segue reference="6ca-gz-9Tn"/>
     </inferredMetricsTieBreakers>
->>>>>>> 0cf3b209501c3d49dc546fff6b7e949781ace4e2
 </document>

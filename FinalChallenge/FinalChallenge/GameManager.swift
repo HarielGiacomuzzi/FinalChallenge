@@ -16,11 +16,8 @@ class GameManager {
     var playerRank = [String]()
     var isMultiplayer : Bool?
     var players = [Player]()
-<<<<<<< HEAD
     var totalGameTurns = 0
-=======
     var isOnMiniGame = false;
->>>>>>> 0cf3b209501c3d49dc546fff6b7e949781ace4e2
     var controlesDeTurno = 0
     
     //minigame controllers

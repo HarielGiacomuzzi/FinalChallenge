@@ -454,7 +454,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = DVXNNDG4U4;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
