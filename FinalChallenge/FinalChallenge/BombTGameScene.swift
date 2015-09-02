@@ -73,16 +73,19 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: NSTimeInterval) {
-
-        if playerRank.count == players.count && !self.paused{
-            println(self.gameManager.playerRank.count)
-//            for p in players{
-//                self.playerRank.append(p.identifier)
-//            }
+        
+        var finished = true
+        for wall in walls {
+            if wall.hasPlayer {
+                finished = false
+            }
+        }
+        
+        if finished && !paused{
             self.gameOver()
             self.paused = true
-            //            AudioSource.sharedInstance.stopAudio()
         }
+
     }
     
     override func didMoveToView(view: SKView) {
@@ -110,7 +113,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             spawnPlayers()
         }
         createPlayersAndObstacles()
-        generateBomb(nil, bombTimer: 100)
+        generateBomb(100)
         
     }
     
@@ -370,9 +373,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func explodePlayer(explodedPlayer:BombPlayerNode, explodedBomb:SKSpriteNode ) {
         
-        //animate explosion here
-        //...
-        
         //remove stuff
         explodedBomb.removeFromParent()
         explodedPlayer.removeFromParent()
@@ -462,7 +462,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.playerRank.append(explodedPlayer.identifier)
         println(playerRank)
         //respawn bomb
-        generateBomb(nil, bombTimer: 100)
+        generateBomb(100)
         
         //audio explosion
         self.runAction(AudioSource.sharedInstance.playExploadSound())
@@ -496,24 +496,16 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     }
     
-    func generateBomb(grabbedBy : SKNode? , bombTimer : Double ){
+    func generateBomb(bombTimer : Double ){
         fagulhando = false
         
         bombShouldExplode = false
         var x : CGFloat?
         var y : CGFloat?
         
-        if let initialNode = grabbedBy {
-            x = initialNode.position.x
-            y = initialNode.position.y
-            
-        }
-        else {
-            x = self.frame.size.width/2
-            y = self.frame.size.height/2
-        }
-        
-        
+        x = self.frame.size.width/2
+        y = self.frame.size.height/2
+
         let spriteAnimatedAtlas = SKTextureAtlas(named: "bombGame")//sprites
         
         let texture = spriteAnimatedAtlas.textureNamed("bombModel")
@@ -582,8 +574,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         throwBomb(vet.dx, y: vet.dy)
         
-        
-
     }
     
     func animateFagulha() {
