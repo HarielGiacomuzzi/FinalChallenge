@@ -16,6 +16,7 @@ class GameManager {
     var playerRank = [String]()
     var isMultiplayer : Bool?
     var players = [Player]()
+    var totalGameTurns = 0
     var controlesDeTurno = 0
     
     init(){

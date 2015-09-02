@@ -22,7 +22,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxP-qb-3xc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="494" y="-151"/>
+            <point key="canvasLocation" x="629" y="-269"/>
         </scene>
         <!--Accelerometer Game Pad Controller-->
         <scene sceneID="8zs-pY-9fY">
@@ -252,7 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R0w-ig-Xg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1456" y="335"/>
+            <point key="canvasLocation" x="1439" y="349"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="oWV-na-dXX">
@@ -289,6 +289,7 @@
                                 </state>
                                 <connections>
                                     <action selector="partyModeButton" destination="1Vb-KC-f6p" eventType="touchUpInside" id="lLx-fD-CVe"/>
+                                    <segue destination="8ga-GJ-cx0" kind="show" identifier="ipadSegue" id="BnX-NU-WBN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -301,13 +302,112 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="Y9w-QZ-R0C" kind="show" identifier="iphoneSegue" id="FnE-Bj-SsS"/>
-                        <segue destination="nrX-X9-ixP" kind="show" identifier="gotoPartyMode" id="jpC-FC-5oD"/>
+                        <segue destination="Y9w-QZ-R0C" kind="show" identifier="" id="FnE-Bj-SsS"/>
+                        <segue destination="nrX-X9-ixP" kind="show" identifier="iphoneSegue" id="jpC-FC-5oD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3O-K9-r4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1104" y="584"/>
+            <point key="canvasLocation" x="-1366" y="463"/>
+        </scene>
+        <!--Party Mode View ControllerIPAD-->
+        <scene sceneID="WX8-CF-IVx">
+            <objects>
+                <viewController id="8ga-GJ-cx0" customClass="PartyModeViewControllerIPAD" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Eqq-Ha-GGz"/>
+                        <viewControllerLayoutGuide type="bottom" id="4dW-kZ-QWB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ick-Ic-vUF">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Black" translatesAutoresizingMaskIntoConstraints="NO" id="scD-rg-dX7">
+                                <rect key="frame" x="70" y="304" width="200" height="200"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Blue" translatesAutoresizingMaskIntoConstraints="NO" id="h4d-3g-lgp">
+                                <rect key="frame" x="300" y="304" width="200" height="200"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red" translatesAutoresizingMaskIntoConstraints="NO" id="k6t-cK-0M2">
+                                <rect key="frame" x="530" y="304" width="200" height="200"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="White" translatesAutoresizingMaskIntoConstraints="NO" id="sjc-ds-EFt">
+                                <rect key="frame" x="760" y="304" width="200" height="200"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgR-ZW-CYI">
+                                <rect key="frame" x="878" y="28" width="85" height="30"/>
+                                <state key="normal" title="Find Players">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ConnectPlayers:" destination="8ga-GJ-cx0" eventType="touchUpInside" id="ZSl-Pv-UEy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFv-tC-zL4">
+                                <rect key="frame" x="473" y="718" width="79" height="30"/>
+                                <state key="normal" title="Start Game">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nYw-5s-nBH">
+                                <rect key="frame" x="760" y="143" width="200" height="153"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzU-qI-6Te">
+                                <rect key="frame" x="139" y="512" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4a-Eq-83q">
+                                <rect key="frame" x="369" y="512" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccH-dH-Ieo">
+                                <rect key="frame" x="599" y="512" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjG-rB-rdI">
+                                <rect key="frame" x="829" y="512" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Setup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOa-tz-p8t">
+                                <rect key="frame" x="70" y="28" width="407" height="132"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="73"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Turn Selection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gi-Kg-diC">
+                                <rect key="frame" x="795" y="126" width="131" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="player1Image" destination="scD-rg-dX7" id="UpR-Ov-mxp"/>
+                        <outlet property="player1Label" destination="gzU-qI-6Te" id="3aR-1Q-bPv"/>
+                        <outlet property="player2Image" destination="h4d-3g-lgp" id="47b-kf-e9O"/>
+                        <outlet property="player2Label" destination="T4a-Eq-83q" id="V5B-r9-XLH"/>
+                        <outlet property="player3Image" destination="k6t-cK-0M2" id="02p-8f-VLd"/>
+                        <outlet property="player3Label" destination="ccH-dH-Ieo" id="edY-N3-JcX"/>
+                        <outlet property="player4Image" destination="sjc-ds-EFt" id="QGV-gb-p3Z"/>
+                        <outlet property="player4Label" destination="bjG-rB-rdI" id="bcq-gl-uiE"/>
+                        <outlet property="turnSelector" destination="nYw-5s-nBH" id="4di-sX-0Md"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h8P-BP-RBF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-339" y="-285"/>
         </scene>
         <!--Party Mode View Controller-->
         <scene sceneID="Few-re-9Vu">
@@ -317,7 +417,7 @@
                         <viewControllerLayoutGuide type="top" id="EWh-2Z-sg3"/>
                         <viewControllerLayoutGuide type="bottom" id="M0p-l6-B14"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ocQ-NJ-NDZ">
+                    <view key="view" contentMode="scaleToFill" id="ocQ-NJ-NDZ" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -325,7 +425,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvJ-sc-ePn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-387" y="263"/>
+            <point key="canvasLocation" x="-325" y="463"/>
         </scene>
         <!--Minigame Collection View Controller-->
         <scene sceneID="YJc-zg-dwn">
@@ -389,7 +489,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uuh-9S-k9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-132" y="1398"/>
+            <point key="canvasLocation" x="-349" y="1380"/>
         </scene>
         <!--Mini Game View Controller-->
         <scene sceneID="u08-or-TA0">
@@ -625,4 +725,10 @@
             <point key="canvasLocation" x="1350" y="2031"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Black" width="120" height="120"/>
+        <image name="Blue" width="120" height="120"/>
+        <image name="Red" width="120" height="120"/>
+        <image name="White" width="120" height="120"/>
+    </resources>
 </document>
