@@ -35,7 +35,7 @@ class GameManager {
         println(players.count)
         if controlesDeTurno >= players.count - 1{
             controlesDeTurno = 0;
-            beginMinigame()
+//            beginMinigame()
         }else{
             controlesDeTurno = controlesDeTurno+1;
         }
@@ -85,15 +85,32 @@ class GameManager {
     }*/
     
     func beginMinigame() {
+        println("CHAMEI A FUNÇAO GO TO MINIGAME")
+        println("O ARRAY TEM \(minigameOrderArray.count) ELEMENTOS")
+        for m in minigameOrderArray {
+            println(m.rawValue)
+        }
         if minigameOrderArray.isEmpty {
+            println("OPS, ESTAVA VAZIO, HEHEHE, VOU ENCHE-LO")
             fillMinigameOrderArray()
+            println("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
+            for m in minigameOrderArray {
+                println(m.rawValue)
+            }
         }
         var minigame = minigameOrderArray.randomItem()
+        
+        println("SERA QUE EU REMOVI UM ELEMENTO MESMO GALERA????")
+        println("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
+        for m in minigameOrderArray {
+            println(m.rawValue)
+        }
+        
+        println("O ELEMENTO ESCOLHIDO  R A N D O M I C A M E N T E  FOI O \(minigame.rawValue)")
         var dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: nil)
+        boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
 
-        println("gotominigame")
     }
     
     func fillMinigameOrderArray() {
@@ -118,4 +135,5 @@ class GameManager {
         var dic = ["closeController":""]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
+    
 }

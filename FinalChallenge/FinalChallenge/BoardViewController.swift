@@ -67,4 +67,12 @@ class BoardViewController : UIViewController {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "gotoMinigame" {
+            println("IDENTIFIQUEI A SEGUE")
+            let minivc = segue.destinationViewController as! MinigameDescriptionViewController
+            minivc.minigame = Minigame(rawValue: sender as! String)!
+        }
+    }
 }
