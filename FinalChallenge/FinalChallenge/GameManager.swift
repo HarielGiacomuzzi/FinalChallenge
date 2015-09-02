@@ -25,7 +25,8 @@ class GameManager {
     var minigameGameOverViewController : MinigameGameOverController?
     
     var minigameOrderArray : [Minigame] = []
-    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+//    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    var allMinigames : [Minigame] = [.FlappyFish]
     
     init(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
@@ -90,7 +91,11 @@ class GameManager {
     }*/
     
     func beginMinigame() {
-        println("chamei o begin minigame")
+        println("CHAMEI A FUNÇAO GO TO MINIGAME")
+        println("O ARRAY TEM \(minigameOrderArray.count) ELEMENTOS")
+        for m in minigameOrderArray {
+            println(m.rawValue)
+        }
         if minigameOrderArray.isEmpty {
             println("OPS, ESTAVA VAZIO, HEHEHE, VOU ENCHE-LO")
             fillMinigameOrderArray()
@@ -100,7 +105,15 @@ class GameManager {
             }
         }
         var minigame = minigameOrderArray.randomItem()
-        var dic = ["openController":" ", "gameName":minigame.rawValue]
+        
+        println("SERA QUE EU REMOVI UM ELEMENTO MESMO GALERA????")
+        println("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
+        for m in minigameOrderArray {
+            println(m.rawValue)
+        }
+        
+        println("O ELEMENTO ESCOLHIDO  R A N D O M I C A M E N T E  FOI O \(minigame.rawValue)")
+        var dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
 
@@ -125,7 +138,8 @@ class GameManager {
             })
             //selectPlayers(0);
         }
-        var dic = ["closeController":""]
+        println("Cheguei aqui :P");
+        var dic = ["closeController":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         self.isOnMiniGame = false;
         self.playerTurnEnded(nil);

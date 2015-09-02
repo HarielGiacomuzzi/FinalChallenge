@@ -18,7 +18,7 @@ class iPhoneDiceViewController: UIViewController {
     }
     
     @IBAction func rollDice(sender: AnyObject) {
-        diceResult = Int(arc4random_uniform(6)+1);
+        diceResult = Int(arc4random_uniform(1)+1);
         lblResult.text = diceResult.description;
         sendResults();
     }
