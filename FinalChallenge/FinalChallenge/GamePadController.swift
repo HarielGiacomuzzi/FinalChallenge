@@ -29,7 +29,7 @@ class GamePadController : UIViewController{
     }
     
     func closeController(data:NSNotification) {
-        dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.popViewControllerAnimated(false)
     }
     
 }

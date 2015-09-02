@@ -92,14 +92,18 @@ class GameManager {
     func beginMinigame() {
         println("chamei o begin minigame")
         if minigameOrderArray.isEmpty {
+            println("OPS, ESTAVA VAZIO, HEHEHE, VOU ENCHE-LO")
             fillMinigameOrderArray()
+            println("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
+            for m in minigameOrderArray {
+                println(m.rawValue)
+            }
         }
         var minigame = minigameOrderArray.randomItem()
         var dic = ["openController":" ", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: nil)
+        boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
 
-        println("gotominigame")
     }
     
     func fillMinigameOrderArray() {
@@ -126,4 +130,5 @@ class GameManager {
         self.isOnMiniGame = false;
         self.playerTurnEnded(nil);
     }
+    
 }
