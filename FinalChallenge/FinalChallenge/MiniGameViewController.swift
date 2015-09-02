@@ -52,6 +52,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         scene.gameController = self
         scene.scaleMode = .AspectFit
         skView.presentScene(scene)
+        println("apresentei a cena sem crashar")
         
     }
     
