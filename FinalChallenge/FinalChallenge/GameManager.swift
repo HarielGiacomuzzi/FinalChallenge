@@ -25,7 +25,6 @@ class GameManager {
     var minigameGameOverViewController : MinigameGameOverController?
     
     var minigameOrderArray : [Minigame] = []
-//    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
     var allMinigames : [Minigame] = [.FlappyFish]
     
     init(){
@@ -33,15 +32,14 @@ class GameManager {
     }
     
     func playerTurnEnded(player : Player?){
-        println(players.count)
-        if controlesDeTurno > players.count - 1{
+        if controlesDeTurno >= players.count{
             controlesDeTurno = 0;
             self.isOnMiniGame = true;
             beginMinigame()
         }else{
             //controlesDeTurno = controlesDeTurno+1;
         }
-        selectPlayers(controlesDeTurno++)
+        selectPlayers(controlesDeTurno)
      }
     
     func messageReceived(data : NSNotification){
@@ -75,6 +73,7 @@ class GameManager {
     
     func selectPlayers(i:Int){
         if !self.isOnMiniGame{
+            controlesDeTurno++
             var p = players[i]
             var aux = NSMutableDictionary();
             aux.setValue(p.playerIdentifier, forKey: "playerID");
