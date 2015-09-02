@@ -27,7 +27,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                navigationController?.navigationBarHidden = true
+        println("Dei load na minigameview controller")
         GameManager.sharedInstance.minigameViewController = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_ControlAction", object: nil);
@@ -52,6 +52,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         scene.gameController = self
         scene.scaleMode = .AspectFit
         skView.presentScene(scene)
+        println("apresentei a cena sem crashar")
         
     }
     
