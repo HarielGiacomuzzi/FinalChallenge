@@ -11,13 +11,14 @@ import MultipeerConnectivity
 
 class ViewController: UIViewController, MCBrowserViewControllerDelegate {
 
+    var iPadStream : NSOutputStream?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true);
         ConnectionManager.sharedInstance.setupBrowser();
         ConnectionManager.sharedInstance.browser?.delegate = self;
-        
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "whoisResponse:", name: "ConnectionManager_WhoIsResponse", object: nil);
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
     }
 
@@ -25,7 +26,24 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func whoisResponse(data : NSNotification?){
+        var aux = ConnectionManager.sharedInstance.getStreamToIpad(ConnectionManager.sharedInstance.peerID.displayName);
+        if aux != nil{
+            self.iPadStream = aux;
+        }
+    }
 
+    @IBAction func sendStreamTest(sender: AnyObject) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            if self.iPadStream != nil{
+                var buffer : [UInt8] = [1];
+                self.iPadStream!.open()
+                self.iPadStream!.write(&buffer, maxLength: buffer.count)
+            }
+        })
+        
+    }
     @IBAction func findGame(sender: AnyObject) {
         self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in}
     }
@@ -60,10 +78,15 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     @IBAction func gotoBombGame() {
         performSegueWithIdentifier("minigameSegue", sender: "bomb")
     }
+    @IBAction func getStreamToiPad(sender: AnyObject) {
+        if ConnectionManager.sharedInstance.getIpadPeer() != nil{
+            self.whoisResponse(nil);
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "minigameSegue" {
-            let minivc = segue.destinationViewController as! MiniGameViewController
+            let minivc = segue.destinationViewController as! MinigameDescriptionViewController
             switch sender as! String {
             case "flap":
                 minivc.minigame = .FlappyFish
@@ -76,7 +99,9 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         
     }
     @IBAction func botaoDeTeste(sender: AnyObject) {
-        GameManager.sharedInstance.beginMinigame()
+        var dic = ["closeController":""]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+
     }
     
 }

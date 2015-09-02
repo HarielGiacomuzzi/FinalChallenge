@@ -80,7 +80,7 @@ class BombPlayerNode: SKNode {
         
         self.addChild(roboBody!)
         roboBody?.position = CGPointMake(0, 0)
-       roboBody?.zPosition = 4
+        roboBody?.zPosition = 4
         var animationAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.25)
         roboBody!.runAction(SKAction.repeatActionForever(animationAction))
         

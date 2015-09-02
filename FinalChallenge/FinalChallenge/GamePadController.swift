@@ -10,6 +10,11 @@ import UIKit
 
 class GamePadController : UIViewController{
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil);
+    }
+    
     @IBAction func upDataSender() {
         
         var action = ["way":PlayerAction.Up.rawValue]
@@ -21,6 +26,10 @@ class GamePadController : UIViewController{
         var action = ["way":PlayerAction.Down.rawValue]
         var dic = ["controllerAction":"", "action":action]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
+    
+    func closeController(data:NSNotification) {
+        navigationController?.popViewControllerAnimated(false)
     }
     
 }

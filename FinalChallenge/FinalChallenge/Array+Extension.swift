@@ -20,4 +20,14 @@ extension Array {
         }
         return false
     }
+    
+    //gets random item and removes from array
+    mutating func randomItem() -> T {
+        let index = Int(arc4random_uniform(UInt32(self.count)))
+        var item = self[index]
+        self.removeAtIndex(index)
+        return item
+    }
+    
+
 }

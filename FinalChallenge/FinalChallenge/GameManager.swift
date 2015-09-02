@@ -16,21 +16,32 @@ class GameManager {
     var playerRank = [String]()
     var isMultiplayer : Bool?
     var players = [Player]()
+<<<<<<< HEAD
     var totalGameTurns = 0
+=======
+    var isOnMiniGame = false;
+>>>>>>> 0cf3b209501c3d49dc546fff6b7e949781ace4e2
     var controlesDeTurno = 0
+    
+    //minigame controllers
+    var minigameDescriptionViewController : MinigameDescriptionViewController?
+    var minigameViewController : MiniGameViewController?
+    var minigameGameOverViewController : MinigameGameOverController?
+    
+    var minigameOrderArray : [Minigame] = []
+    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
     
     init(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
     }
     
     func playerTurnEnded(player : Player?){
-      //chama aqui o próximo player :D controlar ternario Hariel :D
-        println(players.count)
-        if controlesDeTurno >= players.count - 1{
+        if controlesDeTurno >= players.count{
             controlesDeTurno = 0;
-            //TODO chama o outro cara...
+            self.isOnMiniGame = true;
+            beginMinigame()
         }else{
-            controlesDeTurno = controlesDeTurno+1;
+            //controlesDeTurno = controlesDeTurno+1;
         }
         selectPlayers(controlesDeTurno)
      }
@@ -40,7 +51,9 @@ class GameManager {
             for p in players{
                 if p.playerIdentifier == (data.userInfo!["peerID"] as! String){
                     BoardGraph.SharedInstance.walk(result, player: p, view: boardViewController);
-                    playerTurnEnded(p)
+                    if !self.isOnMiniGame{
+                        playerTurnEnded(p)
+                    }
                     break;
                 }
             }
@@ -63,11 +76,14 @@ class GameManager {
     }
     
     func selectPlayers(i:Int){
-        var p = players[i]
-        var aux = NSMutableDictionary();
-        aux.setValue(p.playerIdentifier, forKey: "playerID");
-        aux.setValue(" ", forKey: "playerTurn");
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+        if !self.isOnMiniGame{
+            controlesDeTurno++
+            var p = players[i]
+            var aux = NSMutableDictionary();
+            aux.setValue(p.playerIdentifier, forKey: "playerID");
+            aux.setValue(" ", forKey: "playerTurn");
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+        }
     }
     
     /*
@@ -78,8 +94,58 @@ class GameManager {
     }*/
     
     func beginMinigame() {
-        var minigame = Minigame.FlappyFish
+        println("CHAMEI A FUNÇAO GO TO MINIGAME")
+        println("O ARRAY TEM \(minigameOrderArray.count) ELEMENTOS")
+        for m in minigameOrderArray {
+            println(m.rawValue)
+        }
+        if minigameOrderArray.isEmpty {
+            println("OPS, ESTAVA VAZIO, HEHEHE, VOU ENCHE-LO")
+            fillMinigameOrderArray()
+            println("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
+            for m in minigameOrderArray {
+                println(m.rawValue)
+            }
+        }
+        var minigame = minigameOrderArray.randomItem()
+        
+        println("SERA QUE EU REMOVI UM ELEMENTO MESMO GALERA????")
+        println("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
+        for m in minigameOrderArray {
+            println(m.rawValue)
+        }
+        
+        println("O ELEMENTO ESCOLHIDO  R A N D O M I C A M E N T E  FOI O \(minigame.rawValue)")
         var dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
+
     }
+    
+    func fillMinigameOrderArray() {
+        for minigame in allMinigames {
+            minigameOrderArray.append(minigame)
+        }
+    }
+    
+    func dismissMinigame() {
+        if let vc = minigameGameOverViewController {
+            vc.dismissViewControllerAnimated(false, completion: {() in
+                if let vc2 = self.minigameViewController {
+                    vc2.dismissViewControllerAnimated(false, completion: {() in
+                        if let vc3 = self.minigameDescriptionViewController {
+                            vc3.dismissViewControllerAnimated(false, completion: nil)
+                        }
+                    })
+                }
+            })
+            //selectPlayers(0);
+        }
+        println("Cheguei aqui :P");
+        var dic = ["closeController":" "]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        self.isOnMiniGame = false;
+        self.playerTurnEnded(nil);
+    }
+    
 }

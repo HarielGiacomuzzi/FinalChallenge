@@ -9,6 +9,11 @@
 import UIKit
 
 class SwipeGamePadControllerViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil);
+    }
 
     var beginX:CGFloat = 0.0
     var beginY:CGFloat = 0.0
@@ -40,6 +45,10 @@ class SwipeGamePadControllerViewController: UIViewController {
         var dic = ["controllerAction":"", "action":action]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
+    }
+    
+    func closeController(data:NSNotification) {
+        navigationController?.popViewControllerAnimated(false)
     }
 
 }

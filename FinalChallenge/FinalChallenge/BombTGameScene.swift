@@ -73,7 +73,19 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: NSTimeInterval) {
-        self.gameOver()
+        
+        var finished = true
+        for wall in walls {
+            if wall.hasPlayer {
+                finished = false
+            }
+        }
+        
+        if finished && !paused{
+            self.gameOver()
+            self.paused = true
+        }
+
     }
     
     override func didMoveToView(view: SKView) {
@@ -89,7 +101,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         let fundo = SKSpriteNode(imageNamed: "floor")
         self.addChild(fundo)
         fundo.position = CGPoint(x: self.frame.width / 2, y : self.frame.height/2)
-        fundo.zPosition = 1
+
         
         
         
@@ -101,7 +113,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             spawnPlayers()
         }
         createPlayersAndObstacles()
-        generateBomb(nil, bombTimer: 100)
+        generateBomb(100)
         
     }
     
@@ -121,7 +133,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         var north = BombWallNode(size: size, texture: SKTexture(imageNamed: "wallh"))
         north.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height - 15)
         self.addChild(north)
-        north.zPosition = 2
+
         walls.append(north)
         maxY = north.position.y - north.size.height / 2
         north.hasPlayer = true
@@ -131,7 +143,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         var south = BombWallNode(size: size, texture: SKTexture(imageNamed: "wallh"))
         south.position = CGPointMake(self.frame.size.width / 2, 15)
         self.addChild(south)
-        south.zPosition = 2
+
         walls.append(south)
         minY = south.position.y + south.size.height / 2
         south.hasPlayer = true
@@ -140,14 +152,14 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         size = CGSize(width: 45, height: self.frame.size.height)
         let blackBar = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: (self.frame.width - south.size.width), height: self.frame.height))
         blackBar.position = CGPoint(x: 0 , y: self.frame.height/2)
-        blackBar.zPosition = 2
+
         self.addChild(blackBar)
         
         
         var east = BombWallNode(size: size, texture: SKTexture(imageNamed: "wallv"))
         east.position = CGPointMake(north.position.x + north.size.width / 2, self.frame.size.height / 2)
         self.addChild(east)
-        east.zPosition = 2
+
         walls.append(east)
         maxX = east.position.x - east.size.width / 2
         east.hasPlayer = true
@@ -157,7 +169,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         let blackBar2 = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: (self.frame.width - south.size.width), height: self.frame.height))
         blackBar2.position = CGPoint(x: self.frame.width , y: self.frame.height/2)
-        blackBar2.zPosition = 2
+
 
         self.addChild(blackBar2)
         
@@ -165,7 +177,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         var west = BombWallNode(size: size, texture: SKTexture(imageNamed: "wallv"))
         west.position = CGPointMake(north.position.x - north.size.width / 2, self.frame.size.height / 2)
         self.addChild(west)
-        west.zPosition = 2
+
         walls.append(west)
         minX = west.position.x + west.size.width / 2
         west.hasPlayer = true
@@ -181,7 +193,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         for connectedPeer in connectedPeers {
             var player = players[i]
-            player.zPosition = 10
+
             player.identifier = connectedPeer.displayName
             for boardPlayer in boardPlayers {
                 if player.identifier == boardPlayer.playerIdentifier {
@@ -285,8 +297,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func gameOver(){
-        //gameController = self.view?.window?.rootViewController as! FlappyGameViewController
-        //gameController!.GameOverView.alpha = 1;
+        self.gameController!.gameOverController(playerRank.reverse())
         
     }
     
@@ -362,9 +373,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func explodePlayer(explodedPlayer:BombPlayerNode, explodedBomb:SKSpriteNode ) {
         
-        //animate explosion here
-        //...
-        
         //remove stuff
         explodedBomb.removeFromParent()
         explodedPlayer.removeFromParent()
@@ -408,7 +416,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
 
             self.addChild(part)
-            part.zPosition = 1
+
             part.position = explodedPlayer.position
             part.physicsBody = SKPhysicsBody(rectangleOfSize: part.size)
             part.physicsBody?.applyAngularImpulse(0.04)
@@ -440,17 +448,12 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
                 explosion.physicsBody?.categoryBitMask = 0x0
                 explosion.physicsBody?.applyAngularImpulse(rotacao)
                 explosion.physicsBody?.dynamic = false
-                explosion.zPosition = 2
+
                 self.addChild(explosion)
 
                 explosion.runAction(crescimento, completion: { () -> Void in
                     explosion.removeFromParent()
                 })
-                
-                
-                
-
-                
             }
         }
 
@@ -459,7 +462,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.playerRank.append(explodedPlayer.identifier)
         println(playerRank)
         //respawn bomb
-        generateBomb(nil, bombTimer: 100)
+        generateBomb(100)
         
         //audio explosion
         self.runAction(AudioSource.sharedInstance.playExploadSound())
@@ -467,13 +470,20 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func messageReceived(identifier: String, dictionary: NSDictionary) {
-        var x = dictionary.objectForKey("x") as! CGFloat
-        var y = dictionary.objectForKey("y") as! CGFloat
+                println("recebeu msg")
+        var x:CGFloat = 0.0
+        var y:CGFloat = 0.0
+        if dictionary.objectForKey("x") != nil && dictionary.objectForKey("y") != nil {
+            x = dictionary.objectForKey("x") as! CGFloat
+            y = dictionary.objectForKey("y") as! CGFloat
+        }
         
-        println("recebeu msg")
-
+        println("\(identifier) tentou atirar a bomba")
         if playerActive == identifier {
+            println("e conseguiu com direçao (\(x),\(y))")
             throwBomb(x, y: y)
+        } else {
+            println("mas ele nao estava com ela")
         }
         
     }
@@ -493,24 +503,16 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     }
     
-    func generateBomb(grabbedBy : SKNode? , bombTimer : Double ){
+    func generateBomb(bombTimer : Double ){
         fagulhando = false
         
         bombShouldExplode = false
         var x : CGFloat?
         var y : CGFloat?
         
-        if let initialNode = grabbedBy {
-            x = initialNode.position.x
-            y = initialNode.position.y
-            
-        }
-        else {
-            x = self.frame.size.width/2
-            y = self.frame.size.height/2
-        }
-        
-        
+        x = self.frame.size.width/2
+        y = self.frame.size.height/2
+
         let spriteAnimatedAtlas = SKTextureAtlas(named: "bombGame")//sprites
         
         let texture = spriteAnimatedAtlas.textureNamed("bombModel")
@@ -525,7 +527,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         bomb.physicsBody?.contactTestBitMask = playerCategory | worldCategory
         self.addChild(bomb)
         bomb.physicsBody?.mass = 1
-        self.physicsBody?.dynamic = true
+        bomb.physicsBody?.dynamic = true
+        bomb.zPosition = 50
         
         var pavioAntigo = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: 3, height: 5))
         pavioAntigo.physicsBody = SKPhysicsBody(rectangleOfSize: pavioAntigo.size)
@@ -537,7 +540,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(pavioAntigo)
         pavioArray.append(pavioAntigo)
         
-        bomb.zPosition = 10
+        pavioAntigo.zPosition = 50
 
         self.physicsWorld.addJoint(jointPavio)
         
@@ -552,7 +555,8 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             var jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: pavioNovo.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
             self.addChild(pavioNovo)
             self.physicsWorld.addJoint(jointPavios)
-            pavioNovo.zPosition = 6
+            pavioNovo.zPosition = 50
+
             pavioAntigo = pavioNovo
             pavioArray.append(pavioNovo)
         }
@@ -561,13 +565,14 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         fagulha.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
         fagulha.physicsBody?.categoryBitMask = fireCategory
         fagulha.physicsBody?.collisionBitMask = bombCategory
+        fagulha.zPosition = 50
         fagulha.position = CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame))
         self.addChild(fagulha)
         
         fagulhaJoint = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody, bodyB: fagulha.physicsBody, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
         self.physicsWorld.addJoint(fagulhaJoint)
-        fagulha.zPosition = 2
-        bomb.zPosition = 1
+
+
         
         var bombStartX = randomBetweenNumbers(-10, secondNum: 10)
         
@@ -579,8 +584,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         throwBomb(vet.dx, y: vet.dy)
         
-        
-
     }
     
     func animateFagulha() {
@@ -618,9 +621,4 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
         return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
-
-    
-    
-    
-    
 }

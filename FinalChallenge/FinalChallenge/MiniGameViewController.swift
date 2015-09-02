@@ -27,6 +27,8 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("Dei load na minigameview controller")
+        GameManager.sharedInstance.minigameViewController = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_ControlAction", object: nil);
         
@@ -50,7 +52,14 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         scene.gameController = self
         scene.scaleMode = .AspectFit
         skView.presentScene(scene)
+        println("apresentei a cena sem crashar")
         
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+
     }
     
     func messageReceived(data : NSNotification){

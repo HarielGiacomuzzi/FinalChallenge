@@ -21,6 +21,7 @@ class AccelerometerGamePadController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil);
         
         //gameManager?.miniGameActive =
         
@@ -35,7 +36,7 @@ class AccelerometerGamePadController: UIViewController {
                     else{
                         return
                     }
-                    print(" Y = \(data.acceleration.y)")
+//                    print(" Y = \(data.acceleration.y)")
                     self.sendData(data.acceleration.y)
                 }
             )
@@ -56,5 +57,10 @@ class AccelerometerGamePadController: UIViewController {
             var dic = ["controllerAction":"", "action":action]
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         } 
+    }
+    
+    func closeController(data:NSNotification) {
+        navigationController?.popViewControllerAnimated(false)
+
     }
 }

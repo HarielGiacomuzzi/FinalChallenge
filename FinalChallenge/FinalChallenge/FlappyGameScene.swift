@@ -317,20 +317,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
     }
     
-//    override func messageReceived(identifier:String, action:PlayerAction) {
-//        for player in players {
-//            if player.identifier == identifier {
-//                //movimento pelo gamepad
-//                if action == .Up {
-//                    player.goUp()
-//                } else {
-//                    player.goDown()
-//                }
-//            }
-//        }
-//        
-//    }
-    
     override func messageReceived(identifier: String, dictionary: NSDictionary) {
         for player in players {
             if player.identifier == identifier {
