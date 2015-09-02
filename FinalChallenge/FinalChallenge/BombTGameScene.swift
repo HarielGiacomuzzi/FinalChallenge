@@ -470,10 +470,14 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func messageReceived(identifier: String, dictionary: NSDictionary) {
-        var x = dictionary.objectForKey("x") as! CGFloat
-        var y = dictionary.objectForKey("y") as! CGFloat
+                println("recebeu msg")
+        var x:CGFloat = 0.0
+        var y:CGFloat = 0.0
+        if dictionary.objectForKey("x") != nil && dictionary.objectForKey("y") != nil {
+            x = dictionary.objectForKey("x") as! CGFloat
+            y = dictionary.objectForKey("y") as! CGFloat
+        }
         
-        println("recebeu msg")
         println("\(identifier) tentou atirar a bomba")
         if playerActive == identifier {
             println("e conseguiu com direçao (\(x),\(y))")
