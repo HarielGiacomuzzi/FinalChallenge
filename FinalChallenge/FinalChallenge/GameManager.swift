@@ -16,6 +16,7 @@ class GameManager {
     var playerRank = [String]()
     var isMultiplayer : Bool?
     var players = [Player]()
+    var isOnMiniGame = false;
     var controlesDeTurno = 0
     
     //minigame controllers
@@ -31,15 +32,15 @@ class GameManager {
     }
     
     func playerTurnEnded(player : Player?){
-      //chama aqui o próximo player :D controlar ternario Hariel :D
         println(players.count)
-        if controlesDeTurno >= players.count - 1{
+        if controlesDeTurno > players.count - 1{
             controlesDeTurno = 0;
+            self.isOnMiniGame = true;
             beginMinigame()
         }else{
-            controlesDeTurno = controlesDeTurno+1;
+            //controlesDeTurno = controlesDeTurno+1;
         }
-        selectPlayers(controlesDeTurno)
+        selectPlayers(controlesDeTurno++)
      }
     
     func messageReceived(data : NSNotification){
@@ -47,7 +48,9 @@ class GameManager {
             for p in players{
                 if p.playerIdentifier == (data.userInfo!["peerID"] as! String){
                     BoardGraph.SharedInstance.walk(result, player: p, view: boardViewController);
-                    playerTurnEnded(p)
+                    if !self.isOnMiniGame{
+                        playerTurnEnded(p)
+                    }
                     break;
                 }
             }
@@ -70,11 +73,13 @@ class GameManager {
     }
     
     func selectPlayers(i:Int){
-        var p = players[i]
-        var aux = NSMutableDictionary();
-        aux.setValue(p.playerIdentifier, forKey: "playerID");
-        aux.setValue(" ", forKey: "playerTurn");
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+        if !self.isOnMiniGame{
+            var p = players[i]
+            var aux = NSMutableDictionary();
+            aux.setValue(p.playerIdentifier, forKey: "playerID");
+            aux.setValue(" ", forKey: "playerTurn");
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+        }
     }
     
     /*
@@ -85,11 +90,12 @@ class GameManager {
     }*/
     
     func beginMinigame() {
+        println("chamei o begin minigame")
         if minigameOrderArray.isEmpty {
             fillMinigameOrderArray()
         }
         var minigame = minigameOrderArray.randomItem()
-        var dic = ["openController":"", "gameName":minigame.rawValue]
+        var dic = ["openController":" ", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: nil)
 
@@ -113,9 +119,11 @@ class GameManager {
                     })
                 }
             })
+            //selectPlayers(0);
         }
-        
         var dic = ["closeController":""]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        self.isOnMiniGame = false;
+        self.playerTurnEnded(nil);
     }
 }

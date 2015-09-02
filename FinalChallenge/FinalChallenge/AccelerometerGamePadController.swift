@@ -36,7 +36,7 @@ class AccelerometerGamePadController: UIViewController {
                     else{
                         return
                     }
-                    print(" Y = \(data.acceleration.y)")
+//                    print(" Y = \(data.acceleration.y)")
                     self.sendData(data.acceleration.y)
                 }
             )
