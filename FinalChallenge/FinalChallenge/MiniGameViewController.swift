@@ -56,6 +56,12 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+
+    }
+    
     func messageReceived(data : NSNotification){
         var peerDisplayName = data.userInfo!["peerID"] as! String
         var data = data.userInfo!["actionReceived"] as! NSDictionary
