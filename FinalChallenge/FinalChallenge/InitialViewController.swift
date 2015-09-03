@@ -48,11 +48,14 @@ class InitialViewController: UIViewController
     }
     
     @IBAction func partyModeButtonPressed() {
-        if idiom == iPad {
-            performSegueWithIdentifier("ipadSegue", sender: nil)
-        } else {
-            performSegueWithIdentifier("iphoneSegue", sender: nil)
-        }
+        
+        openBook(0.5, strapTime: 0.3, coverTime: 0.5, completion: {() in
+            if self.idiom == self.iPad {
+                self.performSegueWithIdentifier("ipadSegue", sender: nil)
+            } else {
+                self.performSegueWithIdentifier("iphoneSegue", sender: nil)
+            }
+        })
     }
 
     
@@ -139,7 +142,7 @@ class InitialViewController: UIViewController
     
     // MARK: - Animation
     
-    func openBook(pinTime:NSTimeInterval, strapTime:NSTimeInterval, coverTime: NSTimeInterval) {
+    func openBook(pinTime:NSTimeInterval, strapTime:NSTimeInterval, coverTime: NSTimeInterval, completion:() -> ()) {
         
         UIView.animateWithDuration(pinTime, animations: {
             self.removePin()
@@ -150,7 +153,7 @@ class InitialViewController: UIViewController
                         UIView.animateWithDuration(coverTime, animations: {
                             self.removeCover()
                             }, completion: {(value: Bool) in
-                                
+                                completion()
                         })
                         
                 })
@@ -171,10 +174,4 @@ class InitialViewController: UIViewController
         rightCover.frame = CGRectMake(screenWidth / 2, leftCover.frame.origin.y, rightCover.frame.size.width, rightCover.frame.size.height)
     }
     
-    
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        openBook(2.0, strapTime: 1.0, coverTime: 2.0)
-        
-    }
-
 }
