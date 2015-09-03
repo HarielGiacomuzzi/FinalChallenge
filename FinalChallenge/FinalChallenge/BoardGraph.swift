@@ -136,7 +136,7 @@ class BoardGraph : NSObject{
         playerLastNode?.removePlayer(player);
         
         if x.count > 1{
-            var alerta = UIAlertController(title: "Select a Path", message: "escolhe ai fera!", preferredStyle: .Alert)
+            var alerta = AlertPath(title: "Select a Path", message: "escolhe ai fera!", preferredStyle: .Alert)
             for i in x{
                 var action = UIAlertAction(title: "Path: \(keyFor(i))", style: .Default) { action -> Void in
                     player.x = i.posX
@@ -145,7 +145,7 @@ class BoardGraph : NSObject{
                 }
                     alerta.addAction(action)
                 }
-                view?.presentViewController(alerta, animated: true, completion: nil)
+            view?.presentViewController(alerta, animated: true, completion: nil)
         }else{
             var i = x[0]
             player.x = i.posX
@@ -155,21 +155,7 @@ class BoardGraph : NSObject{
     
     }
     
-    // check if there's a alternative path
-    private func havePath(from : String, to : String){
-    }
-    
-    private func sendPathChosenNotification(){
-    
-    }
-    
     private func paintPaths(path : [String]){
-    }
-    
-    func continueWalking(direction : String){
-    }
-    
-    private func gotoNode(){
     }
     
     class BoardNode : NSObject{
