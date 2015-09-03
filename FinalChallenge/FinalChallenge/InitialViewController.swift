@@ -87,12 +87,18 @@ class InitialViewController: UIViewController
     func setupCovers() {
         let leftCoverImage = UIImage(named: "cover esq")
         let rightCoverImage = UIImage(named: "cover dir")
-        let leftCoverRect = CGRectMake(0, 0, screenWidth, screenHeight)
-        let rightCoverRect = CGRectMake(0, 0, screenWidth, screenHeight)
+        
+        let xScale = screenWidth / leftCoverImage!.size.width
+        
+        var ly = screenHeight / 2 - (leftCoverImage!.size.height * xScale) / 2
+        
+        let leftCoverRect = CGRectMake(0, ly, screenWidth, leftCoverImage!.size.height * xScale)
+        let rightCoverRect = CGRectMake(0, ly, screenWidth, leftCoverImage!.size.height * xScale)
         leftCover = UIImageView(frame: leftCoverRect)
         rightCover = UIImageView(frame: rightCoverRect)
-        rightCover.image = UIImage(named: "cover dir")
-        leftCover.image = UIImage(named: "cover esq")
+        
+        rightCover.image = rightCoverImage
+        leftCover.image = leftCoverImage
         
         mainView.addSubview(rightCover)
         mainView.addSubview(leftCover)
@@ -103,9 +109,12 @@ class InitialViewController: UIViewController
         let strapHeight = strapImage!.size.height
         let strapWidth = strapImage!.size.width
         
-        let strapY = (screenHeight / 2) - (strapHeight / 2)
         
-        let strapRect = CGRectMake(0, strapY, screenWidth, strapHeight)
+        let xScale = screenWidth / strapWidth
+        
+        let strapY = (screenHeight / 2) - ((strapHeight * xScale) / 2)
+        
+        let strapRect = CGRectMake(0, strapY, screenWidth, strapHeight * xScale)
         
         strap = UIImageView(frame: strapRect)
         strap.image = strapImage
@@ -115,7 +124,12 @@ class InitialViewController: UIViewController
     
     func setupPin() {
         let pinImage = UIImage(named: "pin")
-        let pinRect = CGRectMake(0, 0, screenWidth, screenHeight)
+        
+        let xScale = screenWidth / pinImage!.size.width
+        
+        let pinY = screenHeight / 2 - (pinImage!.size.height * xScale) / 2
+        
+        let pinRect = CGRectMake(0, pinY, screenWidth, pinImage!.size.height * xScale)
         
         pin = UIImageView(frame: pinRect)
         pin.image = pinImage
@@ -153,8 +167,8 @@ class InitialViewController: UIViewController
     }
     
     func removeCover() {
-        leftCover.frame = CGRectMake(-leftCover.frame.size.width / 2, 0, leftCover.frame.size.width, leftCover.frame.size.height)
-        rightCover.frame = CGRectMake(screenWidth / 2, 0, rightCover.frame.size.width, rightCover.frame.size.height)
+        leftCover.frame = CGRectMake(-leftCover.frame.size.width / 2, leftCover.frame.origin.y, leftCover.frame.size.width, leftCover.frame.size.height)
+        rightCover.frame = CGRectMake(screenWidth / 2, leftCover.frame.origin.y, rightCover.frame.size.width, rightCover.frame.size.height)
     }
     
     
