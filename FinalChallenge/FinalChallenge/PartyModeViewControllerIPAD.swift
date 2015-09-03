@@ -27,7 +27,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     @IBOutlet weak var player4Image: UIImageView!
     @IBOutlet weak var player4Label: UILabel!
     
-    
+    var arrayAvatars = [String()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         ConnectionManager.sharedInstance.setupBrowser()
         ConnectionManager.sharedInstance.browser?.delegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_ControlAction", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_GameSetup", object: nil);
         
         turnSelector.dataSource = self
         turnSelector.delegate = self
@@ -57,16 +57,16 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         GameManager.sharedInstance.players = connectedPlayers
         
         switch(GameManager.sharedInstance.players.count){
-        case 4: //player4Image.alpha = 1
+        case 4: 
                 player4Label.text = GameManager.sharedInstance.players[3].playerIdentifier
                 fallthrough
-        case 3: //player3Image.alpha = 1
+        case 3:
                 player3Label.text = GameManager.sharedInstance.players[2].playerIdentifier
                 fallthrough
-        case 2: //player2Image.alpha = 1
+        case 2:
                 player2Label.text = GameManager.sharedInstance.players[1].playerIdentifier
                 fallthrough
-        case 1: //player1Image.alpha = 1
+        case 1:
                 player1Label.text = GameManager.sharedInstance.players[0].playerIdentifier
                 break
         default: break
@@ -84,7 +84,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     }
     
     func gameSettings(){
-        
+        GameManager.sharedInstance.totalGameTurns = turns
     }
     
     //MARK: Picker data source
@@ -106,29 +106,45 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     
     func messageReceived(data : NSNotification){
         var identifier = data.userInfo!["peerID"] as! String
-        var dictionary = data.userInfo!["actionReceived"] as! NSDictionary
+        var dictionary = data.userInfo!["avatar"] as! NSDictionary
         var message = dictionary["avatar"] as! String
         
-        switch(identifier){
-        case player1Label.text! : player1Image.alpha = 1
-        case player2Label.text! : player2Image.alpha = 1
-        case player3Label.text! : player3Image.alpha = 1
-        case player4Label.text! : player4Image.alpha = 1
-        default: break
-        }
         
-        println("Mensagem: \(message) e Identifier: \(identifier)")
-        /*for player in players {
-            if player.identifier == identifier {
-                var message = dictionary["way"] as! String
-                var messageEnum = PlayerAction(rawValue: message)
-                if messageEnum == .Up {
-                    player.goUp()
-                } else {
-                    player.goDown()
+        for p in GameManager.sharedInstance.players {
+            if identifier == p.playerIdentifier{
+                if let notNil = p.avatar{
+                    // verifica se tem avatar caso tenha faz
+                    arrayAvatars.removeObject(notNil)
                 }
             }
-        }*/
+        }
+        
+        
+        switch(identifier){
+        case player1Label.text! : player1Image.image = UIImage(named: message)
+        case player2Label.text! : player2Image.image = UIImage(named: message)
+        case player3Label.text! : player3Image.image = UIImage(named: message)
+        case player4Label.text! : player4Image.image = UIImage(named: message)
+        default: break
+        }
+        for p in GameManager.sharedInstance.players {if identifier == p.playerIdentifier{p.avatar = message}}
+        println("Mensagem: \(message) e Identifier: \(identifier)")
+        updateIphoneUsersData(message)
     }
 
+    
+    func updateIphoneUsersData(avat:String){
+        
+        arrayAvatars.append(avat)
+        
+        println(arrayAvatars)
+        
+        let arrayPlayers = arrayAvatars
+        var array = ["arrayPlayers":arrayPlayers]
+        var dic = ["IphoneGameSetup":" ", "arrayPlayers":array]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
+    
+    
+    
 }
