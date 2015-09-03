@@ -74,14 +74,14 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: NSTimeInterval) {
         
-        var finished = true
+        var playersLeft = 0
         for wall in walls {
             if wall.hasPlayer {
-                finished = false
+                playersLeft++
             }
         }
         
-        if finished && !paused{
+        if playersLeft <= 1 && !paused{
             self.gameOver()
             self.paused = true
         }
@@ -356,6 +356,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func handleBombWallContact(bomb:SKPhysicsBody, wall:SKPhysicsBody) {
         let wallNode = wall.node as! BombWallNode
+        playerWithBomb = nil
         if wallNode.hasPlayer {
             bomb.velocity = CGVectorMake(0.0, 0.0)
             bomb.angularVelocity = 0.0
@@ -363,7 +364,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
                 
             }
         } else {
-            playerWithBomb = nil
             var velocity = bomb.velocity
             velocity.normalize()
             bomb.velocity = CGVectorMake(velocity.dx * bombSpeedMultiplier, velocity.dy * bombSpeedMultiplier)
