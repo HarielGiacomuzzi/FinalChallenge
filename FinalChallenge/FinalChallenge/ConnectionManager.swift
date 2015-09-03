@@ -189,7 +189,23 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
                 return
                 }
             }
+        // send avatar to iPad controller
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("GameSetup") != nil {
+                userInfo.updateValue(message.valueForKey("avatar") as! NSObject, forKey: "avatar")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_GameSetup", object: nil, userInfo: userInfo)
+                return
+            }
+        }
             
+        //
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("IphoneGameSetup") != nil {
+                userInfo.updateValue(message.valueForKey("arrayPlayers") as! NSObject, forKey: "arrayPlayers")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_IphoneGameSetup", object: nil, userInfo: userInfo)
+                return
+            }
+        }
             
         // if I dont know what it is I will send the default message
         NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)
