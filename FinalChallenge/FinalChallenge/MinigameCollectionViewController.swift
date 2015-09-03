@@ -15,11 +15,6 @@ class MinigameCollectionViewController : UIViewController {
         minigameCollection = ["Flappy Fish", "Bomb Game", "Third Game", "Last Game"]
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return minigameCollection.count
-    }
-    
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
