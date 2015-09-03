@@ -26,7 +26,8 @@ class GameManager {
     var minigameGameOverViewController : MinigameGameOverController?
     
     var minigameOrderArray : [Minigame] = []
-    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    var allMinigames : [Minigame] = [.FlappyFish]
     
     init(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
@@ -117,6 +118,12 @@ class GameManager {
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
 
+    }
+    
+    func pathChosen() {
+        if isOnMiniGame {
+        beginMinigame()
+        }
     }
     
     func fillMinigameOrderArray() {

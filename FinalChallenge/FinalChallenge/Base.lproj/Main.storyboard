@@ -566,7 +566,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvJ-sc-ePn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-325" y="463"/>
+            <point key="canvasLocation" x="-421" y="515"/>
         </scene>
         <!--Minigame Collection View Controller-->
         <scene sceneID="YJc-zg-dwn">
@@ -583,8 +583,8 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tK7-Hf-xCC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="spF-q5-t30">
-                                    <size key="itemSize" width="254" height="140"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="itemSize" width="250" height="140"/>
+                                    <size key="headerReferenceSize" width="1" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
@@ -593,10 +593,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="254" height="140"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fvB-21-jF9">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fvB-21-jF9">
                                                     <rect key="frame" x="0.0" y="0.0" width="254" height="140"/>
                                                 </imageView>
                                             </subviews>
@@ -613,6 +613,9 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PpB-YM-dJ9">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="Y9w-QZ-R0C" id="b0W-kj-Hoz"/>
                                     <outlet property="delegate" destination="Y9w-QZ-R0C" id="rgT-sI-r0M"/>
@@ -844,7 +847,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtn-fo-B5S">
-                                <rect key="frame" x="297.5" y="289" width="10" height="21"/>
+                                <rect key="frame" x="298" y="289" width="10" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ipq-1p-waw"/>
                                 </constraints>
@@ -895,8 +898,8 @@
         <image name="White" width="120" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ahl-Ky-SJK"/>
-        <segue reference="T9l-u6-hEW"/>
+        <segue reference="EGX-Pa-y2G"/>
+        <segue reference="LsT-VI-dB9"/>
         <segue reference="6ca-gz-9Tn"/>
     </inferredMetricsTieBreakers>
 </document>
