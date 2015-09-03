@@ -18,6 +18,7 @@
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA4D1B94BEE800E94400 /* bombGame.atlas */; };
 		26D6DA541B94CA7700E94400 /* bombSceneAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */; };
+		4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445D7C41B98C99F0049B787 /* AlertPath.swift */; };
 		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
@@ -102,6 +103,7 @@
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
 		26D6DA4D1B94BEE800E94400 /* bombGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bombGame.atlas; sourceTree = "<group>"; };
 		26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = bombSceneAssets.xcassets; sourceTree = "<group>"; };
+		4445D7C41B98C99F0049B787 /* AlertPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPath.swift; sourceTree = "<group>"; };
 		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */,
 				B5DD1B461B8F712A00AA1EB6 /* AudioSource.swift */,
 				B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */,
+				4445D7C41B98C99F0049B787 /* AlertPath.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
 				B5AFAD0A1B94C3770005F19E /* CustomMinigameCollectionView.swift in Sources */,
+				4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */,
 				DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */,
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,
 				DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */,
@@ -701,7 +705,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
@@ -715,7 +718,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
