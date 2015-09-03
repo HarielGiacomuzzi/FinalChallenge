@@ -85,6 +85,8 @@ class InitialViewController: UIViewController
     }
     
     func setupCovers() {
+        let leftCoverImage = UIImage(named: "cover esq")
+        let rightCoverImage = UIImage(named: "cover dir")
         let leftCoverRect = CGRectMake(0, 0, screenWidth, screenHeight)
         let rightCoverRect = CGRectMake(0, 0, screenWidth, screenHeight)
         leftCover = UIImageView(frame: leftCoverRect)
