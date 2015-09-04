@@ -505,7 +505,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8P-BP-RBF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-916" y="-536"/>
+            <point key="canvasLocation" x="-525" y="-496"/>
         </scene>
         <!--Party Mode View Controller-->
         <scene sceneID="Few-re-9Vu">
