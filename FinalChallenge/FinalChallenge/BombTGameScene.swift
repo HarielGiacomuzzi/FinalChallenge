@@ -117,13 +117,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
     }
     
-
-    
     func createPlayersAndObstacles() {
 
         // cria jogadores
-        
-        
     
     }
     

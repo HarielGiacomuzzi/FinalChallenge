@@ -19,6 +19,8 @@
 		26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA4D1B94BEE800E94400 /* bombGame.atlas */; };
 		26D6DA541B94CA7700E94400 /* bombSceneAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */; };
 		4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445D7C41B98C99F0049B787 /* AlertPath.swift */; };
+		4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4473647C1B9A065400C8AD9D /* puffGame.atlas */; };
+		4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */; };
 		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
@@ -110,6 +112,8 @@
 		26D6DA4D1B94BEE800E94400 /* bombGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bombGame.atlas; sourceTree = "<group>"; };
 		26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = bombSceneAssets.xcassets; sourceTree = "<group>"; };
 		4445D7C41B98C99F0049B787 /* AlertPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPath.swift; sourceTree = "<group>"; };
+		4473647C1B9A065400C8AD9D /* puffGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = puffGame.atlas; sourceTree = "<group>"; };
+		4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuffPlayer.swift; sourceTree = "<group>"; };
 		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
@@ -426,10 +430,12 @@
 		DBF7C0BD1B98D4920010FCFE /* PuffGame */ = {
 			isa = PBXGroup;
 			children = (
+				4473647C1B9A065400C8AD9D /* puffGame.atlas */,
 				DBF7C0BF1B98D4EE0010FCFE /* PuffGameScene.sks */,
 				DBF7C0C11B98D50E0010FCFE /* PuffGameControl.sks */,
 				DBF7C0C31B98D5430010FCFE /* PuffGameScene.swift */,
 				DBF7C0C51B98D8050010FCFE /* PuffGameViewController.swift */,
+				4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */,
 			);
 			name = PuffGame;
 			sourceTree = "<group>";
@@ -483,7 +489,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZX7GUMJ35C;
+						DevelopmentTeam = DVXNNDG4U4;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -543,6 +549,7 @@
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				269F18B01B86583000EAD94F /* wind.atlas in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
+				4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */,
 				B5DD1B541B8F90EC00AA1EB6 /* funMusic.mp3 in Resources */,
 				DBE862051B850DB700C8099E /* board_2.xml in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
@@ -592,6 +599,7 @@
 				DBF7C0C81B98DDB90010FCFE /* PuffGamePad.swift in Sources */,
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
+				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,
 				B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */,

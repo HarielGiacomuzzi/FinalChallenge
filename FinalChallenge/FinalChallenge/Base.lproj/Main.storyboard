@@ -917,7 +917,7 @@
         <!--Puff Game Pad-->
         <scene sceneID="DNu-aV-ag7">
             <objects>
-                <viewController id="j90-u9-H7a" customClass="PuffGamePad" sceneMemberID="viewController">
+                <viewController id="j90-u9-H7a" customClass="PuffGamePad" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FR7-Ua-Uek"/>
                         <viewControllerLayoutGuide type="bottom" id="hfm-Vu-rnR"/>
@@ -926,20 +926,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPb-nT-ONT">
-                                <rect key="frame" x="412" y="464" width="59" height="30"/>
-                                <state key="normal" title="Button 2">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uz6-fS-Hug">
-                                <rect key="frame" x="152" y="464" width="59" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uz6-fS-Hug">
+                                <rect key="frame" x="271" y="219" width="59" height="30"/>
                                 <state key="normal" title="Button 1">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pullButton:" destination="j90-u9-H7a" eventType="touchUpInside" id="T02-FV-T7X"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPb-nT-ONT">
+                                <rect key="frame" x="271" y="346" width="59" height="30"/>
+                                <state key="normal" title="Button 2">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushButton:" destination="j90-u9-H7a" eventType="touchUpInside" id="TRK-p8-SNv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RPb-nT-ONT" firstAttribute="top" secondItem="Uz6-fS-Hug" secondAttribute="bottom" constant="97" id="EMC-ha-XO4"/>
+                            <constraint firstItem="RPb-nT-ONT" firstAttribute="centerX" secondItem="Iu8-cp-1kj" secondAttribute="centerX" id="Tqj-DU-kwP"/>
+                            <constraint firstItem="Uz6-fS-Hug" firstAttribute="leading" secondItem="RPb-nT-ONT" secondAttribute="leading" id="atB-PN-5rY"/>
+                            <constraint firstItem="Uz6-fS-Hug" firstAttribute="top" secondItem="FR7-Ua-Uek" secondAttribute="bottom" constant="199" id="drs-dM-5RQ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drR-SW-8ty" userLabel="First Responder" sceneMemberID="firstResponder"/>
