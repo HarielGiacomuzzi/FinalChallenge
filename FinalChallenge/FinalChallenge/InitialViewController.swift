@@ -30,6 +30,7 @@ class InitialViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         screenHeight = UIScreen.mainScreen().bounds.height
         screenWidth = UIScreen.mainScreen().bounds.width
         

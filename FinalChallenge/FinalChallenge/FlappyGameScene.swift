@@ -30,7 +30,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     override func update(currentTime: NSTimeInterval) {
         
         //println(gameManager.isMultiplayer)
-        if players.count == 0 && gameManager.isMultiplayer == true && !self.paused{
+        if players.count == 1 && gameManager.isMultiplayer == true && !self.paused{
             println(self.gameManager.playerRank.count)
             for p in players{
                 self.playerRank.append(p.identifier!)
@@ -302,7 +302,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     func spawnSinglePlayer() {
         
         gameManager.isMultiplayer = false
-        
         testPlayer = FlappyPlayerNode()
         testPlayer!.identifier = "test player"
         testPlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)

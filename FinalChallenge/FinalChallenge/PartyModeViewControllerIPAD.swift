@@ -83,6 +83,11 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in}
     }
     
+    @IBAction func gotoBoardGame(sender: AnyObject){
+        BoardGraph.SharedInstance.loadBoard("board_2");
+        let boardGameViewController = BoardViewController()
+        self.presentViewController(boardGameViewController, animated: false, completion: nil)
+    }
     func gameSettings(){
         GameManager.sharedInstance.totalGameTurns = turns
     }
@@ -127,7 +132,18 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         case player4Label.text! : player4Image.image = UIImage(named: message)
         default: break
         }
-        for p in GameManager.sharedInstance.players {if identifier == p.playerIdentifier{p.avatar = message}}
+        for p in GameManager.sharedInstance.players {
+            if identifier == p.playerIdentifier{
+                p.avatar = message
+                switch(message){
+                    case "Red": p.color = UIColor.redColor()
+                    case "White": p.color = UIColor.whiteColor()
+                    case "Black": p.color = UIColor.blackColor()
+                    case "Blue": p.color = UIColor.blueColor()
+                    default: break
+                }
+            }
+        }
         println("Mensagem: \(message) e Identifier: \(identifier)")
         updateIphoneUsersData(message)
     }

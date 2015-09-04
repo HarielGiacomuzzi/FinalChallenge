@@ -9,26 +9,59 @@
 import UIKit
 class MinigameCollectionViewController : UIViewController {
     
-    var minigameCollection = [String]()
+    var minigameCollection = [Minigame]()
     
     override func viewDidLoad() {
-        minigameCollection = ["Flappy Fish", "Bomb Game", "Third Game", "Last Game"]
+        minigameCollection = GameManager.sharedInstance.allMinigames
+        ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true);
+
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return minigameCollection.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CustomMinigameCollectionView
-        switch minigameCollection[indexPath.row]{
-            case "Flappy Fish": cell.backgroundColor = UIColor.redColor(); break
-            case "Bomb Game": cell.backgroundColor = UIColor.blueColor(); break
-            case "Third Game": cell.backgroundColor = UIColor.whiteColor(); break
-            case "Last Game": cell.backgroundColor = UIColor.purpleColor(); break
-            default : cell.backgroundColor = UIColor.greenColor(); break
+        
+        cell.minigameImage.image = UIImage(named: minigameCollection[indexPath.row].rawValue)
+        
+        println(minigameCollection[indexPath.row].rawValue)
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        switch(minigameCollection[indexPath.row]){
+            case .FlappyFish: cell.specialTag = "flap"
+            case .BombGame: cell.specialTag = "bomb"
+            default: break
         }
         // Configure the cell
         return cell
+    }
+    
+    //performSegueWithIdentifier("minigameSegue", sender: "flap")
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        if let cell : CustomMinigameCollectionView? = collectionView.cellForItemAtIndexPath(indexPath) as? CustomMinigameCollectionView{
+            performSegueWithIdentifier("minigameSegue", sender: cell?.specialTag)
+        }
+        
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "minigameSegue" {
+            let minivc = segue.destinationViewController as! MinigameDescriptionViewController
+            switch sender as! String {
+            case "flap":
+                minivc.minigame = .FlappyFish
+            case "bomb":
+                minivc.minigame = .BombGame
+            default:
+                ()
+            }
+        }
+        
     }
 }
