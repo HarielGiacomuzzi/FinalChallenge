@@ -152,4 +152,10 @@ class GameManager {
         self.playerTurnEnded(nil);
     }
     
+    func updatePlayerMoney(playerID:String, value:Int) {
+        var dic1 = ["player":playerID, "value": value]
+        var dic = ["updateMoney":" ", "dataDic" : dic1]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
+    
 }

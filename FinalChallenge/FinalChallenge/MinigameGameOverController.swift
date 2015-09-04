@@ -19,7 +19,6 @@ class MinigameGameOverController : UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         GameManager.sharedInstance.minigameGameOverViewController = self
-        println("Entrou no nova controller")
         //player = gameManager.playerRank
         println(player.count)
         for p in player {

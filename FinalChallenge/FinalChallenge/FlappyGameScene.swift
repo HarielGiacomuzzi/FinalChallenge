@@ -37,7 +37,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             }
             self.gameOver()
             self.paused = true
-//            AudioSource.sharedInstance.stopAudio()
         }
     }
     
@@ -331,14 +330,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func gameOver(){
-        //self
-        //dispatch_async(dispatch_get_main_queue(),{ [unowned self] in
-            //self.gameController!.gameOverTableView.reloadData()
-            //self.gameController?.gameOverTableView.beginUpdates()
-            //self.gameController?.gameOverTableView.beginUpdates()
-      // })
-      //  self.gameController!.GameOverView.hidden = false
-        
         self.gameController!.gameOverController(playerRank.reverse())
     }
     

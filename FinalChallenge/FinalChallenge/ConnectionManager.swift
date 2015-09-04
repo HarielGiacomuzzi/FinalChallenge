@@ -165,6 +165,15 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             
         // if we receive the commad of a controller
         if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("PuffGamePad") != nil {
+                userInfo.updateValue(message.valueForKey("action") as! NSObject, forKey: "actionReceived")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PuffGamePadAction", object: nil, userInfo: userInfo)
+                return
+            }
+        }
+            
+        // if we receive the commad of a controller
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
             if message.valueForKey("controllerAction") != nil {
                 userInfo.updateValue(message.valueForKey("action") as! NSObject, forKey: "actionReceived")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ControlAction", object: nil, userInfo: userInfo)
@@ -203,6 +212,15 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             if message.valueForKey("IphoneGameSetup") != nil {
                 userInfo.updateValue(message.valueForKey("arrayPlayers") as! NSObject, forKey: "arrayPlayers")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_IphoneGameSetup", object: nil, userInfo: userInfo)
+                return
+            }
+        }
+        // update player money
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("updateMoney") != nil {
+                println(message)
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateMoney", object: nil, userInfo: userInfo)
                 return
             }
         }
