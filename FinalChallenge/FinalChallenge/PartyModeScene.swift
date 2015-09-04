@@ -18,11 +18,15 @@ class PartyModeScene: SKScene {
     var playerSpriteNodeArray = [SKSpriteNode()]
     var beginPosition = CGPoint()
     let imageNames = ["Red", "White", "Blue", "Black"]
-
+    var takenAvatar = [String()]
+    var takenFlag = Bool()
+    var arrayAvatarSprite = [SKSpriteNode()]
     
     override init(size: CGSize) {
         super.init(size: size)
 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_IphoneGameSetup", object: nil);
+        
         self.background.name = "background"
         self.background.anchorPoint = CGPointZero
         self.addChild(background)
@@ -40,9 +44,14 @@ class PartyModeScene: SKScene {
             
             sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height/2)
             
+            arrayAvatarSprite.append(sprite)
+            
             self.addChild(sprite)
         }
     }
+    
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -78,7 +87,19 @@ class PartyModeScene: SKScene {
                     selectedNode.removeAllActions()
                 }else{
                     if selectedNode.position.y > self.frame.height/1.2{
-                        self.sendDataToIpad()
+                        for ta in takenAvatar{
+                            if ta != sp{
+                                takenFlag = false
+                            } else {
+                                takenFlag = true
+                                break
+                            }
+                        }
+                        if takenFlag == false{
+                            self.sendDataToIpad()
+                        } else {
+                            self.selectedNode.position = self.beginPosition
+                        }
                     } else {
                         self.selectedNode.position = self.beginPosition
                     }
@@ -119,7 +140,6 @@ class PartyModeScene: SKScene {
         }
     }
     
-    
     func panForTranslation(translation : CGPoint) {
         let position = selectedNode.position
         for sp in imageNames{
@@ -129,16 +149,35 @@ class PartyModeScene: SKScene {
         }
     }
     
-    
     func sendDataToIpad(){
         println(self.selectedNode.name)
         if let avatarName : String = self.selectedNode.name{
             self.selectedNode.removeFromParent()
             var avatar = ["avatar":avatarName]
-            var dic = ["GameSetup":"", "avatar":avatar]
+            var dic = ["GameSetup":" ", "avatar":avatar]
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         }
     }
+    
+    func messageReceived(data : NSNotification){
+        var identifier = data.userInfo!["peerID"] as! String
+        var dictionary = data.userInfo!["arrayPlayers"] as! NSDictionary
+        var message = dictionary["arrayPlayers"] as! [String]
+        self.takenAvatar = message
+        println(self.takenAvatar)
+        
+        for sprite in arrayAvatarSprite{
+            for taken in takenAvatar{
+                if sprite.name == taken{
+                    sprite.size = CGSize(width: 25, height: 25)
+                } else {
+                    sprite.size = CGSize(width: 50, height: 50)
+                }
+            }
+        }
+        
+    }
+    
     
 }
 
