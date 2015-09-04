@@ -27,6 +27,7 @@
 		5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */; };
 		5E68AD7B1B8CCD3E00FD4404 /* BombPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */; };
 		5E68AD7F1B8CD57C00FD4404 /* BombWallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */; };
+		5E70C7D31B9A0DB1005C753B /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */; };
 		5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */; };
 		5E7E45BC1B960AC600249B8A /* MinigameDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7E45BB1B960AC600249B8A /* MinigameDescriptionViewController.swift */; };
 		5E7E45BE1B960CCC00249B8A /* MinigameDetails.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E7E45BD1B960CCC00249B8A /* MinigameDetails.plist */; };
@@ -117,6 +118,7 @@
 		5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeGamePadControllerViewController.swift; sourceTree = "<group>"; };
 		5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombPlayerNode.swift; sourceTree = "<group>"; };
 		5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombWallNode.swift; sourceTree = "<group>"; };
+		5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimationSegue.swift; sourceTree = "<group>"; };
 		5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPlayerNode.swift; sourceTree = "<group>"; };
 		5E7E45BB1B960AC600249B8A /* MinigameDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameDescriptionViewController.swift; sourceTree = "<group>"; };
 		5E7E45BD1B960CCC00249B8A /* MinigameDetails.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MinigameDetails.plist; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 				B5DD1B461B8F712A00AA1EB6 /* AudioSource.swift */,
 				B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */,
 				4445D7C41B98C99F0049B787 /* AlertPath.swift */,
+				5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -480,7 +483,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = DVXNNDG4U4;
+						DevelopmentTeam = ZX7GUMJ35C;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -583,6 +586,7 @@
 				B5AFAD0F1B9608F70005F19E /* PartyModeScene.swift in Sources */,
 				5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */,
 				B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */,
+				5E70C7D31B9A0DB1005C753B /* NoAnimationSegue.swift in Sources */,
 				DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */,
 				26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */,
 				DBF7C0C81B98DDB90010FCFE /* PuffGamePad.swift in Sources */,
@@ -733,6 +737,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
@@ -746,6 +751,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;

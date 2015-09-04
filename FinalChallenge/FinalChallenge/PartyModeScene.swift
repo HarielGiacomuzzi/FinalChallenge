@@ -152,11 +152,11 @@ class PartyModeScene: SKScene {
     func sendDataToIpad(){
         println(self.selectedNode.name)
         if let avatarName : String = self.selectedNode.name{
-            self.selectedNode.removeFromParent()
             var avatar = ["avatar":avatarName]
             var dic = ["GameSetup":" ", "avatar":avatar]
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         }
+        self.selectedNode.position = self.beginPosition
     }
     
     func messageReceived(data : NSNotification){
@@ -166,10 +166,12 @@ class PartyModeScene: SKScene {
         self.takenAvatar = message
         println(self.takenAvatar)
         
+        // muda formato das imagens identificando se foi pego ou nao
         for sprite in arrayAvatarSprite{
             for taken in takenAvatar{
                 if sprite.name == taken{
                     sprite.size = CGSize(width: 25, height: 25)
+                    break
                 } else {
                     sprite.size = CGSize(width: 50, height: 50)
                 }
@@ -180,4 +182,5 @@ class PartyModeScene: SKScene {
     
     
 }
+
 

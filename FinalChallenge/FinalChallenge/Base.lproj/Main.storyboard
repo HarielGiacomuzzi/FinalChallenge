@@ -380,46 +380,89 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-ta-Slj">
+                                <rect key="frame" x="336" y="499" width="174" height="65"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="OkC-zL-p68"/>
+                                    <constraint firstAttribute="height" constant="65" id="TAg-ex-Wg8"/>
+                                    <constraint firstAttribute="height" constant="150" id="XC0-Po-MBV"/>
+                                    <constraint firstAttribute="width" constant="450" id="gHm-dP-amR"/>
+                                    <constraint firstAttribute="height" constant="65" id="mb7-Sg-fso"/>
+                                    <constraint firstAttribute="width" constant="174" id="uTL-fz-uJS"/>
+                                </constraints>
+                                <state key="normal" title="Single Player">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="OkC-zL-p68"/>
+                                        <exclude reference="TAg-ex-Wg8"/>
+                                        <exclude reference="XC0-Po-MBV"/>
+                                        <exclude reference="gHm-dP-amR"/>
+                                    </mask>
+                                </variation>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUk-Cf-6K3">
-                                <rect key="frame" x="72" y="63" width="450" height="150"/>
+                                <rect key="frame" x="90.5" y="499" width="171" height="65"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.67450980390000004" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="kgM-VI-uBx"/>
-                                    <constraint firstAttribute="width" constant="450" id="rNG-aM-e4o"/>
+                                    <constraint firstAttribute="width" constant="171" id="3ti-QV-Wzh"/>
+                                    <constraint firstAttribute="height" constant="65" id="H9u-er-TzS"/>
                                 </constraints>
                                 <state key="normal" title="Party Mode">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="partyModeButton" destination="1Vb-KC-f6p" eventType="touchUpInside" id="lLx-fD-CVe"/>
-                                    <segue destination="8ga-GJ-cx0" kind="show" identifier="ipadSegue" id="BnX-NU-WBN"/>
+                                    <action selector="partyModeButtonPressed" destination="1Vb-KC-f6p" eventType="touchUpInside" id="fWI-if-cnH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-ta-Slj">
-                                <rect key="frame" x="72" y="398" width="450" height="150"/>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4Y-Qk-pvG">
+                                <rect key="frame" x="16" y="600" width="74.5" height="0.0"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="XC0-Po-MBV"/>
-                                    <constraint firstAttribute="width" constant="450" id="gHm-dP-amR"/>
+                                    <constraint firstAttribute="height" id="i9c-fY-aF4"/>
                                 </constraints>
-                                <state key="normal" title="Single Player">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Y9w-QZ-R0C" kind="show" id="gaY-aW-UZt"/>
-                                </connections>
-                            </button>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zVp-a4-L0N">
+                                <rect key="frame" x="261" y="600" width="74.5" height="0.0"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="SNq-uH-7pj"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPG-HS-nbH">
+                                <rect key="frame" x="509.5" y="600" width="74.5" height="0.0"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="Ox2-4y-sNq"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gFo-J2-5jM" firstAttribute="top" secondItem="xYA-ta-Slj" secondAttribute="bottom" constant="52" id="L7E-dm-ngr"/>
-                            <constraint firstAttribute="centerX" secondItem="BUk-Cf-6K3" secondAttribute="centerX" constant="3" id="Qmm-yD-XgW"/>
-                            <constraint firstAttribute="centerX" secondItem="xYA-ta-Slj" secondAttribute="centerX" constant="3" id="UMD-jn-UbX"/>
-                            <constraint firstItem="BUk-Cf-6K3" firstAttribute="top" secondItem="gC9-Lj-Hnv" secondAttribute="bottom" constant="43" id="ile-7R-lyt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WPG-HS-nbH" secondAttribute="trailing" id="1r4-AE-v4q"/>
+                            <constraint firstItem="gFo-J2-5jM" firstAttribute="top" secondItem="BUk-Cf-6K3" secondAttribute="bottom" constant="36" id="4vB-0E-OiA"/>
+                            <constraint firstItem="BUk-Cf-6K3" firstAttribute="leading" secondItem="O4Y-Qk-pvG" secondAttribute="trailing" id="5Mg-eC-OX5"/>
+                            <constraint firstItem="gFo-J2-5jM" firstAttribute="top" secondItem="WPG-HS-nbH" secondAttribute="bottom" id="BzU-lp-Ahl"/>
+                            <constraint firstItem="O4Y-Qk-pvG" firstAttribute="leading" secondItem="ZcK-a9-FJg" secondAttribute="leadingMargin" id="CTB-q8-5jc"/>
+                            <constraint firstItem="zVp-a4-L0N" firstAttribute="leading" secondItem="BUk-Cf-6K3" secondAttribute="trailing" id="Grz-bS-zKf"/>
+                            <constraint firstItem="gFo-J2-5jM" firstAttribute="top" secondItem="zVp-a4-L0N" secondAttribute="bottom" id="HgI-2d-4oD"/>
+                            <constraint firstItem="zVp-a4-L0N" firstAttribute="width" secondItem="O4Y-Qk-pvG" secondAttribute="width" id="Rrj-Zi-kJf"/>
+                            <constraint firstItem="WPG-HS-nbH" firstAttribute="leading" secondItem="xYA-ta-Slj" secondAttribute="trailing" id="Sqy-eM-DNl"/>
+                            <constraint firstItem="xYA-ta-Slj" firstAttribute="leading" secondItem="zVp-a4-L0N" secondAttribute="trailing" id="V0Y-L7-GWM"/>
+                            <constraint firstItem="gFo-J2-5jM" firstAttribute="top" secondItem="xYA-ta-Slj" secondAttribute="bottom" constant="36" id="rxB-bE-LTv"/>
+                            <constraint firstItem="WPG-HS-nbH" firstAttribute="width" secondItem="zVp-a4-L0N" secondAttribute="width" id="xgk-c0-enW"/>
+                            <constraint firstItem="gFo-J2-5jM" firstAttribute="top" secondItem="O4Y-Qk-pvG" secondAttribute="bottom" id="zOz-xZ-c9I"/>
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="nrX-X9-ixP" kind="show" identifier="iphoneSegue" id="jpC-FC-5oD"/>
+                        <outlet property="mainView" destination="ZcK-a9-FJg" id="yFg-Sb-rPK"/>
+                        <outlet property="partyModeButton" destination="BUk-Cf-6K3" id="myw-bb-cPN"/>
+                        <outlet property="singlePlayerButton" destination="xYA-ta-Slj" id="hZn-t6-BOv"/>
+                        <segue destination="Y9w-QZ-R0C" kind="show" identifier="" id="FnE-Bj-SsS"/>
+                        <segue destination="nrX-X9-ixP" kind="custom" identifier="iphoneSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="jpC-FC-5oD"/>
+                        <segue destination="8ga-GJ-cx0" kind="custom" identifier="ipadSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="AJR-aY-zUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3O-K9-r4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -608,7 +651,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uuh-9S-k9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1562" y="1496"/>
+            <point key="canvasLocation" x="-1180" y="1360"/>
         </scene>
         <!--Mini Game View Controller-->
         <scene sceneID="u08-or-TA0">
