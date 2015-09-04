@@ -206,6 +206,15 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
                 return
             }
         }
+        // update player money
+        if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+            if message.valueForKey("updateMoney") != nil {
+                println(message)
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateMoney", object: nil, userInfo: userInfo)
+                return
+            }
+        }
             
         // if I dont know what it is I will send the default message
         NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)

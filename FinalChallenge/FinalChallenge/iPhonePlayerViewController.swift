@@ -15,6 +15,8 @@ class iPhonePlayerViewController: UIViewController {
         super.viewDidLoad();
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerTurn:", name: "ConnectionManager_PlayerTurn", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil);
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil);
     }
     
     func playerTurn(data : NSNotification){
@@ -34,6 +36,19 @@ class iPhonePlayerViewController: UIViewController {
             println("gotoSwipePad")
         default:
             ()
+        }
+    }
+    
+    func updateMoney(data : NSNotification) {
+        var dic = data.userInfo!["dataDic"] as! NSDictionary
+        var playerName = dic["player"] as! String
+        var value = dic["value"] as! Int
+        println("mensagem para \(playerName)")
+        println("eu sou \(ConnectionManager.sharedInstance.peerID.displayName)")
+        if playerName == ConnectionManager.sharedInstance.peerID.displayName {
+            println("update moneys para \(value)")
+        } else {
+            println("nao rola filho")
         }
     }
 }

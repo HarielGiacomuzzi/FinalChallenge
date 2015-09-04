@@ -81,17 +81,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
             width: 1,
             height: 1)
         presentViewController(popup, animated: true,completion: nil)
-
-
-        //self.performSegueWithIdentifier("gotoGameOver", sender: nil)
-        //var go = MinigameGameOverController()
-        //go.player = self.playerRank
         
     }
-    
-   // override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     //   var go : MinigameGameOverController = (segue.destinationViewController) as! MinigameGameOverController
-       // go.player = self.playerRank
-    //}
     
 }

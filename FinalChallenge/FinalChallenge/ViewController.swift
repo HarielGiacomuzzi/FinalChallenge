@@ -12,6 +12,7 @@ import MultipeerConnectivity
 class ViewController: UIViewController, MCBrowserViewControllerDelegate {
 
     var iPadStream : NSOutputStream?
+    @IBOutlet weak var testTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,8 +100,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         
     }
     @IBAction func botaoDeTeste(sender: AnyObject) {
-        var dic = ["closeController":""]
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        GameManager.sharedInstance.updatePlayerMoney(testTextField.text, value: 15)
 
     }
     

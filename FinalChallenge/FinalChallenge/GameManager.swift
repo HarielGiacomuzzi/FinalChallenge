@@ -26,8 +26,7 @@ class GameManager {
     var minigameGameOverViewController : MinigameGameOverController?
     
     var minigameOrderArray : [Minigame] = []
-    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
-    var allMinigames : [Minigame] = [.FlappyFish]
+    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
     
     init(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
@@ -150,6 +149,12 @@ class GameManager {
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         self.isOnMiniGame = false;
         self.playerTurnEnded(nil);
+    }
+    
+    func updatePlayerMoney(playerID:String, value:Int) {
+        var dic1 = ["player":playerID, "value": value]
+        var dic = ["updateMoney":" ", "dataDic" : dic1]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     
 }
