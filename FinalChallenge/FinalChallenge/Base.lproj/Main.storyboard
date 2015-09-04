@@ -461,8 +461,8 @@
                         <outlet property="partyModeButton" destination="BUk-Cf-6K3" id="myw-bb-cPN"/>
                         <outlet property="singlePlayerButton" destination="xYA-ta-Slj" id="hZn-t6-BOv"/>
                         <segue destination="Y9w-QZ-R0C" kind="show" identifier="" id="FnE-Bj-SsS"/>
-                        <segue destination="nrX-X9-ixP" kind="show" identifier="iphoneSegue" id="jpC-FC-5oD"/>
-                        <segue destination="8ga-GJ-cx0" kind="presentation" identifier="ipadSegue" id="AJR-aY-zUi"/>
+                        <segue destination="nrX-X9-ixP" kind="custom" identifier="iphoneSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="jpC-FC-5oD"/>
+                        <segue destination="8ga-GJ-cx0" kind="custom" identifier="ipadSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="AJR-aY-zUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3O-K9-r4u" userLabel="First Responder" sceneMemberID="firstResponder"/>

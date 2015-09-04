@@ -31,26 +31,14 @@ class InitialViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        screenHeight = UIScreen.mainScreen().bounds.height
-        screenWidth = UIScreen.mainScreen().bounds.width
-        
-        setupView()
-        
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        screenHeight = UIScreen.mainScreen().bounds.height
-        screenWidth = UIScreen.mainScreen().bounds.width
-        
-        removeImagesFromScreen()
         setupView()
         
     }
     
     @IBAction func partyModeButtonPressed() {
-        
-        openBook(2.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
+        partyModeButton.removeFromSuperview()
+        singlePlayerButton.removeFromSuperview()
+        openBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
             if self.idiom == self.iPad {
                 self.performSegueWithIdentifier("ipadSegue", sender: nil)
             } else {
@@ -165,7 +153,7 @@ class InitialViewController: UIViewController
     }
     
     func removePin() {
-        pin.frame = CGRectMake(0, -pin.frame.height * 0.75, pin.frame.width, pin.frame.height)
+        pin.frame = CGRectMake(0, -pin.frame.height * 0.70, pin.frame.width, pin.frame.height)
     }
     
     func removeStrap() {
