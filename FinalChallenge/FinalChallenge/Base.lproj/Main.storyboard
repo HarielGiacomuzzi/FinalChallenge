@@ -850,7 +850,6 @@
         <!--Puff Game View Controller-->
         <scene sceneID="kqc-UI-Ju5">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="anA-6e-FJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="c7L-yS-Sch" customClass="PuffGameViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QNk-Pi-XSE"/>
@@ -862,6 +861,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="anA-6e-FJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-436" y="1414"/>
         </scene>
@@ -882,12 +882,18 @@
                                 <state key="normal" title="Button 2">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pushButton:" destination="j90-u9-H7a" eventType="touchUpInside" id="TRK-p8-SNv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uz6-fS-Hug">
                                 <rect key="frame" x="152" y="464" width="59" height="30"/>
                                 <state key="normal" title="Button 1">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pullButton:" destination="j90-u9-H7a" eventType="touchUpInside" id="T02-FV-T7X"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
