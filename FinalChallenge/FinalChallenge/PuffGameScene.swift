@@ -39,14 +39,33 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func messageReceived(data : NSNotification){
+        if let message = data.userInfo!["actionReceived"] as? String{
+            var messageEnum = PlayerAction(rawValue: message)
+            if messageEnum == PlayerAction.PuffPull{
+                pull--;
+            }
+            if messageEnum == PlayerAction.PuffPush{
+                push--;
+            }
+            for p in players{
+                if pull <= 0 && push <= 0 {
+                    pull = 1;
+                    push = 1;
+                    p.xScale = (player1.xScale+1);
+                    p.yScale = (player1.yScale+1);
+                    if player1.xScale > 10{
+                        explodePuff(player1)
+                    }
+                    break;
+                }
+            }
+        }
+    }
     
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        player1.xScale = (player1.xScale+1)
-        player1.yScale = (player1.yScale+1)
-        if player1.xScale > 10{
-         explodePuff(player1)
-        }
+       
     }
     
     
