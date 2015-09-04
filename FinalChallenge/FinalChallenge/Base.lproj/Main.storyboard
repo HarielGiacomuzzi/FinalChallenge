@@ -439,7 +439,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="WPG-HS-nbH" secondAttribute="trailing" id="1r4-AE-v4q"/>
                             <constraint firstItem="gFo-J2-5jM" firstAttribute="top" secondItem="BUk-Cf-6K3" secondAttribute="bottom" constant="36" id="4vB-0E-OiA"/>
@@ -461,13 +461,13 @@
                         <outlet property="partyModeButton" destination="BUk-Cf-6K3" id="myw-bb-cPN"/>
                         <outlet property="singlePlayerButton" destination="xYA-ta-Slj" id="hZn-t6-BOv"/>
                         <segue destination="Y9w-QZ-R0C" kind="show" identifier="" id="FnE-Bj-SsS"/>
-                        <segue destination="nrX-X9-ixP" kind="show" identifier="iphoneSegue" id="jpC-FC-5oD"/>
-                        <segue destination="8ga-GJ-cx0" kind="show" identifier="ipadSegue" id="AJR-aY-zUi"/>
+                        <segue destination="nrX-X9-ixP" kind="custom" identifier="iphoneSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="jpC-FC-5oD"/>
+                        <segue destination="8ga-GJ-cx0" kind="custom" identifier="ipadSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="AJR-aY-zUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3O-K9-r4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1648" y="704"/>
+            <point key="canvasLocation" x="-1562" y="615"/>
         </scene>
         <!--Party Mode View ControllerIPAD-->
         <scene sceneID="WX8-CF-IVx">
@@ -566,7 +566,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8P-BP-RBF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-765" y="-303"/>
+            <point key="canvasLocation" x="-552" y="-452"/>
         </scene>
         <!--Party Mode View Controller-->
         <scene sceneID="Few-re-9Vu">
@@ -584,7 +584,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvJ-sc-ePn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-325" y="463"/>
+            <point key="canvasLocation" x="-497" y="615"/>
         </scene>
         <!--Minigame Collection View Controller-->
         <scene sceneID="YJc-zg-dwn">
@@ -651,7 +651,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uuh-9S-k9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1562" y="1496"/>
+            <point key="canvasLocation" x="-1180" y="1360"/>
         </scene>
         <!--Mini Game View Controller-->
         <scene sceneID="u08-or-TA0">
@@ -925,12 +925,18 @@
                                 <state key="normal" title="Button 2">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pushButton:" destination="j90-u9-H7a" eventType="touchUpInside" id="TRK-p8-SNv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uz6-fS-Hug">
                                 <rect key="frame" x="152" y="464" width="59" height="30"/>
                                 <state key="normal" title="Button 1">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pullButton:" destination="j90-u9-H7a" eventType="touchUpInside" id="T02-FV-T7X"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -9,11 +9,16 @@
 import SpriteKit
 
 class PuffGameScene: SKScene, SKPhysicsContactDelegate {
+    var players : [SKNode] = [];
+    var pull = 1;
+    var push = 1;
     var player1 = SKShapeNode(circleOfRadius: 10.0);
     var player2 = SKShapeNode(circleOfRadius: 10.0);
     let partsAtlas = SKTextureAtlas(named: "puffGame")
     
     override func didMoveToView(view: SKView) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_PuffGamePadAction", object: nil);
+        
         player1.position.x = CGFloat((self.frame.width/4));
         player1.position.y = CGFloat((self.frame.height/2));
         
@@ -25,6 +30,9 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         
         player2.zPosition = 100;
         player2.fillColor = UIColor.blueColor();
+        
+        players.append(player1);
+        players.append(player2);
         
         self.addChild(player1);
         self.addChild(player2);

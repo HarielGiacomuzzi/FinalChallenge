@@ -19,6 +19,7 @@ class InitialViewController: UIViewController
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var partyModeButton: UIButton!
     @IBOutlet weak var singlePlayerButton: UIButton!
+    
     var screenHeight = UIScreen.mainScreen().bounds.height
     var screenWidth = UIScreen.mainScreen().bounds.width
     var leftCover = UIImageView()
@@ -30,26 +31,14 @@ class InitialViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        screenHeight = UIScreen.mainScreen().bounds.height
-        screenWidth = UIScreen.mainScreen().bounds.width
-        
-        setupView()
-        
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        screenHeight = UIScreen.mainScreen().bounds.height
-        screenWidth = UIScreen.mainScreen().bounds.width
-        
-        removeImagesFromScreen()
         setupView()
         
     }
     
     @IBAction func partyModeButtonPressed() {
-        
-        openBook(0.5, strapTime: 0.3, coverTime: 0.5, completion: {() in
+        partyModeButton.removeFromSuperview()
+        singlePlayerButton.removeFromSuperview()
+        openBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
             if self.idiom == self.iPad {
                 self.performSegueWithIdentifier("ipadSegue", sender: nil)
             } else {
@@ -143,7 +132,6 @@ class InitialViewController: UIViewController
     // MARK: - Animation
     
     func openBook(pinTime:NSTimeInterval, strapTime:NSTimeInterval, coverTime: NSTimeInterval, completion:() -> ()) {
-        
         UIView.animateWithDuration(pinTime, animations: {
             self.removePin()
             }, completion: { (value: Bool) in
@@ -155,6 +143,9 @@ class InitialViewController: UIViewController
                             }, completion: {(value: Bool) in
                                 completion()
                         })
+                        UIView.animateWithDuration(coverTime * 0.75, delay: coverTime * 0.25, options: nil, animations: {
+                                self.zoomIn()
+                            }, completion: nil)
                         
                 })
         })
@@ -162,7 +153,7 @@ class InitialViewController: UIViewController
     }
     
     func removePin() {
-        pin.frame = CGRectMake(0, -screenHeight, pin.frame.width, pin.frame.height)
+        pin.frame = CGRectMake(0, -pin.frame.height * 0.70, pin.frame.width, pin.frame.height)
     }
     
     func removeStrap() {
@@ -171,7 +162,16 @@ class InitialViewController: UIViewController
     
     func removeCover() {
         leftCover.frame = CGRectMake(-leftCover.frame.size.width / 2, leftCover.frame.origin.y, leftCover.frame.size.width, leftCover.frame.size.height)
-        rightCover.frame = CGRectMake(screenWidth / 2, leftCover.frame.origin.y, rightCover.frame.size.width, rightCover.frame.size.height)
+        rightCover.frame = CGRectMake(screenWidth / 2, rightCover.frame.origin.y, rightCover.frame.size.width, rightCover.frame.size.height)
     }
+    
+    func zoomIn() {
+        var aux = screenHeight / 2 - leftCover.frame.height
+        
+        leftCover.frame = CGRectMake(leftCover.frame.origin.x * 2, aux, leftCover.frame.size.width * 2, leftCover.frame.size.height * 2)
+        rightCover.frame = CGRectMake(0.0, aux, rightCover.frame.size.width * 2, rightCover.frame.size.height * 2)
+
+    }
+    
     
 }

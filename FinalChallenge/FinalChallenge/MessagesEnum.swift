@@ -12,6 +12,8 @@ enum PlayerAction : String  {
     case Up = "Up"
     case Down = "Down"
     case Swipe = "Swipe"
+    case PuffPull = "Pull"
+    case PuffPush = "Push"
 }
 
 enum Minigame : String {
