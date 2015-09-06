@@ -41,11 +41,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         
-        startGame()
+        beginCountDown(completion: {self.createPlayersAndObstacles()})
         
-        self.setupWalls()
-        
-        //AudioSource.sharedInstance.flappyFishSound()
+        setupWalls()
         
         // setup physics
         self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )
@@ -74,15 +72,15 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         wallRight.physicsBody?.contactTestBitMask = playerCategory
         self.addChild(wallRight)
         
-        var newParticle = FlappyParticleNode.fromFile("teste")
-        newParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 20 , frame.size.height/2)
-        newParticle!.targetNode = self.scene
-        self.addChild(newParticle!)
-        newParticle?.zPosition = 10
+        var waterParticle = FlappyParticleNode.fromFile("teste")
+        waterParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 20 , frame.size.height/2)
+        waterParticle!.targetNode = self.scene
+        self.addChild(waterParticle!)
+        waterParticle?.zPosition = 10
         
     }
     
-    func startGame() {
+    func beginCountDown(#completion:() -> ()) {
         var countDownNode = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         countDownNode.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
         countDownNode.zPosition = 100
@@ -104,9 +102,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         actions.append(removeNode)
         var actionSequence = SKAction.sequence(actions)
         countDownNode.runAction(actionSequence, completion: {() -> Void in
-            self.createPlayersAndObstacles()
+            completion()
         })
-
     }
     
     func createPlayersAndObstacles() {
@@ -114,6 +111,12 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         //nobody connected
         if players.count == 0 {
+            spawnSinglePlayer()
+        }
+        
+        if GameManager.sharedInstance.isMultiplayer! {
+            self.spawnPlayers()
+        } else {
             spawnSinglePlayer()
         }
         
@@ -213,17 +216,18 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     func spawnStone() {
         var stone = FlappyStoneNode()
-        var scale = getRandomCGFloat(100.0, end: 200.0)
-        scale = scale / 100
+        var scale = CGFloat.random(min: 1, max: 2)
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
         var bottom = testTexture.size().height
         var top = self.frame.size.height - testTexture.size().height
-        var pos = getRandomCGFloat(bottom, end: top)
+        var pos = CGFloat.random(min: bottom, max: top)
         stone.setScale(scale)
         stone.position = CGPointMake(self.frame.size.width + self.frame.size.width / 2, pos)
         stone.setupMovement(self.frame, vel: stoneVel * worldVelMultiplier)
         
-        var rotation = getRandomCGFloat(1, end: 4)
+        var rotation = CGFloat.random(min: 1, max: 4)
+        
+        
         stone.zRotation = rotation
         stone.zPosition = 9
         self.addChild(stone)
@@ -252,20 +256,10 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
         var bottom = testTexture.size().height
         var top = self.frame.size.height - testTexture.size().height
-        var pos = getRandomCGFloat(bottom, end: top)
+        var pos = CGFloat.random(min: bottom, max: top)
         powerUp.position = CGPointMake(self.frame.size.width + powerUp.size.width / 2, pos)
         powerUp.setupMovement(self.frame)
         self.addChild(powerUp)
-    }
-    
-    func getRandomCGFloat(begin:CGFloat,end:CGFloat) -> CGFloat {
-        var beginUint = UInt32(Int(begin))
-        var endUint = UInt32(Int(end))
-        var random = (arc4random() % (endUint - beginUint)) + beginUint
-        var num = CGFloat(Int(random))
-        
-        return num
-        
     }
     
     func spawnPlayers() {
@@ -315,6 +309,13 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
     }
     
+    func gameOver(){
+        self.gameController!.gameOverController(playerRank.reverse())
+    }
+    
+    // MARK: - Player Action Handling
+    
+    // Multiplayer
     override func messageReceived(identifier: String, dictionary: NSDictionary) {
         for player in players {
             if player.identifier == identifier {
@@ -329,10 +330,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
     }
     
-    func gameOver(){
-        self.gameController!.gameOverController(playerRank.reverse())
-    }
-    
+    // Single Player
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
@@ -348,35 +346,38 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     }
     
+    // MARK: - Contact Handling
     
     func didBeginContact(contact: SKPhysicsContact) {
         //checks colision with end of screen
-        if ( contact.bodyA.categoryBitMask & endScreenCategory ) == endScreenCategory || ( contact.bodyB.categoryBitMask & endScreenCategory ) == endScreenCategory {
-            for player in players{
-                if player.physicsBody == contact.bodyA || player.physicsBody == contact.bodyB{
-                    println(player.identifier)
-                    players.removeObject(player)
-                    player.removeFromParent()
-                    self.playerRank.append(player.identifier!)
-                    //AudioSource.sharedInstance.readAudioFile("explosionSound", ext: "wav")
-                    //self.gameManager.playerRank.append(player.identifier!)
-                    //self.gameOver()
-                }
-            }
+        if contact.bodyA.categoryBitMask == playerCategory && contact.bodyB.categoryBitMask == endScreenCategory {
+            handleColisionEndOfScreen(playerBody: contact.bodyA, endscreenBody: contact.bodyB)
+        } else if contact.bodyA.categoryBitMask == endScreenCategory && contact.bodyB.categoryBitMask == playerCategory {
+            handleColisionEndOfScreen(playerBody: contact.bodyB, endscreenBody: contact.bodyA)
         }
         
         //checks colision player / powerup
         if contact.bodyA.categoryBitMask == powerUpCategory && contact.bodyB.categoryBitMask == playerCategory {
             handleColisionPlayerPowerup(player:contact.bodyB, powerup: contact.bodyA)
-            self.runAction(AudioSource.sharedInstance.playBubbleSound())
         } else if contact.bodyB.categoryBitMask == powerUpCategory && contact.bodyA.categoryBitMask == playerCategory {
             handleColisionPlayerPowerup(player:contact.bodyA, powerup: contact.bodyB)
-            self.runAction(AudioSource.sharedInstance.playBubbleSound())
         }
         
     }
     
+    func handleColisionEndOfScreen(#playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
+        for player in players{
+            if player.physicsBody == playerBody {
+                println(player.identifier)
+                players.removeObject(player)
+                player.removeFromParent()
+                self.playerRank.append(player.identifier!)
+            }
+        }
+    }
+    
     func handleColisionPlayerPowerup(#player:SKPhysicsBody,powerup:SKPhysicsBody) {
+        self.runAction(AudioSource.sharedInstance.playBubbleSound())
         var playerNode:FlappyPlayerNode = player.node as! FlappyPlayerNode
         var powerupNode:FlappyPowerupNode = powerup.node as! FlappyPowerupNode
         playerNode.boostAndStop()
