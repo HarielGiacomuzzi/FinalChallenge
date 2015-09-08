@@ -77,6 +77,13 @@ class SetupPartyScene: SKScene {
         bg.zPosition = 0
         self.backgroundColor = UIColor.whiteColor()
         
+        //setup particles
+        
+        var globParticles = SetupParticle.fromFile("setupParticle1")
+        globParticles!.position = CGPointMake(self.frame.width/2, self.frame.height + 10)
+        self.addChild(globParticles!)
+
+        
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {

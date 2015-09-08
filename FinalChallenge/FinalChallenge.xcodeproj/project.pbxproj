@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		264D0CDE1B9F6AE6005B7EE9 /* SetupParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */; };
 		26547BAD1B9F4736003DFD73 /* SetupPartyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */; };
 		26547BB31B9F4D59003DFD73 /* SetupParty.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */; };
+		26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26547BB91B9F696E003DFD73 /* setupParticle1.sks */; };
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
 		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
@@ -104,8 +106,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupParticle.swift; sourceTree = "<group>"; };
 		26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupPartyScene.swift; sourceTree = "<group>"; };
 		26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SetupParty.xcassets; sourceTree = "<group>"; };
+		26547BB91B9F696E003DFD73 /* setupParticle1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = setupParticle1.sks; sourceTree = "<group>"; };
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
 		26B2D9BE1B87A8920056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
@@ -213,6 +217,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26547BB41B9F68DF003DFD73 /* SetupPartyScene SK */ = {
+			isa = PBXGroup;
+			children = (
+				26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */,
+				26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */,
+				26547BB91B9F696E003DFD73 /* setupParticle1.sks */,
+				264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */,
+			);
+			name = "SetupPartyScene SK";
+			sourceTree = "<group>";
+		};
 		5E8F9DD81B7D0093004514D0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,8 +239,7 @@
 				B5AFAD0B1B94CC7F0005F19E /* PartyModeViewController.swift */,
 				B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */,
 				B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */,
-				26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */,
-				26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */,
+				26547BB41B9F68DF003DFD73 /* SetupPartyScene SK */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -548,6 +562,7 @@
 				B5DD1B4A1B8F73D300AA1EB6 /* wavesSound.wav in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
+				26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
 				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
@@ -613,6 +628,7 @@
 				26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */,
 				5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */,
 				DBF7C0C81B98DDB90010FCFE /* PuffGamePad.swift in Sources */,
+				264D0CDE1B9F6AE6005B7EE9 /* SetupParticle.swift in Sources */,
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
