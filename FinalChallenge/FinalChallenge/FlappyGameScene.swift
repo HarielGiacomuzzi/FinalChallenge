@@ -13,28 +13,31 @@ import SpriteKit
 class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
-    var testPlayer:FlappyPlayerNode?
+    var singlePlayer:FlappyPlayerNode?
     //dont touch this variable:
     let stoneVel = 8.0
     
     //change this variable to change world speed:
     let worldVelMultiplier = 1.0
     
+    var winnerRanking:[String] = [] //first is first to win
+    var loserRanking:[String] = [] //first is first to lose
+    
     let playerCategory: UInt32 = 1 << 0
     let worldCategory: UInt32 = 1 << 1
     let stoneCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
-    let endScreenCategory: UInt32 = 1 << 4
-    let powerUpCategory: UInt32 = 1 << 5
+    let endScreenWinCategory: UInt32 = 1 << 4
+    let endScreenLoseCategory: UInt32 = 1 << 4
+    let powerUpCategory: UInt32 = 1 << 6
     
     override func update(currentTime: NSTimeInterval) {
         
-        if players.count == 0  && !self.paused{
-            for p in players{
-                self.playerRank.append(p.identifier!)
-            }
-            self.gameOver()
-            self.paused = true
+        for fish in players {
+            fish.updateRotation()
+        }
+        if let fish = singlePlayer {
+            fish.updateRotation()
         }
     }
     
@@ -58,7 +61,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         wallLeft.position = CGPointMake(0, self.frame.size.height / 2)
         wallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
         wallLeft.physicsBody?.dynamic = false
-        wallLeft.physicsBody?.categoryBitMask = endScreenCategory
+        wallLeft.physicsBody?.categoryBitMask = endScreenLoseCategory
         wallLeft.physicsBody?.contactTestBitMask = playerCategory
         self.addChild(wallLeft)
         
@@ -67,7 +70,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         wallRight.position = CGPointMake(self.frame.width, self.frame.size.height / 2)
         wallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
         wallRight.physicsBody?.dynamic = false
-        wallRight.physicsBody?.categoryBitMask = endScreenCategory
+        wallRight.physicsBody?.categoryBitMask = endScreenWinCategory
         wallRight.physicsBody?.contactTestBitMask = playerCategory
         self.addChild(wallRight)
         
@@ -106,12 +109,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func createPlayersAndObstacles() {
-//        self.spawnPlayers()
-//        
-//        //nobody connected
-//        if players.count == 0 {
-//            spawnSinglePlayer()
-//        }
         
         if GameManager.sharedInstance.isMultiplayer {
             self.spawnPlayers()
@@ -290,22 +287,30 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func spawnSinglePlayer() {
         
-        testPlayer = FlappyPlayerNode()
-        testPlayer!.identifier = "test player"
-        testPlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
-        self.addChild(testPlayer!)
+        singlePlayer = FlappyPlayerNode()
+        singlePlayer!.identifier = "Player"
+        singlePlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
+        self.addChild(singlePlayer!)
         
         var particleTexture = SKTexture(imageNamed: "spark.png")
         var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
         playerParticle!.name = "PlayerParticle"
         playerParticle!.targetNode = self.scene
-        testPlayer!.addChild(playerParticle!)
+        singlePlayer!.addChild(playerParticle!)
         playerParticle?.position = CGPoint(x: -43, y: 0)
         
     }
     
     func gameOver(){
-        self.gameController!.gameOverController(playerRank.reverse())
+        for winner in winnerRanking {
+            playerRank.append(winner)
+        }
+        loserRanking = loserRanking.reverse()
+        for loser in loserRanking {
+            playerRank.append(loser)
+        }
+        
+        self.gameController!.gameOverController(playerRank)
     }
     
     // MARK: - Player Action Handling
@@ -329,7 +334,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-            if let player = testPlayer {
+            if let player = singlePlayer {
                 if location.y > self.frame.size.height / 2 {
                     player.goUp()
                 } else {
@@ -344,11 +349,18 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     // MARK: - Contact Handling
     
     func didBeginContact(contact: SKPhysicsContact) {
-        //checks colision with end of screen
-        if contact.bodyA.categoryBitMask == playerCategory && contact.bodyB.categoryBitMask == endScreenCategory {
-            handleColisionEndOfScreen(playerBody: contact.bodyA, endscreenBody: contact.bodyB)
-        } else if contact.bodyA.categoryBitMask == endScreenCategory && contact.bodyB.categoryBitMask == playerCategory {
-            handleColisionEndOfScreen(playerBody: contact.bodyB, endscreenBody: contact.bodyA)
+        //checks colision with bad end of screen
+        if contact.bodyA.categoryBitMask == playerCategory && contact.bodyB.categoryBitMask == endScreenLoseCategory {
+            handleColisionEndOfScreenBad(playerBody: contact.bodyA, endscreenBody: contact.bodyB)
+        } else if contact.bodyA.categoryBitMask == endScreenLoseCategory && contact.bodyB.categoryBitMask == playerCategory {
+            handleColisionEndOfScreenBad(playerBody: contact.bodyB, endscreenBody: contact.bodyA)
+        }
+        
+        //checks colision with good end of screen
+        if contact.bodyA.categoryBitMask == playerCategory && contact.bodyB.categoryBitMask == endScreenWinCategory {
+            handleColisionEndOfScreenGood(playerBody: contact.bodyA, endscreenBody: contact.bodyB)
+        } else if contact.bodyA.categoryBitMask == endScreenWinCategory && contact.bodyB.categoryBitMask == playerCategory {
+            handleColisionEndOfScreenGood(playerBody: contact.bodyB, endscreenBody: contact.bodyA)
         }
         
         //checks colision player / powerup
@@ -360,13 +372,26 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
     }
     
-    func handleColisionEndOfScreen(#playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
+    //handles losing colision
+    func handleColisionEndOfScreenBad(#playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
         for player in players{
             if player.physicsBody == playerBody {
                 println(player.identifier)
                 players.removeObject(player)
                 player.removeFromParent()
-                self.playerRank.append(player.identifier!)
+                self.loserRanking.append(player.identifier!)
+            }
+        }
+    }
+    
+    //handles winning colision
+    func handleColisionEndOfScreenGood(#playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
+        for player in players{
+            if player.physicsBody == playerBody {
+                println(player.identifier)
+                players.removeObject(player)
+                player.removeFromParent()
+                self.winnerRanking.append(player.identifier!)
             }
         }
     }

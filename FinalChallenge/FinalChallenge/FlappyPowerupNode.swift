@@ -16,8 +16,9 @@ class FlappyPowerupNode: SKSpriteNode {
     let worldCategory: UInt32 = 1 << 1
     let stoneCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
-    let endScreenCategory: UInt32 = 1 << 4
-    let powerUpCategory: UInt32 = 1 << 5
+    let endScreenWinCategory: UInt32 = 1 << 4
+    let endScreenLoseCategory: UInt32 = 1 << 4
+    let powerUpCategory: UInt32 = 1 << 6
     
     let atlas = SKTextureAtlas(named: "bubble")
     
