@@ -27,6 +27,7 @@ class GameManager {
     
     var minigameOrderArray : [Minigame] = []
     var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    //var allMinigames : [Minigame] = [.FlappyFish]
     
     init(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
