@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import SpriteKit
 
 class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate{
     
@@ -31,7 +32,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true)
+      /*  ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true)
         ConnectionManager.sharedInstance.setupBrowser()
         ConnectionManager.sharedInstance.browser?.delegate = self
         
@@ -41,6 +42,19 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         turnSelector.delegate = self
         
         turnSelectorComponents = ["5","10","20"]
+        */
+        
+        let scene = SetupPartyScene(size: CGSize(width: 1024, height: 768))
+        
+        let skView = view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        skView.showsPhysics = false
+        scene.scaleMode = .AspectFit
+        skView.presentScene(scene)
+        println("apresentei a cena sem crashar")
+
         
     }
     
@@ -83,6 +97,11 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in}
     }
     
+    @IBAction func gotoBoardGame(sender: AnyObject){
+        BoardGraph.SharedInstance.loadBoard("board_2");
+        let boardGameViewController = BoardViewController()
+        self.presentViewController(boardGameViewController, animated: false, completion: nil)
+    }
     func gameSettings(){
         GameManager.sharedInstance.totalGameTurns = turns
     }
@@ -127,7 +146,18 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         case player4Label.text! : player4Image.image = UIImage(named: message)
         default: break
         }
-        for p in GameManager.sharedInstance.players {if identifier == p.playerIdentifier{p.avatar = message}}
+        for p in GameManager.sharedInstance.players {
+            if identifier == p.playerIdentifier{
+                p.avatar = message
+                switch(message){
+                    case "Red": p.color = UIColor.redColor()
+                    case "White": p.color = UIColor.whiteColor()
+                    case "Black": p.color = UIColor.blackColor()
+                    case "Blue": p.color = UIColor.blueColor()
+                    default: break
+                }
+            }
+        }
         println("Mensagem: \(message) e Identifier: \(identifier)")
         updateIphoneUsersData(message)
     }

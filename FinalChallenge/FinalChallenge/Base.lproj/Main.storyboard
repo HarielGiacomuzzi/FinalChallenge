@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Y9w-QZ-R0C">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -92,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONt-OX-vCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1622" y="-536"/>
+            <point key="canvasLocation" x="1759" y="-536"/>
         </scene>
         <!--Accelerometer Game Pad Controller-->
         <scene sceneID="8zs-pY-9fY">
@@ -119,6 +119,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Cl-JF-hd4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2813" y="615"/>
+        </scene>
+        <!--Minigame Game Over Controller Single Player-->
+        <scene sceneID="v5U-u5-QNg">
+            <objects>
+                <viewController storyboardIdentifier="MinigameGameOverControllerSinglePlayer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dCA-zM-ejI" customClass="MinigameGameOverControllerSinglePlayer" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Txv-rP-Olj"/>
+                        <viewControllerLayoutGuide type="bottom" id="QqF-Uq-dJ0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="X2g-UN-o7q">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oE8-5a-Zon">
+                                <rect key="frame" x="354" y="331" width="95" height="30"/>
+                                <state key="normal" title="Restart Game">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="restartGame:" destination="dCA-zM-ejI" eventType="touchUpInside" id="ZdO-fk-gNT"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time to death:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-aZ-56m">
+                                <rect key="frame" x="245" y="251" width="111" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CwW-rK-YYg">
+                                <rect key="frame" x="143" y="331" width="132" height="30"/>
+                                <state key="normal" title="Back to Minigames">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToMinigame:" destination="dCA-zM-ejI" eventType="touchUpInside" id="Tdo-kE-IvZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="a5N-aZ-56m" secondAttribute="centerY" constant="38.5" id="BcI-2t-iF2"/>
+                            <constraint firstItem="oE8-5a-Zon" firstAttribute="leading" secondItem="CwW-rK-YYg" secondAttribute="trailing" constant="79" id="EfF-to-5Ms"/>
+                            <constraint firstAttribute="centerX" secondItem="a5N-aZ-56m" secondAttribute="centerX" constant="-0.5" id="U63-5u-pAl"/>
+                            <constraint firstItem="CwW-rK-YYg" firstAttribute="top" secondItem="a5N-aZ-56m" secondAttribute="bottom" constant="59" id="Z0S-jj-3Oa"/>
+                            <constraint firstItem="oE8-5a-Zon" firstAttribute="centerY" secondItem="CwW-rK-YYg" secondAttribute="centerY" id="b01-oe-9xZ"/>
+                            <constraint firstItem="a5N-aZ-56m" firstAttribute="centerX" secondItem="CwW-rK-YYg" secondAttribute="centerX" constant="91.5" id="usn-gl-ttF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="timer" destination="a5N-aZ-56m" id="Ifr-my-yZp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Ue-11-G1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3368" y="-151"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -386,29 +441,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-ta-Slj">
-                                <rect key="frame" x="336" y="499" width="174" height="65"/>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="174" id="OkC-zL-p68"/>
-                                    <constraint firstAttribute="height" constant="65" id="TAg-ex-Wg8"/>
-                                    <constraint firstAttribute="height" constant="150" id="XC0-Po-MBV"/>
-                                    <constraint firstAttribute="width" constant="450" id="gHm-dP-amR"/>
-                                    <constraint firstAttribute="height" constant="65" id="mb7-Sg-fso"/>
-                                    <constraint firstAttribute="width" constant="174" id="uTL-fz-uJS"/>
-                                </constraints>
-                                <state key="normal" title="Single Player">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="OkC-zL-p68"/>
-                                        <exclude reference="TAg-ex-Wg8"/>
-                                        <exclude reference="XC0-Po-MBV"/>
-                                        <exclude reference="gHm-dP-amR"/>
-                                    </mask>
-                                </variation>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUk-Cf-6K3">
                                 <rect key="frame" x="91" y="499" width="171" height="65"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.67450980390000004" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -444,6 +476,29 @@
                                     <constraint firstAttribute="height" id="Ox2-4y-sNq"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-ta-Slj">
+                                <rect key="frame" x="336" y="499" width="174" height="65"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="OkC-zL-p68"/>
+                                    <constraint firstAttribute="height" constant="65" id="TAg-ex-Wg8"/>
+                                    <constraint firstAttribute="height" constant="150" id="XC0-Po-MBV"/>
+                                    <constraint firstAttribute="width" constant="450" id="gHm-dP-amR"/>
+                                    <constraint firstAttribute="height" constant="65" id="mb7-Sg-fso"/>
+                                    <constraint firstAttribute="width" constant="174" id="uTL-fz-uJS"/>
+                                </constraints>
+                                <state key="normal" title="Single Player">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="OkC-zL-p68"/>
+                                        <exclude reference="TAg-ex-Wg8"/>
+                                        <exclude reference="XC0-Po-MBV"/>
+                                        <exclude reference="gHm-dP-amR"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -483,76 +538,13 @@
                         <viewControllerLayoutGuide type="top" id="Eqq-Ha-GGz"/>
                         <viewControllerLayoutGuide type="bottom" id="4dW-kZ-QWB"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ick-Ic-vUF">
+                    <view key="view" contentMode="scaleToFill" id="Ick-Ic-vUF" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Black" translatesAutoresizingMaskIntoConstraints="NO" id="scD-rg-dX7">
                                 <rect key="frame" x="70" y="304" width="200" height="200"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Blue" translatesAutoresizingMaskIntoConstraints="NO" id="h4d-3g-lgp">
-                                <rect key="frame" x="300" y="304" width="200" height="200"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Red" translatesAutoresizingMaskIntoConstraints="NO" id="k6t-cK-0M2">
-                                <rect key="frame" x="530" y="304" width="200" height="200"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="White" translatesAutoresizingMaskIntoConstraints="NO" id="sjc-ds-EFt">
-                                <rect key="frame" x="760" y="304" width="200" height="200"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgR-ZW-CYI">
-                                <rect key="frame" x="878" y="28" width="85" height="30"/>
-                                <state key="normal" title="Find Players">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="ConnectPlayers:" destination="8ga-GJ-cx0" eventType="touchUpInside" id="ZSl-Pv-UEy"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFv-tC-zL4">
-                                <rect key="frame" x="473" y="718" width="79" height="30"/>
-                                <state key="normal" title="Start Game">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nYw-5s-nBH">
-                                <rect key="frame" x="760" y="143" width="200" height="153"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzU-qI-6Te">
-                                <rect key="frame" x="139" y="512" width="62" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4a-Eq-83q">
-                                <rect key="frame" x="369" y="512" width="62" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccH-dH-Ieo">
-                                <rect key="frame" x="599" y="512" width="62" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjG-rB-rdI">
-                                <rect key="frame" x="829" y="512" width="62" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Setup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LOa-tz-p8t">
-                                <rect key="frame" x="70" y="28" width="407" height="132"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="73"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Turn Selection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gi-Kg-diC">
-                                <rect key="frame" x="795" y="126" width="131" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -560,19 +552,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="player1Image" destination="scD-rg-dX7" id="UpR-Ov-mxp"/>
-                        <outlet property="player1Label" destination="gzU-qI-6Te" id="3aR-1Q-bPv"/>
-                        <outlet property="player2Image" destination="h4d-3g-lgp" id="47b-kf-e9O"/>
-                        <outlet property="player2Label" destination="T4a-Eq-83q" id="V5B-r9-XLH"/>
-                        <outlet property="player3Image" destination="k6t-cK-0M2" id="02p-8f-VLd"/>
-                        <outlet property="player3Label" destination="ccH-dH-Ieo" id="edY-N3-JcX"/>
-                        <outlet property="player4Image" destination="sjc-ds-EFt" id="QGV-gb-p3Z"/>
-                        <outlet property="player4Label" destination="bjG-rB-rdI" id="bcq-gl-uiE"/>
-                        <outlet property="turnSelector" destination="nYw-5s-nBH" id="4di-sX-0Md"/>
+                        <segue destination="l9D-dX-UOc" kind="show" identifier="gotoBoardGame" id="KZb-9N-ZG3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8P-BP-RBF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-525" y="-496"/>
+            <point key="canvasLocation" x="-709" y="-494"/>
         </scene>
         <!--Party Mode View Controller-->
         <scene sceneID="Few-re-9Vu">
@@ -606,22 +591,23 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tK7-Hf-xCC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="spF-q5-t30">
-                                    <size key="itemSize" width="250" height="140"/>
-                                    <size key="headerReferenceSize" width="1" height="0.0"/>
+                                <color key="backgroundColor" red="1" green="0.90833199888558891" blue="0.29852642286004494" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="spF-q5-t30">
+                                    <size key="itemSize" width="125" height="70"/>
+                                    <size key="headerReferenceSize" width="10" height="10"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="50" minY="0.0" maxX="50" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="SqI-xr-U13" customClass="CustomMinigameCollectionView" customModule="FinalChallenge" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="140"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="125" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fvB-21-jF9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="140"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="70"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -638,6 +624,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PpB-YM-dJ9">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="10"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>
@@ -654,10 +641,13 @@
                             <constraint firstItem="ebL-Iy-27c" firstAttribute="top" secondItem="tK7-Hf-xCC" secondAttribute="bottom" id="vhW-GD-nTT"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="Ovk-7r-ehi" kind="show" identifier="minigameSegue" id="0i1-Si-jlB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uuh-9S-k9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1180" y="1360"/>
+            <point key="canvasLocation" x="-1306" y="1508"/>
         </scene>
         <!--Mini Game View Controller-->
         <scene sceneID="u08-or-TA0">
@@ -675,6 +665,7 @@
                     <connections>
                         <outlet property="GameOverView" destination="KbS-az-LyU" id="cnn-rV-Nvc"/>
                         <segue destination="eXc-f8-OwA" kind="presentation" identifier="gotoGameOver" id="SIj-DT-Ic4"/>
+                        <segue destination="dCA-zM-ejI" kind="presentation" identifier="gotoGameOverSinglePlayer" id="135-Sb-pW8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qaV-sh-fkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -802,7 +793,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhj-uL-cbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3334" y="-536"/>
+            <point key="canvasLocation" x="3368" y="-870"/>
         </scene>
         <!--Board View Controller-->
         <scene sceneID="8sQ-R9-V61">
@@ -823,7 +814,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1S-db-nvY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="617" y="-536"/>
+            <point key="canvasLocation" x="957" y="-536"/>
         </scene>
         <!--I Phone Player View Controller-->
         <scene sceneID="Imk-1I-fmI">
@@ -985,13 +976,11 @@
     </scenes>
     <resources>
         <image name="Black" width="120" height="120"/>
-        <image name="Blue" width="120" height="120"/>
-        <image name="Red" width="120" height="120"/>
-        <image name="White" width="120" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ahl-Ky-SJK"/>
         <segue reference="Aso-TF-3da"/>
         <segue reference="T9l-u6-hEW"/>
+        <segue reference="Ahl-Ky-SJK"/>
+        <segue reference="S5e-fy-Ifo"/>
     </inferredMetricsTieBreakers>
 </document>

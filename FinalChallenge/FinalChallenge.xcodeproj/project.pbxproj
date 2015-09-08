@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		264D0CDE1B9F6AE6005B7EE9 /* SetupParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */; };
+		26547BAD1B9F4736003DFD73 /* SetupPartyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */; };
+		26547BB31B9F4D59003DFD73 /* SetupParty.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */; };
+		26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26547BB91B9F696E003DFD73 /* setupParticle1.sks */; };
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
 		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
@@ -38,6 +42,7 @@
 		5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA49E091B87B59100AC51F8 /* MinigameScene.swift */; };
 		5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */; };
 		5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */; };
+		5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */; };
 		B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51663EE1B7D0D720040A1B4 /* GamePadController.swift */; };
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
 		B57B33671B86566E000E5F53 /* GameOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57B33661B86566E000E5F53 /* GameOver.xib */; };
@@ -47,6 +52,7 @@
 		B5AFAD0C1B94CC7F0005F19E /* PartyModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD0B1B94CC7F0005F19E /* PartyModeViewController.swift */; };
 		B5AFAD0F1B9608F70005F19E /* PartyModeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */; };
 		B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */; };
+		B5AFAD131B9F47CF0005F19E /* MinigameGameOverControllerSinglePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD121B9F47CF0005F19E /* MinigameGameOverControllerSinglePlayer.swift */; };
 		B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */; };
 		B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */; };
 		B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */; };
@@ -100,6 +106,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupParticle.swift; sourceTree = "<group>"; };
+		26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupPartyScene.swift; sourceTree = "<group>"; };
+		26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SetupParty.xcassets; sourceTree = "<group>"; };
+		26547BB91B9F696E003DFD73 /* setupParticle1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = setupParticle1.sks; sourceTree = "<group>"; };
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
 		26B2D9BE1B87A8920056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
@@ -131,6 +141,7 @@
 		5EA49E091B87B59100AC51F8 /* MinigameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameScene.swift; sourceTree = "<group>"; };
 		5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPowerupNode.swift; sourceTree = "<group>"; };
 		5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameScene.swift; sourceTree = "<group>"; };
+		5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		B51663EE1B7D0D720040A1B4 /* GamePadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadController.swift; sourceTree = "<group>"; };
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
 		B57B33661B86566E000E5F53 /* GameOver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameOver.xib; sourceTree = "<group>"; };
@@ -140,6 +151,7 @@
 		B5AFAD0B1B94CC7F0005F19E /* PartyModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeViewController.swift; sourceTree = "<group>"; };
 		B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeScene.swift; sourceTree = "<group>"; };
 		B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeViewControllerIPAD.swift; sourceTree = "<group>"; };
+		B5AFAD121B9F47CF0005F19E /* MinigameGameOverControllerSinglePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameGameOverControllerSinglePlayer.swift; sourceTree = "<group>"; };
 		B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGameOverCell.swift; sourceTree = "<group>"; };
@@ -205,6 +217,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26547BB41B9F68DF003DFD73 /* SetupPartyScene SK */ = {
+			isa = PBXGroup;
+			children = (
+				26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */,
+				26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */,
+				26547BB91B9F696E003DFD73 /* setupParticle1.sks */,
+				264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */,
+			);
+			name = "SetupPartyScene SK";
+			sourceTree = "<group>";
+		};
 		5E8F9DD81B7D0093004514D0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +239,7 @@
 				B5AFAD0B1B94CC7F0005F19E /* PartyModeViewController.swift */,
 				B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */,
 				B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */,
+				26547BB41B9F68DF003DFD73 /* SetupPartyScene SK */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -225,6 +249,7 @@
 			children = (
 				5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */,
 				5E0E06091B8E384300CE166E /* CGVector+Extension.swift */,
+				5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -269,6 +294,7 @@
 			children = (
 				DBF7C0BD1B98D4920010FCFE /* PuffGame */,
 				5E7E45BB1B960AC600249B8A /* MinigameDescriptionViewController.swift */,
+				B5AFAD121B9F47CF0005F19E /* MinigameGameOverControllerSinglePlayer.swift */,
 				B5DD1B411B8BA75300AA1EB6 /* MinigameGameOverController.swift */,
 				26B2D9C81B87AE570056015F /* MiniGameViewController.swift */,
 				5EA49E091B87B59100AC51F8 /* MinigameScene.swift */,
@@ -489,7 +515,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = DVXNNDG4U4;
+						DevelopmentTeam = ZX7GUMJ35C;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -526,6 +552,7 @@
 				26B2D9C11B87A8B20056015F /* teste.sks in Resources */,
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				5E7E45BE1B960CCC00249B8A /* MinigameDetails.plist in Resources */,
+				26547BB31B9F4D59003DFD73 /* SetupParty.xcassets in Resources */,
 				26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */,
 				B5DD1B521B8F8D0500AA1EB6 /* bubbleSound2.wav in Resources */,
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
@@ -535,6 +562,7 @@
 				B5DD1B4A1B8F73D300AA1EB6 /* wavesSound.wav in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
+				26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
 				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
@@ -585,6 +613,7 @@
 				5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */,
 				5E68AD7F1B8CD57C00FD4404 /* BombWallNode.swift in Sources */,
 				5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */,
+				26547BAD1B9F4736003DFD73 /* SetupPartyScene.swift in Sources */,
 				5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */,
 				5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */,
 				DBF7C0C61B98D8050010FCFE /* PuffGameViewController.swift in Sources */,
@@ -593,10 +622,13 @@
 				B5AFAD0F1B9608F70005F19E /* PartyModeScene.swift in Sources */,
 				5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */,
 				B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */,
+				B5AFAD131B9F47CF0005F19E /* MinigameGameOverControllerSinglePlayer.swift in Sources */,
 				5E70C7D31B9A0DB1005C753B /* NoAnimationSegue.swift in Sources */,
 				DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */,
 				26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */,
+				5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */,
 				DBF7C0C81B98DDB90010FCFE /* PuffGamePad.swift in Sources */,
+				264D0CDE1B9F6AE6005B7EE9 /* SetupParticle.swift in Sources */,
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,

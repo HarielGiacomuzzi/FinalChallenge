@@ -14,7 +14,7 @@ class GameManager {
     var miniGameActive = String()
     var boardViewController : UIViewController?
     var playerRank = [String]()
-    var isMultiplayer : Bool?
+    var isMultiplayer = false
     var players = [Player]()
     var totalGameTurns = 0
     var isOnMiniGame = false;
@@ -24,9 +24,11 @@ class GameManager {
     var minigameDescriptionViewController : MinigameDescriptionViewController?
     var minigameViewController : MiniGameViewController?
     var minigameGameOverViewController : MinigameGameOverController?
+    var minigameGameOverViewControllerSinglePlayer : MinigameGameOverControllerSinglePlayer?
     
     var minigameOrderArray : [Minigame] = []
     var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    //var allMinigames : [Minigame] = [.FlappyFish]
     
     init(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
@@ -151,9 +153,29 @@ class GameManager {
         self.playerTurnEnded(nil);
     }
     
+    func dismissMinigameSinglePlayer(){
+        if let vc = minigameGameOverViewControllerSinglePlayer {
+            vc.dismissViewControllerAnimated(false, completion: {() in
+                if let vc2 = self.minigameViewController {
+                    vc2.dismissViewControllerAnimated(false, completion: {() in
+                        if let vc3 = self.minigameDescriptionViewController {
+                            vc3.dismissViewControllerAnimated(false, completion: nil)
+                        }
+                    })
+                }
+            })
+            //selectPlayers(0);
+        }
+        println("Cheguei aqui :P");
+        var dic = ["closeController":" "]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        self.isOnMiniGame = false;
+        self.playerTurnEnded(nil);
+    }
+    
     func updatePlayerMoney(playerID:String, value:Int) {
-        var dic1 = ["player":playerID, "value": value]
-        var dic = ["updateMoney":" ", "dataDic" : dic1]
+        var playerData = ["player":playerID, "value": value]
+        var dic = ["updateMoney":" ", "dataDic" : playerData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     

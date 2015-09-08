@@ -30,4 +30,6 @@ class PartyModeViewController : UIViewController{
         scene.scaleMode = .AspectFit
         skView.presentScene(scene)
     }
+    
+    
 }

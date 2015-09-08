@@ -12,5 +12,5 @@ import UIKit
 class CustomMinigameCollectionView : UICollectionViewCell {
     
     @IBOutlet weak var minigameImage: UIImageView!
-    
+    var specialTag : String?
 }
