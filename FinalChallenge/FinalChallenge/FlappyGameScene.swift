@@ -260,19 +260,12 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func spawnPlayers() {
         
-        let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
         let boardPlayers = GameManager.sharedInstance.players
         
-        for connectedPeer in connectedPeers {
+        for boardPlayer in boardPlayers {
             var player = FlappyPlayerNode()
-            player.identifier = connectedPeer.displayName
-            
-            for boardPlayer in boardPlayers {
-                if player.identifier == boardPlayer.playerIdentifier {
-                    player.color = boardPlayer.color
-                }
-            }
-
+            player.identifier = boardPlayer.playerIdentifier
+            player.color = boardPlayer.color
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
@@ -283,6 +276,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             player.addChild(playerParticle!)
             playerParticle?.position = CGPoint(x: -43, y: 0)
         }
+        
     }
     
     func spawnSinglePlayer() {
@@ -304,6 +298,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     func gameOver(){
         for winner in winnerRanking {
             playerRank.append(winner)
+        }
+        for lastPlayer in players { //deveria ser só 1 talvez mas vai saber ne
+            playerRank.append(lastPlayer.identifier!)
         }
         loserRanking = loserRanking.reverse()
         for loser in loserRanking {

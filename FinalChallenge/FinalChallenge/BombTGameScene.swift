@@ -14,6 +14,8 @@ import SpriteKit
 
 class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
+    //SET GAMBIARRA MODE TO TRUE IF YOU WANT TO THROW THE BOMB EVERYWHERE
+    var gambiarraMode = true
     
     var walls:[BombWallNode] = [] //0 = north, 1 = south, 2 = east, 3 = west
     var players:[BombPlayerNode] = []//0 = north, 1 = south, 2 = east, 3 = west
@@ -25,7 +27,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var bombShouldTick = false
     var bombShouldExplode = false
-    var playerActive = ""
+    var playerActive = " "
     
     var fagulhando = false
     
@@ -97,30 +99,23 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVectorMake(0, 0)
         self.physicsWorld.contactDelegate = self
         
-        // fund
+        // fundo
         let fundo = SKSpriteNode(imageNamed: "floor")
         self.addChild(fundo)
         fundo.position = CGPoint(x: self.frame.width / 2, y : self.frame.height/2)
 
-        
-        
-        
         //MUST SETUP WALLS BEFORE PLAYERS
         setupWalls()
-
-        spawnSinglePlayer()
-        if ConnectionManager.sharedInstance.session.connectedPeers.count > 0 {
-            spawnPlayers()
+        spawnPlayers()
+        
+        if GameManager.sharedInstance.isMultiplayer {
+            setMultiplayer()
+        } else {
+            setSinglePlayer()
         }
-        createPlayersAndObstacles()
+        
         generateBomb(100)
         
-    }
-    
-    func createPlayersAndObstacles() {
-
-        // cria jogadores
-    
     }
     
     func setupWalls(){
@@ -181,23 +176,19 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
     }
     
-    func spawnPlayers() {
+    func setMultiplayer() {
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
         let boardPlayers = GameManager.sharedInstance.players
         
         var i = 0
         
-        for connectedPeer in connectedPeers {
+        for boardPlayer in boardPlayers {
             var player = players[i]
-
-            player.identifier = connectedPeer.displayName
-            for boardPlayer in boardPlayers {
-                if player.identifier == boardPlayer.playerIdentifier {
-                    //player.color = boardPlayer.color
-                }
-            }
+            player.identifier = boardPlayer.playerIdentifier
+            player.color = boardPlayer.color
             i++
         }
+        
         while i < players.count {
             players[i].removeFromParent()
             walls[i].hasPlayer = false
@@ -205,7 +196,11 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
     }
     
-    func spawnSinglePlayer() {
+    func setSinglePlayer() {
+    
+    }
+    
+    func spawnPlayers() {
         // criar a bomba
         
         var topRight = CGPointMake(maxX - 30, maxY - 30)
@@ -231,8 +226,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         north.runAction(SKAction.repeatActionForever(northMovement))
         self.addChild(north)
         players.append(north)
-        
-        
         
         var south = BombPlayerNode()
         
