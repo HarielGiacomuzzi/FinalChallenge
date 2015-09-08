@@ -9,13 +9,15 @@
 import Foundation
 import SpriteKit
 
-class SetupPartyScene: SKScene {
+class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     // set buttons and nodes
     var banner : SKSpriteNode?
     var turns : SKSpriteNode?
     var connect : SKSpriteNode?
     var go : SKSpriteNode?
+    
+    
     
     // set textures
     let yellowButton : SKTexture = SKTexture(imageNamed: "yellowButton")
@@ -34,6 +36,10 @@ class SetupPartyScene: SKScene {
     override func didMoveToView(view: SKView) {
         
         setObjects()
+        
+        self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
+        self.physicsWorld.contactDelegate = self
+        
         
         
     }
@@ -82,7 +88,19 @@ class SetupPartyScene: SKScene {
         var globParticles = SetupParticle.fromFile("setupParticle1")
         globParticles!.position = CGPointMake(self.frame.width/2, self.frame.height + 10)
         self.addChild(globParticles!)
+        globParticles?.zPosition = 1
 
+        
+        
+        let spawn = SKAction.runBlock({() in self.spawnSword()})
+        
+        let delay = SKAction.waitForDuration(1, withRange: 1)
+        let spawnThenDelay = SKAction.sequence([spawn, delay])
+        let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
+        self.runAction(spawnThenDelayForever)
+        
+        
+        
         
     }
     
@@ -137,6 +155,39 @@ class SetupPartyScene: SKScene {
         }
 
         
+        
+    }
+    
+    func spawnSword(){
+       
+        
+        let effectsNode = SKEffectNode()
+        let filter = CIFilter(name: "CIGaussianBlur")
+        // Set the blur amount. Adjust this to achieve the desired effect
+        let blurAmount = CGFloat.random(min: 0, max: 20)
+        filter.setValue(blurAmount, forKey: kCIInputRadiusKey)
+        
+        effectsNode.filter = filter
+        effectsNode.position = self.view!.center
+        effectsNode.blendMode = .Alpha
+        self.addChild(effectsNode)
+        
+        let texture = SKTexture(imageNamed: "sword")
+        let sprite = SKSpriteNode(texture: texture)
+        let diff = CGFloat.random(min: 0.5, max: 1)
+        sprite.size = CGSize(width: sprite.size.width * diff, height: sprite.size.height * diff)
+        effectsNode.addChild(sprite)
+        
+        let pos = CGFloat.random(min: 0, max: 1024)
+        effectsNode.position = CGPoint(x: pos, y: self.frame.height)
+
+     //   sprite.position = CGPoint(x: pos, y: self.frame.height)
+        sprite.physicsBody = SKPhysicsBody(circleOfRadius: 2)
+        let angle = CGFloat.random(min: 0, max: 0.10)
+        sprite.physicsBody?.applyAngularImpulse(angle)
+        sprite.physicsBody?.affectedByGravity = true
+        sprite.zPosition = 2
+
         
     }
     
