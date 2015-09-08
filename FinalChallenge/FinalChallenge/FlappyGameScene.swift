@@ -29,8 +29,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: NSTimeInterval) {
         
-        if players.count == 0 && gameManager.isMultiplayer == true && !self.paused{
-            println(self.gameManager.playerRank.count)
+        if players.count == 0  && !self.paused{
             for p in players{
                 self.playerRank.append(p.identifier!)
             }
@@ -107,14 +106,14 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func createPlayersAndObstacles() {
-        self.spawnPlayers()
+//        self.spawnPlayers()
+//        
+//        //nobody connected
+//        if players.count == 0 {
+//            spawnSinglePlayer()
+//        }
         
-        //nobody connected
-        if players.count == 0 {
-            spawnSinglePlayer()
-        }
-        
-        if GameManager.sharedInstance.isMultiplayer! {
+        if GameManager.sharedInstance.isMultiplayer {
             self.spawnPlayers()
         } else {
             spawnSinglePlayer()
@@ -264,8 +263,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func spawnPlayers() {
         
-        gameManager.isMultiplayer = true
-        
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
         let boardPlayers = GameManager.sharedInstance.players
         
@@ -292,8 +289,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func spawnSinglePlayer() {
-        
-        gameManager.isMultiplayer = false
         
         testPlayer = FlappyPlayerNode()
         testPlayer!.identifier = "test player"
