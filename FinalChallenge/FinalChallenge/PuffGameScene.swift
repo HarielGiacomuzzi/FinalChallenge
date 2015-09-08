@@ -9,55 +9,55 @@
 import SpriteKit
 
 class PuffGameScene: SKScene, SKPhysicsContactDelegate {
-    var players : [SKNode] = [];
     var pull = 1;
     var push = 1;
-    var player1 = SKShapeNode(circleOfRadius: 10.0);
-    var player2 = SKShapeNode(circleOfRadius: 10.0);
     let partsAtlas = SKTextureAtlas(named: "puffGame")
     
     override func didMoveToView(view: SKView) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_PuffGamePadAction", object: nil);
         
-        player1.position.x = CGFloat((self.frame.width/4));
-        player1.position.y = CGFloat((self.frame.height/2));
+        var count = GameManager.sharedInstance.players.count
+        var width = (self.frame.width-20)/CGFloat(GameManager.sharedInstance.players.count*2)
         
-        player2.position.x = CGFloat((self.frame.width/2));
-        player2.position.y = CGFloat((self.frame.height/2));
-        
-        player1.zPosition = 100;
-        player1.fillColor = UIColor.blueColor();
-        
-        player2.zPosition = 100;
-        player2.fillColor = UIColor.blueColor();
-        
-        players.append(player1);
-        players.append(player2);
-        
-        self.addChild(player1);
-        self.addChild(player2);
+        for p in GameManager.sharedInstance.players{
+            var sprite = SKShapeNode(circleOfRadius: 10.0);
+            p.x = Double(width)*Double(count);
+            p.y = Double((self.frame.height/2));
+            count--;
+            sprite.zPosition = 100;
+            sprite.position.x = CGFloat(p.x)
+            sprite.position.y = CGFloat(p.y)
+            sprite.fillColor = UIColor.blueColor();
+            p.nodeSprite = sprite;
+            
+            self.addChild(p.nodeSprite!)
+        }
+
         
     }
     
     func messageReceived(data : NSNotification){
         if let message = data.userInfo!["actionReceived"] as? String{
             var messageEnum = PlayerAction(rawValue: message)
-            if messageEnum == PlayerAction.PuffPull{
-                pull--;
-            }
-            if messageEnum == PlayerAction.PuffPush{
-                push--;
-            }
-            for p in players{
-                if pull <= 0 && push <= 0 {
-                    pull = 1;
-                    push = 1;
-                    p.xScale = (player1.xScale+1);
-                    p.yScale = (player1.yScale+1);
-                    if player1.xScale > 10{
-                        explodePuff(player1)
+           
+            for p in GameManager.sharedInstance.players{
+                if p.playerIdentifier == data.userInfo!["peerID"] as? String{
+                    if messageEnum == PlayerAction.PuffPull{
+                        p.pull--;
                     }
-                    break;
+                    if messageEnum == PlayerAction.PuffPush{
+                        p.push--;
+                    }
+                    if p.pull <= 0 && p.push <= 0 {
+                        p.pull = 1;
+                        p.push = 1;
+                        p.nodeSprite!.xScale = (p.nodeSprite!.xScale+1);
+                        p.nodeSprite!.yScale = (p.nodeSprite!.yScale+1);
+                        if p.nodeSprite!.xScale > 10{
+                            explodePuff(p.nodeSprite!)
+                        }
+                        break;
+                    }
                 }
             }
         }
@@ -70,32 +70,35 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func explodePuff(player:SKNode){
-        player.removeFromParent()
-        let outExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion0"))
-        let midExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion1"))
-        let inExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion2"))
-        
-        let explosionParts : [SKSpriteNode] = [outExplosion, midExplosion , inExplosion]
-        
-        for explosion in explosionParts{
+        if player.hidden == false{
+            player.hidden = true;
+            player.removeFromParent()
+            let outExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion0"))
+            let midExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion1"))
+            let inExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion2"))
             
-            let m = explosion.size
-            explosion.size = CGSize(width: explosion.size.width * 0.2, height: explosion.size.height * 0.2)
-            explosion.position = CGPoint(x: player.position.x, y: player.position.y)
+            let explosionParts : [SKSpriteNode] = [outExplosion, midExplosion , inExplosion]
             
-            let crescimento = SKAction.resizeToWidth(m.width * 2, height: m.height * 2, duration: 0.5)
-            
-            let rotacao = CGFloat(arc4random_uniform(5)+1);
-            explosion.physicsBody = SKPhysicsBody(rectangleOfSize: m)
-            explosion.physicsBody?.categoryBitMask = 0x0
-            explosion.physicsBody?.applyAngularImpulse(rotacao)
-            explosion.physicsBody?.dynamic = false
-            
-            self.addChild(explosion)
-            
-            explosion.runAction(crescimento, completion: { () -> Void in
-                explosion.removeFromParent()
-            })
+            for explosion in explosionParts{
+                
+                let m = explosion.size
+                explosion.size = CGSize(width: explosion.size.width * 0.2, height: explosion.size.height * 0.2)
+                explosion.position = CGPoint(x: player.position.x, y: player.position.y)
+                
+                let crescimento = SKAction.resizeToWidth(m.width * 2, height: m.height * 2, duration: 0.5)
+                
+                let rotacao = CGFloat(arc4random_uniform(5)+1);
+                explosion.physicsBody = SKPhysicsBody(rectangleOfSize: m)
+                explosion.physicsBody?.categoryBitMask = 0x0
+                explosion.physicsBody?.applyAngularImpulse(rotacao)
+                explosion.physicsBody?.dynamic = false
+                
+                self.addChild(explosion)
+                
+                explosion.runAction(crescimento, completion: { () -> Void in
+                    explosion.removeFromParent()
+                })
+                }
         }
     }
     
