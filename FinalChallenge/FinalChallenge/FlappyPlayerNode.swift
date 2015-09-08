@@ -15,8 +15,9 @@ class FlappyPlayerNode: SKSpriteNode {
     let worldCategory: UInt32 = 1 << 1
     let stoneCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
-    let endScreenCategory: UInt32 = 1 << 4
-    let powerUpCategory: UInt32 = 1 << 5
+    let endScreenWinCategory: UInt32 = 1 << 4
+    let endScreenLoseCategory: UInt32 = 1 << 4
+    let powerUpCategory: UInt32 = 1 << 6
     
     var identifier:String?
     
@@ -100,13 +101,13 @@ class FlappyPlayerNode: SKSpriteNode {
     func goUp() {
  
         self.physicsBody?.applyImpulse(CGVectorMake(0, 0.8))
-        self.updateRotation()
+//        self.updateRotation()
     }
     
     func goDown() {
  
         self.physicsBody?.applyImpulse(CGVectorMake(0, -0.8))
-        self.updateRotation()
+//        self.updateRotation()
     }
     
     func clamp(min: CGFloat, max: CGFloat, value: CGFloat) -> CGFloat {
@@ -120,6 +121,7 @@ class FlappyPlayerNode: SKSpriteNode {
     }
     
     func updateRotation() {
-        self.zRotation = self.clamp( -1, max: 0.5, value: self.physicsBody!.velocity.dy * ( self.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 ) )
+        var value = self.physicsBody!.velocity.dy * ( self.physicsBody!.velocity.dy < 0 ? 0.003 : 0.001 )
+        self.zRotation = value.clamp(-1, 0.5)
     }
 }

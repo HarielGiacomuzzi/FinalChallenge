@@ -18,6 +18,7 @@ class BombPlayerNode: SKNode {
     var roboBody : SKSpriteNode?
     var roboBase : SKSpriteNode?
     var identifier = ""
+    var color = UIColor()
     
     override init() {
         super.init()

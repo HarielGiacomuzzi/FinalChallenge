@@ -14,7 +14,6 @@ class MinigameGameOverController : UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var tableView: UITableView!
     var player:[String]!
-    var gameManager = GameManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()

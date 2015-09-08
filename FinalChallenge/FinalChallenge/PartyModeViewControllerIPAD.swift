@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import SpriteKit
 
 class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate{
     
@@ -31,7 +32,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true)
+      /*  ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true)
         ConnectionManager.sharedInstance.setupBrowser()
         ConnectionManager.sharedInstance.browser?.delegate = self
         
@@ -41,6 +42,19 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         turnSelector.delegate = self
         
         turnSelectorComponents = ["5","10","20"]
+        */
+        
+        let scene = SetupPartyScene(size: CGSize(width: 1024, height: 768))
+        
+        let skView = view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        skView.showsPhysics = false
+        scene.scaleMode = .AspectFit
+        skView.presentScene(scene)
+        println("apresentei a cena sem crashar")
+
         
     }
     

@@ -15,7 +15,9 @@ class FlappyStoneNode: SKSpriteNode {
     let worldCategory: UInt32 = 1 << 1
     let stoneCategory: UInt32 = 1 << 2
     let scoreCategory: UInt32 = 1 << 3
-    let powerUpCategory: UInt32 = 1 << 5
+    let endScreenWinCategory: UInt32 = 1 << 4
+    let endScreenLoseCategory: UInt32 = 1 << 4
+    let powerUpCategory: UInt32 = 1 << 6
     
     let atlas = SKTextureAtlas(named: "rock")
     
@@ -41,10 +43,10 @@ class FlappyStoneNode: SKSpriteNode {
     
     func setupMovement(frame:CGRect, vel:Double) {
         let distanceToMove = CGFloat(-frame.size.width / 2)
-        
         let moveStones = SKAction.moveToX(distanceToMove, duration:NSTimeInterval(vel))
         let removeStones = SKAction.removeFromParent()
         let moveStonesAndRemove = SKAction.sequence([moveStones, removeStones])
         self.runAction(moveStonesAndRemove)
     }
+
 }
