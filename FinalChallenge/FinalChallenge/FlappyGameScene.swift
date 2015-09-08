@@ -14,6 +14,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var singlePlayer:FlappyPlayerNode?
+    var testPlayerLive = true
+    var cont = 1 //contador usado para o timer do singleplayer
+    
     //dont touch this variable:
     let stoneVel = 8.0
     
@@ -33,8 +36,17 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: NSTimeInterval) {
         
-        for fish in players {
+        for fish in players{
             fish.updateRotation()
+        }
+        
+        //println(gameManager.isMultiplayer)
+        if players.count == 1 && GameManager.sharedInstance.isMultiplayer == true && !self.paused{
+            for p in players{
+                self.playerRank.append(p.identifier!)
+            }
+            self.gameOverMP()
+            self.paused = true
         }
         if let fish = singlePlayer {
             fish.updateRotation()
@@ -109,12 +121,32 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         })
     }
     
+    func timerForSinglePlayer(){
+        var timerNode = SKLabelNode(fontNamed:"MarkerFelt-Wide")
+        timerNode.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height - 150)
+        timerNode.zPosition = 100
+        timerNode.fontSize = 150
+        self.addChild(timerNode)
+
+        var wait = SKAction.waitForDuration(1)
+        var run = SKAction.runBlock {
+            // your code here ...
+            timerNode.text = "\(self.cont++)"
+        }
+        
+        timerNode.runAction(SKAction.repeatActionForever(SKAction.sequence([wait, run])))
+    }
+    
     func createPlayersAndObstacles() {
         
         if GameManager.sharedInstance.isMultiplayer {
             self.spawnPlayers()
         } else {
             spawnSinglePlayer()
+        }
+        
+        if GameManager.sharedInstance.isMultiplayer == false{
+            self.timerForSinglePlayer()
         }
         
         // spawn the stones
@@ -133,6 +165,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         let spawnThenDelayPU = SKAction.sequence([spawnPowerups,delayPowerUp])
         let spawnDelayForeverPU = SKAction.repeatActionForever(spawnThenDelayPU)
         self.runAction(spawnDelayForeverPU)
+        
     }
     
     func setupWalls(){
@@ -296,7 +329,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
     }
     
-    func gameOver(){
+    func gameOverMP(){
         for winner in winnerRanking {
             playerRank.append(winner)
         }
@@ -328,7 +361,10 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
     }
     
-    // Single Player
+    func gameOverSP(){
+        self.gameController!.gameOverControllerSinglePlayer(cont)
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
@@ -382,6 +418,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
         if let player = singlePlayer {
             // game over
+            self.gameOverSP()
         }
     }
     

@@ -19,6 +19,8 @@ class Player : NSObject {
     var avatar : String?
     var nodeSprite : SKNode?
     var color = UIColor()
+    var pull = 1
+    var push = 1
     
 //    init(posX: Double, posY: Double) {
 //        self.x = posX;

@@ -24,6 +24,7 @@ class GameManager {
     var minigameDescriptionViewController : MinigameDescriptionViewController?
     var minigameViewController : MiniGameViewController?
     var minigameGameOverViewController : MinigameGameOverController?
+    var minigameGameOverViewControllerSinglePlayer : MinigameGameOverControllerSinglePlayer?
     
     var minigameOrderArray : [Minigame] = []
     var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
@@ -134,6 +135,26 @@ class GameManager {
     
     func dismissMinigame() {
         if let vc = minigameGameOverViewController {
+            vc.dismissViewControllerAnimated(false, completion: {() in
+                if let vc2 = self.minigameViewController {
+                    vc2.dismissViewControllerAnimated(false, completion: {() in
+                        if let vc3 = self.minigameDescriptionViewController {
+                            vc3.dismissViewControllerAnimated(false, completion: nil)
+                        }
+                    })
+                }
+            })
+            //selectPlayers(0);
+        }
+        println("Cheguei aqui :P");
+        var dic = ["closeController":" "]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        self.isOnMiniGame = false;
+        self.playerTurnEnded(nil);
+    }
+    
+    func dismissMinigameSinglePlayer(){
+        if let vc = minigameGameOverViewControllerSinglePlayer {
             vc.dismissViewControllerAnimated(false, completion: {() in
                 if let vc2 = self.minigameViewController {
                     vc2.dismissViewControllerAnimated(false, completion: {() in
