@@ -33,22 +33,10 @@ class InitialViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        screenHeight = UIScreen.mainScreen().bounds.height
-        screenWidth = UIScreen.mainScreen().bounds.width
-        
         setupView()
         
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        screenHeight = UIScreen.mainScreen().bounds.height
-        screenWidth = UIScreen.mainScreen().bounds.width
-        
-        removeImagesFromScreen()
-        setupView()
-        
-    }
     
     @IBAction func partyModeButtonPressed() {
         partyModeButton.removeFromSuperview()
