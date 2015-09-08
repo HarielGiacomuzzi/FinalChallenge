@@ -72,6 +72,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         wallRight.physicsBody?.dynamic = false
         wallRight.physicsBody?.categoryBitMask = endScreenWinCategory
         wallRight.physicsBody?.contactTestBitMask = playerCategory
+        wallRight.physicsBody?.collisionBitMask = playerCategory
         self.addChild(wallRight)
         
         var waterParticle = FlappyParticleNode.fromFile("teste")
@@ -378,6 +379,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
                 player.removeFromParent()
                 self.loserRanking.append(player.identifier!)
             }
+        }
+        if let player = singlePlayer {
+            // game over
         }
     }
     

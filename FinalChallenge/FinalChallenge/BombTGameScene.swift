@@ -14,7 +14,7 @@ import SpriteKit
 
 class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
-    //SET GAMBIARRA MODE TO TRUE IF YOU WANT TO THROW THE BOMB EVERYWHERE
+    //SET ZOEIRA MODE TO TRUE IF YOU WANT TO THROW THE BOMB EVERYWHERE
     var zoeiraMode = false
     
     var walls:[BombWallNode] = [] //0 = north, 1 = south, 2 = east, 3 = west
@@ -308,7 +308,13 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func gameOver(){
-        self.gameController!.gameOverController(playerRank.reverse())
+        //find last player
+        for i in 0...3 {
+            if walls[i].hasPlayer {
+                playerRank.append(players[i].identifier) //append last player
+            }
+        }
+        self.gameController!.gameOverController(playerRank)
         
     }
     
@@ -329,8 +335,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             handlePlayerBombContact(contact.bodyB, player: contact.bodyA)
         }
         
-
-   
     }
     
     func handlePlayerBombContact(bomb:SKPhysicsBody, player:SKPhysicsBody) {
