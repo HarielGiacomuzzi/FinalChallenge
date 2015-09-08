@@ -405,9 +405,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         for part in roboParts {
             print("a")
 
-            let randomNumInt1 = randomBetweenNumbers(0.4, secondNum: 5.0)
-            let randomNumInt2 = randomBetweenNumbers(0.4, secondNum: 5.0)
-            let randomNumInt3 = randomBetweenNumbers(0.0, secondNum: 0.01)
+            let randomNumInt1 = CGFloat.random(min: 0.4, max: 5.0)
+            let randomNumInt2 = CGFloat.random(min: 0.4, max: 5.0)
+            let randomNumInt3 = CGFloat.random(min: 0.0, max: 0.02)
 
 
 
@@ -439,7 +439,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
                 
                 let crescimento = SKAction.resizeToWidth(tamFinal.width * 2, height: tamFinal.height * 2, duration: 0.5)
 
-                let rotacao = randomBetweenNumbers(0.01, secondNum: 5)
+                let rotacao = CGFloat.random(min: 0.01, max: 5.0)
                 explosion.physicsBody = SKPhysicsBody(rectangleOfSize: tamFinal)
                 explosion.physicsBody?.categoryBitMask = 0x0
                 explosion.physicsBody?.applyAngularImpulse(rotacao)
@@ -570,9 +570,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
 
         
-        var bombStartX = randomBetweenNumbers(-10, secondNum: 10)
+        var bombStartX = CGFloat.random(min: -10.0, max: 10.0)
         
-        var bombStartY = randomBetweenNumbers(-10, secondNum: 10)
+        var bombStartY = CGFloat.random(min: -10.0, max: 10.0)
         
         var vet = CGVector(dx: bombStartX, dy: bombStartY)
         
@@ -614,7 +614,4 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     }
     
-    func randomBetweenNumbers(firstNum: CGFloat, secondNum: CGFloat) -> CGFloat{
-        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
-    }
 }

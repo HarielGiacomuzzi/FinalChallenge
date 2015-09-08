@@ -14,7 +14,7 @@ class GameManager {
     var miniGameActive = String()
     var boardViewController : UIViewController?
     var playerRank = [String]()
-    var isMultiplayer : Bool?
+    var isMultiplayer = false
     var players = [Player]()
     var totalGameTurns = 0
     var isOnMiniGame = false;
@@ -153,8 +153,8 @@ class GameManager {
     }
     
     func updatePlayerMoney(playerID:String, value:Int) {
-        var dic1 = ["player":playerID, "value": value]
-        var dic = ["updateMoney":" ", "dataDic" : dic1]
+        var playerData = ["player":playerID, "value": value]
+        var dic = ["updateMoney":" ", "dataDic" : playerData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     

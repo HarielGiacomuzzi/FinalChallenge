@@ -60,6 +60,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
             connectedPlayers.append(player)
         }
         GameManager.sharedInstance.players = connectedPlayers
+        GameManager.sharedInstance.isMultiplayer = true
     }
     
     // Notifies delegate that the user taps the cancel button.
