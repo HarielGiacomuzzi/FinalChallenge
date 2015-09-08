@@ -44,9 +44,9 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         turnSelectorComponents = ["5","10","20"]
         */
         
-        let scene = SetupPartyScene()
+        let scene = SetupPartyScene(size: CGSize(width: 1024, height: 768))
         
-        let skView = SKView()
+        let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true

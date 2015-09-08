@@ -68,7 +68,7 @@ class InitialViewController: UIViewController
         setupStrap()
         
         mainView.bringSubviewToFront(singlePlayerButton)
-    //    mainView.bringSubviewToFront(partyModeButton)
+        mainView.bringSubviewToFront(partyModeButton)
     }
     
     func removeImagesFromScreen() {
