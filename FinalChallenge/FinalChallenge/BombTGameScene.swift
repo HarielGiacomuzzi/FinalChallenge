@@ -14,6 +14,8 @@ import SpriteKit
 
 class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
+    //SET ZOEIRA MODE TO TRUE IF YOU WANT TO THROW THE BOMB EVERYWHERE
+    var zoeiraMode = false
     
     var walls:[BombWallNode] = [] //0 = north, 1 = south, 2 = east, 3 = west
     var players:[BombPlayerNode] = []//0 = north, 1 = south, 2 = east, 3 = west
@@ -25,7 +27,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var bombShouldTick = false
     var bombShouldExplode = false
-    var playerActive = ""
+    var playerActive = " "
     
     var fagulhando = false
     
@@ -69,7 +71,10 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         vector.normalize()
         
-        throwBomb(vector.dx, y: vector.dy)
+        if zoeiraMode || playerActive == "Player" {
+            throwBomb(vector.dx, y: vector.dy)
+        }
+
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -90,37 +95,30 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         startGame()
-        
+
     }
     
     func startGame() {
         self.physicsWorld.gravity = CGVectorMake(0, 0)
         self.physicsWorld.contactDelegate = self
         
-        // fund
+        // fundo
         let fundo = SKSpriteNode(imageNamed: "floor")
         self.addChild(fundo)
         fundo.position = CGPoint(x: self.frame.width / 2, y : self.frame.height/2)
 
-        
-        
-        
         //MUST SETUP WALLS BEFORE PLAYERS
         setupWalls()
-
-        spawnSinglePlayer()
-        if ConnectionManager.sharedInstance.session.connectedPeers.count > 0 {
-            spawnPlayers()
+        spawnPlayers()
+        
+        if GameManager.sharedInstance.isMultiplayer {
+            setMultiplayer()
+        } else {
+            setSinglePlayer()
         }
-        createPlayersAndObstacles()
+        
         generateBomb(100)
         
-    }
-    
-    func createPlayersAndObstacles() {
-
-        // cria jogadores
-    
     }
     
     func setupWalls(){
@@ -148,9 +146,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         size = CGSize(width: 45, height: self.frame.size.height)
         let blackBar = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: (self.frame.width - south.size.width), height: self.frame.height))
         blackBar.position = CGPoint(x: 0 , y: self.frame.height/2)
+        blackBar.zPosition = 20
 
         self.addChild(blackBar)
-        
         
         var east = BombWallNode(size: size, texture: SKTexture(imageNamed: "wallv"))
         east.position = CGPointMake(north.position.x + north.size.width / 2, self.frame.size.height / 2)
@@ -165,7 +163,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         let blackBar2 = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: (self.frame.width - south.size.width), height: self.frame.height))
         blackBar2.position = CGPoint(x: self.frame.width , y: self.frame.height/2)
-
+        blackBar2.zPosition = 20
 
         self.addChild(blackBar2)
         
@@ -181,23 +179,19 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         
     }
     
-    func spawnPlayers() {
+    func setMultiplayer() {
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
         let boardPlayers = GameManager.sharedInstance.players
         
         var i = 0
         
-        for connectedPeer in connectedPeers {
+        for boardPlayer in boardPlayers {
             var player = players[i]
-
-            player.identifier = connectedPeer.displayName
-            for boardPlayer in boardPlayers {
-                if player.identifier == boardPlayer.playerIdentifier {
-                    //player.color = boardPlayer.color
-                }
-            }
+            player.identifier = boardPlayer.playerIdentifier
+            player.color = boardPlayer.color
             i++
         }
+        
         while i < players.count {
             players[i].removeFromParent()
             walls[i].hasPlayer = false
@@ -205,7 +199,30 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
     }
     
-    func spawnSinglePlayer() {
+    func setSinglePlayer() {
+        for player in players {
+            player.identifier = "AI"
+        }
+        var player = players[0]
+        player.identifier = "Player"
+        let randomThrowBombAnimation = SKAction.runBlock({() in
+            self.AIThrowBomb()
+        })
+        
+        let waitAction = SKAction.waitForDuration(2)
+        let sequence = SKAction.sequence([randomThrowBombAnimation, waitAction])
+        
+        self.runAction(SKAction.repeatActionForever(sequence))
+        
+    }
+    
+    func AIThrowBomb() {
+        if playerActive == "AI" {
+            throwBombInRandomDirection()
+        }
+    }
+    
+    func spawnPlayers() {
         // criar a bomba
         
         var topRight = CGPointMake(maxX - 30, maxY - 30)
@@ -231,8 +248,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         north.runAction(SKAction.repeatActionForever(northMovement))
         self.addChild(north)
         players.append(north)
-        
-        
         
         var south = BombPlayerNode()
         
@@ -293,7 +308,13 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func gameOver(){
-        self.gameController!.gameOverController(playerRank.reverse())
+        //find last player
+        for i in 0...3 {
+            if walls[i].hasPlayer {
+                playerRank.append(players[i].identifier) //append last player
+            }
+        }
+        self.gameController!.gameOverController(playerRank)
         
     }
     
@@ -314,8 +335,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             handlePlayerBombContact(contact.bodyB, player: contact.bodyA)
         }
         
-
-   
     }
     
     func handlePlayerBombContact(bomb:SKPhysicsBody, player:SKPhysicsBody) {
@@ -338,9 +357,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             let angle : CGFloat = atan2((bombNode.position.y - playerNode.position.y),
                                         (bombNode.position.x - playerNode.position.x))
             
-//            if( playerNode.zRotation > 0){
-//                playerNode.zRotation = playerNode.roboBody!.zRotation + CGFloat(M_PI) * 2
-//            }
             
             let rotateToAngle = SKAction.rotateToAngle(angle, duration: 0.1)
             
@@ -352,8 +368,17 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func handleBombWallContact(bomb:SKPhysicsBody, wall:SKPhysicsBody) {
         let wallNode = wall.node as! BombWallNode
+
+        var wallCloseToPlayer:BombWallNode?
+        
+        for i in 0...3 {
+            if players[i] == playerWithBomb {
+                wallCloseToPlayer = walls[i]
+            }
+        }
+        
         playerWithBomb = nil
-        if wallNode.hasPlayer {
+        if wallNode.hasPlayer && wallNode != wallCloseToPlayer {
             bomb.velocity = CGVectorMake(0.0, 0.0)
             bomb.angularVelocity = 0.0
             if bombShouldExplode {
@@ -466,7 +491,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func messageReceived(identifier: String, dictionary: NSDictionary) {
-                println("recebeu msg")
+        println("recebeu msg")
         var x:CGFloat = 0.0
         var y:CGFloat = 0.0
         if dictionary.objectForKey("x") != nil && dictionary.objectForKey("y") != nil {
@@ -570,16 +595,20 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
 
         
+        throwBombInRandomDirection()
+        
+    }
+    
+    func throwBombInRandomDirection() {
         var bombStartX = CGFloat.random(min: -10.0, max: 10.0)
-        
+    
         var bombStartY = CGFloat.random(min: -10.0, max: 10.0)
-        
+    
         var vet = CGVector(dx: bombStartX, dy: bombStartY)
-        
+    
         vet.normalize()
-        
+    
         throwBomb(vet.dx, y: vet.dy)
-        
     }
     
     func animateFagulha() {
