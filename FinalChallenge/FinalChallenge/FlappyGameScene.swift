@@ -14,6 +14,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     var players:[FlappyPlayerNode] = []
     var testPlayer:FlappyPlayerNode?
+    var testPlayerLive = true
+    var cont = 1 //contador usado para o timer do singleplayer
+    
     //dont touch this variable:
     let stoneVel = 8.0
     
@@ -30,19 +33,22 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     override func update(currentTime: NSTimeInterval) {
         
         //println(gameManager.isMultiplayer)
-        if players.count == 1 && gameManager.isMultiplayer == true && !self.paused{
+        if players.count == 1 && GameManager.sharedInstance.isMultiplayer == true && !self.paused{
             println(self.gameManager.playerRank.count)
             for p in players{
                 self.playerRank.append(p.identifier!)
             }
-            self.gameOver()
+            self.gameOver(true)
+            self.paused = true
+        } else if !testPlayerLive && GameManager.sharedInstance.isMultiplayer == false && !self.paused{
+            self.gameOver(false)
             self.paused = true
         }
     }
     
     override func didMoveToView(view: SKView) {
         
-        startGame()
+        self.startGame()
         
         self.setupWalls()
         
@@ -110,12 +116,32 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     }
     
+    func timerForSinglePlayer(){
+        var timerNode = SKLabelNode(fontNamed:"MarkerFelt-Wide")
+        timerNode.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height - 150)
+        timerNode.zPosition = 100
+        timerNode.fontSize = 150
+        self.addChild(timerNode)
+
+        var wait = SKAction.waitForDuration(1)
+        var run = SKAction.runBlock {
+            // your code here ...
+            timerNode.text = "\(self.cont++)"
+        }
+        
+        timerNode.runAction(SKAction.repeatActionForever(SKAction.sequence([wait, run])))
+    }
+    
     func createPlayersAndObstacles() {
         self.spawnPlayers()
         
         //nobody connected
         if players.count == 0 {
             spawnSinglePlayer()
+        }
+        
+        if GameManager.sharedInstance.isMultiplayer == false{
+            self.timerForSinglePlayer()
         }
         
         // spawn the stones
@@ -134,6 +160,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         let spawnThenDelayPU = SKAction.sequence([spawnPowerups,delayPowerUp])
         let spawnDelayForeverPU = SKAction.repeatActionForever(spawnThenDelayPU)
         self.runAction(spawnDelayForeverPU)
+        
     }
     
     func setupWalls(){
@@ -300,10 +327,11 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func spawnSinglePlayer() {
         
-        gameManager.isMultiplayer = false
+        GameManager.sharedInstance.isMultiplayer = false
         testPlayer = FlappyPlayerNode()
         testPlayer!.identifier = "test player"
         testPlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
+        testPlayerLive = true
         self.addChild(testPlayer!)
         
         var particleTexture = SKTexture(imageNamed: "spark.png")
@@ -329,8 +357,12 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
     }
     
-    func gameOver(){
-        self.gameController!.gameOverController(playerRank.reverse())
+    func gameOver(isMult:Bool){
+        if isMult{
+            self.gameController!.gameOverController(playerRank.reverse())
+        }else{
+            self.gameController!.gameOverControllerSinglePlayer(cont)
+        }
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -362,6 +394,10 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
                     //self.gameManager.playerRank.append(player.identifier!)
                     //self.gameOver()
                 }
+            }
+            if testPlayer!.physicsBody == contact.bodyA || testPlayer!.physicsBody == contact.bodyB{
+                testPlayer!.removeFromParent()
+                testPlayerLive = false
             }
         }
         
