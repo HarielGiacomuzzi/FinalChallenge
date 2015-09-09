@@ -153,6 +153,17 @@ class GameManager {
         self.playerTurnEnded(nil);
     }
     
+    func dismissMinigameSP(){
+        if let vc2 = self.minigameViewController {
+            vc2.dismissViewControllerAnimated(false, completion: {() in
+                if let vc3 = self.minigameDescriptionViewController {
+                    vc3.dismissViewControllerAnimated(false, completion: nil)
+                }
+            })
+        }
+    }
+    
+    
     func dismissMinigameSinglePlayer(){
         if let vc = minigameGameOverViewControllerSinglePlayer {
             vc.dismissViewControllerAnimated(false, completion: {() in
@@ -167,10 +178,6 @@ class GameManager {
             //selectPlayers(0);
         }
         println("Cheguei aqui :P");
-        var dic = ["closeController":" "]
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        self.isOnMiniGame = false;
-        self.playerTurnEnded(nil);
     }
     
     func updatePlayerMoney(playerID:String, value:Int) {

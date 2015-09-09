@@ -17,4 +17,8 @@ class MinigameScene: SKScene {
         
     }
     
+    func restartGame(){
+        
+    }
+    
 }

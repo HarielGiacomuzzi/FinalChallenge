@@ -972,9 +972,9 @@
         <image name="Black" width="120" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Aso-TF-3da"/>
         <segue reference="T9l-u6-hEW"/>
         <segue reference="Ahl-Ky-SJK"/>
         <segue reference="S5e-fy-Ifo"/>
+        <segue reference="0i1-Si-jlB"/>
     </inferredMetricsTieBreakers>
 </document>

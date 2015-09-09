@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 Hariel Giacomuzzi. All rights reserved.
 //
 
-import Foundation
-
-import Foundation
 import SpriteKit
 
 
