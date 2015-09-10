@@ -19,8 +19,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     var turns : SKSpriteNode?
     var connect : SKSpriteNode?
     var go : SKSpriteNode?
-    var turnPlus : SKSpriteNode?
-    var turnMinus : SKSpriteNode?
     var numberOfTurns : SKLabelNode?
     
     // characters nodes
@@ -238,7 +236,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         if(turns!.containsPoint(location)){
             turns!.texture = yellowTurnsOff
         }else{
-            turnPlus!.texture = yellowTurnsOn
+            turns!.texture = yellowTurnsOn
         }
     
 
