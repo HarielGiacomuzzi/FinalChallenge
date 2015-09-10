@@ -360,10 +360,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
     }
     
-    func gameOverSP(){
-        self.gameController!.gameOverControllerSinglePlayer(cont)
-    }
-    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
@@ -418,8 +414,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         if let player = singlePlayer {
             // game over
             self.paused = true
-            //self.gameOverSP()
-            self.restartGame()
+            self.gameOverSP()
+            //self.restartGame()
         }
     }
     
@@ -443,13 +439,19 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         powerupNode.blowUp()
     }
     
-    override func restartGame(){
+    func gameOverSP(){
         self.removeAllChildren()
         self.removeAllActions()
         var transition = SKTransition.flipHorizontalWithDuration(0.5)
         var goScene = GameOverSceneSP(size: self.size)
         goScene.score = cont
+        goScene.game = "fish"
         self.view?.presentScene(goScene, transition: transition)
     }
+    
+    /*
+    func gameOverSP(){
+    self.gameController!.gameOverControllerSinglePlayer(cont)
+    }*/
     
 }

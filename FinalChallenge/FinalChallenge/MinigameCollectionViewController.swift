@@ -7,13 +7,28 @@
 //
 
 import UIKit
+import SpriteKit
+
 class MinigameCollectionViewController : UIViewController {
     
     var minigameCollection = [Minigame]()
-    
+    var scene : MinigameCollectionScene!
     override func viewDidLoad() {
+        
         minigameCollection = GameManager.sharedInstance.allMinigames
+        
         ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true);
+        
+        scene = MinigameCollectionScene(size: CGSize(width: self.view.frame.width, height: self.view.frame.height))
+        
+        let skView = self.view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        skView.showsPhysics = false
+        scene.viewController = self
+        scene.scaleMode = .AspectFit
+        skView.presentScene(scene)
 
     }
     
@@ -49,6 +64,9 @@ class MinigameCollectionViewController : UIViewController {
         
     }
     
+    func gameSelected(game:String!){
+        performSegueWithIdentifier("minigameSegue", sender: game)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "minigameSegue" {
@@ -64,4 +82,6 @@ class MinigameCollectionViewController : UIViewController {
         }
         
     }
+    
+    
 }
