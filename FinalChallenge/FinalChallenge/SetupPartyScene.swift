@@ -39,7 +39,9 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     let redBanner : SKTexture = SKTexture(imageNamed: "redTitle")
     let greenButton : SKTexture = SKTexture(imageNamed: "greenButtonOn")
     let greenButtonOff : SKTexture = SKTexture(imageNamed: "greenButtonOff")
-    let yellowBanner : SKTexture = SKTexture(imageNamed: "yellowBanner")
+    let yellowTurnsOn : SKTexture = SKTexture(imageNamed: "turnsOn")
+    let yellowTurnsOff : SKTexture = SKTexture(imageNamed: "turnsOff")
+
     let arrowOn : SKTexture = SKTexture(imageNamed: "arrowButtonOn")
     let arrowOff : SKTexture = SKTexture(imageNamed: "arrowButtonOff")
     
@@ -80,7 +82,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         banner?.zPosition = 4
        
         // set the turn select banners
-        turns = SKSpriteNode(texture: yellowBanner, size: yellowButton.size())
+        turns = SKSpriteNode(texture: yellowTurnsOn, size: yellowTurnsOn.size())
         self.addChild(turns!)
         turns!.position = CGPoint(x: self.frame.width * 0.35, y: banner!.position.y - 110)
         turns?.zPosition = 4
@@ -89,7 +91,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         connect = SKSpriteNode(texture: yellowButton, size: yellowButton.size())
         self.addChild(connect!)
-        connect!.position = CGPoint(x: turns!.position.x, y: turns!.position.y - 80)
+        connect!.position = CGPoint(x: turns!.position.x, y: turns!.position.y - 90)
         connect?.zPosition = 4
         
         // set the GO BUTTON
@@ -99,22 +101,12 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         go!.name = "goButton"
         go?.zPosition = 4
         
-        // set the turn controll buttons and label
+        // set the turn controll buttons
 
         
-        turnPlus = SKSpriteNode(texture: arrowOn)
-        turnPlus?.zPosition = 5
-        turnPlus?.position = CGPoint(x: turns!.position.x + 200, y: turns!.position.y + 10)
-        self.addChild(turnPlus!)
-        
-        turnMinus = SKSpriteNode(texture: arrowOn)
-        turnMinus?.zPosition = 5
-        turnMinus?.position = CGPoint(x: turns!.position.x - 200, y: turns!.position.y + 10)
-        turnMinus?.xScale = -1.0
-        self.addChild(turnMinus!)
-        
         numberOfTurns = SKLabelNode(fontNamed: "Helvetica Neue")
-        numberOfTurns?.text = "Turn Counter : 0"
+        numberOfTurns?.text = "max turns : 0"
+        numberOfTurns?.fontSize = 30
         numberOfTurns?.position = CGPoint(x: turns!.position.x, y: turns!.position.y)
         numberOfTurns?.zPosition = 5
         self.addChild(numberOfTurns!)
@@ -216,6 +208,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             connect!.texture = yellowButton
         }
         
+        if(turns!.containsPoint(location)){
+            turns!.texture = yellowTurnsOff
+        }else{
+            turns!.texture = yellowTurnsOn
+        }
+        
+        
         
     }
     
@@ -236,18 +235,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         }
         
         
-        if(turnPlus!.containsPoint(location)){
-            turnPlus!.texture = arrowOff
+        if(turns!.containsPoint(location)){
+            turns!.texture = yellowTurnsOff
         }else{
-            turnPlus!.texture = arrowOn
+            turnPlus!.texture = yellowTurnsOn
         }
     
-        
-        if(turnMinus!.containsPoint(location)){
-            turnMinus!.texture = arrowOff
-        }else{
-            turnMinus!.texture = arrowOn
-        }
+
 
     }
     
@@ -255,8 +249,8 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         go?.texture = greenButton
         connect?.texture = yellowButton
-        turnMinus?.texture = arrowOn
-        turnPlus?.texture = arrowOn
+        turns?.texture = yellowTurnsOn
+
         
         
         var touch: UITouch = touches.first as! UITouch
@@ -273,33 +267,16 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             
         }
 
-        if(turnPlus!.containsPoint(location)){
-            turnCounter++
-            println(turnCounter)
-            numberOfTurns?.text = "Turn Counter : \(turnCounter)"
+        if(turns!.containsPoint(location)){
+            turnCounter = turnCounter + 5
+            if turnCounter > 25 {
+                turnCounter = 0
+            }
+            
+            numberOfTurns?.text = "max turns : \(turnCounter)"
 
         }
-        if(turnMinus!.containsPoint(location) && turnCounter > 0){
-            turnCounter--
-            println(turnCounter)
-            numberOfTurns?.text = "Turn Counter : \(turnCounter)"
-        }
 
-        
-        
-        if (turnCounter == 1){
-        riseCharacter(char1)
-        }
-        if (turnCounter == 2){
-            riseCharacter(char2)
-        }
-        if (turnCounter == 3){
-            riseCharacter(char3)
-        }
-        if (turnCounter == 4){
-            riseCharacter(char4)
-        }
-    
     }
     
     func spawnItem(){
@@ -346,14 +323,12 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     func didBeginContact(contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == fallingCategoryMask {
             let filter = contact.bodyA.node?.parent
-            println("filter removed")
             contact.bodyA.node?.removeFromParent()
             filter?.removeFromParent()
         }
         
         if contact.bodyB.categoryBitMask == fallingCategoryMask {
             let filter = contact.bodyB.node?.parent
-            println("filter removed")
             contact.bodyB.node?.removeFromParent()
             filter?.removeFromParent()
         }
