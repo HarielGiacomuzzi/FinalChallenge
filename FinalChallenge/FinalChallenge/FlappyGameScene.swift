@@ -278,7 +278,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         stoneParticleHigh!.targetNode = self.scene
         stoneParticleHigh!.setupMovement(self.frame, node: stone, vel: stoneVel * worldVelMultiplier)
         self.addChild(stoneParticleHigh!)
-        
     }
     
     func spawnPowerUp() {
@@ -418,7 +417,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
         if let player = singlePlayer {
             // game over
-            self.gameOverSP()
+            self.paused = true
+            //self.gameOverSP()
+            self.restartGame()
         }
     }
     
@@ -440,6 +441,15 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         var powerupNode:FlappyPowerupNode = powerup.node as! FlappyPowerupNode
         playerNode.boostAndStop()
         powerupNode.blowUp()
+    }
+    
+    override func restartGame(){
+        self.removeAllChildren()
+        self.removeAllActions()
+        var transition = SKTransition.flipHorizontalWithDuration(0.5)
+        var goScene = GameOverSceneSP(size: self.size)
+        goScene.score = cont
+        self.view?.presentScene(goScene, transition: transition)
     }
     
 }

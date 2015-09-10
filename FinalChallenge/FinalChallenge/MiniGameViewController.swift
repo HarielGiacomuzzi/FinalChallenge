@@ -106,6 +106,10 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         presentViewController(popupSinglePlayer, animated: true,completion: nil)
     }
     
+    func dismmissMinigameView(){
+         self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
     /*func adaptivePresentationStyleForPresentationController(
         controller: UIPresentationController) -> UIModalPresentationStyle {
             return .None

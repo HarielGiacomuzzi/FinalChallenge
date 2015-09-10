@@ -14,13 +14,16 @@ class MinigameGameOverControllerSinglePlayer : UIViewController{
     var timerText : Int!
     
     override func viewDidLoad() {
+        GameManager.sharedInstance.minigameGameOverViewControllerSinglePlayer = self
         timer.text = "Final Time: \(timerText)"
     }
     
     
     @IBAction func backToMinigame(sender: AnyObject) {
+        GameManager.sharedInstance.dismissMinigameSinglePlayer()
     }
     @IBAction func restartGame(sender: AnyObject) {
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
 
 }
