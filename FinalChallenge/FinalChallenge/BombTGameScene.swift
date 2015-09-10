@@ -640,4 +640,14 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     }
     
+    func gameOverSP(){
+        self.removeAllChildren()
+        self.removeAllActions()
+        var transition = SKTransition.flipHorizontalWithDuration(0.5)
+        var goScene = GameOverSceneSP(size: self.size)
+        goScene.score = 0 // not used yet
+        goScene.game = "bomb"
+        self.view?.presentScene(goScene, transition: transition)
+    }
+    
 }

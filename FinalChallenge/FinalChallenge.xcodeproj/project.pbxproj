@@ -54,6 +54,7 @@
 		B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */; };
 		B5AFAD131B9F47CF0005F19E /* MinigameGameOverControllerSinglePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD121B9F47CF0005F19E /* MinigameGameOverControllerSinglePlayer.swift */; };
 		B5AFAD151BA09BD40005F19E /* GameOverSceneSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */; };
+		B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */; };
 		B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */; };
 		B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */; };
 		B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */; };
@@ -154,6 +155,7 @@
 		B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeViewControllerIPAD.swift; sourceTree = "<group>"; };
 		B5AFAD121B9F47CF0005F19E /* MinigameGameOverControllerSinglePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameGameOverControllerSinglePlayer.swift; sourceTree = "<group>"; };
 		B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneSP.swift; sourceTree = "<group>"; };
+		B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameCollectionScene.swift; sourceTree = "<group>"; };
 		B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGameOverCell.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */,
 				B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */,
+				B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */,
 				B5AFAD0B1B94CC7F0005F19E /* PartyModeViewController.swift */,
 				B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */,
 				B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */,
@@ -518,7 +521,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 5YM6RAKDJ8;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -605,6 +608,7 @@
 				5E7E45BC1B960AC600249B8A /* MinigameDescriptionViewController.swift in Sources */,
 				5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */,
 				B5DD1B471B8F712A00AA1EB6 /* AudioSource.swift in Sources */,
+				B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */,
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
 				B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */,
 				B5AFAD0C1B94CC7F0005F19E /* PartyModeViewController.swift in Sources */,
