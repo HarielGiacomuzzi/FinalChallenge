@@ -11,6 +11,9 @@ import SpriteKit
 
 class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
+    
+    var viewController : PartyModeViewControllerIPAD!
+    
     // set buttons and nodes
     var banner : SKSpriteNode?
     var turns : SKSpriteNode?
@@ -19,6 +22,15 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     var turnPlus : SKSpriteNode?
     var turnMinus : SKSpriteNode?
     var numberOfTurns : SKLabelNode?
+    
+    // characters nodes
+    let char1 : SKSpriteNode = SKSpriteNode(imageNamed: "white")
+    let char2 : SKSpriteNode = SKSpriteNode(imageNamed: "blue")
+    let char3 : SKSpriteNode = SKSpriteNode(imageNamed: "black")
+    let char4 : SKSpriteNode = SKSpriteNode(imageNamed: "red")
+    
+    var charInitialPosition : CGFloat?
+
     
     
     // set textures
@@ -141,6 +153,48 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         boundary.position = CGPoint(x: self.frame.width/2, y: -200)
         self.addChild(boundary)
         
+        // set characters
+        
+        charInitialPosition = (char1.size.height/2)*(-1)
+        
+        char1.position = CGPoint(x: self.frame.width*0.2, y: charInitialPosition!)
+        char1.zPosition = 6
+        self.addChild(char1)
+        /*
+        let shadow1 = SKSpriteNode(imageNamed: "player1")
+        shadow1.blendMode = SKBlendMode(rawValue: 0)!
+        shadow1.colorBlendFactor = 1
+        shadow1.color = SKColor.blackColor()
+        shadow1.alpha = 0.25
+        char1.addChild(shadow1)
+        shadow1.zPosition = -1
+        shadow1.position = CGPoint(x: 5, y: -10)
+        */
+    
+      
+        char2.position = CGPoint(x: self.frame.width * 0.4, y: charInitialPosition!)
+        char2.zPosition = 6
+        self.addChild(char2)
+        /*
+        let shadow2 = SKSpriteNode(imageNamed: "player2")
+        shadow2.blendMode = SKBlendMode(rawValue: 0)!
+        shadow2.colorBlendFactor = 1
+        shadow2.color = SKColor.blackColor()
+        shadow2.alpha = 0.25
+        char2.addChild(shadow2)
+        shadow2.zPosition = -1
+        shadow2.position = CGPoint(x: 5, y: -10)
+*/
+        
+        
+        char3.position = CGPoint(x: self.frame.width*0.6, y: charInitialPosition!)
+        char3.zPosition = 6
+        self.addChild(char3)
+        
+        char4.position = CGPoint(x: self.frame.width*0.8, y: charInitialPosition!)
+        char4.zPosition = 6
+        self.addChild(char4)
+        
         
         
         
@@ -210,9 +264,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         if(go!.containsPoint(location)){
             println("apertei o botao de GO")
+            viewController.turns = turnCounter
+            viewController.gotoBoardGame()
         }
         if(connect!.containsPoint(location)){
             println("apertei o botao de CONNECT")
+            viewController.ConnectPlayers()
+            
         }
 
         if(turnPlus!.containsPoint(location)){
@@ -228,6 +286,20 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         }
 
         
+        
+        if (turnCounter == 1){
+        riseCharacter(char1)
+        }
+        if (turnCounter == 2){
+            riseCharacter(char2)
+        }
+        if (turnCounter == 3){
+            riseCharacter(char3)
+        }
+        if (turnCounter == 4){
+            riseCharacter(char4)
+        }
+    
     }
     
     func spawnItem(){
@@ -285,6 +357,21 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             contact.bodyB.node?.removeFromParent()
             filter?.removeFromParent()
         }
+    }
+    
+    func riseCharacter(char : SKSpriteNode){
+        
+        char.position = CGPoint(x: char.position.x, y: charInitialPosition!)
+        
+        
+        let location = char.position
+        
+        let action = SKAction.moveToY(location.y + char.size.height, duration: 0.7) // Or however much time you want to the action to run.
+        action.timingMode = .EaseInEaseOut
+        
+        char.runAction(action)
+        
+        
     }
     
 
