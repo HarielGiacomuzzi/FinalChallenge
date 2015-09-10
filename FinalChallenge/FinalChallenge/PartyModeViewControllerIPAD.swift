@@ -10,7 +10,7 @@ import UIKit
 import MultipeerConnectivity
 import SpriteKit
 
-class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate{
+class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDelegate{
     
     @IBOutlet weak var turnSelector: UIPickerView!
     var turnSelectorComponents = [String()]
@@ -28,30 +28,38 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     @IBOutlet weak var player4Image: UIImageView!
     @IBOutlet weak var player4Label: UILabel!
     
+    
+    
     var arrayAvatars = [String()]
+    
+    var scene : SetupPartyScene?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      /*  ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true)
+      
+        ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true)
         ConnectionManager.sharedInstance.setupBrowser()
         ConnectionManager.sharedInstance.browser?.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_GameSetup", object: nil);
-        
+        /*
         turnSelector.dataSource = self
         turnSelector.delegate = self
         
         turnSelectorComponents = ["5","10","20"]
         */
         
-        let scene = SetupPartyScene(size: CGSize(width: 1024, height: 768))
+        scene = SetupPartyScene(size: CGSize(width: 1024, height: 768))
+        scene!.viewController = self
+        
         
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.showsPhysics = false
-        scene.scaleMode = .AspectFit
+        scene!.scaleMode = .AspectFit
         skView.presentScene(scene)
         println("apresentei a cena sem crashar")
 
@@ -72,16 +80,16 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         
         switch(GameManager.sharedInstance.players.count){
         case 4: 
-                player4Label.text = GameManager.sharedInstance.players[3].playerIdentifier
+                //player4Label.text = GameManager.sharedInstance.players[3].playerIdentifier
                 fallthrough
         case 3:
-                player3Label.text = GameManager.sharedInstance.players[2].playerIdentifier
+                //player3Label.text = GameManager.sharedInstance.players[2].playerIdentifier
                 fallthrough
         case 2:
-                player2Label.text = GameManager.sharedInstance.players[1].playerIdentifier
+                //player2Label.text = GameManager.sharedInstance.players[1].playerIdentifier
                 fallthrough
         case 1:
-                player1Label.text = GameManager.sharedInstance.players[0].playerIdentifier
+               // player1Label.text = GameManager.sharedInstance.players[0].playerIdentifier
                 break
         default: break
         }
@@ -93,20 +101,23 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!){
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
     }
-    @IBAction func ConnectPlayers(sender: AnyObject) {
+    @IBAction func ConnectPlayers() {
         self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in}
     }
     
-    @IBAction func gotoBoardGame(sender: AnyObject){
+    @IBAction func gotoBoardGame(){
         BoardGraph.SharedInstance.loadBoard("board_2");
-        let boardGameViewController = BoardViewController()
-        self.presentViewController(boardGameViewController, animated: false, completion: nil)
+
+        self.performSegueWithIdentifier("gotoBoardGame", sender: nil)
+        
+        
+        
     }
     func gameSettings(){
         GameManager.sharedInstance.totalGameTurns = turns
     }
     
-    //MARK: Picker data source
+  /*  //MARK: Picker data source
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -122,7 +133,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         turns = turnSelectorComponents[row].toInt()!
     }
-    
+    */
     func messageReceived(data : NSNotification){
         var identifier = data.userInfo!["peerID"] as! String
         var dictionary = data.userInfo!["avatar"] as! NSDictionary
@@ -140,20 +151,32 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         
         
         switch(identifier){
-        case player1Label.text! : player1Image.image = UIImage(named: message)
-        case player2Label.text! : player2Image.image = UIImage(named: message)
-        case player3Label.text! : player3Image.image = UIImage(named: message)
-        case player4Label.text! : player4Image.image = UIImage(named: message)
+        case GameManager.sharedInstance.players[0].playerIdentifier : // player1Image.image = UIImage(named: message)
+                                  scene?.char1.texture = SKTexture(imageNamed: message)
+                                  scene?.riseCharacter(scene!.char1)
+            
+            
+        case GameManager.sharedInstance.players[1].playerIdentifier : // player2Image.image = UIImage(named: message)
+                                    scene?.char2.texture = SKTexture(imageNamed: message)
+                                    scene?.riseCharacter(scene!.char2)
+        case GameManager.sharedInstance.players[2].playerIdentifier : // player3Image.image = UIImage(named: message)
+                                    scene?.char3.texture = SKTexture(imageNamed: message)
+                                    scene?.riseCharacter(scene!.char3)
+
+        case GameManager.sharedInstance.players[3].playerIdentifier : //player4Image.image = UIImage(named: message)
+                                    scene?.char4.texture = SKTexture(imageNamed: message)
+                                    scene?.riseCharacter(scene!.char4)
+
         default: break
         }
         for p in GameManager.sharedInstance.players {
             if identifier == p.playerIdentifier{
                 p.avatar = message
                 switch(message){
-                    case "Red": p.color = UIColor.redColor()
-                    case "White": p.color = UIColor.whiteColor()
-                    case "Black": p.color = UIColor.blackColor()
-                    case "Blue": p.color = UIColor.blueColor()
+                    case "red": p.color = UIColor.redColor()
+                    case "white": p.color = UIColor.whiteColor()
+                    case "black": p.color = UIColor.blackColor()
+                    case "blue": p.color = UIColor.blueColor()
                     default: break
                 }
             }

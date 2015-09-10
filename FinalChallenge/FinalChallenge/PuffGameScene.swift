@@ -12,6 +12,9 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     var pull = 1;
     var push = 1;
     let partsAtlas = SKTextureAtlas(named: "puffGame")
+    var spikeWall = SKNode()
+    var action : SKAction?
+    var counter = 1
     
     override func didMoveToView(view: SKView) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_PuffGamePadAction", object: nil);
@@ -32,7 +35,20 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             
             self.addChild(p.nodeSprite!)
         }
-
+        
+        
+        for i in 0...Int(self.frame.width/partsAtlas.textureNamed("spike").size().width){
+            let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
+            spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width, 0);
+            spikeWall.addChild(spike)
+            
+        }
+       action = SKAction.moveBy(CGVector(dx: 0, dy: 100), duration: NSTimeInterval(1.5))
+        //spikeWall.position = CGPointMake(0, 0);
+        println(spikeWall.frame.height)
+        println(spikeWall.frame.width)
+       self.addChild(spikeWall);
+        
         
     }
     
@@ -65,7 +81,14 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-       
+        if counter == 1{
+            spikeWall.yScale = spikeWall.yScale+0.5
+            spikeWall.runAction(action);
+            counter = 0;
+        }else{
+            spikeWall.runAction(action?.reversedAction());
+            counter = 1
+        }
     }
     
     

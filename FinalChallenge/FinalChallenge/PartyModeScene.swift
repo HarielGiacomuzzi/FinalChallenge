@@ -17,7 +17,7 @@ class PartyModeScene: SKScene {
     var selectedNode = SKSpriteNode()
     var playerSpriteNodeArray = [SKSpriteNode()]
     var beginPosition = CGPoint()
-    let imageNames = ["Red", "White", "Blue", "Black"]
+    let imageNames = ["red", "white", "blue", "black"]
     var takenAvatar = [String()]
     var takenFlag = Bool()
     var arrayAvatarSprite = [SKSpriteNode()]
