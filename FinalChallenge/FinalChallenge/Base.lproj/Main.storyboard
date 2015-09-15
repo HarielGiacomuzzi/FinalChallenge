@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8ga-GJ-cx0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -528,7 +528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3O-K9-r4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1562" y="615"/>
+            <point key="canvasLocation" x="-1418" y="573"/>
         </scene>
         <!--Party Mode View ControllerIPAD-->
         <scene sceneID="WX8-CF-IVx">
@@ -566,10 +566,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="Nlo-0A-Sfq" kind="show" identifier="gotoPlayerPad" id="PM1-Qh-4tX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvJ-sc-ePn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-497" y="615"/>
+            <point key="canvasLocation" x="-797" y="615"/>
         </scene>
         <!--Minigame Collection View Controller-->
         <scene sceneID="YJc-zg-dwn">
@@ -579,61 +582,10 @@
                         <viewControllerLayoutGuide type="top" id="feY-Ki-ZXY"/>
                         <viewControllerLayoutGuide type="bottom" id="ebL-Iy-27c"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5Ru-4q-AtX">
+                    <view key="view" contentMode="scaleToFill" id="5Ru-4q-AtX" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tK7-Hf-xCC">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="1" green="0.90833199888558891" blue="0.29852642286004494" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="spF-q5-t30">
-                                    <size key="itemSize" width="125" height="70"/>
-                                    <size key="headerReferenceSize" width="10" height="10"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="50" minY="0.0" maxX="50" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="SqI-xr-U13" customClass="CustomMinigameCollectionView" customModule="FinalChallenge" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="125" height="70"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fvB-21-jF9">
-                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="70"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="fvB-21-jF9" firstAttribute="leading" secondItem="SqI-xr-U13" secondAttribute="leadingMargin" constant="-8" id="21G-dW-VOp"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="fvB-21-jF9" secondAttribute="trailing" constant="-8" id="45W-nx-jQz"/>
-                                            <constraint firstItem="fvB-21-jF9" firstAttribute="top" secondItem="SqI-xr-U13" secondAttribute="topMargin" constant="-8" id="9ez-Hk-1ng"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="fvB-21-jF9" secondAttribute="bottom" constant="-8" id="yLB-yA-fm6"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="minigameImage" destination="fvB-21-jF9" id="TZD-vt-UUz"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PpB-YM-dJ9">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="10"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </collectionReusableView>
-                                <connections>
-                                    <outlet property="dataSource" destination="Y9w-QZ-R0C" id="b0W-kj-Hoz"/>
-                                    <outlet property="delegate" destination="Y9w-QZ-R0C" id="rgT-sI-r0M"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="tK7-Hf-xCC" secondAttribute="trailing" constant="-16" id="pkU-LS-M1F"/>
-                            <constraint firstItem="tK7-Hf-xCC" firstAttribute="leading" secondItem="5Ru-4q-AtX" secondAttribute="leadingMargin" constant="-16" id="qhB-cB-PPG"/>
-                            <constraint firstItem="tK7-Hf-xCC" firstAttribute="top" secondItem="5Ru-4q-AtX" secondAttribute="topMargin" id="vZ3-V3-o2u"/>
-                            <constraint firstItem="ebL-Iy-27c" firstAttribute="top" secondItem="tK7-Hf-xCC" secondAttribute="bottom" id="vhW-GD-nTT"/>
-                        </constraints>
                     </view>
                     <connections>
                         <segue destination="Ovk-7r-ehi" kind="show" identifier="minigameSegue" id="0i1-Si-jlB"/>
@@ -641,7 +593,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uuh-9S-k9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1306" y="1508"/>
+            <point key="canvasLocation" x="-1303" y="1414"/>
         </scene>
         <!--Mini Game View Controller-->
         <scene sceneID="u08-or-TA0">
@@ -808,7 +760,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1S-db-nvY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="957" y="-536"/>
+            <point key="canvasLocation" x="959" y="-530"/>
         </scene>
         <!--I Phone Player View Controller-->
         <scene sceneID="Imk-1I-fmI">
@@ -965,7 +917,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RON-hx-AgF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="320" y="1414"/>
+            <point key="canvasLocation" x="634" y="1420"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
