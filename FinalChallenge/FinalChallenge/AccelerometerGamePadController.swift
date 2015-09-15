@@ -23,8 +23,6 @@ class AccelerometerGamePadController: UIViewController {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil);
         
-        //gameManager?.miniGameActive =
-        
         if motionManager.accelerometerAvailable{
             let queue = NSOperationQueue()
             motionManager.startAccelerometerUpdatesToQueue(queue, withHandler:

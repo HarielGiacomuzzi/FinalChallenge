@@ -9,8 +9,6 @@
 import SpriteKit
 
 class PuffGameScene: SKScene, SKPhysicsContactDelegate {
-    var pull = 1;
-    var push = 1;
     let partsAtlas = SKTextureAtlas(named: "puffGame")
     
     var spikeWallRight = SKNode()
@@ -22,8 +20,6 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     var actionWallLeft : SKAction?
     var actionWallTop : SKAction?
     var actionWallDown : SKAction?
-    
-    var counter = 1
     
     override func didMoveToView(view: SKView) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_PuffGamePadAction", object: nil);
@@ -45,7 +41,11 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             self.addChild(p.nodeSprite!)
         }
         
-        
+        setupSpikes();
+
+    }
+    
+    func setupSpikes(){
         for i in 0...Int(self.frame.width/partsAtlas.textureNamed("spike").size().width){
             let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
             spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width, -partsAtlas.textureNamed("spike").size().height);
@@ -82,12 +82,6 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         var left = SKAction.moveBy(CGVector(dx: partsAtlas.textureNamed("spike").size().height*1.5, dy: 0), duration: NSTimeInterval(1.5))
         actionWallLeft = SKAction.sequence([left,left.reversedAction()]);
         
-//        println(UIScreen.mainScreen().bounds.height)
-//        println(UIScreen.mainScreen().bounds.width)
-//        println(self.frame.height)
-//        println(self.frame.width)
-        //spikeWall.position = CGPointMake(0, 0);
-
         self.addChild(spikeWallDown);
         self.addChild(spikeWallTop);
         self.addChild(spikeWallRight);
@@ -100,27 +94,16 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
            
             for p in GameManager.sharedInstance.players{
                 if p.playerIdentifier == data.userInfo!["peerID"] as? String{
-                    if messageEnum == PlayerAction.PuffPull{
-                        p.pull--;
-                    }
-                    if messageEnum == PlayerAction.PuffPush{
-                        p.push--;
-                    }
-                    if p.pull <= 0 && p.push <= 0 {
-                        p.pull = 1;
-                        p.push = 1;
                         p.nodeSprite!.xScale = (p.nodeSprite!.xScale+1);
                         p.nodeSprite!.yScale = (p.nodeSprite!.yScale+1);
-                        if p.nodeSprite!.xScale > 10{
+                        if p.nodeSprite!.xScale > 30{
                             explodePuff(p.nodeSprite!)
                         }
                         break;
-                    }
                 }
             }
         }
     }
-    
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
             spikeWallTop.runAction(SKAction.repeatActionForever(actionWallTop!));

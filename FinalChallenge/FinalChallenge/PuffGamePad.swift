@@ -7,20 +7,64 @@
 //
 
 import Foundation
+import CoreMotion
 import UIKit
 
 class PuffGamePad: UIViewController {
+    var gameManager : GameManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad();
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil);
+        
+        if motionManager.accelerometerAvailable{
+            let queue = NSOperationQueue()
+            motionManager.startAccelerometerUpdatesToQueue(queue, withHandler:
+                {data, error in
+                    
+                    if let data = data{
+                        
+                    }
+                    else{
+                        return
+                    }
+                    //                    print(" Y = \(data.acceleration.y)")
+                    self.sendData(data.acceleration.y)
+                }
+            )
+        } else {
+            print("Accelerometer is not available")
+        }
     }
     
-    @IBAction func pullButton(sender: AnyObject) {
-        var dic = ["PuffGamePad":" ", "action":PlayerAction.PuffPull.rawValue]
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        var dic = ["PuffGamePad":" ", "action":PlayerAction.PuffGrow.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true);
     }
-    @IBAction func pushButton(sender: AnyObject) {
-        var dic = ["PuffGamePad":" ", "action":PlayerAction.PuffPush.rawValue]
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true);
+    
+    lazy var motionManager : CMMotionManager = {
+        let motion = CMMotionManager()
+        motion.accelerometerUpdateInterval = 1.0/10.0
+        return motion
+        }()
+    
+    
+    func sendData(y:Double) {
+        
+        if y > 0{
+            var action = ["way":PlayerAction.Down.rawValue]
+            var dic = ["controllerAction":"", "action":action]
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        }else if y < 0{
+            var action = ["way":PlayerAction.Up.rawValue]
+            var dic = ["controllerAction":"", "action":action]
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        }
+    }
+    
+    func closeController(data:NSNotification) {
+        navigationController?.popViewControllerAnimated(false)
+        
     }
     
 }

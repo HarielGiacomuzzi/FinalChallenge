@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8ga-GJ-cx0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -862,39 +862,7 @@
                     <view key="view" contentMode="scaleToFill" id="Iu8-cp-1kj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uz6-fS-Hug">
-                                <rect key="frame" x="0.0" y="-1" width="249" height="601"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="249" id="zGI-Dt-0tl"/>
-                                </constraints>
-                                <state key="normal" title="Button 1">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pullButton:" destination="j90-u9-H7a" eventType="touchUpInside" id="T02-FV-T7X"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPb-nT-ONT">
-                                <rect key="frame" x="290" y="0.0" width="322" height="601"/>
-                                <state key="normal" title="Button 2">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pushButton:" destination="j90-u9-H7a" eventType="touchUpInside" id="TRK-p8-SNv"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Uz6-fS-Hug" firstAttribute="leading" secondItem="Iu8-cp-1kj" secondAttribute="leading" id="3aQ-t8-AHH"/>
-                            <constraint firstItem="RPb-nT-ONT" firstAttribute="centerY" secondItem="Iu8-cp-1kj" secondAttribute="centerY" id="HC1-yc-kKF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="RPb-nT-ONT" secondAttribute="trailing" constant="-28" id="Ik4-CN-jhp"/>
-                            <constraint firstItem="Uz6-fS-Hug" firstAttribute="bottom" secondItem="hfm-Vu-rnR" secondAttribute="top" id="N78-ai-Ppy"/>
-                            <constraint firstItem="Uz6-fS-Hug" firstAttribute="top" secondItem="Iu8-cp-1kj" secondAttribute="topMargin" constant="-1" id="e1o-zk-dqe"/>
-                            <constraint firstItem="RPb-nT-ONT" firstAttribute="top" secondItem="Iu8-cp-1kj" secondAttribute="top" id="kcw-aJ-IPy"/>
-                            <constraint firstItem="RPb-nT-ONT" firstAttribute="leading" secondItem="Uz6-fS-Hug" secondAttribute="trailing" constant="41" id="wbT-D1-ocO"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drR-SW-8ty" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -921,9 +889,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Aso-TF-3da"/>
         <segue reference="Ahl-Ky-SJK"/>
         <segue reference="T9l-u6-hEW"/>
+        <segue reference="Aso-TF-3da"/>
+        <segue reference="Jwa-KR-dh0"/>
         <segue reference="S5e-fy-Ifo"/>
     </inferredMetricsTieBreakers>
 </document>
