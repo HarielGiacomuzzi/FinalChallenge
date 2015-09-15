@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "yellowButtonOn.png"
+      "filename" : "connectOn.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "yellowButtonOn@2x.png"
+      "filename" : "connectOn@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "yellowButtonOn@3x.png"
+      "filename" : "connectOn@3x.png"
     }
   ],
   "info" : {
