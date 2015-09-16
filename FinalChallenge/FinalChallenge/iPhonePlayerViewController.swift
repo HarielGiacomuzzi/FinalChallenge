@@ -9,14 +9,27 @@
 import Foundation
 import MultipeerConnectivity
 import UIKit
+import SpriteKit
 
 class iPhonePlayerViewController: UIViewController {
+    
+    var scene : PlayerControllerScene?
+    
     override func viewDidLoad() {
         super.viewDidLoad();
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerTurn:", name: "ConnectionManager_PlayerTurn", object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerTurn:", name: "ConnectionManager_PlayerTurn", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil);
+        scene = PlayerControllerScene(size: CGSize(width: 1024, height: 768))
+        
+        let skView = self.view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+        skView.showsPhysics = false
+        scene!.scaleMode = .AspectFit
+        skView.presentScene(scene)
     }
     
     func playerTurn(data : NSNotification){
