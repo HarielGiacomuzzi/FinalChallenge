@@ -20,7 +20,6 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         ConnectionManager.sharedInstance.setupBrowser();
         ConnectionManager.sharedInstance.browser?.delegate = self;
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "whoisResponse:", name: "ConnectionManager_WhoIsResponse", object: nil);
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DataReceived", object: nil);
     }
 
     override func didReceiveMemoryWarning() {
