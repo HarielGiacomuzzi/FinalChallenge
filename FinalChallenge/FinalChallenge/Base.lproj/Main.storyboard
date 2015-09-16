@@ -770,7 +770,7 @@
                         <viewControllerLayoutGuide type="top" id="UY5-3e-b3a"/>
                         <viewControllerLayoutGuide type="bottom" id="21k-nJ-3TR"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="T6v-aZ-jeD">
+                    <view key="view" contentMode="scaleToFill" id="T6v-aZ-jeD" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -889,10 +889,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ahl-Ky-SJK"/>
-        <segue reference="T9l-u6-hEW"/>
-        <segue reference="Aso-TF-3da"/>
         <segue reference="Jwa-KR-dh0"/>
         <segue reference="S5e-fy-Ifo"/>
+        <segue reference="Aso-TF-3da"/>
+        <segue reference="EGX-Pa-y2G"/>
+        <segue reference="LsT-VI-dB9"/>
     </inferredMetricsTieBreakers>
 </document>
