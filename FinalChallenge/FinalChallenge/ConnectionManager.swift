@@ -114,7 +114,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         let userInfo = ["peerID":peerID, "state":state.rawValue]
         
         if state == MCSessionState.NotConnected{
-            println("Peer \(peerID.displayName) Disconnected");
+            //println("Peer \(peerID.displayName) Disconnected");
             NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
             return
         }
@@ -138,13 +138,12 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             if message.valueForKey("diceResult") != nil {
                 userInfo.updateValue(message.valueForKey("diceResult") as! Int, forKey: "diceResult")
                 GameManager.sharedInstance.messageReceived(userInfo)
-//                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DiceResult", object: nil, userInfo: userInfo)
                 return
             }
                 // if someone have been disconnected
             if message.valueForKey("Disconnected") != nil {
                 userInfo.updateValue(message.valueForKey("Disconnected") as! String, forKey: "peer")
-                println("peer Disconnected")
+                //println("peer Disconnected")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
                 return
             }
