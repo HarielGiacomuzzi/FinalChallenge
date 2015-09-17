@@ -28,7 +28,6 @@ class PuffGamePad: UIViewController {
                     else{
                         return
                     }
-                    //                    print(" Y = \(data.acceleration.y)")
                     self.sendData(data!.acceleration.y)
                 }
             )

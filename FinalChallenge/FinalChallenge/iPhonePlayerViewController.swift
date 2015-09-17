@@ -56,8 +56,8 @@ class iPhonePlayerViewController: UIViewController {
         let playerName = dic["player"] as! String
         let value = dic["value"] as! Int
         print("mensagem para \(playerName)")
-        print("eu sou \(ConnectionManager.sharedInstance.peerID.displayName)")
-        if playerName == ConnectionManager.sharedInstance.peerID.displayName {
+        print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
+        if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             print("update moneys para \(value)")
         } else {
             print("nao rola filho")
