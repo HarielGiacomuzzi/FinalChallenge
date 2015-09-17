@@ -26,7 +26,7 @@ class iPhoneDiceViewController: UIViewController {
     func sendResults(){
         let aux = NSMutableDictionary();
         aux.setValue(diceResult, forKey: "diceResult");
-        aux.setValue(ConnectionManager.sharedInstance.peerID.displayName, forKey: "playerID");
+        aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
         ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
         print("mandei")
         self.navigationController?.popViewControllerAnimated(true);

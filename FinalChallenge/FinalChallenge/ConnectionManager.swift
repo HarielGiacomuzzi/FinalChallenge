@@ -10,14 +10,18 @@ import Foundation
 import MultipeerConnectivity
 
 class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
-    var peerID: MCPeerID = MCPeerID();
+    var peerID: MCPeerID?
     var session: MCSession!
     var browser: MCBrowserViewController?;
     private var isIpad = false;
     private var iPadPeer : MCPeerID?
-    var advertiser: MCAdvertiserAssistant = MCAdvertiserAssistant();
+    var advertiser : MCAdvertiserAssistant!
     let ServiceID = "iFiesta";
     static let sharedInstance = ConnectionManager();
+    
+    override init() {
+        super.init();
+    }
     
     func setupConnectionWithOptions(displayName : String, active : Bool){
         setupPeerWithDisplayName(displayName);
@@ -33,7 +37,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
     }
     
     func setupSession(){
-        session = MCSession(peer: peerID)
+        session = MCSession(peer: peerID!)
         session.delegate = self
     }
     
@@ -158,7 +162,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         var userInfo = ["data":data, "peerID":peerID.displayName]
             if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary{
         // If is someone's turn
-                if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID.displayName {
+                if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID!.displayName {
                      NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
                     return
             }
@@ -179,7 +183,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         // if there's a whoIs request
             if message.valueForKey("whoIs") != nil && message.valueForKey("whoIs") as! String  ==  "iPad" {
                 if self.isIpad{
-                    var response = ["peer" : self.peerID, "whoIs" : "response", "peerRequested" : "iPad"]
+                    var response = ["peer" : self.peerID!, "whoIs" : "response", "peerRequested" : "iPad"]
                     self.sendDictionaryToPeer(response, reliable: true);
                 }
                 return
