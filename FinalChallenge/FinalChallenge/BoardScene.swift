@@ -12,19 +12,19 @@ class BoardScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         var auxList = [SKNode?](count: self.children.count, repeatedValue: nil);
         
-        println("<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n<BOARD>")
+        print("<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n<BOARD>")
         
         for aux1 in self.children{
-            var aux = aux1 as! SKNode;
+            let aux = aux1 ;
             if aux.name != nil && aux.name == "house"{
-                println("<HOUSE x=\"\(aux.position.x)\" y=\"\(aux.position.y)\" father=\"nil\"/>");
+                print("<HOUSE x=\"\(aux.position.x)\" y=\"\(aux.position.y)\" father=\"nil\"/>");
             }
         }
         
-        println("<NODES>");
+        print("<NODES>");
         
         for aux1 in self.children{
-            var aux = aux1 as! SKNode;
+            let aux = aux1 ;
             
             if aux.name != nil && aux.name == "house"{
                 continue
@@ -39,23 +39,23 @@ class BoardScene: SKScene, SKPhysicsContactDelegate {
         
         for node in auxList{
             if(node != nil){
-                var aux = node as SKNode!
-                println("<node x=\"\(aux.position.x)\" y=\"\(aux.position.y)\" name=\"\(aux.name!)\" father=\"\((aux.name! as NSString).integerValue-1 )\">");
-                println("<next name=\"\((aux.name! as NSString).integerValue+1 )\"/>");
-                println("</node>")
+                let aux = node as SKNode!
+                print("<node x=\"\(aux.position.x)\" y=\"\(aux.position.y)\" name=\"\(aux.name!)\" father=\"\((aux.name! as NSString).integerValue-1 )\">");
+                print("<next name=\"\((aux.name! as NSString).integerValue+1 )\"/>");
+                print("</node>")
             }
         }
 
-        println("</NODES>");
+        print("</NODES>");
         
         for aux1 in self.children{
-            var aux = aux1 as! SKNode;
+            let aux = aux1 ;
             if aux.name != nil && aux.name == "store"{
-                println("<STORE x=\"\(aux.position.x)\" y=\"\(aux.position.y)\" father=\"\"/>");
+                print("<STORE x=\"\(aux.position.x)\" y=\"\(aux.position.y)\" father=\"\"/>");
             }
         }
 
-        println("</BOARD>")
+        print("</BOARD>")
     }
     
 }

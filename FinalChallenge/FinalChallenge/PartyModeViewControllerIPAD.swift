@@ -61,13 +61,13 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         skView.showsPhysics = false
         scene!.scaleMode = .AspectFit
         skView.presentScene(scene)
-        println("apresentei a cena sem crashar")
+        print("apresentei a cena sem crashar")
 
         
     }
     
     // Notifies the delegate, when the user taps the done button
-    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!){
+    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController){
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
         var connectedPlayers:[Player] = []
@@ -98,7 +98,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     }
     
     // Notifies delegate that the user taps the cancel button.
-    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!){
+    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController){
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
     }
     @IBAction func ConnectPlayers() {
@@ -135,9 +135,9 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     }
     */
     func messageReceived(data : NSNotification){
-        var identifier = data.userInfo!["peerID"] as! String
-        var dictionary = data.userInfo!["avatar"] as! NSDictionary
-        var message = dictionary["avatar"] as! String
+        let identifier = data.userInfo!["peerID"] as! String
+        let dictionary = data.userInfo!["avatar"] as! NSDictionary
+        let message = dictionary["avatar"] as! String
         
         
         for p in GameManager.sharedInstance.players {
@@ -181,7 +181,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
                 }
             }
         }
-        println("Mensagem: \(message) e Identifier: \(identifier)")
+        print("Mensagem: \(message) e Identifier: \(identifier)")
         updateIphoneUsersData(message)
     }
 
@@ -190,11 +190,11 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         
         arrayAvatars.append(avat)
         
-        println(arrayAvatars)
+        print(arrayAvatars)
         
         let arrayPlayers = arrayAvatars
-        var array = ["arrayPlayers":arrayPlayers]
-        var dic = ["IphoneGameSetup":" ", "arrayPlayers":array]
+        let array = ["arrayPlayers":arrayPlayers]
+        let dic = ["IphoneGameSetup":" ", "arrayPlayers":array]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     

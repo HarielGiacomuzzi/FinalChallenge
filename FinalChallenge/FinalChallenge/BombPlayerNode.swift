@@ -52,7 +52,7 @@ class BombPlayerNode: SKNode {
         }
         
         
-        roboBase = SKSpriteNode(texture: runFrames[0], color: nil, size: runFrames[0].size())
+        roboBase = SKSpriteNode(texture: runFrames[0], color: UIColor.clearColor(), size: runFrames[0].size())
         roboBase?.zPosition = 2;
         
         self.addChild(roboBase!)
@@ -77,7 +77,7 @@ class BombPlayerNode: SKNode {
         }
         
         
-        roboBody = SKSpriteNode(texture: runFrames[0], color: nil, size: runFrames[0].size())
+        roboBody = SKSpriteNode(texture: runFrames[0], color: UIColor.clearColor(), size: runFrames[0].size())
         
         self.addChild(roboBody!)
         roboBody?.position = CGPointMake(0, 0)

@@ -85,7 +85,7 @@ class InitialViewController: UIViewController
         
         let xScale = screenWidth / leftCoverImage!.size.width
         
-        var ly = screenHeight / 2 - (leftCoverImage!.size.height * xScale) / 2
+        let ly = screenHeight / 2 - (leftCoverImage!.size.height * xScale) / 2
         
         let leftCoverRect = CGRectMake(0, ly, screenWidth, leftCoverImage!.size.height * xScale)
         let rightCoverRect = CGRectMake(0, ly, screenWidth, leftCoverImage!.size.height * xScale)
@@ -146,7 +146,7 @@ class InitialViewController: UIViewController
                             }, completion: {(value: Bool) in
                                 completion()
                         })
-                        UIView.animateWithDuration(coverTime * 0.75, delay: coverTime * 0.25, options: nil, animations: {
+                        UIView.animateWithDuration(coverTime * 0.75, delay: coverTime * 0.25, options: [], animations: {
                                 self.zoomIn()
                             }, completion: nil)
                         
@@ -187,7 +187,7 @@ class InitialViewController: UIViewController
     }
     
     func zoomIn() {
-        var aux = screenHeight / 2 - leftCover.frame.height
+        let aux = screenHeight / 2 - leftCover.frame.height
         
         leftCover.frame = CGRectMake(leftCover.frame.origin.x * 2, aux, leftCover.frame.size.width * 2, leftCover.frame.size.height * 2)
         rightCover.frame = CGRectMake(0.0, aux, rightCover.frame.size.width * 2, rightCover.frame.size.height * 2)
@@ -216,7 +216,7 @@ class InitialViewController: UIViewController
         
         let xScale = screenWidth / leftCoverImage!.size.width
         
-        var ly = screenHeight / 2 - (leftCoverImage!.size.height * xScale) / 2
+        let ly = screenHeight / 2 - (leftCoverImage!.size.height * xScale) / 2
         
         let leftCoverRect = CGRectMake(0, ly, screenWidth, leftCoverImage!.size.height * xScale)
         let rightCoverRect = CGRectMake(0, ly, screenWidth, leftCoverImage!.size.height * xScale)
@@ -225,7 +225,7 @@ class InitialViewController: UIViewController
         leftCover.frame = leftCoverRect
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if opened {
             closeBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
                 self.opened = false

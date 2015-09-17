@@ -64,12 +64,12 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         // setup background color
-        var skyColor = SKColor(red: 79/255.0, green: 146/255.0, blue: 201.0/255.0, alpha: 1.0)
+        let skyColor = SKColor(red: 79/255.0, green: 146/255.0, blue: 201.0/255.0, alpha: 1.0)
         self.backgroundColor = skyColor
 
 
         // left wall , if you hit you are dead
-        var wallLeft = SKNode()
+        let wallLeft = SKNode()
         wallLeft.position = CGPointMake(0, self.frame.size.height / 2)
         wallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
         wallLeft.physicsBody?.dynamic = false
@@ -78,7 +78,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(wallLeft)
         
         //right wall, if you hit you win
-        var wallRight = SKNode()
+        let wallRight = SKNode()
         wallRight.position = CGPointMake(self.frame.width, self.frame.size.height / 2)
         wallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(1, self.frame.height))
         wallRight.physicsBody?.dynamic = false
@@ -87,7 +87,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         wallRight.physicsBody?.collisionBitMask = playerCategory
         self.addChild(wallRight)
         
-        var waterParticle = FlappyParticleNode.fromFile("teste")
+        let waterParticle = FlappyParticleNode.fromFile("teste")
         waterParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 20 , frame.size.height/2)
         waterParticle!.targetNode = self.scene
         self.addChild(waterParticle!)
@@ -95,41 +95,41 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
     }
     
-    func beginCountDown(#completion:() -> ()) {
-        var countDownNode = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+    func beginCountDown(completion completion:() -> ()) {
+        let countDownNode = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         countDownNode.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
         countDownNode.zPosition = 100
         countDownNode.fontSize = 100.0
         var actions:[SKAction] = []
         self.addChild(countDownNode)
         
-        for i in reverse(1...3) {
-            var changeNumber = SKAction.runBlock({() in
+        for i in Array((1...3).reverse()) {
+            let changeNumber = SKAction.runBlock({() in
                 countDownNode.text = "\(i)"
             })
-            var wait = SKAction.waitForDuration(1)
+            let wait = SKAction.waitForDuration(1)
             actions += [changeNumber,wait]
         }
         
-        var removeNode = SKAction.runBlock({() in
+        let removeNode = SKAction.runBlock({() in
             countDownNode.removeFromParent()
         })
         actions.append(removeNode)
-        var actionSequence = SKAction.sequence(actions)
+        let actionSequence = SKAction.sequence(actions)
         countDownNode.runAction(actionSequence, completion: {() -> Void in
             completion()
         })
     }
     
     func timerForSinglePlayer(){
-        var timerNode = SKLabelNode(fontNamed:"MarkerFelt-Wide")
+        let timerNode = SKLabelNode(fontNamed:"MarkerFelt-Wide")
         timerNode.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height - 150)
         timerNode.zPosition = 100
         timerNode.fontSize = 150
         self.addChild(timerNode)
 
-        var wait = SKAction.waitForDuration(1)
-        var run = SKAction.runBlock {
+        let wait = SKAction.waitForDuration(1)
+        let run = SKAction.runBlock {
             // your code here ...
             timerNode.text = "\(self.cont++)"
         }
@@ -202,7 +202,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         currentWidth = 0.0
 
         //adds imovable ground physics
-        var ground = SKNode()
+        let ground = SKNode()
         ground.position = CGPointMake(self.frame.size.width / 2, dummyTexture.size().height * 0.7)
         ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, dummyTexture.size().height * 0.01))
         ground.physicsBody?.dynamic = false
@@ -236,7 +236,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
 
         //adds imovable roof physics
-        var roof = SKNode()
+        let roof = SKNode()
         roof.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height-dummyTexture.size().height * 0.7)
         roof.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, dummyTexture.size().height * 0.01))
         roof.physicsBody?.dynamic = false
@@ -245,25 +245,25 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
 
     func spawnStone() {
-        var stone = FlappyStoneNode()
-        var scale = CGFloat.random(min: 1, max: 2)
+        let stone = FlappyStoneNode()
+        let scale = CGFloat.random(min: 1, max: 2)
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
-        var bottom = testTexture.size().height
-        var top = self.frame.size.height - testTexture.size().height
-        var pos = CGFloat.random(min: bottom, max: top)
+        let bottom = testTexture.size().height
+        let top = self.frame.size.height - testTexture.size().height
+        let pos = CGFloat.random(min: bottom, max: top)
         stone.setScale(scale)
         stone.position = CGPointMake(self.frame.size.width + self.frame.size.width / 2, pos)
         stone.setupMovement(self.frame, vel: stoneVel * worldVelMultiplier)
         
-        var rotation = CGFloat.random(min: 1, max: 4)
+        let rotation = CGFloat.random(min: 1, max: 4)
         
         
         stone.zRotation = rotation
         stone.zPosition = 9
         self.addChild(stone)
         
-        var particleScales = 0.3 * scale
-        var stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
+        let particleScales = 0.3 * scale
+        let stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
         stoneParticleLow!.position = CGPointMake(stone.position.x, stone.position.y - (stone.size.height/2) + 10)
         stoneParticleLow!.name = "stoneParticleLow"
         stoneParticleLow!.particleScale = particleScales
@@ -271,7 +271,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         stoneParticleLow!.setupMovement(self.frame, node: stone, vel: stoneVel * worldVelMultiplier)
         self.addChild(stoneParticleLow!)
     
-        var stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle")
+        let stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle")
         stoneParticleHigh!.position = CGPointMake(stone.position.x, stone.position.y + stone.size.height/2)
         stoneParticleHigh!.name = "stoneParticleHigh"
         stoneParticleHigh!.particleScale = particleScales
@@ -281,11 +281,11 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func spawnPowerUp() {
-        var powerUp = FlappyPowerupNode()
+        let powerUp = FlappyPowerupNode()
         let testTexture = SKTexture(imageNamed: "ffparalaxe1")
-        var bottom = testTexture.size().height
-        var top = self.frame.size.height - testTexture.size().height
-        var pos = CGFloat.random(min: bottom, max: top)
+        let bottom = testTexture.size().height
+        let top = self.frame.size.height - testTexture.size().height
+        let pos = CGFloat.random(min: bottom, max: top)
         powerUp.position = CGPointMake(self.frame.size.width + powerUp.size.width / 2, pos)
         powerUp.setupMovement(self.frame)
         self.addChild(powerUp)
@@ -296,14 +296,14 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         let boardPlayers = GameManager.sharedInstance.players
         
         for boardPlayer in boardPlayers {
-            var player = FlappyPlayerNode()
+            let player = FlappyPlayerNode()
             player.identifier = boardPlayer.playerIdentifier
             player.color = boardPlayer.color
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
             var particleTexture = SKTexture(imageNamed: "spark.png")
-            var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
+            let playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
             playerParticle!.name = "PlayerParticle"
             playerParticle!.targetNode = player
             player.addChild(playerParticle!)
@@ -320,7 +320,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(singlePlayer!)
         
         var particleTexture = SKTexture(imageNamed: "spark.png")
-        var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
+        let playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
         playerParticle!.name = "PlayerParticle"
         playerParticle!.targetNode = self.scene
         singlePlayer!.addChild(playerParticle!)
@@ -335,7 +335,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         for lastPlayer in players { //deveria ser só 1 talvez mas vai saber ne
             playerRank.append(lastPlayer.identifier!)
         }
-        loserRanking = loserRanking.reverse()
+        loserRanking = Array(loserRanking.reverse())
         for loser in loserRanking {
             playerRank.append(loser)
         }
@@ -349,8 +349,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     override func messageReceived(identifier: String, dictionary: NSDictionary) {
         for player in players {
             if player.identifier == identifier {
-                var message = dictionary["way"] as! String
-                var messageEnum = PlayerAction(rawValue: message)
+                let message = dictionary["way"] as! String
+                let messageEnum = PlayerAction(rawValue: message)
                 if messageEnum == .Up {
                     player.goUp()
                 } else {
@@ -360,7 +360,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             if let player = singlePlayer {
@@ -402,10 +402,10 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     //handles losing colision
-    func handleColisionEndOfScreenBad(#playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
+    func handleColisionEndOfScreenBad(playerBody playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
         for player in players{
             if player.physicsBody == playerBody {
-                println(player.identifier)
+                print(player.identifier)
                 players.removeObject(player)
                 player.removeFromParent()
                 self.loserRanking.append(player.identifier!)
@@ -420,10 +420,10 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     //handles winning colision
-    func handleColisionEndOfScreenGood(#playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
+    func handleColisionEndOfScreenGood(playerBody playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
         for player in players{
             if player.physicsBody == playerBody {
-                println(player.identifier)
+                print(player.identifier)
                 players.removeObject(player)
                 player.removeFromParent()
                 self.winnerRanking.append(player.identifier!)
@@ -431,10 +431,10 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
     }
     
-    func handleColisionPlayerPowerup(#player:SKPhysicsBody,powerup:SKPhysicsBody) {
+    func handleColisionPlayerPowerup(player player:SKPhysicsBody,powerup:SKPhysicsBody) {
         self.runAction(AudioSource.sharedInstance.playBubbleSound())
-        var playerNode:FlappyPlayerNode = player.node as! FlappyPlayerNode
-        var powerupNode:FlappyPowerupNode = powerup.node as! FlappyPowerupNode
+        let playerNode:FlappyPlayerNode = player.node as! FlappyPlayerNode
+        let powerupNode:FlappyPowerupNode = powerup.node as! FlappyPowerupNode
         playerNode.boostAndStop()
         powerupNode.blowUp()
     }
@@ -442,8 +442,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     func gameOverSP(){
         self.removeAllChildren()
         self.removeAllActions()
-        var transition = SKTransition.flipHorizontalWithDuration(0.5)
-        var goScene = GameOverSceneSP(size: self.size)
+        let transition = SKTransition.flipHorizontalWithDuration(0.5)
+        let goScene = GameOverSceneSP(size: self.size)
         goScene.score = cont
         goScene.game = "fish"
         self.view?.presentScene(goScene, transition: transition)

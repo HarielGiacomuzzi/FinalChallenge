@@ -10,6 +10,6 @@ import UIKit
 
 class NoAnimationSegue: UIStoryboardSegue {
     override func perform() {
-        sourceViewController.presentViewController(destinationViewController as! UIViewController, animated: false, completion: nil)
+        sourceViewController.presentViewController(destinationViewController , animated: false, completion: nil)
     }
 }

@@ -19,11 +19,11 @@ class MinigameGameOverController : UIViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         GameManager.sharedInstance.minigameGameOverViewController = self
         //player = gameManager.playerRank
-        println(player.count)
+        print(player.count)
         for p in player {
-            println(p)
+            print(p)
         }
-        player.reverse()
+        Array(player.reverse())
         
     }
     
@@ -32,7 +32,7 @@ class MinigameGameOverController : UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CustomGameOverCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! CustomGameOverCell
         cell.playerName.text = player[indexPath.row] as String
         return cell
     }

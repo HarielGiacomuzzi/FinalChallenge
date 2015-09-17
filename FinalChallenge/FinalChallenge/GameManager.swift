@@ -71,14 +71,14 @@ class GameManager {
     
     
     func setPlayerOrder()->[String]{
-        return playerRank.reverse()
+        return Array(playerRank.reverse())
     }
     
     func selectPlayers(i:Int){
         if !self.isOnMiniGame{
             controlesDeTurno++
-            var p = players[i]
-            var aux = NSMutableDictionary();
+            let p = players[i]
+            let aux = NSMutableDictionary();
             aux.setValue(p.playerIdentifier, forKey: "playerID");
             aux.setValue(" ", forKey: "playerTurn");
             ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
@@ -93,28 +93,30 @@ class GameManager {
     }*/
     
     func beginMinigame() {
-        println("CHAMEI A FUNÇAO GO TO MINIGAME")
-        println("O ARRAY TEM \(minigameOrderArray.count) ELEMENTOS")
+        return Void()
+        
+        print("CHAMEI A FUNÇAO GO TO MINIGAME")
+        print("O ARRAY TEM \(minigameOrderArray.count) ELEMENTOS")
         for m in minigameOrderArray {
-            println(m.rawValue)
+            print(m.rawValue)
         }
         if minigameOrderArray.isEmpty {
-            println("OPS, ESTAVA VAZIO, HEHEHE, VOU ENCHE-LO")
+            print("OPS, ESTAVA VAZIO, HEHEHE, VOU ENCHE-LO")
             fillMinigameOrderArray()
-            println("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
+            print("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
             for m in minigameOrderArray {
-                println(m.rawValue)
+                print(m.rawValue)
             }
         }
         var minigame = minigameOrderArray.randomItem()
         
-        println("SERA QUE EU REMOVI UM ELEMENTO MESMO GALERA????")
-        println("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
+        print("SERA QUE EU REMOVI UM ELEMENTO MESMO GALERA????")
+        print("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
         for m in minigameOrderArray {
-            println(m.rawValue)
+            print(m.rawValue)
         }
         
-        println("O ELEMENTO ESCOLHIDO  R A N D O M I C A M E N T E  FOI O \(minigame.rawValue)")
+        print("O ELEMENTO ESCOLHIDO  R A N D O M I C A M E N T E  FOI O \(minigame.rawValue)")
         var dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
@@ -146,8 +148,8 @@ class GameManager {
             })
             //selectPlayers(0);
         }
-        println("Cheguei aqui :P");
-        var dic = ["closeController":" "]
+        print("Cheguei aqui :P");
+        let dic = ["closeController":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         self.isOnMiniGame = false;
         self.playerTurnEnded(nil);
@@ -177,12 +179,12 @@ class GameManager {
             })
             //selectPlayers(0);
         }
-        println("Cheguei aqui :P");
+        print("Cheguei aqui :P");
     }
     
     func updatePlayerMoney(playerID:String, value:Int) {
-        var playerData = ["player":playerID, "value": value]
-        var dic = ["updateMoney":" ", "dataDic" : playerData]
+        let playerData = ["player":playerID, "value": value]
+        let dic = ["updateMoney":" ", "dataDic" : playerData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     

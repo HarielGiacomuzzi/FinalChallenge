@@ -25,10 +25,10 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_PuffGamePadAction", object: nil);
         
         var count = GameManager.sharedInstance.players.count
-        var width = (self.frame.width-20)/CGFloat(GameManager.sharedInstance.players.count*2)
+        let width = (self.frame.width-20)/CGFloat(GameManager.sharedInstance.players.count*2)
         
         for p in GameManager.sharedInstance.players{
-            var sprite = SKShapeNode(circleOfRadius: 10.0);
+            let sprite = SKShapeNode(circleOfRadius: 10.0);
             p.x = Double(width)*Double(count);
             p.y = Double((self.frame.height/2));
             count--;
@@ -46,40 +46,40 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupSpikes(){
-        for i in 0...Int(self.frame.width/partsAtlas.textureNamed("spike").size().width){
+        for i in 0...Int(self.view!.frame.width/partsAtlas.textureNamed("spike").size().width){
             let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
             spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width, -partsAtlas.textureNamed("spike").size().height);
             spikeWallDown.addChild(spike)
         }
         
-        for i in 0...Int(self.frame.width/partsAtlas.textureNamed("spike").size().width){
+        for i in 0...Int(self.view!.frame.width/partsAtlas.textureNamed("spike").size().width){
             let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width, self.frame.height+partsAtlas.textureNamed("spike").size().height);
+            spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width, self.view!.frame.height+partsAtlas.textureNamed("spike").size().height);
             spike.zRotation = CGFloat(3.14159265);
             spikeWallTop.addChild(spike)
         }
         
-        for i in 0...Int(self.frame.width/partsAtlas.textureNamed("spike").size().width){
+        for i in 0...Int(self.view!.frame.width/partsAtlas.textureNamed("spike").size().width){
             let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(self.frame.width+partsAtlas.textureNamed("spike").size().width, CGFloat(i)*partsAtlas.textureNamed("spike").size().height);
+            spike.position = CGPointMake(self.view!.frame.width+partsAtlas.textureNamed("spike").size().width, CGFloat(i)*partsAtlas.textureNamed("spike").size().height);
             spike.zRotation = CGFloat(1.57079633);
             spikeWallRight.addChild(spike)
         }
         
-        for i in 0...Int(self.frame.height/partsAtlas.textureNamed("spike").size().height){
+        for i in 0...Int(self.view!.frame.height/partsAtlas.textureNamed("spike").size().height){
             let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
             spike.position = CGPointMake(-partsAtlas.textureNamed("spike").size().width, CGFloat(i)*partsAtlas.textureNamed("spike").size().height);
             spike.zRotation = CGFloat(-1.57079633);
             spikeWallLeft.addChild(spike);
         }
         
-        var down = SKAction.moveBy(CGVector(dx: 0, dy: partsAtlas.textureNamed("spike").size().height*1.5), duration: NSTimeInterval(1.5))
+        let down = SKAction.moveBy(CGVector(dx: 0, dy: partsAtlas.textureNamed("spike").size().height*1.5), duration: NSTimeInterval(1.5))
         actionWallDown = SKAction.sequence([down, down.reversedAction()]);
-        var top = SKAction.moveBy(CGVector(dx: 0, dy: -partsAtlas.textureNamed("spike").size().height*1.5), duration: NSTimeInterval(1.5))
+        let top = SKAction.moveBy(CGVector(dx: 0, dy: -partsAtlas.textureNamed("spike").size().height*1.5), duration: NSTimeInterval(1.5))
         actionWallTop = SKAction.sequence([top,top.reversedAction()]);
-        var right = SKAction.moveBy(CGVector(dx: -partsAtlas.textureNamed("spike").size().height*1.5, dy: 0), duration: NSTimeInterval(1.5))
+        let right = SKAction.moveBy(CGVector(dx: -partsAtlas.textureNamed("spike").size().height*1.5, dy: 0), duration: NSTimeInterval(1.5))
         actionWallRight = SKAction.sequence([right,right.reversedAction()]);
-        var left = SKAction.moveBy(CGVector(dx: partsAtlas.textureNamed("spike").size().height*1.5, dy: 0), duration: NSTimeInterval(1.5))
+        let left = SKAction.moveBy(CGVector(dx: partsAtlas.textureNamed("spike").size().height*1.5, dy: 0), duration: NSTimeInterval(1.5))
         actionWallLeft = SKAction.sequence([left,left.reversedAction()]);
         
         self.addChild(spikeWallDown);
@@ -105,7 +105,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
             spikeWallTop.runAction(SKAction.repeatActionForever(actionWallTop!));
             spikeWallDown.runAction(SKAction.repeatActionForever(actionWallDown!));
             spikeWallLeft.runAction(SKAction.repeatActionForever(actionWallLeft!));

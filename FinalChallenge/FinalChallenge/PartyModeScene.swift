@@ -150,10 +150,10 @@ class PartyModeScene: SKScene {
     }
     
     func sendDataToIpad(){
-        println(self.selectedNode.name)
+        print(self.selectedNode.name)
         if let avatarName : String = self.selectedNode.name{
-            var avatar = ["avatar":avatarName]
-            var dic = ["GameSetup":" ", "avatar":avatar]
+            let avatar = ["avatar":avatarName]
+            let dic = ["GameSetup":" ", "avatar":avatar]
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         }
         self.selectedNode.position = self.beginPosition
@@ -161,10 +161,10 @@ class PartyModeScene: SKScene {
     
     func messageReceived(data : NSNotification){
         var identifier = data.userInfo!["peerID"] as! String
-        var dictionary = data.userInfo!["arrayPlayers"] as! NSDictionary
-        var message = dictionary["arrayPlayers"] as! [String]
+        let dictionary = data.userInfo!["arrayPlayers"] as! NSDictionary
+        let message = dictionary["arrayPlayers"] as! [String]
         self.takenAvatar = message
-        println(self.takenAvatar)
+        print(self.takenAvatar)
         
         // muda formato das imagens identificando se foi pego ou nao
         for sprite in arrayAvatarSprite{

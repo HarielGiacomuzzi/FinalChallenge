@@ -17,14 +17,14 @@ class GamePadController : UIViewController{
     
     @IBAction func upDataSender() {
         
-        var action = ["way":PlayerAction.Up.rawValue]
-        var dic = ["controllerAction":"", "action":action]
+        let action = ["way":PlayerAction.Up.rawValue]
+        let dic = ["controllerAction":"", "action":action]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
 
     @IBAction func downDataSender() {
-        var action = ["way":PlayerAction.Down.rawValue]
-        var dic = ["controllerAction":"", "action":action]
+        let action = ["way":PlayerAction.Down.rawValue]
+        let dic = ["controllerAction":"", "action":action]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     

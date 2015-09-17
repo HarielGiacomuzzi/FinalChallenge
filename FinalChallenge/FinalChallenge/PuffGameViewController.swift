@@ -15,12 +15,12 @@ extension SKNode {
         
         let path = NSBundle.mainBundle().pathForResource(file as String, ofType: "sks")
         
-        let sceneData = NSData(contentsOfFile: path!, options: .DataReadingMappedIfSafe, error: nil)
+        let sceneData = try? NSData(contentsOfFile: path!, options: .DataReadingMappedIfSafe)
         let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData!)
         
         archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
         
-        var scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! PuffGameScene
+        let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! PuffGameScene
 
         archiver.finishDecoding()
         return scene

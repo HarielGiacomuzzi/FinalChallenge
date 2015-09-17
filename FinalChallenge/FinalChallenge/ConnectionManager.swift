@@ -61,17 +61,29 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
         let error = NSErrorPointer();
         if (reliable){
-            self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
+            do {
+                try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+            } catch var error1 as NSError {
+                error.memory = error1
+            } catch {
+                fatalError()
+            };
         }
         
-            self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
+        do {
+            try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable)
+        } catch var error1 as NSError {
+            error.memory = error1
+        } catch {
+            fatalError()
+        };
         })
         return true
     }
     
     func getIpadPeer() -> MCPeerID?{
         if self.iPadPeer == nil{
-            var aux = ["whoIs" : "iPad"];
+            let aux = ["whoIs" : "iPad"];
             self.sendDictionaryToPeer(aux, reliable: true);
             return nil
         }
@@ -85,7 +97,11 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
                 self.getIpadPeer();
                 return nil;
             }
-        return self.session.startStreamWithName(streamName, toPeer: self.iPadPeer, error: error);
+            do {
+                return try self.session.startStreamWithName(streamName, toPeer: self.iPadPeer!)
+            } catch _ {
+                return nil
+            };
     }
     
     //sends a NSDictionary to the other peer
@@ -93,23 +109,35 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
         let error = NSErrorPointer();
         if (reliable){
-            self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable, error: error);
+            do {
+                try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
+            } catch let error1 as NSError {
+                error.memory = error1
+            } catch {
+                fatalError()
+            };
             return
         }
         
-            self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable, error: error);
+        do {
+            try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable)
+        } catch let error1 as NSError {
+            error.memory = error1
+        } catch {
+            fatalError()
+        };
         })
         return true
     }
     
-    func session(session: MCSession!, didReceiveCertificate certificate: [AnyObject]!, fromPeer peerID: MCPeerID!, certificateHandler: ((Bool) -> Void)!) {
+    func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: ((Bool) -> Void)) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
         certificateHandler(true)
         })
     }
     
     // Remote peer changed state
-    func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState){
+    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState){
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
         let userInfo = ["peerID":peerID, "state":state.rawValue]
         
@@ -124,11 +152,11 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
     }
     
     // Received data from remote peer
-    func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!){
+    func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID){
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             
-        var userInfo = ["data":data, "peerID":peerID.displayName!]
-            if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as? NSDictionary{
+        var userInfo = ["data":data, "peerID":peerID.displayName]
+            if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary{
         // If is someone's turn
                 if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID.displayName {
                      NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
@@ -209,7 +237,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             }
         // update player money
             if message.valueForKey("updateMoney") != nil {
-                println(message)
+                print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateMoney", object: nil, userInfo: userInfo)
                 return
@@ -222,7 +250,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
     }
     
     // Received a byte stream from remote peer
-    func session(session: MCSession!, didReceiveStream stream: NSInputStream!, withName streamName: String!, fromPeer peerID: MCPeerID!){
+    func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID){
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             stream.delegate = self;
             stream.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode);
@@ -233,12 +261,12 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
     //manages the stream incomming messages
     func stream(aStream: NSStream, handleEvent eventCode: NSStreamEvent){
         if (eventCode == NSStreamEvent.HasBytesAvailable) {
-            var stream = aStream as! NSInputStream
+            let stream = aStream as! NSInputStream
             var buffer = [UInt8](count: 8, repeatedValue: 0)
             // Read a single byte
             if stream.hasBytesAvailable {
                 let result: Int = stream.read(&buffer, maxLength: buffer.count)
-                println("received: \(result)")
+                print("received: \(result)")
             }
         } else if (eventCode == NSStreamEvent.EndEncountered) {
             // notify application that stream has ended
@@ -249,12 +277,12 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
     }
     
     // Start receiving a resource from remote peer
-    func session(session: MCSession!, didStartReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, withProgress progress: NSProgress!){
+    func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress){
     
     }
     
     // Finished receiving a resource from remote peer and saved the content in a temporary location - the app is responsible for moving the file to a permanent location within its sandbox
-    func session(session: MCSession!, didFinishReceivingResourceWithName resourceName: String!, fromPeer peerID: MCPeerID!, atURL localURL: NSURL!, withError error: NSError!){
+    func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?){
     
     }
     

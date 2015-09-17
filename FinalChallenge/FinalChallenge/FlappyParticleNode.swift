@@ -16,8 +16,8 @@ class FlappyParticleNode : SKEmitterNode{
    
     class func fromFile(file : String) -> FlappyParticleNode? {
         if let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks") {
-            var data = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil)!
-            var archiver = NSKeyedUnarchiver(forReadingWithData: data)
+            let data = try! NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
+            let archiver = NSKeyedUnarchiver(forReadingWithData: data)
             archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKEmitterNode")
             let particle = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! FlappyParticleNode
             archiver.finishDecoding()

@@ -18,15 +18,15 @@ class SwipeGamePadControllerViewController: UIViewController {
     var beginX:CGFloat = 0.0
     var beginY:CGFloat = 0.0
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch = touches.first as! UITouch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first as UITouch!
         let location = touch.locationInView(self.view)
         beginX = location.x
         beginY = location.y
     }
     
-     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch = touches.first as! UITouch
+     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first as UITouch!
         let location = touch.locationInView(self.view)
         var endX = location.x
         var endY = location.y
@@ -41,8 +41,8 @@ class SwipeGamePadControllerViewController: UIViewController {
     }
     
     func sendVector(x:CGFloat, y:CGFloat) {
-        var action = ["x":x, "y":y]
-        var dic = ["controllerAction":"", "action":action]
+        let action = ["x":x, "y":y]
+        let dic = ["controllerAction":"", "action":action]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
     }

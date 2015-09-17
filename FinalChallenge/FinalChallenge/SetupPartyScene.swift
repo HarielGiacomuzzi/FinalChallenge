@@ -120,7 +120,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         //setup particles
         
-        var globParticles = SetupParticle.fromFile("setupParticle1")
+        let globParticles = SetupParticle.fromFile("setupParticle1")
         globParticles!.position = CGPointMake(self.frame.width/2, self.frame.height + 10)
         self.addChild(globParticles!)
         globParticles?.zPosition = 1
@@ -190,9 +190,9 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        var touch: UITouch = touches.first as! UITouch
-        var location: CGPoint = touch.locationInNode(self)
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as! UITouch!
+        let location: CGPoint = touch.locationInNode(self)
 
         if(go!.containsPoint(location)){
             go!.texture = greenButtonOff
@@ -216,9 +216,9 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        var touch: UITouch = touches.first as! UITouch
-        var location: CGPoint = touch.locationInNode(self)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first as UITouch!
+        let location: CGPoint = touch.locationInNode(self)
         
         if(go!.containsPoint(location)){
             go!.texture = greenButtonOff
@@ -243,7 +243,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         go?.texture = greenButton
         connect?.texture = yellowButton
@@ -251,16 +251,16 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
 
         
         
-        var touch: UITouch = touches.first as! UITouch
-        var location: CGPoint = touch.locationInNode(self)
+        let touch: UITouch = touches.first as UITouch!
+        let location: CGPoint = touch.locationInNode(self)
         
         if(go!.containsPoint(location)){
-            println("apertei o botao de GO")
+            print("apertei o botao de GO")
             viewController.turns = turnCounter
             viewController.gotoBoardGame()
         }
         if(connect!.containsPoint(location)){
-            println("apertei o botao de CONNECT")
+            print("apertei o botao de CONNECT")
             viewController.ConnectPlayers()
             
         }
@@ -284,7 +284,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         let filter = CIFilter(name: "CIGaussianBlur")
         // Set the blur amount. Adjust this to achieve the desired effect
         let blurAmount = CGFloat.random(min: 0, max: 20)
-        filter.setValue(blurAmount, forKey: kCIInputRadiusKey)
+        filter!.setValue(blurAmount, forKey: kCIInputRadiusKey)
         
         effectsNode.filter = filter
         effectsNode.position = self.view!.center
@@ -292,7 +292,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(effectsNode)
         
         
-        var itemVal = CGFloat.random(min: 0.6, max: 3.4)
+        let itemVal = CGFloat.random(min: 0.6, max: 3.4)
         let intItemval = Int(round(itemVal))
         let itemName = "item\(intItemval)"
         

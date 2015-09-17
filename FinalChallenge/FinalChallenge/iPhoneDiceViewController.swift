@@ -24,11 +24,11 @@ class iPhoneDiceViewController: UIViewController {
     }
     
     func sendResults(){
-        var aux = NSMutableDictionary();
+        let aux = NSMutableDictionary();
         aux.setValue(diceResult, forKey: "diceResult");
         aux.setValue(ConnectionManager.sharedInstance.peerID.displayName, forKey: "playerID");
         ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-        println("mandei")
+        print("mandei")
         self.navigationController?.popViewControllerAnimated(true);
     }
 }

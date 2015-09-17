@@ -38,30 +38,30 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func openController(data : NSNotification) {
-        var gameData = data.userInfo!["gameName"] as! String
-        var minigame = Minigame(rawValue: gameData)
+        let gameData = data.userInfo!["gameName"] as! String
+        let minigame = Minigame(rawValue: gameData)
         switch minigame! {
         case .FlappyFish:
             performSegueWithIdentifier("gotoAcelePad", sender: nil)
-            println("gotoAcelePad")
+            print("gotoAcelePad")
         case .BombGame:
             performSegueWithIdentifier("gotoSwipePad", sender: nil)
-            println("gotoSwipePad")
+            print("gotoSwipePad")
         default:
             ()
         }
     }
     
     func updateMoney(data : NSNotification) {
-        var dic = data.userInfo!["dataDic"] as! NSDictionary
-        var playerName = dic["player"] as! String
-        var value = dic["value"] as! Int
-        println("mensagem para \(playerName)")
-        println("eu sou \(ConnectionManager.sharedInstance.peerID.displayName)")
+        let dic = data.userInfo!["dataDic"] as! NSDictionary
+        let playerName = dic["player"] as! String
+        let value = dic["value"] as! Int
+        print("mensagem para \(playerName)")
+        print("eu sou \(ConnectionManager.sharedInstance.peerID.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID.displayName {
-            println("update moneys para \(value)")
+            print("update moneys para \(value)")
         } else {
-            println("nao rola filho")
+            print("nao rola filho")
         }
     }
 }

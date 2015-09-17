@@ -45,10 +45,15 @@ class AudioSource: NSObject, AVAudioPlayerDelegate {
     
     func readAudioFile(fileName:String, ext:String, audioLoop:Bool){ // prepara audio
         self.url = NSBundle.mainBundle().URLForResource(fileName, withExtension: ext)
-        self.avPlayer = AVAudioPlayer(contentsOfURL: self.url, error: &error)
+        do {
+            self.avPlayer = try AVAudioPlayer(contentsOfURL: self.url)
+        } catch let error1 as NSError {
+            error = error1
+            self.avPlayer = nil
+        }
         if avPlayer == nil {
             if let e = error {
-                println(e.localizedDescription)
+                print(e.localizedDescription)
             }
         }
         

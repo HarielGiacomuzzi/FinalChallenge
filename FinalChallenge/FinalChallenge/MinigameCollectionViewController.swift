@@ -41,7 +41,7 @@ class MinigameCollectionViewController : UIViewController {
         
         cell.minigameImage.image = UIImage(named: minigameCollection[indexPath.row].rawValue)
         
-        println(minigameCollection[indexPath.row].rawValue)
+        print(minigameCollection[indexPath.row].rawValue)
         
         self.automaticallyAdjustsScrollViewInsets = false
         

@@ -20,13 +20,13 @@ class MinigameDescriptionViewController: UIViewController {
         navigationController?.navigationBarHidden = true
         GameManager.sharedInstance.minigameDescriptionViewController = self
         if let path = NSBundle.mainBundle().pathForResource("MinigameDetails", ofType: "plist") {
-            var dic = NSDictionary(contentsOfFile: path)
+            let dic = NSDictionary(contentsOfFile: path)
             switch minigame {
             case .FlappyFish:
-                var game = dic?.objectForKey("FlappyFish") as! NSDictionary
+                let game = dic?.objectForKey("FlappyFish") as! NSDictionary
                 minigameDescription.text = game.objectForKey("description") as! String
             case .BombGame:
-                var game = dic?.objectForKey("BombGame") as! NSDictionary
+                let game = dic?.objectForKey("BombGame") as! NSDictionary
                 minigameDescription.text = game.objectForKey("description") as! String
             default:
                 ()

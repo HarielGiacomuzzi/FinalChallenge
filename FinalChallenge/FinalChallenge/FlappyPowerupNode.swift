@@ -24,7 +24,7 @@ class FlappyPowerupNode: SKSpriteNode {
     
     init() {
         let texture = atlas.textureNamed("bubble%201")
-        super.init(texture: texture, color: nil, size: texture.size())
+        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         setupAliveAnimation()
         setupPhysics()
     }
@@ -36,7 +36,7 @@ class FlappyPowerupNode: SKSpriteNode {
     func setupAliveAnimation() {
         var sequence:[SKTexture] = []
         for i in 0...7 {
-            var texture = atlas.textureNamed("bubble%20\(i)")
+            let texture = atlas.textureNamed("bubble%20\(i)")
             sequence.append(texture)
         }
         let animation = SKAction.animateWithTextures(sequence, timePerFrame: 0.1)
@@ -49,7 +49,7 @@ class FlappyPowerupNode: SKSpriteNode {
         
         var sequence:[SKTexture] = []
         for i in 0...6 {
-            var texture = atlas.textureNamed("bubble%20disapear%20\(i)")
+            let texture = atlas.textureNamed("bubble%20disapear%20\(i)")
             sequence.append(texture)
         }
         

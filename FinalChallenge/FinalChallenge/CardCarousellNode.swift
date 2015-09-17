@@ -42,7 +42,7 @@ class CardCarouselNode: SKNode {
     
     
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             
             let location = touch.locationInNode(self)
@@ -50,7 +50,7 @@ class CardCarouselNode: SKNode {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             let centerCard = cards[centerIndex]
@@ -60,16 +60,16 @@ class CardCarouselNode: SKNode {
         }
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
-            var changeInX = location.x - touchedPoint.x
-            var centerCard = cards[centerIndex]
+            let changeInX = location.x - touchedPoint.x
+            let centerCard = cards[centerIndex]
             
             fixCardsZPosition()
             fixScale(centerCard)
             
-            var newPos = centerCard.position.x + changeInX
+            let newPos = centerCard.position.x + changeInX
             
             if newPos > rightCardPoint.x {
                 centerCard.position = rightCardPoint
@@ -107,8 +107,8 @@ class CardCarouselNode: SKNode {
     
     func fixScale(card:SKSpriteNode) {
         if card.position.x > leftCardPoint.x && card.position.x <= centerPoint.x {
-            var fullSize = centerPoint.x - leftCardPoint.x
-            var currentSize = card.position.x - leftCardPoint.x
+            let fullSize = centerPoint.x - leftCardPoint.x
+            let currentSize = card.position.x - leftCardPoint.x
             
             var aux = currentSize / fullSize
             aux = aux * 0.25 + 0.75
@@ -117,8 +117,8 @@ class CardCarouselNode: SKNode {
         }
         
         if card.position.x < rightCardPoint.x && card.position.x >= centerPoint.x {
-            var fullSize = rightCardPoint.x - centerPoint.x
-            var currentSize = rightCardPoint.x - card.position.x
+            let fullSize = rightCardPoint.x - centerPoint.x
+            let currentSize = rightCardPoint.x - card.position.x
             var aux = currentSize / fullSize
             aux = aux * 0.25 + 0.75
             card.setScale(aux)

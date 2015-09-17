@@ -38,7 +38,7 @@ class FlappyPlayerNode: SKSpriteNode {
         let firstAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.07)
         
 
-        super.init(texture: texture, color: nil, size: texture.size())
+        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         setupPhysics()
         self.runAction(SKAction.repeatActionForever( firstAction   ))
         self.colorBlendFactor = 0.4//How much of the color will be applied to the texture 0..1

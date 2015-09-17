@@ -75,6 +75,7 @@
 		B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BC11B84FA0400786728 /* MyParticle2.sks */; };
 		DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */; };
 		DB1748C21B8CF2F100201BA2 /* iPhoneDiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */; };
+		DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB42C9BB1BA9D59400D6D247 /* Board.atlas */; };
 		DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B721B5409B90066B38C /* AppDelegate.swift */; };
 		DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB458B741B5409B90066B38C /* FinalChallenge.xcdatamodeld */; };
 		DB458B781B5409B90066B38C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B771B5409B90066B38C /* ViewController.swift */; };
@@ -179,6 +180,7 @@
 		B5F60BC11B84FA0400786728 /* MyParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle2.sks; sourceTree = "<group>"; };
 		DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhonePlayerViewController.swift; sourceTree = "<group>"; };
 		DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhoneDiceViewController.swift; sourceTree = "<group>"; };
+		DB42C9BB1BA9D59400D6D247 /* Board.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Board.atlas; sourceTree = "<group>"; };
 		DB458B6D1B5409B90066B38C /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB458B711B5409B90066B38C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB458B721B5409B90066B38C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 		DB4E52001B714A10008333D3 /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				DB42C9BB1BA9D59400D6D247 /* Board.atlas */,
 				DB98FEA51B825ED300AD5098 /* board_1.xml */,
 				DBE862041B850DB700C8099E /* board_2.xml */,
 				DB73E8111B72834400F7D7C7 /* BoardGraph.swift */,
@@ -530,6 +533,8 @@
 		DB458B651B5409B90066B38C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Hariel Giacomuzzi";
 				TargetAttributes = {
@@ -595,6 +600,7 @@
 				26B2D9C51B87AB110056015F /* teste.sks in Resources */,
 				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
+				DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */,
 				269F18B01B86583000EAD94F /* wind.atlas in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
 				4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */,

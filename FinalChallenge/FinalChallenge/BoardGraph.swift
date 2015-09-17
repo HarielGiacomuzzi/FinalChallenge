@@ -16,7 +16,7 @@ class BoardGraph : NSObject{
     var nodes : [String : BoardNode] = [:];
 
     func loadBoard(fromFile : String){
-        var a = XMLParser();
+        let a = XMLParser();
         a.loadBoardFrom(NSBundle.mainBundle().pathForResource(fromFile, ofType: "xml")!);
     }
     
@@ -27,7 +27,7 @@ class BoardGraph : NSObject{
     
     // creates a node and insert it on the graph dictionary with the specified name
     func createNode(x: Double, y : Double, name : String?, father : BoardNode?){
-        var aux = BoardNode(posX: x, posY: y, father: father);
+        let aux = BoardNode(posX: x, posY: y, father: father);
         nodes.updateValue(aux, forKey: name!);
     }
     
@@ -131,14 +131,14 @@ class BoardGraph : NSObject{
     }
     
     func walk(qtd : Int, player : Player, view : UIViewController?){
-        var playerLastNode = nodeFor(player)
+        let playerLastNode = nodeFor(player)
         var x : [BoardNode] = walkRecursivo(qtd, node: playerLastNode!)
         playerLastNode?.removePlayer(player);
         
         if x.count > 1{
-            var alerta = AlertPath(title: "Select a Path", message: "escolhe ai fera!", preferredStyle: .Alert)
+            let alerta = AlertPath(title: "Select a Path", message: "escolhe ai fera!", preferredStyle: .Alert)
             for i in x{
-                var action = UIAlertAction(title: "Path: \(keyFor(i))", style: .Default) { action -> Void in
+                let action = UIAlertAction(title: "Path: \(keyFor(i))", style: .Default) { action -> Void in
                     player.x = i.posX
                     player.y = i.posY
                     i.insertPLayer(player)
@@ -147,7 +147,7 @@ class BoardGraph : NSObject{
                 }
             view?.presentViewController(alerta, animated: true, completion: nil)
         }else{
-            var i = x[0]
+            let i = x[0]
             player.x = i.posX
             player.y = i.posY
             i.insertPLayer(player);

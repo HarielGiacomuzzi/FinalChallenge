@@ -24,7 +24,7 @@ class FlappyStoneNode: SKSpriteNode {
     init() {
         var aux = arc4random() % 3 + 1
         let texture = atlas.textureNamed("bigrock\(aux)")
-        super.init(texture: texture, color: nil, size: texture.size())
+        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         setupPhysics(texture)
     }
     

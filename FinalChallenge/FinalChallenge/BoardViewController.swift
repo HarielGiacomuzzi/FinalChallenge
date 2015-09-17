@@ -15,7 +15,7 @@ extension SKNode {
         
         let path = NSBundle.mainBundle().pathForResource(file as String, ofType: "sks")
         
-        let sceneData = NSData(contentsOfFile: path!, options: .DataReadingMappedIfSafe, error: nil)
+        let sceneData = try? NSData(contentsOfFile: path!, options: .DataReadingMappedIfSafe)
         let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData!)
         
         archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
@@ -55,11 +55,11 @@ class BoardViewController : UIViewController {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+            return UIInterfaceOrientationMask.AllButUpsideDown
         } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
+            return UIInterfaceOrientationMask.All
         }
     }
     
@@ -70,7 +70,7 @@ class BoardViewController : UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "gotoMinigame" {
-            println("IDENTIFIQUEI A SEGUE")
+            print("IDENTIFIQUEI A SEGUE")
             let minivc = segue.destinationViewController as! MinigameDescriptionViewController
             minivc.minigame = Minigame(rawValue: sender as! String)!
         }

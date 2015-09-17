@@ -27,19 +27,19 @@ class GameOverSceneSP : MinigameScene{
     //sets flappyfish game over scene
     func setupFlappyFishGameOver(){
         
-        var restartGame = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let restartGame = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         restartGame.text = "Restart Game"
         restartGame.name = "Restart Game"
         restartGame.position = CGPointMake(self.size.width/2, 50)
         self.addChild(restartGame)
         
-        var returnMinigameScene = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let returnMinigameScene = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         returnMinigameScene.text = "Return to Minigames Collection"
         returnMinigameScene.name = "Return MinigameScene"
         returnMinigameScene.position = CGPointMake(self.size.width/2, 150)
         self.addChild(returnMinigameScene)
         
-        var scoreLabel = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let scoreLabel = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         scoreLabel.text = "Final Score: \(score)"
         scoreLabel.name = "Final Score"
         scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2)
@@ -47,13 +47,13 @@ class GameOverSceneSP : MinigameScene{
     }
     
     func setupBombGameOver(){
-        var restartGame = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let restartGame = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         restartGame.text = "Restart Game"
         restartGame.name = "Restart Game"
         restartGame.position = CGPointMake(self.size.width/2, 50)
         self.addChild(restartGame)
         
-        var returnMinigameScene = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let returnMinigameScene = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         returnMinigameScene.text = "Return to Minigames Collection"
         returnMinigameScene.name = "Return MinigameScene"
         returnMinigameScene.position = CGPointMake(self.size.width/2, 150)
@@ -61,9 +61,9 @@ class GameOverSceneSP : MinigameScene{
     }
     
     //touch nodes
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        var touch : UITouch? = touches.first as? UITouch
+        let touch : UITouch? = touches.first as UITouch!
         
         if let location = touch?.locationInNode(self) {
             let touchedNode = self.nodeAtPoint(location)

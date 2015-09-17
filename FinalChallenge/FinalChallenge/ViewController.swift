@@ -28,7 +28,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
     
     func whoisResponse(data : NSNotification?){
-        var aux = ConnectionManager.sharedInstance.getStreamToIpad(ConnectionManager.sharedInstance.peerID.displayName);
+        let aux = ConnectionManager.sharedInstance.getStreamToIpad(ConnectionManager.sharedInstance.peerID.displayName);
         if aux != nil{
             self.iPadStream = aux;
         }
@@ -49,7 +49,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
     
     // Notifies the delegate, when the user taps the done button
-    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!){
+    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController){
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
         let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
         var connectedPlayers:[Player] = []
@@ -63,7 +63,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
     
     // Notifies delegate that the user taps the cancel button.
-    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!){
+    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController){
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
     }
 
@@ -100,7 +100,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         
     }
     @IBAction func botaoDeTeste(sender: AnyObject) {
-        GameManager.sharedInstance.updatePlayerMoney(testTextField.text, value: 15)
+        GameManager.sharedInstance.updatePlayerMoney(testTextField.text!, value: 15)
 
     }
     

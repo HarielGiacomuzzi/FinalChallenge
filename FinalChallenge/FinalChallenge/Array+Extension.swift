@@ -10,7 +10,7 @@ import Foundation
 
 extension Array {
     mutating func removeObject<U: Equatable>(object: U) -> Bool {
-        for (idx, objectToCompare) in enumerate(self) {
+        for (idx, objectToCompare) in self.enumerate() {
             if let to = objectToCompare as? U {
                 if object == to {
                     self.removeAtIndex(idx)
@@ -22,7 +22,7 @@ extension Array {
     }
     
     //gets random item and removes from array
-    mutating func randomItem() -> T {
+    mutating func randomItem() -> Element {
         let index = Int(arc4random_uniform(UInt32(self.count)))
         var item = self[index]
         self.removeAtIndex(index)

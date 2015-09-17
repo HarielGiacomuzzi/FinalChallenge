@@ -29,16 +29,16 @@ class PuffGamePad: UIViewController {
                         return
                     }
                     //                    print(" Y = \(data.acceleration.y)")
-                    self.sendData(data.acceleration.y)
+                    self.sendData(data!.acceleration.y)
                 }
             )
         } else {
-            print("Accelerometer is not available")
+            print("Accelerometer is not available", terminator: "")
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        var dic = ["PuffGamePad":" ", "action":PlayerAction.PuffGrow.rawValue]
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let dic = ["PuffGamePad":" ", "action":PlayerAction.PuffGrow.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true);
     }
     
@@ -52,12 +52,12 @@ class PuffGamePad: UIViewController {
     func sendData(y:Double) {
         
         if y > 0{
-            var action = ["way":PlayerAction.Down.rawValue]
-            var dic = ["controllerAction":"", "action":action]
+            let action = ["way":PlayerAction.Down.rawValue]
+            let dic = ["controllerAction":"", "action":action]
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         }else if y < 0{
-            var action = ["way":PlayerAction.Up.rawValue]
-            var dic = ["controllerAction":"", "action":action]
+            let action = ["way":PlayerAction.Up.rawValue]
+            let dic = ["controllerAction":"", "action":action]
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         }
     }

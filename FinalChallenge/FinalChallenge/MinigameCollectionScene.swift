@@ -16,7 +16,7 @@ class MinigameCollectionScene : SKScene{
     
     override func didMoveToView(view: SKView) {
         
-        var minigameTitle = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let minigameTitle = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         minigameTitle.text = "Minigame Collection"
         minigameTitle.name = "Minigame Collection"
         minigameTitle.position = CGPointMake(self.size.width/2, self.size.height-100)
@@ -29,7 +29,7 @@ class MinigameCollectionScene : SKScene{
             
             sprite.size = CGSize(width: 200, height: 100)
             
-            var aux = GameManager.sharedInstance.allMinigames.count
+            let aux = GameManager.sharedInstance.allMinigames.count
             
             let offsetFraction = (CGFloat(i.hashValue) + 1.0)/(CGFloat(aux) + 1.0)
             
@@ -39,9 +39,9 @@ class MinigameCollectionScene : SKScene{
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        var touch : UITouch? = touches.first as? UITouch
+        let touch : UITouch? = touches.first as UITouch!
         
         if let location = touch?.locationInNode(self) {
             let touchedNode = self.nodeAtPoint(location)

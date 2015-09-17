@@ -15,7 +15,7 @@ class AccelerometerGamePadController: UIViewController {
     
     lazy var motionManager : CMMotionManager = {
         let motion = CMMotionManager()
-        motion.accelerometerUpdateInterval = 1.0/10.0
+        motion.accelerometerUpdateInterval = 1.0/5.0
         return motion
     }()
     
@@ -35,11 +35,11 @@ class AccelerometerGamePadController: UIViewController {
                         return
                     }
 //                    print(" Y = \(data.acceleration.y)")
-                    self.sendData(data.acceleration.y)
+                    self.sendData(data!.acceleration.y)
                 }
             )
         } else {
-            print("Accelerometer is not available")
+            print("Accelerometer is not available", terminator: "")
         }
     }
     
@@ -47,12 +47,12 @@ class AccelerometerGamePadController: UIViewController {
     func sendData(y:Double) {
         
         if y > 0{
-            var action = ["way":PlayerAction.Down.rawValue]
-            var dic = ["controllerAction":"", "action":action]
+            let action = ["way":PlayerAction.Down.rawValue]
+            let dic = ["controllerAction":"", "action":action]
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         }else if y < 0{
-            var action = ["way":PlayerAction.Up.rawValue]
-            var dic = ["controllerAction":"", "action":action]
+            let action = ["way":PlayerAction.Up.rawValue]
+            let dic = ["controllerAction":"", "action":action]
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         } 
     }

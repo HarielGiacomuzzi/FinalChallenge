@@ -29,7 +29,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("Dei load na minigameview controller")
+        print("Dei load na minigameview controller")
         GameManager.sharedInstance.minigameViewController = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_ControlAction", object: nil);
@@ -50,7 +50,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         case .BombGame:
             scene = BombTGameScene(size: CGSize(width: 1024, height: 768))
         default:
-            println("porraaaa")
+            print("porraaaa")
         }
         let skView = view as! SKView
         skView.showsFPS = true
@@ -60,7 +60,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         scene.gameController = self
         scene.scaleMode = .AspectFit
         skView.presentScene(scene)
-        println("apresentei a cena sem crashar")
+        print("apresentei a cena sem crashar")
         
     }
     
@@ -71,14 +71,14 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     }
     
     func messageReceived(data : NSNotification){
-        var peerDisplayName = data.userInfo!["peerID"] as! String
-        var data = data.userInfo!["actionReceived"] as! NSDictionary
+        let peerDisplayName = data.userInfo!["peerID"] as! String
+        let data = data.userInfo!["actionReceived"] as! NSDictionary
         scene.messageReceived(peerDisplayName, dictionary: data)
     }
     
     func gameOverController(playerArray:[String]){
         self.playerRank = playerArray
-        popup.player = playerRank.reverse()
+        popup.player = Array(playerRank.reverse())
         let popoverMenuViewController = popup.popoverPresentationController
         popoverMenuViewController?.permittedArrowDirections = .Any
         popoverMenuViewController?.delegate = self
