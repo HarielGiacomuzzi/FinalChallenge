@@ -40,8 +40,6 @@ class CardCarouselNode: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             

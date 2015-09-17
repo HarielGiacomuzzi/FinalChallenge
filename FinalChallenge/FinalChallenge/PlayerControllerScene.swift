@@ -11,8 +11,8 @@ import SpriteKit
 
 class PlayerControllerScene: SKScene {
     
-    var moneyButton = SKSpriteNode()
-    var lootButton = SKSpriteNode()
+    var moneyButton : PlayerButtonNode!
+    var lootButton : PlayerButtonNode!
     var topBarLimit:CGFloat = 0.0
     var playerName = "Player Name"
     
@@ -56,6 +56,7 @@ class PlayerControllerScene: SKScene {
         while(pos.y > -squareTexture.size().height/2) {
             let squaresNode = SKSpriteNode(texture: squareTexture)
             squaresNode.zPosition = 1
+            squaresNode.alpha = 0.5
         
             squaresNode.position = pos
             addChild(squaresNode)
@@ -69,17 +70,19 @@ class PlayerControllerScene: SKScene {
     func setupButtons() {
         let moneyButtonTextureOn = SKTexture(imageNamed: "button2On")
         let moneyButtonTextureOff = SKTexture(imageNamed: "button2Off")
-        moneyButton = PlayerButtonNode(textureOn: moneyButtonTextureOn, textureOff: moneyButtonTextureOff)
-        moneyButton.position = CGPointMake(frame.size.width - moneyButton.size.width / 2, (moneyButton.size.height / 2) - 20)
+        moneyButton = PlayerButtonNode(textureOn: moneyButtonTextureOn, textureOff: moneyButtonTextureOff, openRight: false)
+        
+        moneyButton.position = CGPointMake(frame.size.width - moneyButton.button.size.width / 2, (moneyButton.button.size.height / 2) - 20)
+
         addChild(moneyButton)
-        moneyButton.zPosition = 30
+        moneyButton.zPosition = 35
         
         let lootButtonTextureOn = SKTexture(imageNamed: "button1On")
         let lootButtonTextureOff = SKTexture(imageNamed: "button1Off")
-        lootButton = PlayerButtonNode(textureOn: lootButtonTextureOn, textureOff: lootButtonTextureOff)
-        lootButton.position = CGPointMake(lootButton.size.width/2, (lootButton.size.height/2) - 20)
+        lootButton = PlayerButtonNode(textureOn: lootButtonTextureOn, textureOff: lootButtonTextureOff, openRight: true)
+        lootButton.position = CGPointMake(lootButton.button.size.width/2, (lootButton.button.size.height/2) - 20)
         addChild(lootButton)
-        lootButton.zPosition = 30
+        lootButton.zPosition = 35
     }
     
     func setupTopBar() {
@@ -108,6 +111,5 @@ class PlayerControllerScene: SKScene {
     func updateMoney(value:Int) {
         
     }
-    
     
 }
