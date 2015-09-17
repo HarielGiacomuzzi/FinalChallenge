@@ -13,6 +13,7 @@ private let movableAvatarNodeName = "movable"
 
 class PartyModeScene: SKScene {
     
+    var viewController : PartyModeViewController!
     let background = SKSpriteNode(imageNamed: "board_beta")
     var selectedNode = SKSpriteNode()
     var playerSpriteNodeArray = [SKSpriteNode()]
@@ -26,6 +27,7 @@ class PartyModeScene: SKScene {
         super.init(size: size)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_IphoneGameSetup", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeView:", name: "ConnectionManager_IphoneChangeView", object: nil);
         
         self.background.name = "background"
         self.background.anchorPoint = CGPointZero
@@ -180,6 +182,17 @@ class PartyModeScene: SKScene {
         
     }
     
+    func changeView(data : NSNotification){
+        var identifier = data.userInfo!["peerID"] as! String
+        var dictionary = data.userInfo!["change"] as! NSDictionary
+        var message = dictionary["change"] as! String
+        
+        if message == "change" {
+            //change view
+            viewController.changeView()
+        }
+        
+    }
     
 }
 
