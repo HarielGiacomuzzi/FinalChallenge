@@ -302,7 +302,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
-            var particleTexture = SKTexture(imageNamed: "spark.png")
+            _ = SKTexture(imageNamed: "spark.png")
             let playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
             playerParticle!.name = "PlayerParticle"
             playerParticle!.targetNode = player
@@ -319,7 +319,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         singlePlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
         self.addChild(singlePlayer!)
         
-        var particleTexture = SKTexture(imageNamed: "spark.png")
+        _ = SKTexture(imageNamed: "spark.png")
         let playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
         playerParticle!.name = "PlayerParticle"
         playerParticle!.targetNode = self.scene
@@ -341,6 +341,13 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
         
         self.gameController!.gameOverController(playerRank)
+        
+        /*self.removeAllChildren()
+        self.removeAllActions()
+        var transition = SKTransition.flipHorizontalWithDuration(0.5)
+        var goScene = GameOverSceneMP(size: self.size)
+        goScene.player = playerRank.reverse()
+        self.view?.presentScene(goScene, transition: transition)*/
     }
     
     // MARK: - Player Action Handling

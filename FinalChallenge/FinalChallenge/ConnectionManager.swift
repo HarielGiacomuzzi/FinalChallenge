@@ -235,6 +235,13 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_IphoneGameSetup", object: nil, userInfo: userInfo)
                 return
             }
+        // change iphoneview
+                
+            if message.valueForKey("IphoneChangeView") != nil {
+                userInfo.updateValue(message.valueForKey("change") as! NSObject, forKey: "change")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_IphoneChangeView", object: nil, userInfo: userInfo)
+                return
+            }
         // update player money
             if message.valueForKey("updateMoney") != nil {
                 print(message)
