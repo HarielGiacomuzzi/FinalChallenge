@@ -103,7 +103,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         var actions:[SKAction] = []
         self.addChild(countDownNode)
         
-        for i in Array((1...3).reverse()) {
+        for i in (1...3).reverse() {
             let changeNumber = SKAction.runBlock({() in
                 countDownNode.text = "\(i)"
             })
@@ -302,7 +302,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
-            var particleTexture = SKTexture(imageNamed: "spark.png")
+            _ = SKTexture(imageNamed: "spark.png")
             let playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
             playerParticle!.name = "PlayerParticle"
             playerParticle!.targetNode = player
@@ -319,7 +319,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         singlePlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
         self.addChild(singlePlayer!)
         
-        var particleTexture = SKTexture(imageNamed: "spark.png")
+        _ = SKTexture(imageNamed: "spark.png")
         let playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
         playerParticle!.name = "PlayerParticle"
         playerParticle!.targetNode = self.scene
@@ -411,7 +411,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
                 self.loserRanking.append(player.identifier!)
             }
         }
-        if let player = singlePlayer {
+        if let _ = singlePlayer {
             // game over
             self.paused = true
             self.gameOverSP()

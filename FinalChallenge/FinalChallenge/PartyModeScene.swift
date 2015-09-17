@@ -80,10 +80,10 @@ class PartyModeScene: SKScene {
                 if selectedNode.name != sp {
                     let scrollDuration = 0.2
                     let velocity = recognizer.velocityInView(recognizer.view)
-                    let pos = selectedNode.position
+                    _ = selectedNode.position
                 
                     // This just multiplies your velocity with the scroll duration.
-                    let p = CGPoint(x: velocity.x * CGFloat(scrollDuration), y: velocity.y * CGFloat(scrollDuration))
+                    _ = CGPoint(x: velocity.x * CGFloat(scrollDuration), y: velocity.y * CGFloat(scrollDuration))
                     selectedNode.removeAllActions()
                 }else{
                     if selectedNode.position.y > self.frame.height/1.2{
@@ -160,7 +160,7 @@ class PartyModeScene: SKScene {
     }
     
     func messageReceived(data : NSNotification){
-        var identifier = data.userInfo!["peerID"] as! String
+        _ = data.userInfo!["peerID"] as! String
         let dictionary = data.userInfo!["arrayPlayers"] as! NSDictionary
         let message = dictionary["arrayPlayers"] as! [String]
         self.takenAvatar = message

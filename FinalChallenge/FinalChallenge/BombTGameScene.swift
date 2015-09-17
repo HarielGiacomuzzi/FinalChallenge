@@ -59,10 +59,10 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first as UITouch!
         let location = touch.locationInView(self.view)
-        var endX = location.x
-        var endY = location.y
-        var x = endX - beginX
-        var y = (endY - beginY) * -1
+        let endX = location.x
+        let endY = location.y
+        let x = endX - beginX
+        let y = (endY - beginY) * -1
         
         var vector = CGVectorMake(x, y)
         
@@ -177,7 +177,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     func setMultiplayer() {
-        let connectedPeers = ConnectionManager.sharedInstance.session.connectedPeers
+        _ = ConnectionManager.sharedInstance.session.connectedPeers
         let boardPlayers = GameManager.sharedInstance.players
         
         var i = 0
@@ -231,7 +231,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         let north = BombPlayerNode()
         north.position = topLeft
         let pi = CGFloat(M_PI)
-        var angle = pi
+        _ = pi
         
         let rotN = SKAction.runBlock({() in
             north.roboBase?.runAction(SKAction.rotateByAngle(pi, duration: 0.3))
@@ -429,7 +429,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
             let randomNumInt1 = CGFloat.random(min: 0.4, max: 5.0)
             let randomNumInt2 = CGFloat.random(min: 0.4, max: 5.0)
-            let randomNumInt3 = CGFloat.random(min: 0.0, max: 0.02)
+            _ = CGFloat.random(min: 0.0, max: 0.02)
 
 
 
@@ -553,7 +553,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         pavioAntigo.position = CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)+2)
         pavioAntigo.physicsBody?.categoryBitMask = fireCategory
         pavioAntigo.physicsBody?.collisionBitMask = bombCategory
-        var jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody!, bodyB: pavioAntigo.physicsBody!, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)))
+        let jointPavio = SKPhysicsJointPin.jointWithBodyA(bomb.physicsBody!, bodyB: pavioAntigo.physicsBody!, anchor: CGPointMake(CGRectGetMidX(bomb.frame), CGRectGetMaxY(bomb.frame)))
 
         self.addChild(pavioAntigo)
         pavioArray.append(pavioAntigo)
@@ -570,7 +570,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             pavioNovo.physicsBody = SKPhysicsBody(circleOfRadius: 5/2)
             pavioNovo.physicsBody?.categoryBitMask = fireCategory
             pavioNovo.physicsBody?.collisionBitMask = bombCategory
-            var jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody!, bodyB: pavioNovo.physicsBody!, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
+            let jointPavios = SKPhysicsJointPin.jointWithBodyA(pavioAntigo.physicsBody!, bodyB: pavioNovo.physicsBody!, anchor: CGPointMake(CGRectGetMidX(pavioAntigo.frame), CGRectGetMaxY(pavioAntigo.frame)))
             self.addChild(pavioNovo)
             self.physicsWorld.addJoint(jointPavios)
             pavioNovo.zPosition = 50

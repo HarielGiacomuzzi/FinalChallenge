@@ -108,7 +108,7 @@ class GameManager {
                 print(m.rawValue)
             }
         }
-        var minigame = minigameOrderArray.randomItem()
+        let minigame = minigameOrderArray.randomItem()
         
         print("SERA QUE EU REMOVI UM ELEMENTO MESMO GALERA????")
         print("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
