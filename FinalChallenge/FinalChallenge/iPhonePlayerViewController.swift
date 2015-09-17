@@ -21,7 +21,7 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil)
         
-        scene = PlayerControllerScene(size: CGSize(width: 1024, height: 768))
+        scene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
         
         let skView = self.view as! SKView
         skView.showsFPS = true

@@ -25,8 +25,8 @@ class CardCarouselNode: SKNode {
         centerPoint = CGPointMake(0, 0)
         
         //change left and right points to change distance between cards
-        leftCardPoint = CGPointMake(centerPoint.x - cards[0].size.width/2, centerPoint.y)
-        rightCardPoint = CGPointMake(centerPoint.x + cards[0].size.width/2, centerPoint.y)
+        leftCardPoint = CGPointMake(centerPoint.x - cards[0].size.width * 0.75, centerPoint.y)
+        rightCardPoint = CGPointMake(centerPoint.x + cards[0].size.width * 0.75, centerPoint.y)
         
         for card in cards {
             card.position = leftCardPoint

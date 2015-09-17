@@ -33,6 +33,7 @@
 		5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */; };
 		5E68AD7B1B8CCD3E00FD4404 /* BombPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */; };
 		5E68AD7F1B8CD57C00FD4404 /* BombWallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */; };
+		5E68DAAB1BA9ECCB00DB14FB /* PlayerButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */; };
 		5E70C7D31B9A0DB1005C753B /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */; };
 		5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */; };
 		5E7E45BC1B960AC600249B8A /* MinigameDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7E45BB1B960AC600249B8A /* MinigameDescriptionViewController.swift */; };
@@ -137,6 +138,7 @@
 		5E677F061B8B877F00238881 /* SwipeGamePadControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeGamePadControllerViewController.swift; sourceTree = "<group>"; };
 		5E68AD7A1B8CCD3E00FD4404 /* BombPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombPlayerNode.swift; sourceTree = "<group>"; };
 		5E68AD7E1B8CD57C00FD4404 /* BombWallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombWallNode.swift; sourceTree = "<group>"; };
+		5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerButtonNode.swift; sourceTree = "<group>"; };
 		5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAnimationSegue.swift; sourceTree = "<group>"; };
 		5E7DCE901B82447B00229F04 /* FlappyPlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPlayerNode.swift; sourceTree = "<group>"; };
 		5E7E45BB1B960AC600249B8A /* MinigameDescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameDescriptionViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */,
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E840FFF1BA9CC000099B16B /* PlayerControllerScene.swift */,
+				5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */,
 			);
 			name = PlayerControllerView;
 			sourceTree = "<group>";
@@ -540,7 +543,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = DVXNNDG4U4;
+						DevelopmentTeam = ZX7GUMJ35C;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -632,6 +635,7 @@
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
 				B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */,
 				B5AFAD0C1B94CC7F0005F19E /* PartyModeViewController.swift in Sources */,
+				5E68DAAB1BA9ECCB00DB14FB /* PlayerButtonNode.swift in Sources */,
 				5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */,
 				5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */,
 				DBE862071B8552C800C8099E /* MainBoard.swift in Sources */,
