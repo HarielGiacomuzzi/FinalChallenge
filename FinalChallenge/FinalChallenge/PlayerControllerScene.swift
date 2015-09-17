@@ -13,6 +13,7 @@ class PlayerControllerScene: SKScene {
     
     var moneyButton : PlayerButtonNode!
     var lootButton : PlayerButtonNode!
+    var carousel : CardCarouselNode!
     var topBarLimit:CGFloat = 0.0
     var playerName = "Player Name"
     
@@ -36,7 +37,7 @@ class PlayerControllerScene: SKScene {
         setupTopBar()
         setupButtons()
         
-        let carousel = CardCarouselNode(cardsArray: cards)
+        carousel = CardCarouselNode(cardsArray: cards, startIndex: 0)
         carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 2)
         carousel.zPosition = 30
         self.addChild(carousel)
@@ -80,7 +81,9 @@ class PlayerControllerScene: SKScene {
         let lootButtonTextureOn = SKTexture(imageNamed: "button1On")
         let lootButtonTextureOff = SKTexture(imageNamed: "button1Off")
         lootButton = PlayerButtonNode(textureOn: lootButtonTextureOn, textureOff: lootButtonTextureOff, openRight: true)
+        
         lootButton.position = CGPointMake(lootButton.button.size.width/2, (lootButton.button.size.height/2) - 20)
+        
         addChild(lootButton)
         lootButton.zPosition = 35
     }
@@ -111,5 +114,9 @@ class PlayerControllerScene: SKScene {
     func updateMoney(value:Int) {
         
     }
+    
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        carousel.removeCard()
+//    }
     
 }
