@@ -10,9 +10,12 @@ import SpriteKit
 
 class GameOverSceneSP : MinigameScene{
     
-    var score : Int!
+    //used in all games
     var game : String!
-    
+    //used in flappyfish,
+    var score : Int!
+    //used in bombGame,
+    var winner : String!
     
     override func didMoveToView(view: SKView) {
         
@@ -58,12 +61,18 @@ class GameOverSceneSP : MinigameScene{
         returnMinigameScene.name = "Return MinigameScene"
         returnMinigameScene.position = CGPointMake(self.size.width/2, 150)
         self.addChild(returnMinigameScene)
+        
+        let scoreLabel = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        scoreLabel.text = "Winner: \(winner)"
+        scoreLabel.name = "Winner"
+        scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2)
+        self.addChild(scoreLabel)
     }
     
     //touch nodes
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        let touch : UITouch? = touches.first as UITouch!
+        let touch : UITouch? = touches.first as UITouch?
         
         if let location = touch?.locationInNode(self) {
             let touchedNode = self.nodeAtPoint(location)
@@ -76,13 +85,13 @@ class GameOverSceneSP : MinigameScene{
                 case "bomb":  scene = BombTGameScene(size: self.scene!.size)
                 default: break
                 }
-            
+                
                 scene.scaleMode = SKSceneScaleMode.AspectFit
                 self.scene!.view!.presentScene(scene, transition: transition)
             }
             
             if touchedNode.name == "Return MinigameScene" {
-                let transition = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
+                _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
                 self.view?.presentScene(nil)
                 GameManager.sharedInstance.dismissMinigameSP()
                 

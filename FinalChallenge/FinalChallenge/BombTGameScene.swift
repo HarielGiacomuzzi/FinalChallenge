@@ -306,13 +306,26 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func gameOver(){
         //find last player
+        var winner = String()
         for i in 0...3 {
             if walls[i].hasPlayer {
                 playerRank.append(players[i].identifier) //append last player
             }
         }
-        self.gameController!.gameOverController(playerRank)
-        
+        //self.gameController!.gameOverController(playerRank)
+        if GameManager.sharedInstance.isMultiplayer{
+            //self.gameController!.gameOverController(playerRank)
+            
+            self.removeAllChildren()
+            self.removeAllActions()
+            var transition = SKTransition.flipHorizontalWithDuration(0.5)
+            var goScene = GameOverSceneMP(size: self.size)
+            goScene.player = playerRank.reverse()
+            self.view?.presentScene(goScene, transition: transition)
+            
+        } else{
+            self.gameOverSP(winner)
+        }
     }
     
     
@@ -640,12 +653,13 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
     }
     
-    func gameOverSP(){
+    func gameOverSP(winner:String){
         self.removeAllChildren()
         self.removeAllActions()
-        let transition = SKTransition.flipHorizontalWithDuration(0.5)
-        let goScene = GameOverSceneSP(size: self.size)
+        var transition = SKTransition.flipHorizontalWithDuration(0.5)
+        var goScene = GameOverSceneSP(size: self.size)
         goScene.score = 0 // not used yet
+        goScene.winner = winner
         goScene.game = "bomb"
         self.view?.presentScene(goScene, transition: transition)
     }

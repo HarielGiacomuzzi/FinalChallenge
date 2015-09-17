@@ -341,6 +341,13 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
         
         self.gameController!.gameOverController(playerRank)
+        
+        /*self.removeAllChildren()
+        self.removeAllActions()
+        var transition = SKTransition.flipHorizontalWithDuration(0.5)
+        var goScene = GameOverSceneMP(size: self.size)
+        goScene.player = playerRank.reverse()
+        self.view?.presentScene(goScene, transition: transition)*/
     }
     
     // MARK: - Player Action Handling

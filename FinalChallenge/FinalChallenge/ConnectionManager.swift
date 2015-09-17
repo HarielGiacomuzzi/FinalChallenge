@@ -94,7 +94,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         return self.iPadPeer;
     }
     
-    //sends a String to the other peer
+    //sends a stream to the iPad
     func getStreamToIpad(streamName : String)-> NSOutputStream?{
             let error = NSErrorPointer();
             if self.iPadPeer == nil{
@@ -237,6 +237,13 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             if message.valueForKey("IphoneGameSetup") != nil {
                 userInfo.updateValue(message.valueForKey("arrayPlayers") as! NSObject, forKey: "arrayPlayers")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_IphoneGameSetup", object: nil, userInfo: userInfo)
+                return
+            }
+        // change iphoneview
+                
+            if message.valueForKey("IphoneChangeView") != nil {
+                userInfo.updateValue(message.valueForKey("change") as! NSObject, forKey: "change")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_IphoneChangeView", object: nil, userInfo: userInfo)
                 return
             }
         // update player money

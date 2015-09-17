@@ -31,5 +31,8 @@ class PartyModeViewController : UIViewController{
         skView.presentScene(scene)
     }
     
+    func changeView(){
+        self.performSegueWithIdentifier("gotoPlayerPad", sender: nil)
+    }
     
 }
