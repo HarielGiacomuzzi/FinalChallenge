@@ -66,7 +66,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         // setup background color
         let skyColor = SKColor(red: 79/255.0, green: 146/255.0, blue: 201.0/255.0, alpha: 1.0)
         self.backgroundColor = skyColor
-
+        
 
         // left wall , if you hit you are dead
         let wallLeft = SKNode()
@@ -340,14 +340,14 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             playerRank.append(loser)
         }
         
-        self.gameController!.gameOverController(playerRank)
+        //self.gameController!.gameOverController(playerRank)
         
-        /*self.removeAllChildren()
+        self.removeAllChildren()
         self.removeAllActions()
         var transition = SKTransition.flipHorizontalWithDuration(0.5)
         var goScene = GameOverSceneMP(size: self.size)
         goScene.player = playerRank.reverse()
-        self.view?.presentScene(goScene, transition: transition)*/
+        self.view?.presentScene(goScene)
     }
     
     // MARK: - Player Action Handling
@@ -451,9 +451,13 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.removeAllActions()
         let transition = SKTransition.flipHorizontalWithDuration(0.5)
         let goScene = GameOverSceneSP(size: self.size)
+        goScene.scaleMode = .AspectFit
         goScene.score = cont
         goScene.game = "fish"
-        self.view?.presentScene(goScene, transition: transition)
+        print("entrou aqui ta sacando 1")
+        //self.removeFromParent()
+        //self.view?.presentScene(nil)
+        self.view?.presentScene(goScene)
     }
     
     /*

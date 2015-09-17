@@ -32,13 +32,17 @@ class InitialViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        partyModeButton.setTitle("Coming Soon", forState: .Normal)
+        partyModeButton.backgroundColor = UIColor.grayColor()
+        partyModeButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         setupView()
         
     }
     
     
     @IBAction func partyModeButtonPressed() {
+        //not ready yet
+        /*
         partyModeButton.removeFromSuperview()
         singlePlayerButton.removeFromSuperview()
         openBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
@@ -48,8 +52,14 @@ class InitialViewController: UIViewController
                 self.performSegueWithIdentifier("iphoneSegue", sender: nil)
             }
         })
+        */
+        
     }
 
+    @IBAction func singlePlayerButton(sender: AnyObject) {
+        GameManager.sharedInstance.isMultiplayer = false
+        self.performSegueWithIdentifier("minigameSegue", sender: nil)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -224,7 +234,7 @@ class InitialViewController: UIViewController
         rightCover.frame = rightCoverRect
         leftCover.frame = leftCoverRect
     }
-    
+   /*
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if opened {
             closeBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
@@ -235,7 +245,7 @@ class InitialViewController: UIViewController
                 self.opened = true
             })
         }
-    }
+    }*/
     
     
 }

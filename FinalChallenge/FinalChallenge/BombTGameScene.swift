@@ -321,7 +321,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             var transition = SKTransition.flipHorizontalWithDuration(0.5)
             var goScene = GameOverSceneMP(size: self.size)
             goScene.player = playerRank.reverse()
-            self.view?.presentScene(goScene, transition: transition)
+            self.view?.presentScene(goScene)
             
         } else{
             self.gameOverSP(winner)
@@ -661,7 +661,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         goScene.score = 0 // not used yet
         goScene.winner = winner
         goScene.game = "bomb"
-        self.view?.presentScene(goScene, transition: transition)
+        self.view?.presentScene(goScene)
     }
     
 }
