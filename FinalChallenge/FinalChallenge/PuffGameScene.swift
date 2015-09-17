@@ -90,7 +90,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     
     func messageReceived(data : NSNotification){
         if let message = data.userInfo!["actionReceived"] as? String{
-            var messageEnum = PlayerAction(rawValue: message)
+            _ = PlayerAction(rawValue: message)
            
             for p in GameManager.sharedInstance.players{
                 if p.playerIdentifier == data.userInfo!["peerID"] as? String{

@@ -191,7 +191,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as! UITouch!
+        let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
 
         if(go!.containsPoint(location)){

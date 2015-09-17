@@ -28,7 +28,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
     
     func whoisResponse(data : NSNotification?){
-        let aux = ConnectionManager.sharedInstance.getStreamToIpad(ConnectionManager.sharedInstance.peerID.displayName);
+        let aux = ConnectionManager.sharedInstance.getStreamToIpad(ConnectionManager.sharedInstance.peerID!.displayName);
         if aux != nil{
             self.iPadStream = aux;
         }

@@ -103,7 +103,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         var actions:[SKAction] = []
         self.addChild(countDownNode)
         
-        for i in Array((1...3).reverse()) {
+        for i in (1...3).reverse() {
             let changeNumber = SKAction.runBlock({() in
                 countDownNode.text = "\(i)"
             })
@@ -418,7 +418,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
                 self.loserRanking.append(player.identifier!)
             }
         }
-        if let player = singlePlayer {
+        if let _ = singlePlayer {
             // game over
             self.paused = true
             self.gameOverSP()
