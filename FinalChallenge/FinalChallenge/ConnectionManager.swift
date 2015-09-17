@@ -94,7 +94,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         return self.iPadPeer;
     }
     
-    //sends a String to the other peer
+    //sends a stream to the iPad
     func getStreamToIpad(streamName : String)-> NSOutputStream?{
             let error = NSErrorPointer();
             if self.iPadPeer == nil{

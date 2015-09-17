@@ -23,6 +23,10 @@ class iPhonePlayerViewController: UIViewController {
         
         scene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
         
+        if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
+            scene?.playerName = peerID
+        }
+        
         let skView = self.view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true

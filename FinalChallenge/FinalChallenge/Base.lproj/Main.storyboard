@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1Vb-KC-f6p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -442,7 +442,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUk-Cf-6K3">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUk-Cf-6K3">
                                 <rect key="frame" x="91" y="499" width="171" height="65"/>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.67450980390000004" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -456,8 +456,8 @@
                                     <action selector="partyModeButtonPressed" destination="1Vb-KC-f6p" eventType="touchUpInside" id="fWI-if-cnH"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O4Y-Qk-pvG">
-                                <rect key="frame" x="16" y="600" width="75" height="0.0"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4Y-Qk-pvG">
+                                <rect key="frame" x="20" y="600" width="72" height="0.0"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="i9c-fY-aF4"/>
@@ -499,9 +499,6 @@
                                         <exclude reference="gHm-dP-amR"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <action selector="singlePlayerButton:" destination="1Vb-KC-f6p" eventType="touchUpInside" id="a8s-Ki-4nI"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -525,7 +522,7 @@
                         <outlet property="mainView" destination="ZcK-a9-FJg" id="yFg-Sb-rPK"/>
                         <outlet property="partyModeButton" destination="BUk-Cf-6K3" id="myw-bb-cPN"/>
                         <outlet property="singlePlayerButton" destination="xYA-ta-Slj" id="hZn-t6-BOv"/>
-                        <segue destination="Y9w-QZ-R0C" kind="show" identifier="minigameSegue" id="FnE-Bj-SsS"/>
+                        <segue destination="Y9w-QZ-R0C" kind="show" identifier="" id="FnE-Bj-SsS"/>
                         <segue destination="nrX-X9-ixP" kind="custom" identifier="iphoneSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="jpC-FC-5oD"/>
                         <segue destination="8ga-GJ-cx0" kind="custom" identifier="ipadSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="AJR-aY-zUi"/>
                     </connections>
