@@ -22,10 +22,7 @@ class PlayerControllerScene: SKScene {
         var card3 = SKSpriteNode(texture: nil, color: UIColor.redColor(), size: CGSize(width: 375, height: 540))
         var card4 = SKSpriteNode(texture: nil, color: UIColor.whiteColor(), size: CGSize(width: 375, height: 540))
         
-        let card1 = SKSpriteNode(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 300, height: 600))
-        let card2 = SKSpriteNode(texture: nil, color: UIColor.greenColor(), size: CGSize(width: 300, height: 600))
-        let card3 = SKSpriteNode(texture: nil, color: UIColor.redColor(), size: CGSize(width: 300, height: 600))
-        let card4 = SKSpriteNode(texture: nil, color: UIColor.whiteColor(), size: CGSize(width: 300, height: 600))
+        var cards = [card1,card2,card3,card4]
         
         let backgroundTexture = SKTexture(imageNamed: "backscreen")
         let background = SKSpriteNode(texture: backgroundTexture)
@@ -34,10 +31,12 @@ class PlayerControllerScene: SKScene {
         
         self.backgroundColor = UIColor.whiteColor()
         
-        let cards = [card1,card2,card3,card4]
+        createSquaresAndAnimate()
+        setupTopBar()
+        setupButtons()
         
-        let carousel = CardCarouselNode(cardsArray: cards)
-        carousel.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
+        var carousel = CardCarouselNode(cardsArray: cards)
+        carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 2)
         self.addChild(carousel)
 
     }

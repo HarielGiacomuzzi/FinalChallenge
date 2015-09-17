@@ -17,7 +17,7 @@ class PlayerButtonNode: SKSpriteNode {
     init(textureOn:SKTexture, textureOff:SKTexture) {
         self.textureOn = textureOn
         self.textureOff = textureOff
-        super.init(texture: textureOn, color: nil, size: textureOn.size())
+        super.init(texture: textureOn, color: UIColor.clearColor(), size: textureOn.size())
         userInteractionEnabled = true
     }
     
@@ -25,11 +25,12 @@ class PlayerButtonNode: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         texture = textureOff
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         texture = textureOn
     }
+
 }
