@@ -255,7 +255,6 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             }
         // update player cards
             if message.valueForKey("updateCards") != nil {
-                print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateCards", object: nil, userInfo: userInfo)
                 return

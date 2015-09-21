@@ -102,7 +102,12 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         
     }
     @IBAction func botaoDeTeste(sender: AnyObject) {
-        GameManager.sharedInstance.updatePlayerMoney(GameManager.sharedInstance.players.first!, value: 15)
+//        GameManager.sharedInstance.updatePlayerMoney(GameManager.sharedInstance.players.first!, value: 15)
+        
+        let cardData = ["player":GameManager.sharedInstance.players.first!.playerIdentifier, "item": "oi"]
+        let dic = ["updateCards":" ", "dataDic" : cardData]
+        
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
 
     }
     
