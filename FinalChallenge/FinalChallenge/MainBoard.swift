@@ -60,26 +60,26 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             self.addChild(p.nodeSprite!)
         }
         
-        realPlayer = Player();
-        let sprite = SKShapeNode(circleOfRadius: 10.0);
-        realPlayer!.x = x;
-        realPlayer!.y = y;
-        print(realPlayer!.x, realPlayer!.y);
-        sprite.zPosition = 100;
-        sprite.position.x = CGFloat(realPlayer!.x);
-        sprite.position.y = CGFloat(realPlayer!.y);
-        sprite.fillColor = UIColor.blueColor();
-        realPlayer!.nodeSprite = sprite;
-        BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(realPlayer!)
-        
-        self.addChild(realPlayer!.nodeSprite!)
+//        realPlayer = Player();
+//        let sprite = SKShapeNode(circleOfRadius: 10.0);
+//        realPlayer!.x = x;
+//        realPlayer!.y = y;
+//        print(realPlayer!.x, realPlayer!.y);
+//        sprite.zPosition = 100;
+//        sprite.position.x = CGFloat(realPlayer!.x);
+//        sprite.position.y = CGFloat(realPlayer!.y);
+//        sprite.fillColor = UIColor.blueColor();
+//        realPlayer!.nodeSprite = sprite;
+//        BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(realPlayer!)
+//        
+//        self.addChild(realPlayer!.nodeSprite!)
 
         GameManager.sharedInstance.playerTurnEnded(nil)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-          BoardGraph.SharedInstance.walk(1, player: realPlayer!, view: self.viewController)
-        realPlayer?.nodeSprite?.position = CGPoint(x: realPlayer!.x, y: realPlayer!.y);
+//          BoardGraph.SharedInstance.walk(1, player: realPlayer!, view: self.viewController)
+//        realPlayer?.nodeSprite?.position = CGPoint(x: realPlayer!.x, y: realPlayer!.y);
            //GameManager.sharedInstance.beginMinigame()
         
     }
