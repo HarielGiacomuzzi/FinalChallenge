@@ -132,13 +132,15 @@ class BoardGraph : NSObject{
     }
     
     func sendCardToPlayer(nodeName : String, player:Player){
-        player.items.append((nodes[nodeName]?.item)!)
+        let card = nodes[nodeName]!.item
+        player.items.append(card!)
         
-        let cardData = ["player":player.playerIdentifier, "item": player.items]
+        let cardData = ["player":player.playerIdentifier, "item": card!.name]
         let dic = ["updateCards":" ", "dataDic" : cardData]
         
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         nodes[nodeName]?.item = nil
+        
     }
     
     //removes item from node and adds item to player
