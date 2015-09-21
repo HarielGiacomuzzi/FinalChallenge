@@ -89,6 +89,7 @@
 		DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73E8111B72834400F7D7C7 /* BoardGraph.swift */; };
 		DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB73E8131B72838D00F7D7C7 /* Board.sks */; };
 		DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */; };
+		DB8C2C2F1BB06D6B0080C2D2 /* board_3.xml in Resources */ = {isa = PBXBuildFile; fileRef = DB8C2C2E1BB06D6B0080C2D2 /* board_3.xml */; settings = {ASSET_TAGS = (); }; };
 		DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */ = {isa = PBXBuildFile; fileRef = DB98FEA51B825ED300AD5098 /* board_1.xml */; };
 		DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC57FE11B83AEA200CA0232 /* XMLParser.swift */; };
 		DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC57FE31B83AEC300CA0232 /* BoardScene.swift */; };
@@ -200,6 +201,7 @@
 		DB73E8111B72834400F7D7C7 /* BoardGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardGraph.swift; sourceTree = "<group>"; };
 		DB73E8131B72838D00F7D7C7 /* Board.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Board.sks; sourceTree = "<group>"; };
 		DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		DB8C2C2E1BB06D6B0080C2D2 /* board_3.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = board_3.xml; sourceTree = "<group>"; };
 		DB98FEA51B825ED300AD5098 /* board_1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = board_1.xml; sourceTree = "<group>"; };
 		DBC57FE11B83AEA200CA0232 /* XMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
 		DBC57FE31B83AEC300CA0232 /* BoardScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardScene.swift; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				DB42C9BB1BA9D59400D6D247 /* Board.atlas */,
 				DB98FEA51B825ED300AD5098 /* board_1.xml */,
 				DBE862041B850DB700C8099E /* board_2.xml */,
+				DB8C2C2E1BB06D6B0080C2D2 /* board_3.xml */,
 				DB73E8111B72834400F7D7C7 /* BoardGraph.swift */,
 				DB73E8131B72838D00F7D7C7 /* Board.sks */,
 				DBE862081B863BD400C8099E /* MainBoard.sks */,
@@ -546,7 +549,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZX7GUMJ35C;
+						DevelopmentTeam = DVXNNDG4U4;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -598,6 +601,7 @@
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
 				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
+				DB8C2C2F1BB06D6B0080C2D2 /* board_3.xml in Resources */,
 				26B2D9BF1B87A8920056015F /* fish.atlas in Resources */,
 				DBF7C0C21B98D50E0010FCFE /* PuffGameControl.sks in Resources */,
 				26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */,

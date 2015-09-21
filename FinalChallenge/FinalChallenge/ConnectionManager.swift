@@ -115,8 +115,6 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         if (reliable){
             do {
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-            } catch let error1 as NSError {
-                error.memory = error1
             } catch {
                 fatalError()
             };

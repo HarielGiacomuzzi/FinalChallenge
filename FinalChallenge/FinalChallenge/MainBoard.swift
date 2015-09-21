@@ -10,12 +10,13 @@ import SpriteKit
 
 class MainBoard: SKScene, SKPhysicsContactDelegate {
     var viewController: UIViewController?
+    var realPlayer : Player?
     let partsAtlas = SKTextureAtlas(named: "Board")
     
     override func didMoveToView(view: SKView) {
         GameManager.sharedInstance.boardViewController = self.viewController;
-        let scaleFactorX = Double(2048/self.size.width);
-        let scaleFactorY = Double(1536/self.size.height);
+        let scaleFactorX = Double(2048/(self.view?.frame.width)!);
+        let scaleFactorY = Double(1536/(self.view?.frame.height)!);
         
         for i in BoardGraph.SharedInstance.nodes{
             var texture = partsAtlas.textureNamed("square1");
@@ -31,20 +32,25 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             }
             
             let x = SKSpriteNode(texture: texture)
-            x.position.x = CGFloat(i.1.posX/scaleFactorX);
-            x.position.y = CGFloat(i.1.posY/scaleFactorY);
-            x.size = CGSize(width: CGFloat(30), height: CGFloat(30));
+            var posY = i.1.posY/scaleFactorY;
+            var posX = i.1.posX/scaleFactorX;
+            x.position.x = CGFloat(posX);
+            x.position.y = CGFloat(posY);
+            i.1.posX = posX;
+            i.1.posY = posY;
+            x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
             self.addChild(x);
         }
         
-        let x = BoardGraph.SharedInstance.nodes["01"]?.posX;
-        let y = BoardGraph.SharedInstance.nodes["01"]?.posY;
+        let x = (BoardGraph.SharedInstance.nodes["01"]?.posX)!;
+        let y = (BoardGraph.SharedInstance.nodes["01"]?.posY)!;
         
         for p in GameManager.sharedInstance.players{
             let sprite = SKSpriteNode(texture: partsAtlas.textureNamed("pin"))
             p.x = x;
             p.y = y;
             sprite.zPosition = 100;
+            sprite.position = CGPoint(x: x, y: y);
             sprite.colorBlendFactor = 0.9;
             sprite.color = p.color;
             sprite.size = CGSize(width: 15, height: 20);
@@ -54,12 +60,26 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             self.addChild(p.nodeSprite!)
         }
         
+        realPlayer = Player();
+        let sprite = SKShapeNode(circleOfRadius: 10.0);
+        realPlayer!.x = x;
+        realPlayer!.y = y;
+        print(realPlayer!.x, realPlayer!.y);
+        sprite.zPosition = 100;
+        sprite.position.x = CGFloat(realPlayer!.x);
+        sprite.position.y = CGFloat(realPlayer!.y);
+        sprite.fillColor = UIColor.blueColor();
+        realPlayer!.nodeSprite = sprite;
+        BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(realPlayer!)
+        
+        self.addChild(realPlayer!.nodeSprite!)
 
         GameManager.sharedInstance.playerTurnEnded(nil)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-          //BoardGraph.SharedInstance.walk(1, player: realPlayer, view: self.viewController)
+          BoardGraph.SharedInstance.walk(1, player: realPlayer!, view: self.viewController)
+        realPlayer?.nodeSprite?.position = CGPoint(x: realPlayer!.x, y: realPlayer!.y);
            //GameManager.sharedInstance.beginMinigame()
         
     }
@@ -68,8 +88,8 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     override func didFinishUpdate() {
         super.didFinishUpdate();
         for p in GameManager.sharedInstance.players{
-            p.nodeSprite?.position.x = CGFloat(p.x/2);
-            p.nodeSprite?.position.y = CGFloat(p.y/2);
+            p.nodeSprite?.position.x = CGFloat(p.x);
+            p.nodeSprite?.position.y = CGFloat(p.y);
         }
     }
 }
