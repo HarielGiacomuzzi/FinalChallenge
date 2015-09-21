@@ -106,7 +106,7 @@ class BoardGraph : NSObject{
     }
     
     // sets the item of a node, return true if it was successfull and false otherwise
-    func setItem(Item : NSObject, nodeName : String) ->Bool{
+    func setItem(Item : Card, nodeName : String) ->Bool{
         if !haveItem(nodeName){
             nodes[nodeName]?.item = Item;
             return true;
@@ -162,7 +162,7 @@ class BoardGraph : NSObject{
         var nextMoves : [BoardNode] = [];
         var posX = 0.0;
         var posY = 0.0;
-        var item : NSObject?
+        var item : Card?
         var nextNames : [String] = [];
         var currentPlayers : [Player] = [];
         var father : BoardNode?

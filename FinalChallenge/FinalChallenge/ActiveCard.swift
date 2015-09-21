@@ -9,7 +9,7 @@
 import Foundation
 
 class ActiveCard : Card {
-    
+
     override init() {
         super.init()
         self.usable = true
