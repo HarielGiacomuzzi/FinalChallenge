@@ -15,8 +15,8 @@ class XMLParser: NSObject, NSXMLParserDelegate {
     private var isOnNode = false;
     
     func loadBoardFrom(fileName : String){
-        var url = NSURL(fileURLWithPath: fileName)
-        var parser = NSXMLParser(contentsOfURL: url);
+        let url = NSURL(fileURLWithPath: fileName)
+        let parser = NSXMLParser(contentsOfURL: url);
         parser?.delegate = self;
         parser?.parse();
         BoardGraph.SharedInstance.setNeighborsReference();

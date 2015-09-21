@@ -68,8 +68,6 @@ class InitialViewController: UIViewController
     // MARK: - View Setup
     
     func setupView() {
-        let screenHeight = UIScreen.mainScreen().bounds.height
-        let screenWidth = UIScreen.mainScreen().bounds.width
         
         setupCovers()
         
@@ -229,23 +227,12 @@ class InitialViewController: UIViewController
         let ly = screenHeight / 2 - (leftCoverImage!.size.height * xScale) / 2
         
         let leftCoverRect = CGRectMake(0, ly, screenWidth, leftCoverImage!.size.height * xScale)
-        let rightCoverRect = CGRectMake(0, ly, screenWidth, leftCoverImage!.size.height * xScale)
+        let rightCoverRect = CGRectMake(0, ly, screenWidth, rightCoverImage!.size.height * xScale)
         
         rightCover.frame = rightCoverRect
         leftCover.frame = leftCoverRect
     }
-   /*
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if opened {
-            closeBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
-                self.opened = false
-            })
-        } else {
-            openBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
-                self.opened = true
-            })
-        }
-    }*/
+
     
     
 }
