@@ -13,14 +13,13 @@ import UIKit
 class Player : NSObject {
     //var playerName:String!
     var playerIdentifier:String!
-    var coins:Int!
+    var coins:Int = 0
     var x:Double!
     var y:Double!
     var avatar : String?
     var nodeSprite : SKNode?
     var color = UIColor()
-    var pull = 1
-    var push = 1
+    var items:[AnyObject] = []
     
 //    init(posX: Double, posY: Double) {
 //        self.x = posX;

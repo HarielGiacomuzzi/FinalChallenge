@@ -112,8 +112,18 @@ class PlayerControllerScene: SKScene {
     
     
     func updateMoney(value:Int) {
+        moneyButton.updateNumber(value)
+    }
+    
+    func updateLoot(value:Int) {
+        lootButton.updateNumber(value)
+    }
+    
+    func addCard(card:AnyObject) {
         
     }
+    
+//    func useCard
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         

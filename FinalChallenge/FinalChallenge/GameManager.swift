@@ -117,7 +117,7 @@ class GameManager {
         }
         
         print("O ELEMENTO ESCOLHIDO  R A N D O M I C A M E N T E  FOI O \(minigame.rawValue)")
-        var dic = ["openController":"", "gameName":minigame.rawValue]
+        let dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
 
@@ -182,9 +182,11 @@ class GameManager {
         print("Cheguei aqui :P");
     }
     
-    func updatePlayerMoney(playerID:String, value:Int) {
-        let playerData = ["player":playerID, "value": value]
+    func updatePlayerMoney(player:Player, value:Int) {
+        player.coins += value
+        let playerData = ["player":player.playerIdentifier, "value": player.coins]
         let dic = ["updateMoney":" ", "dataDic" : playerData]
+        
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     

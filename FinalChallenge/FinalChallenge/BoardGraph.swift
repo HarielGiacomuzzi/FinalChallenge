@@ -114,6 +114,23 @@ class BoardGraph : NSObject{
         return false;
     }
     
+    //removes item from node and adds item to player
+    //sends message to player phone to update item
+    
+    func pickItem(nodeName : String, player:Player) -> Bool{
+        if haveItem(nodeName) {
+            player.items.append((nodes[nodeName]?.item)!)
+            
+            let cardData = ["player":player.playerIdentifier, "item": player.items]
+            let dic = ["updateCards":" ", "dataDic" : cardData]
+            
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+            nodes[nodeName]?.item = nil
+            return true
+        }
+        return false;
+    }
+    
     
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
         var lista : [BoardNode] = [];

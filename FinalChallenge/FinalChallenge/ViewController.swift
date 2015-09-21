@@ -100,7 +100,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         
     }
     @IBAction func botaoDeTeste(sender: AnyObject) {
-        GameManager.sharedInstance.updatePlayerMoney(testTextField.text!, value: 15)
+        GameManager.sharedInstance.updatePlayerMoney(GameManager.sharedInstance.players.first!, value: 15)
 
     }
     

@@ -20,6 +20,7 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerTurn:", name: "ConnectionManager_PlayerTurn", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateCards", object: nil)
         
         scene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
         
@@ -62,6 +63,20 @@ class iPhonePlayerViewController: UIViewController {
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             print("update moneys para \(value)")
+            scene?.updateMoney(value)
+        } else {
+            print("nao rola filho")
+        }
+    }
+    
+    func updateCards(data : NSNotification) {
+        let dic = data.userInfo!["dataDic"] as! NSDictionary
+        let playerName = dic["player"] as! String
+        let card = dic["item"] as! [AnyObject]
+        print("mensagem para \(playerName)")
+        print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
+        if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
+            scene!.addCard(card)
         } else {
             print("nao rola filho")
         }
