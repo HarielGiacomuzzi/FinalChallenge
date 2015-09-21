@@ -111,28 +111,32 @@ class CardCarouselNode: SKNode {
     
     func insertCard(card:SKSpriteNode) {
         cards.append(card)
-        card.position = leftPoint
-        card.setScale(0.75)
+        if cards.count == 1 {
+            card.position = centerPoint
+            card.setScale(1.0)
+        } else {
+            card.position = leftPoint
+            card.setScale(0.75)
+        }
         addChild(card)
         fixCardsZPosition()
     }
     
     func removeCard() {
-        guard cards.count > 0 else {
+        guard !cards.isEmpty else {
             return
         }
         cards[centerIndex].removeFromParent()
         cards.removeAtIndex(centerIndex)
-        if centerIndex >= cards.count {
+        if centerIndex >= cards.count && !cards.isEmpty {
             centerIndex = cards.count - 1
         }
-        if cards.count > 0 {
+        if !cards.isEmpty {
             let centerCard = cards[centerIndex]
             centerCard.position = centerPoint
             centerCard.setScale(1.0)
             fixCardsZPosition()
         }
-
     }
     
     // MARK: - Auxiliar Functions

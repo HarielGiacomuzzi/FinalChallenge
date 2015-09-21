@@ -49,14 +49,12 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
             scene = FlappyGameScene(size: CGSize(width: 1024, height: 768))
         case .BombGame:
             scene = BombTGameScene(size: CGSize(width: 1024, height: 768))
-        default:
-            print("porraaaa")
         }
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-        skView.showsPhysics = false
+        skView.showsPhysics = true
         scene.gameController = self
         scene.scaleMode = .AspectFit
         skView.presentScene(scene)
