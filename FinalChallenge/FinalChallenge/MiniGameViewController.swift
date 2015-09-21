@@ -49,8 +49,6 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
             scene = FlappyGameScene(size: CGSize(width: 1024, height: 768))
         case .BombGame:
             scene = BombTGameScene(size: CGSize(width: 1024, height: 768))
-        default:
-            print("porraaaa")
         }
         let skView = view as! SKView
         skView.showsFPS = true

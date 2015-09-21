@@ -183,7 +183,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         // if there's a whoIs request
             if message.valueForKey("whoIs") != nil && message.valueForKey("whoIs") as! String  ==  "iPad" {
                 if self.isIpad{
-                    var response = ["peer" : self.peerID!, "whoIs" : "response", "peerRequested" : "iPad"]
+                    let response = ["peer" : self.peerID!, "whoIs" : "response", "peerRequested" : "iPad"]
                     self.sendDictionaryToPeer(response, reliable: true);
                 }
                 return

@@ -28,7 +28,6 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             
             if i.1.nextMoves.count > 1 {
                 texture = partsAtlas.textureNamed("square2");
-            
             }
             
             let x = SKSpriteNode(texture: texture)

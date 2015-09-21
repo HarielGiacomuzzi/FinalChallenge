@@ -29,6 +29,6 @@ class iPhoneDiceViewController: UIViewController {
         aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
         ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
         print("mandei")
-        self.navigationController?.popViewControllerAnimated(true);
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
 }

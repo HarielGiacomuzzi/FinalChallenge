@@ -31,9 +31,11 @@ class PlayerButtonNode: SKNode {
 
         for i in 0...22 {
             animationArray.append(SKTexture(imageNamed: "buttonAnimation\(i)"))
+                                print("botei as texturas")
         }
         background = SKSpriteNode(texture: animationArray[0])
         if !openRight {
+                                print("virei as texturas")
             background.xScale = -1.0
         }
 
@@ -60,11 +62,12 @@ class PlayerButtonNode: SKNode {
     }
     
     func setupText() {
+        
         number = SKLabelNode(text: "555")
         if openRight {
             number.position = CGPointMake(background.position.x + background.size.width - button.size.width - 20, background.position.y)
         } else {
-            number.position = CGPointMake(background.position.x - background.size.width + button.size.width + 20, background.position.y)
+            number.position = CGPointMake(background.position.x - background.size.width.mod() + button.size.width + 20, background.position.y)
         }
 
         number.hidden = true
@@ -81,10 +84,13 @@ class PlayerButtonNode: SKNode {
             let leftButtonLeftPoint = button.position.x - button.size.width/2
             let leftButtonTopPoint = button.position.y + button.size.height/2
             background.position = CGPointMake(leftButtonLeftPoint + background.size.width/2, (leftButtonTopPoint - background.size.height/2) + 15)
+                        print(background.position)
         } else {
-            let rightButtonRightPoint = button.position.x + button.size.width/2
             let rightButtonTopPoint = button.position.y + button.size.height/2
-            background.position = CGPointMake(rightButtonRightPoint - background.size.width/2, (rightButtonTopPoint - background.size.height/2) + 15)
+            let rightButtonRightPoint = button.position.x + button.size.width/2
+            print(rightButtonRightPoint)
+            print(background.size.width/2)
+            background.position = CGPointMake(rightButtonRightPoint - background.size.width.mod()/2, (rightButtonTopPoint - background.size.height/2) + 15)
         }
         
         background.zPosition = 2
