@@ -108,10 +108,28 @@ class BoardGraph : NSObject{
     }
     
     // sets the item of a node, return true if it was successfull and false otherwise
-    func setItem(Item : NSObject, nodeName : String) ->Bool{
+    func setItem(Item : Card, nodeName : String) ->Bool{
         if !haveItem(nodeName){
             nodes[nodeName]?.item = Item;
             return true;
+        }
+        return false;
+    }
+    
+    //removes item from node and adds item to player
+    //sends message to player phone to update item
+    
+    func pickItem(nodeName : String, player:Player) -> Bool{
+        if haveItem(nodeName) {
+            let card = nodes[nodeName]!.item
+            player.items.append(card!)
+
+            let cardData = ["player":player.playerIdentifier, "item": card!.name]
+            let dic = ["updateCards":" ", "dataDic" : cardData]
+
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+            nodes[nodeName]?.item = nil
+            return true
         }
         return false;
     }
@@ -164,7 +182,7 @@ class BoardGraph : NSObject{
         var nextMoves : [BoardNode] = [];
         var posX = 0.0;
         var posY = 0.0;
-        var item : NSObject?
+        var item : Card?
         var nextNames : [String] = [];
         var currentPlayers : [Player] = [];
         var father : BoardNode?

@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class PlayerControllerScene: SKScene {
+class PlayerControllerScene: SKScene, CardCarousellDelegate {
     
     var moneyButton : PlayerButtonNode!
     var lootButton : PlayerButtonNode!
@@ -19,13 +19,13 @@ class PlayerControllerScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         
-        let card1 = SKSpriteNode(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
-        let card2 = SKSpriteNode(texture: nil, color: UIColor.greenColor(), size: CGSize(width: 375, height: 540))
-        let card3 = SKSpriteNode(texture: nil, color: UIColor.redColor(), size: CGSize(width: 375, height: 540))
-        let card4 = SKSpriteNode(texture: nil, color: UIColor.whiteColor(), size: CGSize(width: 375, height: 540))
+        let card1 = CardSprite(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
+        let card2 = CardSprite(texture: nil, color: UIColor.greenColor(), size: CGSize(width: 375, height: 540))
+        let card3 = CardSprite(texture: nil, color: UIColor.redColor(), size: CGSize(width: 375, height: 540))
+        let card4 = CardSprite(texture: nil, color: UIColor.whiteColor(), size: CGSize(width: 375, height: 540))
         
         let cards = [card1,card2,card3,card4]
-        
+
         let backgroundTexture = SKTexture(imageNamed: "backscreen")
         let background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPointMake(frame.size.width / 2, frame.size.height  / 2)
@@ -40,6 +40,7 @@ class PlayerControllerScene: SKScene {
         carousel = CardCarouselNode(cardsArray: cards, startIndex: 0)
         carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 2)
         carousel.zPosition = 30
+        carousel.delegate = self
         self.addChild(carousel)
 
     }
@@ -112,6 +113,25 @@ class PlayerControllerScene: SKScene {
     
     
     func updateMoney(value:Int) {
+        moneyButton.updateNumber(value)
+    }
+    
+    func updateLoot(value:Int) {
+        lootButton.updateNumber(value)
+    }
+    
+    func addCard(card:String) {
+        let cardSprite = CardSprite(card: card)
+        carousel.insertCard(cardSprite)
+        
+    }
+    
+    func sendCard(card: SKSpriteNode) {
+        let sentCardSprite = card as! CardSprite
+        let sentCard = sentCardSprite.card
+        let cardData = ["player":playerName, "item": sentCard]
+        let dic = ["sendCard":" ", "dataDic" : cardData]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
     }
     

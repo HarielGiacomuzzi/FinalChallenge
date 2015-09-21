@@ -67,7 +67,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         if (reliable){
             do {
                 try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-            } catch var error1 as NSError {
+            } catch let error1 as NSError {
                 error.memory = error1
             } catch {
                 fatalError()
@@ -76,7 +76,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         
         do {
             try self.session.sendData(message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!, toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable)
-        } catch var error1 as NSError {
+        } catch let error1 as NSError {
             error.memory = error1
         } catch {
             fatalError()
@@ -96,7 +96,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
     
     //sends a stream to the iPad
     func getStreamToIpad(streamName : String)-> NSOutputStream?{
-            let error = NSErrorPointer();
+            _ = NSErrorPointer();
             if self.iPadPeer == nil{
                 self.getIpadPeer();
                 return nil;
@@ -249,6 +249,18 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
                 print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateMoney", object: nil, userInfo: userInfo)
+                return
+            }
+        // update player cards
+            if message.valueForKey("updateCards") != nil {
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateCards", object: nil, userInfo: userInfo)
+                return
+            }
+            if message.valueForKey("sendCard") != nil {
+                print(message)
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_SendCard", object: nil, userInfo: userInfo)
                 return
             }
         }

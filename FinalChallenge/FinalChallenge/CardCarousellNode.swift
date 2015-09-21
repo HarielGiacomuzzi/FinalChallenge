@@ -20,6 +20,7 @@ class CardCarouselNode: SKNode {
     var canRemoveWithSwipeUp = true
     var firstTouch = false
     var movingUp = false
+    var delegate:CardCarousellDelegate?
     
     // MARK: - Initialization
     
@@ -145,6 +146,8 @@ class CardCarouselNode: SKNode {
     
     // MARK: - Add/Remove Cards
     
+    
+    
     func insertCard(card:SKSpriteNode) {
         cards.append(card)
         if cards.count == 1 {
@@ -160,8 +163,10 @@ class CardCarouselNode: SKNode {
     
     func removeCard() {
         if !cards.isEmpty {
+            delegate?.sendCard(cards[centerIndex])
             cards[centerIndex].removeFromParent()
             cards.removeAtIndex(centerIndex)
+
             if !cards.isEmpty {
                 if centerIndex >= cards.count {
                     centerIndex = cards.count - 1
@@ -211,4 +216,6 @@ class CardCarouselNode: SKNode {
             
         }
     }
+    
+    
 }

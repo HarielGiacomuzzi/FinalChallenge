@@ -26,6 +26,8 @@
 		4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4473647C1B9A065400C8AD9D /* puffGame.atlas */; };
 		4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */; };
 		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
+		5E1C59C91BB0771200BCDE1C /* CardSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C59C81BB0771200BCDE1C /* CardSprite.swift */; settings = {ASSET_TAGS = (); }; };
+		5E1C59CB1BB07B1200BCDE1C /* CardCarousellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C59CA1BB07B1200BCDE1C /* CardCarousellDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
 		5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E60396B1B84F03100F63DC3 /* bubble.atlas */; };
@@ -48,6 +50,9 @@
 		5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */; };
 		B503E3F41BAB2FA400C6284A /* GameOverSceneMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */; settings = {ASSET_TAGS = (); }; };
 		B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51663EE1B7D0D720040A1B4 /* GamePadController.swift */; };
+		B5279F8B1BB06C220015DBE7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8A1BB06C220015DBE7 /* Card.swift */; settings = {ASSET_TAGS = (); }; };
+		B5279F8D1BB06CB00015DBE7 /* ActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */; settings = {ASSET_TAGS = (); }; };
+		B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */; settings = {ASSET_TAGS = (); }; };
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
 		B57B33671B86566E000E5F53 /* GameOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57B33661B86566E000E5F53 /* GameOver.xib */; };
 		B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B33681B8656D7000E5F53 /* GameOverXib.swift */; };
@@ -133,6 +138,8 @@
 		4473647C1B9A065400C8AD9D /* puffGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = puffGame.atlas; sourceTree = "<group>"; };
 		4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuffPlayer.swift; sourceTree = "<group>"; };
 		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
+		5E1C59C81BB0771200BCDE1C /* CardSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSprite.swift; sourceTree = "<group>"; };
+		5E1C59CA1BB07B1200BCDE1C /* CardCarousellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCarousellDelegate.swift; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
 		5E60396B1B84F03100F63DC3 /* bubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bubble.atlas; sourceTree = "<group>"; };
@@ -155,6 +162,9 @@
 		5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneMP.swift; sourceTree = "<group>"; };
 		B51663EE1B7D0D720040A1B4 /* GamePadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadController.swift; sourceTree = "<group>"; };
+		B5279F8A1BB06C220015DBE7 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveCard.swift; sourceTree = "<group>"; };
+		B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotActiveCard.swift; sourceTree = "<group>"; };
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
 		B57B33661B86566E000E5F53 /* GameOver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameOver.xib; sourceTree = "<group>"; };
 		B57B33681B8656D7000E5F53 /* GameOverXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverXib.swift; sourceTree = "<group>"; };
@@ -251,6 +261,7 @@
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E840FFF1BA9CC000099B16B /* PlayerControllerScene.swift */,
 				5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */,
+				5E1C59C81BB0771200BCDE1C /* CardSprite.swift */,
 			);
 			name = PlayerControllerView;
 			sourceTree = "<group>";
@@ -334,6 +345,16 @@
 			name = Minigames;
 			sourceTree = "<group>";
 		};
+		B5279F891BB06C0B0015DBE7 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				B5279F8A1BB06C220015DBE7 /* Card.swift */,
+				B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */,
+				B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */,
+			);
+			name = Cards;
+			sourceTree = "<group>";
+		};
 		B5DD1B451B8F6D8300AA1EB6 /* Pads */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,6 +403,7 @@
 		B5F60BBC1B83C35800786728 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B5279F891BB06C0B0015DBE7 /* Cards */,
 				B5F60BBD1B83C36C00786728 /* Player.swift */,
 			);
 			name = Model;
@@ -464,6 +486,7 @@
 				4445D7C41B98C99F0049B787 /* AlertPath.swift */,
 				5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */,
 				5E840FFD1BA9CBB00099B16B /* CardCarousellNode.swift */,
+				5E1C59CA1BB07B1200BCDE1C /* CardCarousellDelegate.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -643,6 +666,7 @@
 				B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */,
 				B5AFAD0C1B94CC7F0005F19E /* PartyModeViewController.swift in Sources */,
 				5E68DAAB1BA9ECCB00DB14FB /* PlayerButtonNode.swift in Sources */,
+				B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */,
 				5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */,
 				5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */,
 				DBE862071B8552C800C8099E /* MainBoard.swift in Sources */,
@@ -660,6 +684,7 @@
 				B5AFAD0F1B9608F70005F19E /* PartyModeScene.swift in Sources */,
 				5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */,
 				B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */,
+				B5279F8D1BB06CB00015DBE7 /* ActiveCard.swift in Sources */,
 				B5AFAD131B9F47CF0005F19E /* MinigameGameOverControllerSinglePlayer.swift in Sources */,
 				5E70C7D31B9A0DB1005C753B /* NoAnimationSegue.swift in Sources */,
 				DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */,
@@ -670,9 +695,11 @@
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				5E840FFE1BA9CBB00099B16B /* CardCarousellNode.swift in Sources */,
+				5E1C59CB1BB07B1200BCDE1C /* CardCarousellDelegate.swift in Sources */,
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,
+				B5279F8B1BB06C220015DBE7 /* Card.swift in Sources */,
 				B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */,
 				5E68AD7B1B8CCD3E00FD4404 /* BombPlayerNode.swift in Sources */,
 				B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */,
@@ -685,6 +712,7 @@
 				B503E3F41BAB2FA400C6284A /* GameOverSceneMP.swift in Sources */,
 				4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */,
 				DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */,
+				5E1C59C91BB0771200BCDE1C /* CardSprite.swift in Sources */,
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,
 				DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */,
 				B5F60BBE1B83C36C00786728 /* Player.swift in Sources */,
