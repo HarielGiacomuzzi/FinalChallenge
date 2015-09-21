@@ -97,6 +97,13 @@ class BoardGraph : NSObject{
         return false;
     }
     
+    func wasUsed(nodeName:String)->Bool{
+        if nodes[nodeName]?.item!.used == true{
+            return true
+        }
+        return false
+    }
+    
     // returns the item of the specified node or nil if there's no item on that node
     func getItem(nodeName : String) -> NSObject?{
         if haveItem(nodeName) {
@@ -119,18 +126,27 @@ class BoardGraph : NSObject{
     
     func pickItem(nodeName : String, player:Player) -> Bool{
         if haveItem(nodeName) {
-            player.items.append((nodes[nodeName]?.item)!)
+            if !wasUsed(nodeName){
+                player.items.append((nodes[nodeName]?.item)!)
             
-            let cardData = ["player":player.playerIdentifier, "item": player.items]
-            let dic = ["updateCards":" ", "dataDic" : cardData]
+                let cardData = ["player":player.playerIdentifier, "item": player.items]
+                let dic = ["updateCards":" ", "dataDic" : cardData]
             
-            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-            nodes[nodeName]?.item = nil
+                ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+                nodes[nodeName]?.item = nil
+            } else{
+                // caso a carta ja tenha sido usada ela ativa seu efeito
+                self.activateCard(nodeName)
+            }
             return true
         }
         return false;
     }
     
+    // activate cards funcions
+    func activateCard(cardName:String){
+        
+    }
     
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
         var lista : [BoardNode] = [];
