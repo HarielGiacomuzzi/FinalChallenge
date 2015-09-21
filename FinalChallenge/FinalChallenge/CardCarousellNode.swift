@@ -17,6 +17,9 @@ class CardCarouselNode: SKNode {
     var leftPoint = CGPointMake(0.0, 0.0)
     var rightPoint = CGPointMake(0.0, 0.0)
     var centerIndex:Int = 0
+    var canRemoveWithSwipeUp = true
+    var firstTouch = false
+    var movingUp = false
     
     // MARK: - Initialization
     
@@ -28,7 +31,6 @@ class CardCarouselNode: SKNode {
         userInteractionEnabled = true
         centerPoint = CGPointMake(0, 0)
         
-        //change left and right points to change distance between cards
         leftPoint = CGPointMake(centerPoint.x - cards[0].size.width * 0.75, centerPoint.y)
         rightPoint = CGPointMake(centerPoint.x + cards[0].size.width * 0.75, centerPoint.y)
         
@@ -65,14 +67,19 @@ class CardCarouselNode: SKNode {
             
             let location = touch.locationInNode(self)
             touchedPoint = location
+            firstTouch = true
         }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-            let centerCard = cards[centerIndex]
+        let centerCard = cards[centerIndex]
+        if centerCard.position.y > centerPoint.y {
+            removeCard()
+        } else {
             centerCard.position = centerPoint
             centerCard.setScale(1.0)
             fixCardsZPosition()
+        }
 
     }
     
@@ -80,30 +87,59 @@ class CardCarouselNode: SKNode {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             let changeInX = location.x - touchedPoint.x
+            let changeInY = location.y - touchedPoint.y
             let centerCard = cards[centerIndex]
             
             fixCardsZPosition()
             fixScale(centerCard)
             
-            let newPos = centerCard.position.x + changeInX
-            
-            if newPos > rightPoint.x {
-                centerCard.position = rightPoint
-                centerCard.setScale(0.75)
-                if centerCard != cards.last {
-                    centerIndex++
+
+            if firstTouch && canRemoveWithSwipeUp {
+                if changeInX.mod() > changeInY {
+                    movingUp = false
+                } else {
+                    movingUp = true
                 }
-            } else if newPos < leftPoint.x {
-                centerCard.position = leftPoint
-                centerCard.setScale(0.75)
-                if centerCard != cards.first {
-                    centerIndex--
-                }
-            } else {
-                centerCard.position.x = newPos
             }
             
+            if movingUp {
+                moveUp(centerCard.position.y + changeInY)
+            } else {
+                moveSideways(centerCard.position.x + changeInX)
+            }
+
+            firstTouch = false
             touchedPoint = location
+        }
+    }
+    
+    // MARK: - Card Movement
+    
+    func moveUp(newPos:CGFloat) {
+        let centerCard = cards[centerIndex]
+        if newPos > centerPoint.y {
+            centerCard.position.y = newPos
+        } else {
+            centerCard.position = centerPoint
+        }
+    }
+    
+    func moveSideways(newPos:CGFloat) {
+        let centerCard = cards[centerIndex]
+        if newPos > rightPoint.x {
+            centerCard.position = rightPoint
+            centerCard.setScale(0.75)
+            if centerCard != cards.last {
+                centerIndex++
+            }
+        } else if newPos < leftPoint.x {
+            centerCard.position = leftPoint
+            centerCard.setScale(0.75)
+            if centerCard != cards.first {
+                centerIndex--
+            }
+        } else {
+            centerCard.position.x = newPos
         }
     }
     
@@ -123,20 +159,20 @@ class CardCarouselNode: SKNode {
     }
     
     func removeCard() {
-        guard !cards.isEmpty else {
-            return
-        }
-        cards[centerIndex].removeFromParent()
-        cards.removeAtIndex(centerIndex)
-        if centerIndex >= cards.count && !cards.isEmpty {
-            centerIndex = cards.count - 1
-        }
         if !cards.isEmpty {
-            let centerCard = cards[centerIndex]
-            centerCard.position = centerPoint
-            centerCard.setScale(1.0)
-            fixCardsZPosition()
+            cards[centerIndex].removeFromParent()
+            cards.removeAtIndex(centerIndex)
+            if !cards.isEmpty {
+                if centerIndex >= cards.count {
+                    centerIndex = cards.count - 1
+                }
+                let centerCard = cards[centerIndex]
+                centerCard.position = centerPoint
+                centerCard.setScale(1.0)
+                fixCardsZPosition()
+            }
         }
+        
     }
     
     // MARK: - Auxiliar Functions

@@ -62,16 +62,12 @@ class PlayerButtonNode: SKNode {
     }
     
     func setupText() {
-        var realBackgroundWidth = background.size.width
-        if realBackgroundWidth < 0 {
-            realBackgroundWidth = realBackgroundWidth * -1
-        }
         
         number = SKLabelNode(text: "555")
         if openRight {
             number.position = CGPointMake(background.position.x + background.size.width - button.size.width - 20, background.position.y)
         } else {
-            number.position = CGPointMake(background.position.x - realBackgroundWidth + button.size.width + 20, background.position.y)
+            number.position = CGPointMake(background.position.x - background.size.width.mod() + button.size.width + 20, background.position.y)
         }
 
         number.hidden = true
@@ -84,11 +80,6 @@ class PlayerButtonNode: SKNode {
     func openBackground() {
         let action = SKAction.animateWithTextures(animationArray, timePerFrame: 0.025)
         
-        var realBackgroundWidth = background.size.width
-        if realBackgroundWidth < 0 {
-            realBackgroundWidth = realBackgroundWidth * -1
-        }
-        
         if openRight {
             let leftButtonLeftPoint = button.position.x - button.size.width/2
             let leftButtonTopPoint = button.position.y + button.size.height/2
@@ -99,7 +90,7 @@ class PlayerButtonNode: SKNode {
             let rightButtonRightPoint = button.position.x + button.size.width/2
             print(rightButtonRightPoint)
             print(background.size.width/2)
-            background.position = CGPointMake(rightButtonRightPoint - realBackgroundWidth/2, (rightButtonTopPoint - background.size.height/2) + 15)
+            background.position = CGPointMake(rightButtonRightPoint - background.size.width.mod()/2, (rightButtonTopPoint - background.size.height/2) + 15)
         }
         
         background.zPosition = 2
