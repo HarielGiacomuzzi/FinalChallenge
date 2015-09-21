@@ -10,10 +10,13 @@ import Foundation
 
 class NotActiveCard : Card {
     
+    var endGameValue = Int()
+    
     override init() {
         super.init()
         self.usable = false
         self.storeValue = 100
+        self.endGameValue = 200
     }
     
 }

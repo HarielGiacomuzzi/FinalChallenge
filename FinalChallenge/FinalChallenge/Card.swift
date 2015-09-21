@@ -10,7 +10,8 @@ import Foundation
 
 class Card : NSObject{
     var usable = Bool()
+    var used = Bool()
     var storeValue = Int()
-    var player = Player()
+    var cardOwner = Player()
     var imageName = String()
 }
