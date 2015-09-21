@@ -16,7 +16,7 @@ class GameOverSceneMP : MinigameScene {
     
     override func didMoveToView(view: SKView) {
         
-        self.backgroundColor = UIColor.blueColor()
+        self.backgroundColor = UIColor.redColor()
         var back = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         back.text = "Back to Board"
         back.name = "Back to Board"

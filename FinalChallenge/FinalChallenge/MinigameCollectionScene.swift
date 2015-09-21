@@ -16,6 +16,8 @@ class MinigameCollectionScene : SKScene{
     
     override func didMoveToView(view: SKView) {
         
+        self.backgroundColor = UIColor.blackColor()
+        
         let minigameTitle = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         minigameTitle.text = "Minigame Collection"
         minigameTitle.name = "Minigame Collection"
@@ -37,6 +39,13 @@ class MinigameCollectionScene : SKScene{
             
             self.addChild(sprite)
         }
+        
+        let backButton = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        backButton.text = "Back"
+        backButton.name = "Back"
+        backButton.position = CGPointMake(self.size.width/2, 100)
+        self.addChild(backButton)
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -53,6 +62,13 @@ class MinigameCollectionScene : SKScene{
             if touchedNode.name == "BombGame" {
                 viewController.gameSelected("bomb")
             }
+            
+            if touchedNode.name == "Back" {
+                self.removeAllChildren()
+                self.removeAllActions()
+                viewController.backToMain()
+            }
         }
     }
+    
 }

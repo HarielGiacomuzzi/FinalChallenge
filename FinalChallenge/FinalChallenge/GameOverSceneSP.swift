@@ -30,6 +30,8 @@ class GameOverSceneSP : MinigameScene{
     //sets flappyfish game over scene
     func setupFlappyFishGameOver(){
         
+        print("entrou aqui ta sacando 2")
+        
         let restartGame = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         restartGame.text = "Restart Game"
         restartGame.name = "Restart Game"
@@ -78,7 +80,7 @@ class GameOverSceneSP : MinigameScene{
             let touchedNode = self.nodeAtPoint(location)
             
             if touchedNode.name == "Restart Game" {
-                let transition = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
+                //let transition = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
                 var scene = MinigameScene()
                 switch(game){
                 case "fish":  scene = FlappyGameScene(size: self.scene!.size)
@@ -87,7 +89,7 @@ class GameOverSceneSP : MinigameScene{
                 }
                 
                 scene.scaleMode = SKSceneScaleMode.AspectFit
-                self.scene!.view!.presentScene(scene, transition: transition)
+                self.scene!.view!.presentScene(scene)
             }
             
             if touchedNode.name == "Return MinigameScene" {
