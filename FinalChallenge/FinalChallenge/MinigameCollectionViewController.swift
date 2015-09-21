@@ -80,8 +80,9 @@ class MinigameCollectionViewController : UIViewController {
                 ()
             }
         }
-        
     }
     
-    
+    func backToMain(){
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

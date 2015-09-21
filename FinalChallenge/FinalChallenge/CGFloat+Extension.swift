@@ -85,6 +85,14 @@ public extension CGFloat {
     public static func randomSign() -> CGFloat {
         return (arc4random_uniform(2) == 0) ? 1.0 : -1.0
     }
+    
+    public func mod() -> CGFloat {
+        if self >= 0 {
+            return self
+        } else {
+            return self * -1
+        }
+    }
 }
 
 /**
