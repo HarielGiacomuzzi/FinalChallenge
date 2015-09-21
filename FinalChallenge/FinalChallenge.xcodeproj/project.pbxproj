@@ -26,6 +26,8 @@
 		4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4473647C1B9A065400C8AD9D /* puffGame.atlas */; };
 		4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */; };
 		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
+		5E1C59C91BB0771200BCDE1C /* CardSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C59C81BB0771200BCDE1C /* CardSprite.swift */; settings = {ASSET_TAGS = (); }; };
+		5E1C59CB1BB07B1200BCDE1C /* CardCarousellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C59CA1BB07B1200BCDE1C /* CardCarousellDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
 		5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E60396B1B84F03100F63DC3 /* bubble.atlas */; };
@@ -135,6 +137,8 @@
 		4473647C1B9A065400C8AD9D /* puffGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = puffGame.atlas; sourceTree = "<group>"; };
 		4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuffPlayer.swift; sourceTree = "<group>"; };
 		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
+		5E1C59C81BB0771200BCDE1C /* CardSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSprite.swift; sourceTree = "<group>"; };
+		5E1C59CA1BB07B1200BCDE1C /* CardCarousellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCarousellDelegate.swift; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
 		5E60396B1B84F03100F63DC3 /* bubble.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bubble.atlas; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E840FFF1BA9CC000099B16B /* PlayerControllerScene.swift */,
 				5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */,
+				5E1C59C81BB0771200BCDE1C /* CardSprite.swift */,
 			);
 			name = PlayerControllerView;
 			sourceTree = "<group>";
@@ -479,6 +484,7 @@
 				4445D7C41B98C99F0049B787 /* AlertPath.swift */,
 				5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */,
 				5E840FFD1BA9CBB00099B16B /* CardCarousellNode.swift */,
+				5E1C59CA1BB07B1200BCDE1C /* CardCarousellDelegate.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -685,6 +691,7 @@
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				5E840FFE1BA9CBB00099B16B /* CardCarousellNode.swift in Sources */,
+				5E1C59CB1BB07B1200BCDE1C /* CardCarousellDelegate.swift in Sources */,
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,
@@ -701,6 +708,7 @@
 				B503E3F41BAB2FA400C6284A /* GameOverSceneMP.swift in Sources */,
 				4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */,
 				DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */,
+				5E1C59C91BB0771200BCDE1C /* CardSprite.swift in Sources */,
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,
 				DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */,
 				B5F60BBE1B83C36C00786728 /* Player.swift in Sources */,

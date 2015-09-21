@@ -119,11 +119,12 @@ class BoardGraph : NSObject{
     
     func pickItem(nodeName : String, player:Player) -> Bool{
         if haveItem(nodeName) {
-            player.items.append((nodes[nodeName]?.item)!)
-            
-            let cardData = ["player":player.playerIdentifier, "item": player.items]
+            let card = nodes[nodeName]!.item
+            player.items.append(card!)
+
+            let cardData = ["player":player.playerIdentifier, "item": card!.name]
             let dic = ["updateCards":" ", "dataDic" : cardData]
-            
+
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
             nodes[nodeName]?.item = nil
             return true

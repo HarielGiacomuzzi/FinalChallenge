@@ -72,7 +72,7 @@ class iPhonePlayerViewController: UIViewController {
     func updateCards(data : NSNotification) {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
         let playerName = dic["player"] as! String
-        let card = dic["item"] as! [AnyObject]
+        let card = dic["item"] as! String
         print("mensagem para \(playerName)")
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
