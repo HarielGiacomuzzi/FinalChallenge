@@ -182,12 +182,21 @@ class GameManager {
         print("Cheguei aqui :P");
     }
     
-    func updatePlayerMoney(player:Player, value:Int) {
-        player.coins += value
+    func updatePlayerMoney(player:Player, value:Int) ->Int{
+        var aux = 0
+        if value < 0 && player.coins < abs(value) {
+            aux = player.coins
+            player.coins = 0
+        }else{
+            aux = abs(value)
+            player.coins += value
+        }
         let playerData = ["player":player.playerIdentifier, "value": player.coins]
         let dic = ["updateMoney":" ", "dataDic" : playerData]
         
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        
+        return aux
     }
     
 }
