@@ -10,6 +10,8 @@ import Foundation
 
 class ActiveCard :Card {
     
+    var used = Bool()
+    
     override init() {
         super.init()
         self.usable = true

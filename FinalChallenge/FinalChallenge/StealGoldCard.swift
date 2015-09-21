@@ -12,6 +12,11 @@ class StealGoldCard : ActiveCard{
     
     var stealValue = 100
     
+    override init() {
+        super.init()
+        self.cardName = "StealGoldCard"
+    }
+    
     override func activate(targetPlayer:Player) {
         self.stealCard(targetPlayer)
     }

@@ -9,8 +9,8 @@
 import Foundation
 
 class Card : NSObject{
+    var cardName = String()
     var usable = Bool()
-    var used = Bool()
     var storeValue = Int()
     var cardOwner = Player()
     var imageName = String()

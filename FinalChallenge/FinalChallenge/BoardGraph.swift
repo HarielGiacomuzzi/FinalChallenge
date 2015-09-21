@@ -97,8 +97,16 @@ class BoardGraph : NSObject{
         return false;
     }
     
+    func isUsable(nodeName:String)->Bool{
+        if nodes[nodeName]?.item!.usable == true{
+            return true
+        }
+        return false
+    }
+    
     func wasUsed(nodeName:String)->Bool{
-        if nodes[nodeName]?.item!.used == true{
+        let card = nodes[nodeName]?.item as! ActiveCard
+        if card.used == true{
             return true
         }
         return false
@@ -121,22 +129,31 @@ class BoardGraph : NSObject{
         return false;
     }
     
+    func sendCardToPlayer(nodeName : String, player:Player){
+        player.items.append((nodes[nodeName]?.item)!)
+        
+        let cardData = ["player":player.playerIdentifier, "item": player.items]
+        let dic = ["updateCards":" ", "dataDic" : cardData]
+        
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        nodes[nodeName]?.item = nil
+    }
+    
     //removes item from node and adds item to player
     //sends message to player phone to update item
     
     func pickItem(nodeName : String, player:Player) -> Bool{
         if haveItem(nodeName) {
-            if !wasUsed(nodeName){
-                player.items.append((nodes[nodeName]?.item)!)
-            
-                let cardData = ["player":player.playerIdentifier, "item": player.items]
-                let dic = ["updateCards":" ", "dataDic" : cardData]
-            
-                ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-                nodes[nodeName]?.item = nil
+            if !isUsable(nodeName){
+                self.sendCardToPlayer(nodeName, player: player)
             } else{
-                // caso a carta ja tenha sido usada ela ativa seu efeito
-                self.activateCard(nodeName)
+                if !wasUsed(nodeName){
+                    self.sendCardToPlayer(nodeName, player: player)
+                } else{
+                    // caso a carta ja tenha sido usada ela ativa seu efeito
+                    self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
+                    nodes[nodeName]?.item = nil
+                }
             }
             return true
         }
@@ -144,8 +161,13 @@ class BoardGraph : NSObject{
     }
     
     // activate cards funcions
-    func activateCard(cardName:String){
-        
+    func activateCard(card:ActiveCard, targetPlayer:Player){
+        switch(card.cardName){
+            // each card has a type and a name, convert the card to its type by its name
+            case "StealGoldCard" :  let actionCard = card as! StealGoldCard
+                                    actionCard.activate(targetPlayer)
+            default: break
+        }
     }
     
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
