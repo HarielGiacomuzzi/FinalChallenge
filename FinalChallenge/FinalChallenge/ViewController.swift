@@ -20,6 +20,8 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         ConnectionManager.sharedInstance.setupBrowser();
         ConnectionManager.sharedInstance.browser?.delegate = self;
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "whoisResponse:", name: "ConnectionManager_WhoIsResponse", object: nil);
+        
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveCard:", name: "ConnectionManager_sendCard", object: nil);
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,7 +70,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
 
     @IBAction func loadBoard(sender: AnyObject) {
-        BoardGraph.SharedInstance.loadBoard("board_2");
+        BoardGraph.SharedInstance.loadBoard("board_3");
     }
     
     
@@ -100,8 +102,17 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         
     }
     @IBAction func botaoDeTeste(sender: AnyObject) {
-        GameManager.sharedInstance.updatePlayerMoney(GameManager.sharedInstance.players.first!, value: 15)
+//        GameManager.sharedInstance.updatePlayerMoney(GameManager.sharedInstance.players.first!, value: 15)
+        
+        let cardData = ["player":GameManager.sharedInstance.players.first!.playerIdentifier, "item": "oi"]
+        let dic = ["updateCards":" ", "dataDic" : cardData]
+        
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
 
+    }
+    
+    func receiveCard(data : NSNotification) {
+        print("recebi algo")
     }
     
 }

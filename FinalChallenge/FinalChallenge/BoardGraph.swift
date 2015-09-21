@@ -34,7 +34,9 @@ class BoardGraph : NSObject{
     func setNeighborsReference(){
         for aux in nodes{
             for x in aux.1.nextNames{
-                aux.1.nextMoves.append(nodes[x]!)
+                if !aux.1.hasNext(nodes[x]!){
+                    aux.1.nextMoves.append(nodes[x]!)
+                }
 //                println("from : \(aux.0) to : \(x)");
             }
         }
@@ -224,6 +226,15 @@ class BoardGraph : NSObject{
         
         override init() {
             super.init();
+        }
+        
+        func hasNext(node : BoardNode) -> Bool{
+            for x in nextMoves{
+                if x == node{
+                    return true;
+                }
+            }
+            return false;
         }
         
         func removePlayer(player : Player?){

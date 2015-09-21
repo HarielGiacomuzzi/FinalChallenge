@@ -115,8 +115,6 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         if (reliable){
             do {
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
-            } catch let error1 as NSError {
-                error.memory = error1
             } catch {
                 fatalError()
             };
@@ -255,9 +253,14 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             }
         // update player cards
             if message.valueForKey("updateCards") != nil {
-                print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateCards", object: nil, userInfo: userInfo)
+                return
+            }
+            if message.valueForKey("sendCard") != nil {
+                print(message)
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_SendCard", object: nil, userInfo: userInfo)
                 return
             }
         }
