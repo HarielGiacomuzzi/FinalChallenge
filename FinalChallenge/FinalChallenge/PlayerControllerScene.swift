@@ -135,19 +135,5 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            
-            if location.x > frame.size.width / 2 {
-                let card = SKSpriteNode(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
-                carousel.insertCard(card)
-            } else {
-                carousel.removeCard()
-            }
-            
-        }
-    }
     
 }
