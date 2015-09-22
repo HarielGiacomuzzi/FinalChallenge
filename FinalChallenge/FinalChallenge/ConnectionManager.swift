@@ -161,7 +161,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary{
         // If is someone's turn to roll dice
                 if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID!.displayName {
-                     NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
                     return
             }
         // If is someone's turn to act

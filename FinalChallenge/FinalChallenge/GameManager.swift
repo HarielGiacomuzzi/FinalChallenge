@@ -31,7 +31,8 @@ class GameManager {
     //var allMinigames : [Minigame] = [.FlappyFish]
     
     init(){
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived2:", name: "ConnectionManager_EndAction", object: nil);
     }
     
     // verifica se todos jogaram
