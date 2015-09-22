@@ -38,7 +38,8 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func playerTurn(data : NSNotification){
-        self.performSegueWithIdentifier("gotoDiceView", sender: nil)
+        scene?.testButton.text = "DICE"
+//        self.performSegueWithIdentifier("gotoDiceView", sender: nil)
         
     }
     

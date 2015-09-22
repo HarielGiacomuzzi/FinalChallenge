@@ -16,6 +16,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     var carousel : CardCarouselNode!
     var topBarLimit:CGFloat = 0.0
     var playerName = "Player Name"
+    var testButton : SKLabelNode!
     
     override func didMoveToView(view: SKView) {
         
@@ -42,6 +43,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
+        createTestButton()
 
     }
     
@@ -133,6 +135,37 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         let dic = ["sendCard":" ", "dataDic" : cardData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
+    }
+    
+    func createTestButton() {
+        
+        testButton = SKLabelNode(text: "NADA")
+        testButton.position = CGPointMake(frame.size.width - testButton.frame.size.width, frame.size.height/2)
+        testButton.fontSize = 50.0
+        testButton.fontName = "GillSans-Bold"
+        testButton.zPosition = 500
+        addChild(testButton)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch: AnyObject in touches {
+            
+            let location = touch.locationInNode(self)
+            if testButton.containsPoint(location) {
+                if testButton.text == "DICE" {
+                    let diceResult = Int(arc4random_uniform(6)+1)
+                    let aux = NSMutableDictionary();
+                    aux.setValue(diceResult, forKey: "diceResult");
+                    aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
+                    ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+                    testButton.text = "DONE"
+                    
+                } else if testButton.text == "DONE" {
+                    
+                }
+            }
+
+        }
     }
     
     
