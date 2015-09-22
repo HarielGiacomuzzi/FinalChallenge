@@ -31,7 +31,7 @@ class GameManager {
     //var allMinigames : [Minigame] = [.FlappyFish]
     
     init(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
     }
     
     // verifica se todos jogaram
@@ -67,6 +67,7 @@ class GameManager {
     
     
     func messageReceived(data : [String : NSObject]){
+        print("eu entrei aqui?")
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
                     BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);

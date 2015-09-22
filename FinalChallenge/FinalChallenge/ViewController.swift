@@ -20,8 +20,8 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         ConnectionManager.sharedInstance.setupBrowser();
         ConnectionManager.sharedInstance.browser?.delegate = self;
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "whoisResponse:", name: "ConnectionManager_WhoIsResponse", object: nil);
-        
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveCard:", name: "ConnectionManager_SendCard", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveCard:", name: "ConnectionManager_SendCard", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "endAction:", name: "ConnectionManager_EndAction", object: nil);
     }
 
     override func didReceiveMemoryWarning() {
@@ -126,6 +126,10 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         aux.setValue(GameManager.sharedInstance.players.first?.playerIdentifier, forKey: "playerID");
         aux.setValue(" ", forKey: "playerAction");
         ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+    }
+    
+    func endAction(data : NSNotification) {
+        print("acabou a acao")
     }
 }
 
