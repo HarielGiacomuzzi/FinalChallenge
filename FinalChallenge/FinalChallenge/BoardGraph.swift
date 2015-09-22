@@ -108,7 +108,7 @@ class BoardGraph : NSObject{
     
     func wasUsed(nodeName:String)->Bool{
         let card = nodes[nodeName]?.item as! ActiveCard
-        if card.used == true{
+        if card.used{
             return true
         }
         return false

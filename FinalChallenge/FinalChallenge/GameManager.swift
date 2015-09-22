@@ -32,6 +32,7 @@ class GameManager {
     
     init(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived2:", name: "ConnectionManager_EndAction", object: nil);
     }
     
     // verifica se todos jogaram
@@ -49,8 +50,9 @@ class GameManager {
         selectPlayers(controlesDeTurno)
      }
     
-    func playerDecision(){
-        
+    func playerTurn(player:Player?){
+        let location = BoardGraph.SharedInstance.whereIs(player!)
+        let haveIten = BoardGraph.SharedInstance.pickItem(location!, player: player!)
     }
     
     /*
@@ -74,12 +76,21 @@ class GameManager {
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
                     BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
-                    playerTurnEnded(p)
+                    //playerTurnEnded(p)
+                    playerTurn(p)
                     break;
                 }
             }
     }
     
+    func messageReceived2(data : [String : NSObject]){
+        for p in players{
+            if p.playerIdentifier == (data["peerID"] as! String){
+                playerTurnEnded(p)
+                break;
+            }
+        }
+    }
     
     func setPlayerOrder()->[String]{
         return Array(playerRank.reverse())
