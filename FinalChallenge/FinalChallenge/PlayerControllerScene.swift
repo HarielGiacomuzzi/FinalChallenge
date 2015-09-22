@@ -9,23 +9,24 @@
 import UIKit
 import SpriteKit
 
-class PlayerControllerScene: SKScene {
+class PlayerControllerScene: SKScene, CardCarousellDelegate {
     
     var moneyButton : PlayerButtonNode!
     var lootButton : PlayerButtonNode!
     var carousel : CardCarouselNode!
     var topBarLimit:CGFloat = 0.0
     var playerName = "Player Name"
+    var testButton : SKLabelNode!
     
     override func didMoveToView(view: SKView) {
         
-        let card1 = SKSpriteNode(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
-        let card2 = SKSpriteNode(texture: nil, color: UIColor.greenColor(), size: CGSize(width: 375, height: 540))
-        let card3 = SKSpriteNode(texture: nil, color: UIColor.redColor(), size: CGSize(width: 375, height: 540))
-        let card4 = SKSpriteNode(texture: nil, color: UIColor.whiteColor(), size: CGSize(width: 375, height: 540))
+        let card1 = CardSprite(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
+        let card2 = CardSprite(texture: nil, color: UIColor.greenColor(), size: CGSize(width: 375, height: 540))
+        let card3 = CardSprite(texture: nil, color: UIColor.redColor(), size: CGSize(width: 375, height: 540))
+        let card4 = CardSprite(texture: nil, color: UIColor.whiteColor(), size: CGSize(width: 375, height: 540))
         
         let cards = [card1,card2,card3,card4]
-        
+
         let backgroundTexture = SKTexture(imageNamed: "backscreen")
         let background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPointMake(frame.size.width / 2, frame.size.height  / 2)
@@ -40,7 +41,9 @@ class PlayerControllerScene: SKScene {
         carousel = CardCarouselNode(cardsArray: cards, startIndex: 0)
         carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 2)
         carousel.zPosition = 30
+        carousel.delegate = self
         self.addChild(carousel)
+        createTestButton()
 
     }
     
@@ -112,22 +115,58 @@ class PlayerControllerScene: SKScene {
     
     
     func updateMoney(value:Int) {
+        moneyButton.updateNumber(value)
+    }
+    
+    func updateLoot(value:Int) {
+        lootButton.updateNumber(value)
+    }
+    
+    func addCard(card:String) {
+        let cardSprite = CardSprite(card: card)
+        carousel.insertCard(cardSprite)
         
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    func sendCard(card: SKSpriteNode) {
+        let sentCardSprite = card as! CardSprite
+        let sentCard = sentCardSprite.card
+        let cardData = ["player":playerName, "item": sentCard]
+        let dic = ["sendCard":" ", "dataDic" : cardData]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
+    }
+    
+    func createTestButton() {
+        
+        testButton = SKLabelNode(text: "NADA")
+        testButton.position = CGPointMake(frame.size.width - testButton.frame.size.width, frame.size.height/2)
+        testButton.fontSize = 50.0
+        testButton.fontName = "GillSans-Bold"
+        testButton.zPosition = 500
+        addChild(testButton)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
+            
             let location = touch.locationInNode(self)
-            
-            if location.x > frame.size.width / 2 {
-                let card = SKSpriteNode(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
-                carousel.insertCard(card)
-            } else {
-                carousel.removeCard()
+            if testButton.containsPoint(location) {
+                if testButton.text == "DICE" {
+                    let diceResult = Int(arc4random_uniform(6)+1)
+                    let aux = NSMutableDictionary();
+                    aux.setValue(diceResult, forKey: "diceResult");
+                    aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
+                    ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+                    testButton.text = "DONE"
+                    
+                } else if testButton.text == "DONE" {
+                    
+                }
             }
-            
+
         }
     }
+    
     
 }

@@ -15,8 +15,8 @@ class XMLParser: NSObject, NSXMLParserDelegate {
     private var isOnNode = false;
     
     func loadBoardFrom(fileName : String){
-        var url = NSURL(fileURLWithPath: fileName)
-        var parser = NSXMLParser(contentsOfURL: url);
+        let url = NSURL(fileURLWithPath: fileName)
+        let parser = NSXMLParser(contentsOfURL: url);
         parser?.delegate = self;
         parser?.parse();
         BoardGraph.SharedInstance.setNeighborsReference();
@@ -33,6 +33,13 @@ class XMLParser: NSObject, NSXMLParserDelegate {
             currentNode = "Store"
             BoardGraph.SharedInstance.createNode((attributeDict["x"] as! NSString).doubleValue, y: (attributeDict["y"] as! NSString).doubleValue, name: "Store", father: nil);
             BoardGraph.SharedInstance.setFather(attributeDict["father"] as String!, sonName: "Store");
+        }
+        if elementName == "BAU"{
+            isOnNode = true;
+            var number = (attributeDict["number"] as? NSString)?.integerValue;
+            currentNode = "Bau\(number!)"
+            BoardGraph.SharedInstance.createNode((attributeDict["x"] as! NSString).doubleValue, y: (attributeDict["y"] as! NSString).doubleValue, name: "Bau\(number!)", father: nil);
+            BoardGraph.SharedInstance.setFather(attributeDict["father"] as String!, sonName: "Bau\(number!)");
         }
         if elementName == "node"{
             isOnNode = true;

@@ -8,7 +8,9 @@
 
 import Foundation
 
-class ActiveCard : Card {
+class ActiveCard :Card {
+    
+    var used = Bool()
     
     override init() {
         super.init()
@@ -16,7 +18,7 @@ class ActiveCard : Card {
         self.storeValue = 100
     }
     
-    func stealCard(){
+    func activate(targetPlayer:Player){
         
     }
 }

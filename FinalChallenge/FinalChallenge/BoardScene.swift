@@ -34,6 +34,10 @@ class BoardScene: SKScene, SKPhysicsContactDelegate {
                 continue
             }
             
+            if aux.name != nil && aux.name == "bau"{
+                continue
+            }
+            
             auxList[(aux.name! as NSString).integerValue] = aux;
         }
         
@@ -52,6 +56,13 @@ class BoardScene: SKScene, SKPhysicsContactDelegate {
             let aux = aux1 ;
             if aux.name != nil && aux.name == "store"{
                 print("<STORE x=\"\(aux.position.x)\" y=\"\(aux.position.y)\" father=\"\"/>");
+            }
+        }
+        
+        for aux1 in self.children{
+            let aux = aux1 ;
+            if aux.name != nil && aux.name == "bau"{
+                print("<BAU x=\"\(aux.position.x)\" y=\"\(aux.position.y)\" father=\"\"/>");
             }
         }
 
