@@ -262,7 +262,7 @@ class BoardGraph : NSObject{
             self.father = father;
             self.posX = posX;
             self.posY = posY;
-            
+            self.item = StealGoldCard()
         }
     }
     

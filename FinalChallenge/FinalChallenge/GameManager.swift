@@ -34,17 +34,23 @@ class GameManager {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
     }
     
+    // verifica se todos jogaram
     func playerTurnEnded(player : Player?){
         if controlesDeTurno >= players.count{
+            //termina rodada
             controlesDeTurno = 0;
             self.isOnMiniGame = true;
             beginMinigame()
         }else{
             //controlesDeTurno = controlesDeTurno+1;
         }
+        // proximo jogador
+        controlesDeTurno = 0 // TIRAR ISSO AQUI, USADO APENAS PARA DEBUG
         selectPlayers(controlesDeTurno)
      }
     
+    /*
+    // dice responce
     func messageReceived(data : NSNotification){
         if let result = (data.userInfo!["diceResult"] as? Int){
             for p in players{
@@ -57,7 +63,8 @@ class GameManager {
                 }
             }
         }
-    }
+    }*/
+    
     
     func messageReceived(data : [String : NSObject]){
             for p in players{
@@ -74,6 +81,7 @@ class GameManager {
         return Array(playerRank.reverse())
     }
     
+    //your time bro
     func selectPlayers(i:Int){
         if !self.isOnMiniGame{
             controlesDeTurno++
@@ -93,6 +101,8 @@ class GameManager {
     }*/
     
     func beginMinigame() {
+        self.isOnMiniGame = false;
+        self.playerTurnEnded(nil);
         return Void()
         
         print("CHAMEI A FUNÇAO GO TO MINIGAME")
