@@ -49,6 +49,10 @@ class GameManager {
         selectPlayers(controlesDeTurno)
      }
     
+    func playerDecision(){
+        
+    }
+    
     /*
     // dice responce
     func messageReceived(data : NSNotification){
@@ -65,7 +69,7 @@ class GameManager {
         }
     }*/
     
-    
+    //dice responce
     func messageReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
