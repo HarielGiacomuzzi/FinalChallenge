@@ -49,6 +49,11 @@ class GameManager {
         selectPlayers(controlesDeTurno)
      }
     
+    func playerTurn(player:Player?){
+        let location = BoardGraph.SharedInstance.whereIs(player!)
+        let haveIten = BoardGraph.SharedInstance.pickItem(location!, player: player!)
+    }
+    
     /*
     // dice responce
     func messageReceived(data : NSNotification){
@@ -65,18 +70,27 @@ class GameManager {
         }
     }*/
     
-    
+    //dice responce
     func messageReceived(data : [String : NSObject]){
         print("eu entrei aqui?")
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
                     BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
-                    playerTurnEnded(p)
+                    //playerTurnEnded(p)
+                    playerTurn(p)
                     break;
                 }
             }
     }
     
+    func messageReceived2(data : [String : NSObject]){
+        for p in players{
+            if p.playerIdentifier == (data["peerID"] as! String){
+                playerTurnEnded(p)
+                break;
+            }
+        }
+    }
     
     func setPlayerOrder()->[String]{
         return Array(playerRank.reverse())

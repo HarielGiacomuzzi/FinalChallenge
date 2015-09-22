@@ -11,6 +11,9 @@
 		26547BAD1B9F4736003DFD73 /* SetupPartyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */; };
 		26547BB31B9F4D59003DFD73 /* SetupParty.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */; };
 		26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26547BB91B9F696E003DFD73 /* setupParticle1.sks */; };
+		2661C40A1BB07EEC003A49F9 /* tutorialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2661C4091BB07EEC003A49F9 /* tutorialScene.swift */; settings = {ASSET_TAGS = (); }; };
+		2661C40C1BB082A9003A49F9 /* tutorialAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2661C40B1BB082A9003A49F9 /* tutorialAssets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		2661C4101BB1D088003A49F9 /* squarePopUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2661C40F1BB1D088003A49F9 /* squarePopUp.atlas */; settings = {ASSET_TAGS = (); }; };
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
 		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
@@ -124,6 +127,9 @@
 		26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupPartyScene.swift; sourceTree = "<group>"; };
 		26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SetupParty.xcassets; sourceTree = "<group>"; };
 		26547BB91B9F696E003DFD73 /* setupParticle1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = setupParticle1.sks; sourceTree = "<group>"; };
+		2661C4091BB07EEC003A49F9 /* tutorialScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tutorialScene.swift; sourceTree = "<group>"; };
+		2661C40B1BB082A9003A49F9 /* tutorialAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = tutorialAssets.xcassets; sourceTree = "<group>"; };
+		2661C40F1BB1D088003A49F9 /* squarePopUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squarePopUp.atlas; sourceTree = "<group>"; };
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
 		26B2D9BE1B87A8920056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
@@ -343,6 +349,9 @@
 				5E7E45BD1B960CCC00249B8A /* MinigameDetails.plist */,
 				B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */,
 				B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */,
+				2661C4091BB07EEC003A49F9 /* tutorialScene.swift */,
+				2661C40F1BB1D088003A49F9 /* squarePopUp.atlas */,
+				2661C40B1BB082A9003A49F9 /* tutorialAssets.xcassets */,
 			);
 			name = Minigames;
 			sourceTree = "<group>";
@@ -591,7 +600,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZX7GUMJ35C;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -641,11 +650,13 @@
 				26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
+				2661C4101BB1D088003A49F9 /* squarePopUp.atlas in Resources */,
 				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
 				DB8C2C2F1BB06D6B0080C2D2 /* board_3.xml in Resources */,
 				26B2D9BF1B87A8920056015F /* fish.atlas in Resources */,
 				DBF7C0C21B98D50E0010FCFE /* PuffGameControl.sks in Resources */,
+				2661C40C1BB082A9003A49F9 /* tutorialAssets.xcassets in Resources */,
 				26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */,
 				B57B33671B86566E000E5F53 /* GameOver.xib in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
@@ -728,6 +739,7 @@
 				DB1748C21B8CF2F100201BA2 /* iPhoneDiceViewController.swift in Sources */,
 				B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
+				2661C40A1BB07EEC003A49F9 /* tutorialScene.swift in Sources */,
 				B5AFAD0A1B94C3770005F19E /* CustomMinigameCollectionView.swift in Sources */,
 				B503E3F41BAB2FA400C6284A /* GameOverSceneMP.swift in Sources */,
 				4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */,
