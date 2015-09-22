@@ -70,7 +70,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
 
     @IBAction func loadBoard(sender: AnyObject) {
-        BoardGraph.SharedInstance.loadBoard("board_2");
+        BoardGraph.SharedInstance.loadBoard("board_3");
     }
     
     

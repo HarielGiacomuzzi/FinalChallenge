@@ -53,6 +53,7 @@
 		B5279F8B1BB06C220015DBE7 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8A1BB06C220015DBE7 /* Card.swift */; settings = {ASSET_TAGS = (); }; };
 		B5279F8D1BB06CB00015DBE7 /* ActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */; settings = {ASSET_TAGS = (); }; };
 		B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */; settings = {ASSET_TAGS = (); }; };
+		B5279F931BB08C7D0015DBE7 /* StealGoldCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */; settings = {ASSET_TAGS = (); }; };
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
 		B57B33671B86566E000E5F53 /* GameOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57B33661B86566E000E5F53 /* GameOver.xib */; };
 		B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B33681B8656D7000E5F53 /* GameOverXib.swift */; };
@@ -94,6 +95,7 @@
 		DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73E8111B72834400F7D7C7 /* BoardGraph.swift */; };
 		DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB73E8131B72838D00F7D7C7 /* Board.sks */; };
 		DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */; };
+		DB8C2C2F1BB06D6B0080C2D2 /* board_3.xml in Resources */ = {isa = PBXBuildFile; fileRef = DB8C2C2E1BB06D6B0080C2D2 /* board_3.xml */; settings = {ASSET_TAGS = (); }; };
 		DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */ = {isa = PBXBuildFile; fileRef = DB98FEA51B825ED300AD5098 /* board_1.xml */; };
 		DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC57FE11B83AEA200CA0232 /* XMLParser.swift */; };
 		DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC57FE31B83AEC300CA0232 /* BoardScene.swift */; };
@@ -164,6 +166,7 @@
 		B5279F8A1BB06C220015DBE7 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveCard.swift; sourceTree = "<group>"; };
 		B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotActiveCard.swift; sourceTree = "<group>"; };
+		B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StealGoldCard.swift; sourceTree = "<group>"; };
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
 		B57B33661B86566E000E5F53 /* GameOver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameOver.xib; sourceTree = "<group>"; };
 		B57B33681B8656D7000E5F53 /* GameOverXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverXib.swift; sourceTree = "<group>"; };
@@ -210,6 +213,7 @@
 		DB73E8111B72834400F7D7C7 /* BoardGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardGraph.swift; sourceTree = "<group>"; };
 		DB73E8131B72838D00F7D7C7 /* Board.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Board.sks; sourceTree = "<group>"; };
 		DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		DB8C2C2E1BB06D6B0080C2D2 /* board_3.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = board_3.xml; sourceTree = "<group>"; };
 		DB98FEA51B825ED300AD5098 /* board_1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = board_1.xml; sourceTree = "<group>"; };
 		DBC57FE11B83AEA200CA0232 /* XMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLParser.swift; sourceTree = "<group>"; };
 		DBC57FE31B83AEC300CA0232 /* BoardScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardScene.swift; sourceTree = "<group>"; };
@@ -347,10 +351,27 @@
 			isa = PBXGroup;
 			children = (
 				B5279F8A1BB06C220015DBE7 /* Card.swift */,
-				B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */,
-				B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */,
+				B5279F901BB08C3E0015DBE7 /* ActivateCards */,
+				B5279F911BB08C550015DBE7 /* NotActivateCards */,
 			);
 			name = Cards;
+			sourceTree = "<group>";
+		};
+		B5279F901BB08C3E0015DBE7 /* ActivateCards */ = {
+			isa = PBXGroup;
+			children = (
+				B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */,
+				B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */,
+			);
+			name = ActivateCards;
+			sourceTree = "<group>";
+		};
+		B5279F911BB08C550015DBE7 /* NotActivateCards */ = {
+			isa = PBXGroup;
+			children = (
+				B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */,
+			);
+			name = NotActivateCards;
 			sourceTree = "<group>";
 		};
 		B5DD1B451B8F6D8300AA1EB6 /* Pads */ = {
@@ -495,6 +516,7 @@
 				DB42C9BB1BA9D59400D6D247 /* Board.atlas */,
 				DB98FEA51B825ED300AD5098 /* board_1.xml */,
 				DBE862041B850DB700C8099E /* board_2.xml */,
+				DB8C2C2E1BB06D6B0080C2D2 /* board_3.xml */,
 				DB73E8111B72834400F7D7C7 /* BoardGraph.swift */,
 				DB73E8131B72838D00F7D7C7 /* Board.sks */,
 				DBE862081B863BD400C8099E /* MainBoard.sks */,
@@ -569,7 +591,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZX7GUMJ35C;
+						DevelopmentTeam = DVXNNDG4U4;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -621,6 +643,7 @@
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
 				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
+				DB8C2C2F1BB06D6B0080C2D2 /* board_3.xml in Resources */,
 				26B2D9BF1B87A8920056015F /* fish.atlas in Resources */,
 				DBF7C0C21B98D50E0010FCFE /* PuffGameControl.sks in Resources */,
 				26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */,
@@ -685,6 +708,7 @@
 				5E70C7D31B9A0DB1005C753B /* NoAnimationSegue.swift in Sources */,
 				DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */,
 				26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */,
+				B5279F931BB08C7D0015DBE7 /* StealGoldCard.swift in Sources */,
 				5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */,
 				DBF7C0C81B98DDB90010FCFE /* PuffGamePad.swift in Sources */,
 				264D0CDE1B9F6AE6005B7EE9 /* SetupParticle.swift in Sources */,

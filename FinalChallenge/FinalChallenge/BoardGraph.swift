@@ -34,7 +34,9 @@ class BoardGraph : NSObject{
     func setNeighborsReference(){
         for aux in nodes{
             for x in aux.1.nextNames{
-                aux.1.nextMoves.append(nodes[x]!)
+                if !aux.1.hasNext(nodes[x]!){
+                    aux.1.nextMoves.append(nodes[x]!)
+                }
 //                println("from : \(aux.0) to : \(x)");
             }
         }
@@ -97,6 +99,21 @@ class BoardGraph : NSObject{
         return false;
     }
     
+    func isUsable(nodeName:String)->Bool{
+        if nodes[nodeName]?.item!.usable == true{
+            return true
+        }
+        return false
+    }
+    
+    func wasUsed(nodeName:String)->Bool{
+        let card = nodes[nodeName]?.item as! ActiveCard
+        if card.used == true{
+            return true
+        }
+        return false
+    }
+    
     // returns the item of the specified node or nil if there's no item on that node
     func getItem(nodeName : String) -> NSObject?{
         if haveItem(nodeName) {
@@ -114,24 +131,48 @@ class BoardGraph : NSObject{
         return false;
     }
     
+    func sendCardToPlayer(nodeName : String, player:Player){
+        let card = nodes[nodeName]!.item
+        player.items.append(card!)
+        
+        let cardData = ["player":player.playerIdentifier, "item": card!.name]
+        let dic = ["updateCards":" ", "dataDic" : cardData]
+        
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        nodes[nodeName]?.item = nil
+        
+    }
+    
     //removes item from node and adds item to player
     //sends message to player phone to update item
     
     func pickItem(nodeName : String, player:Player) -> Bool{
         if haveItem(nodeName) {
-            let card = nodes[nodeName]!.item
-            player.items.append(card!)
-
-            let cardData = ["player":player.playerIdentifier, "item": card!.name]
-            let dic = ["updateCards":" ", "dataDic" : cardData]
-
-            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-            nodes[nodeName]?.item = nil
+            if !isUsable(nodeName){
+                self.sendCardToPlayer(nodeName, player: player)
+            } else{
+                if !wasUsed(nodeName){
+                    self.sendCardToPlayer(nodeName, player: player)
+                } else{
+                    // caso a carta ja tenha sido usada ela ativa seu efeito
+                    self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
+                    nodes[nodeName]?.item = nil
+                }
+            }
             return true
         }
         return false;
     }
     
+    // activate cards funcions
+    func activateCard(card:ActiveCard, targetPlayer:Player){
+        switch(card.cardName){
+            // each card has a type and a name, convert the card to its type by its name
+            case "StealGoldCard" :  let actionCard = card as! StealGoldCard
+                                    actionCard.activate(targetPlayer)
+            default: break
+        }
+    }
     
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
         var lista : [BoardNode] = [];
@@ -187,6 +228,15 @@ class BoardGraph : NSObject{
         
         override init() {
             super.init();
+        }
+        
+        func hasNext(node : BoardNode) -> Bool{
+            for x in nextMoves{
+                if x == node{
+                    return true;
+                }
+            }
+            return false;
         }
         
         func removePlayer(player : Player?){
