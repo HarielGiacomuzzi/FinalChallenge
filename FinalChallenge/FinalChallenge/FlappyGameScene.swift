@@ -344,8 +344,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         self.removeAllChildren()
         self.removeAllActions()
-        var transition = SKTransition.flipHorizontalWithDuration(0.5)
-        var goScene = GameOverSceneMP(size: self.size)
+        _ = SKTransition.flipHorizontalWithDuration(0.5)
+        let goScene = GameOverSceneMP(size: self.size)
         goScene.player = playerRank.reverse()
         self.view?.presentScene(goScene)
     }
@@ -449,7 +449,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     func gameOverSP(){
         self.removeAllChildren()
         self.removeAllActions()
-        let transition = SKTransition.flipHorizontalWithDuration(0.5)
+        _ = SKTransition.flipHorizontalWithDuration(0.5)
         let goScene = GameOverSceneSP(size: self.size)
         goScene.scaleMode = .AspectFit
         goScene.score = cont

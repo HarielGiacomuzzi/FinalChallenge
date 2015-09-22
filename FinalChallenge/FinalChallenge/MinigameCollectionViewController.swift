@@ -48,7 +48,6 @@ class MinigameCollectionViewController : UIViewController {
         switch(minigameCollection[indexPath.row]){
             case .FlappyFish: cell.specialTag = "flap"
             case .BombGame: cell.specialTag = "bomb"
-            default: break
         }
         // Configure the cell
         return cell

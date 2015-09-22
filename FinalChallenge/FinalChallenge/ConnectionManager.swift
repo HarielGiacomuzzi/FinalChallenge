@@ -251,10 +251,11 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateMoney", object: nil, userInfo: userInfo)
                 return
             }
+                
         // update player cards
-            if message.valueForKey("updateCards") != nil {
+            if message.valueForKey("addCard") != nil {
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
-                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateCards", object: nil, userInfo: userInfo)
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_AddCard", object: nil, userInfo: userInfo)
                 return
             }
             if message.valueForKey("sendCard") != nil {

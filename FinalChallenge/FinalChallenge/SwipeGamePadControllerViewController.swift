@@ -28,10 +28,10 @@ class SwipeGamePadControllerViewController: UIViewController {
      override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first as UITouch!
         let location = touch.locationInView(self.view)
-        var endX = location.x
-        var endY = location.y
-        var x = endX - beginX
-        var y = (endY - beginY) * -1
+        let endX = location.x
+        let endY = location.y
+        let x = endX - beginX
+        let y = (endY - beginY) * -1
     
         var vector = CGVectorMake(x, y)
         
