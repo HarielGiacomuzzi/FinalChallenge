@@ -136,7 +136,7 @@ class BoardGraph : NSObject{
         player.items.append(card!)
         
         let cardData = ["player":player.playerIdentifier, "item": card!.name]
-        let dic = ["updateCards":" ", "dataDic" : cardData]
+        let dic = ["addCard":" ", "dataDic" : cardData]
         
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         nodes[nodeName]?.item = nil
