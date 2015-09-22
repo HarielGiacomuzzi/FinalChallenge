@@ -115,5 +115,17 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         print("recebi algo")
     }
     
+    @IBAction func playerturn(sender: AnyObject) {
+        let aux = NSMutableDictionary();
+        aux.setValue(GameManager.sharedInstance.players.first?.playerIdentifier, forKey: "playerID");
+        aux.setValue(" ", forKey: "playerTurn");
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+    }
+    @IBAction func playerAction(sender: AnyObject) {
+        let aux = NSMutableDictionary();
+        aux.setValue(GameManager.sharedInstance.players.first?.playerIdentifier, forKey: "playerID");
+        aux.setValue(" ", forKey: "playerAction");
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+    }
 }
 

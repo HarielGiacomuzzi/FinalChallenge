@@ -139,7 +139,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     
     func createTestButton() {
         
-        testButton = SKLabelNode(text: "NADA")
+        testButton = SKLabelNode(text: "IDLE")
         testButton.position = CGPointMake(frame.size.width - testButton.frame.size.width, frame.size.height/2)
         testButton.fontSize = 50.0
         testButton.fontName = "GillSans-Bold"
@@ -158,10 +158,12 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
                     aux.setValue(diceResult, forKey: "diceResult");
                     aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
                     ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-                    testButton.text = "DONE"
+                    testButton.text = "IDLE"
                     
                 } else if testButton.text == "DONE" {
-                    
+                    let dic = ["endAction":" "]
+                    ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+                    testButton.text = "IDLE"
                 }
             }
 
