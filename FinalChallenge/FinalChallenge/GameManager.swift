@@ -73,6 +73,7 @@ class GameManager {
     
     //dice responce
     func messageReceived(data : [String : NSObject]){
+        print("eu entrei aqui?")
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
                     BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);

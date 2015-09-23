@@ -173,6 +173,10 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         minX = west.position.x + west.size.width / 2
         west.hasPlayer = true
         
+        for wall in walls {
+            wall.zPosition = 50
+        }
+        
         
     }
     
@@ -438,6 +442,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
 
         
         for part in roboParts {
+            part.zPosition = 100
             print("a", terminator: "")
 
             let randomNumInt1 = CGFloat.random(min: 0.4, max: 5.0)
@@ -467,6 +472,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             let explosionParts : [SKSpriteNode] = [outExplosion, midExplosion , inExplosion]
             
             for explosion in explosionParts{
+                explosion.zPosition = 100
             
                 let tamFinal = explosion.size
                 explosion.size = CGSize(width: explosion.size.width * 0.2, height: explosion.size.height * 0.2)

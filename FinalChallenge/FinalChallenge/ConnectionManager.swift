@@ -159,10 +159,15 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             
         var userInfo = ["data":data, "peerID":peerID.displayName]
             if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary{
-        // If is someone's turn
+        // If is someone's turn to roll dice
                 if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID!.displayName {
-                     NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
                     return
+            }
+        // If is someone's turn to act
+            if message.valueForKey("playerAction") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID!.displayName {
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerAction", object: nil, userInfo: nil)
+                return
             }
         // if we received the dice results of a player
             if message.valueForKey("diceResult") != nil {
@@ -252,16 +257,31 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
                 return
             }
                 
-        // update player cards
+        // board sends card to player
             if message.valueForKey("addCard") != nil {
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_AddCard", object: nil, userInfo: userInfo)
                 return
             }
+        //player sends card to board
             if message.valueForKey("sendCard") != nil {
                 print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_SendCard", object: nil, userInfo: userInfo)
+                return
+            }
+        //tells player he can make an action
+            if message.valueForKey("playerAction") != nil {
+                print(message)
+                userInfo.updateValue(message.valueForKey("playerAction") as! NSObject, forKey: "playerAction")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerAction", object: nil, userInfo: userInfo)
+                return
+            }
+        //player tells board his turn has ended
+            if message.valueForKey("endAction") != nil {
+                print(message)
+                userInfo.updateValue(message.valueForKey("endAction") as! NSObject, forKey: "endAction")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_EndAction", object: nil, userInfo: userInfo)
                 return
             }
         }
