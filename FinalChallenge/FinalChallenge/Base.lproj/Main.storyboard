@@ -38,7 +38,6 @@
         <!--Minigame Description View Controller-->
         <scene sceneID="cKF-Nn-zEZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ONt-OX-vCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Ovk-7r-ehi" customClass="MinigameDescriptionViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k74-mX-a8Q"/>
@@ -125,6 +124,7 @@
                         <segue destination="tYi-IB-zqG" kind="show" identifier="gotoMinigameVC" id="AJH-Zt-9A0"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ONt-OX-vCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1809" y="-883"/>
         </scene>
@@ -352,20 +352,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itA-Vz-VqN">
-                                <rect key="frame" x="192" y="305" width="77" height="30"/>
-                                <state key="normal" title="Player Turn"/>
-                                <connections>
-                                    <action selector="playerturn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Vb-7E-68L"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02I-1X-ST8">
-                                <rect key="frame" x="192" y="343" width="90" height="30"/>
-                                <state key="normal" title="Player Action"/>
-                                <connections>
-                                    <action selector="playerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NAA-tT-Pfx"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -686,13 +672,13 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="nYs-rE-dbH" customClass="CustomGameOverCell" customModule="FinalChallenge" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="22" width="542" height="44"/>
+                                                <rect key="frame" x="0.0" y="22" width="550" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nYs-rE-dbH" id="8fx-iZ-R0S">
                                                     <rect key="frame" x="0.0" y="0.0" width="550" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-TQ-UUz">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-TQ-UUz">
                                                             <rect key="frame" x="389" y="11" width="29" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

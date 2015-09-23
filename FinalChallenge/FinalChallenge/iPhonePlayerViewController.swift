@@ -18,7 +18,6 @@ class iPhonePlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerTurn:", name: "ConnectionManager_PlayerTurn", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerAction:", name: "ConnectionManager_PlayerAction", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addCard:", name: "ConnectionManager_AddCard", object: nil)
@@ -39,12 +38,9 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func playerTurn(data : NSNotification){
+        scene?.carousel.canRemoveWithSwipeUp = true
         scene?.testButton.text = "DICE"
         
-    }
-    
-    func playerAction(data : NSNotification) {
-        scene?.testButton.text = "DONE"
     }
     
     func openController(data : NSNotification) {
