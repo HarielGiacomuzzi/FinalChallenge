@@ -58,9 +58,8 @@ class GameManager : NSObject {
     func messageReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
-                    //BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
-                    BoardGraph.SharedInstance.walk(3, player: p, view: boardViewController);
-                    //playerTurnEnded(p)
+                    BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
+                    playerTurnEnded(p)
                     playerTurn(p)
                     break;
                 }
@@ -219,7 +218,8 @@ class GameManager : NSObject {
     }
     
     func loseCard(player:Player){
-        let indexCard = Int(arc4random_uniform(player.items.count as! UInt32))
+        let value = player.items.count
+        let indexCard : Int = (random() % value)
         player.items.removeAtIndex(indexCard)
     }
     
