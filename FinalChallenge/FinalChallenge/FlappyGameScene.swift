@@ -449,7 +449,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     func gameOverSP(){
         self.removeAllChildren()
         self.removeAllActions()
-        _ = SKTransition.flipHorizontalWithDuration(0.5)
+        let transition = SKTransition.flipHorizontalWithDuration(0.5)
         let goScene = GameOverSceneSP(size: self.size)
         goScene.scaleMode = .AspectFit
         goScene.score = cont
@@ -457,7 +457,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         print("entrou aqui ta sacando 1")
         //self.removeFromParent()
         //self.view?.presentScene(nil)
-        self.view?.presentScene(goScene)
+        goScene.setupView()
+        self.view?.presentScene(goScene, transition: transition)
     }
     
     /*

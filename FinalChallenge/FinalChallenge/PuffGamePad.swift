@@ -22,7 +22,7 @@ class PuffGamePad: UIViewController {
             motionManager.startAccelerometerUpdatesToQueue(queue, withHandler:
                 {data, error in
                     
-                    if let data = data{
+                    if let _ = data{
                         
                     }
                     else{

@@ -13,7 +13,7 @@ import UIKit
 class Player : NSObject {
     //var playerName:String!
     var playerIdentifier:String!
-    var coins:Int = 0
+    var coins:Int = 1000
     var x:Double!
     var y:Double!
     var avatar : String?
