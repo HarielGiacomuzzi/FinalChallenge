@@ -126,7 +126,9 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     func addCard(card:String) {
         let cardSprite = CardSprite(card: card)
         carousel.insertCard(cardSprite)
-        
+    }
+    func removeCard(card:String) {
+        print("finge que a carta foi removida")
     }
     
     func sendCard(card: SKSpriteNode) {
