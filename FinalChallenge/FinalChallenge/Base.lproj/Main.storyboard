@@ -873,10 +873,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="IuB-wD-4uJ"/>
-        <segue reference="Ahl-Ky-SJK"/>
         <segue reference="Aso-TF-3da"/>
         <segue reference="S5e-fy-Ifo"/>
         <segue reference="T9l-u6-hEW"/>
+        <segue reference="IuB-wD-4uJ"/>
+        <segue reference="Ahl-Ky-SJK"/>
     </inferredMetricsTieBreakers>
 </document>

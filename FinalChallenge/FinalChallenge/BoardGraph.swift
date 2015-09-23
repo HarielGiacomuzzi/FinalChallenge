@@ -150,13 +150,16 @@ class BoardGraph : NSObject{
         if haveItem(nodeName) {
             if !isUsable(nodeName){
                 self.sendCardToPlayer(nodeName, player: player)
+                print("Entregou ao jogador a carta não usavel")
             } else{
                 if !wasUsed(nodeName){
                     self.sendCardToPlayer(nodeName, player: player)
+                    print("Entregou ao jogador a carta usavel, que ainda não foi usada")
                 } else{
                     // caso a carta ja tenha sido usada ela ativa seu efeito
                     self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
                     nodes[nodeName]?.item = nil
+                    print("A carta era usavel e está sendo usada")
                 }
             }
             return true
@@ -170,6 +173,7 @@ class BoardGraph : NSObject{
             // each card has a type and a name, convert the card to its type by its name
             case "StealGoldCard" :  let actionCard = card as! StealGoldCard
                                     actionCard.activate(targetPlayer)
+                                    print("Fez o efeito da carta StealGoldCard")
             default: break
         }
     }
@@ -262,7 +266,9 @@ class BoardGraph : NSObject{
             self.father = father;
             self.posX = posX;
             self.posY = posY;
-            self.item = StealGoldCard()
+            let it = StealGoldCard()
+            it.used = false
+            self.item = it
         }
     }
     
