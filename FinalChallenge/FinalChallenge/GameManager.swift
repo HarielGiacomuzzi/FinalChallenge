@@ -62,7 +62,8 @@ class GameManager : NSObject {
         print("eu entrei aqui?")
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
-                    BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
+                    //BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
+                    BoardGraph.SharedInstance.walk(3, player: p, view: boardViewController);
                     //playerTurnEnded(p)
                     playerTurn(p)
                     break;
@@ -85,11 +86,12 @@ class GameManager : NSObject {
         for p in players{
             if p.playerIdentifier == (data.userInfo!["peerID"] as! String){
                 let card = dic["item"] as! String
-                var setCard = Card()
+                var setCard = ActiveCard()
                 for c in p.items{
                     if card == c.cardName{
                         p.items.removeObject(c)
-                        setCard = c
+                        setCard = c as! ActiveCard
+                        setCard.used = true
                         break
                     }
                 }
@@ -231,5 +233,16 @@ class GameManager : NSObject {
         
         return aux
     }
+    
+    func updatePlayerPosition(move:Int, player:Player){
+        BoardGraph.SharedInstance.walk(move, player: player, view: boardViewController);
+    }
+    
+    func loseCard(player:Player){
+        let indexCard = Int(arc4random_uniform(player.items.count as! UInt32))
+        player.items.removeAtIndex(indexCard)
+    }
+    
+    
     
 }
