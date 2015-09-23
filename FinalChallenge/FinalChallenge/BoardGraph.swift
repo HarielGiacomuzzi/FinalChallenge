@@ -161,9 +161,9 @@ class BoardGraph : NSObject{
                     print("Entregou ao jogador a carta usavel, que ainda não foi usada")
                 } else{
                     // caso a carta ja tenha sido usada ela ativa seu efeito
+                    print("A carta era usavel e está sendo usada")
                     self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
                     nodes[nodeName]?.item = nil
-                    print("A carta era usavel e está sendo usada")
                 }
             }
             
@@ -178,9 +178,16 @@ class BoardGraph : NSObject{
     func activateCard(card:ActiveCard, targetPlayer:Player){
         switch(card.cardName){
             // each card has a type and a name, convert the card to its type by its name
-            case "StealGoldCard" :  let actionCard = card as! StealGoldCard
+            case "StealGoldCard" :  print("Fez o efeito da carta StealGoldCard")
+                                    let actionCard = card as! StealGoldCard
                                     actionCard.activate(targetPlayer)
-                                    print("Fez o efeito da carta StealGoldCard")
+            case "MoveBackCard" :   print("Fez o efeito da carta MoveBackCard")
+                                    let actionCard = card as! MoveBackCard
+                                    actionCard.activate(targetPlayer)
+            case "LoseCard" :       print("Fez o efeito da carta LoseCard")
+                                    let actionCard = card as! LoseCard
+                                    actionCard.activate(targetPlayer)
+            
             default: break
         }
     }
