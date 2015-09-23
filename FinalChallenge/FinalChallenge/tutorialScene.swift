@@ -174,7 +174,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 print("achei um cara")
               
                 
-                let spriteAnimatedAtlas = SKTextureAtlas(named: "squarePopUp")//sprites
+                let spriteAnimatedAtlas = SKTextureAtlas(named: "squarepopup")//sprites
                 
                 // inicializa corrida
                 var runFrames = [SKTexture]()
