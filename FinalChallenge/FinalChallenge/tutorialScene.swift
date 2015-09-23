@@ -49,7 +49,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
 
     
     func setFlappyFish(){
-        let fundo : SKSpriteNode = SKSpriteNode(imageNamed: "flappyStatic")
+        let fundo : SKSpriteNode = SKSpriteNode(imageNamed: "flappystatic")
         fundo.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         self.addChild(fundo)
         
