@@ -85,7 +85,6 @@
 		B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */; };
 		B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BC11B84FA0400786728 /* MyParticle2.sks */; };
 		DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */; };
-		DB1748C21B8CF2F100201BA2 /* iPhoneDiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */; };
 		DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB42C9BB1BA9D59400D6D247 /* Board.atlas */; };
 		DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B721B5409B90066B38C /* AppDelegate.swift */; };
 		DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB458B741B5409B90066B38C /* FinalChallenge.xcdatamodeld */; };
@@ -202,7 +201,6 @@
 		B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyParticleNode.swift; sourceTree = "<group>"; };
 		B5F60BC11B84FA0400786728 /* MyParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle2.sks; sourceTree = "<group>"; };
 		DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhonePlayerViewController.swift; sourceTree = "<group>"; };
-		DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhoneDiceViewController.swift; sourceTree = "<group>"; };
 		DB42C9BB1BA9D59400D6D247 /* Board.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Board.atlas; sourceTree = "<group>"; };
 		DB458B6D1B5409B90066B38C /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB458B711B5409B90066B38C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -265,7 +263,6 @@
 		5E8410011BA9CC1B0099B16B /* PlayerControllerView */ = {
 			isa = PBXGroup;
 			children = (
-				DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */,
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E840FFF1BA9CC000099B16B /* PlayerControllerScene.swift */,
 				5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */,
@@ -736,7 +733,6 @@
 				B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */,
 				5E8410001BA9CC000099B16B /* PlayerControllerScene.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
-				DB1748C21B8CF2F100201BA2 /* iPhoneDiceViewController.swift in Sources */,
 				B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
 				2661C40A1BB07EEC003A49F9 /* tutorialScene.swift in Sources */,
