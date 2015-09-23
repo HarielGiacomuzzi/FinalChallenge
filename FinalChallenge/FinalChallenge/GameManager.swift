@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GameManager {
+class GameManager : NSObject {
     static let sharedInstance = GameManager()
     var miniGameActive = String()
     var boardViewController : UIViewController?
@@ -30,9 +30,11 @@ class GameManager {
     //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
     var allMinigames : [Minigame] = [.FlappyFish]
     
-    init(){
+    override init(){
+        super.init()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived2:", name: "ConnectionManager_EndAction", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil);
     }
     
     // verifica se todos jogaram
@@ -49,7 +51,7 @@ class GameManager {
     
     func playerTurn(player:Player?){
         let location = BoardGraph.SharedInstance.whereIs(player!)
-        let haveIten = BoardGraph.SharedInstance.pickItem(location!, player: player!)
+        _ = BoardGraph.SharedInstance.pickItem(location!, player: player!)
     }
     
     //dice responce
@@ -63,11 +65,32 @@ class GameManager {
                 }
             }
     }
-    
+    // Finaliza turno
     func messageReceived2(data : [String : NSObject]){
         for p in players{
             if p.playerIdentifier == (data["peerID"] as! String){
                 playerTurnEnded(p)
+                break;
+            }
+        }
+    }
+    // manda a carta a ser adicionada no boardGame
+    func mr3(data : NSNotification){
+        let dic = data.userInfo!["dataDic"] as! NSDictionary
+        
+        for p in players{
+            if p.playerIdentifier == (data.userInfo!["peerID"] as! String){
+                let card = dic["item"] as! String
+                var setCard = Card()
+                for c in p.items{
+                    if card == c.cardName{
+                        p.items.removeObject(c)
+                        setCard = c
+                        break
+                    }
+                }
+                let whereIsPlayer = BoardGraph.SharedInstance.whereIs(p)
+                _ = BoardGraph.SharedInstance.setItem(setCard, nodeName: whereIsPlayer!) // return true if card was set
                 break;
             }
         }

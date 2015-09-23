@@ -183,9 +183,9 @@ class PartyModeScene: SKScene {
     }
     
     func changeView(data : NSNotification){
-        var identifier = data.userInfo!["peerID"] as! String
-        var dictionary = data.userInfo!["change"] as! NSDictionary
-        var message = dictionary["change"] as! String
+        _ = data.userInfo!["peerID"] as! String
+        let dictionary = data.userInfo!["change"] as! NSDictionary
+        let message = dictionary["change"] as! String
         
         if message == "change" {
             //change view

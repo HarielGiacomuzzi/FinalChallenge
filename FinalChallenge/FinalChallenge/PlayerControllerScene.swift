@@ -43,6 +43,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
+        carousel.canRemoveWithSwipeUp = false
         createTestButton()
 
     }
@@ -134,6 +135,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         let cardData = ["player":playerName, "item": sentCard]
         let dic = ["sendCard":" ", "dataDic" : cardData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        carousel.canRemoveWithSwipeUp = false
         
     }
     
@@ -148,6 +150,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print(carousel.canRemoveWithSwipeUp)
         for touch: AnyObject in touches {
             
             let location = touch.locationInNode(self)
@@ -159,12 +162,9 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
                     aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
                     ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
                     testButton.text = "IDLE"
+                    carousel.canRemoveWithSwipeUp = false
                     
-                } else if testButton.text == "DONE" {
-                    let dic = ["endAction":" "]
-                    ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-                    testButton.text = "IDLE"
-                }
+                } 
             }
 
         }

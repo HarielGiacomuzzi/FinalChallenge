@@ -32,8 +32,8 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             }
             
             let x = SKSpriteNode(texture: texture)
-            var posY = i.1.posY/scaleFactorY;
-            var posX = i.1.posX/scaleFactorX;
+            let posY = i.1.posY/scaleFactorY;
+            let posX = i.1.posX/scaleFactorX;
             x.position.x = CGFloat(posX);
             x.position.y = CGFloat(posY);
             i.1.posX = posX;

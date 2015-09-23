@@ -285,6 +285,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_EndAction", object: nil, userInfo: userInfo)
                 return
             }
+        
         }
         // if I dont know what it is I will send the default message
         NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DataReceived", object: nil, userInfo: userInfo)

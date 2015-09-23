@@ -17,9 +17,11 @@ class GameOverSceneSP : MinigameScene{
     //used in bombGame,
     var winner : String!
     
-    override func didMoveToView(view: SKView) {
-        
+    func setupView(){
         self.backgroundColor = UIColor.redColor()
+    }
+    
+    override func didMoveToView(view: SKView) {
         switch(game){
         case "fish": self.setupFlappyFishGameOver()
         case "bomb": self.setupBombGameOver()
