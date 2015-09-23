@@ -125,10 +125,11 @@ class BoardGraph : NSObject{
     // sets the item of a node, return true if it was successfull and false otherwise
     func setItem(Item : Card, nodeName : String) ->Bool{
         if !haveItem(nodeName){
-            nodes[nodeName]?.item = Item;
-            return true;
+            print("Colocou a carta \(Item.cardName)")
+            nodes[nodeName]?.item = Item
+            return true
         }
-        return false;
+        return false
     }
     
     func sendCardToPlayer(nodeName : String, player:Player){
@@ -147,6 +148,9 @@ class BoardGraph : NSObject{
     //sends message to player phone to update item
     
     func pickItem(nodeName : String, player:Player) -> Bool{
+        
+        print(player.items)
+        
         if haveItem(nodeName) {
             if !isUsable(nodeName){
                 self.sendCardToPlayer(nodeName, player: player)
@@ -162,6 +166,9 @@ class BoardGraph : NSObject{
                     print("A carta era usavel e está sendo usada")
                 }
             }
+            
+            print(player.items)
+            
             return true
         }
         return false;
