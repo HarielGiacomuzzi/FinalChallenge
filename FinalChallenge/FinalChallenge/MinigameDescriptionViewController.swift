@@ -69,8 +69,7 @@ class MinigameDescriptionViewController: UIViewController {
 
 
           //      minigameDescription.text = game.objectForKey("description") as! String
-            default:
-                ()
+
             }
 
 

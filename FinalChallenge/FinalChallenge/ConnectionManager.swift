@@ -116,7 +116,8 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
             do {
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
             } catch {
-                fatalError()
+                //fatalError()
+                print("não consegue mandar a mensagem né moises");
             };
             return
         }

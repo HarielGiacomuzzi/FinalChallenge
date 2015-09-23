@@ -33,6 +33,10 @@ class GameOverSceneMP : MinigameScene {
                 }
             }
             
+            //FOR DEBUG
+            p.avatar = "red";
+            //FOR DEBUG
+            
             let sprite =  SKSpriteNode(imageNamed: p.avatar!)
             
             sprite.name = p.avatar!
