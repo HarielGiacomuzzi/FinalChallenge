@@ -146,9 +146,9 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
         
         if state == MCSessionState.NotConnected && UIDevice.currentDevice().userInterfaceIdiom == .Pad && GameManager.sharedInstance.isOnMiniGame{
             print("Peer \(peerID.displayName) Disconnected");
-            GameManager.sharedInstance.minigameViewController?.scene.paused = true;
+            GameManager.sharedInstance.minigameViewController?.scene!.paused = true;
             GameManager.sharedInstance.minigameViewController!.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true, completion: {(Void) -> Void in
-                GameManager.sharedInstance.minigameViewController?.scene.paused = false;
+                GameManager.sharedInstance.minigameViewController?.scene!.paused = false;
             });
             NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
             return

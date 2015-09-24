@@ -96,6 +96,7 @@ class GameOverSceneSP : MinigameScene{
             
             if touchedNode.name == "Return MinigameScene" {
                 _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
+                self.removeFromParent()
                 self.view?.presentScene(nil)
                 GameManager.sharedInstance.dismissMinigameSP()
                 

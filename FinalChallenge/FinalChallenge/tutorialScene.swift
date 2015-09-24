@@ -202,8 +202,6 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 square.runAction(firstAction, completion: { () -> Void in
                     self.addChild(label)
                 })
-                
-                
             }
         }
  
