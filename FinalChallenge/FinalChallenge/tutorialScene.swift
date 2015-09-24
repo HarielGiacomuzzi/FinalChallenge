@@ -174,7 +174,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 print("achei um cara")
               
                 
-                let spriteAnimatedAtlas = SKTextureAtlas(named: "squarepopup")//sprites
+                let spriteAnimatedAtlas = SKTextureAtlas(named: "popup")//sprites
                 
                 // inicializa corrida
                 var runFrames = [SKTexture]()
@@ -185,7 +185,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 }
                 
                 
-                let firstAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.07)
+                let firstAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.05)
                 
                 
                 let label : SKLabelNode = SKLabelNode(text: sprite.name)
