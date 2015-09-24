@@ -8,6 +8,8 @@
 
 import UIKit
 
+// THIS CLASS IS NOT USED ANYMORE, CAN BE DELETED...OR MAY BE USED LATER, DON`T KNOW
+
 class MinigameGameOverControllerSinglePlayer : UIViewController{
     
     @IBOutlet weak var timer: UILabel!

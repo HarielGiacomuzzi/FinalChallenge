@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// THIS CLASS IS NOT USED ANYMORE, CAN BE DELETED...OR MAY BE USED LATER, DON`T KNOW
 
 class MinigameGameOverController : UIViewController, UITableViewDataSource, UITableViewDelegate{
     
@@ -23,7 +24,7 @@ class MinigameGameOverController : UIViewController, UITableViewDataSource, UITa
         for p in player {
             print(p)
         }
-        Array(player.reverse())
+        //Array(player.reverse())
         
     }
     

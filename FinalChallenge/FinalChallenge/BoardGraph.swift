@@ -132,11 +132,12 @@ class BoardGraph : NSObject{
         return false
     }
     
+    // inform the player witch card he got from the boardNode
     func sendCardToPlayer(nodeName : String, player:Player){
         let card = nodes[nodeName]!.item
         player.items.append(card!)
         
-        let cardData = ["player":player.playerIdentifier, "item": card!.name]
+        let cardData = ["player":player.playerIdentifier, "item": card!.cardName]
         let dic = ["addCard":" ", "dataDic" : cardData]
         
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
@@ -146,7 +147,6 @@ class BoardGraph : NSObject{
     
     //removes item from node and adds item to player
     //sends message to player phone to update item
-    
     func pickItem(nodeName : String, player:Player) -> Bool{
         
         print(player.items)
@@ -192,6 +192,7 @@ class BoardGraph : NSObject{
         }
     }
     
+    // Recursive* not Recursivo
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
         var lista : [BoardNode] = [];
         if qtd == 0{
@@ -207,6 +208,7 @@ class BoardGraph : NSObject{
         return lista
     }
     
+    // Jhonny Walker keep walking
     func walk(qtd : Int, player : Player, view : UIViewController?){
         let playerLastNode = nodeFor(player)
         var x : [BoardNode] = walkRecursivo(qtd, node: playerLastNode!)
@@ -231,10 +233,11 @@ class BoardGraph : NSObject{
         }
     
     }
-    
+    //we may need this
     private func paintPaths(path : [String]){
     }
     
+    // boardNodes class
     class BoardNode : NSObject{
         var nextMoves : [BoardNode] = [];
         var posX = 0.0;
@@ -275,14 +278,62 @@ class BoardGraph : NSObject{
             return false;
         }
         
+        // defines if the node will carry an item or not
+        func setupItems(){
+            print("Setting Node Item...")
+            print("Node Position: X: \(self.posX) and Y: \(self.posY)")
+            let willHaveItem : Int = (random() % 2)
+            
+            switch(willHaveItem){
+                case 0: print("Adding card")
+                        self.addItem()
+                case 1: print("No card Added")
+                        self.item = nil
+                default: break
+            }
+            
+            
+            let it = StealGoldCard()
+            it.used = false
+            self.item = it
+        }
+        
+        // defines witch item the node will carry
+        func addItem(){
+            let willBeUsable : Int = (random() % 2)
+            
+            switch(willBeUsable){
+                case 0: let witchOneWillBe : Int = (random() % 3) // this number may vary
+                        switch(witchOneWillBe){
+                            case 0: let it = StealGoldCard()
+                                    it.used = false
+                                    self.item = it
+                                    print("Card StealGoldCard added")
+                            case 1: let it = MoveBackCard()
+                                    it.used = false
+                                    self.item = it
+                                    print("Card MoveBackCard added")
+                            case 2: let it = LoseCard()
+                                    it.used = false
+                                    self.item = it
+                                    print("Card LoseCard added")
+                            default: break
+                        }
+                
+                case 1: print("Collectable card added")
+                        let it = NotActiveCard() //we may need to pass a value
+                        self.item = it
+                
+                default: break
+            }
+        }
+        
         init(posX : Double, posY : Double, father : BoardNode?) {
             super.init();
             self.father = father;
             self.posX = posX;
             self.posY = posY;
-            let it = StealGoldCard()
-            it.used = false
-            self.item = it
+            self.setupItems()
         }
     }
     

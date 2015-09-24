@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+//i think this one is not used anymore, by Bruno Kieling
+
 class CustomMinigameCollectionView : UICollectionViewCell {
     
     @IBOutlet weak var minigameImage: UIImageView!

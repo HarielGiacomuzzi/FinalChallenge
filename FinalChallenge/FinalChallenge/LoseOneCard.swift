@@ -20,6 +20,6 @@ class LoseCard : ActiveCard{
     }
     
     func loseCard(player: Player){
-        
+        GameManager.sharedInstance.loseCard(player)
     }
 }

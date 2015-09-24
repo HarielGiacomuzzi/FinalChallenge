@@ -223,6 +223,4 @@ class GameManager : NSObject {
         player.items.removeAtIndex(indexCard)
     }
     
-    
-    
 }
