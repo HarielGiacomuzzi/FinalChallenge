@@ -13,7 +13,7 @@
 		26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26547BB91B9F696E003DFD73 /* setupParticle1.sks */; };
 		2661C40A1BB07EEC003A49F9 /* tutorialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2661C4091BB07EEC003A49F9 /* tutorialScene.swift */; settings = {ASSET_TAGS = (); }; };
 		2661C40C1BB082A9003A49F9 /* tutorialassets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2661C40B1BB082A9003A49F9 /* tutorialassets.xcassets */; settings = {ASSET_TAGS = (); }; };
-		2682DF691BB481C300ACF1A6 /* squarepopup.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2682DF681BB481C300ACF1A6 /* squarepopup.atlas */; settings = {ASSET_TAGS = (); }; };
+		2682DF6B1BB481E400ACF1A6 /* squarepopup.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 2682DF6A1BB481E400ACF1A6 /* squarepopup.atlas */; settings = {ASSET_TAGS = (); }; };
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
 		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
@@ -131,7 +131,7 @@
 		26547BB91B9F696E003DFD73 /* setupParticle1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = setupParticle1.sks; sourceTree = "<group>"; };
 		2661C4091BB07EEC003A49F9 /* tutorialScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tutorialScene.swift; sourceTree = "<group>"; };
 		2661C40B1BB082A9003A49F9 /* tutorialassets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = tutorialassets.xcassets; sourceTree = "<group>"; };
-		2682DF681BB481C300ACF1A6 /* squarepopup.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squarepopup.atlas; sourceTree = "<group>"; };
+		2682DF6A1BB481E400ACF1A6 /* squarepopup.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squarepopup.atlas; sourceTree = "<group>"; };
 		269F18AF1B86583000EAD94F /* wind.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = wind.atlas; sourceTree = "<group>"; };
 		26B2D9BE1B87A8920056015F /* fish.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = fish.atlas; sourceTree = "<group>"; };
 		26B2D9C01B87A8B20056015F /* teste.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = teste.sks; sourceTree = "<group>"; };
@@ -353,7 +353,7 @@
 				B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */,
 				B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */,
 				2661C4091BB07EEC003A49F9 /* tutorialScene.swift */,
-				2682DF681BB481C300ACF1A6 /* squarepopup.atlas */,
+				2682DF6A1BB481E400ACF1A6 /* squarepopup.atlas */,
 				2661C40B1BB082A9003A49F9 /* tutorialassets.xcassets */,
 			);
 			name = Minigames;
@@ -669,7 +669,7 @@
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */,
 				269F18B01B86583000EAD94F /* wind.atlas in Resources */,
-				2682DF691BB481C300ACF1A6 /* squarepopup.atlas in Resources */,
+				2682DF6B1BB481E400ACF1A6 /* squarepopup.atlas in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
 				4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */,
 				B5DD1B541B8F90EC00AA1EB6 /* funMusic.mp3 in Resources */,
