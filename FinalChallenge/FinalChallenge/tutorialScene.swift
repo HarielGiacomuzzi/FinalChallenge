@@ -49,7 +49,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
 
     
     func setFlappyFish(){
-        let fundo : SKSpriteNode = SKSpriteNode(imageNamed: "flappyStatic")
+        let fundo : SKSpriteNode = SKSpriteNode(imageNamed: "flappystatic")
         fundo.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         self.addChild(fundo)
         
@@ -78,7 +78,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
         let bubbleTexture = bubbleAtlas.textureNamed("bubble%200")
         let bubble : SKSpriteNode = SKSpriteNode(texture: bubbleTexture)
         bubble.zPosition = 10
-        bubble.position = CGPoint(x: self.frame.width/2 - 80, y: self.frame.height/2 - 100)
+        bubble.position = CGPoint(x: self.frame.width/2 - 80, y: self.frame.height/2 - 45)
         self.addChild(bubble)
         bubble.name = "Gives small burst"
         spriteArray.append(bubble)
@@ -175,7 +175,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 print("achei um cara")
               
                 
-                let spriteAnimatedAtlas = SKTextureAtlas(named: "squarePopUp")//sprites
+                let spriteAnimatedAtlas = SKTextureAtlas(named: "popup")//sprites
                 
                 // inicializa corrida
                 var runFrames = [SKTexture]()
@@ -186,7 +186,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 }
                 
                 
-                let firstAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.07)
+                let firstAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.05)
                 
                 
                 let label : SKLabelNode = SKLabelNode(text: sprite.name)
