@@ -221,6 +221,12 @@ class GameManager : NSObject {
         let value = player.items.count
         let indexCard : Int = (random() % value)
         player.items.removeAtIndex(indexCard)
+        
+        let removedCard = player.items[indexCard]
+        let cardData = ["player":player.playerIdentifier, "item": removedCard]
+        let dic = ["removeCard":" ", "dataDic" : cardData]
+        
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     
 }
