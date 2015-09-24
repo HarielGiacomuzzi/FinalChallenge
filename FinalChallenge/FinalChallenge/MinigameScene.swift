@@ -10,11 +10,16 @@ import UIKit
 import SpriteKit
 
 class MinigameScene: SKScene {
-    var gameController : MiniGameViewController? = nil
+    weak var gameController : MiniGameViewController? = nil
+    
     var playerRank:[String] = []
 
     func messageReceived(identifier: String, dictionary: NSDictionary) {
         
+    }
+    
+    deinit{
+        print("deu deinit")
     }
     
 }

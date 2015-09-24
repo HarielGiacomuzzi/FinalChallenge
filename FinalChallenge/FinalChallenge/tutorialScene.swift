@@ -12,7 +12,7 @@ import SpriteKit
 class tutorialScene : SKScene, SKPhysicsContactDelegate {
     
     
-    var viewController : MinigameDescriptionViewController!
+    weak var viewController : MinigameDescriptionViewController!
     var gameName : NSString?
     var gameNumber : Int?
     var spriteArray : [SKSpriteNode] = [SKSpriteNode]()

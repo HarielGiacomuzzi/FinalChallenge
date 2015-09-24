@@ -87,6 +87,7 @@ class GameManager : NSObject {
                         p.items.removeObject(c)
                         setCard = c as! ActiveCard
                         setCard.used = true
+                        setCard.cardOwner = p
                         break
                     }
                 }
@@ -177,7 +178,7 @@ class GameManager : NSObject {
         let dic = ["closeController":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         self.isOnMiniGame = false;
-        self.playerTurnEnded(nil);
+        //self.playerTurnEnded(nil);
     }
     
     
@@ -205,6 +206,7 @@ class GameManager : NSObject {
             aux = abs(value)
             player.coins += value
         }
+        print("Esse é o jogador: \(player.playerIdentifier)")
         let playerData = ["player":player.playerIdentifier, "value": player.coins]
         let dic = ["updateMoney":" ", "dataDic" : playerData]
         
