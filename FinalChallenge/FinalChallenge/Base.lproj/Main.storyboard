@@ -57,6 +57,9 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ln0-Bm-zkx">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="0.92000000000000004" colorSpace="calibratedWhite"/>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="557" width="800" height="244"/>
+                                </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorialBanner" translatesAutoresizingMaskIntoConstraints="NO" id="E2o-7r-WAz">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -205,39 +208,6 @@
                                 <exclude reference="q2V-cm-4Rl"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="EB0-lw-yt0"/>
-                                <exclude reference="Ocs-6f-CR0"/>
-                                <exclude reference="UFU-sT-6Vu"/>
-                                <exclude reference="kCt-Ro-JMB"/>
-                                <exclude reference="HMj-IU-S7K"/>
-                                <exclude reference="q5P-81-I2D"/>
-                                <exclude reference="u0y-OV-q6T"/>
-                                <exclude reference="1qQ-7f-NXX"/>
-                                <exclude reference="6jy-25-qG2"/>
-                                <exclude reference="AY6-C8-g4h"/>
-                                <exclude reference="a4A-u1-vjR"/>
-                                <exclude reference="7Gb-qY-kNC"/>
-                                <exclude reference="Sj4-c0-7j7"/>
-                                <exclude reference="a4e-Zd-zV9"/>
-                                <exclude reference="pvW-50-FBg"/>
-                                <exclude reference="Uet-Qg-o8F"/>
-                                <exclude reference="eUp-1z-M1W"/>
-                                <exclude reference="EAj-1t-B2m"/>
-                                <exclude reference="FoE-Rw-itA"/>
-                                <exclude reference="MeH-7f-L9O"/>
-                                <exclude reference="wbn-Yg-QCV"/>
-                                <exclude reference="2Jg-yY-jgC"/>
-                                <exclude reference="BbJ-de-99M"/>
-                                <exclude reference="Lzq-el-Eb9"/>
-                                <exclude reference="dVD-tJ-qUs"/>
-                                <exclude reference="lid-eh-0hV"/>
-                                <exclude reference="m3u-d7-jlX"/>
-                                <exclude reference="IIo-Ln-aMa"/>
-                                <exclude reference="KOg-Vy-Brp"/>
-                                <exclude reference="kQr-X7-R12"/>
-                                <exclude reference="sYT-Xa-jZE"/>
-                                <exclude reference="WEe-db-Zjk"/>
-                                <exclude reference="WUs-Lc-FQv"/>
                                 <exclude reference="3aZ-Sy-Yzi"/>
                                 <exclude reference="GdZ-BN-ahy"/>
                                 <exclude reference="WNO-3W-wpe"/>
@@ -245,10 +215,43 @@
                                 <exclude reference="fAq-Rw-N2Y"/>
                                 <exclude reference="iih-U8-hnW"/>
                                 <exclude reference="uq7-y3-o8U"/>
+                                <exclude reference="EB0-lw-yt0"/>
+                                <exclude reference="Ocs-6f-CR0"/>
+                                <exclude reference="UFU-sT-6Vu"/>
+                                <exclude reference="kCt-Ro-JMB"/>
                                 <exclude reference="FPS-Nd-Qic"/>
                                 <exclude reference="J5p-6P-xLB"/>
                                 <exclude reference="WRF-Zj-zsB"/>
                                 <exclude reference="eEd-QF-YjZ"/>
+                                <exclude reference="HMj-IU-S7K"/>
+                                <exclude reference="q5P-81-I2D"/>
+                                <exclude reference="u0y-OV-q6T"/>
+                                <exclude reference="EAj-1t-B2m"/>
+                                <exclude reference="FoE-Rw-itA"/>
+                                <exclude reference="MeH-7f-L9O"/>
+                                <exclude reference="wbn-Yg-QCV"/>
+                                <exclude reference="1qQ-7f-NXX"/>
+                                <exclude reference="6jy-25-qG2"/>
+                                <exclude reference="AY6-C8-g4h"/>
+                                <exclude reference="a4A-u1-vjR"/>
+                                <exclude reference="2Jg-yY-jgC"/>
+                                <exclude reference="BbJ-de-99M"/>
+                                <exclude reference="Lzq-el-Eb9"/>
+                                <exclude reference="dVD-tJ-qUs"/>
+                                <exclude reference="lid-eh-0hV"/>
+                                <exclude reference="m3u-d7-jlX"/>
+                                <exclude reference="7Gb-qY-kNC"/>
+                                <exclude reference="Sj4-c0-7j7"/>
+                                <exclude reference="a4e-Zd-zV9"/>
+                                <exclude reference="pvW-50-FBg"/>
+                                <exclude reference="WEe-db-Zjk"/>
+                                <exclude reference="WUs-Lc-FQv"/>
+                                <exclude reference="IIo-Ln-aMa"/>
+                                <exclude reference="KOg-Vy-Brp"/>
+                                <exclude reference="kQr-X7-R12"/>
+                                <exclude reference="sYT-Xa-jZE"/>
+                                <exclude reference="Uet-Qg-o8F"/>
+                                <exclude reference="eUp-1z-M1W"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -260,6 +263,10 @@
                                 <include reference="q2V-cm-4Rl"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="GdZ-BN-ahy"/>
+                                <include reference="WNO-3W-wpe"/>
+                                <exclude reference="iih-U8-hnW"/>
+                                <include reference="uq7-y3-o8U"/>
                                 <include reference="EB0-lw-yt0"/>
                                 <include reference="Ocs-6f-CR0"/>
                                 <include reference="UFU-sT-6Vu"/>
@@ -277,10 +284,6 @@
                                 <exclude reference="pvW-50-FBg"/>
                                 <include reference="Uet-Qg-o8F"/>
                                 <include reference="eUp-1z-M1W"/>
-                                <include reference="GdZ-BN-ahy"/>
-                                <include reference="WNO-3W-wpe"/>
-                                <exclude reference="iih-U8-hnW"/>
-                                <include reference="uq7-y3-o8U"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -292,6 +295,13 @@
                                 <include reference="vNX-pU-JU4"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="3aZ-Sy-Yzi"/>
+                                <include reference="bqQ-nh-oFR"/>
+                                <include reference="fAq-Rw-N2Y"/>
+                                <include reference="FPS-Nd-Qic"/>
+                                <include reference="J5p-6P-xLB"/>
+                                <include reference="WRF-Zj-zsB"/>
+                                <include reference="eEd-QF-YjZ"/>
                                 <include reference="EAj-1t-B2m"/>
                                 <include reference="FoE-Rw-itA"/>
                                 <include reference="MeH-7f-L9O"/>
@@ -302,19 +312,12 @@
                                 <include reference="dVD-tJ-qUs"/>
                                 <exclude reference="lid-eh-0hV"/>
                                 <include reference="m3u-d7-jlX"/>
+                                <include reference="WEe-db-Zjk"/>
+                                <include reference="WUs-Lc-FQv"/>
                                 <include reference="IIo-Ln-aMa"/>
                                 <exclude reference="KOg-Vy-Brp"/>
                                 <include reference="kQr-X7-R12"/>
                                 <include reference="sYT-Xa-jZE"/>
-                                <include reference="WEe-db-Zjk"/>
-                                <include reference="WUs-Lc-FQv"/>
-                                <include reference="3aZ-Sy-Yzi"/>
-                                <include reference="bqQ-nh-oFR"/>
-                                <include reference="fAq-Rw-N2Y"/>
-                                <include reference="FPS-Nd-Qic"/>
-                                <include reference="J5p-6P-xLB"/>
-                                <include reference="WRF-Zj-zsB"/>
-                                <include reference="eEd-QF-YjZ"/>
                             </mask>
                         </variation>
                     </view>
@@ -379,7 +382,7 @@
                                     <action selector="restartGame:" destination="dCA-zM-ejI" eventType="touchUpInside" id="ZdO-fk-gNT"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time to death:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-aZ-56m">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time to death:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5N-aZ-56m">
                                 <rect key="frame" x="457" y="335" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -679,15 +682,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUk-Cf-6K3">
+                            <button clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUk-Cf-6K3">
                                 <rect key="frame" x="91" y="499" width="171" height="65"/>
-                                <color key="backgroundColor" red="0.99215686270000003" green="0.67450980390000004" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="171" id="3ti-QV-Wzh"/>
                                     <constraint firstAttribute="height" constant="65" id="H9u-er-TzS"/>
                                 </constraints>
-                                <state key="normal" title="Party Mode">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Party Mode" backgroundImage="titleButtonOff">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="partyModeButtonPressed" destination="1Vb-KC-f6p" eventType="touchUpInside" id="fWI-if-cnH"/>
@@ -695,28 +697,24 @@
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4Y-Qk-pvG">
                                 <rect key="frame" x="20" y="600" width="72" height="0.0"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="i9c-fY-aF4"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zVp-a4-L0N">
                                 <rect key="frame" x="262" y="600" width="72" height="0.0"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="SNq-uH-7pj"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPG-HS-nbH">
                                 <rect key="frame" x="508" y="600" width="72" height="0.0"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="Ox2-4y-sNq"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-ta-Slj">
                                 <rect key="frame" x="334" y="499" width="174" height="65"/>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="174" id="OkC-zL-p68"/>
                                     <constraint firstAttribute="height" constant="65" id="TAg-ex-Wg8"/>
@@ -725,8 +723,10 @@
                                     <constraint firstAttribute="height" constant="65" id="mb7-Sg-fso"/>
                                     <constraint firstAttribute="width" constant="174" id="uTL-fz-uJS"/>
                                 </constraints>
-                                <state key="normal" title="Single Player">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Single Player" backgroundImage="titleButtonOn">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -871,10 +871,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KbS-az-LyU">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KbS-az-LyU">
                                 <rect key="frame" x="4" y="0.0" width="592" height="600"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="auW-4M-okC">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="auW-4M-okC">
                                         <rect key="frame" x="25" y="25" width="542" height="472"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -882,7 +882,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="542" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nYs-rE-dbH" id="8fx-iZ-R0S">
-                                                    <rect key="frame" x="0.0" y="0.0" width="542" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="542" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-TQ-UUz">
@@ -934,7 +934,7 @@
                                             <outlet property="delegate" destination="eXc-f8-OwA" id="xfm-Hu-AlT"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMi-93-iwd">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMi-93-iwd">
                                         <rect key="frame" x="25" y="505" width="542" height="87"/>
                                         <color key="backgroundColor" red="0.99215686270000003" green="0.67450980390000004" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1066,6 +1066,8 @@
     </scenes>
     <resources>
         <image name="goOn" width="253" height="182"/>
+        <image name="titleButtonOff" width="267" height="119"/>
+        <image name="titleButtonOn" width="267" height="120"/>
         <image name="tutorialBanner" width="1334" height="192"/>
     </resources>
     <inferredMetricsTieBreakers>

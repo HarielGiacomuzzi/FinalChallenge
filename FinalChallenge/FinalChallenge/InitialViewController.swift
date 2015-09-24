@@ -37,6 +37,13 @@ class InitialViewController: UIViewController
         partyModeButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         setupView()
         
+        let notPressedButton = UIImage(named: "titleButtonOn")//
+        let versusButtonImage = UIImage(named: "titleButtonOff")
+        singlePlayerButton.setImage( notPressedButton, forState: UIControlState.Normal)
+        singlePlayerButton.setImage(versusButtonImage, forState: UIControlState.Highlighted)
+        
+
+        
     }
     
     
