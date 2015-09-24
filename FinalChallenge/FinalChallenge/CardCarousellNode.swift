@@ -166,8 +166,8 @@ class CardCarouselNode: SKNode {
     func removeCard(index:Int) {
         if !cards.isEmpty {
             delegate?.sendCard(cards[index])
-            cards.removeAtIndex(index)
             cards[index].removeFromParent()
+            cards.removeAtIndex(index)
             
             if !cards.isEmpty {
                 if centerIndex >= cards.count {

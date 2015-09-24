@@ -158,7 +158,8 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
             let location = touch.locationInNode(self)
             if testButton.containsPoint(location) {
                 if testButton.text == "DICE" {
-                    let diceResult = Int(arc4random_uniform(6)+1)
+//                    let diceResult = Int(arc4random_uniform(6)+1)
+                    let diceResult = 2
                     let aux = NSMutableDictionary();
                     aux.setValue(diceResult, forKey: "diceResult");
                     aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");

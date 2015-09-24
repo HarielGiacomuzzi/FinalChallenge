@@ -15,7 +15,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     @IBOutlet weak var GameOverView: UIView!
     
-    var scene = MinigameScene()
+    var scene : MinigameScene?
     
     var minigame = Minigame.FlappyFish
    // var minigame = Minigame.BombGame
@@ -55,8 +55,8 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.showsPhysics = true
-        scene.gameController = self
-        scene.scaleMode = .AspectFit
+        scene!.gameController = self
+        scene!.scaleMode = .AspectFit
         skView.presentScene(scene)
         print("apresentei a cena sem crashar")
         
@@ -64,6 +64,12 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        weak var sceneweak = scene
+        print("a sceene no momento é \(scene)")
+        print("a weaksceene no momento é \(sceneweak)")
+        scene = nil
+        print("a sceene no momento é \(scene)")
+        print("a weaksceene no momento é \(sceneweak)")
         NSNotificationCenter.defaultCenter().removeObserver(self)
 
     }
@@ -71,7 +77,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     func messageReceived(data : NSNotification){
         let peerDisplayName = data.userInfo!["peerID"] as! String
         let data = data.userInfo!["actionReceived"] as! NSDictionary
-        scene.messageReceived(peerDisplayName, dictionary: data)
+        scene!.messageReceived(peerDisplayName, dictionary: data)
     }
     
     func gameOverController(playerArray:[String]){

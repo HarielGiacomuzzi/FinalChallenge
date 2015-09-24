@@ -38,8 +38,7 @@ class MinigameDescriptionViewController: UIViewController {
         scene = tutorialScene(size: CGSize(width: 1024, height: 768))
         scene!.viewController = self
         
-        
-        navigationController?.navigationBarHidden = true
+
         GameManager.sharedInstance.minigameDescriptionViewController = self
         if let path = NSBundle.mainBundle().pathForResource("MinigameDetails", ofType: "plist") {
             let dic = NSDictionary(contentsOfFile: path)
@@ -95,11 +94,20 @@ class MinigameDescriptionViewController: UIViewController {
 
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "gotoMinigameVC" {
             let minivc = segue.destinationViewController as! MiniGameViewController
             minivc.minigame = minigame
         }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+                performSegueWithIdentifier("gotoMinigameVC", sender: nil)
     }
 
 }
