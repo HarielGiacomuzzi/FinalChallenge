@@ -78,7 +78,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
         let bubbleTexture = bubbleAtlas.textureNamed("bubble%200")
         let bubble : SKSpriteNode = SKSpriteNode(texture: bubbleTexture)
         bubble.zPosition = 10
-        bubble.position = CGPoint(x: self.frame.width/2 - 80, y: self.frame.height/2 - 100)
+        bubble.position = CGPoint(x: self.frame.width/2 - 80, y: self.frame.height/2 - 45)
         self.addChild(bubble)
         bubble.name = "Gives small burst"
         spriteArray.append(bubble)
