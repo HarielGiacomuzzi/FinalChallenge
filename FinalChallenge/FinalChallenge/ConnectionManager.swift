@@ -268,6 +268,13 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_AddCard", object: nil, userInfo: userInfo)
                 return
             }
+        // board sends card to player
+            if message.valueForKey("removeCard") != nil {
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_RemoveCard", object: nil, userInfo: userInfo)
+                return
+            }
+                
         //player sends card to board
             if message.valueForKey("sendCard") != nil {
                 print(message)

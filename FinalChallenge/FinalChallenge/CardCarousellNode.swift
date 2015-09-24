@@ -180,6 +180,7 @@ class CardCarouselNode: SKNode {
         
     }
     
+    
     // MARK: - Auxiliar Functions
     
     func fixCardsZPosition() {

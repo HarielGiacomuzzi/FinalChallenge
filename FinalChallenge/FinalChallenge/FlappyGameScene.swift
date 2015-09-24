@@ -458,7 +458,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         //self.removeFromParent()
         //self.view?.presentScene(nil)
         goScene.setupView()
-        self.view?.presentScene(goScene, transition: transition)
+        self.view?.presentScene(goScene)
     }
     
     /*

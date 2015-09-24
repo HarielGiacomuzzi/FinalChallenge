@@ -81,11 +81,12 @@ class GameManager : NSObject {
         for p in players{
             if p.playerIdentifier == (data.userInfo!["peerID"] as! String){
                 let card = dic["item"] as! String
-                var setCard = Card()
+                var setCard = ActiveCard()
                 for c in p.items{
                     if card == c.cardName{
                         p.items.removeObject(c)
-                        setCard = c
+                        setCard = c as! ActiveCard
+                        setCard.used = true
                         break
                     }
                 }
@@ -211,5 +212,23 @@ class GameManager : NSObject {
         
         return aux
     }
+    
+    func updatePlayerPosition(move:Int, player:Player){
+        BoardGraph.SharedInstance.walk(move, player: player, view: boardViewController);
+    }
+    
+    func loseCard(player:Player){
+        let value = player.items.count
+        let indexCard : Int = (random() % value)
+        player.items.removeAtIndex(indexCard)
+        
+        let removedCard = player.items[indexCard]
+        let cardData = ["player":player.playerIdentifier, "item": removedCard]
+        let dic = ["removeCard":" ", "dataDic" : cardData]
+        
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
+    
+    
     
 }
