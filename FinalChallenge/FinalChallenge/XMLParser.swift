@@ -22,6 +22,8 @@ class XMLParser: NSObject, NSXMLParserDelegate {
         BoardGraph.SharedInstance.setNeighborsReference();
     }
     
+    // THIS WARNINGS ARE BOTHERING ME, PLEASE FIX IT, PLOX MORDEKAISER APPROVES
+    
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if elementName == "HOUSE"{
             isOnNode = true;

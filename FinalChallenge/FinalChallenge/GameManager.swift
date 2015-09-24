@@ -229,6 +229,4 @@ class GameManager : NSObject {
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     
-    
-    
 }
