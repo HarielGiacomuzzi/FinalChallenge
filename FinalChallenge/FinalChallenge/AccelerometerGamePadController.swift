@@ -58,7 +58,7 @@ class AccelerometerGamePadController: UIViewController {
     }
     
     func closeController(data:NSNotification) {
-        navigationController?.popViewControllerAnimated(false)
+        dismissViewControllerAnimated(false, completion: nil)
 
     }
 }

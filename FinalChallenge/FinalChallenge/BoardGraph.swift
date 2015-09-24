@@ -125,17 +125,19 @@ class BoardGraph : NSObject{
     // sets the item of a node, return true if it was successfull and false otherwise
     func setItem(Item : Card, nodeName : String) ->Bool{
         if !haveItem(nodeName){
-            nodes[nodeName]?.item = Item;
-            return true;
+            print("Colocou a carta \(Item.cardName)")
+            nodes[nodeName]?.item = Item
+            return true
         }
-        return false;
+        return false
     }
     
+    // inform the player witch card he got from the boardNode
     func sendCardToPlayer(nodeName : String, player:Player){
         let card = nodes[nodeName]!.item
         player.items.append(card!)
         
-        let cardData = ["player":player.playerIdentifier, "item": card!.name]
+        let cardData = ["player":player.playerIdentifier, "item": card!.cardName]
         let dic = ["addCard":" ", "dataDic" : cardData]
         
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
@@ -145,20 +147,28 @@ class BoardGraph : NSObject{
     
     //removes item from node and adds item to player
     //sends message to player phone to update item
-    
     func pickItem(nodeName : String, player:Player) -> Bool{
+        
+        print(player.items)
+        
         if haveItem(nodeName) {
             if !isUsable(nodeName){
                 self.sendCardToPlayer(nodeName, player: player)
+                print("Entregou ao jogador a carta não usavel")
             } else{
                 if !wasUsed(nodeName){
                     self.sendCardToPlayer(nodeName, player: player)
+                    print("Entregou ao jogador a carta usavel, que ainda não foi usada")
                 } else{
                     // caso a carta ja tenha sido usada ela ativa seu efeito
+                    print("A carta era usavel e está sendo usada")
                     self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
                     nodes[nodeName]?.item = nil
                 }
             }
+            
+            print(player.items)
+            
             return true
         }
         return false;
@@ -168,12 +178,21 @@ class BoardGraph : NSObject{
     func activateCard(card:ActiveCard, targetPlayer:Player){
         switch(card.cardName){
             // each card has a type and a name, convert the card to its type by its name
-            case "StealGoldCard" :  let actionCard = card as! StealGoldCard
+            case "StealGoldCard" :  print("Fez o efeito da carta StealGoldCard")
+                                    let actionCard = card as! StealGoldCard
                                     actionCard.activate(targetPlayer)
+            case "MoveBackCard" :   print("Fez o efeito da carta MoveBackCard")
+                                    let actionCard = card as! MoveBackCard
+                                    actionCard.activate(targetPlayer)
+            case "LoseCard" :       print("Fez o efeito da carta LoseCard")
+                                    let actionCard = card as! LoseCard
+                                    actionCard.activate(targetPlayer)
+            
             default: break
         }
     }
     
+    // Recursive* not Recursivo
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
         var lista : [BoardNode] = [];
         if qtd == 0{
@@ -189,6 +208,7 @@ class BoardGraph : NSObject{
         return lista
     }
     
+    // Jhonny Walker keep walking
     func walk(qtd : Int, player : Player, view : UIViewController?){
         let playerLastNode = nodeFor(player)
         var x : [BoardNode] = walkRecursivo(qtd, node: playerLastNode!)
@@ -213,10 +233,11 @@ class BoardGraph : NSObject{
         }
     
     }
-    
+    //we may need this
     private func paintPaths(path : [String]){
     }
     
+    // boardNodes class
     class BoardNode : NSObject{
         var nextMoves : [BoardNode] = [];
         var posX = 0.0;
@@ -257,12 +278,62 @@ class BoardGraph : NSObject{
             return false;
         }
         
+        // defines if the node will carry an item or not
+        func setupItems(){
+            print("Setting Node Item...")
+            print("Node Position: X: \(self.posX) and Y: \(self.posY)")
+            let willHaveItem : Int = (random() % 2)
+            
+            switch(willHaveItem){
+                case 0: print("Adding card")
+                        self.addItem()
+                case 1: print("No card Added")
+                        self.item = nil
+                default: break
+            }
+            
+            
+            let it = StealGoldCard()
+            it.used = false
+            self.item = it
+        }
+        
+        // defines witch item the node will carry
+        func addItem(){
+            let willBeUsable : Int = (random() % 2)
+            
+            switch(willBeUsable){
+                case 0: let witchOneWillBe : Int = (random() % 3) // this number may vary
+                        switch(witchOneWillBe){
+                            case 0: let it = StealGoldCard()
+                                    it.used = false
+                                    self.item = it
+                                    print("Card StealGoldCard added")
+                            case 1: let it = MoveBackCard()
+                                    it.used = false
+                                    self.item = it
+                                    print("Card MoveBackCard added")
+                            case 2: let it = LoseCard()
+                                    it.used = false
+                                    self.item = it
+                                    print("Card LoseCard added")
+                            default: break
+                        }
+                
+                case 1: print("Collectable card added")
+                        let it = NotActiveCard() //we may need to pass a value
+                        self.item = it
+                
+                default: break
+            }
+        }
+        
         init(posX : Double, posY : Double, father : BoardNode?) {
             super.init();
             self.father = father;
             self.posX = posX;
             self.posY = posY;
-            self.item = StealGoldCard()
+            self.setupItems()
         }
     }
     

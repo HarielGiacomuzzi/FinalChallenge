@@ -56,6 +56,8 @@
 		B5279F8D1BB06CB00015DBE7 /* ActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */; settings = {ASSET_TAGS = (); }; };
 		B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */; settings = {ASSET_TAGS = (); }; };
 		B5279F931BB08C7D0015DBE7 /* StealGoldCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */; settings = {ASSET_TAGS = (); }; };
+		B579AB681BB332E700B9D181 /* MoveBackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579AB671BB332E700B9D181 /* MoveBackCard.swift */; settings = {ASSET_TAGS = (); }; };
+		B579AB6A1BB3358800B9D181 /* LoseOneCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579AB691BB3358800B9D181 /* LoseOneCard.swift */; settings = {ASSET_TAGS = (); }; };
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
 		B57B33671B86566E000E5F53 /* GameOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57B33661B86566E000E5F53 /* GameOver.xib */; };
 		B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B33681B8656D7000E5F53 /* GameOverXib.swift */; };
@@ -83,8 +85,8 @@
 		B5F60BBE1B83C36C00786728 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBD1B83C36C00786728 /* Player.swift */; };
 		B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */; };
 		B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BC11B84FA0400786728 /* MyParticle2.sks */; };
+		DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB129D681BB31D15002B4862 /* squarePopUp.atlas */; settings = {ASSET_TAGS = (); }; };
 		DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */; };
-		DB1748C21B8CF2F100201BA2 /* iPhoneDiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */; };
 		DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB42C9BB1BA9D59400D6D247 /* Board.atlas */; };
 		DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB458B721B5409B90066B38C /* AppDelegate.swift */; };
 		DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB458B741B5409B90066B38C /* FinalChallenge.xcdatamodeld */; };
@@ -171,6 +173,8 @@
 		B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveCard.swift; sourceTree = "<group>"; };
 		B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotActiveCard.swift; sourceTree = "<group>"; };
 		B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StealGoldCard.swift; sourceTree = "<group>"; };
+		B579AB671BB332E700B9D181 /* MoveBackCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveBackCard.swift; sourceTree = "<group>"; };
+		B579AB691BB3358800B9D181 /* LoseOneCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoseOneCard.swift; sourceTree = "<group>"; };
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
 		B57B33661B86566E000E5F53 /* GameOver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameOver.xib; sourceTree = "<group>"; };
 		B57B33681B8656D7000E5F53 /* GameOverXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverXib.swift; sourceTree = "<group>"; };
@@ -199,8 +203,8 @@
 		B5F60BBD1B83C36C00786728 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyParticleNode.swift; sourceTree = "<group>"; };
 		B5F60BC11B84FA0400786728 /* MyParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle2.sks; sourceTree = "<group>"; };
+		DB129D681BB31D15002B4862 /* squarePopUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squarePopUp.atlas; sourceTree = "<group>"; };
 		DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhonePlayerViewController.swift; sourceTree = "<group>"; };
-		DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhoneDiceViewController.swift; sourceTree = "<group>"; };
 		DB42C9BB1BA9D59400D6D247 /* Board.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Board.atlas; sourceTree = "<group>"; };
 		DB458B6D1B5409B90066B38C /* FinalChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB458B711B5409B90066B38C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -263,7 +267,6 @@
 		5E8410011BA9CC1B0099B16B /* PlayerControllerView */ = {
 			isa = PBXGroup;
 			children = (
-				DB1748C11B8CF2F100201BA2 /* iPhoneDiceViewController.swift */,
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E840FFF1BA9CC000099B16B /* PlayerControllerScene.swift */,
 				5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */,
@@ -368,6 +371,8 @@
 			children = (
 				B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */,
 				B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */,
+				B579AB671BB332E700B9D181 /* MoveBackCard.swift */,
+				B579AB691BB3358800B9D181 /* LoseOneCard.swift */,
 			);
 			name = ActivateCards;
 			sourceTree = "<group>";
@@ -597,7 +602,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
+						DevelopmentTeam = DVXNNDG4U4;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -664,6 +669,7 @@
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
 				4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */,
 				B5DD1B541B8F90EC00AA1EB6 /* funMusic.mp3 in Resources */,
+				DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */,
 				DBE862051B850DB700C8099E /* board_2.xml in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
 			);
@@ -698,6 +704,7 @@
 				DBE862071B8552C800C8099E /* MainBoard.swift in Sources */,
 				B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */,
 				B5DD1B421B8BA75300AA1EB6 /* MinigameGameOverController.swift in Sources */,
+				B579AB681BB332E700B9D181 /* MoveBackCard.swift in Sources */,
 				5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */,
 				5E68AD7F1B8CD57C00FD4404 /* BombWallNode.swift in Sources */,
 				5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */,
@@ -732,7 +739,6 @@
 				B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */,
 				5E8410001BA9CC000099B16B /* PlayerControllerScene.swift in Sources */,
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
-				DB1748C21B8CF2F100201BA2 /* iPhoneDiceViewController.swift in Sources */,
 				B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
 				2661C40A1BB07EEC003A49F9 /* tutorialScene.swift in Sources */,
@@ -741,6 +747,7 @@
 				4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */,
 				DB458B761B5409B90066B38C /* FinalChallenge.xcdatamodeld in Sources */,
 				5E1C59C91BB0771200BCDE1C /* CardSprite.swift in Sources */,
+				B579AB6A1BB3358800B9D181 /* LoseOneCard.swift in Sources */,
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,
 				DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */,
 				B5F60BBE1B83C36C00786728 /* Player.swift in Sources */,

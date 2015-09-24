@@ -53,7 +53,7 @@ class MinigameDescriptionViewController: UIViewController {
             let dic = NSDictionary(contentsOfFile: path)
             switch minigame {
             case .FlappyFish:
-                let game = dic?.objectForKey("FlappyFish") as! NSDictionary
+                _ = dic?.objectForKey("FlappyFish") as! NSDictionary
                 scene?.gameNumber = 1
                 scene?.gameName = "Flappy Fish"
                 for miniGameTitle in gameTitle{
@@ -70,7 +70,7 @@ class MinigameDescriptionViewController: UIViewController {
                 }
          //       minigameDescription.text = game.objectForKey("description") as! String
             case .BombGame:
-                let game = dic?.objectForKey("BombGame") as! NSDictionary
+                _ = dic?.objectForKey("BombGame") as! NSDictionary
                 scene?.gameNumber = 2
                 scene?.gameName = "Bomb Bots"
                 for miniGameTitle in gameTitle{
@@ -89,8 +89,7 @@ class MinigameDescriptionViewController: UIViewController {
 
 
           //      minigameDescription.text = game.objectForKey("description") as! String
-            default:
-                ()
+
             }
 
 

@@ -22,6 +22,8 @@ class XMLParser: NSObject, NSXMLParserDelegate {
         BoardGraph.SharedInstance.setNeighborsReference();
     }
     
+    // THIS WARNINGS ARE BOTHERING ME, PLEASE FIX IT, PLOX MORDEKAISER APPROVES
+    
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if elementName == "HOUSE"{
             isOnNode = true;
@@ -36,7 +38,7 @@ class XMLParser: NSObject, NSXMLParserDelegate {
         }
         if elementName == "BAU"{
             isOnNode = true;
-            var number = (attributeDict["number"] as? NSString)?.integerValue;
+            let number = (attributeDict["number"] as? NSString)?.integerValue;
             currentNode = "Bau\(number!)"
             BoardGraph.SharedInstance.createNode((attributeDict["x"] as! NSString).doubleValue, y: (attributeDict["y"] as! NSString).doubleValue, name: "Bau\(number!)", father: nil);
             BoardGraph.SharedInstance.setFather(attributeDict["father"] as String!, sonName: "Bau\(number!)");
@@ -54,7 +56,7 @@ class XMLParser: NSObject, NSXMLParserDelegate {
         
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String?) {
+    func parser(parser: NSXMLParser, foundCharacters string: String) {
         
     }
     

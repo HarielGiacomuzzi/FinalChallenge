@@ -457,6 +457,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         print("entrou aqui ta sacando 1")
         //self.removeFromParent()
         //self.view?.presentScene(nil)
+        goScene.setupView()
         self.view?.presentScene(goScene)
     }
     

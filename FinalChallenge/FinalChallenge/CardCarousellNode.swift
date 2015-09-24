@@ -95,7 +95,7 @@ class CardCarouselNode: SKNode {
             fixScale(centerCard)
             
 
-            if firstTouch && canRemoveWithSwipeUp {
+            if firstTouch {
                 if changeInX.mod() > changeInY {
                     movingUp = false
                 } else {
@@ -103,7 +103,7 @@ class CardCarouselNode: SKNode {
                 }
             }
             
-            if movingUp {
+            if movingUp && canRemoveWithSwipeUp {
                 moveUp(centerCard.position.y + changeInY)
             } else {
                 moveSideways(centerCard.position.x + changeInX)
@@ -179,6 +179,7 @@ class CardCarouselNode: SKNode {
         }
         
     }
+    
     
     // MARK: - Auxiliar Functions
     

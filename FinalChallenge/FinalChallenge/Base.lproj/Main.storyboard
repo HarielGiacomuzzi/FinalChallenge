@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1Vb-KC-f6p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -44,7 +44,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dFJ-Xp-Ae5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sNE-Xt-480" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hey-bv-Jt4">
@@ -367,11 +367,11 @@
                         <viewControllerLayoutGuide type="bottom" id="QqF-Uq-dJ0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="X2g-UN-o7q">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oE8-5a-Zon">
-                                <rect key="frame" x="354" y="415" width="95" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oE8-5a-Zon">
+                                <rect key="frame" x="353" y="331" width="94" height="30"/>
                                 <state key="normal" title="Restart Game">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -385,8 +385,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CwW-rK-YYg">
-                                <rect key="frame" x="143" y="415" width="132" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CwW-rK-YYg">
+                                <rect key="frame" x="144" y="331" width="130" height="30"/>
                                 <state key="normal" title="Back to Minigames">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -580,8 +580,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0Z-zd-xsx">
-                                <rect key="frame" x="30" y="20" width="541" height="98"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S0Z-zd-xsx">
+                                <rect key="frame" x="34" y="20" width="533" height="98"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="274" id="I3F-UK-4Yp"/>
                                     <constraint firstAttribute="height" constant="274" id="SdW-HZ-D4c"/>
@@ -600,8 +600,8 @@
                                     <action selector="upDataSender" destination="zUZ-IC-i5H" eventType="touchUpInside" id="Lxq-d1-u7C"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3y-yg-SC1">
-                                <rect key="frame" x="60" y="484" width="501" height="108"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3y-yg-SC1">
+                                <rect key="frame" x="64" y="484" width="493" height="108"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="108" id="FyQ-5N-MmQ"/>
                                     <constraint firstAttribute="height" constant="274" id="bzd-KJ-Ihs"/>
@@ -707,15 +707,15 @@
                                     <constraint firstAttribute="height" id="SNq-uH-7pj"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WPG-HS-nbH">
-                                <rect key="frame" x="510" y="600" width="75" height="0.0"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPG-HS-nbH">
+                                <rect key="frame" x="508" y="600" width="72" height="0.0"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="Ox2-4y-sNq"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-ta-Slj">
-                                <rect key="frame" x="336" y="499" width="174" height="65"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYA-ta-Slj">
+                                <rect key="frame" x="334" y="499" width="174" height="65"/>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="174" id="OkC-zL-p68"/>
@@ -736,6 +736,9 @@
                                         <exclude reference="gHm-dP-amR"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="singlePlayerButton:" destination="1Vb-KC-f6p" eventType="touchUpInside" id="xYj-iH-m9B"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -759,7 +762,7 @@
                         <outlet property="mainView" destination="ZcK-a9-FJg" id="yFg-Sb-rPK"/>
                         <outlet property="partyModeButton" destination="BUk-Cf-6K3" id="myw-bb-cPN"/>
                         <outlet property="singlePlayerButton" destination="xYA-ta-Slj" id="hZn-t6-BOv"/>
-                        <segue destination="Y9w-QZ-R0C" kind="show" identifier="" id="FnE-Bj-SsS"/>
+                        <segue destination="Y9w-QZ-R0C" kind="show" identifier="minigameSegue" id="FnE-Bj-SsS"/>
                         <segue destination="nrX-X9-ixP" kind="custom" identifier="iphoneSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="jpC-FC-5oD"/>
                         <segue destination="8ga-GJ-cx0" kind="custom" identifier="ipadSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="AJR-aY-zUi"/>
                     </connections>
@@ -842,7 +845,7 @@
                         <viewControllerLayoutGuide type="bottom" id="UaF-yA-c0n"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5lL-ja-Op9" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -865,7 +868,7 @@
                         <viewControllerLayoutGuide type="bottom" id="elV-ok-nAw"/>
                     </layoutGuides>
                     <view key="view" alpha="0.5" contentMode="scaleToFill" id="odR-I5-w3m">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KbS-az-LyU">
@@ -989,7 +992,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Vr8-B1-12e"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="K6S-YJ-Ao9" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1016,7 +1019,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="lPg-7D-jtd"/>
                     <connections>
-                        <segue destination="1Zr-eQ-4F0" kind="show" identifier="gotoDiceView" id="V8j-2L-VkD"/>
                         <segue destination="des-rM-SDy" kind="show" identifier="gotoAcelePad" id="EGX-Pa-y2G"/>
                         <segue destination="I0t-Fc-Jfd" kind="show" identifier="gotoSwipePad" id="LsT-VI-dB9"/>
                     </connections>
@@ -1024,53 +1026,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="STS-k4-Pb1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="638" y="1332"/>
-        </scene>
-        <!--iPhone Dice View Controller-->
-        <scene sceneID="MiT-xX-VQX">
-            <objects>
-                <viewController id="1Zr-eQ-4F0" customClass="iPhoneDiceViewController" customModule="FinalChallenge" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zof-Pq-HYf"/>
-                        <viewControllerLayoutGuide type="bottom" id="yeP-UD-s9h"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RD9-dc-U6W">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1X-oz-wj6">
-                                <rect key="frame" x="277" y="383" width="57" height="30"/>
-                                <state key="normal" title="RollDice">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="rollDice:" destination="1Zr-eQ-4F0" eventType="touchUpInside" id="hy9-kp-7JL"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jtn-fo-B5S">
-                                <rect key="frame" x="297" y="289" width="11" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="ipq-1p-waw"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="E1X-oz-wj6" firstAttribute="leading" secondItem="RD9-dc-U6W" secondAttribute="leading" constant="277" id="5Ni-vo-J50"/>
-                            <constraint firstItem="yeP-UD-s9h" firstAttribute="top" secondItem="E1X-oz-wj6" secondAttribute="bottom" constant="187" id="MDa-5A-0bU"/>
-                            <constraint firstItem="E1X-oz-wj6" firstAttribute="centerX" secondItem="Jtn-fo-B5S" secondAttribute="centerX" constant="3" id="Yal-29-Nc5"/>
-                            <constraint firstItem="E1X-oz-wj6" firstAttribute="top" secondItem="Jtn-fo-B5S" secondAttribute="bottom" constant="73" id="nLp-Fs-oLW"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="lblResult" destination="Jtn-fo-B5S" id="YZS-FP-WeW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L32-wc-KND" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2107" y="2347"/>
         </scene>
         <!--Puff Game View Controller-->
         <scene sceneID="kqc-UI-Ju5">
@@ -1114,8 +1069,8 @@
         <image name="tutorialBanner" width="1334" height="192"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KZb-9N-ZG3"/>
-        <segue reference="6ca-gz-9Tn"/>
+        <segue reference="Aso-TF-3da"/>
+        <segue reference="S5e-fy-Ifo"/>
         <segue reference="IuB-wD-4uJ"/>
         <segue reference="T9l-u6-hEW"/>
         <segue reference="Ahl-Ky-SJK"/>

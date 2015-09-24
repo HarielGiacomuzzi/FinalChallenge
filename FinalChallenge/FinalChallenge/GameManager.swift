@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GameManager {
+class GameManager : NSObject {
     static let sharedInstance = GameManager()
     var miniGameActive = String()
     var boardViewController : UIViewController?
@@ -27,12 +27,14 @@ class GameManager {
     var minigameGameOverViewControllerSinglePlayer : MinigameGameOverControllerSinglePlayer?
     
     var minigameOrderArray : [Minigame] = []
-    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
-    //var allMinigames : [Minigame] = [.FlappyFish]
+    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    var allMinigames : [Minigame] = [.FlappyFish]
     
-    init(){
+    override init(){
+        super.init()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived2:", name: "ConnectionManager_EndAction", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil);
     }
     
     // verifica se todos jogaram
@@ -42,51 +44,54 @@ class GameManager {
             controlesDeTurno = 0;
             self.isOnMiniGame = true;
             beginMinigame()
-        }else{
-            //controlesDeTurno = controlesDeTurno+1;
         }
         // proximo jogador
-        controlesDeTurno = 0 // TIRAR ISSO AQUI, USADO APENAS PARA DEBUG
         selectPlayers(controlesDeTurno)
      }
     
     func playerTurn(player:Player?){
         let location = BoardGraph.SharedInstance.whereIs(player!)
-        let haveIten = BoardGraph.SharedInstance.pickItem(location!, player: player!)
+        _ = BoardGraph.SharedInstance.pickItem(location!, player: player!)
     }
-    
-    /*
-    // dice responce
-    func messageReceived(data : NSNotification){
-        if let result = (data.userInfo!["diceResult"] as? Int){
-            for p in players{
-                if p.playerIdentifier == (data.userInfo!["peerID"] as! String){
-                    BoardGraph.SharedInstance.walk(result, player: p, view: boardViewController);
-                    if !self.isOnMiniGame{
-                        playerTurnEnded(p)
-                    }
-                    break;
-                }
-            }
-        }
-    }*/
     
     //dice responce
     func messageReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
                     BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
-                    //playerTurnEnded(p)
+                    playerTurnEnded(p)
                     playerTurn(p)
                     break;
                 }
             }
     }
-    
+    // Finaliza turno
     func messageReceived2(data : [String : NSObject]){
         for p in players{
             if p.playerIdentifier == (data["peerID"] as! String){
                 playerTurnEnded(p)
+                break;
+            }
+        }
+    }
+    // manda a carta a ser adicionada no boardGame
+    func mr3(data : NSNotification){
+        let dic = data.userInfo!["dataDic"] as! NSDictionary
+        
+        for p in players{
+            if p.playerIdentifier == (data.userInfo!["peerID"] as! String){
+                let card = dic["item"] as! String
+                var setCard = ActiveCard()
+                for c in p.items{
+                    if card == c.cardName{
+                        p.items.removeObject(c)
+                        setCard = c as! ActiveCard
+                        setCard.used = true
+                        break
+                    }
+                }
+                let whereIsPlayer = BoardGraph.SharedInstance.whereIs(p)
+                _ = BoardGraph.SharedInstance.setItem(setCard, nodeName: whereIsPlayer!) // return true if card was set
                 break;
             }
         }
@@ -108,46 +113,27 @@ class GameManager {
         }
     }
     
-    /*
-    func cleanManager(){
-        gameActive = ""
-        playerRank.removeAll(keepCapacity: false)
-        isMultiplayer = nil
-    }*/
-    
+    // acabou a rodada, está na hora da aventura :P
     func beginMinigame() {
         self.isOnMiniGame = false;
         self.playerTurnEnded(nil);
         return Void()
-        
-        print("CHAMEI A FUNÇAO GO TO MINIGAME")
-        print("O ARRAY TEM \(minigameOrderArray.count) ELEMENTOS")
-        for m in minigameOrderArray {
-            print(m.rawValue)
-        }
+
         if minigameOrderArray.isEmpty {
-            print("OPS, ESTAVA VAZIO, HEHEHE, VOU ENCHE-LO")
             fillMinigameOrderArray()
-            print("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
-            for m in minigameOrderArray {
-                print(m.rawValue)
-            }
         }
         let minigame = minigameOrderArray.randomItem()
-        
-        print("SERA QUE EU REMOVI UM ELEMENTO MESMO GALERA????")
-        print("O ARRAY AGORA TEM \(minigameOrderArray.count) ELEMENTOS")
         for m in minigameOrderArray {
             print(m.rawValue)
         }
         
-        print("O ELEMENTO ESCOLHIDO  R A N D O M I C A M E N T E  FOI O \(minigame.rawValue)")
         let dic = ["openController":"", "gameName":minigame.rawValue]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
 
     }
     
+    // chamado quando o player já escolheu um caminho no tabuleiro
     func pathChosen() {
         if isOnMiniGame {
         beginMinigame()
@@ -160,6 +146,7 @@ class GameManager {
         }
     }
     
+    // chama isso quando termina o minigame e inicia a próxima rodada
     func dismissMinigame() {
         if let vc = minigameGameOverViewController {
             vc.dismissViewControllerAnimated(false, completion: {() in
@@ -173,7 +160,6 @@ class GameManager {
             })
             //selectPlayers(0);
         }
-        print("Cheguei aqui :P");
         let dic = ["closeController":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         self.isOnMiniGame = false;
@@ -188,6 +174,10 @@ class GameManager {
                 }
             })
         }
+        let dic = ["closeController":" "]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        self.isOnMiniGame = false;
+        self.playerTurnEnded(nil);
     }
     
     
@@ -204,7 +194,6 @@ class GameManager {
             })
             //selectPlayers(0);
         }
-        print("Cheguei aqui :P");
     }
     
     func updatePlayerMoney(player:Player, value:Int) ->Int{
@@ -222,6 +211,22 @@ class GameManager {
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
         return aux
+    }
+    
+    func updatePlayerPosition(move:Int, player:Player){
+        BoardGraph.SharedInstance.walk(move, player: player, view: boardViewController);
+    }
+    
+    func loseCard(player:Player){
+        let value = player.items.count
+        let indexCard : Int = (random() % value)
+        player.items.removeAtIndex(indexCard)
+        
+        let removedCard = player.items[indexCard]
+        let cardData = ["player":player.playerIdentifier, "item": removedCard]
+        let dic = ["removeCard":" ", "dataDic" : cardData]
+        
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     
 }

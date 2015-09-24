@@ -43,6 +43,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
+        carousel.canRemoveWithSwipeUp = false
         createTestButton()
 
     }
@@ -125,7 +126,9 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     func addCard(card:String) {
         let cardSprite = CardSprite(card: card)
         carousel.insertCard(cardSprite)
-        
+    }
+    func removeCard(card:String) {
+        print("finge que a carta foi removida")
     }
     
     func sendCard(card: SKSpriteNode) {
@@ -134,12 +137,13 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         let cardData = ["player":playerName, "item": sentCard]
         let dic = ["sendCard":" ", "dataDic" : cardData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        carousel.canRemoveWithSwipeUp = false
         
     }
     
     func createTestButton() {
         
-        testButton = SKLabelNode(text: "NADA")
+        testButton = SKLabelNode(text: "IDLE")
         testButton.position = CGPointMake(frame.size.width - testButton.frame.size.width, frame.size.height/2)
         testButton.fontSize = 50.0
         testButton.fontName = "GillSans-Bold"
@@ -148,6 +152,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print(carousel.canRemoveWithSwipeUp)
         for touch: AnyObject in touches {
             
             let location = touch.locationInNode(self)
@@ -158,11 +163,10 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
                     aux.setValue(diceResult, forKey: "diceResult");
                     aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
                     ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-                    testButton.text = "DONE"
+                    testButton.text = "IDLE"
+                    carousel.canRemoveWithSwipeUp = false
                     
-                } else if testButton.text == "DONE" {
-                    
-                }
+                } 
             }
 
         }

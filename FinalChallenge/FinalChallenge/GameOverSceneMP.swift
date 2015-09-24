@@ -17,7 +17,7 @@ class GameOverSceneMP : MinigameScene {
     override func didMoveToView(view: SKView) {
         
         self.backgroundColor = UIColor.redColor()
-        var back = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let back = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         back.text = "Back to Board"
         back.name = "Back to Board"
         back.position = CGPointMake(self.size.width/2, 50)
@@ -32,6 +32,10 @@ class GameOverSceneMP : MinigameScene {
                     p = j
                 }
             }
+            
+            //FOR DEBUG
+            p.avatar = "red";
+            //FOR DEBUG
             
             let sprite =  SKSpriteNode(imageNamed: p.avatar!)
             
@@ -55,13 +59,13 @@ class GameOverSceneMP : MinigameScene {
     //touch nodes
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        var touch : UITouch? = touches.first as UITouch?
+        let touch : UITouch? = touches.first as UITouch?
         
         if let location = touch?.locationInNode(self) {
             let touchedNode = self.nodeAtPoint(location)
             
             if touchedNode.name == "Back to Board" {
-                let transition = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
+                _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
                 self.view?.presentScene(nil)
                 GameManager.sharedInstance.dismissMinigameSP()
             }
