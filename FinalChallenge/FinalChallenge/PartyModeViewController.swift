@@ -28,6 +28,7 @@ class PartyModeViewController : UIViewController{
         skView.ignoresSiblingOrder = true
         skView.showsPhysics = false
         scene.scaleMode = .AspectFit
+        scene.viewController = self
         skView.presentScene(scene)
     }
     

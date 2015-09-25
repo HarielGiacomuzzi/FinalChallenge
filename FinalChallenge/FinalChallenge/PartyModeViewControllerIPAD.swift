@@ -106,11 +106,16 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     }
     
     @IBAction func gotoBoardGame(){
-        BoardGraph.SharedInstance.loadBoard("board_2");
+        
+        let change = "change"
+        let c = ["change":change]
+        let dic = ["IphoneChangeView": " ", "change":c]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        
+        BoardGraph.SharedInstance.loadBoard("board_3");
 
+        
         self.performSegueWithIdentifier("gotoBoardGame", sender: nil)
-        
-        
         
     }
     func gameSettings(){

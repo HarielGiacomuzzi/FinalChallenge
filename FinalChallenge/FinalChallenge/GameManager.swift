@@ -28,8 +28,8 @@ class GameManager : NSObject {
     var minigameGameOverViewControllerSinglePlayer : MinigameGameOverControllerSinglePlayer?
     
     var minigameOrderArray : [Minigame] = []
-    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
-    var allMinigames : [Minigame] = [.FlappyFish]
+    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    //var allMinigames : [Minigame] = [.FlappyFish]
     
     override init(){
         super.init()

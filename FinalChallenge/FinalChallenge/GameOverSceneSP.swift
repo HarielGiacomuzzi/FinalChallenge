@@ -90,7 +90,7 @@ class GameOverSceneSP : MinigameScene{
                 default: break
                 }
                 
-                scene.scaleMode = SKSceneScaleMode.AspectFit
+                scene.scaleMode = SKSceneScaleMode.Fill
                 self.scene!.view!.presentScene(scene)
             }
             

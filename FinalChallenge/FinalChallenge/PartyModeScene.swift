@@ -46,6 +46,8 @@ class PartyModeScene: SKScene {
             
             sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height/2)
             
+            sprite.zPosition = 100
+            
             arrayAvatarSprite.append(sprite)
             
             self.addChild(sprite)
@@ -183,7 +185,6 @@ class PartyModeScene: SKScene {
     }
     
     func changeView(data : NSNotification){
-        _ = data.userInfo!["peerID"] as! String
         let dictionary = data.userInfo!["change"] as! NSDictionary
         let message = dictionary["change"] as! String
         
