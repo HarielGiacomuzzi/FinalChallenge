@@ -168,7 +168,7 @@ class GameManager : NSObject {
         self.playerTurnEnded(nil);
     }
     
-    func dismissMinigameSP(){
+    func dismissMinigameMP(){
         if let vc2 = self.minigameViewController {
             vc2.scene = MinigameScene();
 //            vc2.scene = nil
@@ -180,8 +180,25 @@ class GameManager : NSObject {
                 }
             })
         }
+        let dic = ["closeController":" "]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        self.isOnMiniGame = false;
+        self.playerTurnEnded(nil);
     }
     
+    func dismissMinigameSP(){
+        if let vc2 = self.minigameViewController {
+            vc2.scene = MinigameScene();
+            //            vc2.scene = nil
+            vc2.dismissViewControllerAnimated(false, completion: {() in
+                if let vc3 = self.minigameDescriptionViewController {
+                    vc3.scene = tutorialScene();
+                    //                    vc3.scene = nil
+                    vc3.dismissViewControllerAnimated(false, completion: nil)
+                }
+            })
+        }
+    }
     
     func dismissMinigameSinglePlayer(){
         if let vc = minigameGameOverViewControllerSinglePlayer {
