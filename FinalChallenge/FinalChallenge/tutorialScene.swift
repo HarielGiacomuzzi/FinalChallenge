@@ -196,9 +196,11 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 square.zPosition = 100
                 square.position = CGPoint(x: label.position.x, y: label.position.y  + 5)
                 self.addChild(square)
-                square.runAction(firstAction, completion: { () -> Void in
-                    self.addChild(label)
-                })
+                //square.runAction(firstAction, completion: { () -> Void in
+                //    self.addChild(label)
+                //})
+                
+                
             }
         }
     }
