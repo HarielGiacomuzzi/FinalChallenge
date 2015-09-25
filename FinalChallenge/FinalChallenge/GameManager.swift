@@ -28,8 +28,8 @@ class GameManager : NSObject {
     var minigameGameOverViewControllerSinglePlayer : MinigameGameOverControllerSinglePlayer?
     
     var minigameOrderArray : [Minigame] = []
-    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
-    //var allMinigames : [Minigame] = [.FlappyFish]
+    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    var allMinigames : [Minigame] = [.FlappyFish]
     
     override init(){
         super.init()
@@ -117,9 +117,9 @@ class GameManager : NSObject {
     
     // acabou a rodada, está na hora da aventura :P
     func beginMinigame() {
-        self.isOnMiniGame = false;
-        self.playerTurnEnded(nil);
-        return Void()
+//        self.isOnMiniGame = false;
+//        self.playerTurnEnded(nil);
+//        return Void()
 
         if minigameOrderArray.isEmpty {
             fillMinigameOrderArray()
