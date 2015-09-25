@@ -54,9 +54,10 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         //skView.showsFPS = true
         //skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-        skView.showsPhysics = true
+        //skView.showsPhysics = true
         scene!.gameController = self
-        scene!.scaleMode = .AspectFit
+        //scene!.scaleMode = .AspectFit
+        scene!.scaleMode = .Fill
         skView.presentScene(scene)
         print("apresentei a cena sem crashar")
         
@@ -68,8 +69,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         print("a sceene no momento é \(scene)")
         print("a weaksceene no momento é \(sceneweak)")
         scene = nil
-        print("a sceene no momento é \(scene)")
-        print("a weaksceene no momento é \(sceneweak)")
+        print(sceneweak)
         NSNotificationCenter.defaultCenter().removeObserver(self)
 
     }

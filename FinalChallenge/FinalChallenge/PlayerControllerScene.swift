@@ -20,10 +20,12 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     
     override func didMoveToView(view: SKView) {
         
-        let card1 = CardSprite(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
-        let card2 = CardSprite(texture: nil, color: UIColor.greenColor(), size: CGSize(width: 375, height: 540))
-        let card3 = CardSprite(texture: nil, color: UIColor.redColor(), size: CGSize(width: 375, height: 540))
-        let card4 = CardSprite(texture: nil, color: UIColor.whiteColor(), size: CGSize(width: 375, height: 540))
+        let texture = SKTexture(imageNamed: "daCard")
+        
+        let card1 = CardSprite(texture: texture, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
+        let card2 = CardSprite(texture: texture, color: UIColor.greenColor(), size: CGSize(width: 375, height: 540))
+        let card3 = CardSprite(texture: texture, color: UIColor.redColor(), size: CGSize(width: 375, height: 540))
+        let card4 = CardSprite(texture: texture, color: UIColor.whiteColor(), size: CGSize(width: 375, height: 540))
         
         let cards = [card1,card2,card3,card4]
 
@@ -158,8 +160,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
             let location = touch.locationInNode(self)
             if testButton.containsPoint(location) {
                 if testButton.text == "DICE" {
-//                    let diceResult = Int(arc4random_uniform(6)+1)
-                    let diceResult = 2
+                    let diceResult = 1 //Int(arc4random_uniform(6)+1)
                     let aux = NSMutableDictionary();
                     aux.setValue(diceResult, forKey: "diceResult");
                     aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");

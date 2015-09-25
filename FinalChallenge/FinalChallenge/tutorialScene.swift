@@ -12,8 +12,8 @@ import SpriteKit
 class tutorialScene : SKScene, SKPhysicsContactDelegate {
     
     
-    weak var viewController : MinigameDescriptionViewController!
-    var gameName : NSString?
+    //var viewController : MinigameDescriptionViewController!
+    var gameName : String?
     var gameNumber : Int?
     var spriteArray : [SKSpriteNode] = [SKSpriteNode]()
     
@@ -165,7 +165,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
-        viewController.performSegueWithIdentifier("gotoMinigameVC", sender: nil)
+//        viewController.performSegueWithIdentifier("gotoMinigameVC", sender: nil)
         
         for sprite in spriteArray {
             if (sprite.containsPoint(location)){

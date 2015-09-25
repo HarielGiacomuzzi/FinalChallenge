@@ -470,8 +470,8 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     self.gameController!.gameOverControllerSinglePlayer(cont)
     }*/
     
-    deinit{
-        print("flap fish being deinitialized")
-    }
+//    deinit{
+//        print("flap fish being deinitialized")
+//    }
     
 }

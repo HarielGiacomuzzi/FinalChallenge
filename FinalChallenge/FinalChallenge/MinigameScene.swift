@@ -10,7 +10,8 @@ import UIKit
 import SpriteKit
 
 class MinigameScene: SKScene {
-    weak var gameController : MiniGameViewController? = nil
+    var gameController : MiniGameViewController? = nil
+    
     var playerRank:[String] = []
 
     func messageReceived(identifier: String, dictionary: NSDictionary) {
