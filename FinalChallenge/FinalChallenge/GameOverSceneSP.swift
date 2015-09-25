@@ -90,18 +90,24 @@ class GameOverSceneSP : MinigameScene{
                 default: break
                 }
                 
-                scene.scaleMode = SKSceneScaleMode.AspectFit
+                scene.scaleMode = SKSceneScaleMode.ResizeFill
                 self.scene!.view!.presentScene(scene)
             }
             
             if touchedNode.name == "Return MinigameScene" {
                 _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
+                self.removeFromParent()
                 self.view?.presentScene(nil)
+                self.view?.removeFromSuperview()
+              // self.view = nil
                 GameManager.sharedInstance.dismissMinigameSP()
                 
             }
         }
     }
     
+    deinit{
+        print("\(self.game) is being deInitialized")
+    }
     
 }

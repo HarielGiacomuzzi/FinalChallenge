@@ -333,7 +333,13 @@ class BoardGraph : NSObject{
             self.father = father;
             self.posX = posX;
             self.posY = posY;
-            self.setupItems()
+            let it = StealGoldCard()
+            it.used = false
+            self.item = it
+            
+           
+            
+            //self.setupItems()
         }
     }
     

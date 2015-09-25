@@ -41,14 +41,11 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
             
             
         }
-        
-        
-        
-        
     }
 
     
     func setFlappyFish(){
+        
         let fundo : SKSpriteNode = SKSpriteNode(imageNamed: "flappystatic")
         fundo.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         self.addChild(fundo)
@@ -164,7 +161,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
-    
+   
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
@@ -186,7 +183,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 }
                 
                 
-                let firstAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.05)
+                _ = SKAction.animateWithTextures(runFrames, timePerFrame: 0.05)
                 
                 
                 let label : SKLabelNode = SKLabelNode(text: sprite.name)
@@ -200,16 +197,13 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 square.zPosition = 100
                 square.position = CGPoint(x: label.position.x, y: label.position.y  + 5)
                 self.addChild(square)
-                square.runAction(firstAction, completion: { () -> Void in
-                    self.addChild(label)
-                })
+                //square.runAction(firstAction, completion: { () -> Void in
+                //    self.addChild(label)
+                //})
                 
                 
             }
         }
- 
-        
-        
     }
     
 

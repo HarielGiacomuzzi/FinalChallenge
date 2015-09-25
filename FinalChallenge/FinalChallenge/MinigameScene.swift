@@ -17,4 +17,8 @@ class MinigameScene: SKScene {
         
     }
     
+    deinit{
+        print("deu deinit")
+    }
+    
 }

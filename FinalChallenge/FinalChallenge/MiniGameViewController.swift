@@ -51,8 +51,8 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
             scene = BombTGameScene(size: CGSize(width: 1024, height: 768))
         }
         let skView = view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        //skView.showsFPS = true
+        //skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.showsPhysics = true
         scene!.gameController = self
