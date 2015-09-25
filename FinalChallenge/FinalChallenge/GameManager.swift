@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class GameManager : NSObject {
     static let sharedInstance = GameManager()
@@ -87,6 +88,7 @@ class GameManager : NSObject {
                         p.items.removeObject(c)
                         setCard = c as! ActiveCard
                         setCard.used = true
+                        setCard.cardOwner = p
                         break
                     }
                 }
@@ -115,9 +117,9 @@ class GameManager : NSObject {
     
     // acabou a rodada, está na hora da aventura :P
     func beginMinigame() {
-        self.isOnMiniGame = false;
-        self.playerTurnEnded(nil);
-        return Void()
+//        self.isOnMiniGame = false;
+//        self.playerTurnEnded(nil);
+//        return Void()
 
         if minigameOrderArray.isEmpty {
             fillMinigameOrderArray()
@@ -166,10 +168,14 @@ class GameManager : NSObject {
         self.playerTurnEnded(nil);
     }
     
-    func dismissMinigameSP(){
+    func dismissMinigameMP(){
         if let vc2 = self.minigameViewController {
+            vc2.scene = MinigameScene();
+//            vc2.scene = nil
             vc2.dismissViewControllerAnimated(false, completion: {() in
                 if let vc3 = self.minigameDescriptionViewController {
+                    vc3.scene = tutorialScene();
+//                    vc3.scene = nil
                     vc3.dismissViewControllerAnimated(false, completion: nil)
                 }
             })
@@ -180,6 +186,19 @@ class GameManager : NSObject {
         self.playerTurnEnded(nil);
     }
     
+    func dismissMinigameSP(){
+        if let vc2 = self.minigameViewController {
+            vc2.scene = MinigameScene();
+            //            vc2.scene = nil
+            vc2.dismissViewControllerAnimated(false, completion: {() in
+                if let vc3 = self.minigameDescriptionViewController {
+                    vc3.scene = tutorialScene();
+                    //                    vc3.scene = nil
+                    vc3.dismissViewControllerAnimated(false, completion: nil)
+                }
+            })
+        }
+    }
     
     func dismissMinigameSinglePlayer(){
         if let vc = minigameGameOverViewControllerSinglePlayer {
@@ -205,6 +224,7 @@ class GameManager : NSObject {
             aux = abs(value)
             player.coins += value
         }
+        print("Esse é o jogador: \(player.playerIdentifier)")
         let playerData = ["player":player.playerIdentifier, "value": player.coins]
         let dic = ["updateMoney":" ", "dataDic" : playerData]
         

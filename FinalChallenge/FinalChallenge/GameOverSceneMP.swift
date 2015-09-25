@@ -67,7 +67,7 @@ class GameOverSceneMP : MinigameScene {
             if touchedNode.name == "Back to Board" {
                 _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
                 self.view?.presentScene(nil)
-                GameManager.sharedInstance.dismissMinigameSP()
+                GameManager.sharedInstance.dismissMinigameMP()
             }
         }
     }

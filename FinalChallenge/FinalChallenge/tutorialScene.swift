@@ -12,8 +12,8 @@ import SpriteKit
 class tutorialScene : SKScene, SKPhysicsContactDelegate {
     
     
-    var viewController : MinigameDescriptionViewController!
-    var gameName : NSString?
+    //var viewController : MinigameDescriptionViewController!
+    var gameName : String?
     var gameNumber : Int?
     var spriteArray : [SKSpriteNode] = [SKSpriteNode]()
     
@@ -41,14 +41,11 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
             
             
         }
-        
-        
-        
-        
     }
 
     
     func setFlappyFish(){
+        
         let fundo : SKSpriteNode = SKSpriteNode(imageNamed: "flappystatic")
         fundo.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         self.addChild(fundo)
@@ -164,7 +161,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
-    
+   
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
@@ -206,9 +203,6 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 
             }
         }
- 
-        
-        
     }
     
 
