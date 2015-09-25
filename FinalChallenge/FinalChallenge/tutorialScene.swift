@@ -182,7 +182,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 }
                 
                 
-                _ = SKAction.animateWithTextures(runFrames, timePerFrame: 0.05)
+                let firstAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.05)
                 
                 
                 let label : SKLabelNode = SKLabelNode(text: sprite.name)
@@ -196,9 +196,9 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 square.zPosition = 100
                 square.position = CGPoint(x: label.position.x, y: label.position.y  + 5)
                 self.addChild(square)
-                //square.runAction(firstAction, completion: { () -> Void in
-                //    self.addChild(label)
-                //})
+                square.runAction(firstAction, completion: { () -> Void in
+                    self.addChild(label)
+                })
                 
                 
             }
