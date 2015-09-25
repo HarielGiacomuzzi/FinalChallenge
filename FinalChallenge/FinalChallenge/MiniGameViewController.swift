@@ -49,11 +49,6 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        weak var sceneweak = scene
-        print("a sceene no momento é \(scene)")
-        print("a weaksceene no momento é \(sceneweak)")
-        scene = nil
-        print(sceneweak)
         NSNotificationCenter.defaultCenter().removeObserver(self)
 
     }

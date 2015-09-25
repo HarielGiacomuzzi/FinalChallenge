@@ -427,7 +427,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         if let _ = singlePlayer {
             // game over
             self.paused = true
-            self.gameOverSP()
+            gameOverSP("fish", winner: "", score: cont)
             //self.restartGame()
         }
     }
@@ -451,18 +451,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         playerNode.boostAndStop()
         powerupNode.blowUp()
     }
-    
-    func gameOverSP(){
-        self.removeAllActions()
-        self.removeAllChildren()
-        _ = SKTransition.flipHorizontalWithDuration(0.5)
-        let goScene = GameOverSceneSP(size: self.size)
-        goScene.scaleMode = .AspectFit
-        goScene.score = cont
-        goScene.game = "fish"
-        print("entrou aqui ta sacando 1")
-        goScene.setupView()
-        self.view?.presentScene(goScene)
-    }
+
     
 }
