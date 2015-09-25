@@ -27,10 +27,13 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController) {
         if GameManager.sharedInstance.isOnMiniGame{
             GameManager.sharedInstance.minigameViewController?.scene!.paused = false;
+            browserViewController.dismissViewControllerAnimated(true, completion: nil);
         }
     }
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController) {
+        let alerta = UIAlertController(title: "Need Other Player", message: "Can't Continue Without other players", preferredStyle: .Alert)
+        browserViewController.presentViewController(alerta, animated: true, completion: nil);
         return Void()
     }
     
