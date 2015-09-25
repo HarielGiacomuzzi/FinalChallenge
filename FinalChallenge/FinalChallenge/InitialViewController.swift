@@ -50,7 +50,7 @@ class InitialViewController: UIViewController
     
     @IBAction func partyModeButtonPressed() {
         //not ready yet
-        /*
+        
         partyModeButton.removeFromSuperview()
         singlePlayerButton.removeFromSuperview()
         openBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
@@ -60,7 +60,7 @@ class InitialViewController: UIViewController
                 self.performSegueWithIdentifier("iphoneSegue", sender: nil)
             }
         })
-        */
+
         
     }
 
