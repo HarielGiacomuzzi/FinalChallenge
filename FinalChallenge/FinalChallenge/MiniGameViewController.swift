@@ -51,12 +51,13 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
             scene = BombTGameScene(size: CGSize(width: 1024, height: 768))
         }
         let skView = view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        //skView.showsFPS = true
+        //skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-        skView.showsPhysics = true
+        //skView.showsPhysics = true
         scene!.gameController = self
-        scene!.scaleMode = .AspectFit
+        //scene!.scaleMode = .AspectFit
+        scene!.scaleMode = .Fill
         skView.presentScene(scene)
         print("apresentei a cena sem crashar")
         

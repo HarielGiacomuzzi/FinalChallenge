@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
+class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowserViewControllerDelegate{
     var peerID: MCPeerID?
     var session: MCSession!
     var browser: MCBrowserViewController?;
@@ -21,6 +21,17 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate{
     
     override init() {
         super.init();
+    }
+    
+    //funções do browser
+    func browserViewControllerDidFinish(browserViewController: MCBrowserViewController) {
+        if GameManager.sharedInstance.isOnMiniGame{
+            GameManager.sharedInstance.minigameViewController?.scene!.paused = false;
+        }
+    }
+    
+    func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController) {
+        return Void()
     }
     
     func setupConnectionWithOptions(displayName : String, active : Bool){

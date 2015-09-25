@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class GameManager : NSObject {
     static let sharedInstance = GameManager()
@@ -27,8 +28,8 @@ class GameManager : NSObject {
     var minigameGameOverViewControllerSinglePlayer : MinigameGameOverControllerSinglePlayer?
     
     var minigameOrderArray : [Minigame] = []
-    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
-    var allMinigames : [Minigame] = [.FlappyFish]
+    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    //var allMinigames : [Minigame] = [.FlappyFish]
     
     override init(){
         super.init()
@@ -169,16 +170,16 @@ class GameManager : NSObject {
     
     func dismissMinigameSP(){
         if let vc2 = self.minigameViewController {
+            vc2.scene = MinigameScene();
+//            vc2.scene = nil
             vc2.dismissViewControllerAnimated(false, completion: {() in
                 if let vc3 = self.minigameDescriptionViewController {
+                    vc3.scene = tutorialScene();
+//                    vc3.scene = nil
                     vc3.dismissViewControllerAnimated(false, completion: nil)
                 }
             })
         }
-        let dic = ["closeController":" "]
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        self.isOnMiniGame = false;
-        //self.playerTurnEnded(nil);
     }
     
     
