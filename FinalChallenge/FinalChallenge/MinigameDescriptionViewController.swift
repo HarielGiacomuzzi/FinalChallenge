@@ -44,12 +44,12 @@ class MinigameDescriptionViewController: UIViewController {
         
         
         scene = tutorialScene(size: CGSize(width: 1024, height: 768))
-        scene!.viewController = self
+        //scene!.viewController = self
         
         
         navigationController?.navigationBarHidden = true
         GameManager.sharedInstance.minigameDescriptionViewController = self
-        if let path = NSBundle.mainBundle().pathForResource("MinigameDetails", ofType: "plist") {
+       if let path = NSBundle.mainBundle().pathForResource("MinigameDetails", ofType: "plist") {
             let dic = NSDictionary(contentsOfFile: path)
             switch minigame {
             case .FlappyFish:
@@ -96,7 +96,7 @@ class MinigameDescriptionViewController: UIViewController {
         }
         
     
-        
+      
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true

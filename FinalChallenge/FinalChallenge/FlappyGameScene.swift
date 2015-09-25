@@ -134,7 +134,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             timerNode.text = "\(self.cont++)"
         }
         
-        timerNode.runAction(SKAction.repeatActionForever(SKAction.sequence([wait, run])))
+        self.runAction(SKAction.repeatActionForever(SKAction.sequence([wait, run])))
     }
     
     func createPlayersAndObstacles() {
@@ -463,5 +463,9 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     func gameOverSP(){
     self.gameController!.gameOverControllerSinglePlayer(cont)
     }*/
+    
+    deinit{
+        print("flap fish being deinitialized")
+    }
     
 }
