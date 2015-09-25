@@ -465,13 +465,4 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.view?.presentScene(goScene)
     }
     
-    /*
-    func gameOverSP(){
-    self.gameController!.gameOverControllerSinglePlayer(cont)
-    }*/
-    
-//    deinit{
-//        print("flap fish being deinitialized")
-//    }
-    
 }

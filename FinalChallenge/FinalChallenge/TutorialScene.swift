@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class tutorialScene : SKScene, SKPhysicsContactDelegate {
+class TutorialScene : SKScene, SKPhysicsContactDelegate {
     
     
     //var viewController : MinigameDescriptionViewController!

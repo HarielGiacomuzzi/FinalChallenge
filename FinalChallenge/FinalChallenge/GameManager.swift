@@ -24,12 +24,10 @@ class GameManager : NSObject {
     //minigame controllers
     var minigameDescriptionViewController : MinigameDescriptionViewController?
     var minigameViewController : MiniGameViewController?
-    var minigameGameOverViewController : MinigameGameOverController?
-    var minigameGameOverViewControllerSinglePlayer : MinigameGameOverControllerSinglePlayer?
     
     var minigameOrderArray : [Minigame] = []
     var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
-//    var allMinigames : [Minigame] = [.FlappyFish]
+    //var allMinigames : [Minigame] = [.FlappyFish]
     
     override init(){
         super.init()
@@ -150,18 +148,15 @@ class GameManager : NSObject {
     
     // chama isso quando termina o minigame e inicia a próxima rodada
     func dismissMinigame() {
-        if let vc = minigameGameOverViewController {
+        if let vc = self.minigameViewController {
             vc.dismissViewControllerAnimated(false, completion: {() in
-                if let vc2 = self.minigameViewController {
-                    vc2.dismissViewControllerAnimated(false, completion: {() in
-                        if let vc3 = self.minigameDescriptionViewController {
-                            vc3.dismissViewControllerAnimated(false, completion: nil)
-                        }
-                    })
+                if let vc2 = self.minigameDescriptionViewController {
+                    vc2.dismissViewControllerAnimated(false, completion: nil)
                 }
             })
-            //selectPlayers(0);
         }
+            //selectPlayers(0);
+
         let dic = ["closeController":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         self.isOnMiniGame = false;
@@ -174,7 +169,7 @@ class GameManager : NSObject {
 //            vc2.scene = nil
             vc2.dismissViewControllerAnimated(false, completion: {() in
                 if let vc3 = self.minigameDescriptionViewController {
-                    vc3.scene = tutorialScene();
+                    vc3.scene = TutorialScene();
 //                    vc3.scene = nil
                     vc3.dismissViewControllerAnimated(false, completion: nil)
                 }
@@ -189,29 +184,12 @@ class GameManager : NSObject {
     func dismissMinigameSP(){
         if let vc2 = self.minigameViewController {
             vc2.scene = MinigameScene();
-            //            vc2.scene = nil
             vc2.dismissViewControllerAnimated(false, completion: {() in
                 if let vc3 = self.minigameDescriptionViewController {
-                    vc3.scene = tutorialScene();
-                    //                    vc3.scene = nil
+                    vc3.scene = TutorialScene();
                     vc3.dismissViewControllerAnimated(false, completion: nil)
                 }
             })
-        }
-    }
-    
-    func dismissMinigameSinglePlayer(){
-        if let vc = minigameGameOverViewControllerSinglePlayer {
-            vc.dismissViewControllerAnimated(false, completion: {() in
-                if let vc2 = self.minigameViewController {
-                    vc2.dismissViewControllerAnimated(false, completion: {() in
-                        if let vc3 = self.minigameDescriptionViewController {
-                            vc3.dismissViewControllerAnimated(false, completion: nil)
-                        }
-                    })
-                }
-            })
-            //selectPlayers(0);
         }
     }
     
