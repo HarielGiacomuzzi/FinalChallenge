@@ -12,8 +12,8 @@ import SpriteKit
 class tutorialScene : SKScene, SKPhysicsContactDelegate {
     
     
-    var viewController : MinigameDescriptionViewController!
-    var gameName : NSString?
+    //var viewController : MinigameDescriptionViewController!
+    var gameName : String?
     var gameNumber : Int?
     var spriteArray : [SKSpriteNode] = [SKSpriteNode]()
     
@@ -41,10 +41,6 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
             
             
         }
-        
-        
-        
-        
     }
 
     
@@ -165,7 +161,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
         
     }
     
-    
+   
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
@@ -186,7 +182,7 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 }
                 
                 
-                let firstAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.05)
+                _ = SKAction.animateWithTextures(runFrames, timePerFrame: 0.05)
                 
                 
                 let label : SKLabelNode = SKLabelNode(text: sprite.name)
@@ -207,9 +203,6 @@ class tutorialScene : SKScene, SKPhysicsContactDelegate {
                 
             }
         }
-        
-        
-        
     }
     
 
