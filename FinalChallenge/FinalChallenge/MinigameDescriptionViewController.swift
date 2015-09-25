@@ -14,7 +14,7 @@ class MinigameDescriptionViewController: UIViewController {
 
     
     var minigame = Minigame.FlappyFish
-    weak var scene = tutorialScene?()
+    var scene = tutorialScene?()
     
     @IBOutlet weak var goButton: UIButton!
     
