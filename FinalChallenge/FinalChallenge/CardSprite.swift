@@ -15,12 +15,14 @@ class CardSprite: SKSpriteNode {
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
+                colorBlendFactor = 0.4
     }
     
     init(card:String) {
         self.card = card
         let texture = SKTexture(imageNamed: card)
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        colorBlendFactor = 0.4
     }
     
     required init?(coder aDecoder: NSCoder) {
