@@ -22,7 +22,7 @@ class MinigameGameOverControllerSinglePlayer : UIViewController{
     
     
     @IBAction func backToMinigame(sender: AnyObject) {
-        GameManager.sharedInstance.dismissMinigameSinglePlayer()
+        //GameManager.sharedInstance.dismissMinigameSinglePlayer()
     }
     @IBAction func restartGame(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)

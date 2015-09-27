@@ -138,7 +138,7 @@ class GameManager : NSObject {
     // chamado quando o player já escolheu um caminho no tabuleiro
     func pathChosen() {
         if isOnMiniGame {
-        beginMinigame()
+            beginMinigame()
         }
     }
     
@@ -146,26 +146,6 @@ class GameManager : NSObject {
         for minigame in allMinigames {
             minigameOrderArray.append(minigame)
         }
-    }
-    
-    // chama isso quando termina o minigame e inicia a próxima rodada
-    func dismissMinigame() {
-        if let vc = minigameGameOverViewController {
-            vc.dismissViewControllerAnimated(false, completion: {() in
-                if let vc2 = self.minigameViewController {
-                    vc2.dismissViewControllerAnimated(false, completion: {() in
-                        if let vc3 = self.minigameDescriptionViewController {
-                            vc3.dismissViewControllerAnimated(false, completion: nil)
-                        }
-                    })
-                }
-            })
-            //selectPlayers(0);
-        }
-        let dic = ["closeController":" "]
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        self.isOnMiniGame = false;
-        self.playerTurnEnded(nil);
     }
     
     func dismissMinigameMP(){
@@ -199,22 +179,7 @@ class GameManager : NSObject {
             })
         }
     }
-    
-    func dismissMinigameSinglePlayer(){
-        if let vc = minigameGameOverViewControllerSinglePlayer {
-            vc.dismissViewControllerAnimated(false, completion: {() in
-                if let vc2 = self.minigameViewController {
-                    vc2.dismissViewControllerAnimated(false, completion: {() in
-                        if let vc3 = self.minigameDescriptionViewController {
-                            vc3.dismissViewControllerAnimated(false, completion: nil)
-                        }
-                    })
-                }
-            })
-            //selectPlayers(0);
-        }
-    }
-    
+
     func updatePlayerMoney(player:Player, value:Int) ->Int{
         var aux = 0
         if value < 0 && player.coins < abs(value) {
@@ -227,9 +192,7 @@ class GameManager : NSObject {
         print("Esse é o jogador: \(player.playerIdentifier)")
         let playerData = ["player":player.playerIdentifier, "value": player.coins]
         let dic = ["updateMoney":" ", "dataDic" : playerData]
-        
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        
         return aux
     }
     

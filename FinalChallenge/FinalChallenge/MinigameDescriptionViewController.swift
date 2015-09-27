@@ -68,7 +68,7 @@ class MinigameDescriptionViewController: UIViewController {
                     gameDesc.text = "Avoid the rocks while swimming through the river. Grab bubbles to gain a little boost. \nPress on the upper part of the screen to swim up and the botton to swim down"
                     }
                 }
-         //       minigameDescription.text = game.objectForKey("description") as! String
+         // minigameDescription.text = game.objectForKey("description") as! String
             case .BombGame:
                 _ = dic?.objectForKey("BombGame") as! NSDictionary
                 scene?.gameNumber = 2
@@ -87,8 +87,7 @@ class MinigameDescriptionViewController: UIViewController {
                     }
                 }
 
-
-          //      minigameDescription.text = game.objectForKey("description") as! String
+          // minigameDescription.text = game.objectForKey("description") as! String
 
             }
 
