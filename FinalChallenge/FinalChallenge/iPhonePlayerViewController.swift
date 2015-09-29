@@ -13,7 +13,9 @@ import SpriteKit
 
 class iPhonePlayerViewController: UIViewController {
     
+    var skView : SKView?
     var scene : PlayerControllerScene?
+    var storeScene : StoreScene?
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -24,18 +26,19 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeCard:", name: "ConnectionManager_RemoveCard", object: nil)
         
         scene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
+        scene?.viewController = self
         
         if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
             scene?.playerName = peerID
         }
         
-        let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.ignoresSiblingOrder = true
-        skView.showsPhysics = false
-        scene!.scaleMode = .AspectFit
-        skView.presentScene(scene)
+        skView = self.view as? SKView
+        skView?.showsFPS = true
+        skView?.showsNodeCount = true
+        skView?.ignoresSiblingOrder = true
+        skView?.showsPhysics = false
+        scene?.scaleMode = .AspectFit
+        skView?.presentScene(scene)
     }
     
     func playerTurn(data : NSNotification){
@@ -99,5 +102,27 @@ class iPhonePlayerViewController: UIViewController {
         } else {
             print("nao rola filho")
         }
+    }
+    
+    func openPlayerView() {
+        storeScene = nil
+        scene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
+        scene?.viewController = self
+        if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
+            scene?.playerName = peerID
+        }
+        scene?.scaleMode = .AspectFit
+        skView?.presentScene(scene)
+    }
+    
+    func openStore() {
+        scene = nil
+        storeScene = StoreScene(size: CGSize(width: 1334, height: 750))
+        storeScene?.viewController = self
+        if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
+            storeScene?.playerName = peerID
+        }
+        storeScene?.scaleMode = .AspectFit
+        skView?.presentScene(storeScene)
     }
 }
