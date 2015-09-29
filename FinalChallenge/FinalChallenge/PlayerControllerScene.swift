@@ -174,10 +174,6 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         }
     }
     
-    func openStore() {
-        viewController?.openStore()
-    }
-    
     deinit {
         print("player view scene deinit")
     }

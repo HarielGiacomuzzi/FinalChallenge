@@ -13,6 +13,7 @@ class StoreButtonNode: SKSpriteNode {
     
     var textureOn:SKTexture?
     var textureOff:SKTexture?
+    weak var delegate:StoreButtonDelegate?
     
     init(textureOn:SKTexture, textureOff:SKTexture) {
         self.textureOn = textureOn
@@ -28,9 +29,15 @@ class StoreButtonNode: SKSpriteNode {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         texture = textureOff
+        delegate?.buttonClicked(self)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         texture = textureOn
+        
     }
+}
+
+protocol StoreButtonDelegate : class {
+    func buttonClicked(sender:SKSpriteNode)
 }

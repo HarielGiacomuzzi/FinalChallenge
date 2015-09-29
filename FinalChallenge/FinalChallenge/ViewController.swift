@@ -88,7 +88,8 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "minigameSegue" {
-            let minivc = segue.destinationViewController as! MinigameDescriptionViewController
+            let minivc = segue.destinationViewController as! MiniGameViewController
+            
             switch sender as! String {
             case "flap":
                 minivc.minigame = .FlappyFish
@@ -103,9 +104,14 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     @IBAction func botaoDeTeste(sender: AnyObject) {
 //        GameManager.sharedInstance.updatePlayerMoney(GameManager.sharedInstance.players.first!, value: 15)
         
-        let cardData = ["player":GameManager.sharedInstance.players.first!.playerIdentifier, "item": "oi"]
-        let dic = ["addCard":" ", "dataDic" : cardData]
-        
+//        let cardData = ["player":GameManager.sharedInstance.players.first!.playerIdentifier, "item": "oi"]
+//        let dic = ["addCard":" ", "dataDic" : cardData]
+//        
+//        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        let cards = ["1","2","3","4","5"]
+        let player = GameManager.sharedInstance.players.first!.playerIdentifier
+        let dataDic = ["cards":cards, "player":player]
+        let dic = ["openStore" : " ", "dataDic" : dataDic]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
 
     }

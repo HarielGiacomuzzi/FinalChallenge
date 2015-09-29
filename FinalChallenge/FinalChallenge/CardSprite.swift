@@ -20,9 +20,15 @@ class CardSprite: SKSpriteNode {
     
     init(card:String) {
         self.card = card
-        let texture = SKTexture(imageNamed: card)
+//        let texture = SKTexture(imageNamed: card)
+//        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+//        colorBlendFactor = 0.4
+        
+        //init de teste:
+        
+        let texture = SKTexture(imageNamed: "daCard")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-        colorBlendFactor = 0.4
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

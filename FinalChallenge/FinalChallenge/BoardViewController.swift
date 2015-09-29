@@ -71,7 +71,7 @@ class BoardViewController : UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "gotoMinigame" {
             //print("IDENTIFIQUEI A SEGUE")
-            let minivc = segue.destinationViewController as! MinigameDescriptionViewController
+            let minivc = segue.destinationViewController as! MiniGameViewController
             minivc.minigame = Minigame(rawValue: sender as! String)!
         }
     }

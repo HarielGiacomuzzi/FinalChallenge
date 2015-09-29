@@ -22,6 +22,7 @@ class GameOverSceneSP : MinigameScene{
     }
     
     override func didMoveToView(view: SKView) {
+        self.backgroundColor = UIColor.redColor()
         switch(game){
         case "fish": self.setupFlappyFishGameOver()
         case "bomb": self.setupBombGameOver()
@@ -99,8 +100,10 @@ class GameOverSceneSP : MinigameScene{
                 self.removeFromParent()
                 self.view?.presentScene(nil)
                 self.view?.removeFromSuperview()
-              // self.view = nil
-                GameManager.sharedInstance.dismissMinigameSP()
+                // self.view = nil
+                //GameManager.sharedInstance.dismissMinigameSP()
+                GameManager.sharedInstance.newDismissMinigameSP()
+                //self.gameController!.back()
                 
             }
         }

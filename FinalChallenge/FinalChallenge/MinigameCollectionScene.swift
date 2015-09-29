@@ -10,7 +10,7 @@ import SpriteKit
 
 class MinigameCollectionScene : SKScene{
     
-    var viewController : MinigameCollectionViewController!
+    weak var viewController : MinigameCollectionViewController!
     
     var collection = [SKSpriteNode()]
     
@@ -21,7 +21,7 @@ class MinigameCollectionScene : SKScene{
         let minigameTitle = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         minigameTitle.text = "Minigame Collection"
         minigameTitle.name = "Minigame Collection"
-        minigameTitle.position = CGPointMake(self.size.width/2, self.size.height-100)
+        minigameTitle.position = CGPointMake(self.size.width/2, self.size.height/1.2)
         self.addChild(minigameTitle)
         
         for i in GameManager.sharedInstance.allMinigames{
@@ -43,7 +43,7 @@ class MinigameCollectionScene : SKScene{
         let backButton = SKLabelNode(fontNamed: "MarkerFelt-Wide")
         backButton.text = "Back"
         backButton.name = "Back"
-        backButton.position = CGPointMake(self.size.width/2, 100)
+        backButton.position = CGPointMake(self.size.width/2, self.size.height/10)
         self.addChild(backButton)
         
     }
@@ -69,6 +69,10 @@ class MinigameCollectionScene : SKScene{
                 viewController.backToMain()
             }
         }
+    }
+    
+    deinit{
+        print("MinigameCollectionScene did deinit")
     }
     
 }

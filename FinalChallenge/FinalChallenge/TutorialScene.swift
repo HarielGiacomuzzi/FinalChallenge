@@ -9,36 +9,35 @@
 import Foundation
 import SpriteKit
 
-class TutorialScene : SKScene, SKPhysicsContactDelegate {
+class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
     
     
     //var viewController : MinigameDescriptionViewController!
-    var gameName : String?
-    var gameNumber : Int?
+
+    //var gameNumber : Int?
     var spriteArray : [SKSpriteNode] = [SKSpriteNode]()
-    
-    
+    var startButton : SKLabelNode!
+    var goButton : SKSpriteNode!
+    var background : SKSpriteNode!
+    var fontSize : CGFloat = 26.0
+    var nameText : SKLabelNode!
+    var barName : SKSpriteNode!
     override func didMoveToView(view: SKView) {
         
         setObjects()
-
-        
-        
         
     }
     
     func setObjects(){
-        let valor = gameNumber!
+        //let valor = gameNumber!
         
-        switch valor {
-        case 1 :  setFlappyFish();
+        switch self.gameName {
             
-        case 2 :  setBombBots();
+            case "FlappyFish" :  setFlappyFish();
+            
+            case "BombGame" :  setBombBots();
             
         default : break;
-            
-            
-            
             
         }
     }
@@ -79,6 +78,88 @@ class TutorialScene : SKScene, SKPhysicsContactDelegate {
         self.addChild(bubble)
         bubble.name = "Gives small burst"
         spriteArray.append(bubble)
+        
+        goButton = SKSpriteNode(imageNamed: "greenButtonOn")
+        goButton.position = CGPoint(x: self.frame.width/1.2, y: self.frame.height/6)
+        goButton.name = "StartGame"
+        goButton.zPosition = 1001
+        self.addChild(goButton)
+        
+        background = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: self.frame.width, height: self.frame.height/2))
+        background.position = CGPoint(x: self.frame.width/2, y: self.frame.width/10)
+        background.zPosition = 1000
+        background.alpha = 0.9
+        self.addChild(background)
+        
+        barName = SKSpriteNode(imageNamed: "setUpBanner")
+        barName.size.height = barName.size.height/3
+        barName.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2.7)
+        barName.zPosition = 1100
+        
+        nameText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        nameText.text = "Flappy Fish"
+        nameText.position.y = nameText.position.y - 10
+        nameText.zPosition = 1101
+        
+        barName.addChild(nameText)
+        self.addChild(barName)
+        
+        let d = SKNode()
+        if !GameManager.sharedInstance.isMultiplayer{
+            let desc = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc.text = "Avoid the rocks while swimming through the river."
+            desc.position = CGPointMake(desc.position.x, desc.position.y)
+            desc.fontColor = UIColor.blackColor()
+            desc.fontSize = fontSize
+            d.addChild(desc)
+        
+            let desc2 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc2.text = "Grab bubbles to gain a little boost. Press on "
+            desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
+            desc2.fontColor = UIColor.blackColor()
+            desc2.fontSize = fontSize
+            d.addChild(desc2)
+        
+            let desc3 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc3.text = "the upper part of the screen to swim up and the "
+            desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
+            desc3.fontColor = UIColor.blackColor()
+            desc3.fontSize = fontSize
+            d.addChild(desc3)
+        
+            let desc4 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc4.text = "botton to swim down"
+            desc4.position = CGPointMake(desc4.position.x, desc4.position.y - 90)
+            desc4.fontColor = UIColor.blackColor()
+            desc4.fontSize = fontSize
+            d.addChild(desc4)
+        } else {
+            let desc = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc.text = "Avoid the rocks while swimming through the river."
+            desc.position = CGPointMake(desc.position.x, desc.position.y)
+            desc.fontColor = UIColor.blackColor()
+            desc.fontSize = fontSize
+            d.addChild(desc)
+            
+            let desc2 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc2.text = "Grab bubbles to gain a little boost. Check your"
+            desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
+            desc2.fontColor = UIColor.blackColor()
+            desc2.fontSize = fontSize
+            d.addChild(desc2)
+            
+            let desc3 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc3.text = "device to check the game controls."
+            desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
+            desc3.fontColor = UIColor.blackColor()
+            desc3.fontSize = fontSize
+            d.addChild(desc3)
+        }
+        d.zPosition = 1002
+        d.position = CGPoint(x: self.frame.width/3+5, y: self.frame.height/4)
+        
+        self.addChild(d)
+        
         
     }
     
@@ -159,19 +240,152 @@ class TutorialScene : SKScene, SKPhysicsContactDelegate {
         self.addChild(bomb)
         spriteArray.append(bomb)
         
+        goButton = SKSpriteNode(imageNamed: "greenButtonOn")
+        goButton.position = CGPoint(x: self.frame.width/1.2, y: self.frame.height/6)
+        goButton.name = "StartGame"
+        goButton.zPosition = 1001
+        self.addChild(goButton)
+        
+        background = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: self.frame.width, height: self.frame.height/2))
+        background.position = CGPoint(x: self.frame.width/2, y: self.frame.width/10)
+        background.zPosition = 1000
+        background.alpha = 0.9
+        self.addChild(background)
+        
+        barName = SKSpriteNode(imageNamed: "setUpBanner")
+        barName.size.height = barName.size.height/3
+        barName.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2.7)
+        barName.zPosition = 1100
+        
+        nameText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        nameText.text = "Bomb Game"
+        nameText.position.y = nameText.position.y - 10
+        nameText.zPosition = 1101
+        
+        barName.addChild(nameText)
+        self.addChild(barName)
+        
+        let d = SKNode()
+        if !GameManager.sharedInstance.isMultiplayer{
+            let desc = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc.text = "Throw the bomb to other robots and don't let it "
+            desc.position = CGPointMake(desc.position.x, desc.position.y)
+            desc.fontColor = UIColor.blackColor()
+            desc.fontSize = fontSize
+            d.addChild(desc)
+            
+            let desc2 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc2.text = "explode on your hands! While traveling or left "
+            desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
+            desc2.fontColor = UIColor.blackColor()
+            desc2.fontSize = fontSize
+            d.addChild(desc2)
+            
+            let desc3 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc3.text = "unchecked, the bomb timer will go down until "
+            desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
+            desc3.fontColor = UIColor.blackColor()
+            desc3.fontSize = fontSize
+            d.addChild(desc3)
+            
+            let desc4 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc4.text = "some bot grab it again."
+            desc4.position = CGPointMake(desc4.position.x, desc4.position.y - 90)
+            desc4.fontColor = UIColor.blackColor()
+            desc4.fontSize = fontSize
+            d.addChild(desc4)
+            
+            let desc5 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc5.text = "While handling the bomb, swipe to throw "
+            desc5.position = CGPointMake(desc5.position.x, desc5.position.y - 120)
+            desc5.fontColor = UIColor.blackColor()
+            desc5.fontSize = fontSize
+            d.addChild(desc5)
+            
+            let desc6 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc6.text = "to the desired angle."
+            desc6.position = CGPointMake(desc6.position.x, desc6.position.y - 150)
+            desc6.fontColor = UIColor.blackColor()
+            desc6.fontSize = fontSize
+            d.addChild(desc6)
+
+        } else {//"Throw the bomb to other robots and don't let it explode on your hands! While traveling or left unchecked, the bomb timer will go down until some bot grab it. Check your device to check the game controls"
+            let desc = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc.text = "Throw the bomb to other robots and don't let it "
+            desc.position = CGPointMake(desc.position.x, desc.position.y)
+            desc.fontColor = UIColor.blackColor()
+            desc.fontSize = fontSize
+            d.addChild(desc)
+            
+            let desc2 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc2.text = "explode on your hands! While traveling or left "
+            desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
+            desc2.fontColor = UIColor.blackColor()
+            desc2.fontSize = fontSize
+            d.addChild(desc2)
+            
+            let desc3 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc3.text = "unchecked, the bomb timer will go down until "
+            desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
+            desc3.fontColor = UIColor.blackColor()
+            desc3.fontSize = fontSize
+            d.addChild(desc3)
+            
+            let desc4 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc4.text = "some bot grab it again."
+            desc4.position = CGPointMake(desc4.position.x, desc4.position.y - 90)
+            desc4.fontColor = UIColor.blackColor()
+            desc4.fontSize = fontSize
+            d.addChild(desc4)
+            
+            let desc5 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            desc5.text = "device to check the game controls."
+            desc5.position = CGPointMake(desc5.position.x, desc5.position.y - 120)
+            desc5.fontColor = UIColor.blackColor()
+            desc5.fontSize = fontSize
+            d.addChild(desc5)
+        }
+        d.zPosition = 1002
+        d.position = CGPoint(x: self.frame.width/3+5, y: self.frame.height/4)
+        
+        self.addChild(d)
+    }
+    //this func cleans whats inside tutorial scene and star another one
+    func startGame(minigameName:String){
+        self.removeAllChildren()
+        self.removeAllActions()
+        _ = SKTransition.flipHorizontalWithDuration(0.5)
+        var goScene = MinigameScene()
+        self.gameController?.dismissScene()
+        switch(minigameName){
+            case "FlappyFish": goScene = FlappyGameScene(size: self.size)
+            case "BombGame":   goScene = BombTGameScene(size: self.size)
+        default: break
+        }
+        self.view?.presentScene(goScene)
+        
     }
     
-   
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
-//        viewController.performSegueWithIdentifier("gotoMinigameVC", sender: nil)
         
+        // working with bad go button
+        for touch: AnyObject in touches {
+            
+            let location = touch.locationInNode(self)
+            
+            if goButton.containsPoint(location){
+                //change button go sprite
+                goButton.texture = SKTexture(imageNamed: "greenButtonOff")
+            }
+        }
+        
+        // runs throught sprites looking to show ther text i think...
         for sprite in spriteArray {
             if (sprite.containsPoint(location)){
                 print("achei um cara")
               
-                
                 let spriteAnimatedAtlas = SKTextureAtlas(named: "popup")//sprites
                 
                 // inicializa corrida
@@ -204,9 +418,30 @@ class TutorialScene : SKScene, SKPhysicsContactDelegate {
                 
             }
         }
+        
     }
     
-
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        // working with bad go button
+        for touch: AnyObject in touches {
+            
+            let location = touch.locationInNode(self)
+            
+            if goButton.containsPoint(location){
+                goButton.texture = SKTexture(imageNamed: "greenButtonOff")
+                print("Iniciou jogo")
+                switch(self.gameName){
+                case "FlappyFish": startGame(self.gameName)//start scene
+                case "BombGame": startGame(self.gameName)
+                default: break
+                }
+            }
+        }
+    }
     
+    deinit{
+        print("Tutorial scene is out of the memory")
+    }
     
 }
