@@ -31,8 +31,7 @@ class GameManager : NSObject {
     
     override init(){
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_DiceResult", object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived2:", name: "ConnectionManager_EndAction", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "diceReceived:", name: "ConnectionManager_DiceResult", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil);
     }
     
@@ -50,29 +49,21 @@ class GameManager : NSObject {
     
     func playerTurn(player:Player?){
         let location = BoardGraph.SharedInstance.whereIs(player!)
-        _ = BoardGraph.SharedInstance.pickItem(location!, player: player!)
+        BoardGraph.SharedInstance.pickItem(location!, player: player!)
     }
     
     //dice responce
-    func messageReceived(data : [String : NSObject]){
+    func diceReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
                     BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
-                    playerTurnEnded(p)
                     playerTurn(p)
+                    playerTurnEnded(p)
                     break;
                 }
             }
     }
-    // Finaliza turno
-    func messageReceived2(data : [String : NSObject]){
-        for p in players{
-            if p.playerIdentifier == (data["peerID"] as! String){
-                playerTurnEnded(p)
-                break;
-            }
-        }
-    }
+
     // manda a carta a ser adicionada no boardGame
     func mr3(data : NSNotification){
         let dic = data.userInfo!["dataDic"] as! NSDictionary
@@ -91,7 +82,7 @@ class GameManager : NSObject {
                     }
                 }
                 let whereIsPlayer = BoardGraph.SharedInstance.whereIs(p)
-                _ = BoardGraph.SharedInstance.setItem(setCard, nodeName: whereIsPlayer!) // return true if card was set
+                BoardGraph.SharedInstance.setItem(setCard, nodeName: whereIsPlayer!) // return true if card was set
                 break;
             }
         }

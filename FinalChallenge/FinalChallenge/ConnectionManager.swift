@@ -33,6 +33,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController) {
         let alerta = UIAlertController(title: "Need Other Player", message: "Can't Continue Without other players", preferredStyle: .Alert)
+        //alerta.actions.append(UIAction)
         browserViewController.presentViewController(alerta, animated: true, completion: nil);
         return Void()
     }
@@ -191,7 +192,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         // if we received the dice results of a player
             if message.valueForKey("diceResult") != nil {
                 userInfo.updateValue(message.valueForKey("diceResult") as! Int, forKey: "diceResult")
-                GameManager.sharedInstance.messageReceived(userInfo)
+                GameManager.sharedInstance.diceReceived(userInfo)
                 return
             }
                 // if someone have been disconnected
@@ -301,13 +302,6 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 print(message)
                 userInfo.updateValue(message.valueForKey("playerAction") as! NSObject, forKey: "playerAction")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerAction", object: nil, userInfo: userInfo)
-                return
-            }
-        //player tells board his turn has ended
-            if message.valueForKey("endAction") != nil {
-                print(message)
-                userInfo.updateValue(message.valueForKey("endAction") as! NSObject, forKey: "endAction")
-                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_EndAction", object: nil, userInfo: userInfo)
                 return
             }
         

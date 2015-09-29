@@ -259,7 +259,6 @@ class BoardGraph : NSObject{
         for i in nodes{
             if predicate.evaluateWithObject(i.0){
                 i.1.item = nil;
-                print(i.0)
             }
         }
     }
