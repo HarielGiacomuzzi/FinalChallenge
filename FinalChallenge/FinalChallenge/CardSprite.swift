@@ -20,14 +20,13 @@ class CardSprite: SKSpriteNode {
     
     init(card:String) {
         self.card = card
-//        let texture = SKTexture(imageNamed: card)
-//        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-//        colorBlendFactor = 0.4
+        let atlas = SKTextureAtlas(named: "cards")
         
-        //init de teste:
-        
-        let texture = SKTexture(imageNamed: "daCard")
+        let texture = atlas.textureNamed("trapCardBase")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        
+//        let spriteLoko = SKSpriteNode(texture: texture)
+//        addChild(spriteLoko)
         
     }
     

@@ -16,6 +16,7 @@ class iPhonePlayerViewController: UIViewController {
     var skView : SKView?
     var playerScene : PlayerControllerScene?
     var storeScene : StoreScene?
+    var partyModeScene : PartyModeScene?
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -26,20 +27,15 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeCard:", name: "ConnectionManager_RemoveCard", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openStore:", name: "ConnectionManager_OpenStore", object: nil)
         
-        playerScene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
-        playerScene?.viewController = self
-        
-        if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
-            playerScene?.playerName = peerID
-        }
-        
         skView = self.view as? SKView
         skView?.showsFPS = true
         skView?.showsNodeCount = true
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
-        playerScene?.scaleMode = .AspectFit
-        skView?.presentScene(playerScene)
+        
+//        loadPartyModeScene()
+//        loadStore(["1","2","3","4","5"])
+        loadPlayerView()
     }
     
     // MARK: - Message Received Functions
@@ -123,6 +119,8 @@ class iPhonePlayerViewController: UIViewController {
     
     func loadPlayerView() {
         storeScene = nil
+        partyModeScene = nil
+        
         playerScene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
         playerScene?.viewController = self
         if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
@@ -134,6 +132,8 @@ class iPhonePlayerViewController: UIViewController {
     
     func loadStore(cards:[String]) {
         playerScene = nil
+        partyModeScene = nil
+        
         storeScene = StoreScene(size: CGSize(width: 1334, height: 750))
         storeScene?.cardsString = cards
         storeScene?.viewController = self
@@ -142,5 +142,15 @@ class iPhonePlayerViewController: UIViewController {
         }
         storeScene?.scaleMode = .AspectFit
         skView?.presentScene(storeScene)
+    }
+    
+    func loadPartyModeScene() {
+        playerScene = nil
+        storeScene = nil
+        
+        partyModeScene = PartyModeScene(size: CGSize(width: self.view.frame.width, height: self.view.frame.height))
+        
+        partyModeScene?.viewController = self
+        skView?.presentScene(partyModeScene)
     }
 }

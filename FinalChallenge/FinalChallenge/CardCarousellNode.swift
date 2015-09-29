@@ -229,3 +229,7 @@ class CardCarouselNode: SKNode {
     
     
 }
+
+protocol CardCarousellDelegate : class {
+    func sendCard(card:SKSpriteNode)
+}
