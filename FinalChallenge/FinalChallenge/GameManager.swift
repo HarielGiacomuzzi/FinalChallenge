@@ -23,6 +23,7 @@ class GameManager : NSObject {
     
     //minigame controllers
     var minigameDescriptionViewController : MinigameDescriptionViewController?
+    
     var minigameViewController : MiniGameViewController?
     
     var minigameOrderArray : [Minigame] = []
@@ -101,7 +102,7 @@ class GameManager : NSObject {
         return Array(playerRank.reverse())
     }
     
-    //your time bro
+    // handle player order
     func selectPlayers(i:Int){
         if !self.isOnMiniGame{
             controlesDeTurno++
@@ -113,11 +114,8 @@ class GameManager : NSObject {
         }
     }
     
-    // acabou a rodada, está na hora da aventura :P
+    // start minigame
     func beginMinigame() {
-//        self.isOnMiniGame = false;
-//        self.playerTurnEnded(nil);
-//        return Void()
 
         if minigameOrderArray.isEmpty {
             fillMinigameOrderArray()
@@ -136,7 +134,7 @@ class GameManager : NSObject {
     // chamado quando o player já escolheu um caminho no tabuleiro
     func pathChosen() {
         if isOnMiniGame {
-        beginMinigame()
+            beginMinigame()
         }
     }
     
@@ -146,53 +144,28 @@ class GameManager : NSObject {
         }
     }
     
-    // chama isso quando termina o minigame e inicia a próxima rodada
-    func dismissMinigame() {
-        if let vc = self.minigameViewController {
-            vc.dismissViewControllerAnimated(false, completion: {() in
-                if let vc2 = self.minigameDescriptionViewController {
-                    vc2.dismissViewControllerAnimated(false, completion: nil)
-                }
-            })
-        }
-            //selectPlayers(0);
-
-        let dic = ["closeController":" "]
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        self.isOnMiniGame = false;
-//        self.playerTurnEnded(nil);
-    }
+    // MARK: - Dismiss views handlings
     
+// dismiss the minigamescene and notificates the iPhone users the view change
     func dismissMinigameMP(){
-        if let vc2 = self.minigameViewController {
-            vc2.scene = MinigameScene();
-//            vc2.scene = nil
-            vc2.dismissViewControllerAnimated(false, completion: {() in
-                if let vc3 = self.minigameDescriptionViewController {
-                    vc3.scene = TutorialScene();
-//                    vc3.scene = nil
-                    vc3.dismissViewControllerAnimated(false, completion: nil)
-                }
-            })
+        if let vc = self.minigameViewController {
+            vc.dismissViewControllerAnimated(false, completion: nil)
         }
         let dic = ["closeController":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         self.isOnMiniGame = false;
-//        self.playerTurnEnded(nil);
     }
-    
-    func dismissMinigameSP(){
-        if let vc2 = self.minigameViewController {
-            vc2.scene = MinigameScene();
-            vc2.dismissViewControllerAnimated(false, completion: {() in
-                if let vc3 = self.minigameDescriptionViewController {
-                    vc3.scene = TutorialScene();
-                    vc3.dismissViewControllerAnimated(false, completion: nil)
-                }
-            })
+// this one may replace the dismissMinigameSP
+    func newDismissMinigameSP(){
+        if let vc = self.minigameViewController {
+            //vc2.scene = MinigameScene();
+            vc.dismissViewControllerAnimated(false, completion: nil)
         }
     }
     
+    // MARK: - Card Functions
+    
+// used to update users gold or to use cards function, can take or give player gold
     func updatePlayerMoney(player:Player, value:Int) ->Int{
         var aux = 0
         if value < 0 && player.coins < abs(value) {
@@ -205,16 +178,16 @@ class GameManager : NSObject {
         print("Esse é o jogador: \(player.playerIdentifier)")
         let playerData = ["player":player.playerIdentifier, "value": player.coins]
         let dic = ["updateMoney":" ", "dataDic" : playerData]
-        
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        
         return aux
     }
     
+// update users position may be used with keyboard functions
     func updatePlayerPosition(move:Int, player:Player){
         BoardGraph.SharedInstance.walk(move, player: player, view: boardViewController);
     }
     
+// this function takes a card from a player
     func loseCard(player:Player){
         let value = player.items.count
         let indexCard : Int = (random() % value)

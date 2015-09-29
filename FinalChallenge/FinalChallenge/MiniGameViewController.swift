@@ -13,7 +13,7 @@ import Foundation
 
 class MiniGameViewController: UIViewController, UIPopoverPresentationControllerDelegate{
     
-    @IBOutlet weak var GameOverView: UIView!
+    //@IBOutlet weak var GameOverView: UIView!
     
     var scene : MinigameScene?
     
@@ -28,13 +28,20 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         GameManager.sharedInstance.minigameViewController = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_ControlAction", object: nil);
+        var name = String()
         
         switch minigame {
         case .FlappyFish:
-            scene = FlappyGameScene(size: CGSize(width: 1024, height: 768))
+        //    scene = FlappyGameScene(size: CGSize(width: 1024, height: 768))
+            name = "FlappyFish"
         case .BombGame:
-            scene = BombTGameScene(size: CGSize(width: 1024, height: 768))
+        //    scene = BombTGameScene(size: CGSize(width: 1024, height: 768))
+            name = "BombGame"
         }
+        
+        scene = TutorialScene(size: CGSize(width: 1024, height: 768))
+        scene!.gameName = name
+        
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
@@ -50,7 +57,6 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self)
-
     }
     
     func messageReceived(data : NSNotification){
@@ -58,10 +64,9 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         let data = data.userInfo!["actionReceived"] as! NSDictionary
         scene!.messageReceived(peerDisplayName, dictionary: data)
     }
-    
-    
-    func dismmissMinigameView(){
-         self.dismissViewControllerAnimated(false, completion: nil)
-    }
 
+    func dismissScene(){
+        scene = nil
+    }
+    
 }
