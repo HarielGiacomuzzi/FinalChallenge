@@ -328,7 +328,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             self.view?.presentScene(goScene)
             
         } else{
-            self.gameOverSP(winner)
+            self.gameOverSP("bomb", winner: winner, score: 0)
         }
     }
     
@@ -657,17 +657,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             
         }
 
-    }
-    
-    func gameOverSP(winner:String){
-        self.removeAllChildren()
-        self.removeAllActions()
-        _ = SKTransition.flipHorizontalWithDuration(0.5)
-        let goScene = GameOverSceneSP(size: self.size)
-        goScene.score = 0 // not used yet
-        goScene.winner = winner
-        goScene.game = "bomb"
-        self.view?.presentScene(goScene)
     }
     
 }

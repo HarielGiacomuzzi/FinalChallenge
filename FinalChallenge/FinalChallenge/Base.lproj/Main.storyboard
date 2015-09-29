@@ -333,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONt-OX-vCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1622" y="-1875"/>
+            <point key="canvasLocation" x="1053" y="-1502"/>
         </scene>
         <!--Accelerometer Game Pad Controller-->
         <scene sceneID="8zs-pY-9fY">
@@ -564,7 +564,7 @@
                     </view>
                     <connections>
                         <outlet property="testTextField" destination="H0d-zd-U5L" id="pZ4-eq-4oK"/>
-                        <segue destination="Ovk-7r-ehi" kind="show" identifier="minigameSegue" id="Aso-TF-3da"/>
+                        <segue destination="tYi-IB-zqG" kind="show" identifier="minigameSegue" id="vFp-2s-lFp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -829,12 +829,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="Ovk-7r-ehi" kind="show" identifier="minigameSegue" id="0i1-Si-jlB"/>
+                        <segue destination="tYi-IB-zqG" kind="show" identifier="minigameSegue" id="sO1-DV-OhG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uuh-9S-k9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1303" y="1414"/>
+            <point key="canvasLocation" x="-1418" y="1606"/>
         </scene>
         <!--Mini Game View Controller-->
         <scene sceneID="u08-or-TA0">
@@ -857,7 +857,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qaV-sh-fkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2612.25" y="-540"/>
+            <point key="canvasLocation" x="1922" y="-1079"/>
         </scene>
         <!--Minigame Game Over Controller-->
         <scene sceneID="mwK-ob-4fw">
@@ -997,12 +997,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="Ovk-7r-ehi" kind="show" identifier="gotoMinigame" id="6ca-gz-9Tn"/>
+                        <segue destination="tYi-IB-zqG" kind="show" identifier="gotoMinigame" id="V5t-hc-B95"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k1S-db-nvY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="959" y="-530"/>
+            <point key="canvasLocation" x="217" y="-1079"/>
         </scene>
         <!--iPhone Player View Controller-->
         <scene sceneID="Imk-1I-fmI">
@@ -1071,10 +1071,10 @@
         <image name="tutorialBanner" width="1334" height="192"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Aso-TF-3da"/>
         <segue reference="S5e-fy-Ifo"/>
-        <segue reference="IuB-wD-4uJ"/>
-        <segue reference="T9l-u6-hEW"/>
         <segue reference="Ahl-Ky-SJK"/>
+        <segue reference="vFp-2s-lFp"/>
+        <segue reference="T9l-u6-hEW"/>
+        <segue reference="IuB-wD-4uJ"/>
     </inferredMetricsTieBreakers>
 </document>

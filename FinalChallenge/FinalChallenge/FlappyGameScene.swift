@@ -12,6 +12,10 @@ import SpriteKit
 
 class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
+    deinit {
+        print("DEI O DEINIT?")
+    }
+    
     var players:[FlappyPlayerNode] = []
     var singlePlayer:FlappyPlayerNode?
     var testPlayerLive = true
@@ -54,6 +58,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func didMoveToView(view: SKView) {
+
         
         beginCountDown(completion: {self.createPlayersAndObstacles()})
         
@@ -87,7 +92,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         wallRight.physicsBody?.collisionBitMask = playerCategory
         self.addChild(wallRight)
         
-        let waterParticle = FlappyParticleNode.fromFile("teste")
+        weak var waterParticle = FlappyParticleNode.fromFile("teste")
         waterParticle?.position = CGPointMake(frame.size.width + (frame.size.width/2 ) + 20 , frame.size.height/2)
         waterParticle!.targetNode = self.scene
         self.addChild(waterParticle!)
@@ -263,7 +268,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(stone)
         
         let particleScales = 0.3 * scale
-        let stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
+        weak var stoneParticleLow = FlappyParticleNode.fromFile("MyParticle")
         stoneParticleLow!.position = CGPointMake(stone.position.x, stone.position.y - (stone.size.height/2) + 10)
         stoneParticleLow!.name = "stoneParticleLow"
         stoneParticleLow!.particleScale = particleScales
@@ -271,7 +276,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         stoneParticleLow!.setupMovement(self.frame, node: stone, vel: stoneVel * worldVelMultiplier)
         self.addChild(stoneParticleLow!)
     
-        let stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle")
+        weak var stoneParticleHigh = FlappyParticleNode.fromFile("MyParticle")
         stoneParticleHigh!.position = CGPointMake(stone.position.x, stone.position.y + stone.size.height/2)
         stoneParticleHigh!.name = "stoneParticleHigh"
         stoneParticleHigh!.particleScale = particleScales
@@ -320,7 +325,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(singlePlayer!)
         
         _ = SKTexture(imageNamed: "spark.png")
-        let playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
+        weak var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
         playerParticle!.name = "PlayerParticle"
         playerParticle!.targetNode = self.scene
         singlePlayer!.addChild(playerParticle!)
@@ -368,6 +373,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        gameOverSP()
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             if let player = singlePlayer {
@@ -421,7 +427,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         if let _ = singlePlayer {
             // game over
             self.paused = true
-            self.gameOverSP()
+            gameOverSP("fish", winner: "", score: cont)
             //self.restartGame()
         }
     }
@@ -445,27 +451,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         playerNode.boostAndStop()
         powerupNode.blowUp()
     }
-    
-    func gameOverSP(){
-        self.removeAllChildren()
-        self.removeAllActions()
-        _ = SKTransition.flipHorizontalWithDuration(0.5)
-        let goScene = GameOverSceneSP(size: self.size)
-        goScene.scaleMode = .AspectFit
-        goScene.score = cont
-        goScene.game = "fish"
-        print("entrou aqui ta sacando 1")
-        goScene.setupView()
-        self.view?.presentScene(goScene)
-    }
-    
-    /*
-    func gameOverSP(){
-    self.gameController!.gameOverControllerSinglePlayer(cont)
-    }*/
-    
-    deinit{
-        print("flap fish being deinitialized")
-    }
+
     
 }

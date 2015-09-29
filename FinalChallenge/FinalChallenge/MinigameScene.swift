@@ -11,15 +11,26 @@ import SpriteKit
 
 class MinigameScene: SKScene {
     var gameController : MiniGameViewController? = nil
-    
+    var gameName = String()
     var playerRank:[String] = []
 
     func messageReceived(identifier: String, dictionary: NSDictionary) {
         
     }
     
-    deinit{
-        print("deu deinit")
+    func gameOverSP(game:String, winner:String, score:Int) {
+        self.removeAllChildren()
+        self.removeAllActions()
+        _ = SKTransition.flipHorizontalWithDuration(0.5)
+        let goScene = GameOverSceneSP(size: self.size)
+        goScene.scaleMode = .AspectFit
+        goScene.winner = winner
+        goScene.game = game
+        goScene.score = score
+        self.view?.presentScene(goScene)
     }
     
+    deinit{
+        print("MinigameScene is out")
+    }
 }

@@ -88,7 +88,8 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "minigameSegue" {
-            let minivc = segue.destinationViewController as! MinigameDescriptionViewController
+            let minivc = segue.destinationViewController as! MiniGameViewController
+            
             switch sender as! String {
             case "flap":
                 minivc.minigame = .FlappyFish

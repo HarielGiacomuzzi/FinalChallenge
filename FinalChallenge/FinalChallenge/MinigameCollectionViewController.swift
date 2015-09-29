@@ -13,6 +13,7 @@ class MinigameCollectionViewController : UIViewController {
     
     var minigameCollection = [Minigame]()
     var scene : MinigameCollectionScene!
+    
     override func viewDidLoad() {
         
         minigameCollection = GameManager.sharedInstance.allMinigames
@@ -69,7 +70,7 @@ class MinigameCollectionViewController : UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "minigameSegue" {
-            let minivc = segue.destinationViewController as! MinigameDescriptionViewController
+            let minivc = segue.destinationViewController as! MiniGameViewController
             switch sender as! String {
             case "flap":
                 minivc.minigame = .FlappyFish
@@ -82,6 +83,11 @@ class MinigameCollectionViewController : UIViewController {
     }
     
     func backToMain(){
+        scene = nil
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    deinit{
+        print("MinigameCollectionViewController did deinit")
     }
 }

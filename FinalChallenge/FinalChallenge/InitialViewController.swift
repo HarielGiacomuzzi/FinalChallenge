@@ -32,6 +32,7 @@ class InitialViewController: UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         partyModeButton.setTitle("Coming Soon", forState: .Normal)
         partyModeButton.backgroundColor = UIColor.grayColor()
         partyModeButton.setTitleColor(UIColor.blackColor(), forState: .Normal)

@@ -35,25 +35,12 @@ class CardCarouselNode: SKNode {
         leftPoint = CGPointMake(centerPoint.x - cards[0].size.width * 0.75, centerPoint.y)
         rightPoint = CGPointMake(centerPoint.x + cards[0].size.width * 0.75, centerPoint.y)
         
-        for i in 0..<cards.count {
-            if i < centerIndex {
-                cards[i].position = rightPoint
-                cards[i].setScale(0.75)
-                addChild(cards[i])
-            }
-            if i == centerIndex {
-                cards[i].position = centerPoint
-                cards[i].setScale(1.0)
-                addChild(cards[i])
-            }
-            if i > centerIndex {
-                cards[i].position = leftPoint
-                cards[i].setScale(0.75)
-                addChild(cards[i])
-            }
-        }
-        
+        fixCardsXPosition()
         fixCardsZPosition()
+        
+        for card in cards {
+            addChild(card)
+        }
 
     }
     
@@ -77,9 +64,8 @@ class CardCarouselNode: SKNode {
         if centerCard.position.y > centerPoint.y {
             removeCard()
         } else {
-            centerCard.position = centerPoint
-            centerCard.setScale(1.0)
             fixCardsZPosition()
+            fixCardsXPosition()
         }
 
     }
@@ -92,11 +78,9 @@ class CardCarouselNode: SKNode {
             let centerCard = cards[centerIndex]
             
             fixCardsZPosition()
-            fixScale(centerCard)
-            
 
             if firstTouch {
-                if changeInX.mod() > changeInY {
+                if fabs(changeInX) > changeInY {
                     movingUp = false
                 } else {
                     movingUp = true
@@ -106,7 +90,7 @@ class CardCarouselNode: SKNode {
             if movingUp && canRemoveWithSwipeUp {
                 moveUp(centerCard.position.y + changeInY)
             } else {
-                moveSideways(centerCard.position.x + changeInX)
+                moveSideways(changeInX)
             }
 
             firstTouch = false
@@ -124,29 +108,63 @@ class CardCarouselNode: SKNode {
             centerCard.position = centerPoint
         }
     }
+
     
-    func moveSideways(newPos:CGFloat) {
+    func moveSideways(changeInX:CGFloat) {
         let centerCard = cards[centerIndex]
-        if newPos > rightPoint.x {
+        let newCenterPos = centerCard.position.x + changeInX
+        
+        if newCenterPos > rightPoint.x {
             centerCard.position = rightPoint
             centerCard.setScale(0.75)
-            if centerCard != cards.last {
-                centerIndex++
-            }
-        } else if newPos < leftPoint.x {
-            centerCard.position = leftPoint
-            centerCard.setScale(0.75)
-            if centerCard != cards.first {
+            if centerIndex > 0 {
                 centerIndex--
             }
+        } else if newCenterPos < leftPoint.x {
+            centerCard.position = leftPoint
+            centerCard.setScale(0.75)
+            if centerIndex < cards.count - 1 {
+                centerIndex++
+            }
         } else {
-            centerCard.position.x = newPos
+            if centerCard.position.x > centerPoint.x {
+                if centerIndex > 0 {
+                    let leftCard = cards[centerIndex - 1]
+                    let newLeftPos = changeInX + leftCard.position.x
+                    if newLeftPos > rightPoint.x {
+                        leftCard.position = rightPoint
+                        leftCard.setScale(0.75)
+                    } else if newLeftPos < leftPoint.x {
+                        leftCard.position = leftPoint
+                        leftCard.setScale(0.75)
+                    } else {
+                        leftCard.position.x = newLeftPos
+                        fixScale(leftCard)
+                    }
+                }
+            } else {
+                if centerIndex < cards.count - 1 {
+                    let rightCard = cards[centerIndex + 1]
+                    let newRightPos = changeInX + rightCard.position.x
+                    if newRightPos > rightPoint.x {
+                        rightCard.position = rightPoint
+                        rightCard.setScale(0.75)
+                    } else if newRightPos < leftPoint.x {
+                        rightCard.position = leftPoint
+                        rightCard.setScale(0.75)
+                    } else {
+                        rightCard.position.x = newRightPos
+                        fixScale(rightCard)
+                    }
+                }
+            }
+            centerCard.position.x = newCenterPos
         }
+        fixScale(centerCard)
     }
     
+    
     // MARK: - Add/Remove Cards
-    
-    
     
     func insertCard(card:SKSpriteNode) {
         cards.append(card)
@@ -162,11 +180,15 @@ class CardCarouselNode: SKNode {
     }
     
     func removeCard() {
+        removeCard(centerIndex)
+    }
+    
+    func removeCard(index:Int) {
         if !cards.isEmpty {
-            delegate?.sendCard(cards[centerIndex])
-            cards[centerIndex].removeFromParent()
-            cards.removeAtIndex(centerIndex)
-
+            delegate?.sendCard(cards[index])
+            cards[index].removeFromParent()
+            cards.removeAtIndex(index)
+            
             if !cards.isEmpty {
                 if centerIndex >= cards.count {
                     centerIndex = cards.count - 1
@@ -177,7 +199,6 @@ class CardCarouselNode: SKNode {
                 fixCardsZPosition()
             }
         }
-        
     }
     
     
@@ -185,14 +206,15 @@ class CardCarouselNode: SKNode {
     
     func fixCardsZPosition() {
         for card in cards {
-            card.zPosition = 1
+            card.zPosition = card.size.height * 0.01
         }
-        cards[centerIndex].zPosition = 3
-        if centerIndex - 1 >= 0 {
-            cards[centerIndex - 1].zPosition = 2
+        
+        cards[centerIndex].zPosition += 0.5
+        if centerIndex > 0 {
+            cards[centerIndex - 1].zPosition += 0.1
         }
-        if centerIndex + 1 < cards.count {
-            cards[centerIndex + 1].zPosition = 2
+        if centerIndex < cards.count - 1 {
+            cards[centerIndex + 1].zPosition += 0.1
         }
         
     }
@@ -215,6 +237,23 @@ class CardCarouselNode: SKNode {
             aux = aux * 0.25 + 0.75
             card.setScale(aux)
             
+        }
+    }
+    
+    func fixCardsXPosition() {
+        for i in 0..<cards.count {
+            if i < centerIndex {
+                cards[i].position = leftPoint
+                cards[i].setScale(0.75)
+            }
+            if i == centerIndex {
+                cards[i].position = centerPoint
+                cards[i].setScale(1.0)
+            }
+            if i > centerIndex {
+                cards[i].position = rightPoint
+                cards[i].setScale(0.75)
+            }
         }
     }
     
