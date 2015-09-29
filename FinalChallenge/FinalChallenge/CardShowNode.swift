@@ -12,6 +12,7 @@ import SpriteKit
 class CardShowNode: SKNode {
     
     var cards : [SKSpriteNode]?
+    weak var delegate : CardShowDelegate?
     
     //requires cardsArray.count == 5
     init(cardsArray:[SKSpriteNode]) {
@@ -37,7 +38,6 @@ class CardShowNode: SKNode {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
-            print("touch")
             
             let location = touch.locationInNode(self)
             let touchedNode = nodeAtPoint(location)
@@ -45,11 +45,16 @@ class CardShowNode: SKNode {
             for i in 0..<cards!.count {
                 if cards![i] == touchedNode {
                     fixCardsZPosition(i)
+                    delegate?.cardChosen(cards![i])
                 }
             }
             
         }
 
+    }
+    
+    func removeCard(card:SKSpriteNode) {
+        card.removeFromParent()
     }
     
     func fixCardsZPosition(centerIndex:Int) {
@@ -68,4 +73,8 @@ class CardShowNode: SKNode {
         }
         
     }
+}
+
+protocol CardShowDelegate : class {
+    func cardChosen(sender:SKSpriteNode)
 }

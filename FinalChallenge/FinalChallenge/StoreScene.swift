@@ -9,12 +9,19 @@
 import UIKit
 import SpriteKit
 
-class StoreScene: SKScene {
+class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     
     weak var viewController : iPhonePlayerViewController?
     var playerName = "Player Name"
     var topBarLimit:CGFloat = 0.0
     
+    var buyButton:StoreButtonNode!
+    var leaveButton:StoreButtonNode!
+    
+    var chosenCard:SKSpriteNode?
+    var cardShow:CardShowNode!
+    
+    // MARK: - View Lifecicle
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -31,6 +38,12 @@ class StoreScene: SKScene {
         setupMindingoSalesman()
         setupCards()
     }
+    
+    deinit {
+        print("store scene deinit")
+    }
+
+    // MARK: - View Setup
     
     func createSquaresAndAnimate() {
         
@@ -78,17 +91,19 @@ class StoreScene: SKScene {
         
         let leaveTextureOn = SKTexture(imageNamed: "leaveon")
         let leaveTextureOff = SKTexture(imageNamed: "leaveoff")
-        let leaveButton = StoreButtonNode(textureOn: leaveTextureOn, textureOff: leaveTextureOff)
+        leaveButton = StoreButtonNode(textureOn: leaveTextureOn, textureOff: leaveTextureOff)
         leaveButton.position = CGPointMake(frame.size.width - leaveButton.size.width/2, leaveButton.size.height/2)
         leaveButton.zPosition = 35
         addChild(leaveButton)
+        leaveButton.delegate = self
         
         let buyTextureOn = SKTexture(imageNamed: "buyon")
         let buyTextureOff = SKTexture(imageNamed: "buyoff")
-        let buyButton = StoreButtonNode(textureOn: buyTextureOn, textureOff: buyTextureOff)
+        buyButton = StoreButtonNode(textureOn: buyTextureOn, textureOff: buyTextureOff)
         buyButton.position = CGPointMake(frame.size.width - buyButton.size.width/2, leaveButton.size.height + buyButton.size.height/2)
         buyButton.zPosition = 35
         addChild(buyButton)
+        buyButton.delegate = self
         
     }
     
@@ -109,22 +124,30 @@ class StoreScene: SKScene {
             cards.append(card)
         }
         
-        let cardShow = CardShowNode(cardsArray: cards)
+        cardShow = CardShowNode(cardsArray: cards)
         cardShow.position = CGPointMake(frame.size.width/2, cards[0].size.height * 0.75)
         cardShow.zPosition = 35
+        cardShow.delegate = self
         addChild(cardShow)
         
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        closeStore()
+    // MARK: - Delegate Functions
+    
+    func buttonClicked(sender: SKSpriteNode) {
+        if sender == buyButton {
+            if let card = chosenCard {
+                cardShow.removeCard(card)
+                chosenCard = nil
+            }
+        }
+        if sender == leaveButton {
+            viewController?.openPlayerView()
+        }
     }
     
-    func closeStore() {
-        viewController?.openPlayerView()
+    func cardChosen(sender: SKSpriteNode) {
+        chosenCard = sender
     }
     
-    deinit {
-        print("store scene deinit")
-    }
 }
