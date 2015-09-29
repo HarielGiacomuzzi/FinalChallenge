@@ -39,6 +39,7 @@ class BoardGraph : NSObject{
                 }
 //                println("from : \(aux.0) to : \(x)");
             }
+            removeItemFromInappropriatePlace();
         }
     }
     
@@ -213,7 +214,9 @@ class BoardGraph : NSObject{
         let playerLastNode = nodeFor(player)
         var x : [BoardNode] = walkRecursivo(qtd, node: playerLastNode!)
         playerLastNode?.removePlayer(player);
-        
+        if qtd < 0{
+            walkBackward(qtd, player:player)
+        }
         if x.count > 1{
             let alerta = AlertPath(title: "Select a Path", message: "escolhe ai fera!", preferredStyle: .Alert)
             for i in x{
@@ -235,6 +238,30 @@ class BoardGraph : NSObject{
     }
     //we may need this
     private func paintPaths(path : [String]){
+    }
+    
+    func walkBackward(qtd : Int, player : Player){
+        var aux = Int(whereIs(player)!);
+        nodes[whereIs(player)!]?.removePlayer(player)
+        if aux! - qtd < 0{
+        return Void()
+        } else{
+           var x = nodes[String(aux!-qtd)]
+            player.x = x!.posX
+            player.y = x!.posY
+            x!.insertPLayer(player);
+        }
+    }
+    
+    func removeItemFromInappropriatePlace(){
+        
+        let predicate =  NSPredicate(format:"SELF MATCHES %@", "[A-Za-z]{2,5}[0-9]?")
+        for i in nodes{
+            if predicate.evaluateWithObject(i.0){
+                i.1.item = nil;
+                print(i.0)
+            }
+        }
     }
     
     // boardNodes class
@@ -338,7 +365,6 @@ class BoardGraph : NSObject{
             self.item = it
             
            
-            
             //self.setupItems()
         }
     }
