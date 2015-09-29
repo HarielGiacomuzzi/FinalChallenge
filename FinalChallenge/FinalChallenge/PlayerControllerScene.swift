@@ -155,7 +155,6 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        openStore()
         for touch: AnyObject in touches {
             
             let location = touch.locationInNode(self)
@@ -173,10 +172,6 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
             }
 
         }
-    }
-    
-    func openStore() {
-        viewController?.openStore()
     }
     
     deinit {

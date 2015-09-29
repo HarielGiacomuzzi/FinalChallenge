@@ -282,7 +282,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_AddCard", object: nil, userInfo: userInfo)
                 return
             }
-        // board sends card to player
+        // board removes card from player
             if message.valueForKey("removeCard") != nil {
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_RemoveCard", object: nil, userInfo: userInfo)
@@ -308,6 +308,13 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 print(message)
                 userInfo.updateValue(message.valueForKey("endAction") as! NSObject, forKey: "endAction")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_EndAction", object: nil, userInfo: userInfo)
+                return
+            }
+                
+        //board tells player to open store
+            if message.valueForKey("openStore") != nil {
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_OpenStore", object: nil, userInfo: userInfo)
                 return
             }
         

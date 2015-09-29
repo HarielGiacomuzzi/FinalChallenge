@@ -18,6 +18,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     var buyButton:StoreButtonNode!
     var leaveButton:StoreButtonNode!
     
+    var cardsString : [String]!
     var chosenCard:SKSpriteNode?
     var cardShow:CardShowNode!
     
@@ -118,9 +119,8 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     func setupCards() {
         var cards : [SKSpriteNode] = []
         
-        for _ in 0...4 {
-            let texture = SKTexture(imageNamed: "daCard")
-            let card = SKSpriteNode(texture: texture)
+        for cardString in cardsString {
+            let card = CardSprite(card: cardString)
             cards.append(card)
         }
         
@@ -142,7 +142,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
             }
         }
         if sender == leaveButton {
-            viewController?.openPlayerView()
+            viewController?.loadPlayerView()
         }
     }
     
