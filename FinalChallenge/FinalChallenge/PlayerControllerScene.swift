@@ -21,8 +21,6 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-//        let texture = SKTexture(imageNamed: "daCard")
-
         
         var cards:[CardSprite] = []
         
@@ -135,7 +133,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         print("finge que a carta foi removida")
     }
     
-    func sendCard(card: SKSpriteNode) {
+    func sendCard(card: SKNode) {
         let sentCardSprite = card as! CardSprite
         let sentCard = sentCardSprite.card
         let cardData = ["player":playerName, "item": sentCard]

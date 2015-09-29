@@ -19,7 +19,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     var leaveButton:StoreButtonNode!
     
     var cardsString : [String]!
-    var chosenCard:SKSpriteNode?
+    var chosenCard:CardShowNode?
     var cardShow:CardShowNode!
     
     // MARK: - View Lifecicle
@@ -111,13 +111,13 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     func setupMindingoSalesman() {
         let mindiTexture = SKTexture(imageNamed: "mindingo")
         let mindingo = SKSpriteNode(texture: mindiTexture)
-        mindingo.zPosition = 20
+        mindingo.zPosition = 21
         mindingo.position = CGPointMake(frame.size.width/2, frame.size.height/2)
         addChild(mindingo)
     }
     
     func setupCards() {
-        var cards : [SKSpriteNode] = []
+        var cards : [SKNode] = []
         
         for cardString in cardsString {
             let card = CardSprite(card: cardString)
@@ -125,7 +125,9 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         }
         
         cardShow = CardShowNode(cardsArray: cards)
-        cardShow.position = CGPointMake(frame.size.width/2, cards[0].size.height * 0.75)
+        cardShow.setScale(0.60)
+        let cardFrame = cardShow.calculateAccumulatedFrame()
+        cardShow.position = CGPointMake(frame.size.width/2, cardFrame.height*0.75)
         cardShow.zPosition = 35
         cardShow.delegate = self
         addChild(cardShow)
@@ -146,8 +148,8 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         }
     }
     
-    func cardChosen(sender: SKSpriteNode) {
-        chosenCard = sender
+    func cardChosen(sender: SKNode) {
+        chosenCard = sender as? CardShowNode
     }
     
 }

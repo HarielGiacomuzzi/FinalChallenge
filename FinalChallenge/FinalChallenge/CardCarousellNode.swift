@@ -11,8 +11,9 @@ import SpriteKit
 
 class CardCarouselNode: SKNode {
     
+    var cardFrame = CGRectMake(0, 0, 0, 0)
     var touchedPoint:CGPoint = CGPointMake(0.0, 0.0)
-    var cards:[SKSpriteNode] = []
+    var cards:[SKNode] = []
     var centerPoint = CGPointMake(0.0, 0.0)
     var leftPoint = CGPointMake(0.0, 0.0)
     var rightPoint = CGPointMake(0.0, 0.0)
@@ -25,16 +26,17 @@ class CardCarouselNode: SKNode {
     // MARK: - Initialization
     
     //startIndex must be inside array...
-    init(cardsArray:[SKSpriteNode], startIndex:Int) {
+    init(cardsArray:[SKNode], startIndex:Int) {
         super.init()
         cards = cardsArray
         centerIndex = startIndex
         userInteractionEnabled = true
         centerPoint = CGPointMake(0, 0)
-        
-        leftPoint = CGPointMake(centerPoint.x - cards[0].size.width * 0.75, centerPoint.y)
-        rightPoint = CGPointMake(centerPoint.x + cards[0].size.width * 0.75, centerPoint.y)
-        
+        cardFrame = cards[0].calculateAccumulatedFrame()
+
+        leftPoint = CGPointMake(centerPoint.x - cardFrame.width * 0.75, centerPoint.y)
+        rightPoint = CGPointMake(centerPoint.x + cardFrame.width * 0.75, centerPoint.y)
+
         fixCardsXPosition()
         fixCardsZPosition()
         
@@ -136,7 +138,7 @@ class CardCarouselNode: SKNode {
     
     // MARK: - Add/Remove Cards
     
-    func insertCard(card:SKSpriteNode) {
+    func insertCard(card:SKNode) {
         cards.append(card)
         if cards.count == 1 {
             card.position = centerPoint
@@ -176,20 +178,20 @@ class CardCarouselNode: SKNode {
     
     func fixCardsZPosition() {
         for card in cards {
-            card.zPosition = card.size.height * 0.01
+            card.zPosition = 1
         }
         
-        cards[centerIndex].zPosition += 0.5
+        cards[centerIndex].zPosition = 30
         if centerIndex > 0 {
-            cards[centerIndex - 1].zPosition += 0.1
+            cards[centerIndex - 1].zPosition = 20
         }
         if centerIndex < cards.count - 1 {
-            cards[centerIndex + 1].zPosition += 0.1
+            cards[centerIndex + 1].zPosition  = 20
         }
         
     }
     
-    func fixScale(card:SKSpriteNode) {
+    func fixScale(card:SKNode) {
         if card.position.x > leftPoint.x && card.position.x <= centerPoint.x {
             let fullSize = centerPoint.x - leftPoint.x
             let currentSize = card.position.x - leftPoint.x
@@ -231,5 +233,5 @@ class CardCarouselNode: SKNode {
 }
 
 protocol CardCarousellDelegate : class {
-    func sendCard(card:SKSpriteNode)
+    func sendCard(card:SKNode)
 }

@@ -9,25 +9,23 @@
 import UIKit
 import SpriteKit
 
-class CardSprite: SKSpriteNode {
+class CardSprite: SKNode {
     
     var card = "defaultcard"
     
-    override init(texture: SKTexture?, color: UIColor, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-                colorBlendFactor = 0.4
-    }
-    
     init(card:String) {
+        super.init()
         self.card = card
+        
         let atlas = SKTextureAtlas(named: "cards")
-        
         let texture = atlas.textureNamed("trapCardBase")
-        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-        
-//        let spriteLoko = SKSpriteNode(texture: texture)
-//        addChild(spriteLoko)
-        
+        let baseSprite = SKSpriteNode(texture: texture)
+        baseSprite.zPosition = 1
+        addChild(baseSprite)
+        let texture2 = atlas.textureNamed(card)
+        let sprite = SKSpriteNode(texture: texture2)
+        sprite.zPosition = 2
+        addChild(sprite)
     }
     
     required init?(coder aDecoder: NSCoder) {

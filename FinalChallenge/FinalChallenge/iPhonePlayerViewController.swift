@@ -34,8 +34,8 @@ class iPhonePlayerViewController: UIViewController {
         skView?.showsPhysics = false
         
 //        loadPartyModeScene()
-//        loadStore(["1","2","3","4","5"])
-        loadPlayerView()
+        loadStore(["stealgold","stealgold","losecard","returnSquares","losecard"])
+//        loadPlayerView()
     }
     
     // MARK: - Message Received Functions
