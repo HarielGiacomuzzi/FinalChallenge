@@ -132,7 +132,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
             } catch {
                 //fatalError()
-                print("não consegue mandar a mensagem né moises");
+                //print("não consegue mandar a mensagem né moises");
             };
             return
         }
@@ -167,6 +167,11 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             GameManager.sharedInstance.minigameViewController!.presentViewController(reconect, animated: true, completion: nil);
             NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
             return
+        }
+        
+        if state == MCSessionState.NotConnected{
+            print("Caiuuuuu");
+            return;
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ConnectionStatusChanged", object: nil, userInfo: userInfo)

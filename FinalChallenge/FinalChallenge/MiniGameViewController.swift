@@ -50,7 +50,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         scene!.gameController = self
         scene!.scaleMode = .Fill
         skView.presentScene(scene)
-        print("apresentei a cena sem crashar")
+        //print("apresentei a cena sem crashar")
         
     }
     

@@ -1,4 +1,4 @@
-//
+            //
 //  GameManager.swift
 //  FinalChallenge
 //
@@ -145,6 +145,7 @@ class GameManager : NSObject {
         let dic = ["closeController":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         self.isOnMiniGame = false;
+        self.playerTurnEnded(nil);
     }
 // this one may replace the dismissMinigameSP
     func newDismissMinigameSP(){
