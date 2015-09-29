@@ -12,7 +12,7 @@ import SpriteKit
 class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     //SET ZOEIRA MODE TO TRUE IF YOU WANT TO THROW THE BOMB EVERYWHERE
-    var zoeiraMode = false
+    var zoeiraMode = true
     
     var walls:[BombWallNode] = [] //0 = north, 1 = south, 2 = east, 3 = west
     var players:[BombPlayerNode] = []//0 = north, 1 = south, 2 = east, 3 = west

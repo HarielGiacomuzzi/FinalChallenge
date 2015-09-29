@@ -14,8 +14,9 @@ import SpriteKit
 class iPhonePlayerViewController: UIViewController {
     
     var skView : SKView?
-    var scene : PlayerControllerScene?
+    var playerScene : PlayerControllerScene?
     var storeScene : StoreScene?
+    var partyModeScene : PartyModeScene?
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -24,26 +25,24 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addCard:", name: "ConnectionManager_AddCard", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeCard:", name: "ConnectionManager_RemoveCard", object: nil)
-        
-        scene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
-        scene?.viewController = self
-        
-        if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
-            scene?.playerName = peerID
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "openStore:", name: "ConnectionManager_OpenStore", object: nil)
         
         skView = self.view as? SKView
         skView?.showsFPS = true
         skView?.showsNodeCount = true
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
-        scene?.scaleMode = .AspectFit
-        skView?.presentScene(scene)
+        
+//        loadPartyModeScene()
+        loadStore(["stealgold","stealgold","losecard","returnSquares","losecard"])
+//        loadPlayerView()
     }
     
+    // MARK: - Message Received Functions
+    
     func playerTurn(data : NSNotification){
-        scene?.carousel.canRemoveWithSwipeUp = true
-        scene?.testButton.text = "DICE"
+        playerScene?.carousel.canRemoveWithSwipeUp = true
+        playerScene?.testButton.text = "DICE"
         
     }
     
@@ -68,7 +67,7 @@ class iPhonePlayerViewController: UIViewController {
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             print("update moneys para \(value)")
-            scene?.updateMoney(value)
+            playerScene?.updateMoney(value)
         } else {
             print("nao rola filho")
         }
@@ -83,7 +82,7 @@ class iPhonePlayerViewController: UIViewController {
         print("mensagem para \(playerName)")
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
-            scene!.addCard(card)
+            playerScene!.addCard(card)
         } else {
             print("nao rola filho")
         }
@@ -98,31 +97,60 @@ class iPhonePlayerViewController: UIViewController {
         print("mensagem para \(playerName)")
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
-            scene!.removeCard(card)
+            playerScene!.removeCard(card)
         } else {
             print("nao rola filho")
         }
     }
     
-    func openPlayerView() {
-        storeScene = nil
-        scene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
-        scene?.viewController = self
-        if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
-            scene?.playerName = peerID
+    func openStore(data : NSNotification) {
+        if storeScene == nil {
+            let dic = data.userInfo!["dataDic"] as! NSDictionary
+            let cards = dic["cards"] as! [String]
+            let player = dic["player"] as! String
+            if player == ConnectionManager.sharedInstance.peerID!.displayName {
+                print(player)
+                loadStore(cards)
+            }
         }
-        scene?.scaleMode = .AspectFit
-        skView?.presentScene(scene)
     }
     
-    func openStore() {
-        scene = nil
+    // MARK: - Scene Control
+    
+    func loadPlayerView() {
+        storeScene = nil
+        partyModeScene = nil
+        
+        playerScene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
+        playerScene?.viewController = self
+        if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
+            playerScene?.playerName = peerID
+        }
+        playerScene?.scaleMode = .AspectFit
+        skView?.presentScene(playerScene)
+    }
+    
+    func loadStore(cards:[String]) {
+        playerScene = nil
+        partyModeScene = nil
+        
         storeScene = StoreScene(size: CGSize(width: 1334, height: 750))
+        storeScene?.cardsString = cards
         storeScene?.viewController = self
         if let peerID = ConnectionManager.sharedInstance.peerID?.displayName {
             storeScene?.playerName = peerID
         }
         storeScene?.scaleMode = .AspectFit
         skView?.presentScene(storeScene)
+    }
+    
+    func loadPartyModeScene() {
+        playerScene = nil
+        storeScene = nil
+        
+        partyModeScene = PartyModeScene(size: CGSize(width: self.view.frame.width, height: self.view.frame.height))
+        
+        partyModeScene?.viewController = self
+        skView?.presentScene(partyModeScene)
     }
 }

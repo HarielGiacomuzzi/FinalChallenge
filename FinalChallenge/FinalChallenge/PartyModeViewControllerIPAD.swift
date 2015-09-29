@@ -159,8 +159,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         case GameManager.sharedInstance.players[0].playerIdentifier : // player1Image.image = UIImage(named: message)
                                   scene?.char1.texture = SKTexture(imageNamed: message)
                                   scene?.riseCharacter(scene!.char1)
-            
-            
+        
         case GameManager.sharedInstance.players[1].playerIdentifier : // player2Image.image = UIImage(named: message)
                                     scene?.char2.texture = SKTexture(imageNamed: message)
                                     scene?.riseCharacter(scene!.char2)

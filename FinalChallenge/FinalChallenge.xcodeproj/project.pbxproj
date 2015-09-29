@@ -30,7 +30,6 @@
 		4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */; };
 		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
 		5E1C59C91BB0771200BCDE1C /* CardSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C59C81BB0771200BCDE1C /* CardSprite.swift */; settings = {ASSET_TAGS = (); }; };
-		5E1C59CB1BB07B1200BCDE1C /* CardCarousellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C59CA1BB07B1200BCDE1C /* CardCarousellDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2095981BB973F2002FC8AF /* StoreScene.swift */; settings = {ASSET_TAGS = (); }; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E4299321BB9880E004B1DF9 /* StoreButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */; settings = {ASSET_TAGS = (); }; };
@@ -50,6 +49,7 @@
 		5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */; };
 		5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */; };
 		5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA49E091B87B59100AC51F8 /* MinigameScene.swift */; };
+		5EB787EB1BBB0C2900579739 /* cards.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5EB787EA1BBB0C2900579739 /* cards.atlas */; settings = {ASSET_TAGS = (); }; };
 		5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */; };
 		5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */; };
 		5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */; };
@@ -66,7 +66,6 @@
 		B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B33681B8656D7000E5F53 /* GameOverXib.swift */; };
 		B5AFAD081B94C1DD0005F19E /* MinigameCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */; };
 		B5AFAD0A1B94C3770005F19E /* CustomMinigameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */; };
-		B5AFAD0C1B94CC7F0005F19E /* PartyModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD0B1B94CC7F0005F19E /* PartyModeViewController.swift */; };
 		B5AFAD0F1B9608F70005F19E /* PartyModeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */; };
 		B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */; };
 		B5AFAD151BA09BD40005F19E /* GameOverSceneSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */; };
@@ -148,7 +147,6 @@
 		4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuffPlayer.swift; sourceTree = "<group>"; };
 		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
 		5E1C59C81BB0771200BCDE1C /* CardSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSprite.swift; sourceTree = "<group>"; };
-		5E1C59CA1BB07B1200BCDE1C /* CardCarousellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCarousellDelegate.swift; sourceTree = "<group>"; };
 		5E2095981BB973F2002FC8AF /* StoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreScene.swift; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreButtonNode.swift; sourceTree = "<group>"; };
@@ -168,6 +166,7 @@
 		5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		5EA49E091B87B59100AC51F8 /* MinigameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameScene.swift; sourceTree = "<group>"; };
+		5EB787EA1BBB0C2900579739 /* cards.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = cards.atlas; path = ../../../../../Downloads/cards.atlas; sourceTree = "<group>"; };
 		5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPowerupNode.swift; sourceTree = "<group>"; };
 		5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameScene.swift; sourceTree = "<group>"; };
 		5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
@@ -184,7 +183,6 @@
 		B57B33681B8656D7000E5F53 /* GameOverXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverXib.swift; sourceTree = "<group>"; };
 		B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameCollectionViewController.swift; sourceTree = "<group>"; };
 		B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMinigameCollectionView.swift; sourceTree = "<group>"; };
-		B5AFAD0B1B94CC7F0005F19E /* PartyModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeViewController.swift; sourceTree = "<group>"; };
 		B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeScene.swift; sourceTree = "<group>"; };
 		B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeViewControllerIPAD.swift; sourceTree = "<group>"; };
 		B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneSP.swift; sourceTree = "<group>"; };
@@ -269,9 +267,11 @@
 		5E8410011BA9CC1B0099B16B /* PlayerControllerView */ = {
 			isa = PBXGroup;
 			children = (
+				5EB787EA1BBB0C2900579739 /* cards.atlas */,
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E840FFF1BA9CC000099B16B /* PlayerControllerScene.swift */,
 				5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */,
+				5E840FFD1BA9CBB00099B16B /* CardCarousellNode.swift */,
 				5E1C59C81BB0771200BCDE1C /* CardSprite.swift */,
 				5E2095981BB973F2002FC8AF /* StoreScene.swift */,
 				5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */,
@@ -288,7 +288,6 @@
 				5E8410011BA9CC1B0099B16B /* PlayerControllerView */,
 				B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */,
 				B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */,
-				B5AFAD0B1B94CC7F0005F19E /* PartyModeViewController.swift */,
 				B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */,
 				B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */,
 				26547BB41B9F68DF003DFD73 /* SetupPartyScene SK */,
@@ -518,8 +517,6 @@
 				B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */,
 				4445D7C41B98C99F0049B787 /* AlertPath.swift */,
 				5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */,
-				5E840FFD1BA9CBB00099B16B /* CardCarousellNode.swift */,
-				5E1C59CA1BB07B1200BCDE1C /* CardCarousellDelegate.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -605,7 +602,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
+						DevelopmentTeam = ZX7GUMJ35C;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -673,6 +670,7 @@
 				4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */,
 				B5DD1B541B8F90EC00AA1EB6 /* funMusic.mp3 in Resources */,
 				DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */,
+				5EB787EB1BBB0C2900579739 /* cards.atlas in Resources */,
 				DBE862051B850DB700C8099E /* board_2.xml in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
 			);
@@ -699,7 +697,6 @@
 				B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */,
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
 				B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */,
-				B5AFAD0C1B94CC7F0005F19E /* PartyModeViewController.swift in Sources */,
 				5E68DAAB1BA9ECCB00DB14FB /* PlayerButtonNode.swift in Sources */,
 				B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */,
 				5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */,
@@ -733,7 +730,6 @@
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				5E840FFE1BA9CBB00099B16B /* CardCarousellNode.swift in Sources */,
 				5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */,
-				5E1C59CB1BB07B1200BCDE1C /* CardCarousellDelegate.swift in Sources */,
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,

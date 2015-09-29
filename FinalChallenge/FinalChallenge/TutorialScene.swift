@@ -359,7 +359,9 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         self.gameController?.dismissScene()
         switch(minigameName){
             case "FlappyFish": goScene = FlappyGameScene(size: self.size)
+                               gameController?.scene = goScene
             case "BombGame":   goScene = BombTGameScene(size: self.size)
+                               gameController?.scene = goScene
         default: break
         }
         self.view?.presentScene(goScene)
@@ -443,5 +445,4 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
     deinit{
         print("Tutorial scene is out of the memory")
     }
-    
 }

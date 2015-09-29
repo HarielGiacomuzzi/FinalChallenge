@@ -21,14 +21,13 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        let texture = SKTexture(imageNamed: "daCard")
-
-        let card1 = CardSprite(texture: texture, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
-        let card2 = CardSprite(texture: texture, color: UIColor.greenColor(), size: CGSize(width: 375, height: 540))
-        let card3 = CardSprite(texture: texture, color: UIColor.redColor(), size: CGSize(width: 375, height: 540))
-        let card4 = CardSprite(texture: texture, color: UIColor.whiteColor(), size: CGSize(width: 375, height: 540))
         
-        let cards = [card1,card2,card3,card4]
+        var cards:[CardSprite] = []
+        
+        for _ in 0...3 {
+            let card = CardSprite(card: "losecard")
+            cards.append(card)
+        }
 
         let backgroundTexture = SKTexture(imageNamed: "backscreen")
         let background = SKSpriteNode(texture: backgroundTexture)
@@ -134,7 +133,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         print("finge que a carta foi removida")
     }
     
-    func sendCard(card: SKSpriteNode) {
+    func sendCard(card: SKNode) {
         let sentCardSprite = card as! CardSprite
         let sentCard = sentCardSprite.card
         let cardData = ["player":playerName, "item": sentCard]
@@ -155,13 +154,12 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        openStore()
         for touch: AnyObject in touches {
             
             let location = touch.locationInNode(self)
             if testButton.containsPoint(location) {
                 if testButton.text == "DICE" {
-                    let diceResult = 1 //Int(arc4random_uniform(6)+1)
+                    let diceResult = Int(arc4random_uniform(6)+1)
                     let aux = NSMutableDictionary();
                     aux.setValue(diceResult, forKey: "diceResult");
                     aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
@@ -173,10 +171,6 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
             }
 
         }
-    }
-    
-    func openStore() {
-        viewController?.openStore()
     }
     
     deinit {

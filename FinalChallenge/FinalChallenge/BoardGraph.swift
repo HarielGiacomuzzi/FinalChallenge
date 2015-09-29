@@ -211,12 +211,13 @@ class BoardGraph : NSObject{
     
     // Jhonny Walker keep walking
     func walk(qtd : Int, player : Player, view : UIViewController?){
+        if qtd < 0{
+            walkBackward(qtd, player:player)
+            return
+        }
         let playerLastNode = nodeFor(player)
         var x : [BoardNode] = walkRecursivo(qtd, node: playerLastNode!)
         playerLastNode?.removePlayer(player);
-        if qtd < 0{
-            walkBackward(qtd, player:player)
-        }
         if x.count > 1{
             let alerta = AlertPath(title: "Select a Path", message: "escolhe ai fera!", preferredStyle: .Alert)
             for i in x{
@@ -240,7 +241,7 @@ class BoardGraph : NSObject{
     private func paintPaths(path : [String]){
     }
     
-    func walkBackward(qtd : Int, player : Player){
+    private func walkBackward(qtd : Int, player : Player){
         var aux = Int(whereIs(player)!);
         nodes[whereIs(player)!]?.removePlayer(player)
         if aux! - qtd < 0{
@@ -259,7 +260,6 @@ class BoardGraph : NSObject{
         for i in nodes{
             if predicate.evaluateWithObject(i.0){
                 i.1.item = nil;
-                print(i.0)
             }
         }
     }

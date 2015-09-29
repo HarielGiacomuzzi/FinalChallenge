@@ -13,7 +13,7 @@ private let movableAvatarNodeName = "movable"
 
 class PartyModeScene: SKScene {
     
-    var viewController : PartyModeViewController!
+    weak var viewController : iPhonePlayerViewController?
     let background = SKSpriteNode(imageNamed: "board_beta")
     var selectedNode = SKSpriteNode()
     var playerSpriteNodeArray = [SKSpriteNode()]
@@ -190,7 +190,7 @@ class PartyModeScene: SKScene {
         
         if message == "change" {
             //change view
-            viewController.changeView()
+            viewController?.loadPlayerView()
         }
         
     }

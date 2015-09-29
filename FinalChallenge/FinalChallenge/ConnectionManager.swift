@@ -33,6 +33,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController) {
         let alerta = UIAlertController(title: "Need Other Player", message: "Can't Continue Without other players", preferredStyle: .Alert)
+        //alerta.actions.append(UIAction)
         browserViewController.presentViewController(alerta, animated: true, completion: nil);
         return Void()
     }
@@ -131,7 +132,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
             } catch {
                 //fatalError()
-                print("não consegue mandar a mensagem né moises");
+                //print("não consegue mandar a mensagem né moises");
             };
             return
         }
@@ -168,6 +169,11 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             return
         }
         
+        if state == MCSessionState.NotConnected{
+            print("Caiuuuuu");
+            return;
+        }
+        
         NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ConnectionStatusChanged", object: nil, userInfo: userInfo)
         })
     }
@@ -191,7 +197,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         // if we received the dice results of a player
             if message.valueForKey("diceResult") != nil {
                 userInfo.updateValue(message.valueForKey("diceResult") as! Int, forKey: "diceResult")
-                GameManager.sharedInstance.messageReceived(userInfo)
+                GameManager.sharedInstance.diceReceived(userInfo)
                 return
             }
                 // if someone have been disconnected
@@ -282,7 +288,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_AddCard", object: nil, userInfo: userInfo)
                 return
             }
-        // board sends card to player
+        // board removes card from player
             if message.valueForKey("removeCard") != nil {
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_RemoveCard", object: nil, userInfo: userInfo)
@@ -301,13 +307,6 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 print(message)
                 userInfo.updateValue(message.valueForKey("playerAction") as! NSObject, forKey: "playerAction")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerAction", object: nil, userInfo: userInfo)
-                return
-            }
-        //player tells board his turn has ended
-            if message.valueForKey("endAction") != nil {
-                print(message)
-                userInfo.updateValue(message.valueForKey("endAction") as! NSObject, forKey: "endAction")
-                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_EndAction", object: nil, userInfo: userInfo)
                 return
             }
         
