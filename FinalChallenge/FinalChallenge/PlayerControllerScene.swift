@@ -17,11 +17,12 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     var topBarLimit:CGFloat = 0.0
     var playerName = "Player Name"
     var testButton : SKLabelNode!
+    weak var viewController : iPhonePlayerViewController?
     
     override func didMoveToView(view: SKView) {
-        
+        super.didMoveToView(view)
         let texture = SKTexture(imageNamed: "daCard")
-        
+
         let card1 = CardSprite(texture: texture, color: UIColor.blueColor(), size: CGSize(width: 375, height: 540))
         let card2 = CardSprite(texture: texture, color: UIColor.greenColor(), size: CGSize(width: 375, height: 540))
         let card3 = CardSprite(texture: texture, color: UIColor.redColor(), size: CGSize(width: 375, height: 540))
@@ -33,19 +34,19 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         let background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPointMake(frame.size.width / 2, frame.size.height  / 2)
         addChild(background)
-        
+
         self.backgroundColor = UIColor.whiteColor()
         
         createSquaresAndAnimate()
         setupTopBar()
         setupButtons()
-        
+
         carousel = CardCarouselNode(cardsArray: cards, startIndex: 0)
         carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 2)
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
-//        carousel.canRemoveWithSwipeUp = false
+        carousel.canRemoveWithSwipeUp = false
         createTestButton()
 
     }
@@ -154,7 +155,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print(carousel.canRemoveWithSwipeUp)
+        openStore()
         for touch: AnyObject in touches {
             
             let location = touch.locationInNode(self)
@@ -174,5 +175,12 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         }
     }
     
+    func openStore() {
+        viewController?.openStore()
+    }
+    
+    deinit {
+        print("player view scene deinit")
+    }
     
 }

@@ -9,6 +9,6 @@
 import Foundation
 import SpriteKit
 
-protocol CardCarousellDelegate {
+protocol CardCarousellDelegate : class {
     func sendCard(card:SKSpriteNode)
 }

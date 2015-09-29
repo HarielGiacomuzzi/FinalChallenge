@@ -23,6 +23,7 @@ class XMLParser: NSObject, NSXMLParserDelegate {
     }
     
     // THIS WARNINGS ARE BOTHERING ME, PLEASE FIX IT, PLOX MORDEKAISER APPROVES
+    // CONCORDO PLENAMENTE COM ESSE COMMENT ACIMA ˆˆˆˆˆˆ
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if elementName == "HOUSE"{

@@ -20,7 +20,7 @@ class CardCarouselNode: SKNode {
     var canRemoveWithSwipeUp = true
     var firstTouch = false
     var movingUp = false
-    var delegate:CardCarousellDelegate?
+    weak var delegate:CardCarousellDelegate?
     
     // MARK: - Initialization
     
@@ -65,7 +65,8 @@ class CardCarouselNode: SKNode {
             removeCard()
         } else {
             fixCardsZPosition()
-            fixCardsXPosition()
+            centerCard.position = centerPoint
+            centerCard.setScale(1.0)
         }
 
     }
@@ -127,37 +128,6 @@ class CardCarouselNode: SKNode {
                 centerIndex++
             }
         } else {
-            if centerCard.position.x > centerPoint.x {
-                if centerIndex > 0 {
-                    let leftCard = cards[centerIndex - 1]
-                    let newLeftPos = changeInX + leftCard.position.x
-                    if newLeftPos > rightPoint.x {
-                        leftCard.position = rightPoint
-                        leftCard.setScale(0.75)
-                    } else if newLeftPos < leftPoint.x {
-                        leftCard.position = leftPoint
-                        leftCard.setScale(0.75)
-                    } else {
-                        leftCard.position.x = newLeftPos
-                        fixScale(leftCard)
-                    }
-                }
-            } else {
-                if centerIndex < cards.count - 1 {
-                    let rightCard = cards[centerIndex + 1]
-                    let newRightPos = changeInX + rightCard.position.x
-                    if newRightPos > rightPoint.x {
-                        rightCard.position = rightPoint
-                        rightCard.setScale(0.75)
-                    } else if newRightPos < leftPoint.x {
-                        rightCard.position = leftPoint
-                        rightCard.setScale(0.75)
-                    } else {
-                        rightCard.position.x = newRightPos
-                        fixScale(rightCard)
-                    }
-                }
-            }
             centerCard.position.x = newCenterPos
         }
         fixScale(centerCard)
