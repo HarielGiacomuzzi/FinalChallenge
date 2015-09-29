@@ -53,6 +53,7 @@ class InitialViewController: UIViewController
         
         partyModeButton.removeFromSuperview()
         singlePlayerButton.removeFromSuperview()
+        GameManager.sharedInstance.isMultiplayer = true
         openBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
             if self.idiom == self.iPad {
                 self.performSegueWithIdentifier("ipadSegue", sender: nil)

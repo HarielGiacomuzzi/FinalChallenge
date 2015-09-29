@@ -9,6 +9,7 @@
 import SpriteKit
 
 class BoardScene: SKScene, SKPhysicsContactDelegate {
+    
     override func didMoveToView(view: SKView) {
         var auxList = [SKNode?](count: self.children.count, repeatedValue: nil);
         
@@ -69,5 +70,8 @@ class BoardScene: SKScene, SKPhysicsContactDelegate {
         print("</BOARD>")
     }
     
+    deinit{
+        print("Deu deinit na tela de board game")
+    }
     
 }
