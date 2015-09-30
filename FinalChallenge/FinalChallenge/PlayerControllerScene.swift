@@ -22,9 +22,9 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         
-        let card1 = CardSprite(card: "losecard")
-        let card2 = CardSprite(card: "stealgold")
-        let card3 = CardSprite(card: "returnSquares")
+        let card1 = CardSprite(cardName: "losecard")
+        let card2 = CardSprite(cardName: "stealgold")
+        let card3 = CardSprite(cardName: "returnSquares")
         
         let cards = [card1,card2,card3]
 
@@ -81,7 +81,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         moneyButton.position = CGPointMake(frame.size.width - moneyButton.button.size.width / 2, (moneyButton.button.size.height / 2) - 20)
 
         addChild(moneyButton)
-        moneyButton.zPosition = 35
+        moneyButton.zPosition = 100
         
         let lootButtonTextureOn = SKTexture(imageNamed: "button1On")
         let lootButtonTextureOff = SKTexture(imageNamed: "button1Off")
@@ -90,7 +90,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         lootButton.position = CGPointMake(lootButton.button.size.width/2, (lootButton.button.size.height/2) - 20)
         
         addChild(lootButton)
-        lootButton.zPosition = 35
+        lootButton.zPosition = 100
     }
     
     func setupTopBar() {
@@ -125,7 +125,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     }
     
     func addCard(card:String) {
-        let cardSprite = CardSprite(card: card)
+        let cardSprite = CardSprite(cardName: card)
         carousel.insertCard(cardSprite)
     }
     func removeCard(card:String) {
@@ -134,7 +134,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     
     func sendCard(card: SKNode) {
         let sentCardSprite = card as! CardSprite
-        let sentCard = sentCardSprite.card
+        let sentCard = sentCardSprite.cardName
         let cardData = ["player":playerName, "item": sentCard]
         let dic = ["sendCard":" ", "dataDic" : cardData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)

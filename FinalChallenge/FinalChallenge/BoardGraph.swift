@@ -242,12 +242,12 @@ class BoardGraph : NSObject{
     }
     
     private func walkBackward(qtd : Int, player : Player){
-        var aux = Int(whereIs(player)!);
+        let aux = Int(whereIs(player)!);
         nodes[whereIs(player)!]?.removePlayer(player)
         if aux! - qtd < 0{
         return Void()
         } else{
-           var x = nodes[String(aux!-qtd)]
+           let x = nodes[String(aux!-qtd)]
             player.x = x!.posX
             player.y = x!.posY
             x!.insertPLayer(player);

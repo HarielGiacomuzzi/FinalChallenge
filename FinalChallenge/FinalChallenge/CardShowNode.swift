@@ -46,8 +46,6 @@ class CardShowNode: SKNode {
             for i in 0..<cards!.count {
 
                 if cards![i] == touchedNode.parent {
-                    let testCard = cards![i] as! CardSprite
-                    print(testCard.card)
                     fixCardsZPosition(i)
                     delegate?.cardChosen(cards![i])
                 }
@@ -58,6 +56,8 @@ class CardShowNode: SKNode {
     }
     
     func removeCard(card:SKNode) {
+        print("cheguei aqui")
+        print(card)
         card.removeFromParent()
     }
     

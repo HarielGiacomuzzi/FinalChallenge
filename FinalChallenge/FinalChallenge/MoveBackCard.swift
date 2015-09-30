@@ -15,6 +15,7 @@ class MoveBackCard : ActiveCard{
     override init() {
         super.init()
         self.cardName = "MoveBackCard"
+        imageName = "returnSquares"
     }
     
     override func activate(targetPlayer:Player) {
