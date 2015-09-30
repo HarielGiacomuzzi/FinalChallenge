@@ -14,7 +14,10 @@ class BoardGraph : NSObject{
     
     static let SharedInstance = BoardGraph();
     var nodes : [String : BoardNode] = [:];
-
+    private var hasSpecialNodeOnPath = false;
+    private var specialNodeName = "";
+    
+    
     func loadBoard(fromFile : String){
         let a = XMLParser();
         a.loadBoardFrom(NSBundle.mainBundle().pathForResource(fromFile, ofType: "xml")!);
@@ -200,6 +203,10 @@ class BoardGraph : NSObject{
     // Recursive* not Recursivo
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
         var lista : [BoardNode] = [];
+        if node.isSpecialNode{
+            hasSpecialNodeOnPath = true;
+            specialNodeName = keyFor(node)!;
+        }
         if qtd == 0{
             lista.append(node)
             return lista
@@ -219,10 +226,16 @@ class BoardGraph : NSObject{
             walkBackward(qtd, player:player)
             return
         }
-        let playerLastNode = nodeFor(player)
+        var playerLastNode = nodeFor(player)
         var x : [BoardNode] = walkRecursivo(qtd, node: playerLastNode!)
         for i in x {
             print(keyFor(i));
+        }
+        if hasSpecialNodeOnPath{
+            nodes[specialNodeName]?.insertPLayer(player);
+            playerLastNode?.removePlayer(player);
+            playerLastNode = nodes[specialNodeName];
+            nodes[specialNodeName]?.activateNode(specialNodeName, player: player);
         }
         if x.count > 1{
             let alerta = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
@@ -243,7 +256,6 @@ class BoardGraph : NSObject{
             i.insertPLayer(player);
             playerLastNode?.removePlayer(player);
         }
-    
     }
     
     //we may need this
@@ -297,6 +309,31 @@ class BoardGraph : NSObject{
         
         func removePlayer(player : Player?){
             currentPlayers.removeObject(player!);
+        }
+        
+        func activateNode(nodeName : String, player : Player){
+            if !self.isSpecialNode{
+                return
+            }
+            switch nodeName{
+                case "House":
+                    for item in player.items{
+                        if !item.usable{
+                            player.itemsInHouse.append(item);
+                            player.items.removeObject(item);
+                        }
+                    }
+                break
+                
+                case "Store":
+                break
+                
+                //o dafault é ser um baú
+                default:
+                    //faz as coisas do baú
+                break
+            }
+            return
         }
         
         func insertPLayer(player : Player?){
