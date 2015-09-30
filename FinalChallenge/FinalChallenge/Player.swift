@@ -20,6 +20,7 @@ class Player : NSObject {
     var nodeSprite : SKNode?
     var color = UIColor()
     var items:[Card] = []
+    var itemsInHouse : [Card] = []
     
 //    init(posX: Double, posY: Double) {
 //        self.x = posX;
