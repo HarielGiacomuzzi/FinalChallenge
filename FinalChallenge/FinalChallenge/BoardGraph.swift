@@ -47,6 +47,7 @@ class BoardGraph : NSObject{
 //                println("from : \(aux.0) to : \(x)");
             }
             removeItemFromInappropriatePlace();
+            addCoins()
         }
     }
     
@@ -200,30 +201,6 @@ class BoardGraph : NSObject{
         }
     }
     
-//    //COINS
-//    func haveCoin(NodeName: String) -> Bool{
-//        if nodes[NodeName]?.coins != nil{
-//            return true
-//        }
-//        return false
-//    }
-//    
-//    func getCoins(nodeName : String) -> NSObject?{
-//        if haveCoin(nodeName){
-//            return nodes[nodeName]?.coins
-//        }
-//        return nil
-//    }
-//    
-//    func setCoins(Coins: Player, nodeName : String) -> Bool{
-//        if !haveCoin(nodeName){
-//            print("Colocou a moeda \(Coins.nodeSprite)")
-//            nodes[nodeName]?.coins = Coins
-//            return true
-//        }
-//        return false
-//    }
-    
     func addCoins(){
         let aux = Array(nodes.values)
         for i in 0...Int(arc4random_uniform(50)+1){
@@ -323,6 +300,7 @@ class BoardGraph : NSObject{
         var posX = 0.0;
         var posY = 0.0;
         var item : Card?
+        var isSpecialNode = false;
         var coins : Int?
         var nextNames : [String] = [];
         var currentPlayers : [Player] = [];
