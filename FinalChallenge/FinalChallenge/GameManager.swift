@@ -169,7 +169,7 @@ class GameManager : NSObject {
             aux = abs(value)
             player.coins += value
         }
-        print("Esse é o jogador: \(player.playerIdentifier)")
+        //print("Esse é o jogador: \(player.playerIdentifier)")
         let playerData = ["player":player.playerIdentifier, "value": player.coins]
         let dic = ["updateMoney":" ", "dataDic" : playerData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
