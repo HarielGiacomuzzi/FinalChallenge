@@ -27,8 +27,8 @@ class GameManager : NSObject {
     var minigameViewController : MiniGameViewController?
     
     var minigameOrderArray : [Minigame] = []
-    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
-    //var allMinigames : [Minigame] = [.FlappyFish]
+    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    var allMinigames : [Minigame] = [.FlappyFish]
     
     override init(){
         super.init()
@@ -111,7 +111,9 @@ class GameManager : NSObject {
         if minigameOrderArray.isEmpty {
             fillMinigameOrderArray()
         }
+        
         let minigame = minigameOrderArray.randomItem()
+        
         for m in minigameOrderArray {
             print(m.rawValue)
         }
