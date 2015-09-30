@@ -264,18 +264,34 @@
 			name = "SetupPartyScene SK";
 			sourceTree = "<group>";
 		};
+		5E2BAEE91BBB432D001C70EB /* PlayerScene */ = {
+			isa = PBXGroup;
+			children = (
+				5E840FFF1BA9CC000099B16B /* PlayerControllerScene.swift */,
+				5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */,
+				5E840FFD1BA9CBB00099B16B /* CardCarousellNode.swift */,
+			);
+			name = PlayerScene;
+			sourceTree = "<group>";
+		};
+		5E2BAEEA1BBB433B001C70EB /* StoreScene */ = {
+			isa = PBXGroup;
+			children = (
+				5E2095981BB973F2002FC8AF /* StoreScene.swift */,
+				5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */,
+				5E4299331BB9914F004B1DF9 /* CardShowNode.swift */,
+			);
+			name = StoreScene;
+			sourceTree = "<group>";
+		};
 		5E8410011BA9CC1B0099B16B /* PlayerControllerView */ = {
 			isa = PBXGroup;
 			children = (
 				5EB787EA1BBB0C2900579739 /* cards.atlas */,
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
-				5E840FFF1BA9CC000099B16B /* PlayerControllerScene.swift */,
-				5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */,
-				5E840FFD1BA9CBB00099B16B /* CardCarousellNode.swift */,
 				5E1C59C81BB0771200BCDE1C /* CardSprite.swift */,
-				5E2095981BB973F2002FC8AF /* StoreScene.swift */,
-				5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */,
-				5E4299331BB9914F004B1DF9 /* CardShowNode.swift */,
+				5E2BAEE91BBB432D001C70EB /* PlayerScene */,
+				5E2BAEEA1BBB433B001C70EB /* StoreScene */,
 			);
 			name = PlayerControllerView;
 			sourceTree = "<group>";
@@ -602,7 +618,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZX7GUMJ35C;
+						DevelopmentTeam = DVXNNDG4U4;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;

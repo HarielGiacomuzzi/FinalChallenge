@@ -12,6 +12,9 @@ import SpriteKit
 class CardSprite: SKNode {
     
     var card = "defaultcard"
+    var baseSprite:SKSpriteNode!
+    var image:SKSpriteNode!
+    var nameLabel:SKLabelNode!
     
     init(card:String) {
         super.init()
@@ -19,13 +22,22 @@ class CardSprite: SKNode {
         
         let atlas = SKTextureAtlas(named: "cards")
         let texture = atlas.textureNamed("trapCardBase")
-        let baseSprite = SKSpriteNode(texture: texture)
+        baseSprite = SKSpriteNode(texture: texture)
         baseSprite.zPosition = 1
         addChild(baseSprite)
         let texture2 = atlas.textureNamed(card)
-        let sprite = SKSpriteNode(texture: texture2)
-        sprite.zPosition = 2
-        addChild(sprite)
+        image = SKSpriteNode(texture: texture2)
+        image.zPosition = 2
+        addChild(image)
+        nameLabel = SKLabelNode(text: card)
+        let maxSize = baseSprite.position.y + baseSprite.frame.height/2
+        let minSize = image.position.y + image.size.height/2
+        let midSize = minSize + ((maxSize - minSize) / 2)
+        nameLabel.position = CGPointMake(baseSprite.position.x, midSize)
+        nameLabel.zPosition = 3
+        nameLabel.fontSize = 45
+        nameLabel.fontName = "GillSans-Bold"
+        addChild(nameLabel)
     }
     
     required init?(coder aDecoder: NSCoder) {
