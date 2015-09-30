@@ -21,6 +21,7 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         ConnectionManager.sharedInstance.browser?.delegate = self;
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "whoisResponse:", name: "ConnectionManager_WhoIsResponse", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveCard:", name: "ConnectionManager_SendCard", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeStore:", name: "ConnectionManager_CloseStore", object: nil);
     }
 
     override func didReceiveMemoryWarning() {
@@ -116,12 +117,16 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
     }
     
     @IBAction func openStore() {
-        let cards = ["stealgold","stealgold","losecard","returnSquares","losecard"]
+        let cards = ["StealGoldCard","StealGoldCard","LoseCard","MoveBackCard","LoseCard"]
         let player = GameManager.sharedInstance.players.first!.playerIdentifier
         let dataDic = ["cards":cards, "player":player]
         let dic = ["openStore" : " ", "dataDic" : dataDic]
         print("?")
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
+    
+    func closeStore(data : NSNotification) {
+        print("store was closed")
     }
 
 

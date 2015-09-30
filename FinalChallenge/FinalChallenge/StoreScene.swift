@@ -153,13 +153,19 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
             }
         }
         if sender == leaveButton {
-            viewController?.loadPlayerView()
+            closeStore()
         }
     }
     
     func sendMessageToBuy(card:CardSprite) {
         let dataDic = ["card":card.cardName]
         let dic = ["buyCard" : " ", "dataDic" : dataDic]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
+    
+    func closeStore() {
+        viewController?.loadPlayerView()
+        let dic = ["closeStore":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     

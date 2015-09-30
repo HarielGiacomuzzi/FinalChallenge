@@ -330,6 +330,13 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_BuyResponse", object: nil, userInfo: userInfo)
                 return
             }
+        //tells board that store was closed
+                if message.valueForKey("closeStore") != nil {
+                    print(message)
+                    userInfo.updateValue(message.valueForKey("closeStore") as! NSObject, forKey: "closeStore")
+                    NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_CloseStore", object: nil, userInfo: userInfo)
+                    return
+                }
         
         }
         // if I dont know what it is I will send the default message

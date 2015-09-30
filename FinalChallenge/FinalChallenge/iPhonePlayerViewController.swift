@@ -86,6 +86,7 @@ class iPhonePlayerViewController: UIViewController {
         print("mensagem para \(playerName)")
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
+            playerCards.append(card)
             playerScene!.addCard(card)
         } else {
             print("nao rola filho")
@@ -102,6 +103,7 @@ class iPhonePlayerViewController: UIViewController {
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerScene!.removeCard(card)
+            playerCards.removeObject(card)
         } else {
             print("nao rola filho")
         }
@@ -125,9 +127,12 @@ class iPhonePlayerViewController: UIViewController {
             let worked = dic["worked"] as! Bool
             let status = dic["status"] as! String
             let player = dic["player"] as! String
-            playerMoney = dic["playerMoney"] as! Int
             let card = dic["card"] as! String
             if player == ConnectionManager.sharedInstance.peerID!.displayName {
+                playerMoney = dic["playerMoney"] as! Int
+                if worked {
+                    playerCards.append(card)
+                }
                 storeScene?.buyResponse(status, worked: worked, money: playerMoney, card: card)
             }
             
@@ -146,7 +151,9 @@ class iPhonePlayerViewController: UIViewController {
             playerScene?.playerName = peerID
         }
         playerScene?.scaleMode = .AspectFit
+        playerScene?.cardsString = playerCards
         skView?.presentScene(playerScene)
+        playerScene?.updateMoney(playerMoney)
     }
     
     func loadStore(cards:[String]) {

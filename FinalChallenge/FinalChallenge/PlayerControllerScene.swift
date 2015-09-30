@@ -17,17 +17,12 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     var topBarLimit:CGFloat = 0.0
     var playerName = "Player Name"
     var testButton : SKLabelNode!
+    var cardsString:[String] = []
     weak var viewController : iPhonePlayerViewController?
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         
-        let card1 = CardSprite(cardName: "losecard")
-        let card2 = CardSprite(cardName: "stealgold")
-        let card3 = CardSprite(cardName: "returnSquares")
-        
-        let cards = [card1,card2,card3]
-
         let backgroundTexture = SKTexture(imageNamed: "backscreen")
         let background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPointMake(frame.size.width / 2, frame.size.height  / 2)
@@ -38,15 +33,28 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         createSquaresAndAnimate()
         setupTopBar()
         setupButtons()
+        createTestButton()
+        
+        var cards:[CardSprite] = []
+        for cardString in cardsString {
+            let card = CardSprite(cardName: cardString)
+            cards.append(card)
+        }
+        print(cards)
+        if !cards.isEmpty {
+            setupCardCarousel(cards)
+        }
 
+    }
+    
+    func setupCardCarousel(cards:[CardSprite]) {
         carousel = CardCarouselNode(cardsArray: cards, startIndex: 0)
         carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 2)
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
         carousel.canRemoveWithSwipeUp = false
-        createTestButton()
-
+        
     }
     
     func createSquaresAndAnimate() {
@@ -126,7 +134,12 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     
     func addCard(card:String) {
         let cardSprite = CardSprite(cardName: card)
-        carousel.insertCard(cardSprite)
+        if carousel == nil {
+            let cards = [cardSprite]
+            setupCardCarousel(cards)
+        } else {
+            carousel.insertCard(cardSprite)
+        }
     }
     func removeCard(card:String) {
         print("finge que a carta foi removida")
