@@ -11,25 +11,26 @@ import SpriteKit
 
 class CardSprite: SKNode {
     
-    var card = "defaultcard"
+    var cardName = "defaultCard"
+    var card = Card()
     var baseSprite:SKSpriteNode!
     var image:SKSpriteNode!
     var nameLabel:SKLabelNode!
     
-    init(card:String) {
+    init(cardName:String) {
         super.init()
-        self.card = card
-        
+        self.cardName = cardName
+        self.card = GameManager.sharedInstance.getCard(cardName)
         let atlas = SKTextureAtlas(named: "cards")
         let texture = atlas.textureNamed("trapCardBase")
         baseSprite = SKSpriteNode(texture: texture)
         baseSprite.zPosition = 1
         addChild(baseSprite)
-        let texture2 = atlas.textureNamed(card)
+        let texture2 = atlas.textureNamed(card.imageName)
         image = SKSpriteNode(texture: texture2)
         image.zPosition = 2
         addChild(image)
-        nameLabel = SKLabelNode(text: card)
+        nameLabel = SKLabelNode(text: card.cardName)
         let maxSize = baseSprite.position.y + baseSprite.frame.height/2
         let minSize = image.position.y + image.size.height/2
         let midSize = minSize + ((maxSize - minSize) / 2)

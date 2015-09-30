@@ -13,6 +13,7 @@ class LoseCard : ActiveCard{
     override init() {
         super.init()
         self.cardName = "LoseCard"
+        imageName = "losecard"
     }
     
     override func activate(targetPlayer:Player) {

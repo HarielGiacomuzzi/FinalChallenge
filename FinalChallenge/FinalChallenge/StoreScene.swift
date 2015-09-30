@@ -19,7 +19,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     var leaveButton:StoreButtonNode!
     
     var cardsString : [String]!
-    var chosenCard:CardShowNode?
+    var chosenCard:CardSprite?
     var cardShow:CardShowNode!
     
     // MARK: - View Lifecicle
@@ -120,7 +120,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         var cards : [SKNode] = []
         
         for cardString in cardsString {
-            let card = CardSprite(card: cardString)
+            let card = CardSprite(cardName: cardString)
             cards.append(card)
         }
         
@@ -133,14 +133,23 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         addChild(cardShow)
         
     }
+    // MARK: - Messages Received Functions
+    
+    func buyResponse(status:String,worked:Bool, money:Int, card:String) {
+        if worked {
+            if chosenCard?.cardName == card {
+                cardShow.removeCard(chosenCard!)
+                chosenCard = nil
+            }
+        }
+    }
     
     // MARK: - Delegate Functions
     
     func buttonClicked(sender: SKSpriteNode) {
         if sender == buyButton {
             if let card = chosenCard {
-                cardShow.removeCard(card)
-                chosenCard = nil
+                sendMessageToBuy(card)
             }
         }
         if sender == leaveButton {
@@ -148,8 +157,14 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         }
     }
     
+    func sendMessageToBuy(card:CardSprite) {
+        let dataDic = ["card":card.cardName]
+        let dic = ["buyCard" : " ", "dataDic" : dataDic]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
+    
     func cardChosen(sender: SKNode) {
-        chosenCard = sender as? CardShowNode
+        chosenCard = sender as? CardSprite
     }
     
 }

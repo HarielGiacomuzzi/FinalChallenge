@@ -309,6 +309,27 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerAction", object: nil, userInfo: userInfo)
                 return
             }
+        //tells player to open store view
+            if message.valueForKey("openStore") != nil {
+                    print(message)
+                    userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                    NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_OpenStore", object: nil, userInfo: userInfo)
+                    return
+            }
+        //tells board that player wants to buy card
+            if message.valueForKey("buyCard") != nil {
+                print(message)
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_BuyCard", object: nil, userInfo: userInfo)
+                return
+            }
+        //board tells player the result of the buy attempt
+            if message.valueForKey("BuyResponse") != nil {
+                print(message)
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_BuyResponse", object: nil, userInfo: userInfo)
+                return
+            }
         
         }
         // if I dont know what it is I will send the default message

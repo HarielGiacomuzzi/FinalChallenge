@@ -75,7 +75,7 @@ class PlayerButtonNode: SKNode {
     }
     
     func openBackground() {
-        let action = SKAction.animateWithTextures(animationArray, timePerFrame: 0.025)
+        let action = SKAction.animateWithTextures(animationArray, timePerFrame: 0.015)
         
         if openRight {
             let leftButtonLeftPoint = button.position.x - button.size.width/2

@@ -108,11 +108,6 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
 //        let dic = ["addCard":" ", "dataDic" : cardData]
 //        
 //        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        let cards = ["1","2","3","4","5"]
-        let player = GameManager.sharedInstance.players.first!.playerIdentifier
-        let dataDic = ["cards":cards, "player":player]
-        let dic = ["openStore" : " ", "dataDic" : dataDic]
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
 
     }
     
@@ -120,6 +115,15 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         print("recebi algo")
     }
     
+    @IBAction func openStore() {
+        let cards = ["stealgold","stealgold","losecard","returnSquares","losecard"]
+        let player = GameManager.sharedInstance.players.first!.playerIdentifier
+        let dataDic = ["cards":cards, "player":player]
+        let dic = ["openStore" : " ", "dataDic" : dataDic]
+        print("?")
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
+
 
 }
 
