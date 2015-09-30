@@ -559,6 +559,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Amo-Ys-0eK">
+                                <rect key="frame" x="65" y="396" width="78" height="30"/>
+                                <state key="normal" title="Open Store"/>
+                                <connections>
+                                    <action selector="openStore" destination="BYZ-38-t0r" eventType="touchUpInside" id="wIh-FV-5FT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

@@ -17,17 +17,12 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     var topBarLimit:CGFloat = 0.0
     var playerName = "Player Name"
     var testButton : SKLabelNode!
+    var cardsString:[String] = []
     weak var viewController : iPhonePlayerViewController?
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         
-        let card1 = CardSprite(card: "losecard")
-        let card2 = CardSprite(card: "stealgold")
-        let card3 = CardSprite(card: "returnSquares")
-        
-        let cards = [card1,card2,card3]
-
         let backgroundTexture = SKTexture(imageNamed: "backscreen")
         let background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPointMake(frame.size.width / 2, frame.size.height  / 2)
@@ -38,15 +33,28 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         createSquaresAndAnimate()
         setupTopBar()
         setupButtons()
+        createTestButton()
+        
+        var cards:[CardSprite] = []
+        for cardString in cardsString {
+            let card = CardSprite(cardName: cardString)
+            cards.append(card)
+        }
+        print(cards)
+        if !cards.isEmpty {
+            setupCardCarousel(cards)
+        }
 
+    }
+    
+    func setupCardCarousel(cards:[CardSprite]) {
         carousel = CardCarouselNode(cardsArray: cards, startIndex: 0)
         carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 2)
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
         carousel.canRemoveWithSwipeUp = false
-        createTestButton()
-
+        
     }
     
     func createSquaresAndAnimate() {
@@ -81,7 +89,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         moneyButton.position = CGPointMake(frame.size.width - moneyButton.button.size.width / 2, (moneyButton.button.size.height / 2) - 20)
 
         addChild(moneyButton)
-        moneyButton.zPosition = 35
+        moneyButton.zPosition = 100
         
         let lootButtonTextureOn = SKTexture(imageNamed: "button1On")
         let lootButtonTextureOff = SKTexture(imageNamed: "button1Off")
@@ -90,7 +98,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         lootButton.position = CGPointMake(lootButton.button.size.width/2, (lootButton.button.size.height/2) - 20)
         
         addChild(lootButton)
-        lootButton.zPosition = 35
+        lootButton.zPosition = 100
     }
     
     func setupTopBar() {
@@ -125,8 +133,13 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     }
     
     func addCard(card:String) {
-        let cardSprite = CardSprite(card: card)
-        carousel.insertCard(cardSprite)
+        let cardSprite = CardSprite(cardName: card)
+        if carousel == nil {
+            let cards = [cardSprite]
+            setupCardCarousel(cards)
+        } else {
+            carousel.insertCard(cardSprite)
+        }
     }
     func removeCard(card:String) {
         print("finge que a carta foi removida")
@@ -134,7 +147,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     
     func sendCard(card: SKNode) {
         let sentCardSprite = card as! CardSprite
-        let sentCard = sentCardSprite.card
+        let sentCard = sentCardSprite.cardName
         let cardData = ["player":playerName, "item": sentCard]
         let dic = ["sendCard":" ", "dataDic" : cardData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)

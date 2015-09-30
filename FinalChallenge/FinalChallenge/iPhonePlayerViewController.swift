@@ -17,6 +17,8 @@ class iPhonePlayerViewController: UIViewController {
     var playerScene : PlayerControllerScene?
     var storeScene : StoreScene?
     var partyModeScene : PartyModeScene?
+    var playerMoney = 0
+    var playerCards:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -26,6 +28,7 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addCard:", name: "ConnectionManager_AddCard", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeCard:", name: "ConnectionManager_RemoveCard", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openStore:", name: "ConnectionManager_OpenStore", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "buyResponse:", name: "ConnectionManager_BuyResponse", object: nil)
         
         skView = self.view as? SKView
         skView?.showsFPS = true
@@ -34,8 +37,8 @@ class iPhonePlayerViewController: UIViewController {
         skView?.showsPhysics = false
         
 //        loadPartyModeScene()
-//        loadStore(["stealgold","stealgold","losecard","returnSquares","losecard"])
-        loadPlayerView()
+        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
+//        loadPlayerView()
     }
     
     // MARK: - Message Received Functions
@@ -67,7 +70,8 @@ class iPhonePlayerViewController: UIViewController {
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             print("update moneys para \(value)")
-            playerScene?.updateMoney(value)
+            playerMoney = value
+            playerScene?.updateMoney(playerMoney)
         } else {
             print("nao rola filho")
         }
@@ -82,6 +86,7 @@ class iPhonePlayerViewController: UIViewController {
         print("mensagem para \(playerName)")
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
+            playerCards.append(card)
             playerScene!.addCard(card)
         } else {
             print("nao rola filho")
@@ -98,6 +103,7 @@ class iPhonePlayerViewController: UIViewController {
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerScene!.removeCard(card)
+            playerCards.removeObject(card)
         } else {
             print("nao rola filho")
         }
@@ -115,6 +121,24 @@ class iPhonePlayerViewController: UIViewController {
         }
     }
     
+    func buyResponse(data : NSNotification) {
+        if storeScene != nil {
+            let dic = data.userInfo!["dataDic"] as! NSDictionary
+            let worked = dic["worked"] as! Bool
+            let status = dic["status"] as! String
+            let player = dic["player"] as! String
+            let card = dic["card"] as! String
+            if player == ConnectionManager.sharedInstance.peerID!.displayName {
+                playerMoney = dic["playerMoney"] as! Int
+                if worked {
+                    playerCards.append(card)
+                }
+                storeScene?.buyResponse(status, worked: worked, money: playerMoney, card: card)
+            }
+            
+        }
+    }
+    
     // MARK: - Scene Control
     
     func loadPlayerView() {
@@ -127,7 +151,9 @@ class iPhonePlayerViewController: UIViewController {
             playerScene?.playerName = peerID
         }
         playerScene?.scaleMode = .AspectFit
+        playerScene?.cardsString = playerCards
         skView?.presentScene(playerScene)
+        playerScene?.updateMoney(playerMoney)
     }
     
     func loadStore(cards:[String]) {
