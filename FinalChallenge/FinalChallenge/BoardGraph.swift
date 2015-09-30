@@ -193,6 +193,40 @@ class BoardGraph : NSObject{
         }
     }
     
+//    //COINS
+//    func haveCoin(NodeName: String) -> Bool{
+//        if nodes[NodeName]?.coins != nil{
+//            return true
+//        }
+//        return false
+//    }
+//    
+//    func getCoins(nodeName : String) -> NSObject?{
+//        if haveCoin(nodeName){
+//            return nodes[nodeName]?.coins
+//        }
+//        return nil
+//    }
+//    
+//    func setCoins(Coins: Player, nodeName : String) -> Bool{
+//        if !haveCoin(nodeName){
+//            print("Colocou a moeda \(Coins.nodeSprite)")
+//            nodes[nodeName]?.coins = Coins
+//            return true
+//        }
+//        return false
+//    }
+    
+    func addCoins(){
+        let aux = Array(nodes.values)
+        for i in 0...Int(arc4random_uniform(50)+1){
+            if !aux[Int(arc4random_uniform(UInt32(aux.count)))].isSpecialNode{
+                aux[Int(arc4random_uniform(UInt32(aux.count)))].coins = 10
+            }
+        }
+    }
+   
+    
     // Recursive* not Recursivo
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
         var lista : [BoardNode] = [];
@@ -242,12 +276,12 @@ class BoardGraph : NSObject{
     }
     
     private func walkBackward(qtd : Int, player : Player){
-        var aux = Int(whereIs(player)!);
+        let aux = Int(whereIs(player)!);
         nodes[whereIs(player)!]?.removePlayer(player)
         if aux! - qtd < 0{
         return Void()
         } else{
-           var x = nodes[String(aux!-qtd)]
+           let x = nodes[String(aux!-qtd)]
             player.x = x!.posX
             player.y = x!.posY
             x!.insertPLayer(player);
@@ -270,6 +304,7 @@ class BoardGraph : NSObject{
         var posX = 0.0;
         var posY = 0.0;
         var item : Card?
+        var coins : Int?
         var nextNames : [String] = [];
         var currentPlayers : [Player] = [];
         var father : BoardNode?
