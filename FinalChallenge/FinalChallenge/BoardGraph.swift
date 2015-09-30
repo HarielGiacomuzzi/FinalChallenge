@@ -28,6 +28,10 @@ class BoardGraph : NSObject{
     // creates a node and insert it on the graph dictionary with the specified name
     func createNode(x: Double, y : Double, name : String?, father : BoardNode?){
         let aux = BoardNode(posX: x, posY: y, father: father);
+        let predicate =  NSPredicate(format:"SELF MATCHES %@", "[A-Za-z]{2,5}[0-9]?")
+        if predicate.evaluateWithObject(name!){
+            aux.isSpecialNode = true;
+        }
         nodes.updateValue(aux, forKey: name!);
     }
     
@@ -126,7 +130,7 @@ class BoardGraph : NSObject{
     // sets the item of a node, return true if it was successfull and false otherwise
     func setItem(Item : Card, nodeName : String) ->Bool{
         if !haveItem(nodeName){
-            print("Colocou a carta \(Item.cardName)")
+            //print("Colocou a carta \(Item.cardName)")
             nodes[nodeName]?.item = Item
             return true
         }
@@ -150,25 +154,25 @@ class BoardGraph : NSObject{
     //sends message to player phone to update item
     func pickItem(nodeName : String, player:Player) -> Bool{
         
-        print(player.items)
+        //print(player.items)
         
         if haveItem(nodeName) {
             if !isUsable(nodeName){
                 self.sendCardToPlayer(nodeName, player: player)
-                print("Entregou ao jogador a carta não usavel")
+                //print("Entregou ao jogador a carta não usavel")
             } else{
                 if !wasUsed(nodeName){
                     self.sendCardToPlayer(nodeName, player: player)
-                    print("Entregou ao jogador a carta usavel, que ainda não foi usada")
+                    //print("Entregou ao jogador a carta usavel, que ainda não foi usada")
                 } else{
                     // caso a carta ja tenha sido usada ela ativa seu efeito
-                    print("A carta era usavel e está sendo usada")
+                    //print("A carta era usavel e está sendo usada")
                     self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
                     nodes[nodeName]?.item = nil
                 }
             }
             
-            print(player.items)
+            //print(player.items)
             
             return true
         }
@@ -179,13 +183,13 @@ class BoardGraph : NSObject{
     func activateCard(card:ActiveCard, targetPlayer:Player){
         switch(card.cardName){
             // each card has a type and a name, convert the card to its type by its name
-            case "StealGoldCard" :  print("Fez o efeito da carta StealGoldCard")
+            case "StealGoldCard" :  //print("Fez o efeito da carta StealGoldCard")
                                     let actionCard = card as! StealGoldCard
                                     actionCard.activate(targetPlayer)
-            case "MoveBackCard" :   print("Fez o efeito da carta MoveBackCard")
+            case "MoveBackCard" :   //print("Fez o efeito da carta MoveBackCard")
                                     let actionCard = card as! MoveBackCard
                                     actionCard.activate(targetPlayer)
-            case "LoseCard" :       print("Fez o efeito da carta LoseCard")
+            case "LoseCard" :       //print("Fez o efeito da carta LoseCard")
                                     let actionCard = card as! LoseCard
                                     actionCard.activate(targetPlayer)
             
@@ -217,14 +221,17 @@ class BoardGraph : NSObject{
         }
         let playerLastNode = nodeFor(player)
         var x : [BoardNode] = walkRecursivo(qtd, node: playerLastNode!)
-        playerLastNode?.removePlayer(player);
+        for i in x {
+            print(keyFor(i));
+        }
         if x.count > 1{
-            let alerta = AlertPath(title: "Select a Path", message: "escolhe ai fera!", preferredStyle: .Alert)
+            let alerta = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
             for i in x{
                 let action = UIAlertAction(title: "Path: \(keyFor(i))", style: .Default) { action -> Void in
                     player.x = i.posX
                     player.y = i.posY
                     i.insertPLayer(player)
+                    playerLastNode?.removePlayer(player);
                 }
                     alerta.addAction(action)
                 }
@@ -234,9 +241,11 @@ class BoardGraph : NSObject{
             player.x = i.posX
             player.y = i.posY
             i.insertPLayer(player);
+            playerLastNode?.removePlayer(player);
         }
     
     }
+    
     //we may need this
     private func paintPaths(path : [String]){
     }
@@ -255,10 +264,8 @@ class BoardGraph : NSObject{
     }
     
     func removeItemFromInappropriatePlace(){
-        
-        let predicate =  NSPredicate(format:"SELF MATCHES %@", "[A-Za-z]{2,5}[0-9]?")
         for i in nodes{
-            if predicate.evaluateWithObject(i.0){
+            if i.1.isSpecialNode{
                 i.1.item = nil;
             }
         }
@@ -270,6 +277,7 @@ class BoardGraph : NSObject{
         var posX = 0.0;
         var posY = 0.0;
         var item : Card?
+        var isSpecialNode = false;
         var nextNames : [String] = [];
         var currentPlayers : [Player] = [];
         var father : BoardNode?
@@ -307,14 +315,14 @@ class BoardGraph : NSObject{
         
         // defines if the node will carry an item or not
         func setupItems(){
-            print("Setting Node Item...")
-            print("Node Position: X: \(self.posX) and Y: \(self.posY)")
+            //print("Setting Node Item...")
+            //print("Node Position: X: \(self.posX) and Y: \(self.posY)")
             let willHaveItem : Int = (random() % 2)
             
             switch(willHaveItem){
-                case 0: print("Adding card")
+                case 0: //print("Adding card")
                         self.addItem()
-                case 1: print("No card Added")
+                case 1: //print("No card Added")
                         self.item = nil
                 default: break
             }
@@ -335,19 +343,19 @@ class BoardGraph : NSObject{
                             case 0: let it = StealGoldCard()
                                     it.used = false
                                     self.item = it
-                                    print("Card StealGoldCard added")
+                                    //print("Card StealGoldCard added")
                             case 1: let it = MoveBackCard()
                                     it.used = false
                                     self.item = it
-                                    print("Card MoveBackCard added")
+                                    //print("Card MoveBackCard added")
                             case 2: let it = LoseCard()
                                     it.used = false
                                     self.item = it
-                                    print("Card LoseCard added")
+                                    //print("Card LoseCard added")
                             default: break
                         }
                 
-                case 1: print("Collectable card added")
+                case 1: //print("Collectable card added")
                         let it = NotActiveCard() //we may need to pass a value
                         self.item = it
                 
