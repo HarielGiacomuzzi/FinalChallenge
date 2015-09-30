@@ -22,12 +22,11 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         
-        var cards:[CardSprite] = []
+        let card1 = CardSprite(card: "losecard")
+        let card2 = CardSprite(card: "stealgold")
+        let card3 = CardSprite(card: "returnSquares")
         
-        for _ in 0...3 {
-            let card = CardSprite(card: "losecard")
-            cards.append(card)
-        }
+        let cards = [card1,card2,card3]
 
         let backgroundTexture = SKTexture(imageNamed: "backscreen")
         let background = SKSpriteNode(texture: backgroundTexture)

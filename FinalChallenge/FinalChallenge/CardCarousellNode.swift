@@ -21,6 +21,7 @@ class CardCarouselNode: SKNode {
     var canRemoveWithSwipeUp = true
     var firstTouch = false
     var movingUp = false
+    var checkTouch:CGPoint = CGPointMake(0.0, 0.0)
     weak var delegate:CardCarousellDelegate?
     
     // MARK: - Initialization
@@ -57,11 +58,34 @@ class CardCarouselNode: SKNode {
             
             let location = touch.locationInNode(self)
             touchedPoint = location
+            checkTouch = location
             firstTouch = true
         }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            if location == checkTouch {
+                let touchedNode = nodeAtPoint(location)
+                
+                if centerIndex > 0 {
+                    if touchedNode.parent == cards[centerIndex-1] {
+                        centerIndex--
+                        fixCardsXPosition()
+                    }
+                }
+                
+                if centerIndex < cards.count - 1 {
+                    if touchedNode.parent == cards[centerIndex+1] {
+                        centerIndex++
+                        fixCardsXPosition()
+                        
+                    }
+                }
+            }
+        }
+        
         let centerCard = cards[centerIndex]
         if centerCard.position.y > centerPoint.y {
             removeCard()
