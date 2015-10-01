@@ -29,7 +29,8 @@ class MinigameCollectionScene : SKScene{
             
             sprite.name = i.rawValue
             
-            sprite.size = CGSize(width: 200, height: 100)
+            //sprite.size = CGSize(width: 200, height: 100)
+            sprite.setScale(0.5)
             
             let aux = GameManager.sharedInstance.allMinigames.count
             

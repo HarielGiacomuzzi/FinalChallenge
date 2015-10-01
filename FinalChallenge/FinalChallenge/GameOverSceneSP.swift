@@ -99,12 +99,8 @@ class GameOverSceneSP : MinigameScene{
                 _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
                 self.removeFromParent()
                 self.view?.presentScene(nil)
-                self.view?.removeFromSuperview()
-                // self.view = nil
-                //GameManager.sharedInstance.dismissMinigameSP()
+                //self.view?.removeFromSuperview()
                 GameManager.sharedInstance.newDismissMinigameSP()
-                //self.gameController!.back()
-                
             }
         }
     }

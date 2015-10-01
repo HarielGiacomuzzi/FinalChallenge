@@ -26,6 +26,8 @@ class GameManager : NSObject {
     
     var minigameViewController : MiniGameViewController?
     
+    var boardGameViewController : BoardViewController?
+    
     var minigameOrderArray : [Minigame] = []
     //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
     var allMinigames : [Minigame] = [.FlappyFish]
@@ -143,6 +145,7 @@ class GameManager : NSObject {
     func dismissMinigameMP(){
         if let vc = self.minigameViewController {
             vc.dismissViewControllerAnimated(false, completion: nil)
+            boardGameViewController?.viewDidLoad()
         }
         let dic = ["closeController":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
@@ -152,7 +155,6 @@ class GameManager : NSObject {
 // this one may replace the dismissMinigameSP
     func newDismissMinigameSP(){
         if let vc = self.minigameViewController {
-            //vc2.scene = MinigameScene();
             vc.dismissViewControllerAnimated(false, completion: nil)
         }
     }

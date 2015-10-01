@@ -13,7 +13,7 @@ class MinigameScene: SKScene {
     var gameController : MiniGameViewController? = nil
     var gameName = String()
     var playerRank:[String] = []
-
+    
     func messageReceived(identifier: String, dictionary: NSDictionary) {
         
     }

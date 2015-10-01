@@ -22,6 +22,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
     var fontSize : CGFloat = 26.0
     var nameText : SKLabelNode!
     var barName : SKSpriteNode!
+    
     override func didMoveToView(view: SKView) {
         
         setObjects()
@@ -30,6 +31,8 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
     
     func setObjects(){
         //let valor = gameNumber!
+        
+        self.backgroundColor = UIColor.purpleColor()
         
         switch self.gameName {
             

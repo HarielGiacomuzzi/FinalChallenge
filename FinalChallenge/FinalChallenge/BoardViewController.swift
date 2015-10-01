@@ -11,6 +11,7 @@ import UIKit
 import SpriteKit
 
 extension SKNode {
+    
     class func unarchiveFromFile(file : NSString) -> SKNode? {
         
         let path = NSBundle.mainBundle().pathForResource(file as String, ofType: "sks")
@@ -32,23 +33,30 @@ extension SKNode {
 }
 
 class BoardViewController : UIViewController {
+    
+    var scene : MainBoard!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        GameManager.sharedInstance.boardGameViewController = self
+        self.setupScene()
+    }
+    
+    func setupScene(){
         //let scene = MainBoard(size: self.view.frame.size)
-        if let scene = MainBoard.unarchiveFromFile("MainBoard") as? MainBoard {
-            // Configure the view.
-            let skView = self.view as! SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
-            scene.viewController = self;
-            skView.presentScene(scene)
-        }
+        scene = MainBoard.unarchiveFromFile("MainBoard") as! MainBoard
+        // Configure the view.
+        let skView = self.view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = true
+        
+        /* Set the scale mode to scale to fit the window */
+        scene.scaleMode = .AspectFill
+        scene.viewController = self;
+        skView.presentScene(scene)
     }
     
     override func shouldAutorotate() -> Bool {
@@ -70,9 +78,15 @@ class BoardViewController : UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "gotoMinigame" {
-            //print("IDENTIFIQUEI A SEGUE")
+            scene.removeAllActions()
+            scene.removeAllChildren()
+            scene = nil
             let minivc = segue.destinationViewController as! MiniGameViewController
             minivc.minigame = Minigame(rawValue: sender as! String)!
         }
+    }
+    
+    deinit{
+        print("Deu deinit na board view")
     }
 }
