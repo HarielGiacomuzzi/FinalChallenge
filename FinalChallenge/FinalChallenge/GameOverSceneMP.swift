@@ -33,10 +33,6 @@ class GameOverSceneMP : MinigameScene {
                 }
             }
             
-            //FOR DEBUG
-            p.avatar = "red";
-            //FOR DEBUG
-            
             let sprite =  SKSpriteNode(imageNamed: p.avatar!)
             
             sprite.name = p.avatar!
@@ -44,12 +40,9 @@ class GameOverSceneMP : MinigameScene {
             sprite.size = CGSize(width: 100, height: 200)
             
             let offsetFraction = (CGFloat(i) + 1.0)/(CGFloat(player.count) + 1.0)
+
+            sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height/2)
             
-            if i < 2{
-                sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height/2)
-            }else{
-               sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height*offsetFraction/2)
-            }
             self.addChild(sprite)
         }
         

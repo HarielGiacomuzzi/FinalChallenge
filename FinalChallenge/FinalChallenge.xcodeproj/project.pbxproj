@@ -51,6 +51,9 @@
 		5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA49E091B87B59100AC51F8 /* MinigameScene.swift */; };
 		5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */; };
 		5ED294DB1BBD96B50073B148 /* cards.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5ED294DA1BBD96B50073B148 /* cards.atlas */; settings = {ASSET_TAGS = (); }; };
+		5ED294DE1BBD9AAA0073B148 /* AccelerometerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294DD1BBD9AAA0073B148 /* AccelerometerScene.swift */; settings = {ASSET_TAGS = (); }; };
+		5ED294E01BBD9C030073B148 /* GamePadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294DF1BBD9C030073B148 /* GamePadScene.swift */; settings = {ASSET_TAGS = (); }; };
+		5ED294E21BBD9D380073B148 /* SwipeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294E11BBD9D380073B148 /* SwipeScene.swift */; settings = {ASSET_TAGS = (); }; };
 		5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */; };
 		5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */; };
 		B503E3F41BAB2FA400C6284A /* GameOverSceneMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */; settings = {ASSET_TAGS = (); }; };
@@ -168,6 +171,9 @@
 		5EA49E091B87B59100AC51F8 /* MinigameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameScene.swift; sourceTree = "<group>"; };
 		5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPowerupNode.swift; sourceTree = "<group>"; };
 		5ED294DA1BBD96B50073B148 /* cards.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = cards.atlas; sourceTree = "<group>"; };
+		5ED294DD1BBD9AAA0073B148 /* AccelerometerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerScene.swift; sourceTree = "<group>"; };
+		5ED294DF1BBD9C030073B148 /* GamePadScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadScene.swift; sourceTree = "<group>"; };
+		5ED294E11BBD9D380073B148 /* SwipeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeScene.swift; sourceTree = "<group>"; };
 		5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameScene.swift; sourceTree = "<group>"; };
 		5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneMP.swift; sourceTree = "<group>"; };
@@ -290,6 +296,7 @@
 				5ED294DA1BBD96B50073B148 /* cards.atlas */,
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E1C59C81BB0771200BCDE1C /* CardSprite.swift */,
+				5ED294DC1BBD9A700073B148 /* GamePads */,
 				5E2BAEE91BBB432D001C70EB /* PlayerScene */,
 				5E2BAEEA1BBB433B001C70EB /* StoreScene */,
 			);
@@ -341,6 +348,16 @@
 				26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		5ED294DC1BBD9A700073B148 /* GamePads */ = {
+			isa = PBXGroup;
+			children = (
+				5ED294DD1BBD9AAA0073B148 /* AccelerometerScene.swift */,
+				5ED294DF1BBD9C030073B148 /* GamePadScene.swift */,
+				5ED294E11BBD9D380073B148 /* SwipeScene.swift */,
+			);
+			name = GamePads;
 			sourceTree = "<group>";
 		};
 		5ED9E8771B7127760073FB7B /* FlappyGame */ = {
@@ -714,6 +731,7 @@
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
 				B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */,
 				5E68DAAB1BA9ECCB00DB14FB /* PlayerButtonNode.swift in Sources */,
+				5ED294E01BBD9C030073B148 /* GamePadScene.swift in Sources */,
 				B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */,
 				5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */,
 				5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */,
@@ -743,6 +761,7 @@
 				264D0CDE1B9F6AE6005B7EE9 /* SetupParticle.swift in Sources */,
 				5E4299341BB9914F004B1DF9 /* CardShowNode.swift in Sources */,
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
+				5ED294DE1BBD9AAA0073B148 /* AccelerometerScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				5E840FFE1BA9CBB00099B16B /* CardCarousellNode.swift in Sources */,
 				5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */,
@@ -757,6 +776,7 @@
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
 				B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
+				5ED294E21BBD9D380073B148 /* SwipeScene.swift in Sources */,
 				2661C40A1BB07EEC003A49F9 /* TutorialScene.swift in Sources */,
 				B5AFAD0A1B94C3770005F19E /* CustomMinigameCollectionView.swift in Sources */,
 				B503E3F41BAB2FA400C6284A /* GameOverSceneMP.swift in Sources */,

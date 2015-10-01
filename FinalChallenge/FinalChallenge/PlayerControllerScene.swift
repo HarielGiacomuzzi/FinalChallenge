@@ -177,7 +177,10 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
                     aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
                     ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
                     testButton.text = "IDLE"
-                    carousel.canRemoveWithSwipeUp = false
+                    if carousel != nil {
+                        carousel.canRemoveWithSwipeUp = false
+                    }
+                    
                     
                 } 
             }

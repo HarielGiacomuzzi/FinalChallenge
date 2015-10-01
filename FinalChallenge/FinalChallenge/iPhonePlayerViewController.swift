@@ -17,11 +17,13 @@ class iPhonePlayerViewController: UIViewController {
     var playerScene : PlayerControllerScene?
     var storeScene : StoreScene?
     var partyModeScene : PartyModeScene?
+    var gamePadScene : GamePadScene?
     var playerMoney = 0
     var playerCards:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerTurn:", name: "ConnectionManager_PlayerTurn", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil)
@@ -36,15 +38,19 @@ class iPhonePlayerViewController: UIViewController {
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
         
-//        loadPartyModeScene()
-        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
+
+        loadPartyModeScene()
+//   	loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
 //        loadPlayerView()
     }
     
     // MARK: - Message Received Functions
     
     func playerTurn(data : NSNotification){
-        playerScene?.carousel.canRemoveWithSwipeUp = true
+
+        if playerScene?.carousel != nil {
+            playerScene?.carousel.canRemoveWithSwipeUp = true
+        }
         playerScene?.testButton.text = "DICE"
         
     }
@@ -52,14 +58,7 @@ class iPhonePlayerViewController: UIViewController {
     func openController(data : NSNotification) {
         let gameData = data.userInfo!["gameName"] as! String
         let minigame = Minigame(rawValue: gameData)
-        switch minigame! {
-        case .FlappyFish:
-            performSegueWithIdentifier("gotoAcelePad", sender: nil)
-            print("gotoAcelePad")
-        case .BombGame:
-            performSegueWithIdentifier("gotoSwipePad", sender: nil)
-            print("gotoSwipePad")
-        }
+        loadGamePad(minigame!)
     }
     
     func updateMoney(data : NSNotification) {
@@ -142,8 +141,7 @@ class iPhonePlayerViewController: UIViewController {
     // MARK: - Scene Control
     
     func loadPlayerView() {
-        storeScene = nil
-        partyModeScene = nil
+        setAllScenesNil()
         
         playerScene = PlayerControllerScene(size: CGSize(width: 1334, height: 750))
         playerScene?.viewController = self
@@ -157,8 +155,7 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func loadStore(cards:[String]) {
-        playerScene = nil
-        partyModeScene = nil
+        setAllScenesNil()
         
         storeScene = StoreScene(size: CGSize(width: 1334, height: 750))
         storeScene?.cardsString = cards
@@ -171,12 +168,32 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func loadPartyModeScene() {
-        playerScene = nil
-        storeScene = nil
+        setAllScenesNil()
         
         partyModeScene = PartyModeScene(size: CGSize(width: self.view.frame.width, height: self.view.frame.height))
         
         partyModeScene?.viewController = self
         skView?.presentScene(partyModeScene)
+    }
+    
+    func loadGamePad(minigame:Minigame) {
+        setAllScenesNil()
+        
+        switch minigame {
+        case .FlappyFish:
+            gamePadScene = AccelerometerScene(size: CGSize(width: 1334, height: 750))
+        case .BombGame:
+            gamePadScene = SwipeScene(size: CGSize(width: 1334, height: 750))
+        }
+        
+        gamePadScene?.viewController = self
+        skView?.presentScene(gamePadScene)
+    }
+    
+    func setAllScenesNil() {
+        playerScene = nil
+        storeScene = nil
+        partyModeScene = nil
+        gamePadScene = nil
     }
 }

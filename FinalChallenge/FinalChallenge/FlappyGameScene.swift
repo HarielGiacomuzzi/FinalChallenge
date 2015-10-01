@@ -427,8 +427,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         if let _ = singlePlayer {
             // game over
             self.paused = true
-            gameOverSP("fish", winner: "", score: cont)
-            //self.restartGame()
+            self.gameOverSP("fish", winner: "", score: cont)
         }
     }
     
