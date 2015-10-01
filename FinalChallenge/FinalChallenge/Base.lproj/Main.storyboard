@@ -559,6 +559,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Amo-Ys-0eK">
+                                <rect key="frame" x="65" y="396" width="78" height="30"/>
+                                <state key="normal" title="Open Store"/>
+                                <connections>
+                                    <action selector="openStore" destination="BYZ-38-t0r" eventType="touchUpInside" id="wIh-FV-5FT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1040,7 +1047,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drR-SW-8ty" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-436" y="2252"/>
+            <point key="canvasLocation" x="-120" y="2308"/>
         </scene>
     </scenes>
     <resources>
@@ -1050,10 +1057,10 @@
         <image name="tutorialBanner" width="1334" height="192"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Afr-tR-2lE"/>
-        <segue reference="EGX-Pa-y2G"/>
-        <segue reference="LsT-VI-dB9"/>
+        <segue reference="IuB-wD-4uJ"/>
+        <segue reference="T9l-u6-hEW"/>
         <segue reference="vFp-2s-lFp"/>
+        <segue reference="Ahl-Ky-SJK"/>
         <segue reference="S5e-fy-Ifo"/>
     </inferredMetricsTieBreakers>
 </document>

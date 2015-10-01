@@ -36,6 +36,7 @@ class GameManager : NSObject {
         super.init()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "diceReceived:", name: "ConnectionManager_DiceResult", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerAskedToBuyCard:", name: "ConnectionManager_BuyCard", object: nil);
     }
     
     // verifica se todos jogaram
@@ -89,6 +90,46 @@ class GameManager : NSObject {
                 break;
             }
         }
+    }
+    
+    func playerAskedToBuyCard(data : NSNotification) {
+        let playerName = data.userInfo!["peerID"] as! String
+        let dic = data.userInfo!["dataDic"] as! NSDictionary
+        let cardName = dic["card"] as! String
+        
+        print("player \(playerName) tried to buy card \(cardName)")
+        
+        let player = getPlayer(playerName)
+        print(player.playerIdentifier)
+        let card = getCard(cardName)
+        print(card.cardName)
+        
+        var status = " "
+        var worked = false
+        
+        if player.items.count >= 5 {
+            status = "You already have the maximum ammount of cards"
+            print("ta lotado")
+        } else if player.coins <= card.storeValue {
+            status = "You don't have enough money"
+            print("faltou money")
+        } else {
+            status = "You have successfully bought a card"
+            worked = true
+        }
+        
+        if worked {
+            player.coins -= card.storeValue
+            player.items.append(card)
+            print("player comprou gostoso")
+            print("player coins \(player.coins) | player items \(player.items)")
+        }
+        
+        let dataDic = ["player":playerName, "status":status, "worked":worked, "playerMoney":player.coins, "card":cardName]
+        let dicc = ["BuyResponse":" ","dataDic":dataDic]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dicc, reliable: true)
+        
+        
     }
     
     func setPlayerOrder()->[String]{
@@ -171,7 +212,7 @@ class GameManager : NSObject {
             aux = abs(value)
             player.coins += value
         }
-        print("Esse é o jogador: \(player.playerIdentifier)")
+        //print("Esse é o jogador: \(player.playerIdentifier)")
         let playerData = ["player":player.playerIdentifier, "value": player.coins]
         let dic = ["updateMoney":" ", "dataDic" : playerData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
@@ -195,5 +236,39 @@ class GameManager : NSObject {
         
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
+
+    // given a card name this function returns you the corresponding card
+    func getCard(name:String) -> Card {
+        switch(name){
+        case "StealGoldCard" :
+            return StealGoldCard()
+        case "MoveBackCard" :
+            return MoveBackCard()
+        case "LoseCard" :
+            return LoseCard()
+        default :
+            print("entrei no default deu ruim gente")
+            return Card()
+            
+        }
+        
+    }
+    // given a player name this function returns you the corresponding player
+    func getPlayer(name:String) -> Player {
+        for player in players {
+            if player.playerIdentifier == name {
+                return player
+            }
+        }
+        return Player()
+    }
+    
+//    func getRandomActiveCard() -> ActiveCard {
+//        
+//    }
+//    
+//    getRandomSpecialCard() -> NotActiveCard {
+//    
+//    }
     
 }

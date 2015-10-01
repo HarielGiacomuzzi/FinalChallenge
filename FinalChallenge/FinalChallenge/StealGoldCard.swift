@@ -15,6 +15,7 @@ class StealGoldCard : ActiveCard{
     override init() {
         super.init()
         self.cardName = "StealGoldCard"
+        imageName = "stealgold"
     }
     
     override func activate(targetPlayer:Player) {
