@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1Vb-KC-f6p">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -771,7 +771,7 @@
                         <outlet property="singlePlayerButton" destination="xYA-ta-Slj" id="hZn-t6-BOv"/>
                         <segue destination="Y9w-QZ-R0C" kind="show" identifier="minigameSegue" id="FnE-Bj-SsS"/>
                         <segue destination="8ga-GJ-cx0" kind="custom" identifier="ipadSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="AJR-aY-zUi"/>
-                        <segue destination="GcT-Oz-NQ3" kind="show" identifier="iphoneSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="Afr-tR-2lE"/>
+                        <segue destination="GcT-Oz-NQ3" kind="custom" identifier="iphoneSegue" customClass="NoAnimationSegue" customModule="FinalChallenge" customModuleProvider="target" id="Afr-tR-2lE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3O-K9-r4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1057,10 +1057,10 @@
         <image name="tutorialBanner" width="1334" height="192"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IuB-wD-4uJ"/>
-        <segue reference="T9l-u6-hEW"/>
+        <segue reference="LsT-VI-dB9"/>
+        <segue reference="Afr-tR-2lE"/>
+        <segue reference="EGX-Pa-y2G"/>
         <segue reference="vFp-2s-lFp"/>
-        <segue reference="Ahl-Ky-SJK"/>
         <segue reference="S5e-fy-Ifo"/>
     </inferredMetricsTieBreakers>
 </document>

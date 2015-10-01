@@ -53,8 +53,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
-        carousel.canRemoveWithSwipeUp = false
-        
+        carousel.canRemoveWithSwipeUp = false        
     }
     
     func createSquaresAndAnimate() {
