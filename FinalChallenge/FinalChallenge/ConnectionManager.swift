@@ -65,7 +65,9 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
     }
     
     func closeConections(){
-        session.disconnect();
+        if session != nil{
+            session.disconnect();
+        }
     }
     
     func advertiseSelf(advertise:Bool){
@@ -130,7 +132,6 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
     //sends a NSDictionary to the other peer
     func sendDictionaryToPeer(message : NSDictionary?, reliable : Bool) -> Bool{
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-        let error = NSErrorPointer();
         if (reliable){
             do {
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
@@ -143,10 +144,8 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         
         do {
             try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Unreliable)
-        } catch let error1 as NSError {
-            error.memory = error1
-        } catch {
-            fatalError()
+        }catch {
+            //fatalError()
         };
         })
         return true
