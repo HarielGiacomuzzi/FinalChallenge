@@ -29,11 +29,15 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             GameManager.sharedInstance.minigameViewController?.scene!.paused = false;
             browserViewController.dismissViewControllerAnimated(true, completion: nil);
         }
+        if GameManager.sharedInstance.isOnBoard{
+            browserViewController.dismissViewControllerAnimated(true, completion: nil);
+            GameManager.sharedInstance.lostConnectionOnBoard();
+        }
     }
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController) {
         let alerta = UIAlertController(title: "Need Other Player", message: "Can't Continue Without other players", preferredStyle: .Alert)
-        //alerta.actions.append(UIAction)
+        alerta.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         browserViewController.presentViewController(alerta, animated: true, completion: nil);
         return Void()
     }
@@ -159,11 +163,16 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
         let userInfo = ["peerID":peerID, "state":state.rawValue]
         
-        if state == MCSessionState.NotConnected && UIDevice.currentDevice().userInterfaceIdiom == .Pad && GameManager.sharedInstance.isOnMiniGame{
+        if (state == MCSessionState.NotConnected && UIDevice.currentDevice().userInterfaceIdiom == .Pad && GameManager.sharedInstance.isOnMiniGame) || (state == MCSessionState.NotConnected && UIDevice.currentDevice().userInterfaceIdiom == .Pad && GameManager.sharedInstance.isOnBoard){
             print("Peer \(peerID.displayName) Disconnected");
-            GameManager.sharedInstance.minigameViewController?.scene!.paused = true;
             let reconect = MCBrowserViewController(serviceType: self.ServiceID, session: session)
             reconect.delegate = self;
+            if GameManager.sharedInstance.isOnBoard{
+                GameManager.sharedInstance.boardGameViewController?.presentViewController(reconect, animated: true, completion: nil);
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
+                return
+            }
+            GameManager.sharedInstance.minigameViewController?.scene!.paused = true;
             GameManager.sharedInstance.minigameViewController!.presentViewController(reconect, animated: true, completion: nil);
             NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
             return
