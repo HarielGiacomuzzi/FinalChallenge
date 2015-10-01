@@ -38,6 +38,8 @@ class MinigameCollectionScene : SKScene{
             
             sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height/2)
             
+            sprite.setScale(0.3)
+            
             self.addChild(sprite)
         }
         
