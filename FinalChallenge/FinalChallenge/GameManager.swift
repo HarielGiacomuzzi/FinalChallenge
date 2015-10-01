@@ -18,8 +18,10 @@ class GameManager : NSObject {
     var isMultiplayer = false
     var players = [Player]()
     var totalGameTurns = 0
+    var hasPath = false;
     var isOnMiniGame = false;
     var controlesDeTurno = 0
+    var isOnBoard = false;
     
     //minigame controllers
     var minigameDescriptionViewController : MinigameDescriptionViewController?
@@ -45,7 +47,9 @@ class GameManager : NSObject {
             //termina rodada
             controlesDeTurno = 0;
             self.isOnMiniGame = true;
-            beginMinigame()
+            if !hasPath{
+                beginMinigame()
+            }
         }
         // proximo jogador
         selectPlayers(controlesDeTurno)
@@ -148,6 +152,15 @@ class GameManager : NSObject {
         }
     }
     
+    // once reconected resends the message for the last player...
+    func lostConnectionOnBoard(){
+        let p = players[controlesDeTurno-1]
+        let aux = NSMutableDictionary();
+        aux.setValue(p.playerIdentifier, forKey: "playerID");
+        aux.setValue(" ", forKey: "playerTurn");
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+    }
+    
     // start minigame
     func beginMinigame() {
 
@@ -170,6 +183,7 @@ class GameManager : NSObject {
     // chamado quando o player já escolheu um caminho no tabuleiro
     func pathChosen() {
         if isOnMiniGame {
+            hasPath = false;
             beginMinigame()
         }
     }

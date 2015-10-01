@@ -250,6 +250,7 @@ class BoardGraph : NSObject{
         }
         if x.count > 1{
             let alerta = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
+            GameManager.sharedInstance.hasPath = true;
             for i in x{
                 let action = UIAlertAction(title: "Path: \(keyFor(i))", style: .Default) { action -> Void in
                     player.x = i.posX
