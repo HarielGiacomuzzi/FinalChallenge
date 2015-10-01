@@ -261,4 +261,12 @@ class GameManager : NSObject {
         return Player()
     }
     
+//    func getRandomActiveCard() -> ActiveCard {
+//        
+//    }
+//    
+//    getRandomSpecialCard() -> NotActiveCard {
+//    
+//    }
+    
 }
