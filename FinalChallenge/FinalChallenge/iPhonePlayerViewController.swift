@@ -48,7 +48,10 @@ class iPhonePlayerViewController: UIViewController {
     // MARK: - Message Received Functions
     
     func playerTurn(data : NSNotification){
-        playerScene?.carousel.canRemoveWithSwipeUp = true
+
+        if playerScene?.carousel != nil {
+            playerScene?.carousel.canRemoveWithSwipeUp = true
+        }
         playerScene?.testButton.text = "DICE"
         
     }

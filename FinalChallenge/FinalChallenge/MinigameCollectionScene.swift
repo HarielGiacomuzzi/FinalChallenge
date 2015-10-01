@@ -29,13 +29,16 @@ class MinigameCollectionScene : SKScene{
             
             sprite.name = i.rawValue
             
-            sprite.size = CGSize(width: 200, height: 100)
+            //sprite.size = CGSize(width: 200, height: 100)
+            sprite.setScale(0.5)
             
             let aux = GameManager.sharedInstance.allMinigames.count
             
             let offsetFraction = (CGFloat(i.hashValue) + 1.0)/(CGFloat(aux) + 1.0)
             
             sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height/2)
+            
+            sprite.setScale(0.3)
             
             self.addChild(sprite)
         }

@@ -42,9 +42,6 @@ class InitialViewController: UIViewController
         let versusButtonImage = UIImage(named: "titleButtonOff")
         singlePlayerButton.setImage( notPressedButton, forState: UIControlState.Normal)
         singlePlayerButton.setImage(versusButtonImage, forState: UIControlState.Highlighted)
-        
-
-        
     }
     
     
