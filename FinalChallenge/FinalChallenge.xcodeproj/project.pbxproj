@@ -49,8 +49,8 @@
 		5E8F9DD71B7D0052004514D0 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */; };
 		5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */; };
 		5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA49E091B87B59100AC51F8 /* MinigameScene.swift */; };
-		5EB787EB1BBB0C2900579739 /* cards.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5EB787EA1BBB0C2900579739 /* cards.atlas */; settings = {ASSET_TAGS = (); }; };
 		5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */; };
+		5ED294DB1BBD96B50073B148 /* cards.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5ED294DA1BBD96B50073B148 /* cards.atlas */; settings = {ASSET_TAGS = (); }; };
 		5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */; };
 		5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */; };
 		B503E3F41BAB2FA400C6284A /* GameOverSceneMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */; settings = {ASSET_TAGS = (); }; };
@@ -166,8 +166,8 @@
 		5E8F9DD61B7D0052004514D0 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		5EA49E091B87B59100AC51F8 /* MinigameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameScene.swift; sourceTree = "<group>"; };
-		5EB787EA1BBB0C2900579739 /* cards.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = cards.atlas; path = ../../../../../Downloads/cards.atlas; sourceTree = "<group>"; };
 		5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPowerupNode.swift; sourceTree = "<group>"; };
+		5ED294DA1BBD96B50073B148 /* cards.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = cards.atlas; sourceTree = "<group>"; };
 		5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameScene.swift; sourceTree = "<group>"; };
 		5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneMP.swift; sourceTree = "<group>"; };
@@ -287,7 +287,7 @@
 		5E8410011BA9CC1B0099B16B /* PlayerControllerView */ = {
 			isa = PBXGroup;
 			children = (
-				5EB787EA1BBB0C2900579739 /* cards.atlas */,
+				5ED294DA1BBD96B50073B148 /* cards.atlas */,
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E1C59C81BB0771200BCDE1C /* CardSprite.swift */,
 				5E2BAEE91BBB432D001C70EB /* PlayerScene */,
@@ -685,8 +685,8 @@
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
 				4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */,
 				B5DD1B541B8F90EC00AA1EB6 /* funMusic.mp3 in Resources */,
+				5ED294DB1BBD96B50073B148 /* cards.atlas in Resources */,
 				DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */,
-				5EB787EB1BBB0C2900579739 /* cards.atlas in Resources */,
 				DBE862051B850DB700C8099E /* board_2.xml in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
 			);
