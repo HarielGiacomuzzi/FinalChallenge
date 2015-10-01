@@ -20,6 +20,7 @@ class GamePadScene: SKScene {
     
     
     func closeController(data:NSNotification) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         viewController?.loadPlayerView()
         
     }
