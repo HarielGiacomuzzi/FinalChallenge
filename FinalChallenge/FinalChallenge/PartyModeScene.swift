@@ -22,6 +22,7 @@ class PartyModeScene: SKScene {
     var takenAvatar = [String()]
     var takenFlag = Bool()
     var arrayAvatarSprite = [SKSpriteNode()]
+    var gestureRecognizer : UIPanGestureRecognizer!
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -62,8 +63,12 @@ class PartyModeScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("handlePanFrom:"))
+        gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("handlePanFrom:"))
         self.view!.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    override func willMoveFromView(view: SKView) {
+        view.removeGestureRecognizer(gestureRecognizer)
     }
     
     func handlePanFrom(recognizer : UIPanGestureRecognizer) {
@@ -193,6 +198,10 @@ class PartyModeScene: SKScene {
             viewController?.loadPlayerView()
         }
         
+    }
+    
+    deinit {
+        print("deinit da party mode scene")
     }
     
 }
