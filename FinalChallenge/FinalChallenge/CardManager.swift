@@ -69,7 +69,7 @@ class CardManager{
 
     func getRandomCard(isUsable : Bool)-> ActiveCard {
         let rand = Int(arc4random_uniform(UInt32(usableCount-1)))
-        var card : Card = nil
+        var card : Card? = nil
         if rand == 1{
         card = getCard(.StealGoldCard)
         }
