@@ -17,7 +17,6 @@
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
 		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
-		26B2D9C51B87AB110056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C41B87AB110056015F /* teste.sks */; };
 		26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C61B87AC030056015F /* BombTGameScene.swift */; };
 		26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C81B87AE570056015F /* MiniGameViewController.swift */; };
 		26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */; };
@@ -74,6 +73,7 @@
 		B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */; };
 		B5AFAD151BA09BD40005F19E /* GameOverSceneSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */; };
 		B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */; };
+		B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5CD203A1BBDA86600D184F6 /* avatar.atlas */; settings = {ASSET_TAGS = (); }; };
 		B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */; };
 		B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */; };
 		B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */; };
@@ -195,6 +195,7 @@
 		B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeViewControllerIPAD.swift; sourceTree = "<group>"; };
 		B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneSP.swift; sourceTree = "<group>"; };
 		B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameCollectionScene.swift; sourceTree = "<group>"; };
+		B5CD203A1BBDA86600D184F6 /* avatar.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = avatar.atlas; sourceTree = "<group>"; };
 		B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGameOverCell.swift; sourceTree = "<group>"; };
@@ -313,6 +314,7 @@
 				5E8410011BA9CC1B0099B16B /* PlayerControllerView */,
 				B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */,
 				B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */,
+				B5CD203A1BBDA86600D184F6 /* avatar.atlas */,
 				B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */,
 				B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */,
 				26547BB41B9F68DF003DFD73 /* SetupPartyScene SK */,
@@ -633,12 +635,12 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Hariel Giacomuzzi";
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = DVXNNDG4U4;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -697,7 +699,6 @@
 				26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */,
 				B57B33671B86566E000E5F53 /* GameOver.xib in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
-				26B2D9C51B87AB110056015F /* teste.sks in Resources */,
 				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */,
@@ -708,6 +709,7 @@
 				5ED294DB1BBD96B50073B148 /* cards.atlas in Resources */,
 				DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */,
 				DBE862051B850DB700C8099E /* board_2.xml in Resources */,
+				B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -856,6 +858,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -927,6 +930,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giacomuzzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -942,6 +946,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giacomuzzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -962,6 +967,7 @@
 				);
 				INFOPLIST_FILE = FinalChallengeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giacomuzzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalChallenge.app/FinalChallenge";
 			};
@@ -977,6 +983,7 @@
 				);
 				INFOPLIST_FILE = FinalChallengeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giacomuzzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalChallenge.app/FinalChallenge";
 			};

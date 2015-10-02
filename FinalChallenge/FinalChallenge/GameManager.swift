@@ -18,6 +18,7 @@ class GameManager : NSObject {
     var isMultiplayer = false
     var players = [Player]()
     var totalGameTurns = 0
+    var currentGameTurn = 0
     var hasPath = false;
     var isOnMiniGame = false;
     var controlesDeTurno = 0
@@ -163,6 +164,8 @@ class GameManager : NSObject {
     // start minigame
     func beginMinigame() {
 
+        self.currentGameTurn++
+        
         if minigameOrderArray.isEmpty {
             fillMinigameOrderArray()
         }

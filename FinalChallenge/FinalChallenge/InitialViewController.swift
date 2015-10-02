@@ -33,17 +33,26 @@ class InitialViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        partyModeButton.setTitle("Coming Soon", forState: .Normal)
-        partyModeButton.backgroundColor = UIColor.grayColor()
-        partyModeButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        let buttonImage = UIImage(named: "titleButtonOn")
+        let pressedButtonImage = UIImage(named: "titleButtonOff")
+        
+        partyModeButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
+        singlePlayerButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
+        
+        partyModeButton.setBackgroundImage(pressedButtonImage, forState: UIControlState.Highlighted)
+        singlePlayerButton.setBackgroundImage(pressedButtonImage, forState: UIControlState.Highlighted)
+        
+        /* UNCOMMENT THIS IF PARTY MODE IS DISABLED */
+        
+//        partyModeButton.setTitle("Coming Soon", forState: .Normal)
+//        partyModeButton.enabled = false
+
+        /* END OF PARTY MODE DISABLED SETTINGS */
+        
         setupView()
         
-        let notPressedButton = UIImage(named: "titleButtonOn")//
-        let versusButtonImage = UIImage(named: "titleButtonOff")
-        singlePlayerButton.setImage( notPressedButton, forState: UIControlState.Normal)
-        singlePlayerButton.setImage(versusButtonImage, forState: UIControlState.Highlighted)
     }
-    
+
     
     @IBAction func partyModeButtonPressed() {
         //not ready yet
