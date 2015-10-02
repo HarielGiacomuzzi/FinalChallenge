@@ -23,7 +23,9 @@ class iPhonePlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
         ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true);
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerTurn:", name: "ConnectionManager_PlayerTurn", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil)
@@ -40,7 +42,7 @@ class iPhonePlayerViewController: UIViewController {
         
 //        playerCards = ["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"]
         loadPartyModeScene()
-//   	loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
+//        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
 //        loadPlayerView()
     }
     

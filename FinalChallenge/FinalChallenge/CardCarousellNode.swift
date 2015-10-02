@@ -61,6 +61,7 @@ class CardCarouselNode: SKNode {
             checkTouch = location
             firstTouch = true
         }
+        
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -103,6 +104,7 @@ class CardCarouselNode: SKNode {
             let changeInX = location.x - touchedPoint.x
             let changeInY = location.y - touchedPoint.y
             let centerCard = cards[centerIndex]
+            print(canRemoveWithSwipeUp)
             
             fixCardsZPosition()
 
@@ -123,6 +125,7 @@ class CardCarouselNode: SKNode {
             firstTouch = false
             touchedPoint = location
         }
+        
     }
     
     // MARK: - Card Movement

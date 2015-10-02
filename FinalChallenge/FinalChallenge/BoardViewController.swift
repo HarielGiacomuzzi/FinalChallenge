@@ -81,6 +81,7 @@ class BoardViewController : UIViewController {
             scene.removeAllActions()
             scene.removeAllChildren()
             scene = nil
+            GameManager.sharedInstance.isOnBoard = false;
             let minivc = segue.destinationViewController as! MiniGameViewController
             minivc.minigame = Minigame(rawValue: sender as! String)!
         }

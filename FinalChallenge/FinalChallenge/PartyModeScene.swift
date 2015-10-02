@@ -22,6 +22,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var takenAvatar = [String()]
     var takenFlag = Bool()
     var arrayAvatarSprite = [SKSpriteNode()]
+    var gestureRecognizer : UIPanGestureRecognizer!
     
     
     
@@ -90,7 +91,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMoveToView(view: SKView) {
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("handlePanFrom:"))
+        gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("handlePanFrom:"))
         self.view!.addGestureRecognizer(gestureRecognizer)
         
         setObjects()
@@ -99,6 +100,10 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         
+    }
+    
+    override func willMoveFromView(view: SKView) {
+        view.removeGestureRecognizer(gestureRecognizer)
     }
     
     func handlePanFrom(recognizer : UIPanGestureRecognizer) {
