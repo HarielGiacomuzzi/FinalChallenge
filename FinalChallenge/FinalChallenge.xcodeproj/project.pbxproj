@@ -28,6 +28,7 @@
 		4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445D7C41B98C99F0049B787 /* AlertPath.swift */; };
 		4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4473647C1B9A065400C8AD9D /* puffGame.atlas */; };
 		4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */; };
+		447891DB1BBEF2120094E16B /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447891DA1BBEF2120094E16B /* CardManager.swift */; settings = {ASSET_TAGS = (); }; };
 		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
 		5E1C59C91BB0771200BCDE1C /* CardSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C59C81BB0771200BCDE1C /* CardSprite.swift */; settings = {ASSET_TAGS = (); }; };
 		5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2095981BB973F2002FC8AF /* StoreScene.swift */; settings = {ASSET_TAGS = (); }; };
@@ -148,6 +149,7 @@
 		4445D7C41B98C99F0049B787 /* AlertPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPath.swift; sourceTree = "<group>"; };
 		4473647C1B9A065400C8AD9D /* puffGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = puffGame.atlas; sourceTree = "<group>"; };
 		4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuffPlayer.swift; sourceTree = "<group>"; };
+		447891DA1BBEF2120094E16B /* CardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
 		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
 		5E1C59C81BB0771200BCDE1C /* CardSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSprite.swift; sourceTree = "<group>"; };
 		5E2095981BB973F2002FC8AF /* StoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreScene.swift; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */,
 				4445D7C41B98C99F0049B787 /* AlertPath.swift */,
 				5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */,
+				447891DA1BBEF2120094E16B /* CardManager.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
 				B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
+				447891DB1BBEF2120094E16B /* CardManager.swift in Sources */,
 				5ED294E21BBD9D380073B148 /* SwipeScene.swift in Sources */,
 				2661C40A1BB07EEC003A49F9 /* TutorialScene.swift in Sources */,
 				B5AFAD0A1B94C3770005F19E /* CustomMinigameCollectionView.swift in Sources */,
