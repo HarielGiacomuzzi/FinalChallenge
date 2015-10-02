@@ -29,8 +29,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     var charInitialPosition : CGFloat?
 
-    
-    
     // set textures
     let yellowButton : SKTexture = SKTexture(imageNamed: "yellowButton")
     let yellowButtonOff : SKTexture = SKTexture(imageNamed: "yellowButtonOff")
@@ -49,23 +47,16 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     let boundaryCategoryMask: UInt32 =  0x1 << 1
     let fallingCategoryMask: UInt32 =  0x1 << 2
 
-    var turnCounter = 0
+    var turnCounter = 5
     
     
     override func update(currentTime: NSTimeInterval) {
-
-        
     }
     
     override func didMoveToView(view: SKView) {
-        
         setObjects()
-        
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
-        self.physicsWorld.contactDelegate = self
-        
-        
-        
+        self.physicsWorld.contactDelegate = self    
     }
     
     func setObjects(){
@@ -99,10 +90,11 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
 
         
         numberOfTurns = SKLabelNode(fontNamed: "Helvetica Neue")
-        numberOfTurns?.text = "max turns : 0"
+        numberOfTurns?.text = "max turns : 5"
         numberOfTurns?.fontSize = 30
         numberOfTurns?.position = CGPoint(x: turns!.position.x, y: turns!.position.y)
         numberOfTurns?.zPosition = 5
+        GameManager.sharedInstance.totalGameTurns = self.turnCounter
         self.addChild(numberOfTurns!)
         
         
@@ -260,19 +252,18 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
 
         if(turns!.containsPoint(location)){
             turnCounter = turnCounter + 5
-            if turnCounter > 25 {
-                turnCounter = 0
+            if turnCounter > 30 {
+                turnCounter = 5
             }
             
             numberOfTurns?.text = "max turns : \(turnCounter)"
-
+            GameManager.sharedInstance.totalGameTurns = turnCounter
         }
 
     }
     
     func spawnItem(){
        
-        
         let effectsNode = SKEffectNode()
         let filter = CIFilter(name: "CIGaussianBlur")
         // Set the blur amount. Adjust this to achieve the desired effect
@@ -305,9 +296,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         sprite.zPosition = 2
         sprite.physicsBody?.categoryBitMask = fallingCategoryMask
         sprite.physicsBody?.contactTestBitMask = boundaryCategoryMask
-        
-
-        
     }
     
     

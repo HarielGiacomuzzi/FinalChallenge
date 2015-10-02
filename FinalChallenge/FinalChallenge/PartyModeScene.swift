@@ -51,6 +51,14 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         banner?.zPosition = 4
         banner?.name = "banner"
         
+        let titleLabel = SKLabelNode(fontNamed: "GillSans-Bold")
+        titleLabel.text = "Choose your Character"
+        titleLabel.name = "label"
+        titleLabel.zPosition = 500
+        titleLabel.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
+        self.addChild(titleLabel)
+        
+        
         let background = SKTexture(imageNamed: "setupBG")
         let bg = SKSpriteNode(texture: background, size: background.size())
         self.addChild(bg)
@@ -248,12 +256,14 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(globParticles!)
         globParticles?.zPosition = 1
         
-        let spawn = SKAction.runBlock({() in self.spawnItem()})
+        
+        //for some reason this code dont wornk on the iPhone, the phone trys to mantein a 40 fps just like the iPad, but for some reason starts dropping
+        /*let spawn = SKAction.runBlock({() in self.spawnItem()})
         
         let delay = SKAction.waitForDuration(0.7, withRange: 1.4)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
-        self.runAction(spawnThenDelayForever)
+        self.runAction(spawnThenDelayForever)*/
 
         
         //set boundary
@@ -261,7 +271,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         boundary.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.frame.width, height: 1))
         boundary.physicsBody?.dynamic = false
         boundary.physicsBody?.categoryBitMask = boundaryCategoryMask
-        boundary.position = CGPoint(x: self.frame.width/2, y: 100)
+        boundary.position = CGPoint(x: self.frame.width/2, y: -200)
         self.addChild(boundary)
     }
     
