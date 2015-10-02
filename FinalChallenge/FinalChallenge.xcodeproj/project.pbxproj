@@ -17,7 +17,6 @@
 		269F18B01B86583000EAD94F /* wind.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 269F18AF1B86583000EAD94F /* wind.atlas */; };
 		26B2D9BF1B87A8920056015F /* fish.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9BE1B87A8920056015F /* fish.atlas */; };
 		26B2D9C11B87A8B20056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C01B87A8B20056015F /* teste.sks */; };
-		26B2D9C51B87AB110056015F /* teste.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26B2D9C41B87AB110056015F /* teste.sks */; };
 		26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C61B87AC030056015F /* BombTGameScene.swift */; };
 		26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B2D9C81B87AE570056015F /* MiniGameViewController.swift */; };
 		26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26CF80991B8CD59000DFCB73 /* fireBombParticle.sks */; };
@@ -630,7 +629,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Hariel Giacomuzzi";
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
@@ -694,7 +693,6 @@
 				26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */,
 				B57B33671B86566E000E5F53 /* GameOver.xib in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
-				26B2D9C51B87AB110056015F /* teste.sks in Resources */,
 				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */,
@@ -852,6 +850,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -923,6 +922,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giacomuzzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -938,6 +938,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giacomuzzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -958,6 +959,7 @@
 				);
 				INFOPLIST_FILE = FinalChallengeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giacomuzzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalChallenge.app/FinalChallenge";
 			};
@@ -973,6 +975,7 @@
 				);
 				INFOPLIST_FILE = FinalChallengeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giacomuzzi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalChallenge.app/FinalChallenge";
 			};
