@@ -173,14 +173,15 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
 
         default: break
         }
+        //defines the player avatar image or right now the color
         for p in GameManager.sharedInstance.players {
             if identifier == p.playerIdentifier{
                 p.avatar = message
                 switch(message){
-                    case "red": p.color = UIColor.redColor()
-                    case "white": p.color = UIColor.whiteColor()
-                    case "black": p.color = UIColor.blackColor()
-                    case "blue": p.color = UIColor.blueColor()
+                    case "paladinCard": p.color = UIColor.redColor()
+                    case "rangerCard": p.color = UIColor.whiteColor()
+                    case "thiefCard": p.color = UIColor.blackColor()
+                    case "wizardCard": p.color = UIColor.blueColor()
                     default: break
                 }
             }

@@ -36,9 +36,9 @@ class iPhonePlayerViewController: UIViewController {
         skView?.showsFPS = true
         skView?.showsNodeCount = true
         skView?.ignoresSiblingOrder = true
-        skView?.showsPhysics = false
+        skView?.showsPhysics = true
         
-
+//        playerCards = ["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"]
         loadPartyModeScene()
 //   	loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
 //        loadPlayerView()

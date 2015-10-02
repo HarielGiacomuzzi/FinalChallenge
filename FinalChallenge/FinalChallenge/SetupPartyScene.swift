@@ -22,10 +22,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     var numberOfTurns : SKLabelNode?
     
     // characters nodes
-    let char1 : SKSpriteNode = SKSpriteNode(imageNamed: "white")
-    let char2 : SKSpriteNode = SKSpriteNode(imageNamed: "blue")
-    let char3 : SKSpriteNode = SKSpriteNode(imageNamed: "black")
-    let char4 : SKSpriteNode = SKSpriteNode(imageNamed: "red")
+    let char1 : SKSpriteNode = SKSpriteNode(imageNamed: "paladinCard")
+    let char2 : SKSpriteNode = SKSpriteNode(imageNamed: "rangerCard")
+    let char3 : SKSpriteNode = SKSpriteNode(imageNamed: "thiefCard")
+    let char4 : SKSpriteNode = SKSpriteNode(imageNamed: "wizardCard")
     
     var charInitialPosition : CGFloat?
 
@@ -69,10 +69,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setObjects(){
-
-        
-
-        
         // set the red SETUP GAME banner
         banner = SKSpriteNode(texture: redBanner, size: redBanner.size() )
         self.addChild(banner!)
@@ -184,10 +180,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         char4.position = CGPoint(x: self.frame.width*0.8, y: charInitialPosition!)
         char4.zPosition = 6
         self.addChild(char4)
-        
-        
-        
-        
+ 
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -343,8 +336,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         action.timingMode = .EaseInEaseOut
         
         char.runAction(action)
-        
-        
     }
     
 
