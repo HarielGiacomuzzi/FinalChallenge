@@ -64,6 +64,7 @@ class CardManager{
             print("entrei no default deu ruim gente")
             return Card()
             
+            
         }
     }
 
