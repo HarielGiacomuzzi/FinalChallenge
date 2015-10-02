@@ -42,5 +42,8 @@ class SwipeScene: GamePadScene {
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
     }
+    
+
+    
 
 }
