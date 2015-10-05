@@ -136,6 +136,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         charInitialPosition = (char1.size.height/2)*(-1)
         
         char1.position = CGPoint(x: self.frame.width*0.2, y: charInitialPosition!)
+        char1.setScale(0.2)
         char1.zPosition = 6
         self.addChild(char1)
         /*
@@ -151,6 +152,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
       
         char2.position = CGPoint(x: self.frame.width * 0.4, y: charInitialPosition!)
+        char2.setScale(0.2)
         char2.zPosition = 6
         self.addChild(char2)
         /*
@@ -166,10 +168,12 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         
         char3.position = CGPoint(x: self.frame.width*0.6, y: charInitialPosition!)
+        char3.setScale(0.2)
         char3.zPosition = 6
         self.addChild(char3)
         
         char4.position = CGPoint(x: self.frame.width*0.8, y: charInitialPosition!)
+        char4.setScale(0.2)
         char4.zPosition = 6
         self.addChild(char4)
  

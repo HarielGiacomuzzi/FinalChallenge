@@ -29,7 +29,6 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     @IBOutlet weak var player4Label: UILabel!
     
     
-    
     var arrayAvatars = [String()]
     
     var scene : SetupPartyScene?
@@ -38,6 +37,8 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
       
+        GameManager.sharedInstance.ipadAvatarViewController = self
+        
         ConnectionManager.sharedInstance.setupConnectionWithOptions(UIDevice.currentDevice().name, active: true)
         ConnectionManager.sharedInstance.setupBrowser()
         ConnectionManager.sharedInstance.browser?.delegate = self
