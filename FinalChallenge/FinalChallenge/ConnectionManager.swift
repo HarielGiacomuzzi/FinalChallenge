@@ -37,8 +37,8 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
     
     //Verifica se o player já estava conectado para impedir de mostrar os outros :P
     func browserViewController(browserViewController: MCBrowserViewController, shouldPresentNearbyPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) -> Bool {
-        for p in session.connectedPeers{
-            if p == peerID{
+        for p in GameManager.sharedInstance.players{
+            if p.playerIdentifier == peerID.displayName{
                 return true
             }
         }
@@ -174,8 +174,8 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         
         if (state == MCSessionState.NotConnected && UIDevice.currentDevice().userInterfaceIdiom == .Pad && GameManager.sharedInstance.isOnMiniGame) || (state == MCSessionState.NotConnected && UIDevice.currentDevice().userInterfaceIdiom == .Pad && GameManager.sharedInstance.isOnBoard){
             
-            for p in session.connectedPeers{
-                if peerID == p{
+            for p in GameManager.sharedInstance.players{
+                if peerID.displayName == p.playerIdentifier{
                     print("Peer \(peerID.displayName) Disconnected");
                     let reconect = MCBrowserViewController(serviceType: self.ServiceID, session: session)
                     reconect.delegate = self;

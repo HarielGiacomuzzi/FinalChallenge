@@ -203,7 +203,6 @@ class GameManager : NSObject {
     // chamado quando o player já escolheu um caminho no tabuleiro
     func pathChosen() {
         if isOnMiniGame {
-            hasPath = false;
             beginMinigame()
         }
     }

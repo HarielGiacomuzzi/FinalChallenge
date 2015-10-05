@@ -13,6 +13,7 @@ class AlertPath: UIAlertController{
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(true)
+        GameManager.sharedInstance.hasPath = false;
         GameManager.sharedInstance.pathChosen()
     }
 
