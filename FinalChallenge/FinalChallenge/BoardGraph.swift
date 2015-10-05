@@ -344,7 +344,7 @@ class BoardGraph : NSObject{
                 //o dafault é ser um baú
                 default:
                     if arc4random_uniform(UInt32(1)) >= 1{
-                        GameManager.sharedInstance.loseCard(player);
+                        CardManager.ShareInstance.loseCard(player);
                     }else{
                         //dar uma carta pro player, como não sei o método que faz isso deixa assim kkkk
                     }

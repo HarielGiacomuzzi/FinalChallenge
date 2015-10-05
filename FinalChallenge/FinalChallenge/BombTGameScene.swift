@@ -324,7 +324,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             self.removeAllActions()
             _ = SKTransition.flipHorizontalWithDuration(0.5)
             let goScene = GameOverSceneMP(size: self.size)
-            goScene.player = playerRank.reverse()
+            goScene.players = playerRank.reverse()
             self.view?.presentScene(goScene)
             
         } else{
@@ -507,7 +507,6 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func messageReceived(identifier: String, dictionary: NSDictionary) {
-        print("recebeu msg")
         var x:CGFloat = 0.0
         var y:CGFloat = 0.0
         if dictionary.objectForKey("x") != nil && dictionary.objectForKey("y") != nil {
@@ -515,12 +514,9 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             y = dictionary.objectForKey("y") as! CGFloat
         }
         
-        print("\(identifier) tentou atirar a bomba")
         if playerActive == identifier {
-            print("e conseguiu com direçao (\(x),\(y))")
             throwBomb(x, y: y)
         } else {
-            print("mas ele nao estava com ela")
         }
         
     }

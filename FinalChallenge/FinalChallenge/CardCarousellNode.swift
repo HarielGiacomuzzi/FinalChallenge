@@ -18,9 +18,11 @@ class CardCarouselNode: SKNode {
     var leftPoint = CGPointMake(0.0, 0.0)
     var rightPoint = CGPointMake(0.0, 0.0)
     var centerIndex:Int = 0
-    var canRemoveWithSwipeUp = true
+    var canRemoveWithSwipeUp = false
+    var canRemoveWithSwipeDown = false
     var firstTouch = false
     var movingUp = false
+    var movingDown = false
     var checkTouch:CGPoint = CGPointMake(0.0, 0.0)
     weak var delegate:CardCarousellDelegate?
     
@@ -88,8 +90,15 @@ class CardCarouselNode: SKNode {
         }
         
         let centerCard = cards[centerIndex]
+        print(centerCard.position.y)
+        print(centerPoint.y)
         if centerCard.position.y > centerPoint.y {
             removeCard()
+        } else if centerCard.position.y < centerPoint.y {
+            delegate?.sendCard(centerCard)
+            centerCard.position = centerPoint
+            print("send card?")
+            
         } else {
             fixCardsZPosition()
             centerCard.position = centerPoint
@@ -104,20 +113,25 @@ class CardCarouselNode: SKNode {
             let changeInX = location.x - touchedPoint.x
             let changeInY = location.y - touchedPoint.y
             let centerCard = cards[centerIndex]
-            print(canRemoveWithSwipeUp)
             
             fixCardsZPosition()
 
             if firstTouch {
-                if fabs(changeInX) > changeInY {
-                    movingUp = false
-                } else {
-                    movingUp = true
+                movingUp = false
+                movingDown = false
+                if fabs(changeInX) < fabs(changeInY) {
+                    if changeInY > 0 {
+                        movingUp = true
+                    } else {
+                        movingDown = true
+                    }
                 }
             }
             
             if movingUp && canRemoveWithSwipeUp {
                 moveUp(centerCard.position.y + changeInY)
+            } else if movingDown && canRemoveWithSwipeDown {
+                moveDown(centerCard.position.y + changeInY)
             } else {
                 moveSideways(changeInX)
             }
@@ -133,6 +147,15 @@ class CardCarouselNode: SKNode {
     func moveUp(newPos:CGFloat) {
         let centerCard = cards[centerIndex]
         if newPos > centerPoint.y {
+            centerCard.position.y = newPos
+        } else {
+            centerCard.position = centerPoint
+        }
+    }
+    
+    func moveDown(newPos:CGFloat) {
+        let centerCard = cards[centerIndex]
+        if newPos < centerPoint.y {
             centerCard.position.y = newPos
         } else {
             centerCard.position = centerPoint

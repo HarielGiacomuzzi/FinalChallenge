@@ -53,6 +53,7 @@ class iPhonePlayerViewController: UIViewController {
             playerScene?.carousel.canRemoveWithSwipeUp = true
         }
         playerScene?.testButton.text = "DICE"
+        setNotification("Your Turn")
         
     }
     
@@ -69,7 +70,11 @@ class iPhonePlayerViewController: UIViewController {
         print("mensagem para \(playerName)")
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
+            print("playerscene = \(playerScene)")
+            print("gamepadscene = \(gamePadScene)")
+            print("era pra notificar aqui")
             print("update moneys para \(value)")
+            setNotification("You got \(playerMoney - value) moneys")
             playerMoney = value
             playerScene?.updateMoney(playerMoney)
         } else {
@@ -196,5 +201,14 @@ class iPhonePlayerViewController: UIViewController {
         storeScene = nil
         partyModeScene = nil
         gamePadScene = nil
+    }
+    
+    
+    // MARK: - Aux Functions
+    
+    func setNotification(text:String) {
+        let notification = NotificationNode(text: text)
+        notification.position = CGPointMake(skView!.scene!.frame.size.width/2, skView!.scene!.frame.size.height/2)
+        skView?.scene!.addChild(notification)
     }
 }

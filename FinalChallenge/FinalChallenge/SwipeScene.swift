@@ -42,5 +42,14 @@ class SwipeScene: GamePadScene {
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
     }
+    
+    override func didMoveToView(view: SKView) {
+        super.didMoveToView(view)
+        let label = SKLabelNode(text: "ACCELEROMETER")
+        label.fontSize = 70
+        label.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+        addChild(label)
+    }
+    
 
 }

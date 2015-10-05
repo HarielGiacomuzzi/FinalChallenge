@@ -1,4 +1,4 @@
-            //
+//
 //  GameManager.swift
 //  FinalChallenge
 //
@@ -109,7 +109,7 @@ class GameManager : NSObject {
         
         let player = getPlayer(playerName)
         print(player.playerIdentifier)
-        let card = getCard(cardName)
+        let card =  CardManager.ShareInstance.getCard(cardName)
         print(card.cardName)
         
         var status = " "
@@ -136,7 +136,6 @@ class GameManager : NSObject {
         let dataDic = ["player":playerName, "status":status, "worked":worked, "playerMoney":player.coins, "card":cardName]
         let dicc = ["BuyResponse":" ","dataDic":dataDic]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dicc, reliable: true)
-        
         
     }
     
@@ -263,35 +262,7 @@ class GameManager : NSObject {
         BoardGraph.SharedInstance.walk(move, player: player, view: boardViewController);
     }
     
-// this function takes a card from a player
-    func loseCard(player:Player){
-        let value = player.items.count
-        let indexCard : Int = (random() % value)
-        player.items.removeAtIndex(indexCard)
-        
-        let removedCard = player.items[indexCard]
-        let cardData = ["player":player.playerIdentifier, "item": removedCard]
-        let dic = ["removeCard":" ", "dataDic" : cardData]
-        
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-    }
 
-    // given a card name this function returns you the corresponding card
-    func getCard(name:String) -> Card {
-        switch(name){
-        case "StealGoldCard" :
-            return StealGoldCard()
-        case "MoveBackCard" :
-            return MoveBackCard()
-        case "LoseCard" :
-            return LoseCard()
-        default :
-            print("entrei no default deu ruim gente")
-            return Card()
-            
-        }
-        
-    }
     // given a player name this function returns you the corresponding player
     func getPlayer(name:String) -> Player {
         for player in players {
@@ -301,13 +272,5 @@ class GameManager : NSObject {
         }
         return Player()
     }
-    
-//    func getRandomActiveCard() -> ActiveCard {
-//        
-//    }
-//    
-//    getRandomSpecialCard() -> NotActiveCard {
-//    
-//    }
-    
+        
 }

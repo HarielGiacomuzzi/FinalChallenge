@@ -16,11 +16,12 @@ class CardSprite: SKNode {
     var baseSprite:SKSpriteNode!
     var image:SKSpriteNode!
     var nameLabel:SKLabelNode!
+    var priceLabel:SKLabelNode?
     
     init(cardName:String) {
         super.init()
         self.cardName = cardName
-        self.card = GameManager.sharedInstance.getCard(cardName)
+        self.card = CardManager.ShareInstance.getCard(cardName)
         let atlas = SKTextureAtlas(named: "cards")
         let texture = atlas.textureNamed("trapCardBase")
         baseSprite = SKSpriteNode(texture: texture)
@@ -39,6 +40,15 @@ class CardSprite: SKNode {
         nameLabel.fontSize = 45
         nameLabel.fontName = "GillSans-Bold"
         addChild(nameLabel)
+    }
+    
+    func setPrice() {
+        priceLabel = SKLabelNode(text: "$\(card.storeValue)")
+        priceLabel!.zPosition = 4
+        priceLabel?.fontSize = 45
+        priceLabel?.fontName = "GillSans-Bold"
+        priceLabel?.fontColor = UIColor(red:0.13, green:0.42, blue:0.16, alpha:1.0)
+        addChild(priceLabel!)
     }
     
     required init?(coder aDecoder: NSCoder) {

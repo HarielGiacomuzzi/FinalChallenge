@@ -33,37 +33,6 @@ class MinigameCollectionViewController : UIViewController {
 
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return minigameCollection.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! CustomMinigameCollectionView
-        
-        cell.minigameImage.image = UIImage(named: minigameCollection[indexPath.row].rawValue)
-        
-        print(minigameCollection[indexPath.row].rawValue)
-        
-        self.automaticallyAdjustsScrollViewInsets = false
-        
-        switch(minigameCollection[indexPath.row]){
-            case .FlappyFish: cell.specialTag = "flap"
-            case .BombGame: cell.specialTag = "bomb"
-        }
-        // Configure the cell
-        return cell
-    }
-    
-    //performSegueWithIdentifier("minigameSegue", sender: "flap")
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        if let cell : CustomMinigameCollectionView? = collectionView.cellForItemAtIndexPath(indexPath) as? CustomMinigameCollectionView{
-            performSegueWithIdentifier("minigameSegue", sender: cell?.specialTag)
-        }
-        
-    }
-    
     func gameSelected(game:String!){
         performSegueWithIdentifier("minigameSegue", sender: game)
     }

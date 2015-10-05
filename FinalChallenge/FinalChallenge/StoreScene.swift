@@ -17,6 +17,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     
     var buyButton:StoreButtonNode!
     var leaveButton:StoreButtonNode!
+    var moneyLabel:SKLabelNode!
     
     var cardsString : [String]!
     var chosenCard:CardSprite?
@@ -84,6 +85,14 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         text.zPosition = 30
         addChild(text)
         
+        moneyLabel = SKLabelNode(text: "$\(viewController!.playerMoney)")
+        moneyLabel.position = topBarSprite.position
+        moneyLabel.position.x = frame.size.width - moneyLabel.frame.size.width
+        moneyLabel.fontName = "GillSans-Bold"
+        moneyLabel.fontSize = 70
+        moneyLabel.zPosition = 30
+        addChild(moneyLabel)
+        
         topBarLimit = topBarSprite.position.y - topBarSprite.frame.size.height/2 + 30
         
     }
@@ -121,6 +130,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         
         for cardString in cardsString {
             let card = CardSprite(cardName: cardString)
+            card.setPrice()
             cards.append(card)
         }
         
@@ -137,6 +147,8 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     
     func buyResponse(status:String,worked:Bool, money:Int, card:String) {
         if worked {
+            moneyLabel.text = "$\(money)"
+            moneyLabel.position.x = frame.size.width - moneyLabel.frame.size.width
             if chosenCard?.cardName == card {
                 cardShow.removeCard(chosenCard!)
                 chosenCard = nil

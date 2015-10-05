@@ -138,6 +138,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         char1.position = CGPoint(x: self.frame.width*0.2, y: charInitialPosition!)
         char1.setScale(0.2)
         char1.zPosition = 6
+        char1.setScale(0.5)
         self.addChild(char1)
         /*
         let shadow1 = SKSpriteNode(imageNamed: "player1")
@@ -155,6 +156,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         char2.setScale(0.2)
         char2.zPosition = 6
         self.addChild(char2)
+        char2.setScale(0.5)
         /*
         let shadow2 = SKSpriteNode(imageNamed: "player2")
         shadow2.blendMode = SKBlendMode(rawValue: 0)!
@@ -170,11 +172,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         char3.position = CGPoint(x: self.frame.width*0.6, y: charInitialPosition!)
         char3.setScale(0.2)
         char3.zPosition = 6
+        char3.setScale(0.5)
         self.addChild(char3)
         
         char4.position = CGPoint(x: self.frame.width*0.8, y: charInitialPosition!)
         char4.setScale(0.2)
         char4.zPosition = 6
+        char4.setScale(0.5)
         self.addChild(char4)
  
     }
@@ -233,7 +237,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
+
         go?.texture = greenButton
         connect?.texture = yellowButton
         turns?.texture = yellowTurnsOn
