@@ -38,6 +38,11 @@ class AccelerometerScene: GamePadScene {
         } else {
             print("Accelerometer is not available", terminator: "")
         }
+        
+        let label = SKLabelNode(text: "ACCELEROMETER")
+        label.fontSize = 70
+        label.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+        addChild(label)
     }
     
     func sendData(y:Double) {

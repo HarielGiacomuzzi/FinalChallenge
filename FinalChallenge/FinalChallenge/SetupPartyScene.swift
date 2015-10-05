@@ -137,6 +137,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         char1.position = CGPoint(x: self.frame.width*0.2, y: charInitialPosition!)
         char1.zPosition = 6
+        char1.setScale(0.5)
         self.addChild(char1)
         /*
         let shadow1 = SKSpriteNode(imageNamed: "player1")
@@ -153,6 +154,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         char2.position = CGPoint(x: self.frame.width * 0.4, y: charInitialPosition!)
         char2.zPosition = 6
         self.addChild(char2)
+        char2.setScale(0.5)
         /*
         let shadow2 = SKSpriteNode(imageNamed: "player2")
         shadow2.blendMode = SKBlendMode(rawValue: 0)!
@@ -167,10 +169,12 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         char3.position = CGPoint(x: self.frame.width*0.6, y: charInitialPosition!)
         char3.zPosition = 6
+        char3.setScale(0.5)
         self.addChild(char3)
         
         char4.position = CGPoint(x: self.frame.width*0.8, y: charInitialPosition!)
         char4.zPosition = 6
+        char4.setScale(0.5)
         self.addChild(char4)
  
     }
@@ -248,14 +252,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             print("apertei o botao de CONNECT")
             viewController.ConnectPlayers()
             
-        } else {
-        //PROVISORIO ENQUANTO AS CARTAS ESTAO GIGANTES
-        //PROVISORIO ENQUANTO AS CARTAS ESTAO GIGANTES
-            print("apertei o botao de GO")
-            viewController.turns = turnCounter
-            viewController.gotoBoardGame()
-        //PROVISORIO ENQUANTO AS CARTAS ESTAO GIGANTES
-        //PROVISORIO ENQUANTO AS CARTAS ESTAO GIGANTES
         }
 
         if(turns!.containsPoint(location)){
