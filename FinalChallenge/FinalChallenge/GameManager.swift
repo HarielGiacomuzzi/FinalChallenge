@@ -18,19 +18,22 @@ class GameManager : NSObject {
     var isMultiplayer = false
     var players = [Player]()
     var totalGameTurns = 0
-    var currentGameTurn = 0
+    var currentGameTurn = 1
     var hasPath = false;
     var isOnMiniGame = false;
     var controlesDeTurno = 0
     var isOnBoard = false;
+    var gameEnded = false
     
-    //minigame controllers
+    //used only in mainboard
+    var doOnce = false
+    //controllers acess
     var minigameDescriptionViewController : MinigameDescriptionViewController?
-    
     var minigameViewController : MiniGameViewController?
-    
     var boardGameViewController : BoardViewController?
+    var ipadAvatarViewController : PartyModeViewControllerIPAD?
     
+    // some arrays
     var minigameOrderArray : [Minigame] = []
     var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
     //var allMinigames : [Minigame] = [.FlappyFish]
@@ -140,8 +143,19 @@ class GameManager : NSObject {
         return Array(playerRank.reverse())
     }
     
+    func endGameScene(){
+        self.gameEnded = true
+    }
+    
     // handle player order
     func selectPlayers(i:Int){
+        
+        if self.currentGameTurn == self.totalGameTurns {
+            //end game
+            print("O jogo terminou tche")
+            self.endGameScene()
+        }
+        
         if !self.isOnMiniGame{
             controlesDeTurno++
             let p = players[i]
@@ -215,7 +229,15 @@ class GameManager : NSObject {
             vc.dismissViewControllerAnimated(false, completion: nil)
         }
     }
-    
+// dismiss boardgame view from the end game scene
+    func dismissBoardGame(){
+        if let vc = self.boardGameViewController {
+            vc.dismissViewControllerAnimated(false, completion: nil)
+            if let vc2 = self.ipadAvatarViewController {
+                vc2.dismissViewControllerAnimated(false, completion: nil)
+            }
+        }
+    }
     // MARK: - Card Functions
     
 // used to update users gold or to use cards function, can take or give player gold

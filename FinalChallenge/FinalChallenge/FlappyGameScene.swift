@@ -342,8 +342,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             playerRank.append(loser)
         }
         
-        //self.gameController!.gameOverController(playerRank)
-        
         self.removeAllChildren()
         self.removeAllActions()
         _ = SKTransition.flipHorizontalWithDuration(0.5)

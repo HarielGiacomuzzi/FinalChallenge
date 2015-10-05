@@ -10,11 +10,7 @@ import Foundation
 import SpriteKit
 
 class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
-    
-    
-    //var viewController : MinigameDescriptionViewController!
 
-    //var gameNumber : Int?
     var spriteArray : [SKSpriteNode] = [SKSpriteNode]()
     var startButton : SKLabelNode!
     var goButton : SKSpriteNode!

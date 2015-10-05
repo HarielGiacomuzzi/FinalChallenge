@@ -7,20 +7,25 @@
 //
 
 import SpriteKit
-var doOnce = false
-
 
 class MainBoard: SKScene, SKPhysicsContactDelegate {
     weak var viewController: UIViewController?
     var realPlayer : Player?
     let partsAtlas = SKTextureAtlas(named: "Board")
 
+    override func update(currentTime: NSTimeInterval) {
+        if !self.paused && GameManager.sharedInstance.gameEnded{
+            self.presentEndGameScene()
+            //self.paused = true
+        }
+    }
+
     override func didMoveToView(view: SKView) {
             GameManager.sharedInstance.boardViewController = self.viewController;
             GameManager.sharedInstance.isOnBoard = true;
             let scaleFactorX = Double(2048/(self.view?.frame.width)!);
             let scaleFactorY = Double(1536/(self.view?.frame.height)!);
-            if !doOnce{
+            if !GameManager.sharedInstance.doOnce{
                 for i in BoardGraph.SharedInstance.nodes{
                     var texture = self.partsAtlas.textureNamed("square1");
                     if i.0 == "House"{
@@ -46,7 +51,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     
                     self.addChild(x);
                     
-                    doOnce = true
+                    GameManager.sharedInstance.doOnce = true
                 }
                 let x = (BoardGraph.SharedInstance.nodes["01"]?.posX)!;
                 let y = (BoardGraph.SharedInstance.nodes["01"]?.posY)!;
@@ -97,12 +102,17 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                 }
                 
             }
-        self.setupBoard()
     }
-    
-    
-    func setupBoard(){
-        
+
+    func presentEndGameScene(){
+        print("Apresentou EndGame")
+        self.removeAllChildren()
+        self.removeAllActions()
+        _ = SKTransition.flipHorizontalWithDuration(0.5)
+        let goScene = EndGameScene(size: self.size)
+        goScene.scaleMode = .AspectFit
+        self.view?.presentScene(goScene)
+
     }
     
     override func didFinishUpdate() {

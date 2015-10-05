@@ -68,6 +68,7 @@
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
 		B57B33671B86566E000E5F53 /* GameOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57B33661B86566E000E5F53 /* GameOver.xib */; };
 		B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B33681B8656D7000E5F53 /* GameOverXib.swift */; };
+		B5A7685D1BBEF4B3006819B9 /* EndGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7685C1BBEF4B3006819B9 /* EndGameScene.swift */; settings = {ASSET_TAGS = (); }; };
 		B5AFAD081B94C1DD0005F19E /* MinigameCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */; };
 		B5AFAD0A1B94C3770005F19E /* CustomMinigameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */; };
 		B5AFAD0F1B9608F70005F19E /* PartyModeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */; };
@@ -191,6 +192,7 @@
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
 		B57B33661B86566E000E5F53 /* GameOver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameOver.xib; sourceTree = "<group>"; };
 		B57B33681B8656D7000E5F53 /* GameOverXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverXib.swift; sourceTree = "<group>"; };
+		B5A7685C1BBEF4B3006819B9 /* EndGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameScene.swift; sourceTree = "<group>"; };
 		B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameCollectionViewController.swift; sourceTree = "<group>"; };
 		B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMinigameCollectionView.swift; sourceTree = "<group>"; };
 		B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeScene.swift; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 				DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */,
 				DBC57FE31B83AEC300CA0232 /* BoardScene.swift */,
 				DBE862061B8552C800C8099E /* MainBoard.swift */,
+				B5A7685C1BBEF4B3006819B9 /* EndGameScene.swift */,
 			);
 			name = Board;
 			sourceTree = "<group>";
@@ -643,7 +646,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZX7GUMJ35C;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -772,6 +775,7 @@
 				DBC57FE41B83AEC300CA0232 /* BoardScene.swift in Sources */,
 				5ED294DE1BBD9AAA0073B148 /* AccelerometerScene.swift in Sources */,
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
+				B5A7685D1BBEF4B3006819B9 /* EndGameScene.swift in Sources */,
 				5E840FFE1BA9CBB00099B16B /* CardCarousellNode.swift in Sources */,
 				5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */,
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
