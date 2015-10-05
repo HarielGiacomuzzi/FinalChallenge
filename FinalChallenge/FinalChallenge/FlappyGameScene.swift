@@ -46,9 +46,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         //println(gameManager.isMultiplayer)
         if players.count == 1 && GameManager.sharedInstance.isMultiplayer == true && !self.paused{
-            for p in players{
-                self.playerRank.append(p.identifier!)
-            }
             self.gameOverMP()
             self.paused = true
         }
@@ -351,7 +348,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         self.removeAllActions()
         _ = SKTransition.flipHorizontalWithDuration(0.5)
         let goScene = GameOverSceneMP(size: self.size)
-        goScene.player = playerRank.reverse()
+        goScene.players = playerRank
         self.view?.presentScene(goScene)
     }
     

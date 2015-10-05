@@ -53,6 +53,9 @@ class iPhonePlayerViewController: UIViewController {
             playerScene?.carousel.canRemoveWithSwipeUp = true
         }
         playerScene?.testButton.text = "DICE"
+        let notification = NotificationNode(text: "Your Turn")
+        notification.position = CGPointMake((playerScene?.frame.size.width)!/2, (playerScene?.frame.size.height)!/2)
+        playerScene?.addChild(notification)
         
     }
     

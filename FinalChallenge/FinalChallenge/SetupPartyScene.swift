@@ -229,7 +229,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
+
         go?.texture = greenButton
         connect?.texture = yellowButton
         turns?.texture = yellowTurnsOn
@@ -248,6 +248,14 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             print("apertei o botao de CONNECT")
             viewController.ConnectPlayers()
             
+        } else {
+        //PROVISORIO ENQUANTO AS CARTAS ESTAO GIGANTES
+        //PROVISORIO ENQUANTO AS CARTAS ESTAO GIGANTES
+            print("apertei o botao de GO")
+            viewController.turns = turnCounter
+            viewController.gotoBoardGame()
+        //PROVISORIO ENQUANTO AS CARTAS ESTAO GIGANTES
+        //PROVISORIO ENQUANTO AS CARTAS ESTAO GIGANTES
         }
 
         if(turns!.containsPoint(location)){

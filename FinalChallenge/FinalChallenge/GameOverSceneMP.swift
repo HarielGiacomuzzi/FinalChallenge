@@ -10,7 +10,7 @@ import SpriteKit
 
 class GameOverSceneMP : MinigameScene {
    
-    var player:[String] = []
+    var players:[String] = []
     var playerNode:[SKSpriteNode] = []
     
     
@@ -23,12 +23,13 @@ class GameOverSceneMP : MinigameScene {
         back.position = CGPointMake(self.size.width/2, 50)
         self.addChild(back)
         
-        for i in 0..<player.count{
+        //precisa estar do maior pro menor
+        for i in 0..<players.count{
             
             var p = Player()
             
             for j in GameManager.sharedInstance.players{
-                if player[i] == j.playerIdentifier{
+                if players[i] == j.playerIdentifier{
                     p = j
                 }
             }
@@ -39,26 +40,26 @@ class GameOverSceneMP : MinigameScene {
             
             sprite.size = CGSize(width: 100, height: 200)
             
-            let offsetFraction = (CGFloat(i) + 1.0)/(CGFloat(player.count) + 1.0)
+            let offsetFraction = (CGFloat(i) + 1.0)/(CGFloat(players.count) + 1.0)
 
             sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height/2)
             
             self.addChild(sprite)
             
-            print("dando o dinheiro para o player \(player)")
-            print("playerCount =  \(player.count)")
+            print("dando o dinheiro para o player \(p.playerIdentifier)")
+            print("playerCount =  \(players.count)")
             
-            if i < player.count-1 { //not last player
+            if i < players.count-1 { //not last player
                 switch i {
                 case 0:
                     GameManager.sharedInstance.updatePlayerMoney(p, value: 50)
-                    print("dando 50 para o player \(player)")
+                    print("dando 50 para o player \(p.playerIdentifier)")
                 case 1:
                     GameManager.sharedInstance.updatePlayerMoney(p, value: 25)
-                    print("dando 25 para o player \(player)")
+                    print("dando 25 para o player \(p.playerIdentifier)")
                 case 2:
                     GameManager.sharedInstance.updatePlayerMoney(p, value: 5)
-                    print("dando 5 para o player \(player)")
+                    print("dando 5 para o player \(p.playerIdentifier)")
                 default:
                     ()
                 }
