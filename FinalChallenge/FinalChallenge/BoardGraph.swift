@@ -339,6 +339,22 @@ class BoardGraph : NSObject{
                 break
                 
                 case "Store":
+                    var cards: [Card] = []
+                    for i in 0...2 {
+                        cards.append(CardManager.ShareInstance.getRandomCard(true))
+                    }
+                    for i in 0...1 {
+                        cards.append(CardManager.ShareInstance.getRandomCard(false))
+                    }
+                    var cardsString: [String] = []
+                    for card in cards {
+                        cardsString.append(card.cardName)
+                    }
+                    let dataDic = ["cards":cardsString,"player":player]
+                    let dic = ["openStire":" ", "dataDic":dataDic]
+                    ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+                    
+                    
                 break
                 
                 //o dafault é ser um baú
