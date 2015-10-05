@@ -40,8 +40,8 @@ class iPhonePlayerViewController: UIViewController {
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
 //        playerCards = ["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"]
-        loadPartyModeScene()
-//        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
+//        loadPartyModeScene()
+        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
 //        loadPlayerView()
     }
     
@@ -53,9 +53,7 @@ class iPhonePlayerViewController: UIViewController {
             playerScene?.carousel.canRemoveWithSwipeUp = true
         }
         playerScene?.testButton.text = "DICE"
-        let notification = NotificationNode(text: "Your Turn")
-        notification.position = CGPointMake((playerScene?.frame.size.width)!/2, (playerScene?.frame.size.height)!/2)
-        playerScene?.addChild(notification)
+        setNotification("Your Turn")
         
     }
     
@@ -72,7 +70,11 @@ class iPhonePlayerViewController: UIViewController {
         print("mensagem para \(playerName)")
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
+            print("playerscene = \(playerScene)")
+            print("gamepadscene = \(gamePadScene)")
+            print("era pra notificar aqui")
             print("update moneys para \(value)")
+            setNotification("You got \(playerMoney - value) moneys")
             playerMoney = value
             playerScene?.updateMoney(playerMoney)
         } else {
@@ -199,5 +201,14 @@ class iPhonePlayerViewController: UIViewController {
         storeScene = nil
         partyModeScene = nil
         gamePadScene = nil
+    }
+    
+    
+    // MARK: - Aux Functions
+    
+    func setNotification(text:String) {
+        let notification = NotificationNode(text: text)
+        notification.position = CGPointMake(skView!.scene!.frame.size.width/2, skView!.scene!.frame.size.height/2)
+        skView?.scene!.addChild(notification)
     }
 }
