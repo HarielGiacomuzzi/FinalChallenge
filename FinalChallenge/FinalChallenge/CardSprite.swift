@@ -20,7 +20,7 @@ class CardSprite: SKNode {
     init(cardName:String) {
         super.init()
         self.cardName = cardName
-        self.card = GameManager.sharedInstance.getCard(cardName)
+        self.card = CardManager.ShareInstance.getCard(cardName)
         let atlas = SKTextureAtlas(named: "cards")
         let texture = atlas.textureNamed("trapCardBase")
         baseSprite = SKSpriteNode(texture: texture)
