@@ -249,8 +249,19 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         if(go!.containsPoint(location)){
             print("apertei o botao de GO")
-            viewController.turns = turnCounter
-            viewController.gotoBoardGame()
+            var canGo = false
+            for p in GameManager.sharedInstance.players{
+                if p.avatar == nil {
+                    canGo = false
+                    break
+                }else{
+                    canGo = true
+                }
+            }
+            if canGo{
+                viewController.turns = turnCounter
+                viewController.gotoBoardGame()
+            }
         }
         if(connect!.containsPoint(location)){
             print("apertei o botao de CONNECT")
