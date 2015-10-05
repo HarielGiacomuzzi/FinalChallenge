@@ -21,7 +21,6 @@ class CardManager{
     var collectableCount = 0
     var usableCount = 3
     
-    
 
     // this function takes a card from a player
     func loseCard(player:Player){
@@ -64,7 +63,6 @@ class CardManager{
             print("entrei no default deu ruim gente")
             return Card()
             
-            
         }
     }
 
@@ -83,4 +81,13 @@ class CardManager{
         return card as! ActiveCard
     }
     
+    func sendCard(player:Player, card:Card){
+        player.items.append(card)
+        
+        let cardData = ["player":player.playerIdentifier, "item": card.cardName]
+        let dic = ["addCard":" ", "dataDic" : cardData]
+        
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        
+    }
 }
