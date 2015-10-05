@@ -48,7 +48,6 @@ class iPhonePlayerViewController: UIViewController {
     // MARK: - Message Received Functions
     
     func playerTurn(data : NSNotification){
-
         if playerScene?.carousel != nil {
             playerScene?.carousel.canRemoveWithSwipeUp = true
         }
@@ -207,8 +206,8 @@ class iPhonePlayerViewController: UIViewController {
     // MARK: - Aux Functions
     
     func setNotification(text:String) {
-        let notification = NotificationNode(text: text)
-        notification.position = CGPointMake(skView!.scene!.frame.size.width/2, skView!.scene!.frame.size.height/2)
-        skView?.scene!.addChild(notification)
+//        let notification = NotificationNode(text: text)
+//        notification.position = CGPointMake(skView!.scene!.frame.size.width/2, skView!.scene!.frame.size.height/2)
+//        skView?.scene!.addChild(notification)
     }
 }
