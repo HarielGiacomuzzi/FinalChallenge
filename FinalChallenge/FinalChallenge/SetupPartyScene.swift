@@ -261,6 +261,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             if canGo{
                 viewController.turns = turnCounter
                 viewController.gotoBoardGame()
+                for p in GameManager.sharedInstance.players{
+                    GameManager.sharedInstance.updatePlayerMoney(p, value: p.coins)
+                }
+                
             }
         }
         if(connect!.containsPoint(location)){
