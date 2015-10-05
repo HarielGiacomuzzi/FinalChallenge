@@ -57,5 +57,9 @@ class AccelerometerScene: GamePadScene {
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         }
     }
+    
+    override func willMoveFromView(view: SKView) {
+        motionManager.stopAccelerometerUpdates()
+    }
 
 }
