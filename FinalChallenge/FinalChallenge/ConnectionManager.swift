@@ -23,7 +23,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         super.init();
     }
     
-    //funções do browser
+    //Funções do browser
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController) {
         if GameManager.sharedInstance.isOnMiniGame{
             GameManager.sharedInstance.minigameViewController?.scene!.paused = false;
@@ -35,7 +35,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         }
     }
     
-    // verifica se o player já estava conectado para impedir de mostrar os outros :P
+    //Verifica se o player já estava conectado para impedir de mostrar os outros :P
     func browserViewController(browserViewController: MCBrowserViewController, shouldPresentNearbyPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) -> Bool {
         for p in session.connectedPeers{
             if p == peerID{
