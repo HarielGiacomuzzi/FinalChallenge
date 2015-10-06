@@ -88,7 +88,9 @@ class PlayerButtonNode: SKNode {
         }
         
         background.zPosition = 2
-        addChild(background)
+        if background.parent == nil {
+            addChild(background)
+        }
         background.runAction(action, completion: {() in
             self.number.hidden = false
         })

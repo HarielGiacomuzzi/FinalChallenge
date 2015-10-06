@@ -23,7 +23,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         super.init();
     }
     
-    //funções do browser
+    //Funções do browser
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController) {
         if GameManager.sharedInstance.isOnMiniGame{
             GameManager.sharedInstance.minigameViewController?.scene!.paused = false;
@@ -33,6 +33,16 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             browserViewController.dismissViewControllerAnimated(true, completion: nil);
             GameManager.sharedInstance.lostConnectionOnBoard();
         }
+    }
+    
+    //Verifica se o player já estava conectado para impedir de mostrar os outros :P
+    func browserViewController(browserViewController: MCBrowserViewController, shouldPresentNearbyPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) -> Bool {
+        for p in GameManager.sharedInstance.players{
+            if p.playerIdentifier == peerID.displayName{
+                return true
+            }
+        }
+        return false
     }
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController) {
@@ -163,18 +173,23 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         let userInfo = ["peerID":peerID, "state":state.rawValue]
         
         if (state == MCSessionState.NotConnected && UIDevice.currentDevice().userInterfaceIdiom == .Pad && GameManager.sharedInstance.isOnMiniGame) || (state == MCSessionState.NotConnected && UIDevice.currentDevice().userInterfaceIdiom == .Pad && GameManager.sharedInstance.isOnBoard){
-            print("Peer \(peerID.displayName) Disconnected");
-            let reconect = MCBrowserViewController(serviceType: self.ServiceID, session: session)
-            reconect.delegate = self;
-            if GameManager.sharedInstance.isOnBoard{
-                GameManager.sharedInstance.boardGameViewController?.presentViewController(reconect, animated: true, completion: nil);
-                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
-                return
+            
+            for p in GameManager.sharedInstance.players{
+                if peerID.displayName == p.playerIdentifier{
+                    print("Peer \(peerID.displayName) Disconnected");
+                    let reconect = MCBrowserViewController(serviceType: self.ServiceID, session: session)
+                    reconect.delegate = self;
+                    if GameManager.sharedInstance.isOnBoard{
+                        GameManager.sharedInstance.boardGameViewController?.presentViewController(reconect, animated: true, completion: nil);
+                        NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
+                        return
+                    }
+                    GameManager.sharedInstance.minigameViewController?.scene!.paused = true;
+                    GameManager.sharedInstance.minigameViewController!.presentViewController(reconect, animated: true, completion: nil);
+                    NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
+                    return
+                }
             }
-            GameManager.sharedInstance.minigameViewController?.scene!.paused = true;
-            GameManager.sharedInstance.minigameViewController!.presentViewController(reconect, animated: true, completion: nil);
-            NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerDisconnected", object: nil, userInfo: userInfo)
-            return
         }
         
         if state == MCSessionState.NotConnected{
@@ -194,6 +209,9 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary{
         // If is someone's turn to roll dice
                 if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID!.displayName {
+                    print(message.valueForKey("playerTurn"))
+                    print(message.valueForKey("playerID"))
+                    
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
                     return
             }

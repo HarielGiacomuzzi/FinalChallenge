@@ -174,6 +174,10 @@ class GameManager : NSObject {
             aux.setValue(p.playerIdentifier, forKey: "playerID");
             aux.setValue(" ", forKey: "playerTurn");
             ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
         }
     }
     
@@ -210,7 +214,6 @@ class GameManager : NSObject {
     // chamado quando o player já escolheu um caminho no tabuleiro
     func pathChosen() {
         if isOnMiniGame {
-            hasPath = false;
             beginMinigame()
         }
     }
