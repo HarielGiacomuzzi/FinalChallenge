@@ -282,6 +282,14 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_IphoneChangeView", object: nil, userInfo: userInfo)
                 return
             }
+                
+        // inform iphone that the player can select avatar
+            if message.valueForKey("canSelectAvatar") != nil {
+                userInfo.updateValue(message.valueForKey("able") as! NSObject, forKey: "able")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_canSelectAvatar", object: nil, userInfo: userInfo)
+                return
+            }
+
         // update player money
             if message.valueForKey("updateMoney") != nil {
                 print(message)

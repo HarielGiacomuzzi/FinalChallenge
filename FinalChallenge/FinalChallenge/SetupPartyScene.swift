@@ -12,7 +12,7 @@ import SpriteKit
 class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     
-    var viewController : PartyModeViewControllerIPAD!
+    weak var viewController : PartyModeViewControllerIPAD!
     
     // set buttons and nodes
     var banner : SKSpriteNode?
@@ -115,12 +115,12 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
 
         
         
-        let spawn = SKAction.runBlock({() in self.spawnItem()})
+      /*let spawn = SKAction.runBlock({() in self.spawnItem()})
         
         let delay = SKAction.waitForDuration(0.7, withRange: 1.4)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
-        self.runAction(spawnThenDelayForever)
+        self.runAction(spawnThenDelayForever)*/
         
         
         //set boundary
@@ -231,9 +231,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         }else{
             turns!.texture = yellowTurnsOn
         }
-    
-
-
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -259,6 +256,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             if canGo{
+                self.view?.presentScene(nil)
                 viewController.turns = turnCounter
                 viewController.gotoBoardGame()
             }
@@ -345,7 +343,9 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         char.runAction(action)
     }
     
-
+    deinit{
+        print("SetupScene do Ipad foi retirada")
+    }
     
     
 }

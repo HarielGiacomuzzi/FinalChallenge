@@ -23,7 +23,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var takenFlag = Bool()
     var arrayAvatarSprite = [SKSpriteNode()]
     var gestureRecognizer : UIPanGestureRecognizer!
-    
+    var canSelectAvatar = false
     
     
     var banner : SKSpriteNode?
@@ -43,6 +43,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_IphoneGameSetup", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeView:", name: "ConnectionManager_IphoneChangeView", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "avatarIsSelectable:", name: "ConnectionManager_canSelectAvatar", object: nil);
         
         banner = SKSpriteNode(imageNamed: "setUpBanner")
         self.addChild(banner!)
@@ -202,9 +203,11 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     func sendDataToIpad(){
         print(self.selectedNode.name)
         if let avatarName : String = self.selectedNode.name{
-            let avatar = ["avatar":avatarName]
-            let dic = ["GameSetup":" ", "avatar":avatar]
-            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+            if canSelectAvatar{
+                let avatar = ["avatar":avatarName]
+                let dic = ["GameSetup":" ", "avatar":avatar]
+                ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+            }
         }
         self.selectedNode.position = self.beginPosition
     }
@@ -244,6 +247,16 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func avatarIsSelectable(data : NSNotification){
+        let dictionary = data.userInfo!["able"] as! NSDictionary
+        let message = dictionary["able"] as! String
+        
+        if message == "able" {
+            //change view
+            self.canSelectAvatar = true
+        }
+        
+    }
     
     
     

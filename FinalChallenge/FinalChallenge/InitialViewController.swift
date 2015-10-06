@@ -27,21 +27,23 @@ class InitialViewController: UIViewController
     var strap = UIImageView()
     var pin = UIImageView()
     var opened = false
-
+    
     // MARK: - ViewController Lifecycle
     
-    override func viewDidLoad() {
+   override func viewDidLoad() {
         super.viewDidLoad()
-        
         let buttonImage = UIImage(named: "titleButtonOn")
         let pressedButtonImage = UIImage(named: "titleButtonOff")
-        
+
         partyModeButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
         singlePlayerButton.setBackgroundImage(buttonImage, forState: UIControlState.Normal)
         
         partyModeButton.setBackgroundImage(pressedButtonImage, forState: UIControlState.Highlighted)
         singlePlayerButton.setBackgroundImage(pressedButtonImage, forState: UIControlState.Highlighted)
-        
+    
+    
+        BoardGraph.SharedInstance.loadBoard("board_3");
+    
         /* UNCOMMENT THIS IF PARTY MODE IS DISABLED */
         
 //        partyModeButton.setTitle("Coming Soon", forState: .Normal)
@@ -50,15 +52,14 @@ class InitialViewController: UIViewController
         /* END OF PARTY MODE DISABLED SETTINGS */
         
         setupView()
-        
-    }
 
+    }
     
     @IBAction func partyModeButtonPressed() {
         //not ready yet
         
-        partyModeButton.removeFromSuperview()
-        singlePlayerButton.removeFromSuperview()
+        //partyModeButton.removeFromSuperview()
+        //singlePlayerButton.removeFromSuperview()
         GameManager.sharedInstance.isMultiplayer = true
         openBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {() in
             if self.idiom == self.iPad {
@@ -248,6 +249,8 @@ class InitialViewController: UIViewController
         leftCover.frame = leftCoverRect
     }
 
-    
+    deinit{
+        print("Retirou a initialviewcontroller")
+    }
     
 }

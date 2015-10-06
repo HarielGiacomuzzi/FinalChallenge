@@ -26,6 +26,8 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             let scaleFactorX = Double(2048/(self.view?.frame.width)!);
             let scaleFactorY = Double(1536/(self.view?.frame.height)!);
             if !GameManager.sharedInstance.doOnce{
+                
+                print("Desenhou o boardgame")
                 for i in BoardGraph.SharedInstance.nodes{
                     var texture = self.partsAtlas.textureNamed("square1");
                     if i.0 == "House"{
@@ -45,6 +47,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     
                         x.position.x = CGFloat(posX);
                         x.position.y = CGFloat(posY);
+                        x.zPosition = 10
                         i.1.posX = posX;
                         i.1.posY = posY;
                         x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
@@ -97,7 +100,6 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                 }
                 
                 for p in GameManager.sharedInstance.players{
-                    
                     self.addChild(p.nodeSprite!)
                 }
                 

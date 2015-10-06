@@ -32,9 +32,17 @@ class EndGameScene : SKScene{
             let touchedNode = self.nodeAtPoint(location)
             
             if touchedNode.name == "back"{
-                
+                _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
+               // self.view?.presentScene(nil)
+                ConnectionManager.sharedInstance.closeConections()
+                GameManager.sharedInstance.restartGameManager()
+                GameManager.sharedInstance.dismissBoardGame()
             }
         }
+    }
+    
+    deinit{
+        print("retirou a endgamescene")
     }
 }
 

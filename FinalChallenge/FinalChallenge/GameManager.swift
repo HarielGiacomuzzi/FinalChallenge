@@ -13,26 +13,27 @@ import SpriteKit
 class GameManager : NSObject {
     static let sharedInstance = GameManager()
     var miniGameActive = String()
-    var boardViewController : UIViewController?
+    weak var boardViewController : UIViewController?
     var playerRank = [String]()
     var isMultiplayer = false
     var players = [Player]()
     var totalGameTurns = 0
-    var currentGameTurn = 1
+    var currentGameTurn = 0
     var hasPath = false;
     var isOnMiniGame = false;
     var controlesDeTurno = 0
-    var isOnBoard = false;
+    var isOnBoard = false
     var gameEnded = false
     
     //used only in mainboard
     var doOnce = false
-    //controllers acess
-    var minigameDescriptionViewController : MinigameDescriptionViewController?
-    var minigameViewController : MiniGameViewController?
-    var boardGameViewController : BoardViewController?
-    var ipadAvatarViewController : PartyModeViewControllerIPAD?
     
+    //controllers acess
+    weak var minigameDescriptionViewController : MinigameDescriptionViewController?
+    weak var minigameViewController : MiniGameViewController?
+    weak var boardGameViewController : BoardViewController?
+    weak var ipadAvatarViewController : PartyModeViewControllerIPAD?
+
     // some arrays
     var minigameOrderArray : [Minigame] = []
     var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
@@ -43,6 +44,16 @@ class GameManager : NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "diceReceived:", name: "ConnectionManager_DiceResult", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerAskedToBuyCard:", name: "ConnectionManager_BuyCard", object: nil);
+    }
+    
+    func restartGameManager(){
+        self.doOnce = false
+        self.players.removeAll()
+        self.totalGameTurns = 0
+        self.currentGameTurn = 0
+        self.gameEnded = false
+        self.isOnBoard = false
+        self.hasPath = false
     }
     
     // verifica se todos jogaram
@@ -235,6 +246,7 @@ class GameManager : NSObject {
             vc.dismissViewControllerAnimated(false, completion: nil)
             if let vc2 = self.ipadAvatarViewController {
                 vc2.dismissViewControllerAnimated(false, completion: nil)
+                
             }
         }
     }

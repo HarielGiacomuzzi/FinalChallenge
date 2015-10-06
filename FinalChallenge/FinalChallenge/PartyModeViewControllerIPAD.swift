@@ -95,6 +95,10 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         default: break
         }
         
+        let able = "able"
+        let a = ["able":able]
+        let dic = ["canSelectAvatar": " ", "able":a]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         
     }
     
@@ -112,8 +116,6 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         let dic = ["IphoneChangeView": " ", "change":c]
         
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        
-        BoardGraph.SharedInstance.loadBoard("board_3");
         
         self.performSegueWithIdentifier("gotoBoardGame", sender: nil)
         
@@ -190,7 +192,6 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         updateIphoneUsersData(message)
     }
 
-    
     func updateIphoneUsersData(avat:String){
         
         arrayAvatars.append(avat)
@@ -202,8 +203,5 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         let dic = ["IphoneGameSetup":" ", "arrayPlayers":array]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
-    
-    
-    
     
 }
