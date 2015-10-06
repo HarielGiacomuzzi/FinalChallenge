@@ -54,6 +54,7 @@ class GameManager : NSObject {
         self.gameEnded = false
         self.isOnBoard = false
         self.hasPath = false
+        BoardGraph.SharedInstance.destroyGraph();
     }
     
     // verifica se todos jogaram
@@ -173,10 +174,6 @@ class GameManager : NSObject {
             let aux = NSMutableDictionary();
             aux.setValue(p.playerIdentifier, forKey: "playerID");
             aux.setValue(" ", forKey: "playerTurn");
-            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-            ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
             ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
         }
     }

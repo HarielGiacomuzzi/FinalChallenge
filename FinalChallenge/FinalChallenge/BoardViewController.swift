@@ -38,6 +38,10 @@ class BoardViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
         GameManager.sharedInstance.boardGameViewController = self
         self.setupScene()
     }

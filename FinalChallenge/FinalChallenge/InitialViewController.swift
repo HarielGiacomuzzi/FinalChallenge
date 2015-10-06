@@ -42,7 +42,7 @@ class InitialViewController: UIViewController
         singlePlayerButton.setBackgroundImage(pressedButtonImage, forState: UIControlState.Highlighted)
     
     
-        BoardGraph.SharedInstance.loadBoard("board_3");
+        
     
         /* UNCOMMENT THIS IF PARTY MODE IS DISABLED */
         

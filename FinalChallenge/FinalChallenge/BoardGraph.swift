@@ -28,6 +28,17 @@ class BoardGraph : NSObject{
         return nodes.count;
     }
     
+    // kill's em all
+    func destroyGraph(){
+        for x in nodes{
+            x.1.item = nil;
+            x.1.coins = nil;
+            x.1.father = nil;
+            x.1.nextMoves = [];
+        }
+        nodes = [:];
+    }
+    
     // creates a node and insert it on the graph dictionary with the specified name
     func createNode(x: Double, y : Double, name : String?, father : BoardNode?){
         let aux = BoardNode(posX: x, posY: y, father: father);
