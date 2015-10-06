@@ -207,6 +207,8 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             
         var userInfo = ["data":data, "peerID":peerID.displayName]
             if let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? NSDictionary{
+                print("A MENSAGEM RECEBIDA FOIIIII")
+                print(message)
         // If is someone's turn to roll dice
                 if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID!.displayName {
                     print(message.valueForKey("playerTurn"))
