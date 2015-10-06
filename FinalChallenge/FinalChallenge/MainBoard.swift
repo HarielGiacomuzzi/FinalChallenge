@@ -116,6 +116,10 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
 
     }
     
+    override func willMoveFromView(view: SKView) {
+        print("WILL MOVE FROM VIEWWWWEWEWEWEWEW")
+    }
+    
     override func didFinishUpdate() {
         super.didFinishUpdate();
         for p in GameManager.sharedInstance.players{

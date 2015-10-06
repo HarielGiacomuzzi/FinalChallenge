@@ -257,6 +257,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             }
             if canGo{
                 self.view?.presentScene(nil)
+                BoardGraph.SharedInstance.loadBoard("board_3");
                 viewController.turns = turnCounter
                 viewController.gotoBoardGame()
                 for p in GameManager.sharedInstance.players{

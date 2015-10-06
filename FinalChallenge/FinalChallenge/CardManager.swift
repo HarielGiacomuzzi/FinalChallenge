@@ -58,11 +58,9 @@ class CardManager{
         case .MoveBackCard :
             return MoveBackCard()
         case .LoseCard :
-            return LoseCard()
-        default :
-            print("entrei no default deu ruim gente")
-            return Card()
-            
+            let card = LoseCard()
+            print(card)
+            return card
         }
     }
 
@@ -70,13 +68,13 @@ class CardManager{
         let rand = Int(arc4random_uniform(UInt32(usableCount-1)))
         var card : Card? = nil
         if rand == 1{
-        card = getCard(.StealGoldCard)
+            card = getCard(.StealGoldCard)
         }
         if rand == 2{
-        card == getCard(.MoveBackCard)
+            card = getCard(.MoveBackCard)
         }
         if rand == 0{
-        card == getCard(.LoseCard)
+            card = getCard(.LoseCard)
         }
         return card as! ActiveCard
     }

@@ -28,6 +28,17 @@ class BoardGraph : NSObject{
         return nodes.count;
     }
     
+    // kill's em all
+    func destroyGraph(){
+        for x in nodes{
+            x.1.item = nil;
+            x.1.coins = nil;
+            x.1.father = nil;
+            x.1.nextMoves = [];
+        }
+        nodes = [:];
+    }
+    
     // creates a node and insert it on the graph dictionary with the specified name
     func createNode(x: Double, y : Double, name : String?, father : BoardNode?){
         let aux = BoardNode(posX: x, posY: y, father: father);
@@ -340,19 +351,25 @@ class BoardGraph : NSObject{
                 
                 case "Store":
                     var cards: [Card] = []
+                    print("criei cards")
                     for i in 0...2 {
                         cards.append(CardManager.ShareInstance.getRandomCard(true))
+                        print("appendei \(cards[i]) to cards")
                     }
                     for i in 0...1 {
                         cards.append(CardManager.ShareInstance.getRandomCard(false))
+                        print("appendei \(cards[i]) to cards")
                     }
+                    print(cards)
                     var cardsString: [String] = []
                     for card in cards {
                         cardsString.append(card.cardName)
                     }
-                    let dataDic = ["cards":cardsString,"player":player]
-                    let dic = ["openStire":" ", "dataDic":dataDic]
+                    let dataDic = ["cards":cardsString,"player":player.playerIdentifier]
+                    let dic = ["openStore":" ", "dataDic":dataDic]
+                    print("vou enviar msg pra abrir a loja")
                     ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+                    print("enviei")
                     
                     
                 break
