@@ -33,7 +33,8 @@ class GameManager : NSObject {
     weak var minigameViewController : MiniGameViewController?
     weak var boardGameViewController : BoardViewController?
     weak var ipadAvatarViewController : PartyModeViewControllerIPAD?
-
+    weak var iphonePlayerController: iPhonePlayerViewController?
+    
     // some arrays
     var minigameOrderArray : [Minigame] = []
     var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
@@ -51,9 +52,12 @@ class GameManager : NSObject {
         self.players.removeAll()
         self.totalGameTurns = 0
         self.currentGameTurn = 0
+        self.controlesDeTurno = 0
         self.gameEnded = false
         self.isOnBoard = false
-        self.hasPath = false
+        self.isOnMiniGame = false
+        self.isMultiplayer = false
+        self.playerRank.removeAll()
     }
     
     // verifica se todos jogaram
@@ -156,16 +160,14 @@ class GameManager : NSObject {
     
     func endGameScene(){
         self.gameEnded = true
+        let end = "gameEnded"
+        let e = ["gameEnded":end]
+        let dic = ["TheGameEnded": " ", "gameEnded":e]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     
     // handle player order
     func selectPlayers(i:Int){
-        
-        if self.currentGameTurn == self.totalGameTurns {
-            //end game
-            print("O jogo terminou tche")
-            self.endGameScene()
-        }
         
         if !self.isOnMiniGame{
             controlesDeTurno++
@@ -234,6 +236,12 @@ class GameManager : NSObject {
         }
         let dic = ["closeController":" "]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        
+        if self.currentGameTurn == self.totalGameTurns {
+            //end game
+            self.endGameScene()
+        }
+        
         self.isOnMiniGame = false;
         self.playerTurnEnded(nil);
     }
@@ -254,6 +262,13 @@ class GameManager : NSObject {
         }
     }
     // MARK: - Card Functions
+// Dismiss player controller on iphone
+    func dismissPlayerViewController(){
+        if let vc = self.iphonePlayerController{
+            vc.dismissViewControllerAnimated(false, completion: nil)
+        }
+    }
+    
     
 // used to update users gold or to use cards function, can take or give player gold
     func updatePlayerMoney(player:Player, value:Int) ->Int{

@@ -68,6 +68,7 @@
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
 		B57B33671B86566E000E5F53 /* GameOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57B33661B86566E000E5F53 /* GameOver.xib */; };
 		B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B33681B8656D7000E5F53 /* GameOverXib.swift */; };
+		B5840CC81BC43E1D006E741B /* EndGameIphoneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5840CC71BC43E1D006E741B /* EndGameIphoneScene.swift */; settings = {ASSET_TAGS = (); }; };
 		B5A7685D1BBEF4B3006819B9 /* EndGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7685C1BBEF4B3006819B9 /* EndGameScene.swift */; settings = {ASSET_TAGS = (); }; };
 		B5AFAD081B94C1DD0005F19E /* MinigameCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */; };
 		B5AFAD0A1B94C3770005F19E /* CustomMinigameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */; };
@@ -192,6 +193,7 @@
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
 		B57B33661B86566E000E5F53 /* GameOver.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameOver.xib; sourceTree = "<group>"; };
 		B57B33681B8656D7000E5F53 /* GameOverXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverXib.swift; sourceTree = "<group>"; };
+		B5840CC71BC43E1D006E741B /* EndGameIphoneScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameIphoneScene.swift; sourceTree = "<group>"; };
 		B5A7685C1BBEF4B3006819B9 /* EndGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameScene.swift; sourceTree = "<group>"; };
 		B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameCollectionViewController.swift; sourceTree = "<group>"; };
 		B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomMinigameCollectionView.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				5E2BAEE91BBB432D001C70EB /* PlayerScene */,
 				5E2BAEEA1BBB433B001C70EB /* StoreScene */,
 				5EE267D61BC2A49D0006E5BD /* NotificationNode.swift */,
+				B5840CC71BC43E1D006E741B /* EndGameIphoneScene.swift */,
 			);
 			name = PlayerControllerView;
 			sourceTree = "<group>";
@@ -646,7 +649,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = DVXNNDG4U4;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -777,6 +780,7 @@
 				DB73E8161B7286A800F7D7C7 /* BoardViewController.swift in Sources */,
 				B5A7685D1BBEF4B3006819B9 /* EndGameScene.swift in Sources */,
 				5E840FFE1BA9CBB00099B16B /* CardCarousellNode.swift in Sources */,
+				B5840CC81BC43E1D006E741B /* EndGameIphoneScene.swift in Sources */,
 				5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */,
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,

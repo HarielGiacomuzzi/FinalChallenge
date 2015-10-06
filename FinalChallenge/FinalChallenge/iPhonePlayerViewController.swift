@@ -18,6 +18,8 @@ class iPhonePlayerViewController: UIViewController {
     var storeScene : StoreScene?
     var partyModeScene : PartyModeScene?
     var gamePadScene : GamePadScene?
+    var endGameScene : EndGameIphoneScene?
+    
     var playerMoney = 0
     var playerCards:[String] = []
     
@@ -33,6 +35,7 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeCard:", name: "ConnectionManager_RemoveCard", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openStore:", name: "ConnectionManager_OpenStore", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "buyResponse:", name: "ConnectionManager_BuyResponse", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "openEndGameScene:", name: "ConnectionManager_TheGameEnded", object: nil)
         
         skView = self.view as? SKView
         skView?.showsFPS = true
@@ -202,6 +205,10 @@ class iPhonePlayerViewController: UIViewController {
         gamePadScene = nil
     }
     
+    func openEndGameScene(){
+        endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
+        skView?.presentScene(endGameScene)
+    }
     
     // MARK: - Aux Functions
     

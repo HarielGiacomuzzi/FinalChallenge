@@ -16,7 +16,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     override func update(currentTime: NSTimeInterval) {
         if !self.paused && GameManager.sharedInstance.gameEnded{
             self.presentEndGameScene()
-            //self.paused = true
+            self.paused = true
         }
     }
 
@@ -27,7 +27,6 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             let scaleFactorY = Double(1536/(self.view?.frame.height)!);
             if !GameManager.sharedInstance.doOnce{
                 
-                print("Desenhou o boardgame")
                 for i in BoardGraph.SharedInstance.nodes{
                     var texture = self.partsAtlas.textureNamed("square1");
                     if i.0 == "House"{

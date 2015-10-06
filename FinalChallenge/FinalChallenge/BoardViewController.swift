@@ -37,7 +37,15 @@ class BoardViewController : UIViewController {
     var scene : MainBoard!
     
     override func viewDidLoad() {
+        //super.viewDidLoad()
+        //print("DEU VIEW DIDLOAD")
+        //GameManager.sharedInstance.boardGameViewController = self
+        //self.setupScene()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         super.viewDidLoad()
+        print("DEU VIEW DIDLOAD")
         GameManager.sharedInstance.boardGameViewController = self
         self.setupScene()
     }
@@ -77,6 +85,7 @@ class BoardViewController : UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print("entrou no preperForSegue")
         if segue.identifier == "gotoMinigame" {
             scene.removeAllActions()
             scene.removeAllChildren()
@@ -89,5 +98,6 @@ class BoardViewController : UIViewController {
     
     deinit{
         print("Deu deinit na board view")
+        self.view = nil
     }
 }

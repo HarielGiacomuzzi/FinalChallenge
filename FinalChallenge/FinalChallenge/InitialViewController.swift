@@ -41,9 +41,6 @@ class InitialViewController: UIViewController
         partyModeButton.setBackgroundImage(pressedButtonImage, forState: UIControlState.Highlighted)
         singlePlayerButton.setBackgroundImage(pressedButtonImage, forState: UIControlState.Highlighted)
     
-    
-        BoardGraph.SharedInstance.loadBoard("board_3");
-    
         /* UNCOMMENT THIS IF PARTY MODE IS DISABLED */
         
 //        partyModeButton.setTitle("Coming Soon", forState: .Normal)
