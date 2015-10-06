@@ -271,6 +271,7 @@ class GameManager : NSObject {
     // MARK: - Card Functions
 // Dismiss player controller on iphone
     func dismissPlayerViewController(){
+        print("dismissPlayerViewController")
         if let vc = self.iphonePlayerController{
             vc.dismissViewControllerAnimated(false, completion: nil)
         }

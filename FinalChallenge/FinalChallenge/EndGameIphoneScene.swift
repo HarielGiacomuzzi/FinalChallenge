@@ -12,6 +12,8 @@ import SpriteKit
 class EndGameIphoneScene : SKScene{
     
     override func didMoveToView(view: SKView) {
+        ConnectionManager.sharedInstance.closeConections()
+        
         self.backgroundColor = UIColor.blueColor()
         let label = SKLabelNode(fontNamed: "GillSans-Bold")
         label.text = "Game ended someone won, the rest lost, deal with it"
@@ -35,7 +37,6 @@ class EndGameIphoneScene : SKScene{
             if touchedNode.name == "back"{
                 _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
                 // self.view?.presentScene(nil)
-                ConnectionManager.sharedInstance.closeConections()
                 GameManager.sharedInstance.restartGameManager()
                 GameManager.sharedInstance.dismissPlayerViewController()
             }

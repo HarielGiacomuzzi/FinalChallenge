@@ -11,6 +11,8 @@ import SpriteKit
 class EndGameScene : SKScene{
     
     override func didMoveToView(view: SKView) {
+        ConnectionManager.sharedInstance.closeConections()
+        
         self.backgroundColor = UIColor.blueColor()
         let label = SKLabelNode(fontNamed: "GillSans-Bold")
         label.text = "Game ended some one won, the rest lost, deal with it"
