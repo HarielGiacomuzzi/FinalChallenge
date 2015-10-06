@@ -91,7 +91,10 @@ class iPhonePlayerViewController: UIViewController {
         print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerCards.append(card)
-            playerScene!.addCard(card)
+            if playerScene != nil {
+                playerScene!.addCard(card)
+            }
+            
         } else {
             print("nao rola filho")
         }
@@ -114,6 +117,7 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func openStore(data : NSNotification) {
+        print("OPEN STORE MENSAGEM RECEBI")
         if storeScene == nil {
             let dic = data.userInfo!["dataDic"] as! NSDictionary
             let cards = dic["cards"] as! [String]

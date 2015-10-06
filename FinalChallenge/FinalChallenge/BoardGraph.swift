@@ -340,19 +340,25 @@ class BoardGraph : NSObject{
                 
                 case "Store":
                     var cards: [Card] = []
+                    print("criei cards")
                     for i in 0...2 {
                         cards.append(CardManager.ShareInstance.getRandomCard(true))
+                        print("appendei \(cards[i]) to cards")
                     }
                     for i in 0...1 {
                         cards.append(CardManager.ShareInstance.getRandomCard(false))
+                        print("appendei \(cards[i]) to cards")
                     }
+                    print(cards)
                     var cardsString: [String] = []
                     for card in cards {
                         cardsString.append(card.cardName)
                     }
-                    let dataDic = ["cards":cardsString,"player":player]
-                    let dic = ["openStire":" ", "dataDic":dataDic]
+                    let dataDic = ["cards":cardsString,"player":player.playerIdentifier]
+                    let dic = ["openStore":" ", "dataDic":dataDic]
+                    print("vou enviar msg pra abrir a loja")
                     ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+                    print("enviei")
                     
                     
                 break

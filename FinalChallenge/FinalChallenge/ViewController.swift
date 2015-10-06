@@ -22,7 +22,12 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "whoisResponse:", name: "ConnectionManager_WhoIsResponse", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveCard:", name: "ConnectionManager_SendCard", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeStore:", name: "ConnectionManager_CloseStore", object: nil);
-    }
+        
+        print(CardManager.ShareInstance.getRandomCard(false))
+        print(CardManager.ShareInstance.getRandomCard(false))
+        
+
+}
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
