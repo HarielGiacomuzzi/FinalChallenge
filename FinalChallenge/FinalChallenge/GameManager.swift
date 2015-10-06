@@ -23,6 +23,7 @@ class GameManager : NSObject {
     var isOnMiniGame = false;
     var controlesDeTurno = 0
     var isOnBoard = false
+    var isOnStore = false
     var gameEnded = false
     
     //used only in mainboard
@@ -45,6 +46,7 @@ class GameManager : NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "diceReceived:", name: "ConnectionManager_DiceResult", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerAskedToBuyCard:", name: "ConnectionManager_BuyCard", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "leaveStore:", name: "ConnectionManager_CloseStore", object: nil);
     }
     
     func restartGameManager(){
@@ -67,7 +69,7 @@ class GameManager : NSObject {
             //termina rodada
             controlesDeTurno = 0;
             self.isOnMiniGame = true;
-            if !hasPath{
+            if !hasPath && !isOnStore{
                 beginMinigame()
             }
         }
@@ -213,6 +215,14 @@ class GameManager : NSObject {
     // chamado quando o player já escolheu um caminho no tabuleiro
     func pathChosen() {
         if isOnMiniGame {
+            beginMinigame()
+        }
+    }
+    
+    // chamado quando o player já saiu da loja
+    func leaveStore(){
+        isOnStore = false
+        if isOnMiniGame{
             beginMinigame()
         }
     }
