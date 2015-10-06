@@ -209,7 +209,7 @@ class iPhonePlayerViewController: UIViewController {
         gamePadScene = nil
     }
     
-    func openEndGameScene(){
+    func openEndGameScene(data:NSNotification){
         endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
         skView?.presentScene(endGameScene)
     }

@@ -18,7 +18,7 @@ class GameManager : NSObject {
     var isMultiplayer = false
     var players = [Player]()
     var totalGameTurns = 0
-    var currentGameTurn = 0
+    var currentGameTurn = 4
     var hasPath = false;
     var isOnMiniGame = false;
     var controlesDeTurno = 0
@@ -51,13 +51,14 @@ class GameManager : NSObject {
         self.doOnce = false
         self.players.removeAll()
         self.totalGameTurns = 0
-        self.currentGameTurn = 0
+        self.currentGameTurn = 4
         self.controlesDeTurno = 0
         self.gameEnded = false
         self.isOnBoard = false
         self.isOnMiniGame = false
         self.isMultiplayer = false
         self.playerRank.removeAll()
+        BoardGraph.SharedInstance.destroyGraph();
     }
     
     // verifica se todos jogaram
