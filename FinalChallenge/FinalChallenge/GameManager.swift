@@ -14,11 +14,12 @@ class GameManager : NSObject {
     static let sharedInstance = GameManager()
     var miniGameActive = String()
     weak var boardViewController : UIViewController?
+    
     var playerRank = [String]()
     var isMultiplayer = false
     var players = [Player]()
     var totalGameTurns = 0
-    var currentGameTurn = 4
+    var currentGameTurn = 0
     var hasPath = false;
     var isOnMiniGame = false;
     var controlesDeTurno = 0
@@ -53,7 +54,7 @@ class GameManager : NSObject {
         self.doOnce = false
         self.players.removeAll()
         self.totalGameTurns = 0
-        self.currentGameTurn = 4
+        self.currentGameTurn = 0
         self.controlesDeTurno = 0
         self.gameEnded = false
         self.isOnBoard = false
@@ -124,6 +125,10 @@ class GameManager : NSObject {
         let cardName = dic["card"] as! String
         
         print("player \(playerName) tried to buy card \(cardName)")
+        
+        guard !players.isEmpty else {
+            return
+        }
         
         let player = getPlayer(playerName)
         print(player.playerIdentifier)
