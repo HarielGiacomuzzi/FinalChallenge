@@ -220,7 +220,7 @@ class GameManager : NSObject {
     }
     
     // chamado quando o player já saiu da loja
-    func leaveStore(){
+    func leaveStore(data:NSNotification){
         isOnStore = false
         if isOnMiniGame{
             beginMinigame()
