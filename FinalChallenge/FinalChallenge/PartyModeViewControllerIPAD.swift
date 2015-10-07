@@ -160,18 +160,18 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         switch(identifier){
         case GameManager.sharedInstance.players[0].playerIdentifier : // player1Image.image = UIImage(named: message)
                                   scene?.char1.texture = SKTexture(imageNamed: message)
-                                  scene?.riseCharacter(scene!.char1)
+                                  scene?.riseCharacter(scene!.char1, identifier: identifier)
         
         case GameManager.sharedInstance.players[1].playerIdentifier : // player2Image.image = UIImage(named: message)
                                     scene?.char2.texture = SKTexture(imageNamed: message)
-                                    scene?.riseCharacter(scene!.char2)
+                                    scene?.riseCharacter(scene!.char2, identifier: identifier)
         case GameManager.sharedInstance.players[2].playerIdentifier : // player3Image.image = UIImage(named: message)
                                     scene?.char3.texture = SKTexture(imageNamed: message)
-                                    scene?.riseCharacter(scene!.char3)
+                                    scene?.riseCharacter(scene!.char3, identifier: identifier)
 
         case GameManager.sharedInstance.players[3].playerIdentifier : //player4Image.image = UIImage(named: message)
                                     scene?.char4.texture = SKTexture(imageNamed: message)
-                                    scene?.riseCharacter(scene!.char4)
+                                    scene?.riseCharacter(scene!.char4,identifier: identifier)
 
         default: break
         }

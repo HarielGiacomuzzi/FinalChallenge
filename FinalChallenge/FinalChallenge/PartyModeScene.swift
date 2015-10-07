@@ -204,7 +204,21 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         print(self.selectedNode.name)
         if let avatarName : String = self.selectedNode.name{
             if canSelectAvatar{
-                let avatar = ["avatar":avatarName]
+                var avatar:[String:String] = [:]
+                
+                switch avatarName {
+                case "paladinCard":
+                    avatar = ["avatar":"knight"]
+                case "rangerCard":
+                    avatar = ["avatar":"ranger"]
+                case "thiefCard":
+                    avatar = ["avatar":"thief"]
+                case "wizardCard":
+                    avatar = ["avatar":"wizard"]
+                default:
+                    ()
+                }
+//                let avatar = ["avatar":avatarName]
                 let dic = ["GameSetup":" ", "avatar":avatar]
                 ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
             }
