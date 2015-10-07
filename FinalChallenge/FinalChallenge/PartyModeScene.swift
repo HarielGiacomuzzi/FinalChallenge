@@ -195,9 +195,13 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     func panForTranslation(translation : CGPoint) {
         let position = selectedNode.position
         for sp in imageNames{
-            if selectedNode.name! == sp {
-                selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+            if let nodeName = selectedNode.name{
+                if nodeName == sp {
+                    selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+                }
             }
+            
+            
         }
     }
     
@@ -280,6 +284,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         //setup particles
         
         let globParticles = SetupParticle.fromFile("setupParticle1")
+        globParticles!.name = "particles"
         globParticles!.position = CGPointMake(self.frame.width/2, self.frame.height + 10)
         self.addChild(globParticles!)
         globParticles?.zPosition = 1
@@ -296,6 +301,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         //set boundary
         let boundary : SKNode = SKNode()
+        boundary.name = "boundry"
         boundary.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.frame.width, height: 1))
         boundary.physicsBody?.dynamic = false
         boundary.physicsBody?.categoryBitMask = boundaryCategoryMask
@@ -306,6 +312,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     func spawnItem(){
         
         let effectsNode = SKEffectNode()
+        effectsNode.name = "effect"
         let filter = CIFilter(name: "CIGaussianBlur")
         // Set the blur amount. Adjust this to achieve the desired effect
         let blurAmount = CGFloat.random(min: 0, max: 20)
@@ -323,6 +330,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         let texture = SKTexture(imageNamed: itemName)
         let sprite = SKSpriteNode(texture: texture)
+        sprite.name = "something"
         let diff = CGFloat.random(min: 0.5, max: 1)
         sprite.size = CGSize(width: sprite.size.width * diff, height: sprite.size.height * diff)
         effectsNode.addChild(sprite)
