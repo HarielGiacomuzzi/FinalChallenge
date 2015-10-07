@@ -146,6 +146,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         let dictionary = data.userInfo!["avatar"] as! NSDictionary
         let message = dictionary["avatar"] as! String
         
+        arrayAvatars.append(message)
         
         for p in GameManager.sharedInstance.players {
             if identifier == p.playerIdentifier{
@@ -189,15 +190,13 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
             }
         }
         print("Mensagem: \(message) e Identifier: \(identifier)")
-        updateIphoneUsersData(message)
-    }
-
-    func updateIphoneUsersData(avat:String){
-        
-        arrayAvatars.append(avat)
         
         print(arrayAvatars)
         
+        updateIphoneUsersData()
+    }
+
+    func updateIphoneUsersData(){
         let arrayPlayers = arrayAvatars
         let array = ["arrayPlayers":arrayPlayers]
         let dic = ["IphoneGameSetup":" ", "arrayPlayers":array]

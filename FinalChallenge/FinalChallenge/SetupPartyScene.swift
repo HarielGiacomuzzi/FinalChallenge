@@ -49,8 +49,45 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
 
     var turnCounter = 5
     
-    
     override func update(currentTime: NSTimeInterval) {
+        for i in 0..<GameManager.sharedInstance.players.count{
+            //print("Entrou na mudanca")
+            for j in i+1..<GameManager.sharedInstance.players.count{
+                if (GameManager.sharedInstance.players[i].avatar != nil) && (GameManager.sharedInstance.players[j].avatar != nil) {
+                    print("Entrou na mudanca \(GameManager.sharedInstance.players[i].avatar!) e \(GameManager.sharedInstance.players[j].avatar!)")
+                    if (GameManager.sharedInstance.players[i].avatar! == GameManager.sharedInstance.players[j].avatar!){
+                        print("Entrou na mudanca 3")
+                        var aux = GameManager.sharedInstance.players[j].avatar
+                        GameManager.sharedInstance.players[j].avatar = nil
+                        for avatar in viewController.arrayAvatars{
+                            print("Entrou na mudanca 4")
+                            if avatar == aux{
+                                print("Entrou na mudanca 5")
+                                viewController.arrayAvatars.removeObject(avatar)
+                                print("\(avatar) e o array: \(viewController.arrayAvatars)")
+                                viewController.updateIphoneUsersData()
+                                
+                                switch(GameManager.sharedInstance.players[j].playerIdentifier){
+                                case GameManager.sharedInstance.players[0].playerIdentifier : // player1Image.image = UIImage(named: message)
+                                    char1.texture = nil
+                                case GameManager.sharedInstance.players[1].playerIdentifier : // player2Image.image = UIImage(named: message)
+                                    char2.texture = nil
+                                case GameManager.sharedInstance.players[2].playerIdentifier : // player3Image.image = UIImage(named: message)
+                                    char3.texture = nil
+                                case GameManager.sharedInstance.players[3].playerIdentifier : //player4Image.image = UIImage(named: message)
+                                    char4.texture = nil
+                                    
+                                default: break
+                                }
+                                
+                                
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     override func didMoveToView(view: SKView) {

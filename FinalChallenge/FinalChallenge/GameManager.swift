@@ -18,7 +18,7 @@ class GameManager : NSObject {
     var isMultiplayer = false
     var players = [Player]()
     var totalGameTurns = 0
-    var currentGameTurn = 4
+    var currentGameTurn = 1
     var hasPath = false;
     var isOnMiniGame = false;
     var controlesDeTurno = 0
@@ -53,7 +53,7 @@ class GameManager : NSObject {
         self.doOnce = false
         self.players.removeAll()
         self.totalGameTurns = 0
-        self.currentGameTurn = 4
+        self.currentGameTurn = 1
         self.controlesDeTurno = 0
         self.gameEnded = false
         self.isOnBoard = false
