@@ -150,12 +150,13 @@ class iPhonePlayerViewController: UIViewController {
         }
     }
     
+    // MARK: - Scene Control
+    
     func openEndGameScene(data:NSNotification){
         endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
+        endGameScene?.scaleMode = .AspectFit
         skView?.presentScene(endGameScene)
     }
-    
-    // MARK: - Scene Control
     
     func loadPlayerView() {
         setAllScenesNil()

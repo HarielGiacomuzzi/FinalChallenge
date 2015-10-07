@@ -111,7 +111,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         self.removeAllActions()
         _ = SKTransition.flipHorizontalWithDuration(0.5)
         let goScene = EndGameScene(size: self.size)
-        goScene.scaleMode = .AspectFit
+        goScene.scaleMode = self.scaleMode
         self.view?.presentScene(goScene)
 
     }

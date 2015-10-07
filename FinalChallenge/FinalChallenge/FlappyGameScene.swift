@@ -347,6 +347,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         _ = SKTransition.flipHorizontalWithDuration(0.5)
         let goScene = GameOverSceneMP(size: self.size)
         goScene.players = playerRank
+        goScene.scaleMode = self.scaleMode
         self.view?.presentScene(goScene)
     }
     
@@ -368,7 +369,6 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        gameOverSP()
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             if let player = singlePlayer {

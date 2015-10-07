@@ -23,7 +23,7 @@ class MinigameScene: SKScene {
         self.removeAllActions()
         _ = SKTransition.flipHorizontalWithDuration(0.5)
         let goScene = GameOverSceneSP(size: self.size)
-        goScene.scaleMode = .AspectFit
+        goScene.scaleMode = self.scaleMode
         goScene.winner = winner
         goScene.game = game
         goScene.score = score

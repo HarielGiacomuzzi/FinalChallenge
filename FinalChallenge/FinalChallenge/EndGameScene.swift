@@ -13,9 +13,16 @@ class EndGameScene : SKScene{
     override func didMoveToView(view: SKView) {
         ConnectionManager.sharedInstance.closeConections()
         
-        self.backgroundColor = UIColor.blueColor()
+        let background = SKTexture(imageNamed: "setupBG")
+        let bg = SKSpriteNode(texture: background, size: background.size())
+        self.addChild(bg)
+        bg.name = "bg"
+        bg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        bg.zPosition = 0
+        self.backgroundColor = UIColor.whiteColor()
+
         let label = SKLabelNode(fontNamed: "GillSans-Bold")
-        label.text = "Game ended some one won, the rest lost, deal with it"
+        label.text = "Game ended someone won, the rest lost, deal with it"
         label.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         self.addChild(label)
         
