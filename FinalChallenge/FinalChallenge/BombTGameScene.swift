@@ -206,6 +206,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         }
         let player = players[0]
         player.identifier = "Player"
+        player.color = UIColor.redColor()
         let randomThrowBombAnimation = SKAction.runBlock({() in
             self.AIThrowBomb()
         })

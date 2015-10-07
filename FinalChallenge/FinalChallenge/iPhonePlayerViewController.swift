@@ -150,6 +150,11 @@ class iPhonePlayerViewController: UIViewController {
         }
     }
     
+    func openEndGameScene(data:NSNotification){
+        endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
+        skView?.presentScene(endGameScene)
+    }
+    
     // MARK: - Scene Control
     
     func loadPlayerView() {
@@ -209,10 +214,6 @@ class iPhonePlayerViewController: UIViewController {
         gamePadScene = nil
     }
     
-    func openEndGameScene(data:NSNotification){
-        endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
-        skView?.presentScene(endGameScene)
-    }
     
     // MARK: - Aux Functions
     

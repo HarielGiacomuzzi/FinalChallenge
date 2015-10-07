@@ -14,6 +14,7 @@ class GameManager : NSObject {
     static let sharedInstance = GameManager()
     var miniGameActive = String()
     weak var boardViewController : UIViewController?
+    
     var playerRank = [String]()
     var isMultiplayer = false
     var players = [Player]()
@@ -124,6 +125,10 @@ class GameManager : NSObject {
         let cardName = dic["card"] as! String
         
         print("player \(playerName) tried to buy card \(cardName)")
+        
+        guard !players.isEmpty else {
+            return
+        }
         
         let player = getPlayer(playerName)
         print(player.playerIdentifier)
