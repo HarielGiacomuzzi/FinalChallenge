@@ -213,11 +213,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        riseCharacter(char1, identifier: "march hare")
-        riseCharacter(char2, identifier: "bruno kieling")
-        riseCharacter(char3, identifier: "jojo phone")
-        riseCharacter(char4, identifier: "Iphone de Hariel")
-        
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
         
