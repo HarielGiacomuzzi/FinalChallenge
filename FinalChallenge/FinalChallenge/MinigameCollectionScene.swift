@@ -18,10 +18,18 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         
         self.backgroundColor = UIColor.blackColor()
         
-        let minigameTitle = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let banner = SKSpriteNode(imageNamed: "setUpBanner")
+        self.addChild(banner)
+        banner.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
+        banner.size.height = banner.size.height/2
+        banner.zPosition = 4
+        banner.name = "banner"
+        
+        let minigameTitle = SKLabelNode(fontNamed: "GillSans-Bold")
         minigameTitle.text = "Minigame Collection"
         minigameTitle.name = "Minigame Collection"
-        minigameTitle.position = CGPointMake(self.size.width/2, self.size.height/1.2)
+        minigameTitle.position = CGPointMake(self.size.width/2, self.size.height*0.85)
+        minigameTitle.zPosition = 5
         self.addChild(minigameTitle)
         
 //        for i in GameManager.sharedInstance.allMinigames{
@@ -45,11 +53,20 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         
 //        let carousel = CardCarouselNode(cardsArray: GameManager.sharedInstance.allMinigames, startIndex: 0)
         
-        let backButton = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let backButton = SKLabelNode(fontNamed: "GillSans-Bold")
         backButton.text = "Back"
         backButton.name = "Back"
-        backButton.position = CGPointMake(self.size.width/2, self.size.height/10)
+        backButton.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
+        backButton.zPosition = 5
         self.addChild(backButton)
+        
+        let background = SKTexture(imageNamed: "setupBG")
+        let bg = SKSpriteNode(texture: background, size: background.size())
+        self.addChild(bg)
+        bg.name = "bg"
+        bg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        bg.zPosition = 0
+        self.backgroundColor = UIColor.whiteColor()
         
         setupMinigames()
         
@@ -60,6 +77,7 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         for i in GameManager.sharedInstance.allMinigames {
             let sprite = SKSpriteNode(imageNamed: i.rawValue)
             sprite.name = i.rawValue
+            sprite.zPosition = 5
             minigameSprites.append(sprite)
         }
         let carousel = CardCarouselNode(cardsArray: minigameSprites, startIndex: 0)
