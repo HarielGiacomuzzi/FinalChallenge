@@ -18,7 +18,16 @@ class BombPlayerNode: SKNode {
     var roboBody : SKSpriteNode?
     var roboBase : SKSpriteNode?
     var identifier = ""
-    var color = UIColor()
+    var color = UIColor() {
+        didSet {
+            roboBody?.color = color
+            roboBody?.colorBlendFactor = 0.4
+            roboBase?.colorBlendFactor = 0.4
+            roboBase?.color = color
+            print(roboBase?.color)
+            print(roboBody?.color)
+        }
+    }
     
     override init() {
         super.init()
@@ -57,6 +66,9 @@ class BombPlayerNode: SKNode {
         
         self.addChild(roboBase!)
         
+        roboBase?.color = color
+//        roboBase?.colorBlendFactor = 0.4
+        
         roboBase?.position = CGPointMake(0, 0)
         
         let animationAction = SKAction.animateWithTextures(runFrames, timePerFrame: 0.25)
@@ -76,8 +88,10 @@ class BombPlayerNode: SKNode {
             runFrames.append(spriteAnimatedAtlas.textureNamed(runTextureName))
         }
         
-        
         roboBody = SKSpriteNode(texture: runFrames[0], color: UIColor.clearColor(), size: runFrames[0].size())
+        
+        roboBody?.color = color
+//        roboBody?.colorBlendFactor = 0.4
         
         self.addChild(roboBody!)
         roboBody?.position = CGPointMake(0, 0)
