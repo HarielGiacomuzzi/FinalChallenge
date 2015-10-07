@@ -67,6 +67,10 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        scene = nil
+    }
+    
     // Notifies the delegate, when the user taps the done button
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController){
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
