@@ -185,10 +185,10 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
             if identifier == p.playerIdentifier{
                 p.avatar = message
                 switch(message){
-                    case "paladinCard": p.color = UIColor.redColor()
-                    case "rangerCard": p.color = UIColor.whiteColor()
-                    case "thiefCard": p.color = UIColor.blackColor()
-                    case "wizardCard": p.color = UIColor.blueColor()
+                    case "knight": p.color = UIColor.redColor()
+                    case "ranger": p.color = UIColor.whiteColor()
+                    case "thief": p.color = UIColor.blackColor()
+                    case "wizard": p.color = UIColor.blueColor()
                     default: break
                 }
             }

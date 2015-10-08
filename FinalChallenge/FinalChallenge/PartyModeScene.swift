@@ -25,7 +25,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var gestureRecognizer : UIPanGestureRecognizer!
     var canSelectAvatar = false
     
-    
     var banner : SKSpriteNode?
     var turns : SKSpriteNode?
     var connect : SKSpriteNode?
@@ -210,12 +209,16 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                 switch avatarName {
                 case "paladinCard":
                     avatar = ["avatar":"knight"]
+                    viewController!.playerColor = UIColor.redColor()
                 case "rangerCard":
                     avatar = ["avatar":"ranger"]
+                    viewController!.playerColor = UIColor.whiteColor()
                 case "thiefCard":
                     avatar = ["avatar":"thief"]
+                    viewController!.playerColor = UIColor.blackColor()
                 case "wizardCard":
                     avatar = ["avatar":"wizard"]
+                    viewController!.playerColor = UIColor.blueColor()
                 default:
                     ()
                 }

@@ -19,7 +19,8 @@ class iPhonePlayerViewController: UIViewController {
     var partyModeScene : PartyModeScene?
     var gamePadScene : GamePadScene?
     var endGameScene : EndGameIphoneScene?
-    
+
+    var playerColor : UIColor!
     var playerMoney = 0
     var playerCards:[String] = []
     
@@ -205,6 +206,7 @@ class iPhonePlayerViewController: UIViewController {
         
         gamePadScene?.viewController = self
         skView?.presentScene(gamePadScene)
+        gamePadScene?.backgroundColor = playerColor
     }
     
     func setAllScenesNil() {
