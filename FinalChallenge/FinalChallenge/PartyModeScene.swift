@@ -266,6 +266,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                     avatar = ["avatar":"thief"]
                 case "wizard":
                     avatar = ["avatar":"wizard"]
+                    viewController!.playerColor = UIColor.blueColor()
                 default:
                     ()
                 }
