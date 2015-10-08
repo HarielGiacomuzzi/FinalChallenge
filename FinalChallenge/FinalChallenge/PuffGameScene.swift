@@ -36,7 +36,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             sprite.position.x = CGFloat(p.x)
             sprite.position.y = CGFloat(p.y)
             sprite.fillColor = UIColor.blueColor();
-            p.nodeSprite = sprite;
+            p.nodeSprite = PlayerNode(named: p.avatar!);
             
             self.addChild(p.nodeSprite!)
         }

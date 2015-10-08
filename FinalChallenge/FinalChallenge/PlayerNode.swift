@@ -55,12 +55,7 @@ class PlayerNode: SKSpriteNode {
             let last = list.removeLast()
             block = {self.walkTo(last, completion: newBlock)}
         }
-//        let lastt = list.removeLast()
         walkTo(list.last!, completion: block)
-        
-//        let block = {self.walkTo(pointList.last!, completion: {})}
-//        walkTo(pointList.first!, completion: block)
-    
     }
     
     func walkTo(point:CGPoint, completion:() -> ()) {

@@ -17,7 +17,7 @@ class Player : NSObject {
     var x:Double!
     var y:Double!
     var avatar : String?
-    var nodeSprite : SKNode?
+    var nodeSprite : PlayerNode?
     var color = UIColor()
     var items:[Card] = []
     var itemsInHouse : [Card] = []

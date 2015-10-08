@@ -67,7 +67,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     sprite.colorBlendFactor = 0.9;
                     sprite.color = p.color;
                     sprite.size = CGSize(width: 15, height: 20);
-                    p.nodeSprite = sprite;
+                    p.nodeSprite = PlayerNode(named: p.avatar!);
                     BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(p)
                     
                     self.addChild(p.nodeSprite!)
