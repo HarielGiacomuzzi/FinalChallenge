@@ -25,7 +25,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var gestureRecognizer : UIPanGestureRecognizer!
     var canSelectAvatar = false
     
-    
     var banner : SKSpriteNode?
     var turns : SKSpriteNode?
     var connect : SKSpriteNode?
@@ -81,8 +80,14 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
             
             let sprite = SKSpriteNode(imageNamed: imageName)
             
-            sprite.name = imageName
-
+            switch(imageName){
+            case "paladinCard" : sprite.name = "knight"
+            case "rangerCard" : sprite.name = "ranger"
+            case "thiefCard" : sprite.name = "thief"
+            case "wizardCard" : sprite.name = "wizard"
+            default : break
+            }
+    
             //sprite.size = CGSize(width: 50, height: 50)
             
             sprite.setScale(0.3)
@@ -134,7 +139,15 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
             recognizer.setTranslation(CGPointZero, inView: recognizer.view)
         } else if recognizer.state == .Ended {
             for sp in imageNames{
-                if selectedNode.name != sp {
+                var aux = sp
+                switch(aux){
+                case "paladinCard" : aux = "knight"
+                case "rangerCard" : aux = "ranger"
+                case "thiefCard" : aux = "thief"
+                case "wizardCard" : aux = "wizard"
+                default : break
+                }
+                if selectedNode.name != aux {
                     let scrollDuration = 0.2
                     let velocity = recognizer.velocityInView(recognizer.view)
                     _ = selectedNode.position
@@ -145,7 +158,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                 }else{
                     if selectedNode.position.y > self.frame.height/1.2{
                         for ta in takenAvatar{
-                            if ta != sp{
+                            if ta != aux{
                                 takenFlag = false
                             } else {
                                 takenFlag = true
@@ -183,7 +196,15 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                 selectedNode = touchedNode as! SKSpriteNode
                 
                 for sp in imageNames{
-                    if touchedNode.name! == sp {
+                    var aux = sp
+                    switch(aux){
+                    case "paladinCard" : aux = "knight"
+                    case "rangerCard" : aux = "ranger"
+                    case "thiefCard" : aux = "thief"
+                    case "wizardCard" : aux = "wizard"
+                    default : break
+                    }
+                    if touchedNode.name! == aux {
                         let sequence = SKAction.sequence([SKAction.rotateByAngle(degToRad(-4.0), duration: 0.1),
                             SKAction.rotateByAngle(0.0, duration: 0.1),
                             SKAction.rotateByAngle(degToRad(4.0), duration: 0.1)])
@@ -211,7 +232,17 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let position = selectedNode.position
         for sp in imageNames{
             if let nodeName = selectedNode.name{
-                if nodeName == sp {
+                var aux = sp
+                
+                switch(aux){
+                case "paladinCard" : aux = "knight"
+                case "rangerCard" : aux = "ranger"
+                case "thiefCard" : aux = "thief"
+                case "wizardCard" : aux = "wizard"
+                default : break
+                }
+                
+                if nodeName == aux {
                     selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
                 }
             }
@@ -227,13 +258,13 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                 var avatar:[String:String] = [:]
                 
                 switch avatarName {
-                case "paladinCard":
+                case "knight":
                     avatar = ["avatar":"knight"]
-                case "rangerCard":
+                case "ranger":
                     avatar = ["avatar":"ranger"]
-                case "thiefCard":
+                case "thief":
                     avatar = ["avatar":"thief"]
-                case "wizardCard":
+                case "wizard":
                     avatar = ["avatar":"wizard"]
                 default:
                     ()
