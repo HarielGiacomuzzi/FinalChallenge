@@ -54,9 +54,16 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let titleLabel = SKLabelNode(fontNamed: "GillSans-Bold")
         titleLabel.text = "Choose your Character"
         titleLabel.name = "label"
-        titleLabel.zPosition = 500
+        titleLabel.zPosition = 5
         titleLabel.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
         self.addChild(titleLabel)
+        
+        let back = SKLabelNode(fontNamed: "GillSans-Bold") // will be a texture probably
+        back.name = "back"
+        back.text = "Back"
+        back.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
+        back.zPosition = 5
+        self.addChild(back)
         
         
         let background = SKTexture(imageNamed: "setupBG")
@@ -90,10 +97,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
             self.addChild(sprite)
         }
     }
-    
-    
-
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -169,7 +172,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     func selectNodeForTouch(touchLocation : CGPoint) {
         // 1
         let touchedNode = self.nodeAtPoint(touchLocation)
-        
+    
         if touchedNode is SKSpriteNode {
             // 2
             if !selectedNode.isEqual(touchedNode) {
@@ -191,12 +194,28 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch : UITouch? = touches.first as UITouch?
+        
+        if let location = touch?.locationInNode(self) {
+            let touchedNode = self.nodeAtPoint(location)
+            if touchedNode.name == "back"{
+                viewController?.dismissViewControllerAnimated(false, completion: nil)
+            }
+        }
+        
+    }
+    
     func panForTranslation(translation : CGPoint) {
         let position = selectedNode.position
         for sp in imageNames{
-            if selectedNode.name! == sp {
-                selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+            if let nodeName = selectedNode.name{
+                if nodeName == sp {
+                    selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+                }
             }
+            
+            
         }
     }
     
@@ -283,6 +302,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         //setup particles
         
         let globParticles = SetupParticle.fromFile("setupParticle1")
+        globParticles!.name = "particles"
         globParticles!.position = CGPointMake(self.frame.width/2, self.frame.height + 10)
         self.addChild(globParticles!)
         globParticles?.zPosition = 1
@@ -299,6 +319,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         //set boundary
         let boundary : SKNode = SKNode()
+        boundary.name = "boundry"
         boundary.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.frame.width, height: 1))
         boundary.physicsBody?.dynamic = false
         boundary.physicsBody?.categoryBitMask = boundaryCategoryMask
@@ -309,6 +330,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     func spawnItem(){
         
         let effectsNode = SKEffectNode()
+        effectsNode.name = "effect"
         let filter = CIFilter(name: "CIGaussianBlur")
         // Set the blur amount. Adjust this to achieve the desired effect
         let blurAmount = CGFloat.random(min: 0, max: 20)
@@ -326,6 +348,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         let texture = SKTexture(imageNamed: itemName)
         let sprite = SKSpriteNode(texture: texture)
+        sprite.name = "something"
         let diff = CGFloat.random(min: 0.5, max: 1)
         sprite.size = CGSize(width: sprite.size.width * diff, height: sprite.size.height * diff)
         effectsNode.addChild(sprite)
@@ -353,7 +376,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
             filter?.removeAllChildren()
             filter?.removeAllActions()
             filter?.removeFromParent()
-            
         }
         
         if contact.bodyB.categoryBitMask == fallingCategoryMask {

@@ -18,11 +18,19 @@ class GameOverSceneSP : MinigameScene{
     var winner : String!
     
     func setupView(){
-        self.backgroundColor = UIColor.redColor()
+        //self.backgroundColor = UIColor.redColor()
     }
     
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = UIColor.redColor()
+        //self.backgroundColor = UIColor.redColor()
+        let background = SKTexture(imageNamed: "setupBG")
+        let bg = SKSpriteNode(texture: background, size: background.size())
+        self.addChild(bg)
+        bg.name = "bg"
+        bg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        bg.zPosition = 0
+        self.backgroundColor = UIColor.whiteColor()
+        
         switch(game){
         case "fish": self.setupFlappyFishGameOver()
         case "bomb": self.setupBombGameOver()
@@ -35,19 +43,19 @@ class GameOverSceneSP : MinigameScene{
         
         print("entrou aqui ta sacando 2")
         
-        let restartGame = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let restartGame = SKLabelNode(fontNamed: "GillSans-Bold")
         restartGame.text = "Restart Game"
         restartGame.name = "Restart Game"
         restartGame.position = CGPointMake(self.size.width/2, 50)
         self.addChild(restartGame)
         
-        let returnMinigameScene = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let returnMinigameScene = SKLabelNode(fontNamed: "GillSans-Bold")
         returnMinigameScene.text = "Return to Minigames Collection"
         returnMinigameScene.name = "Return MinigameScene"
         returnMinigameScene.position = CGPointMake(self.size.width/2, 150)
         self.addChild(returnMinigameScene)
         
-        let scoreLabel = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let scoreLabel = SKLabelNode(fontNamed: "GillSans-Bold")
         scoreLabel.text = "Final Score: \(score)"
         scoreLabel.name = "Final Score"
         scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2)
@@ -55,19 +63,19 @@ class GameOverSceneSP : MinigameScene{
     }
     
     func setupBombGameOver(){
-        let restartGame = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let restartGame = SKLabelNode(fontNamed: "GillSans-Bold")
         restartGame.text = "Restart Game"
         restartGame.name = "Restart Game"
         restartGame.position = CGPointMake(self.size.width/2, 50)
         self.addChild(restartGame)
         
-        let returnMinigameScene = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let returnMinigameScene = SKLabelNode(fontNamed: "GillSans-Bold")
         returnMinigameScene.text = "Return to Minigames Collection"
         returnMinigameScene.name = "Return MinigameScene"
         returnMinigameScene.position = CGPointMake(self.size.width/2, 150)
         self.addChild(returnMinigameScene)
         
-        let scoreLabel = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let scoreLabel = SKLabelNode(fontNamed: "GillSans-Bold")
         scoreLabel.text = "Winner: \(winner)"
         scoreLabel.name = "Winner"
         scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2)

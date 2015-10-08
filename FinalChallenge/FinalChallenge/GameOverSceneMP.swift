@@ -16,8 +16,16 @@ class GameOverSceneMP : MinigameScene {
     
     override func didMoveToView(view: SKView) {
         
-        self.backgroundColor = UIColor.redColor()
-        let back = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let background = SKTexture(imageNamed: "setupBG")
+        let bg = SKSpriteNode(texture: background, size: background.size())
+        self.addChild(bg)
+        bg.name = "bg"
+        bg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        bg.zPosition = 0
+        self.backgroundColor = UIColor.whiteColor()
+        
+        
+        let back = SKLabelNode(fontNamed: "GillSans-Bold")
         back.text = "Back to Board"
         back.name = "Back to Board"
         back.position = CGPointMake(self.size.width/2, 50)

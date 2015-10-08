@@ -128,23 +128,6 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         GameManager.sharedInstance.totalGameTurns = turns
     }
     
-  /*  //MARK: Picker data source
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return turnSelectorComponents.count
-    }
-    
-    //MARK: Picker Delegates
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return turnSelectorComponents[row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        turns = turnSelectorComponents[row].toInt()!
-    }
-    */
     func messageReceived(data : NSNotification){
         let identifier = data.userInfo!["peerID"] as! String
         let dictionary = data.userInfo!["avatar"] as! NSDictionary

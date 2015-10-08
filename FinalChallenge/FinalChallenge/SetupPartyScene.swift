@@ -20,7 +20,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     var connect : SKSpriteNode?
     var go : SKSpriteNode?
     var numberOfTurns : SKLabelNode?
-    
+    var back : SKLabelNode?
     // characters nodes
     let char1 : SKSpriteNode = SKSpriteNode(imageNamed: "knight")
     let char2 : SKSpriteNode = SKSpriteNode(imageNamed: "ranger")
@@ -101,6 +101,14 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setObjects(){
+        
+        back = SKLabelNode(fontNamed: "GillSans-Bold") // will be a texture probably
+        back!.name = "back"
+        back!.text = "Back"
+        back!.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
+        back?.zPosition = 5
+        self.addChild(back!)
+        
         // set the red SETUP GAME banner
         banner = SKSpriteNode(texture: redBanner, size: redBanner.size() )
         self.addChild(banner!)
@@ -270,6 +278,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             turns!.texture = yellowTurnsOff
         }else{
             turns!.texture = yellowTurnsOn
+        }
+        
+        if(back!.containsPoint(location)){
+            viewController.dismissViewControllerAnimated(false, completion: nil)
         }
     }
     
