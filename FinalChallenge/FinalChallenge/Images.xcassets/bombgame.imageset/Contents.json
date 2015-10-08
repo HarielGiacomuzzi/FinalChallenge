@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "bomberbots.png",
+      "filename" : "bomberBots.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "bomberbots@2x.png",
+      "filename" : "bomberBots@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "fishrace@3x.png",
+      "filename" : "bomberBots@3x.png",
       "scale" : "3x"
     }
   ],
