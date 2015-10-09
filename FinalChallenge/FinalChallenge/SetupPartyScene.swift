@@ -20,12 +20,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     var connect : SKSpriteNode?
     var go : SKSpriteNode?
     var numberOfTurns : SKLabelNode?
-    
+    var back : SKLabelNode?
     // characters nodes
-    let char1 : SKSpriteNode = SKSpriteNode(imageNamed: "paladinCard")
-    let char2 : SKSpriteNode = SKSpriteNode(imageNamed: "rangerCard")
-    let char3 : SKSpriteNode = SKSpriteNode(imageNamed: "thiefCard")
-    let char4 : SKSpriteNode = SKSpriteNode(imageNamed: "wizardCard")
+    let char1 : SKSpriteNode = SKSpriteNode(imageNamed: "knight")
+    let char2 : SKSpriteNode = SKSpriteNode(imageNamed: "ranger")
+    let char3 : SKSpriteNode = SKSpriteNode(imageNamed: "thief")
+    let char4 : SKSpriteNode = SKSpriteNode(imageNamed: "wizard")
+    var charScale:CGFloat = 0.60
     
     var charInitialPosition : CGFloat?
 
@@ -41,6 +42,8 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     let arrowOn : SKTexture = SKTexture(imageNamed: "arrowButtonOn")
     let arrowOff : SKTexture = SKTexture(imageNamed: "arrowButtonOff")
     
+    var popupAtlas:SKTextureAtlas!
+    
     
     
     // colisions
@@ -49,17 +52,63 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
 
     var turnCounter = 5
     
-    
     override func update(currentTime: NSTimeInterval) {
+        for i in 0..<GameManager.sharedInstance.players.count{
+            //print("Entrou na mudanca")
+            for j in i+1..<GameManager.sharedInstance.players.count{
+                if (GameManager.sharedInstance.players[i].avatar != nil) && (GameManager.sharedInstance.players[j].avatar != nil) {
+                    print("Entrou na mudanca \(GameManager.sharedInstance.players[i].avatar!) e \(GameManager.sharedInstance.players[j].avatar!)")
+                    if (GameManager.sharedInstance.players[i].avatar! == GameManager.sharedInstance.players[j].avatar!){
+                        print("Entrou na mudanca 3")
+                        var aux = GameManager.sharedInstance.players[j].avatar
+                        GameManager.sharedInstance.players[j].avatar = nil
+                        for avatar in viewController.arrayAvatars{
+                            print("Entrou na mudanca 4")
+                            if avatar == aux{
+                                print("Entrou na mudanca 5")
+                                viewController.arrayAvatars.removeObject(avatar)
+                                print("\(avatar) e o array: \(viewController.arrayAvatars)")
+                                viewController.updateIphoneUsersData()
+                                
+                                switch(GameManager.sharedInstance.players[j].playerIdentifier){
+                                case GameManager.sharedInstance.players[0].playerIdentifier : // player1Image.image = UIImage(named: message)
+                                    char1.texture = nil
+                                case GameManager.sharedInstance.players[1].playerIdentifier : // player2Image.image = UIImage(named: message)
+                                    char2.texture = nil
+                                case GameManager.sharedInstance.players[2].playerIdentifier : // player3Image.image = UIImage(named: message)
+                                    char3.texture = nil
+                                case GameManager.sharedInstance.players[3].playerIdentifier : //player4Image.image = UIImage(named: message)
+                                    char4.texture = nil
+                                    
+                                default: break
+                                }
+                                
+                                
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     override func didMoveToView(view: SKView) {
         setObjects()
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
-        self.physicsWorld.contactDelegate = self    
+        self.physicsWorld.contactDelegate = self
+        popupAtlas = SKTextureAtlas(named: "popup")
     }
     
     func setObjects(){
+        
+        back = SKLabelNode(fontNamed: "GillSans-Bold") // will be a texture probably
+        back!.name = "back"
+        back!.text = "Back"
+        back!.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
+        back?.zPosition = 5
+        self.addChild(back!)
+        
         // set the red SETUP GAME banner
         banner = SKSpriteNode(texture: redBanner, size: redBanner.size() )
         self.addChild(banner!)
@@ -132,14 +181,18 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(boundary)
         
         // set characters
+        char1.setScale(charScale)
+        char2.setScale(charScale)
+        char3.setScale(charScale)
+        char4.setScale(charScale)
         
-        charInitialPosition = (char1.size.height/2)*(-1)
+        
+        charInitialPosition = -(char1.size.height/2)
         
         char1.position = CGPoint(x: self.frame.width*0.2, y: charInitialPosition!)
-        char1.setScale(0.2)
         char1.zPosition = 6
-        char1.setScale(0.5)
         self.addChild(char1)
+        
         /*
         let shadow1 = SKSpriteNode(imageNamed: "player1")
         shadow1.blendMode = SKBlendMode(rawValue: 0)!
@@ -153,11 +206,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
       
         char2.position = CGPoint(x: self.frame.width * 0.4, y: charInitialPosition!)
-        char2.setScale(0.2)
         char2.zPosition = 6
         self.addChild(char2)
-        char2.setScale(0.5)
-        /*
+        
+    /*
         let shadow2 = SKSpriteNode(imageNamed: "player2")
         shadow2.blendMode = SKBlendMode(rawValue: 0)!
         shadow2.colorBlendFactor = 1
@@ -170,15 +222,11 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         
         char3.position = CGPoint(x: self.frame.width*0.6, y: charInitialPosition!)
-        char3.setScale(0.2)
         char3.zPosition = 6
-        char3.setScale(0.5)
         self.addChild(char3)
         
         char4.position = CGPoint(x: self.frame.width*0.8, y: charInitialPosition!)
-        char4.setScale(0.2)
         char4.zPosition = 6
-        char4.setScale(0.5)
         self.addChild(char4)
  
     }
@@ -230,6 +278,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             turns!.texture = yellowTurnsOff
         }else{
             turns!.texture = yellowTurnsOn
+        }
+        
+        if(back!.containsPoint(location)){
+            viewController.dismissViewControllerAnimated(false, completion: nil)
         }
     }
     
@@ -335,18 +387,49 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func riseCharacter(char : SKSpriteNode){
+    func riseCharacter(char : SKSpriteNode, identifier : String){
         
-        char.position = CGPoint(x: char.position.x, y: charInitialPosition!)
+        if let oldPopupNode = childNodeWithName("popup \(identifier)") {
+            oldPopupNode.removeFromParent()
+        }
+        if let oldLabel = childNodeWithName("name \(identifier)") {
+            oldLabel.removeFromParent()
+        }
         
+        let topHeight = (connect?.position.y)! - (connect?.size.height)!*0.25
+        let charPosition = topHeight - char.size.height/2
         
-        let location = char.position
+        var popupTextures:[SKTexture] = []
         
-        let action = SKAction.moveToY(location.y + char.size.height, duration: 0.7) // Or however much time you want to the action to run.
-        action.timingMode = .EaseInEaseOut
+        for i in 0...10 {
+            popupTextures.append(popupAtlas.textureNamed("desc\(i)"))
+        }
+        let popupAnimation = SKAction.animateWithTextures(popupTextures, timePerFrame: 0.05)
         
-        char.runAction(action)
+        let action = SKAction.moveToY(charPosition, duration: 0.7)
+        
+        char.runAction(action, completion: {() in
+            let popup = SKSpriteNode(texture: popupTextures.first)
+            popup.name = "popup \(identifier)"
+            popup.setScale(0.5)
+            popup.position = CGPointMake(char.position.x, popup.size.height/2)
+            self.addChild(popup)
+            
+            popup.zPosition = char.zPosition + 1
+            popup.runAction(popupAnimation, completion: {() in
+                let name = SKLabelNode(text: identifier)
+                name.position = popup.position
+                name.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+                name.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+                name.fontName = "Helvetica Neue"
+                name.name = "name \(identifier)"
+                name.fontSize = 15
+                self.addChild(name)
+                name.zPosition = popup.zPosition + 1
+            })
+        })
     }
+    
     
     deinit{
         print("SetupScene do Ipad foi retirada")

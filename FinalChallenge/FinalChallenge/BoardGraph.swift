@@ -307,6 +307,7 @@ class BoardGraph : NSObject{
             let i = x[0]
             player.x = i.posX
             player.y = i.posY
+
             i.insertPLayer(player);
             playerLastNode?.removePlayer(player);
         }

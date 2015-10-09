@@ -14,14 +14,26 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
     
     var collection = [SKSpriteNode()]
     
+    // colisions
+    let boundaryCategoryMask: UInt32 =  0x1 << 1
+    let fallingCategoryMask: UInt32 =  0x1 << 2
+    
     override func didMoveToView(view: SKView) {
         
         self.backgroundColor = UIColor.blackColor()
         
-        let minigameTitle = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let banner = SKSpriteNode(imageNamed: "setUpBanner")
+        self.addChild(banner)
+        banner.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
+        banner.size.height = banner.size.height/2
+        banner.zPosition = 4
+        banner.name = "banner"
+        
+        let minigameTitle = SKLabelNode(fontNamed: "GillSans-Bold")
         minigameTitle.text = "Minigame Collection"
         minigameTitle.name = "Minigame Collection"
-        minigameTitle.position = CGPointMake(self.size.width/2, self.size.height/1.2)
+        minigameTitle.position = CGPointMake(self.size.width/2, self.size.height*0.85)
+        minigameTitle.zPosition = 5
         self.addChild(minigameTitle)
         
 //        for i in GameManager.sharedInstance.allMinigames{
@@ -45,13 +57,24 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         
 //        let carousel = CardCarouselNode(cardsArray: GameManager.sharedInstance.allMinigames, startIndex: 0)
         
-        let backButton = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+        let backButton = SKLabelNode(fontNamed: "GillSans-Bold")
         backButton.text = "Back"
         backButton.name = "Back"
-        backButton.position = CGPointMake(self.size.width/2, self.size.height/10)
+        backButton.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
+        backButton.zPosition = 5
         self.addChild(backButton)
         
-        setupMinigames()
+        let background = SKTexture(imageNamed: "setupBG")
+        let bg = SKSpriteNode(texture: background, size: background.size())
+        self.addChild(bg)
+        bg.name = "bg"
+        bg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        bg.zPosition = 0
+        self.backgroundColor = UIColor.whiteColor()
+        
+        self.setupMinigames()
+        
+        self.setObjects()
         
     }
     
@@ -60,6 +83,7 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         for i in GameManager.sharedInstance.allMinigames {
             let sprite = SKSpriteNode(imageNamed: i.rawValue)
             sprite.name = i.rawValue
+            sprite.zPosition = 5
             minigameSprites.append(sprite)
         }
         let carousel = CardCarouselNode(cardsArray: minigameSprites, startIndex: 0)
@@ -70,6 +94,76 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         carousel.delegate = self
         addChild(carousel)
     }
+    
+    func setObjects(){
+        
+        //setup particles
+        
+        let globParticles = SetupParticle.fromFile("setupParticle1")
+        globParticles!.name = "particles"
+        globParticles!.position = CGPointMake(self.frame.width/2, self.frame.height + 10)
+        self.addChild(globParticles!)
+        globParticles?.zPosition = 1
+        
+        
+        //for some reason this code dont wornk on the iPhone, the phone trys to mantein a 40 fps just like the iPad, but for some reason starts dropping
+        /*let spawn = SKAction.runBlock({() in self.spawnItem()})
+        
+        let delay = SKAction.waitForDuration(0.7, withRange: 1.4)
+        let spawnThenDelay = SKAction.sequence([spawn, delay])
+        let spawnThenDelayForever = SKAction.repeatActionForever(spawnThenDelay)
+        self.runAction(spawnThenDelayForever)*/
+        
+        
+        //set boundary
+        let boundary : SKNode = SKNode()
+        boundary.name = "boundry"
+        boundary.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.frame.width, height: 1))
+        boundary.physicsBody?.dynamic = false
+        boundary.physicsBody?.categoryBitMask = boundaryCategoryMask
+        boundary.position = CGPoint(x: self.frame.width/2, y: -200)
+        self.addChild(boundary)
+    }
+    
+    func spawnItem(){
+        
+        let effectsNode = SKEffectNode()
+        effectsNode.name = "effect"
+        let filter = CIFilter(name: "CIGaussianBlur")
+        // Set the blur amount. Adjust this to achieve the desired effect
+        let blurAmount = CGFloat.random(min: 0, max: 20)
+        filter!.setValue(blurAmount, forKey: kCIInputRadiusKey)
+        
+        effectsNode.filter = filter
+        effectsNode.position = self.view!.center
+        effectsNode.blendMode = .Alpha
+        self.addChild(effectsNode)
+        
+        
+        let itemVal = CGFloat.random(min: 0.6, max: 3.4)
+        let intItemval = Int(round(itemVal))
+        let itemName = "item\(intItemval)"
+        
+        let texture = SKTexture(imageNamed: itemName)
+        let sprite = SKSpriteNode(texture: texture)
+        sprite.name = "something"
+        let diff = CGFloat.random(min: 0.5, max: 1)
+        sprite.size = CGSize(width: sprite.size.width * diff, height: sprite.size.height * diff)
+        effectsNode.addChild(sprite)
+        
+        let pos = CGFloat.random(min: 0, max: 1024)
+        effectsNode.position = CGPoint(x: pos, y: self.frame.height+50)
+        
+        sprite.physicsBody = SKPhysicsBody(circleOfRadius: sprite.size.height/2)
+        let angle = CGFloat.random(min: 0.1, max: 0.6)
+        sprite.physicsBody?.applyAngularImpulse(angle  * sprite.size.width * 0.01)
+        sprite.physicsBody?.affectedByGravity = true
+        sprite.zPosition = 2
+        sprite.physicsBody?.categoryBitMask = fallingCategoryMask
+        sprite.physicsBody?.contactTestBitMask = boundaryCategoryMask
+        
+    }
+
     
     func sendCard(card: SKNode) {
         let minigame = Minigame(rawValue: card.name!)!

@@ -19,7 +19,8 @@ class iPhonePlayerViewController: UIViewController {
     var partyModeScene : PartyModeScene?
     var gamePadScene : GamePadScene?
     var endGameScene : EndGameIphoneScene?
-    
+
+    var playerColor : UIColor!
     var playerMoney = 0
     var playerCards:[String] = []
     
@@ -152,6 +153,12 @@ class iPhonePlayerViewController: UIViewController {
     
     // MARK: - Scene Control
     
+    func openEndGameScene(data:NSNotification){
+        endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
+        endGameScene?.scaleMode = .AspectFit
+        skView?.presentScene(endGameScene)
+    }
+    
     func loadPlayerView() {
         setAllScenesNil()
         
@@ -200,6 +207,7 @@ class iPhonePlayerViewController: UIViewController {
         
         gamePadScene?.viewController = self
         skView?.presentScene(gamePadScene)
+        gamePadScene?.backgroundColor = playerColor
     }
     
     func setAllScenesNil() {
@@ -209,10 +217,6 @@ class iPhonePlayerViewController: UIViewController {
         gamePadScene = nil
     }
     
-    func openEndGameScene(data:NSNotification){
-        endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
-        skView?.presentScene(endGameScene)
-    }
     
     // MARK: - Aux Functions
     

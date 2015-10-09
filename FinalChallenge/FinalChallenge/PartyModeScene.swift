@@ -25,7 +25,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var gestureRecognizer : UIPanGestureRecognizer!
     var canSelectAvatar = false
     
-    
     var banner : SKSpriteNode?
     var turns : SKSpriteNode?
     var connect : SKSpriteNode?
@@ -55,14 +54,22 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let titleLabel = SKLabelNode(fontNamed: "GillSans-Bold")
         titleLabel.text = "Choose your Character"
         titleLabel.name = "label"
-        titleLabel.zPosition = 500
+        titleLabel.zPosition = 5
         titleLabel.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
         self.addChild(titleLabel)
+        
+        let back = SKLabelNode(fontNamed: "GillSans-Bold") // will be a texture probably
+        back.name = "back"
+        back.text = "Back"
+        back.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
+        back.zPosition = 5
+        self.addChild(back)
         
         
         let background = SKTexture(imageNamed: "setupBG")
         let bg = SKSpriteNode(texture: background, size: background.size())
         self.addChild(bg)
+        bg.name = "bg"
         bg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         bg.zPosition = 0
         self.backgroundColor = UIColor.whiteColor()
@@ -73,8 +80,14 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
             
             let sprite = SKSpriteNode(imageNamed: imageName)
             
-            sprite.name = imageName
-
+            switch(imageName){
+            case "paladinCard" : sprite.name = "knight"
+            case "rangerCard" : sprite.name = "ranger"
+            case "thiefCard" : sprite.name = "thief"
+            case "wizardCard" : sprite.name = "wizard"
+            default : break
+            }
+    
             //sprite.size = CGSize(width: 50, height: 50)
             
             sprite.setScale(0.3)
@@ -90,10 +103,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
             self.addChild(sprite)
         }
     }
-    
-    
-
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -130,7 +139,15 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
             recognizer.setTranslation(CGPointZero, inView: recognizer.view)
         } else if recognizer.state == .Ended {
             for sp in imageNames{
-                if selectedNode.name != sp {
+                var aux = sp
+                switch(aux){
+                case "paladinCard" : aux = "knight"
+                case "rangerCard" : aux = "ranger"
+                case "thiefCard" : aux = "thief"
+                case "wizardCard" : aux = "wizard"
+                default : break
+                }
+                if selectedNode.name != aux {
                     let scrollDuration = 0.2
                     let velocity = recognizer.velocityInView(recognizer.view)
                     _ = selectedNode.position
@@ -141,7 +158,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                 }else{
                     if selectedNode.position.y > self.frame.height/1.2{
                         for ta in takenAvatar{
-                            if ta != sp{
+                            if ta != aux{
                                 takenFlag = false
                             } else {
                                 takenFlag = true
@@ -169,7 +186,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     func selectNodeForTouch(touchLocation : CGPoint) {
         // 1
         let touchedNode = self.nodeAtPoint(touchLocation)
-        
+    
         if touchedNode is SKSpriteNode {
             // 2
             if !selectedNode.isEqual(touchedNode) {
@@ -179,7 +196,15 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                 selectedNode = touchedNode as! SKSpriteNode
                 
                 for sp in imageNames{
-                    if touchedNode.name! == sp {
+                    var aux = sp
+                    switch(aux){
+                    case "paladinCard" : aux = "knight"
+                    case "rangerCard" : aux = "ranger"
+                    case "thiefCard" : aux = "thief"
+                    case "wizardCard" : aux = "wizard"
+                    default : break
+                    }
+                    if touchedNode.name! == aux {
                         let sequence = SKAction.sequence([SKAction.rotateByAngle(degToRad(-4.0), duration: 0.1),
                             SKAction.rotateByAngle(0.0, duration: 0.1),
                             SKAction.rotateByAngle(degToRad(4.0), duration: 0.1)])
@@ -191,12 +216,38 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch : UITouch? = touches.first as UITouch?
+        
+        if let location = touch?.locationInNode(self) {
+            let touchedNode = self.nodeAtPoint(location)
+            if touchedNode.name == "back"{
+                viewController?.dismissViewControllerAnimated(false, completion: nil)
+            }
+        }
+        
+    }
+    
     func panForTranslation(translation : CGPoint) {
         let position = selectedNode.position
         for sp in imageNames{
-            if selectedNode.name! == sp {
-                selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+            if let nodeName = selectedNode.name{
+                var aux = sp
+                
+                switch(aux){
+                case "paladinCard" : aux = "knight"
+                case "rangerCard" : aux = "ranger"
+                case "thiefCard" : aux = "thief"
+                case "wizardCard" : aux = "wizard"
+                default : break
+                }
+                
+                if nodeName == aux {
+                    selectedNode.position = CGPoint(x: position.x + translation.x, y: position.y + translation.y)
+                }
             }
+            
+            
         }
     }
     
@@ -204,7 +255,25 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         print(self.selectedNode.name)
         if let avatarName : String = self.selectedNode.name{
             if canSelectAvatar{
-                let avatar = ["avatar":avatarName]
+                var avatar:[String:String] = [:]
+                
+                switch avatarName {
+                case "knight":
+                    avatar = ["avatar":"knight"]
+                    viewController!.playerColor = UIColor.redColor()
+                case "ranger":
+                    avatar = ["avatar":"ranger"]
+                    viewController!.playerColor = UIColor.whiteColor()
+                case "thief":
+                    avatar = ["avatar":"thief"]
+                    viewController!.playerColor = UIColor.blackColor()
+                case "wizard":
+                    avatar = ["avatar":"wizard"]
+                    viewController!.playerColor = UIColor.blueColor()
+                default:
+                    ()
+                }
+//                let avatar = ["avatar":avatarName]
                 let dic = ["GameSetup":" ", "avatar":avatar]
                 ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
             }
@@ -265,6 +334,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         //setup particles
         
         let globParticles = SetupParticle.fromFile("setupParticle1")
+        globParticles!.name = "particles"
         globParticles!.position = CGPointMake(self.frame.width/2, self.frame.height + 10)
         self.addChild(globParticles!)
         globParticles?.zPosition = 1
@@ -281,6 +351,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         //set boundary
         let boundary : SKNode = SKNode()
+        boundary.name = "boundry"
         boundary.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.frame.width, height: 1))
         boundary.physicsBody?.dynamic = false
         boundary.physicsBody?.categoryBitMask = boundaryCategoryMask
@@ -291,6 +362,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     func spawnItem(){
         
         let effectsNode = SKEffectNode()
+        effectsNode.name = "effect"
         let filter = CIFilter(name: "CIGaussianBlur")
         // Set the blur amount. Adjust this to achieve the desired effect
         let blurAmount = CGFloat.random(min: 0, max: 20)
@@ -308,6 +380,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         let texture = SKTexture(imageNamed: itemName)
         let sprite = SKSpriteNode(texture: texture)
+        sprite.name = "something"
         let diff = CGFloat.random(min: 0.5, max: 1)
         sprite.size = CGSize(width: sprite.size.width * diff, height: sprite.size.height * diff)
         effectsNode.addChild(sprite)
@@ -335,7 +408,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
             filter?.removeAllChildren()
             filter?.removeAllActions()
             filter?.removeFromParent()
-            
         }
         
         if contact.bodyB.categoryBitMask == fallingCategoryMask {

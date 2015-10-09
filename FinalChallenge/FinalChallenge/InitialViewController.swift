@@ -52,6 +52,12 @@ class InitialViewController: UIViewController
 
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if self.opened{
+            self.closeBook(1.0, strapTime: 1.0, coverTime: 2.0, completion: {()})
+        }
+    }
+    
     @IBAction func partyModeButtonPressed() {
         //not ready yet
         
@@ -173,7 +179,7 @@ class InitialViewController: UIViewController
                         
                 })
         })
-        
+        self.opened = true
     }
     
     func closeBook(pinTime:NSTimeInterval, strapTime:NSTimeInterval, coverTime: NSTimeInterval, completion:() -> ()) {
@@ -191,6 +197,7 @@ class InitialViewController: UIViewController
                         
                 })
         })
+        self.opened = false
         
     }
     

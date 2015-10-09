@@ -67,6 +67,10 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        scene = nil
+    }
+    
     // Notifies the delegate, when the user taps the done button
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController){
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
@@ -124,28 +128,12 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         GameManager.sharedInstance.totalGameTurns = turns
     }
     
-  /*  //MARK: Picker data source
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return turnSelectorComponents.count
-    }
-    
-    //MARK: Picker Delegates
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return turnSelectorComponents[row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        turns = turnSelectorComponents[row].toInt()!
-    }
-    */
     func messageReceived(data : NSNotification){
         let identifier = data.userInfo!["peerID"] as! String
         let dictionary = data.userInfo!["avatar"] as! NSDictionary
         let message = dictionary["avatar"] as! String
         
+        arrayAvatars.append(message)
         
         for p in GameManager.sharedInstance.players {
             if identifier == p.playerIdentifier{
@@ -160,18 +148,18 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         switch(identifier){
         case GameManager.sharedInstance.players[0].playerIdentifier : // player1Image.image = UIImage(named: message)
                                   scene?.char1.texture = SKTexture(imageNamed: message)
-                                  scene?.riseCharacter(scene!.char1)
+                                  scene?.riseCharacter(scene!.char1, identifier: identifier)
         
         case GameManager.sharedInstance.players[1].playerIdentifier : // player2Image.image = UIImage(named: message)
                                     scene?.char2.texture = SKTexture(imageNamed: message)
-                                    scene?.riseCharacter(scene!.char2)
+                                    scene?.riseCharacter(scene!.char2, identifier: identifier)
         case GameManager.sharedInstance.players[2].playerIdentifier : // player3Image.image = UIImage(named: message)
                                     scene?.char3.texture = SKTexture(imageNamed: message)
-                                    scene?.riseCharacter(scene!.char3)
+                                    scene?.riseCharacter(scene!.char3, identifier: identifier)
 
         case GameManager.sharedInstance.players[3].playerIdentifier : //player4Image.image = UIImage(named: message)
                                     scene?.char4.texture = SKTexture(imageNamed: message)
-                                    scene?.riseCharacter(scene!.char4)
+                                    scene?.riseCharacter(scene!.char4,identifier: identifier)
 
         default: break
         }
@@ -180,24 +168,22 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
             if identifier == p.playerIdentifier{
                 p.avatar = message
                 switch(message){
-                    case "paladinCard": p.color = UIColor.redColor()
-                    case "rangerCard": p.color = UIColor.whiteColor()
-                    case "thiefCard": p.color = UIColor.blackColor()
-                    case "wizardCard": p.color = UIColor.blueColor()
+                    case "knight": p.color = UIColor.redColor()
+                    case "ranger": p.color = UIColor.whiteColor()
+                    case "thief": p.color = UIColor.blackColor()
+                    case "wizard": p.color = UIColor.blueColor()
                     default: break
                 }
             }
         }
         print("Mensagem: \(message) e Identifier: \(identifier)")
-        updateIphoneUsersData(message)
-    }
-
-    func updateIphoneUsersData(avat:String){
-        
-        arrayAvatars.append(avat)
         
         print(arrayAvatars)
         
+        updateIphoneUsersData()
+    }
+
+    func updateIphoneUsersData(){
         let arrayPlayers = arrayAvatars
         let array = ["arrayPlayers":arrayPlayers]
         let dic = ["IphoneGameSetup":" ", "arrayPlayers":array]
