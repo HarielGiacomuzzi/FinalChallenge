@@ -11,6 +11,11 @@ import UIKit
 
 class AlertPath: UIAlertController{
     
+    var quantity = 0
+    var node : BoardNode?
+    var lista : [BoardNode]?
+    var viewToShow : UIViewController?
+    
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(true)
         GameManager.sharedInstance.hasPath = false;
