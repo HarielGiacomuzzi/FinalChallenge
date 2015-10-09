@@ -76,6 +76,10 @@ class GameManager : NSObject {
         }
         // proximo jogador
         selectPlayers(controlesDeTurno)
+        
+        if let p = player?.items{
+            print(p)
+        }
      }
     
     func playerTurn(player:Player?){

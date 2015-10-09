@@ -76,6 +76,7 @@
 		B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */; };
 		B5AFAD151BA09BD40005F19E /* GameOverSceneSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */; };
 		B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */; };
+		B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */; settings = {ASSET_TAGS = (); }; };
 		B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5CD203A1BBDA86600D184F6 /* avatar.atlas */; settings = {ASSET_TAGS = (); }; };
 		B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */; };
 		B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */; };
@@ -201,6 +202,7 @@
 		B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyModeViewControllerIPAD.swift; sourceTree = "<group>"; };
 		B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneSP.swift; sourceTree = "<group>"; };
 		B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameCollectionScene.swift; sourceTree = "<group>"; };
+		B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cardThrowSound.wav; sourceTree = "<group>"; };
 		B5CD203A1BBDA86600D184F6 /* avatar.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = avatar.atlas; sourceTree = "<group>"; };
 		B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
@@ -432,6 +434,42 @@
 			name = NotActivateCards;
 			sourceTree = "<group>";
 		};
+		B5B9291F1BC6F4EB00DD2C46 /* FlappyFish Sound */ = {
+			isa = PBXGroup;
+			children = (
+				B5DD1B491B8F73D300AA1EB6 /* wavesSound.wav */,
+				B5DD1B531B8F90EC00AA1EB6 /* funMusic.mp3 */,
+				B5DD1B511B8F8D0500AA1EB6 /* bubbleSound2.wav */,
+				B5DD1B4F1B8F888200AA1EB6 /* bubbleSound.mp3 */,
+				B5DD1B4D1B8F7EDB00AA1EB6 /* bubbleSound.aif */,
+			);
+			name = "FlappyFish Sound";
+			sourceTree = "<group>";
+		};
+		B5B929201BC6F4FC00DD2C46 /* BombGame */ = {
+			isa = PBXGroup;
+			children = (
+				B5DD1B4B1B8F745700AA1EB6 /* explosionSound.wav */,
+			);
+			name = BombGame;
+			sourceTree = "<group>";
+		};
+		B5B929211BC6F50E00DD2C46 /* MainGame */ = {
+			isa = PBXGroup;
+			children = (
+				B5B929221BC6F51900DD2C46 /* iphone */,
+			);
+			name = MainGame;
+			sourceTree = "<group>";
+		};
+		B5B929221BC6F51900DD2C46 /* iphone */ = {
+			isa = PBXGroup;
+			children = (
+				B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */,
+			);
+			name = iphone;
+			sourceTree = "<group>";
+		};
 		B5DD1B451B8F6D8300AA1EB6 /* Pads */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,12 +484,9 @@
 		B5DD1B481B8F73BB00AA1EB6 /* AudioFiles */ = {
 			isa = PBXGroup;
 			children = (
-				B5DD1B531B8F90EC00AA1EB6 /* funMusic.mp3 */,
-				B5DD1B511B8F8D0500AA1EB6 /* bubbleSound2.wav */,
-				B5DD1B4F1B8F888200AA1EB6 /* bubbleSound.mp3 */,
-				B5DD1B4D1B8F7EDB00AA1EB6 /* bubbleSound.aif */,
-				B5DD1B4B1B8F745700AA1EB6 /* explosionSound.wav */,
-				B5DD1B491B8F73D300AA1EB6 /* wavesSound.wav */,
+				B5B929211BC6F50E00DD2C46 /* MainGame */,
+				B5B929201BC6F4FC00DD2C46 /* BombGame */,
+				B5B9291F1BC6F4EB00DD2C46 /* FlappyFish Sound */,
 			);
 			name = AudioFiles;
 			sourceTree = "<group>";
@@ -718,6 +753,7 @@
 				5ED294DB1BBD96B50073B148 /* cards.atlas in Resources */,
 				DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */,
 				DBE862051B850DB700C8099E /* board_2.xml in Resources */,
+				B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */,
 				B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
 			);

@@ -29,6 +29,7 @@ class GameOverSceneMP : MinigameScene {
         back.text = "Back to Board"
         back.name = "Back to Board"
         back.position = CGPointMake(self.size.width/2, 50)
+        back.zPosition = 5
         self.addChild(back)
         
         //precisa estar do maior pro menor
@@ -51,6 +52,8 @@ class GameOverSceneMP : MinigameScene {
             let offsetFraction = (CGFloat(i) + 1.0)/(CGFloat(players.count) + 1.0)
 
             sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height/2)
+            
+            sprite.zPosition = 5
             
             self.addChild(sprite)
             

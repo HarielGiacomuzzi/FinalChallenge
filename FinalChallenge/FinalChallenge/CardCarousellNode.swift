@@ -94,11 +94,10 @@ class CardCarouselNode: SKNode {
         print(centerPoint.y)
         if centerCard.position.y > centerPoint.y {
             removeCard()
+            //manda a carta
         } else if centerCard.position.y < centerPoint.y {
             delegate?.sendCard(centerCard)
-            centerCard.position = centerPoint
-            print("send card?")
-            
+            centerCard.position = centerPoint 
         } else {
             fixCardsZPosition()
             centerCard.position = centerPoint
@@ -206,6 +205,7 @@ class CardCarouselNode: SKNode {
     }
     
     func removeCard(index:Int) {
+        
         if !cards.isEmpty {
             delegate?.sendCard(cards[index])
             cards[index].removeFromParent()

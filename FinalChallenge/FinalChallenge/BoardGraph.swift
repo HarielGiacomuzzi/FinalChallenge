@@ -169,8 +169,6 @@ class BoardGraph : NSObject{
     //sends message to player phone to update item
     func pickItem(nodeName : String, player:Player) -> Bool{
         
-        //print(player.items)
-        
         if haveItem(nodeName) {
             if !isUsable(nodeName){
                 self.sendCardToPlayer(nodeName, player: player)

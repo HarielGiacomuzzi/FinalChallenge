@@ -47,18 +47,21 @@ class GameOverSceneSP : MinigameScene{
         restartGame.text = "Restart Game"
         restartGame.name = "Restart Game"
         restartGame.position = CGPointMake(self.size.width/2, 50)
+        restartGame.zPosition = 2
         self.addChild(restartGame)
         
         let returnMinigameScene = SKLabelNode(fontNamed: "GillSans-Bold")
         returnMinigameScene.text = "Return to Minigames Collection"
         returnMinigameScene.name = "Return MinigameScene"
         returnMinigameScene.position = CGPointMake(self.size.width/2, 150)
+        returnMinigameScene.zPosition = 2
         self.addChild(returnMinigameScene)
         
         let scoreLabel = SKLabelNode(fontNamed: "GillSans-Bold")
         scoreLabel.text = "Final Score: \(score)"
         scoreLabel.name = "Final Score"
         scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2)
+        scoreLabel.zPosition = 2
         self.addChild(scoreLabel)
     }
     
@@ -67,18 +70,21 @@ class GameOverSceneSP : MinigameScene{
         restartGame.text = "Restart Game"
         restartGame.name = "Restart Game"
         restartGame.position = CGPointMake(self.size.width/2, 50)
+        restartGame.zPosition = 2
         self.addChild(restartGame)
         
         let returnMinigameScene = SKLabelNode(fontNamed: "GillSans-Bold")
         returnMinigameScene.text = "Return to Minigames Collection"
         returnMinigameScene.name = "Return MinigameScene"
         returnMinigameScene.position = CGPointMake(self.size.width/2, 150)
+        returnMinigameScene.zPosition = 2
         self.addChild(returnMinigameScene)
         
         let scoreLabel = SKLabelNode(fontNamed: "GillSans-Bold")
         scoreLabel.text = "Winner: \(winner)"
         scoreLabel.name = "Winner"
         scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2)
+        scoreLabel.zPosition = 2
         self.addChild(scoreLabel)
     }
     

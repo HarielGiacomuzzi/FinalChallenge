@@ -21,6 +21,10 @@ class AudioSource: NSObject, AVAudioPlayerDelegate {
     
     //BombGames sound effects
     var exploadSound : SKAction!
+    
+    //Main Game
+    //iphone
+    var cardThrow : SKAction!
     static let sharedInstance = AudioSource()
     
     override init(){
@@ -29,7 +33,6 @@ class AudioSource: NSObject, AVAudioPlayerDelegate {
     //flappyFish sound effects
     func playBubbleSound() -> SKAction{
         bubbleSound = SKAction.playSoundFileNamed("bubbleSound2.wav", waitForCompletion: false)
-        
         return bubbleSound
     }
     
@@ -37,6 +40,11 @@ class AudioSource: NSObject, AVAudioPlayerDelegate {
     func playExploadSound() -> SKAction{
         exploadSound = SKAction.playSoundFileNamed("explosionSound.wav", waitForCompletion: false)
         return exploadSound
+    }
+    
+    func cardSound() -> SKAction{
+        cardThrow = SKAction.playSoundFileNamed("cardThrowSound.wav", waitForCompletion: false)
+        return cardThrow
     }
     
     func flappyFishSound(){

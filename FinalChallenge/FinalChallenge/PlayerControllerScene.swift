@@ -145,6 +145,13 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
     }
     
     func sendCard(card: SKNode) {
+        AudioSource.sharedInstance.cardSound()
+        for c in (viewController?.playerCards)!{
+            if c == card.name{
+                viewController?.playerCards.removeObject(c)
+                break
+            }
+        }
         let sentCardSprite = card as! CardSprite
         let sentCard = sentCardSprite.cardName
         let cardData = ["player":playerName, "item": sentCard]
