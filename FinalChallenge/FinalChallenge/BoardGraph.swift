@@ -268,7 +268,10 @@ class BoardGraph : NSObject{
     }
     
     func walkList(quantity : Int, player : Player, view : UIViewController?) -> [BoardNode]?{
-        return walk(quantity, node: nodeFor(player)!, lista: [], view: view);
+        let a = walk(quantity, node: nodeFor(player)!, lista: [], view: view);
+        nodeFor(player)?.removePlayer(player);
+        a!.last?.insertPLayer(player);
+        return a;
     }
     
     // Jhonny Walker keep walking

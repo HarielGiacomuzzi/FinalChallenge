@@ -59,15 +59,10 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                 let y = (BoardGraph.SharedInstance.nodes["01"]?.posY)!;
                 
                 for p in GameManager.sharedInstance.players{
-                    let sprite = SKSpriteNode(texture: partsAtlas.textureNamed("pin"))
                     p.x = x;
                     p.y = y;
-                    sprite.zPosition = 100;
-                    sprite.position = CGPoint(x: x, y: y);
-                    sprite.colorBlendFactor = 0.9;
-                    sprite.color = p.color;
-                    sprite.size = CGSize(width: 15, height: 20);
                     p.nodeSprite = PlayerNode(named: p.avatar!);
+                    p.nodeSprite?.position = CGPointMake(CGFloat(p.x), CGFloat(p.y))
                     BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(p)
                     
                     self.addChild(p.nodeSprite!)
@@ -100,7 +95,6 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                 
                 for p in GameManager.sharedInstance.players{
                     self.addChild(p.nodeSprite!)
-                    p.nodeSprite!.setScale(0.5)
                 }
                 
             }
@@ -117,13 +111,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
 
     }
     
-    override func didFinishUpdate() {
-        super.didFinishUpdate();
-        for p in GameManager.sharedInstance.players{
-            p.nodeSprite?.position.x = CGFloat(p.x);
-            p.nodeSprite?.position.y = CGFloat(p.y);
-        }
-    }
+
     
     deinit{
         print("A main board saiu")
