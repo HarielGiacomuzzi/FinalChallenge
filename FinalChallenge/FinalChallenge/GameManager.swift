@@ -91,7 +91,8 @@ class GameManager : NSObject {
     func diceReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
-                    BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
+                    let oi:[BoardNode] = BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
+                    print(oi)
                     playerTurn(p)
                     playerTurnEnded(p)
                     break;
@@ -318,6 +319,15 @@ class GameManager : NSObject {
             }
         }
         return Player()
+    }
+    
+    func movePlayerOnBoard(nodes:[BoardNode], player: Player, completion:() -> ()) {
+        var points:[CGPoint] = []
+        for n in nodes {
+            points.append(CGPointMake(CGFloat(n.posX), CGFloat(n.posY)))
+        }
+        player.nodeSprite?.walkTo(points, completion: completion)
+        
     }
         
 }
