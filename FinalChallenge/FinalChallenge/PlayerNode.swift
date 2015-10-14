@@ -18,6 +18,7 @@ class PlayerNode: SKSpriteNode {
     
     init(named:String) {
         
+        
         let playerSpriteAtlas = SKTextureAtlas(named: "charSprites")
         
         self.named = named
@@ -30,6 +31,8 @@ class PlayerNode: SKSpriteNode {
         super.init(texture: pTexture, color: UIColor.clearColor(), size: pTexture.size())
         
         fillTextures(playerSpriteAtlas)
+        zPosition = 5000
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

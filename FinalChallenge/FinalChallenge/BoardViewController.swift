@@ -39,7 +39,7 @@ class BoardViewController : UIViewController {
     override func viewDidLoad() {
         //super.viewDidLoad()
         //print("DEU VIEW DIDLOAD")
-        //GameManager.sharedInstance.boardGameViewController = self
+        GameManager.sharedInstance.boardGameViewController = self
         //self.setupScene()
     }
     

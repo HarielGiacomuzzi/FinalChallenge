@@ -100,6 +100,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                 
                 for p in GameManager.sharedInstance.players{
                     self.addChild(p.nodeSprite!)
+                    p.nodeSprite!.setScale(0.5)
                 }
                 
             }
