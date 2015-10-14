@@ -16,6 +16,8 @@ class BoardGraph : NSObject{
     var nodes : [String : BoardNode] = [:];
     private var hasSpecialNodeOnPath = false;
     private var specialNodeName = "";
+    var alertCondition = false;
+    var alertRef : AlertPath?
     
     
     func loadBoard(fromFile : String){
@@ -240,36 +242,34 @@ class BoardGraph : NSObject{
         return lista
     }
     
-    func walk(quantity : Int, node : BoardNode, var lista : [BoardNode], view : UIViewController?) -> [BoardNode]?{
+    private func walk(quantity : Int, node : BoardNode, var lista : [BoardNode], view : UIViewController?) -> [BoardNode]?{
         if quantity == 0 {
             return lista
         }
         
         if node.nextMoves.count > 1 {
             let alerta = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
-            GameManager.sharedInstance.hasPath = true;
             for i in node.nextMoves{
                 let action = UIAlertAction(title: "Path: \(keyFor(i))", style: .Default) { action -> Void in
-                    //player.x = i.posX
-                    //player.y = i.posY
-                    //i.insertPLayer(player)
-                    //playerLastNode?.removePlayer(player);
+                    BoardGraph.SharedInstance.alertRef!.node = i
                 }
                 alerta.addAction(action)
             }
-            alerta.quantity = quantity
-            alerta.node = node
-            alerta.lista = lista
-            alerta.viewToShow = view
-            
+            self.alertRef = alerta;
+            self.alertCondition = true;
             view?.presentViewController(alerta, animated: true, completion: nil)
-            
+            while self.alertCondition {}
+            lista.append(node)
+            return walk(quantity - 1, node: alerta.node!, lista: lista, view: view)
         }
         
         lista.append(node)
         return walk(quantity - 1, node: node.nextMoves.first!, lista : lista, view: view);
     }
     
+    func walkList(quantity : Int, player : Player, view : UIViewController?) -> [BoardNode]?{
+        return walk(quantity, node: nodeFor(player)!, lista: [], view: view);
+    }
     
     // Jhonny Walker keep walking
     func walk(qtd : Int, player : Player, view : UIViewController?){

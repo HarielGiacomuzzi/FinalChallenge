@@ -91,7 +91,11 @@ class GameManager : NSObject {
     func diceReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
+                    var a = UIAlertController(title: "Hello World!", message: "Apareci :)", preferredStyle: .ActionSheet)
+                    boardViewController?.presentViewController(a, animated: true, completion: nil);
                     BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
+                    //print("vou chamar o board graph walk list")
+                    //print (BoardGraph.SharedInstance.walkList(data["diceResult"] as! Int, player: p, view: boardViewController))
                     playerTurn(p)
                     playerTurnEnded(p)
                     break;

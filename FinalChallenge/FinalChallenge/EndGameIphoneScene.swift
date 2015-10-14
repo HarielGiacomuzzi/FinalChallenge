@@ -25,12 +25,14 @@ class EndGameIphoneScene : SKScene{
         let label = SKLabelNode(fontNamed: "GillSans-Bold")
         label.text = "Game ended someone won, the rest lost, deal with it"
         label.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        label.zPosition = 5
         self.addChild(label)
         
         let backToMain = SKLabelNode(fontNamed: "GillSans-Bold")
         backToMain.name = "back"
         backToMain.text = "Back to Start Screen"
         backToMain.position = CGPoint(x: self.frame.width/2, y: self.frame.height/5)
+        backToMain.zPosition = 5
         self.addChild(backToMain)
         
     }
