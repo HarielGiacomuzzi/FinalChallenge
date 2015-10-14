@@ -91,8 +91,7 @@ class GameManager : NSObject {
     func diceReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
-                    let oi:[BoardNode] = BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
-                    print(oi)
+                    BoardGraph.SharedInstance.walk(data["diceResult"] as! Int, player: p, view: boardViewController);
                     playerTurn(p)
                     playerTurnEnded(p)
                     break;
