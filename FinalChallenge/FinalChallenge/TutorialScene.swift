@@ -331,7 +331,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
             d.addChild(desc3)
             
             let desc4 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
-            desc4.text = "some bot grab it again."
+            desc4.text = "some bot grab it again. Check your"
             desc4.position = CGPointMake(desc4.position.x, desc4.position.y - 90)
             desc4.fontColor = UIColor.blackColor()
             desc4.fontSize = fontSize

@@ -30,6 +30,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var connect : SKSpriteNode?
     var go : SKSpriteNode?
     var numberOfTurns : SKLabelNode?
+    var tutorialNode : SKSpriteNode?
     
     var charInitialPosition : CGFloat?
     
@@ -117,7 +118,37 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         
+        self.setTutorialScene()
+    }
+    
+    func setTutorialScene(){
+        tutorialNode = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
+        tutorialNode?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        tutorialNode?.zPosition = 10000
+        tutorialNode?.name = "tutorial"
         
+        let tutorialText = SKLabelNode(fontNamed: "GillSans-Bold")
+        tutorialText.name = "tutorial label"
+        tutorialText.text = "Tutorial"
+        tutorialText.position.y = tutorialNode!.frame.height/2.5
+        tutorialText.zPosition = 11000
+        
+        let text = SKLabelNode(fontNamed: "GillSans-Bold")
+        text.name = "tutorial label"
+        text.text = "Two or more Players"
+        text.position.y = tutorialNode!.frame.height/3.2
+        text.zPosition = 11000
+        text.fontSize = 20
+        
+        let sprite1 = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: tutorialNode!.frame.width/2, height: tutorialNode!.frame.height/5))
+        sprite1.name = "Tutorial sprite"
+        sprite1.position.y = tutorialNode!.frame.height/5
+        sprite1.zPosition = 11000
+        
+        tutorialNode?.addChild(tutorialText)
+        tutorialNode?.addChild(text)
+        tutorialNode?.addChild(sprite1)
+        self.addChild(tutorialNode!)
     }
     
     override func willMoveFromView(view: SKView) {
@@ -220,6 +251,9 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let touch : UITouch? = touches.first as UITouch?
         
         if let location = touch?.locationInNode(self) {
+            if (tutorialNode!.containsPoint(location)){
+                tutorialNode?.removeFromParent()
+            }
             let touchedNode = self.nodeAtPoint(location)
             if touchedNode.name == "back"{
                 viewController?.dismissViewControllerAnimated(false, completion: nil)

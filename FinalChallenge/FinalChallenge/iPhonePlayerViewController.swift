@@ -55,7 +55,7 @@ class iPhonePlayerViewController: UIViewController {
         if playerScene?.carousel != nil {
             playerScene?.carousel.canRemoveWithSwipeUp = true
         }
-        playerScene?.testButton.text = "DICE"
+        playerScene?.dice.activateDice()
         setNotification("Your Turn")
         
     }
