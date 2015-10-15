@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		262C07F11BD0298A00246DF5 /* TestterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262C07F01BD0298A00246DF5 /* TestterViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		262C07F31BD02B3400246DF5 /* roboPadAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 262C07F21BD02B3400246DF5 /* roboPadAssets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		264D0CDE1B9F6AE6005B7EE9 /* SetupParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */; };
 		26547BAD1B9F4736003DFD73 /* SetupPartyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */; };
 		26547BB31B9F4D59003DFD73 /* SetupParty.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */; };
@@ -137,6 +139,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		262C07F01BD0298A00246DF5 /* TestterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestterViewController.swift; sourceTree = "<group>"; };
+		262C07F21BD02B3400246DF5 /* roboPadAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = roboPadAssets.xcassets; sourceTree = "<group>"; };
 		264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupParticle.swift; sourceTree = "<group>"; };
 		26547BAC1B9F4736003DFD73 /* SetupPartyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupPartyScene.swift; sourceTree = "<group>"; };
 		26547BB21B9F4D59003DFD73 /* SetupParty.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SetupParty.xcassets; sourceTree = "<group>"; };
@@ -380,6 +384,7 @@
 				5ED294DD1BBD9AAA0073B148 /* AccelerometerScene.swift */,
 				5ED294DF1BBD9C030073B148 /* GamePadScene.swift */,
 				5ED294E11BBD9D380073B148 /* SwipeScene.swift */,
+				262C07F21BD02B3400246DF5 /* roboPadAssets.xcassets */,
 			);
 			name = GamePads;
 			sourceTree = "<group>";
@@ -534,6 +539,7 @@
 		DB458B641B5409B90066B38C = {
 			isa = PBXGroup;
 			children = (
+				262C07F01BD0298A00246DF5 /* TestterViewController.swift */,
 				DB458B6F1B5409B90066B38C /* FinalChallenge */,
 				DB458B881B5409B90066B38C /* FinalChallengeTests */,
 				DB458B6E1B5409B90066B38C /* Products */,
@@ -749,6 +755,7 @@
 				26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
+				262C07F31BD02B3400246DF5 /* roboPadAssets.xcassets in Resources */,
 				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
 				DB8C2C2F1BB06D6B0080C2D2 /* board_3.xml in Resources */,
@@ -861,6 +868,7 @@
 				DB458B731B5409B90066B38C /* AppDelegate.swift in Sources */,
 				DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */,
 				B5F60BBE1B83C36C00786728 /* Player.swift in Sources */,
+				262C07F11BD0298A00246DF5 /* TestterViewController.swift in Sources */,
 				5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */,
 				B5DD1B441B8CD53400AA1EB6 /* AccelerometerGamePadController.swift in Sources */,
 				B5AFAD151BA09BD40005F19E /* GameOverSceneSP.swift in Sources */,
