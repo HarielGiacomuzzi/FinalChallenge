@@ -49,7 +49,14 @@ class PlayerNode: SKSpriteNode {
     }
     
     func walkTo(pointList:[CGPoint], completion:() -> ()) {
-
+        if pointList.count == 0 {
+            completion()
+            return
+        }
+        if pointList.count == 1 {
+            walkTo(pointList.first!, completion: completion)
+            return
+        }
         var list = pointList
         let last = list.removeLast()
         var block = {self.walkTo(last, completion: {() in
@@ -57,8 +64,6 @@ class PlayerNode: SKSpriteNode {
             self.runAction(SKAction.waitForDuration(0.5), completion: {() in
                 completion()
             })
-//            self.runAction(SKAction.waitForDuration(0.2))
-//            completion()
         })}
         while list.count > 1 {
             let newBlock = block
@@ -70,7 +75,8 @@ class PlayerNode: SKSpriteNode {
     }
     
     func walkTo(point:CGPoint, completion:() -> ()) {
-        print("walk to \(point)")
+        print(point)
+        print(position)
         let textures = decideDirection(point)
         let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.1)
         let movement = SKAction.moveTo(point, duration: 2.0)

@@ -87,20 +87,59 @@ class GameManager : NSObject {
         BoardGraph.SharedInstance.pickItem(location!, player: player!)
     }
     
-    //dice responce
+    //dice response
     func diceReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
-                    let nodes = BoardGraph.SharedInstance.walkList(data["diceResult"] as! Int, player: p, view: boardViewController)
-                    movePlayerOnBoard(nodes!, player: p, completion: {() in
-                            self.playerTurn(p)
-                            self.playerTurnEnded(p)
-                        })
-
+                    let tuple = BoardGraph.SharedInstance.walkList(data["diceResult"] as! Int, player: p, view: boardViewController)
+                    movePlayerOnBoardComplete(p, nodeList: tuple.nodeList, remaining: tuple.remaining, currentNode: tuple.currentNode)
                     break;
                 }
             }
     }
+    
+    func movePlayerOnBoardComplete(p:Player, nodeList:[BoardNode], remaining:Int,currentNode:BoardNode) {
+        if remaining > 0 {
+            movePlayerAndContinueWithCrossroads(p, nodeList: nodeList, remaining: remaining, currentNode: currentNode)
+        } else {
+            movePlayerAndContinue(p, nodeList: nodeList)
+        }
+    }
+    
+    func movePlayerAndContinue(p:Player, nodeList:[BoardNode]) {
+        movePlayerOnBoard(nodeList, player: p, completion: {() in
+            self.playerTurn(p)
+            self.playerTurnEnded(p)
+        })
+    }
+    
+    func movePlayerAndContinueWithCrossroads(p:Player, nodeList:[BoardNode], remaining:Int, currentNode:BoardNode) {
+        movePlayerOnBoard(nodeList, player: p, completion: {() in
+            let alert = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
+            for node in currentNode.nextMoves {
+                let title = "Path: \(BoardGraph.SharedInstance.keyFor(node))"
+                let action = UIAlertAction(title: title, style: .Default, handler: {action -> Void in
+                    BoardGraph.SharedInstance.alertRef!.node = node
+                    self.movePlayerOneSquare(p, node: node, remaining: remaining-1)
+                })
+                BoardGraph.SharedInstance.alertRef = alert
+                BoardGraph.SharedInstance.alertCondition = true
+                alert.addAction(action)
+            }
+            self.boardViewController?.presentViewController(alert, animated: true, completion:nil)
+
+        })
+        
+    }
+    
+    func movePlayerOneSquare(p:Player, node:BoardNode, remaining:Int) {
+        BoardGraph.SharedInstance.walkToNode(p, node: node)
+        movePlayerOnBoard([node], player: p, completion: {() in
+            let tuple = BoardGraph.SharedInstance.walkList(remaining, player: p, view: self.boardViewController)
+            self.movePlayerOnBoardComplete(p, nodeList: tuple.nodeList, remaining: tuple.remaining, currentNode: tuple.currentNode)
+        })
+    }
+    
 
     // manda a carta a ser adicionada no boardGame
     func mr3(data : NSNotification){
@@ -328,7 +367,6 @@ class GameManager : NSObject {
         for n in nodes {
             points.append(CGPointMake(CGFloat(n.posX), CGFloat(n.posY)))
         }
-        points.removeFirst()
         player.nodeSprite?.walkTo(points, completion: completion)
         
     }

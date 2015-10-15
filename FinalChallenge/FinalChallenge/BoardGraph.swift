@@ -242,36 +242,28 @@ class BoardGraph : NSObject{
         return lista
     }
     
-    private func walk(quantity : Int, node : BoardNode, var lista : [BoardNode], view : UIViewController?) -> [BoardNode]?{
+    func walk(quantity : Int, node : BoardNode, var lista : [BoardNode], view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
         if quantity == 0 {
-            return lista
+            return (lista, quantity, node)
         }
         
         if node.nextMoves.count > 1 {
-            let alerta = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
-            for i in node.nextMoves{
-                let action = UIAlertAction(title: "Path: \(keyFor(i))", style: .Default) { action -> Void in
-                    BoardGraph.SharedInstance.alertRef!.node = i
-                }
-                alerta.addAction(action)
-            }
-            self.alertRef = alerta;
-            self.alertCondition = true;
-            view?.presentViewController(alerta, animated: true, completion: nil)
-            while self.alertCondition {}
-            lista.append(node)
-            return walk(quantity - 1, node: alerta.node!, lista: lista, view: view)
+            return (lista,quantity,node)
         }
-        
         lista.append(node)
         return walk(quantity - 1, node: node.nextMoves.first!, lista : lista, view: view);
     }
     
-    func walkList(quantity : Int, player : Player, view : UIViewController?) -> [BoardNode]?{
+    func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
         let a = walk(quantity, node: nodeFor(player)!, lista: [], view: view);
         nodeFor(player)?.removePlayer(player);
-        a!.last?.insertPLayer(player);
+        a.nodeList.last?.insertPLayer(player);
         return a;
+    }
+    
+    func walkToNode(player:Player, node:BoardNode) {
+        nodeFor(player)?.removePlayer(player)
+        node.insertPLayer(player)
     }
     
     // Jhonny Walker keep walking

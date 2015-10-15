@@ -100,4 +100,5 @@ class BoardViewController : UIViewController {
         print("Deu deinit na board view")
         self.view = nil
     }
+    
 }
