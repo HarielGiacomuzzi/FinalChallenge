@@ -100,7 +100,7 @@ class GameOverSceneMP : MinigameScene {
         self.addChild(titleLabel)
         
         
-//        thirdPlace(player3!)
+        thirdPlace(player3)
         
         
     }
@@ -113,22 +113,20 @@ class GameOverSceneMP : MinigameScene {
         if let location = touch?.locationInNode(self) {
             let touchedNode = self.nodeAtPoint(location)
             
-//            if touchedNode.name == "Back to Board" {
-                _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
-                self.view?.presentScene(nil)
-                GameManager.sharedInstance.dismissMinigameMP()
-//            }
+            _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
+            self.view?.presentScene(nil)
+            GameManager.sharedInstance.dismissMinigameMP()
+
         }
     }
     
     
-    func secondPlace(secondPlayer : Player){
+    func secondPlace(secondPlayer : Player?){
         
         
         let base : SKSpriteNode = SKSpriteNode(imageNamed: "squarebackground")
         base.name = "fundo tela Segundo MENOR LOSER"
         
-        base.color = secondPlayer.color
         base.colorBlendFactor = 0.7
         base.size = CGSize(width: base.frame.width, height: self.frame.height)
         
@@ -136,31 +134,32 @@ class GameOverSceneMP : MinigameScene {
         base.position = CGPoint(x: -(base.frame.width/2), y: self.frame.height/2)
         
         self.addChild(base)
-        let avatar : SKSpriteNode = SKSpriteNode(imageNamed: secondPlayer.avatar!)
-        avatar.position = CGPoint(x: -70, y: -170)
-        base.addChild(avatar)
-        avatar.zPosition = 2
-        avatar.size = CGSize(width: avatar.size.width * 0.7, height: avatar.size.height * 0.7)
         
-        
+        if let player = secondPlayer {
+            base.color = player.color
+            let avatar : SKSpriteNode = SKSpriteNode(imageNamed: player.avatar!)
+            avatar.position = CGPoint(x: -70, y: -170)
+            base.addChild(avatar)
+            avatar.zPosition = 2
+            avatar.size = CGSize(width: avatar.size.width * 0.7, height: avatar.size.height * 0.7)
+        }
         
         
         let movement = SKAction.moveTo(posicaoFinal, duration: 0.5)
         base.runAction(movement){ () -> Void in
-            self.firstPlace(self.player1!)
+            self.firstPlace(self.player1)
         }
         
         
         
     }
     
-    func thirdPlace(thirdPlayer : Player){
+    func thirdPlace(thirdPlayer : Player?){
         
         
         let base : SKSpriteNode = SKSpriteNode(imageNamed: "squarebackground")
         base.name = "fundo tela Segundo MAIOR LOSER"
         
-        base.color = thirdPlayer.color
         base.colorBlendFactor = 0.7
         base.size = CGSize(width: base.frame.width, height: self.frame.height)
         let posicaoFinal = CGPoint(x: self.frame.width - base.frame.width/2, y: self.frame.height/2)
@@ -168,30 +167,29 @@ class GameOverSceneMP : MinigameScene {
         
         self.addChild(base)
         
-        
-        let avatar : SKSpriteNode = SKSpriteNode(imageNamed: thirdPlayer.avatar!)
-        avatar.position = CGPoint(x: 70, y: -170)
-        base.addChild(avatar)
-        avatar.zPosition = 2
-        avatar.xScale = avatar.xScale * -1.0
-        avatar.size = CGSize(width: avatar.size.width * 0.7, height: avatar.size.height * 0.7)
-        
+        if let player = thirdPlayer {
+            base.color = player.color
+            let avatar : SKSpriteNode = SKSpriteNode(imageNamed: player.avatar!)
+            avatar.position = CGPoint(x: -70, y: -170)
+            base.addChild(avatar)
+            avatar.zPosition = 2
+            avatar.size = CGSize(width: avatar.size.width * 0.7, height: avatar.size.height * 0.7)
+        }
         
         
         let movement = SKAction.moveTo(posicaoFinal, duration: 0.5)
         base.runAction(movement) { () -> Void in
-            self.secondPlace(self.player2!)
+            self.secondPlace(self.player2)
         }
         
     }
     
-    func firstPlace(firstPlayer : Player){
+    func firstPlace(firstPlayer : Player?){
         
         
         let base : SKSpriteNode = SKSpriteNode(imageNamed: "winnerbackground")
         base.name = "fundo tela Segundo MAIOR LOSER"
         
-        base.color = firstPlayer.color
         base.colorBlendFactor = 0.7
         base.zPosition = 3
         
@@ -201,16 +199,14 @@ class GameOverSceneMP : MinigameScene {
         base.zPosition = 3
         self.addChild(base)
         
-        let avatar : SKSpriteNode = SKSpriteNode(imageNamed: (firstPlayer.avatar)!)
-        avatar.position = CGPoint(x: 0, y: -150)
-        base.addChild(avatar)
-        avatar.zPosition = 3
-        avatar.xScale = avatar.xScale * -1.0
-        avatar.size = CGSize(width: avatar.size.width * 0.8, height: avatar.size.height * 0.8)
-        
-        
-        
-        
+        if let player = firstPlayer {
+            base.color = player.color
+            let avatar : SKSpriteNode = SKSpriteNode(imageNamed: player.avatar!)
+            avatar.position = CGPoint(x: -70, y: -170)
+            base.addChild(avatar)
+            avatar.zPosition = 2
+            avatar.size = CGSize(width: avatar.size.width * 0.7, height: avatar.size.height * 0.7)
+        }
         
         let movement = SKAction.moveTo(posicaoFinal, duration: 0.5)
         base.runAction(movement) {

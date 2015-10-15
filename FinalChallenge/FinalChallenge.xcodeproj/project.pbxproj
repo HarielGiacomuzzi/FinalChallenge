@@ -34,6 +34,7 @@
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E4299321BB9880E004B1DF9 /* StoreButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */; settings = {ASSET_TAGS = (); }; };
 		5E4299341BB9914F004B1DF9 /* CardShowNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4299331BB9914F004B1DF9 /* CardShowNode.swift */; settings = {ASSET_TAGS = (); }; };
+		5E51FBE61BD0315E00F482A6 /* endgameassets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E51FBE51BD0315E00F482A6 /* endgameassets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
 		5E5A64A41BC6E26B00D5AC09 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A64A31BC6E26B00D5AC09 /* PlayerNode.swift */; settings = {ASSET_TAGS = (); }; };
 		5E5A64A61BC6EC6B00D5AC09 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A64A51BC6EC6B00D5AC09 /* TestViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -168,6 +169,7 @@
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreButtonNode.swift; sourceTree = "<group>"; };
 		5E4299331BB9914F004B1DF9 /* CardShowNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardShowNode.swift; sourceTree = "<group>"; };
+		5E51FBE51BD0315E00F482A6 /* endgameassets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = endgameassets.xcassets; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
 		5E5A64A31BC6E26B00D5AC09 /* PlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 		5E5A64A51BC6EC6B00D5AC09 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				2682DF6E1BB4838900ACF1A6 /* popup.atlas */,
 				2661C40B1BB082A9003A49F9 /* tutorialassets.xcassets */,
 				5EE219F91BD028D700D6EF98 /* EndGameParticleNode.swift */,
+				5E51FBE51BD0315E00F482A6 /* endgameassets.xcassets */,
 			);
 			name = Minigames;
 			sourceTree = "<group>";
@@ -779,6 +782,7 @@
 				5ED294DB1BBD96B50073B148 /* cards.atlas in Resources */,
 				DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */,
 				DBE862051B850DB700C8099E /* board_2.xml in Resources */,
+				5E51FBE61BD0315E00F482A6 /* endgameassets.xcassets in Resources */,
 				B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */,
 				B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
