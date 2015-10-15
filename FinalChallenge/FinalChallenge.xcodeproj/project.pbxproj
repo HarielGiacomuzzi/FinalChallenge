@@ -59,6 +59,7 @@
 		5ED294E01BBD9C030073B148 /* GamePadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294DF1BBD9C030073B148 /* GamePadScene.swift */; settings = {ASSET_TAGS = (); }; };
 		5ED294E21BBD9D380073B148 /* SwipeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294E11BBD9D380073B148 /* SwipeScene.swift */; settings = {ASSET_TAGS = (); }; };
 		5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */; };
+		5EE219F61BD0161300D6EF98 /* DiceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE219F51BD0161300D6EF98 /* DiceNode.swift */; settings = {ASSET_TAGS = (); }; };
 		5EE267D71BC2A49D0006E5BD /* NotificationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE267D61BC2A49D0006E5BD /* NotificationNode.swift */; settings = {ASSET_TAGS = (); }; };
 		5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */; };
 		B503E3F41BAB2FA400C6284A /* GameOverSceneMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */; settings = {ASSET_TAGS = (); }; };
@@ -190,6 +191,7 @@
 		5ED294DF1BBD9C030073B148 /* GamePadScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadScene.swift; sourceTree = "<group>"; };
 		5ED294E11BBD9D380073B148 /* SwipeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeScene.swift; sourceTree = "<group>"; };
 		5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameScene.swift; sourceTree = "<group>"; };
+		5EE219F51BD0161300D6EF98 /* DiceNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceNode.swift; sourceTree = "<group>"; };
 		5EE267D61BC2A49D0006E5BD /* NotificationNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNode.swift; sourceTree = "<group>"; };
 		5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneMP.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				5E840FFF1BA9CC000099B16B /* PlayerControllerScene.swift */,
 				5E68DAAA1BA9ECCB00DB14FB /* PlayerButtonNode.swift */,
 				5E840FFD1BA9CBB00099B16B /* CardCarousellNode.swift */,
+				5EE219F51BD0161300D6EF98 /* DiceNode.swift */,
 			);
 			name = PlayerScene;
 			sourceTree = "<group>";
@@ -841,6 +844,7 @@
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,
+				5EE219F61BD0161300D6EF98 /* DiceNode.swift in Sources */,
 				B5279F8B1BB06C220015DBE7 /* Card.swift in Sources */,
 				B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */,
 				5E68AD7B1B8CCD3E00FD4404 /* BombPlayerNode.swift in Sources */,

@@ -99,10 +99,12 @@ class GameManager : NSObject {
     }
     
     func movePlayerOnBoardComplete(p:Player, nodeList:[BoardNode], remaining:Int,currentNode:BoardNode) {
+        var list = nodeList
+        list.removeFirst()
         if remaining > 0 {
-            movePlayerAndContinueWithCrossroads(p, nodeList: nodeList, remaining: remaining, currentNode: currentNode)
+            movePlayerAndContinueWithCrossroads(p, nodeList: list, remaining: remaining, currentNode: currentNode)
         } else {
-            movePlayerAndContinue(p, nodeList: nodeList)
+            movePlayerAndContinue(p, nodeList: list)
         }
     }
     
