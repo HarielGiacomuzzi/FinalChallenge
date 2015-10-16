@@ -254,15 +254,20 @@ class GameManager : NSObject {
         }
         
         let minigame = minigameOrderArray.randomItem()
-        
-        for m in minigameOrderArray {
-            //print(m.rawValue)
-        }
-        
-        let dic = ["openController":"", "gameName":minigame.rawValue]
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        sendBeginMinigameMessage(minigame)
         boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
 
+    }
+    
+    func sendBeginMinigameMessage(minigame:Minigame) {
+        var playerColorDic:[String:UIColor] = [:]
+        for player in players {
+            playerColorDic[player.playerIdentifier] = player.color
+        }
+        print("estou enviando o dic:")
+        print(playerColorDic)
+        let dic = ["openController":"", "gameName":minigame.rawValue, "playerColorDic":playerColorDic]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     
     // chamado quando o player já escolheu um caminho no tabuleiro
