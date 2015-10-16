@@ -120,14 +120,20 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         text.zPosition = 11
         text.fontSize = 20
         
-        let sprite1 = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: tutorialNode!.frame.width/2, height: tutorialNode!.frame.height/5))
+        let d = SKNode()
+        
+        let desc = SKLabelNode(fontNamed: "GillSans-Bold")
+        desc.name = "desc 1"
+        desc.text = "To play this mode you will need"
+        
+        /*let sprite1 = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: tutorialNode!.frame.width/2, height: tutorialNode!.frame.height/5))
         sprite1.name = "Tutorial sprite"
         sprite1.position.y = tutorialNode!.frame.height/5
-        sprite1.zPosition = 11
+        sprite1.zPosition = 11*/
         
         tutorialNode?.addChild(tutorialText)
         tutorialNode?.addChild(text)
-        tutorialNode?.addChild(sprite1)
+        //tutorialNode?.addChild(sprite1)
         self.addChild(tutorialNode!)
     }
     
