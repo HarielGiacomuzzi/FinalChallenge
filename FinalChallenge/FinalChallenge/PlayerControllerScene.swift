@@ -9,14 +9,14 @@
 import UIKit
 import SpriteKit
 
-class PlayerControllerScene: SKScene, CardCarousellDelegate {
+class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
     
     var moneyButton : PlayerButtonNode!
     var lootButton : PlayerButtonNode!
     var carousel : CardCarouselNode!
     var topBarLimit:CGFloat = 0.0
     var playerName = "Player Name"
-    var testButton : SKLabelNode!
+    var dice : DiceNode!
     var cardsString:[String] = []
     weak var viewController : iPhonePlayerViewController?
     
@@ -33,7 +33,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         createSquaresAndAnimate()
         setupTopBar()
         setupButtons()
-        createTestButton()
+        createDice()
         
         var cards:[CardSprite] = []
         for cardString in cardsString {
@@ -85,7 +85,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         let moneyButtonTextureOff = SKTexture(imageNamed: "button2Off")
         moneyButton = PlayerButtonNode(textureOn: moneyButtonTextureOn, textureOff: moneyButtonTextureOff, openRight: false)
         
-        moneyButton.position = CGPointMake(frame.size.width - moneyButton.button.size.width / 2, (moneyButton.button.size.height / 2) - 20)
+        moneyButton.position = CGPointMake((frame.size.width - moneyButton.button.size.width / 2) - 20, (moneyButton.button.size.height / 2) - 20)
 
         addChild(moneyButton)
         moneyButton.zPosition = 100
@@ -94,7 +94,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         let lootButtonTextureOff = SKTexture(imageNamed: "button1Off")
         lootButton = PlayerButtonNode(textureOn: lootButtonTextureOn, textureOff: lootButtonTextureOff, openRight: true)
         
-        lootButton.position = CGPointMake(lootButton.button.size.width/2, (lootButton.button.size.height/2) - 20)
+        lootButton.position = CGPointMake(lootButton.button.size.width/2 + 20, (lootButton.button.size.height/2) - 20)
         
         addChild(lootButton)
         lootButton.zPosition = 100
@@ -161,38 +161,26 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate {
         
     }
     
-    func createTestButton() {
-        
-        testButton = SKLabelNode(text: "IDLE")
-        testButton.position = CGPointMake(frame.size.width - testButton.frame.size.width, frame.size.height/2)
-        testButton.fontSize = 50.0
-        testButton.fontName = "GillSans-Bold"
-        testButton.zPosition = 500
-        addChild(testButton)
+    
+    func createDice() {
+        dice = DiceNode()
+        dice.zPosition = 30
+        dice.position = CGPointMake(moneyButton.position.x, frame.size.height/2)
+        addChild(dice)
+        dice.delegate = self
+
     }
     
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch: AnyObject in touches {
-            
-            let location = touch.locationInNode(self)
-            if testButton.containsPoint(location) {
-                if testButton.text == "DICE" {
-                    let diceResult = 6//Int(arc4random_uniform(6)+1)
-                    let aux = NSMutableDictionary();
-                    aux.setValue(diceResult, forKey: "diceResult");
-                    aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
-                    ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
-                    testButton.text = "IDLE"
-                    if carousel != nil {
-                        carousel.canRemoveWithSwipeUp = false
-                    }
-                    
-                    
-                } 
-            }
-
+    func diceRolled(sender: SKSpriteNode) {
+        let diceResult = 6//Int(arc4random_uniform(6)+1)
+        let aux = NSMutableDictionary();
+        aux.setValue(diceResult, forKey: "diceResult");
+        aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
+        if carousel != nil {
+            carousel.canRemoveWithSwipeUp = false
         }
+
     }
     
     deinit {

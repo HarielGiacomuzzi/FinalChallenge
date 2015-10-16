@@ -44,7 +44,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     var popupAtlas:SKTextureAtlas!
     
-    
+    var tutorialNode : SKSpriteNode?
     
     // colisions
     let boundaryCategoryMask: UInt32 =  0x1 << 1
@@ -59,6 +59,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
                 if (GameManager.sharedInstance.players[i].avatar != nil) && (GameManager.sharedInstance.players[j].avatar != nil) {
                     //print("Entrou na mudanca \(GameManager.sharedInstance.players[i].avatar!) e \(GameManager.sharedInstance.players[j].avatar!)")
                     if (GameManager.sharedInstance.players[i].avatar! == GameManager.sharedInstance.players[j].avatar!){
+                        
                         //print("Entrou na mudanca 3")
                         var aux = GameManager.sharedInstance.players[j].avatar
                         GameManager.sharedInstance.players[j].avatar = nil
@@ -98,6 +99,37 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         popupAtlas = SKTextureAtlas(named: "popup")
+        self.setTutorialScene()
+    }
+    
+    func setTutorialScene(){
+        tutorialNode = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
+        tutorialNode?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        tutorialNode?.zPosition = 10
+        tutorialNode?.name = "tutorial"
+        
+        let tutorialText = SKLabelNode(fontNamed: "GillSans-Bold")
+        tutorialText.name = "tutorial label"
+        tutorialText.text = "Tutorial"
+        tutorialText.position.y = tutorialNode!.frame.height/2.5
+        tutorialText.zPosition = 11
+        
+        let text = SKLabelNode(fontNamed: "GillSans-Bold")
+        text.name = "tutorial label"
+        text.text = "Two or more Players"
+        text.position.y = tutorialNode!.frame.height/3.2
+        text.zPosition = 11
+        text.fontSize = 20
+        
+        let sprite1 = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: tutorialNode!.frame.width/2, height: tutorialNode!.frame.height/5))
+        sprite1.name = "Tutorial sprite"
+        sprite1.position.y = tutorialNode!.frame.height/5
+        sprite1.zPosition = 11
+        
+        tutorialNode?.addChild(tutorialText)
+        tutorialNode?.addChild(text)
+        tutorialNode?.addChild(sprite1)
+        self.addChild(tutorialNode!)
     }
     
     func setObjects(){
@@ -260,6 +292,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
+        
+        if(tutorialNode!.containsPoint(location)){
+            tutorialNode?.removeFromParent()
+        }
         
         if(go!.containsPoint(location)){
             go!.texture = greenButtonOff
