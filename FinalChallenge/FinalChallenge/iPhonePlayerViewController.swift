@@ -66,11 +66,7 @@ class iPhonePlayerViewController: UIViewController {
         let minigame = Minigame(rawValue: gameData)
         let playerColorDic = data.userInfo!["playerColorDic"] as! [String:UIColor]
         let playerName = ConnectionManager.sharedInstance.peerID!.displayName
-        print("estou recebendo o dic:")
-        print(playerColorDic)
         playerColor = playerColorDic[playerName]
-        print("setei a color")
-        print(playerColor)
         loadGamePad(minigame!)
     }
     

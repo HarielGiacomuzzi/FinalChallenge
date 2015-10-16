@@ -264,8 +264,7 @@ class GameManager : NSObject {
         for player in players {
             playerColorDic[player.playerIdentifier] = player.color
         }
-        print("estou enviando o dic:")
-        print(playerColorDic)
+
         let dic = ["openController":"", "gameName":minigame.rawValue, "playerColorDic":playerColorDic]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
