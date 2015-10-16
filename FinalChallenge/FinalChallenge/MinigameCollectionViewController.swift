@@ -23,10 +23,13 @@ class MinigameCollectionViewController : UIViewController {
         scene = MinigameCollectionScene(size: CGSize(width: self.view.frame.width, height: self.view.frame.height))
         
         let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.ignoresSiblingOrder = true
+        
+        //debug configs
+        skView.showsFPS = false
+        skView.showsNodeCount = false
         skView.showsPhysics = false
+        
+        skView.ignoresSiblingOrder = true
         scene.viewController = self
         scene.scaleMode = .AspectFit
         skView.presentScene(scene)
@@ -57,6 +60,6 @@ class MinigameCollectionViewController : UIViewController {
     }
     
     deinit{
-        print("MinigameCollectionViewController did deinit")
+        //print("MinigameCollectionViewController did deinit")
     }
 }

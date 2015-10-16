@@ -22,11 +22,7 @@ extension SKNode {
         archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
         
         var scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! SKNode
-        if(false){
-            scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! BoardScene
-        }else{
-            scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! MainBoard
-        }
+        scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as! MainBoard
         archiver.finishDecoding()
         return scene
     }
@@ -45,7 +41,7 @@ class BoardViewController : UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidLoad()
-        print("DEU VIEW DIDLOAD")
+        //print("DEU VIEW DIDLOAD")
         GameManager.sharedInstance.boardGameViewController = self
         self.setupScene()
     }
@@ -55,8 +51,8 @@ class BoardViewController : UIViewController {
         scene = MainBoard.unarchiveFromFile("MainBoard") as! MainBoard
         // Configure the view.
         let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        skView.showsFPS = false
+        skView.showsNodeCount = false
         
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
@@ -85,7 +81,7 @@ class BoardViewController : UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("entrou no preperForSegue")
+        //print("entrou no preperForSegue")
         if segue.identifier == "gotoMinigame" {
             scene.removeAllActions()
             scene.removeAllChildren()
@@ -97,7 +93,7 @@ class BoardViewController : UIViewController {
     }
     
     deinit{
-        print("Deu deinit na board view")
+        //print("Deu deinit na board view")
         self.view = nil
     }
     

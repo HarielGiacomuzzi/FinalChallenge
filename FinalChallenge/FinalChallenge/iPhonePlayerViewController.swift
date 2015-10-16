@@ -40,8 +40,8 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil)
         
         skView = self.view as? SKView
-        skView?.showsFPS = true
-        skView?.showsNodeCount = true
+        skView?.showsFPS = false
+        skView?.showsNodeCount = false
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
 //        playerCards = ["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"]
@@ -75,29 +75,29 @@ class iPhonePlayerViewController: UIViewController {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
         let playerName = dic["player"] as! String
         let value = dic["value"] as! Int
-        print("mensagem para \(playerName)")
-        print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
+        //print("mensagem para \(playerName)")
+        //print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
-            print("playerscene = \(playerScene)")
-            print("gamepadscene = \(gamePadScene)")
-            print("era pra notificar aqui")
-            print("update moneys para \(value)")
+            //print("playerscene = \(playerScene)")
+            //print("gamepadscene = \(gamePadScene)")
+            //print("era pra notificar aqui")
+            //print("update moneys para \(value)")
             setNotification("You got \(playerMoney - value) moneys")
             playerMoney = value
             playerScene?.updateMoney(playerMoney)
         } else {
-            print("nao rola filho")
+            //print("nao rola filho")
         }
     }
     
     func addCard(data : NSNotification) {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
-        print("estou no iphone")
-        print(dic)
+        //print("estou no iphone")
+        //print(dic)
         let playerName = dic["player"] as! String
         let card = dic["item"] as! String
-        print("mensagem para \(playerName)")
-        print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
+        //print("mensagem para \(playerName)")
+        //print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerCards.append(card)
             if playerScene != nil {
@@ -105,34 +105,34 @@ class iPhonePlayerViewController: UIViewController {
             }
             
         } else {
-            print("nao rola filho")
+            //print("nao rola filho")
         }
     }
     
     func removeCard(data : NSNotification) {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
-        print("estou no iphone")
-        print(dic)
+        //print("estou no iphone")
+        //print(dic)
         let playerName = dic["player"] as! String
         let card = dic["item"] as! String
-        print("mensagem para \(playerName)")
-        print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
+        //print("mensagem para \(playerName)")
+        //print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerScene!.removeCard(card)
             playerCards.removeObject(card)
         } else {
-            print("nao rola filho")
+            //print("nao rola filho")
         }
     }
     
     func openStore(data : NSNotification) {
-        print("OPEN STORE MENSAGEM RECEBI")
+        //print("OPEN STORE MENSAGEM RECEBI")
         if storeScene == nil {
             let dic = data.userInfo!["dataDic"] as! NSDictionary
             let cards = dic["cards"] as! [String]
             let player = dic["player"] as! String
             if player == ConnectionManager.sharedInstance.peerID!.displayName {
-                print(player)
+                //print(player)
                 loadStore(cards)
             }
         }

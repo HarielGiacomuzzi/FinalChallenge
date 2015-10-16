@@ -45,7 +45,7 @@ class CardManager{
     case "LoseCard" :
         return LoseCard()
     default :
-        print("entrei no default deu ruim gente")
+        //print("entrei no default deu ruim gente")
         return Card()
 
     }
@@ -59,7 +59,7 @@ class CardManager{
             return MoveBackCard()
         case .LoseCard :
             let card = LoseCard()
-            print(card)
+            //print(card)
             return card
         }
     }
