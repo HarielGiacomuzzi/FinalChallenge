@@ -53,7 +53,7 @@ class EndGameScene : SKScene{
     }
     
     deinit{
-        print("retirou a endgamescene")
+        //print("retirou a endgamescene")
     }
 }
 

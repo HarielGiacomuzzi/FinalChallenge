@@ -254,7 +254,7 @@ class InitialViewController: UIViewController
     }
 
     deinit{
-        print("Retirou a initialviewcontroller")
+        //print("Retirou a initialviewcontroller")
     }
     
 }

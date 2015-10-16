@@ -101,7 +101,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     }
 
     func presentEndGameScene(){
-        print("Apresentou EndGame")
+        //print("Apresentou EndGame")
         self.removeAllChildren()
         self.removeAllActions()
         _ = SKTransition.flipHorizontalWithDuration(0.5)
@@ -114,6 +114,6 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
 
     
     deinit{
-        print("A main board saiu")
+        //print("A main board saiu")
     }
 }

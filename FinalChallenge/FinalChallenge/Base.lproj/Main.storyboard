@@ -174,7 +174,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="770" y="1608"/>
+            <point key="canvasLocation" x="658" y="1532"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="oWV-na-dXX">
@@ -584,8 +584,8 @@
         <image name="titleButtonOn" width="267" height="120"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Afr-tR-2lE"/>
-        <segue reference="vFp-2s-lFp"/>
+        <segue reference="IuB-wD-4uJ"/>
         <segue reference="S5e-fy-Ifo"/>
+        <segue reference="vFp-2s-lFp"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -286,7 +286,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func sendDataToIpad(){
-        print(self.selectedNode.name)
+        //print(self.selectedNode.name)
         if let avatarName : String = self.selectedNode.name{
             if canSelectAvatar{
                 var avatar:[String:String] = [:]
@@ -320,7 +320,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let dictionary = data.userInfo!["arrayPlayers"] as! NSDictionary
         let message = dictionary["arrayPlayers"] as! [String]
         self.takenAvatar = message
-        print(self.takenAvatar)
+        //print(self.takenAvatar)
         
         // muda formato das imagens identificando se foi pego ou nao
         for sprite in arrayAvatarSprite{

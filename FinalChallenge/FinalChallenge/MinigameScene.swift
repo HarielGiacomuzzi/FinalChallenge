@@ -31,6 +31,6 @@ class MinigameScene: SKScene {
     }
     
     deinit{
-        print("MinigameScene is out")
+        //print("MinigameScene is out")
     }
 }

@@ -39,7 +39,7 @@ class AccelerometerGamePadController: UIViewController {
                 }
             )
         } else {
-            print("Accelerometer is not available", terminator: "")
+            //print("Accelerometer is not available", terminator: "")
         }
     }
     

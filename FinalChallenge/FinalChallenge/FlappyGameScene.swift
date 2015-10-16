@@ -13,7 +13,7 @@ import SpriteKit
 class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     deinit {
-        print("DEI O DEINIT?")
+        //print("DEI O DEINIT?")
     }
     
     var players:[FlappyPlayerNode] = []
@@ -304,7 +304,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
             player.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
             self.addChild(player)
             players.append(player)
-            _ = SKTexture(imageNamed: "spark.png")
+            //_ = SKTexture(imageNamed: "spark.png")
             let playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
             playerParticle!.name = "PlayerParticle"
             playerParticle!.targetNode = player
@@ -321,7 +321,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         singlePlayer!.position = CGPoint(x: self.frame.size.width / 2, y:self.frame.size.height / 2)
         self.addChild(singlePlayer!)
         
-        _ = SKTexture(imageNamed: "spark.png")
+        //_ = SKTexture(imageNamed: "spark.png")
         weak var playerParticle = FlappyParticleNode.fromFile("PlayerParticle")
         playerParticle!.name = "PlayerParticle"
         playerParticle!.targetNode = self.scene
@@ -344,7 +344,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
         
         self.removeAllChildren()
         self.removeAllActions()
-        _ = SKTransition.flipHorizontalWithDuration(0.5)
+        SKTransition.flipHorizontalWithDuration(0.5)
         let goScene = GameOverSceneMP(size: self.size)
         goScene.players = playerRank
         goScene.scaleMode = self.scaleMode
@@ -413,7 +413,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     func handleColisionEndOfScreenBad(playerBody playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
         for player in players{
             if player.physicsBody == playerBody {
-                print(player.identifier)
+                //print(player.identifier)
                 players.removeObject(player)
                 player.removeFromParent()
                 self.loserRanking.append(player.identifier!)
@@ -430,7 +430,7 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     func handleColisionEndOfScreenGood(playerBody playerBody:SKPhysicsBody,endscreenBody:SKPhysicsBody) {
         for player in players{
             if player.physicsBody == playerBody {
-                print(player.identifier)
+                //print(player.identifier)
                 players.removeObject(player)
                 player.removeFromParent()
                 self.winnerRanking.append(player.identifier!)

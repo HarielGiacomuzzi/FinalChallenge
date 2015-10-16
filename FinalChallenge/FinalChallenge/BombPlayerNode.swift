@@ -24,8 +24,8 @@ class BombPlayerNode: SKNode {
             roboBody?.colorBlendFactor = 0.4
             roboBase?.colorBlendFactor = 0.4
             roboBase?.color = color
-            print(roboBase?.color)
-            print(roboBody?.color)
+            //print(roboBase?.color)
+            //print(roboBody?.color)
         }
     }
     

@@ -75,8 +75,8 @@ class PlayerNode: SKSpriteNode {
     }
     
     func walkTo(point:CGPoint, completion:() -> ()) {
-        print(point)
-        print(position)
+        //print(point)
+        //print(position)
         let textures = decideDirection(point)
         let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.1)
         let movement = SKAction.moveTo(point, duration: 2.0)

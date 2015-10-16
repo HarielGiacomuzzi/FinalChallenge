@@ -41,7 +41,7 @@ class GameOverSceneSP : MinigameScene{
     //sets flappyfish game over scene
     func setupFlappyFishGameOver(){
         
-        print("entrou aqui ta sacando 2")
+        //print("entrou aqui ta sacando 2")
         
         let restartGame = SKLabelNode(fontNamed: "GillSans-Bold")
         restartGame.text = "Restart Game"
@@ -120,7 +120,7 @@ class GameOverSceneSP : MinigameScene{
     }
     
     deinit{
-        print("\(self.game) is being deInitialized")
+        //print("\(self.game) is being deInitialized")
     }
     
 }

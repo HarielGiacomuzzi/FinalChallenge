@@ -236,7 +236,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
         let north = BombPlayerNode()
         north.position = topLeft
         let pi = CGFloat(M_PI)
-        _ = pi
+        //_ = pi
         
         let rotN = SKAction.runBlock({() in
             north.roboBase?.runAction(SKAction.rotateByAngle(pi, duration: 0.3))

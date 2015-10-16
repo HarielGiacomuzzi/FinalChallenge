@@ -15,6 +15,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
     var browser: MCBrowserViewController?;
     private var isIpad = false;
     private var iPadPeer : MCPeerID?
+    private var lastSyncMessage : NSDictionary?
     var advertiser : MCAdvertiserAssistant!
     let ServiceID = "iFiesta";
     static let sharedInstance = ConnectionManager();
@@ -142,12 +143,15 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
     //sends a NSDictionary to the other peer
     func sendDictionaryToPeer(message : NSDictionary?, reliable : Bool) -> Bool{
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        if(message!.valueForKey("openController") != nil || message!.valueForKey("closeController") != nil || message!.valueForKey("IphoneChangeView") != nil || message!.valueForKey("gameEnded") != nil){
+            self.lastSyncMessage = message
+        }
+            
         if (reliable){
             do {
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
             } catch {
                 //fatalError()
-                //print("não consegue mandar a mensagem né moises");
             };
             return
         }
@@ -176,7 +180,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             
             for p in GameManager.sharedInstance.players{
                 if peerID.displayName == p.playerIdentifier{
-                    print("Peer \(peerID.displayName) Disconnected");
+                    //print("Peer \(peerID.displayName) Disconnected");
                     let reconect = MCBrowserViewController(serviceType: self.ServiceID, session: session)
                     reconect.delegate = self;
                     if GameManager.sharedInstance.isOnBoard{
@@ -193,10 +197,15 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         }
         
         if state == MCSessionState.NotConnected{
-            print("Caiuuuuu");
+            NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PeerNotConnected", object: nil, userInfo: userInfo)
             return;
         }
         
+        if state == MCSessionState.Connected && self.lastSyncMessage != nil{
+            //print(self.lastSyncMessage)
+            self.sendDictionaryToPeer(self.lastSyncMessage, reliable: true);
+        }
+            
         NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ConnectionStatusChanged", object: nil, userInfo: userInfo)
         })
     }
@@ -211,8 +220,8 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 //print(message)
         // If is someone's turn to roll dice
                 if message.valueForKey("playerTurn") != nil && message.valueForKey("playerID") as! String  ==  ConnectionManager.sharedInstance.peerID!.displayName {
-                    print(message.valueForKey("playerTurn"))
-                    print(message.valueForKey("playerID"))
+                    //print(message.valueForKey("playerTurn"))
+                    //print(message.valueForKey("playerID"))
                     
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerTurn", object: nil, userInfo: nil)
                     return
@@ -222,13 +231,15 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerAction", object: nil, userInfo: nil)
                 return
             }
+                
         // if we received the dice results of a player
             if message.valueForKey("diceResult") != nil {
                 userInfo.updateValue(message.valueForKey("diceResult") as! Int, forKey: "diceResult")
                 GameManager.sharedInstance.diceReceived(userInfo)
                 return
             }
-                // if someone have been disconnected
+                
+        // if someone have been disconnected
             if message.valueForKey("Disconnected") != nil {
                 userInfo.updateValue(message.valueForKey("Disconnected") as! String, forKey: "peer")
                 //println("peer Disconnected")
@@ -296,7 +307,6 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 return
             }
         // change iphoneview
-                
             if message.valueForKey("IphoneChangeView") != nil {
                 userInfo.updateValue(message.valueForKey("change") as! NSObject, forKey: "change")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_IphoneChangeView", object: nil, userInfo: userInfo)
@@ -312,7 +322,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
 
         // update player money
             if message.valueForKey("updateMoney") != nil {
-                print(message)
+                //print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateMoney", object: nil, userInfo: userInfo)
                 return
@@ -333,48 +343,48 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 
         //player sends card to board
             if message.valueForKey("sendCard") != nil {
-                print(message)
+                //print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_SendCard", object: nil, userInfo: userInfo)
                 return
             }
         //tells player he can make an action
             if message.valueForKey("playerAction") != nil {
-                print(message)
+                //print(message)
                 userInfo.updateValue(message.valueForKey("playerAction") as! NSObject, forKey: "playerAction")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PlayerAction", object: nil, userInfo: userInfo)
                 return
             }
         //tells player to open store view
             if message.valueForKey("openStore") != nil {
-                    print(message)
+                   // print(message)
                     userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                     NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_OpenStore", object: nil, userInfo: userInfo)
                     return
             }
         //tells board that player wants to buy card
             if message.valueForKey("buyCard") != nil {
-                print(message)
+                //print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_BuyCard", object: nil, userInfo: userInfo)
                 return
             }
         //board tells player the result of the buy attempt
             if message.valueForKey("BuyResponse") != nil {
-                print(message)
+                //print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_BuyResponse", object: nil, userInfo: userInfo)
                 return
             }
         //tells board that store was closed
             if message.valueForKey("closeStore") != nil {
-                print(message)
+                //print(message)
                 userInfo.updateValue(message.valueForKey("closeStore") as! NSObject, forKey: "closeStore")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_CloseStore", object: nil, userInfo: userInfo)
                 return
             }
             if message.valueForKey("gameEnded") != nil {
-                print(message)
+                //print(message)
                 userInfo.updateValue(message.valueForKey("gameEnded") as! NSObject, forKey: "gameEnded")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_TheGameEnded", object: nil, userInfo: userInfo)
                 return
@@ -400,11 +410,11 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
     func stream(aStream: NSStream, handleEvent eventCode: NSStreamEvent){
         if (eventCode == NSStreamEvent.HasBytesAvailable) {
             let stream = aStream as! NSInputStream
-            var buffer = [UInt8](count: 8, repeatedValue: 0)
+            _ = [UInt8](count: 8, repeatedValue: 0)
             // Read a single byte
             if stream.hasBytesAvailable {
-                let result: Int = stream.read(&buffer, maxLength: buffer.count)
-                print("received: \(result)")
+                //let result: Int = stream.read(&buffer, maxLength: buffer.count)
+                //print("received: \(result)")
             }
         } else if (eventCode == NSStreamEvent.EndEncountered) {
             // notify application that stream has ended
