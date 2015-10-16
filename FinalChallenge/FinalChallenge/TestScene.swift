@@ -29,8 +29,8 @@ class TestScene: SKScene {
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch = touches.first
-        let location = touch?.locationInNode(self)
+        //let touch = touches.first
+        //let location = touch?.locationInNode(self)
 //        player.walkTo(location!)
     }
 }

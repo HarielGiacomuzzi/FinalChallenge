@@ -90,13 +90,16 @@ class MinigameDescriptionViewController: UIViewController {
         
         
         let skView = view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.ignoresSiblingOrder = true
+        
+        //debug configs
+        skView.showsFPS = false
+        skView.showsNodeCount = false
         skView.showsPhysics = false
+        
+        skView.ignoresSiblingOrder = true
         scene!.scaleMode = .AspectFit
         skView.presentScene(scene)
-        print("apresentei a cena sem crashar")
+        //print("apresentei a cena sem crashar")
         
         
         

@@ -24,6 +24,6 @@ class StealGoldCard : ActiveCard{
     
     func stealCard(player: Player){
         let stolenValue = GameManager.sharedInstance.updatePlayerMoney(player, value: -stealValue)
-        _ = GameManager.sharedInstance.updatePlayerMoney(self.cardOwner, value: stolenValue)
+        GameManager.sharedInstance.updatePlayerMoney(self.cardOwner, value: stolenValue)
     }
 }

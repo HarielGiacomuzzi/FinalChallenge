@@ -214,7 +214,7 @@ class BoardGraph : NSObject{
     
     func addCoins(){
         let aux = Array(nodes.values)
-        for i in 0...Int(arc4random_uniform(50)+1){
+        for _ in 0...Int(arc4random_uniform(50)+1){
             if !aux[Int(arc4random_uniform(UInt32(aux.count)))].isSpecialNode{
                 aux[Int(arc4random_uniform(UInt32(aux.count)))].coins = Int(arc4random_uniform(9)+1)*5
             }
@@ -304,10 +304,6 @@ class BoardGraph : NSObject{
             i.insertPLayer(player);
             playerLastNode?.removePlayer(player);
         }
-    }
-    
-    //we may need this
-    private func paintPaths(path : [String]){
     }
     
     private func walkBackward(qtd : Int, player : Player){

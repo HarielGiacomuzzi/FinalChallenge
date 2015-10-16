@@ -56,8 +56,8 @@ class CardShowNode: SKNode {
     }
     
     func removeCard(card:SKNode) {
-        print("cheguei aqui")
-        print(card)
+        //print("cheguei aqui")
+        //print(card)
         card.removeFromParent()
     }
     

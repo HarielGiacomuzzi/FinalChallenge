@@ -191,7 +191,7 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
     }
     
     deinit{
-        print("MinigameCollectionScene did deinit")
+        //print("MinigameCollectionScene did deinit")
     }
     
 }

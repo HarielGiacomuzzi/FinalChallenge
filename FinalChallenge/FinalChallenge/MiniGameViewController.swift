@@ -24,7 +24,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Dei load na minigameview controller")
+        //print("Dei load na minigameview controller")
         GameManager.sharedInstance.minigameViewController = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_ControlAction", object: nil);
@@ -43,10 +43,13 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         scene!.gameName = name
         
         let skView = view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        
+        //debug configs
+        skView.showsFPS = false
+        skView.showsNodeCount = false
+        skView.showsPhysics = false
+        
         skView.ignoresSiblingOrder = true
-        skView.showsPhysics = true
         scene!.gameController = self
         scene!.scaleMode = .Fill
         skView.presentScene(scene)

@@ -42,7 +42,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     }
     
     deinit {
-        print("store scene deinit")
+        //print("store scene deinit")
     }
 
     // MARK: - View Setup

@@ -78,7 +78,7 @@ class GameManager : NSObject {
         selectPlayers(controlesDeTurno)
         
         if let p = player?.items{
-            print(p)
+            //print(p)
         }
      }
     
@@ -170,26 +170,26 @@ class GameManager : NSObject {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
         let cardName = dic["card"] as! String
         
-        print("player \(playerName) tried to buy card \(cardName)")
+        //print("player \(playerName) tried to buy card \(cardName)")
         
         guard !players.isEmpty else {
             return
         }
         
         let player = getPlayer(playerName)
-        print(player.playerIdentifier)
+        //print(player.playerIdentifier)
         let card =  CardManager.ShareInstance.getCard(cardName)
-        print(card.cardName)
+        //print(card.cardName)
         
         var status = " "
         var worked = false
         
         if player.items.count >= 5 {
             status = "You already have the maximum ammount of cards"
-            print("ta lotado")
+            //print("ta lotado")
         } else if player.coins <= card.storeValue {
             status = "You don't have enough money"
-            print("faltou money")
+            //print("faltou money")
         } else {
             status = "You have successfully bought a card"
             worked = true
@@ -198,8 +198,8 @@ class GameManager : NSObject {
         if worked {
             player.coins -= card.storeValue
             player.items.append(card)
-            print("player comprou gostoso")
-            print("player coins \(player.coins) | player items \(player.items)")
+            //print("player comprou gostoso")
+            //print("player coins \(player.coins) | player items \(player.items)")
         }
         
         let dataDic = ["player":playerName, "status":status, "worked":worked, "playerMoney":player.coins, "card":cardName]
@@ -254,7 +254,7 @@ class GameManager : NSObject {
         let minigame = minigameOrderArray.randomItem()
         
         for m in minigameOrderArray {
-            print(m.rawValue)
+            //print(m.rawValue)
         }
         
         let dic = ["openController":"", "gameName":minigame.rawValue]
@@ -322,7 +322,7 @@ class GameManager : NSObject {
     // MARK: - Card Functions
 // Dismiss player controller on iphone
     func dismissPlayerViewController(){
-        print("dismissPlayerViewController")
+        //print("dismissPlayerViewController")
         if let vc = self.iphonePlayerController{
             vc.dismissViewControllerAnimated(false, completion: nil)
         }

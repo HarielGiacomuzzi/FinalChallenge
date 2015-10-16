@@ -57,20 +57,20 @@ class GameOverSceneMP : MinigameScene {
             
             self.addChild(sprite)
             
-            print("dando o dinheiro para o player \(p.playerIdentifier)")
-            print("playerCount =  \(players.count)")
+            //print("dando o dinheiro para o player \(p.playerIdentifier)")
+            //print("playerCount =  \(players.count)")
             
             if i < players.count-1 { //not last player
                 switch i {
                 case 0:
                     GameManager.sharedInstance.updatePlayerMoney(p, value: 50)
-                    print("dando 50 para o player \(p.playerIdentifier)")
+                    //print("dando 50 para o player \(p.playerIdentifier)")
                 case 1:
                     GameManager.sharedInstance.updatePlayerMoney(p, value: 25)
-                    print("dando 25 para o player \(p.playerIdentifier)")
+                    //print("dando 25 para o player \(p.playerIdentifier)")
                 case 2:
                     GameManager.sharedInstance.updatePlayerMoney(p, value: 5)
-                    print("dando 5 para o player \(p.playerIdentifier)")
+                    //print("dando 5 para o player \(p.playerIdentifier)")
                 default:
                     ()
                 }
