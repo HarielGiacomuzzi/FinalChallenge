@@ -40,13 +40,6 @@ class InitialViewController: UIViewController
         
         partyModeButton.setBackgroundImage(pressedButtonImage, forState: UIControlState.Highlighted)
         singlePlayerButton.setBackgroundImage(pressedButtonImage, forState: UIControlState.Highlighted)
-    
-        /* UNCOMMENT THIS IF PARTY MODE IS DISABLED */
-        
-//        partyModeButton.setTitle("Coming Soon", forState: .Normal)
-//        partyModeButton.enabled = false
-
-        /* END OF PARTY MODE DISABLED SETTINGS */
         
         setupView()
 

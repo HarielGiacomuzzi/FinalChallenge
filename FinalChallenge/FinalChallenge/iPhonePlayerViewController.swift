@@ -37,6 +37,7 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openStore:", name: "ConnectionManager_OpenStore", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "buyResponse:", name: "ConnectionManager_BuyResponse", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openEndGameScene:", name: "ConnectionManager_TheGameEnded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil)
         
         skView = self.view as? SKView
         skView?.showsFPS = true
@@ -64,6 +65,10 @@ class iPhonePlayerViewController: UIViewController {
         let gameData = data.userInfo!["gameName"] as! String
         let minigame = Minigame(rawValue: gameData)
         loadGamePad(minigame!)
+    }
+    
+    func closeController(data : NSNotification) {
+        loadPlayerView()
     }
     
     func updateMoney(data : NSNotification) {
