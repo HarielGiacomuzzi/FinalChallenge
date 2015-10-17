@@ -250,26 +250,19 @@ class BoardGraph : NSObject{
     /* ******************************** */
     
     
-    func walk(quantity : Int, node : BoardNode, var lista : [BoardNode], view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
-        if node.isSpecialNode{
-            hasSpecialNodeOnPath = true;
-            specialNodeName = keyFor(node)!;
-        }
-        if quantity == 0 || node.nextMoves.count > 1 {
-            return (lista, quantity, node)
+    func walk(quantity : Int, node : BoardNode, var list : [BoardNode], view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
+
+        if quantity == 0 || node.nextMoves.count > 1 || node.isSpecialNode {
+            return (list, quantity, node)
         }
         
-        lista.append(node)
-        return walk(quantity - 1, node: node.nextMoves.first!, lista : lista, view: view);
+        list.append(node.nextMoves.first!)
+        return walk(quantity - 1, node: node.nextMoves.first!, list : list, view: view);
     }
     
     func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
 
-        let a = walk(quantity, node: nodeFor(player)!, lista: [], view: view);
-        if hasSpecialNodeOnPath{
-            nodes[specialNodeName]?.activateNode(specialNodeName, player: player);
-            hasSpecialNodeOnPath = false
-        }
+        let a = walk(quantity, node: nodeFor(player)!, list: [], view: view);
         nodeFor(player)?.removePlayer(player);
         a.nodeList.last?.insertPLayer(player);
         return a;

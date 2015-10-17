@@ -76,10 +76,6 @@ class GameManager : NSObject {
         }
         // proximo jogador
         selectPlayers(controlesDeTurno)
-        
-        if let p = player?.items{
-            //print(p)
-        }
      }
     
     func playerTurn(player:Player?){
@@ -99,12 +95,15 @@ class GameManager : NSObject {
     }
     
     func movePlayerOnBoardComplete(p:Player, nodeList:[BoardNode], remaining:Int,currentNode:BoardNode) {
-        var list = nodeList
-        list.removeFirst()
         if remaining > 0 {
-            movePlayerAndContinueWithCrossroads(p, nodeList: list, remaining: remaining, currentNode: currentNode)
+            if currentNode.isSpecialNode {
+                movePlayerAndContinueWithSpecialNode(p, nodeList: nodeList, remaining: remaining, currentNode: currentNode)
+            } else  if currentNode.nextMoves.count > 1 {
+                movePlayerAndContinueWithCrossroads(p, nodeList: nodeList, remaining: remaining, currentNode: currentNode)
+            }
+            
         } else {
-            movePlayerAndContinue(p, nodeList: list)
+            movePlayerAndContinue(p, nodeList: nodeList)
         }
     }
     
@@ -112,6 +111,14 @@ class GameManager : NSObject {
         movePlayerOnBoard(nodeList, player: p, completion: {() in
             self.playerTurn(p)
             self.playerTurnEnded(p)
+        })
+    }
+    
+    func movePlayerAndContinueWithSpecialNode(p:Player, nodeList:[BoardNode],remaining:Int,currentNode:BoardNode) {
+        movePlayerOnBoard(nodeList, player: p, completion: {() in
+            let nodeName = BoardGraph.SharedInstance.keyFor(currentNode)
+            currentNode.activateNode(nodeName!, player: p)
+            self.movePlayerOneSquare(p, node: currentNode.nextMoves.first!, remaining: remaining)
         })
     }
     
