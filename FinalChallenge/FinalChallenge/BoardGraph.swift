@@ -222,6 +222,44 @@ class BoardGraph : NSObject{
     }
    
     
+    
+    /* ******************************** */
+    /* WALK ATUAL ESTA AQUI !!!!!!!! */
+    /* ******************************** */
+    
+    private func walk(quantity : Int, node : BoardNode, var list : [BoardNode], view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
+
+        if quantity == 0 || node.nextMoves.count > 1 || node.isSpecialNode {
+            return (list, quantity, node)
+        }
+        
+        list.append(node.nextMoves.first!)
+        return walk(quantity - 1, node: node.nextMoves.first!, list : list, view: view);
+    }
+    
+    //returns the list of nodes the player have moved
+    func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
+
+        let a = walk(quantity, node: nodeFor(player)!, list: [], view: view);
+        nodeFor(player)?.removePlayer(player);
+        a.nodeList.last?.insertPLayer(player);
+        return a;
+    }
+    
+    //used to move to the next node in cases you have to choose, or when you're blocked
+    func walkToNode(player:Player, node:BoardNode) {
+        nodeFor(player)?.removePlayer(player)
+        node.insertPLayer(player)
+    }
+    
+    //TODO: walk backwards
+    
+    /* ******************************** */
+    /* WALK ATUAL TERMINA AQUI !!!!!!!! */
+    /* ******************************** */
+    
+    
+    
     // Recursive* not Recursivo
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
         var lista : [BoardNode] = [];
@@ -241,44 +279,6 @@ class BoardGraph : NSObject{
         }
         return lista
     }
-    
-    
-    
-    
-    /* ******************************** */
-    /* WALK ATUAL ESTA AQUI !!!!!!!! */
-    /* ******************************** */
-    
-    
-    func walk(quantity : Int, node : BoardNode, var list : [BoardNode], view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
-
-        if quantity == 0 || node.nextMoves.count > 1 || node.isSpecialNode {
-            return (list, quantity, node)
-        }
-        
-        list.append(node.nextMoves.first!)
-        return walk(quantity - 1, node: node.nextMoves.first!, list : list, view: view);
-    }
-    
-    func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
-
-        let a = walk(quantity, node: nodeFor(player)!, list: [], view: view);
-        nodeFor(player)?.removePlayer(player);
-        a.nodeList.last?.insertPLayer(player);
-        return a;
-    }
-    
-    func walkToNode(player:Player, node:BoardNode) {
-        nodeFor(player)?.removePlayer(player)
-        node.insertPLayer(player)
-    }
-    
-    /* ******************************** */
-    /* WALK ATUAL TERMINA AQUI !!!!!!!! */
-    /* ******************************** */
-    
-    
-    
     
     // Jhonny Walker keep walking
     func walk(qtd : Int, player : Player, view : UIViewController?){

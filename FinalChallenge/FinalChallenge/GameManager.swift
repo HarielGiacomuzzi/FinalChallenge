@@ -27,6 +27,9 @@ class GameManager : NSObject {
     var isOnStore = false
     var gameEnded = false
     
+    //this variable is used to store the player movement while he is on store
+    var movementClosure: () -> () = {}
+    
     //used only in mainboard
     var doOnce = false
     
@@ -94,6 +97,7 @@ class GameManager : NSObject {
             }
     }
     
+    //handles movement and all its possibilities
     func movePlayerOnBoardComplete(p:Player, nodeList:[BoardNode], remaining:Int,currentNode:BoardNode) {
         if remaining > 0 {
             if currentNode.isSpecialNode {
@@ -107,6 +111,7 @@ class GameManager : NSObject {
         }
     }
     
+    //ends movement and continues game
     func movePlayerAndContinue(p:Player, nodeList:[BoardNode]) {
         movePlayerOnBoard(nodeList, player: p, completion: {() in
             self.playerTurn(p)
@@ -114,14 +119,20 @@ class GameManager : NSObject {
         })
     }
     
+    //moves player until it gets to a special node, handles action and continues
     func movePlayerAndContinueWithSpecialNode(p:Player, nodeList:[BoardNode],remaining:Int,currentNode:BoardNode) {
         movePlayerOnBoard(nodeList, player: p, completion: {() in
             let nodeName = BoardGraph.SharedInstance.keyFor(currentNode)
             currentNode.activateNode(nodeName!, player: p)
-            self.movePlayerOneSquare(p, node: currentNode.nextMoves.first!, remaining: remaining)
+            if nodeName != "Store" {
+                self.movePlayerOneSquare(p, node: currentNode.nextMoves.first!, remaining: remaining)
+            } else {
+                self.movementClosure = {self.movePlayerOneSquare(p, node: currentNode.nextMoves.first!, remaining: remaining)}
+            }
         })
     }
     
+    //moves player until it gets to a crossroads then open alert to chose path and continues
     func movePlayerAndContinueWithCrossroads(p:Player, nodeList:[BoardNode], remaining:Int, currentNode:BoardNode) {
         movePlayerOnBoard(nodeList, player: p, completion: {() in
             let alert = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
@@ -141,6 +152,7 @@ class GameManager : NSObject {
         
     }
     
+    //moves player one block ahead
     func movePlayerOneSquare(p:Player, node:BoardNode, remaining:Int) {
         BoardGraph.SharedInstance.walkToNode(p, node: node)
         movePlayerOnBoard([node], player: p, completion: {() in
@@ -285,6 +297,7 @@ class GameManager : NSObject {
     
     // chamado quando o player já saiu da loja
     func leaveStore(data:NSNotification){
+        movementClosure()
         isOnStore = false
         if isOnMiniGame{
             beginMinigame()
