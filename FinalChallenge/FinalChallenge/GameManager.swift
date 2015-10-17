@@ -299,7 +299,7 @@ class GameManager : NSObject {
     func leaveStore(data:NSNotification){
         movementClosure()
         isOnStore = false
-        if isOnMiniGame{
+        if isOnMiniGame {
             beginMinigame()
         }
     }
