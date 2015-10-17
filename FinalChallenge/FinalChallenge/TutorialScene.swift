@@ -96,7 +96,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         barName.zPosition = 1100
         
         nameText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
-        nameText.text = "Flappy Fish"
+        nameText.text = "Fish Race"
         nameText.position.y = nameText.position.y - 10
         nameText.zPosition = 1101
         
@@ -257,7 +257,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         barName.zPosition = 1100
         
         nameText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
-        nameText.text = "Bomb Game"
+        nameText.text = "Bomber Bots"
         nameText.position.y = nameText.position.y - 10
         nameText.zPosition = 1101
         
