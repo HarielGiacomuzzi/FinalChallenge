@@ -21,6 +21,7 @@ class Player : NSObject {
     var color = UIColor()
     var items:[Card] = []
     var itemsInHouse : [Card] = []
+    var lastMessage : NSDictionary?
     
 //    init(posX: Double, posY: Double) {
 //        self.x = posX;

@@ -27,6 +27,9 @@ class GameManager : NSObject {
     var isOnStore = false
     var gameEnded = false
     
+    //this variable is used to store the player movement while he is on store
+    var movementClosure: () -> () = {}
+    
     //used only in mainboard
     var doOnce = false
     
@@ -76,10 +79,6 @@ class GameManager : NSObject {
         }
         // proximo jogador
         selectPlayers(controlesDeTurno)
-        
-        if let p = player?.items{
-            print(p)
-        }
      }
     
     func playerTurn(player:Player?){
@@ -98,16 +97,21 @@ class GameManager : NSObject {
             }
     }
     
+    //handles movement and all its possibilities
     func movePlayerOnBoardComplete(p:Player, nodeList:[BoardNode], remaining:Int,currentNode:BoardNode) {
-        var list = nodeList
-        list.removeFirst()
         if remaining > 0 {
-            movePlayerAndContinueWithCrossroads(p, nodeList: list, remaining: remaining, currentNode: currentNode)
+            if currentNode.isSpecialNode {
+                movePlayerAndContinueWithSpecialNode(p, nodeList: nodeList, remaining: remaining, currentNode: currentNode)
+            } else  if currentNode.nextMoves.count > 1 {
+                movePlayerAndContinueWithCrossroads(p, nodeList: nodeList, remaining: remaining, currentNode: currentNode)
+            }
+            
         } else {
-            movePlayerAndContinue(p, nodeList: list)
+            movePlayerAndContinue(p, nodeList: nodeList)
         }
     }
     
+    //ends movement and continues game
     func movePlayerAndContinue(p:Player, nodeList:[BoardNode]) {
         movePlayerOnBoard(nodeList, player: p, completion: {() in
             self.playerTurn(p)
@@ -115,6 +119,20 @@ class GameManager : NSObject {
         })
     }
     
+    //moves player until it gets to a special node, handles action and continues
+    func movePlayerAndContinueWithSpecialNode(p:Player, nodeList:[BoardNode],remaining:Int,currentNode:BoardNode) {
+        movePlayerOnBoard(nodeList, player: p, completion: {() in
+            let nodeName = BoardGraph.SharedInstance.keyFor(currentNode)
+            currentNode.activateNode(nodeName!, player: p)
+            if nodeName != "Store" {
+                self.movePlayerOneSquare(p, node: currentNode.nextMoves.first!, remaining: remaining)
+            } else {
+                self.movementClosure = {self.movePlayerOneSquare(p, node: currentNode.nextMoves.first!, remaining: remaining)}
+            }
+        })
+    }
+    
+    //moves player until it gets to a crossroads then open alert to chose path and continues
     func movePlayerAndContinueWithCrossroads(p:Player, nodeList:[BoardNode], remaining:Int, currentNode:BoardNode) {
         movePlayerOnBoard(nodeList, player: p, completion: {() in
             let alert = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
@@ -134,6 +152,7 @@ class GameManager : NSObject {
         
     }
     
+    //moves player one block ahead
     func movePlayerOneSquare(p:Player, node:BoardNode, remaining:Int) {
         BoardGraph.SharedInstance.walkToNode(p, node: node)
         movePlayerOnBoard([node], player: p, completion: {() in
@@ -172,26 +191,26 @@ class GameManager : NSObject {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
         let cardName = dic["card"] as! String
         
-        print("player \(playerName) tried to buy card \(cardName)")
+        //print("player \(playerName) tried to buy card \(cardName)")
         
         guard !players.isEmpty else {
             return
         }
         
         let player = getPlayer(playerName)
-        print(player.playerIdentifier)
+        //print(player.playerIdentifier)
         let card =  CardManager.ShareInstance.getCard(cardName)
-        print(card.cardName)
+        //print(card.cardName)
         
         var status = " "
         var worked = false
         
         if player.items.count >= 5 {
             status = "You already have the maximum ammount of cards"
-            print("ta lotado")
+            //print("ta lotado")
         } else if player.coins <= card.storeValue {
             status = "You don't have enough money"
-            print("faltou money")
+            //print("faltou money")
         } else {
             status = "You have successfully bought a card"
             worked = true
@@ -200,8 +219,8 @@ class GameManager : NSObject {
         if worked {
             player.coins -= card.storeValue
             player.items.append(card)
-            print("player comprou gostoso")
-            print("player coins \(player.coins) | player items \(player.items)")
+            //print("player comprou gostoso")
+            //print("player coins \(player.coins) | player items \(player.items)")
         }
         
         let dataDic = ["player":playerName, "status":status, "worked":worked, "playerMoney":player.coins, "card":cardName]
@@ -254,15 +273,19 @@ class GameManager : NSObject {
         }
         
         let minigame = minigameOrderArray.randomItem()
-        
-        for m in minigameOrderArray {
-            print(m.rawValue)
-        }
-        
-        let dic = ["openController":"", "gameName":minigame.rawValue]
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        sendBeginMinigameMessage(minigame)
         boardViewController?.performSegueWithIdentifier("gotoMinigame", sender: minigame.rawValue)
 
+    }
+    
+    func sendBeginMinigameMessage(minigame:Minigame) {
+        var playerColorDic:[String:UIColor] = [:]
+        for player in players {
+            playerColorDic[player.playerIdentifier] = player.color
+        }
+
+        let dic = ["openController":"", "gameName":minigame.rawValue, "playerColorDic":playerColorDic]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     
     // chamado quando o player já escolheu um caminho no tabuleiro
@@ -274,8 +297,9 @@ class GameManager : NSObject {
     
     // chamado quando o player já saiu da loja
     func leaveStore(data:NSNotification){
+        movementClosure()
         isOnStore = false
-        if isOnMiniGame{
+        if isOnMiniGame {
             beginMinigame()
         }
     }
@@ -324,7 +348,7 @@ class GameManager : NSObject {
     // MARK: - Card Functions
 // Dismiss player controller on iphone
     func dismissPlayerViewController(){
-        print("dismissPlayerViewController")
+        //print("dismissPlayerViewController")
         if let vc = self.iphonePlayerController{
             vc.dismissViewControllerAnimated(false, completion: nil)
         }

@@ -21,7 +21,7 @@ class TestViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         skView.showsPhysics = true
         scene.scaleMode = .Fill
-        print("abriu?")
+        //print("abriu?")
     
         skView.presentScene(scene)
     }

@@ -214,13 +214,51 @@ class BoardGraph : NSObject{
     
     func addCoins(){
         let aux = Array(nodes.values)
-        for i in 0...Int(arc4random_uniform(50)+1){
+        for _ in 0...Int(arc4random_uniform(50)+1){
             if !aux[Int(arc4random_uniform(UInt32(aux.count)))].isSpecialNode{
                 aux[Int(arc4random_uniform(UInt32(aux.count)))].coins = Int(arc4random_uniform(9)+1)*5
             }
         }
     }
    
+    
+    
+    /* ******************************** */
+    /* WALK ATUAL ESTA AQUI !!!!!!!! */
+    /* ******************************** */
+    
+    private func walk(quantity : Int, node : BoardNode, var list : [BoardNode], view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
+
+        if quantity == 0 || node.nextMoves.count > 1 || node.isSpecialNode {
+            return (list, quantity, node)
+        }
+        
+        list.append(node.nextMoves.first!)
+        return walk(quantity - 1, node: node.nextMoves.first!, list : list, view: view);
+    }
+    
+    //returns the list of nodes the player have moved
+    func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
+
+        let a = walk(quantity, node: nodeFor(player)!, list: [], view: view);
+        nodeFor(player)?.removePlayer(player);
+        a.nodeList.last?.insertPLayer(player);
+        return a;
+    }
+    
+    //used to move to the next node in cases you have to choose, or when you're blocked
+    func walkToNode(player:Player, node:BoardNode) {
+        nodeFor(player)?.removePlayer(player)
+        node.insertPLayer(player)
+    }
+    
+    //TODO: walk backwards
+    
+    /* ******************************** */
+    /* WALK ATUAL TERMINA AQUI !!!!!!!! */
+    /* ******************************** */
+    
+    
     
     // Recursive* not Recursivo
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
@@ -240,30 +278,6 @@ class BoardGraph : NSObject{
             }
         }
         return lista
-    }
-    
-    func walk(quantity : Int, node : BoardNode, var lista : [BoardNode], view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
-        if quantity == 0 {
-            return (lista, quantity, node)
-        }
-        
-        if node.nextMoves.count > 1 {
-            return (lista,quantity,node)
-        }
-        lista.append(node)
-        return walk(quantity - 1, node: node.nextMoves.first!, lista : lista, view: view);
-    }
-    
-    func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
-        let a = walk(quantity, node: nodeFor(player)!, lista: [], view: view);
-        nodeFor(player)?.removePlayer(player);
-        a.nodeList.last?.insertPLayer(player);
-        return a;
-    }
-    
-    func walkToNode(player:Player, node:BoardNode) {
-        nodeFor(player)?.removePlayer(player)
-        node.insertPLayer(player)
     }
     
     // Jhonny Walker keep walking
@@ -304,10 +318,6 @@ class BoardGraph : NSObject{
             i.insertPLayer(player);
             playerLastNode?.removePlayer(player);
         }
-    }
-    
-    //we may need this
-    private func paintPaths(path : [String]){
     }
     
     private func walkBackward(qtd : Int, player : Player){

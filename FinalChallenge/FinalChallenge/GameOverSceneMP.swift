@@ -19,21 +19,6 @@ class GameOverSceneMP : MinigameScene {
     var player3 : Player?
     
     override func didMoveToView(view: SKView) {
-        /*
-        let background = SKTexture(imageNamed: "setupBG")
-        let bg = SKSpriteNode(texture: background, size: background.size())
-        self.addChild(bg)
-        bg.name = "bg"
-        bg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-        bg.zPosition = 0
-        self.backgroundColor = UIColor.whiteColor()
-        
-        
-        let back = SKLabelNode(fontNamed: "GillSans-Bold")
-        back.text = "Back to Board"
-        back.name = "Back to Board"
-        back.position = CGPointMake(self.size.width/2, 50)
-        self.addChild(back) */
         
         //precisa estar do maior pro menor
         for i in 0..<players.count{
@@ -45,37 +30,18 @@ class GameOverSceneMP : MinigameScene {
                     p = j
                 }
             }
-            /*
-            let sprite =  SKSpriteNode(imageNamed: p.avatar!)
-            
-            sprite.name = p.avatar!
-            
-            sprite.size = CGSize(width: 100, height: 200)
-            
-            let offsetFraction = (CGFloat(i) + 1.0)/(CGFloat(players.count) + 1.0)
-            
-            sprite.position = CGPoint(x: size.width * offsetFraction, y: size.height/2)
-            
-            self.addChild(sprite)*/
-            
-            print("dando o dinheiro para o player \(p.playerIdentifier)")
-            print("playerCount =  \(players.count)")
             
             if i < players.count-1 { //not last player
                 switch i {
                 case 0:
                     GameManager.sharedInstance.updatePlayerMoney(p, value: 50)
                     player1 = p
-                    print("dando 50 para o player \(p.playerIdentifier)")
                 case 1:
                     GameManager.sharedInstance.updatePlayerMoney(p, value: 25)
                     player2 = p
-                    print("dando 25 para o player \(p.playerIdentifier)")
                 case 2:
                     GameManager.sharedInstance.updatePlayerMoney(p, value: 5)
-                    print("dando 5 para o player \(p.playerIdentifier)")
                     player3 = p
-                    
                 default:
                     ()
                 }
@@ -99,7 +65,7 @@ class GameOverSceneMP : MinigameScene {
         titleLabel.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
         self.addChild(titleLabel)
         
-        
+
         thirdPlace(player3)
         
         
@@ -111,7 +77,7 @@ class GameOverSceneMP : MinigameScene {
         let touch : UITouch? = touches.first as UITouch?
         
         if let location = touch?.locationInNode(self) {
-            let touchedNode = self.nodeAtPoint(location)
+            _ = self.nodeAtPoint(location)
             
             _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
             self.view?.presentScene(nil)
@@ -120,6 +86,35 @@ class GameOverSceneMP : MinigameScene {
         }
     }
     
+    func thirdPlace(thirdPlayer : Player?){
+        
+        
+        let base : SKSpriteNode = SKSpriteNode(imageNamed: "squarebackground")
+        base.name = "fundo tela Segundo MAIOR LOSER"
+        
+        base.colorBlendFactor = 0.7
+        base.size = CGSize(width: base.frame.width, height: self.frame.height)
+        let posicaoFinal = CGPoint(x: self.frame.width - base.frame.width/2, y: self.frame.height/2)
+        base.position = CGPoint(x: self.frame.width + base.frame.width/2, y: self.frame.height/2)
+        
+        self.addChild(base)
+        
+        if let player = thirdPlayer {
+            base.color = player.color
+            let avatar : SKSpriteNode = SKSpriteNode(imageNamed: player.avatar!)
+            avatar.position = CGPoint(x: 70, y: -170)
+            base.addChild(avatar)
+            avatar.zPosition = 2
+            avatar.size = CGSize(width: avatar.size.width * 0.7, height: avatar.size.height * 0.7)
+        }
+        
+        
+        let movement = SKAction.moveTo(posicaoFinal, duration: 0.5)
+        base.runAction(movement) { () -> Void in
+            self.secondPlace(self.player2)
+        }
+        
+    }
     
     func secondPlace(secondPlayer : Player?){
         
@@ -154,35 +149,6 @@ class GameOverSceneMP : MinigameScene {
         
     }
     
-    func thirdPlace(thirdPlayer : Player?){
-        
-        
-        let base : SKSpriteNode = SKSpriteNode(imageNamed: "squarebackground")
-        base.name = "fundo tela Segundo MAIOR LOSER"
-        
-        base.colorBlendFactor = 0.7
-        base.size = CGSize(width: base.frame.width, height: self.frame.height)
-        let posicaoFinal = CGPoint(x: self.frame.width - base.frame.width/2, y: self.frame.height/2)
-        base.position = CGPoint(x: self.frame.width + base.frame.width/2, y: self.frame.height/2)
-        
-        self.addChild(base)
-        
-        if let player = thirdPlayer {
-            base.color = player.color
-            let avatar : SKSpriteNode = SKSpriteNode(imageNamed: player.avatar!)
-            avatar.position = CGPoint(x: -70, y: -170)
-            base.addChild(avatar)
-            avatar.zPosition = 2
-            avatar.size = CGSize(width: avatar.size.width * 0.7, height: avatar.size.height * 0.7)
-        }
-        
-        
-        let movement = SKAction.moveTo(posicaoFinal, duration: 0.5)
-        base.runAction(movement) { () -> Void in
-            self.secondPlace(self.player2)
-        }
-        
-    }
     
     func firstPlace(firstPlayer : Player?){
         
@@ -202,7 +168,7 @@ class GameOverSceneMP : MinigameScene {
         if let player = firstPlayer {
             base.color = player.color
             let avatar : SKSpriteNode = SKSpriteNode(imageNamed: player.avatar!)
-            avatar.position = CGPoint(x: -70, y: -170)
+            avatar.position = CGPoint(x: 0, y: -170)
             base.addChild(avatar)
             avatar.zPosition = 2
             avatar.size = CGSize(width: avatar.size.width * 0.7, height: avatar.size.height * 0.7)
@@ -334,12 +300,6 @@ class GameOverSceneMP : MinigameScene {
             }
         }
         
-        
-        
-        
     }
-    
-    
-    
     
 }

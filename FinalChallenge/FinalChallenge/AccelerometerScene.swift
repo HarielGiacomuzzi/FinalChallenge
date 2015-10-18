@@ -38,7 +38,7 @@ class AccelerometerScene: GamePadScene {
                 }
             )
         } else {
-            print("Accelerometer is not available", terminator: "")
+            //print("Accelerometer is not available", terminator: "")
         }
         
         let label = SKLabelNode(text: "ACCELEROMETER")

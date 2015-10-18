@@ -96,7 +96,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         barName.zPosition = 1100
         
         nameText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
-        nameText.text = "Flappy Fish"
+        nameText.text = "Fish Race"
         nameText.position.y = nameText.position.y - 10
         nameText.zPosition = 1101
         
@@ -257,7 +257,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         barName.zPosition = 1100
         
         nameText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
-        nameText.text = "Bomb Game"
+        nameText.text = "Bomber Bots"
         nameText.position.y = nameText.position.y - 10
         nameText.zPosition = 1101
         
@@ -385,7 +385,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         // runs throught sprites looking to show ther text i think...
         for sprite in spriteArray {
             if (sprite.containsPoint(location)){
-                print("achei um cara")
+                //print("achei um cara")
               
                 let spriteAnimatedAtlas = SKTextureAtlas(named: "popup")//sprites
                 
@@ -431,7 +431,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
             
             if goButton.containsPoint(location){
                 goButton.texture = SKTexture(imageNamed: "greenButtonOff")
-                print("Iniciou jogo")
+                //print("Iniciou jogo")
                 switch(self.gameName){
                 case "FlappyFish": startGame(self.gameName)//start scene
                 case "BombGame": startGame(self.gameName)
@@ -442,6 +442,6 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     deinit{
-        print("Tutorial scene is out of the memory")
+        //print("Tutorial scene is out of the memory")
     }
 }

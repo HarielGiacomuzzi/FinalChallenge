@@ -53,11 +53,11 @@ class BoardNode : NSObject{
         case "Store":
             var cards: [Card] = []
             //print("criei cards")
-            for i in 0...2 {
+            for _ in 0...2 {
                 cards.append(CardManager.ShareInstance.getRandomCard(true))
                 //print("appendei \(cards[i]) to cards")
             }
-            for i in 0...1 {
+            for _ in 0...1 {
                 cards.append(CardManager.ShareInstance.getRandomCard(false))
                 //print("appendei \(cards[i]) to cards")
             }

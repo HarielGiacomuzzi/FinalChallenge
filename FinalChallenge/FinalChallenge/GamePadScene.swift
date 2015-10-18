@@ -13,15 +13,4 @@ class GamePadScene: SKScene {
     
     weak var viewController : iPhonePlayerViewController?
     
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil);
-    }
-    
-    
-    func closeController(data:NSNotification) {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-        viewController?.loadPlayerView()
-        
-    }
 }

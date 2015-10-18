@@ -37,10 +37,11 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openStore:", name: "ConnectionManager_OpenStore", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "buyResponse:", name: "ConnectionManager_BuyResponse", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openEndGameScene:", name: "ConnectionManager_TheGameEnded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil)
         
         skView = self.view as? SKView
-        skView?.showsFPS = true
-        skView?.showsNodeCount = true
+        skView?.showsFPS = false
+        skView?.showsNodeCount = false
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
 //        playerCards = ["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"]
@@ -63,36 +64,35 @@ class iPhonePlayerViewController: UIViewController {
     func openController(data : NSNotification) {
         let gameData = data.userInfo!["gameName"] as! String
         let minigame = Minigame(rawValue: gameData)
+        let playerColorDic = data.userInfo!["playerColorDic"] as! [String:UIColor]
+        let playerName = ConnectionManager.sharedInstance.peerID!.displayName
+        playerColor = playerColorDic[playerName]
         loadGamePad(minigame!)
+    }
+    
+    func closeController(data : NSNotification) {
+        loadPlayerView()
     }
     
     func updateMoney(data : NSNotification) {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
         let playerName = dic["player"] as! String
         let value = dic["value"] as! Int
-        print("mensagem para \(playerName)")
-        print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
-            print("playerscene = \(playerScene)")
-            print("gamepadscene = \(gamePadScene)")
-            print("era pra notificar aqui")
-            print("update moneys para \(value)")
+
             setNotification("You got \(playerMoney - value) moneys")
             playerMoney = value
             playerScene?.updateMoney(playerMoney)
         } else {
-            print("nao rola filho")
+
         }
     }
     
     func addCard(data : NSNotification) {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
-        print("estou no iphone")
-        print(dic)
         let playerName = dic["player"] as! String
         let card = dic["item"] as! String
-        print("mensagem para \(playerName)")
-        print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
+
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerCards.append(card)
             if playerScene != nil {
@@ -100,34 +100,28 @@ class iPhonePlayerViewController: UIViewController {
             }
             
         } else {
-            print("nao rola filho")
+
         }
     }
     
     func removeCard(data : NSNotification) {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
-        print("estou no iphone")
-        print(dic)
         let playerName = dic["player"] as! String
         let card = dic["item"] as! String
-        print("mensagem para \(playerName)")
-        print("eu sou \(ConnectionManager.sharedInstance.peerID!.displayName)")
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerScene!.removeCard(card)
             playerCards.removeObject(card)
         } else {
-            print("nao rola filho")
+            
         }
     }
     
     func openStore(data : NSNotification) {
-        print("OPEN STORE MENSAGEM RECEBI")
         if storeScene == nil {
             let dic = data.userInfo!["dataDic"] as! NSDictionary
             let cards = dic["cards"] as! [String]
             let player = dic["player"] as! String
             if player == ConnectionManager.sharedInstance.peerID!.displayName {
-                print(player)
                 loadStore(cards)
             }
         }
@@ -151,13 +145,11 @@ class iPhonePlayerViewController: UIViewController {
         }
     }
     
-    // MARK: - Scene Control
-    
     func openEndGameScene(data:NSNotification){
-        endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
-        endGameScene?.scaleMode = .Fill
-        skView?.presentScene(endGameScene)
+        loadEndGameScene()
     }
+    
+    // MARK: - Scene Control
     
     func loadPlayerView() {
         setAllScenesNil()
@@ -208,6 +200,13 @@ class iPhonePlayerViewController: UIViewController {
         gamePadScene?.viewController = self
         skView?.presentScene(gamePadScene)
         gamePadScene?.backgroundColor = playerColor
+    }
+    
+    func loadEndGameScene() {
+        setAllScenesNil()
+        
+        endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
+        skView?.presentScene(endGameScene)
     }
     
     func setAllScenesNil() {

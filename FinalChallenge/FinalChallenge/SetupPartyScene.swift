@@ -57,17 +57,18 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             //print("Entrou na mudanca")
             for j in i+1..<GameManager.sharedInstance.players.count{
                 if (GameManager.sharedInstance.players[i].avatar != nil) && (GameManager.sharedInstance.players[j].avatar != nil) {
-                    print("Entrou na mudanca \(GameManager.sharedInstance.players[i].avatar!) e \(GameManager.sharedInstance.players[j].avatar!)")
+                    //print("Entrou na mudanca \(GameManager.sharedInstance.players[i].avatar!) e \(GameManager.sharedInstance.players[j].avatar!)")
                     if (GameManager.sharedInstance.players[i].avatar! == GameManager.sharedInstance.players[j].avatar!){
-                        print("Entrou na mudanca 3")
-                        let aux = GameManager.sharedInstance.players[j].avatar
+                        
+                        //print("Entrou na mudanca 3")
+                        var aux = GameManager.sharedInstance.players[j].avatar
                         GameManager.sharedInstance.players[j].avatar = nil
                         for avatar in viewController.arrayAvatars{
-                            print("Entrou na mudanca 4")
+                            //print("Entrou na mudanca 4")
                             if avatar == aux{
-                                print("Entrou na mudanca 5")
+                                //print("Entrou na mudanca 5")
                                 viewController.arrayAvatars.removeObject(avatar)
-                                print("\(avatar) e o array: \(viewController.arrayAvatars)")
+                                //print("\(avatar) e o array: \(viewController.arrayAvatars)")
                                 viewController.updateIphoneUsersData()
                                 
                                 switch(GameManager.sharedInstance.players[j].playerIdentifier){
@@ -332,7 +333,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         let location: CGPoint = touch.locationInNode(self)
         
         if(go!.containsPoint(location)){
-            print("apertei o botao de GO")
+//            print("apertei o botao de GO")
             var canGo = false
             for p in GameManager.sharedInstance.players{
                 if p.avatar == nil {
@@ -354,7 +355,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         if(connect!.containsPoint(location)){
-            print("apertei o botao de CONNECT")
+//            print("apertei o botao de CONNECT")
             viewController.ConnectPlayers()
             
         }
@@ -467,7 +468,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     
     deinit{
-        print("SetupScene do Ipad foi retirada")
+        //print("SetupScene do Ipad foi retirada")
     }
     
     
