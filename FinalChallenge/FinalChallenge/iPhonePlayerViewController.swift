@@ -254,7 +254,6 @@ class iPhonePlayerViewController: UIViewController {
         
         //fixes notifications positions
         let notificationHeight = notificationArray.first?.calculateAccumulatedFrame().height
-        print(notificationHeight)
         var fullsize:CGFloat = 0.0
         var start:CGFloat = 0.0
         for _ in notificationArray {
