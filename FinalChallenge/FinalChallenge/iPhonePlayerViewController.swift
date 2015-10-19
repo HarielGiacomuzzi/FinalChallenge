@@ -238,15 +238,36 @@ class iPhonePlayerViewController: UIViewController {
     func setNotification(text:String) {
         let notification = NotificationNode(text: text)
         notificationArray.append(notification)
-        notification.position = CGPointMake(skView!.scene!.frame.size.width/2, skView!.scene!.frame.size.height/2)
-        skView?.scene!.addChild(notification)
-        
+
+        setNotificationsInNewScene()
     }
     
     func setNotificationsInNewScene() {
+        
+        //adds notifications to scene
         for notification in notificationArray {
-            skView?.scene!.addChild(notification)
+            if notification.parent != nil {
+                notification.removeFromParent()
+            }
+            skView?.scene?.addChild(notification)
         }
+        
+        //fixes notifications positions
+        let notificationHeight = notificationArray.first?.calculateAccumulatedFrame().height
+        print(notificationHeight)
+        var fullsize:CGFloat = 0.0
+        var start:CGFloat = 0.0
+        for _ in notificationArray {
+            fullsize += notificationHeight!
+        }
+        start = skView!.scene!.frame.size.height/2 - fullsize/2
+        
+        for notification in notificationArray {
+            let positionY = start + notificationHeight!/2
+            notification.position = CGPointMake(skView!.scene!.frame.size.width/2, positionY)
+            start = positionY + notificationHeight!/2
+        }
+        
     }
 
 }
