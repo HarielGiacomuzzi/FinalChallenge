@@ -194,6 +194,14 @@ class BoardGraph : NSObject{
         return false;
     }
     
+    //gives the house cois to player and sets it to 0
+    func giveCoins(nodeName : String, player : Player) {
+        if nodes[nodeName]?.coins > 0 {
+            GameManager.sharedInstance.updatePlayerMoney(player, value: nodes[nodeName]!.coins!)
+        }
+        nodes[nodeName]?.coins = 0
+    }
+    
     // activate cards funcions
     func activateCard(card:ActiveCard, targetPlayer:Player){
         switch(card.cardName){

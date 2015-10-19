@@ -84,6 +84,7 @@ class GameManager : NSObject {
     func playerTurn(player:Player?){
         let location = BoardGraph.SharedInstance.whereIs(player!)
         BoardGraph.SharedInstance.pickItem(location!, player: player!)
+        BoardGraph.SharedInstance.giveCoins(location!, player: player!)
     }
     
     //dice response

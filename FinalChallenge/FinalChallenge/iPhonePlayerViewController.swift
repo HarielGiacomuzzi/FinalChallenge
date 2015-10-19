@@ -19,6 +19,8 @@ class iPhonePlayerViewController: UIViewController {
     var partyModeScene : PartyModeScene?
     var gamePadScene : GamePadScene?
     var endGameScene : EndGameIphoneScene?
+    
+    var notificationArray : [NotificationNode] = []
 
     var playerColor : UIColor!
     var playerMoney = 0
@@ -95,6 +97,7 @@ class iPhonePlayerViewController: UIViewController {
 
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerCards.append(card)
+            setNotification("You got teh card \(card) :)")
             if playerScene != nil {
                 playerScene!.addCard(card)
             }
@@ -111,6 +114,7 @@ class iPhonePlayerViewController: UIViewController {
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerScene!.removeCard(card)
             playerCards.removeObject(card)
+            setNotification("You lost teh card \(card) :(")
         } else {
             
         }
@@ -163,6 +167,7 @@ class iPhonePlayerViewController: UIViewController {
         playerScene?.cardsString = playerCards
         skView?.presentScene(playerScene)
         playerScene?.updateMoney(playerMoney)
+        setNotificationsInNewScene()
     }
     
     func loadStore(cards:[String]) {
@@ -176,6 +181,7 @@ class iPhonePlayerViewController: UIViewController {
         }
         storeScene?.scaleMode = .AspectFit
         skView?.presentScene(storeScene)
+        setNotificationsInNewScene()
     }
     
     func loadPartyModeScene() {
@@ -185,6 +191,7 @@ class iPhonePlayerViewController: UIViewController {
         
         partyModeScene?.viewController = self
         skView?.presentScene(partyModeScene)
+        setNotificationsInNewScene()
     }
     
     func loadGamePad(minigame:Minigame) {
@@ -200,6 +207,7 @@ class iPhonePlayerViewController: UIViewController {
         gamePadScene?.viewController = self
         skView?.presentScene(gamePadScene)
         gamePadScene?.backgroundColor = playerColor
+        setNotificationsInNewScene()
     }
     
     func loadEndGameScene() {
@@ -207,6 +215,7 @@ class iPhonePlayerViewController: UIViewController {
         
         endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
         skView?.presentScene(endGameScene)
+        setNotificationsInNewScene()
     }
     
     func setAllScenesNil() {
@@ -216,12 +225,28 @@ class iPhonePlayerViewController: UIViewController {
         gamePadScene = nil
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for notification in notificationArray {
+            notification.removeFromParent()
+        }
+        notificationArray = []
+    }
+    
     
     // MARK: - Aux Functions
     
     func setNotification(text:String) {
-//        let notification = NotificationNode(text: text)
-//        notification.position = CGPointMake(skView!.scene!.frame.size.width/2, skView!.scene!.frame.size.height/2)
-//        skView?.scene!.addChild(notification)
+        let notification = NotificationNode(text: text)
+        notificationArray.append(notification)
+        notification.position = CGPointMake(skView!.scene!.frame.size.width/2, skView!.scene!.frame.size.height/2)
+        skView?.scene!.addChild(notification)
+        
     }
+    
+    func setNotificationsInNewScene() {
+        for notification in notificationArray {
+            skView?.scene!.addChild(notification)
+        }
+    }
+
 }
