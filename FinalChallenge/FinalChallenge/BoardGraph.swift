@@ -157,13 +157,15 @@ class BoardGraph : NSObject{
     // inform the player witch card he got from the boardNode
     func sendCardToPlayer(nodeName : String, player:Player){
         let card = nodes[nodeName]!.item
-        player.items.append(card!)
-        
-        let cardData = ["player":player.playerIdentifier, "item": card!.cardName]
-        let dic = ["addCard":" ", "dataDic" : cardData]
-        
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        nodes[nodeName]?.item = nil
+        if player.items.count < 5 {
+            player.items.append(card!)
+            
+            let cardData = ["player":player.playerIdentifier, "item": card!.cardName]
+            let dic = ["addCard":" ", "dataDic" : cardData]
+            
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+            nodes[nodeName]?.item = nil
+        }
         
     }
     
