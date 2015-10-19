@@ -138,7 +138,7 @@ class GameManager : NSObject {
         movePlayerOnBoard(nodeList, player: p, completion: {() in
             let alert = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
             for node in currentNode.nextMoves {
-                let title = "Path: \(BoardGraph.SharedInstance.keyFor(node))"
+                let title = self.getRelativePosition(currentNode, node2: node)
                 let action = UIAlertAction(title: title, style: .Default, handler: {action -> Void in
                     BoardGraph.SharedInstance.alertRef!.node = node
                     self.movePlayerOneSquare(p, node: node, remaining: remaining-1)
@@ -151,6 +151,24 @@ class GameManager : NSObject {
 
         })
         
+    }
+    
+    func getRelativePosition(node1:BoardNode, node2:BoardNode) -> String {
+        let leftRight = fabs(fabs(node1.posX) - fabs(node2.posX))
+        let upDown = fabs(fabs(node1.posY) - fabs(node2.posY))
+        if leftRight > upDown {
+            if node2.posX > node1.posX {
+                return "right"
+            } else {
+                return "left"
+            }
+        } else {
+            if node2.posY > node1.posY {
+                return "up"
+            } else {
+                return "down"
+            }
+        }
     }
     
     //moves player one block ahead
