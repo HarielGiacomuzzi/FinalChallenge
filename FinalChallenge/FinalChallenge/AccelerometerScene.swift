@@ -10,6 +10,8 @@ import UIKit
 import SpriteKit
 import CoreMotion
 
+
+//flappy fish
 class AccelerometerScene: GamePadScene {
     
     lazy var motionManager : CMMotionManager = {

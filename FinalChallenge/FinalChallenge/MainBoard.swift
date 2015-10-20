@@ -11,6 +11,7 @@ import SpriteKit
 class MainBoard: SKScene, SKPhysicsContactDelegate {
     weak var viewController: UIViewController?
     var realPlayer : Player?
+    let map = SKSpriteNode(imageNamed: "map")
     let partsAtlas = SKTextureAtlas(named: "Board")
 
     override func update(currentTime: NSTimeInterval) {
@@ -25,6 +26,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             GameManager.sharedInstance.isOnBoard = true;
             let scaleFactorX = Double(2048/(self.view?.frame.width)!);
             let scaleFactorY = Double(1536/(self.view?.frame.height)!);
+            setupMap()
             if !GameManager.sharedInstance.doOnce{
                 
                 for i in BoardGraph.SharedInstance.nodes{
@@ -55,6 +57,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     
                     GameManager.sharedInstance.doOnce = true
                 }
+        
                 let x = (BoardGraph.SharedInstance.nodes["01"]?.posX)!;
                 let y = (BoardGraph.SharedInstance.nodes["01"]?.posY)!;
                 
@@ -64,6 +67,8 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     p.nodeSprite = PlayerNode(named: p.avatar!);
                     p.nodeSprite?.position = CGPointMake(CGFloat(p.x), CGFloat(p.y))
                     BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(p)
+                    p.nodeSprite?.setScale(0.5)
+                    p.nodeSprite?.anchorPoint = CGPointMake(0.5, 0.25)
                     
                     self.addChild(p.nodeSprite!)
                 }
@@ -100,6 +105,13 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             }
     }
 
+    func setupMap(){
+        map.position.x = CGFloat((self.view?.frame.width)!/2);
+        map.position.y = CGFloat((self.view?.frame.height)!/2);
+        map.zPosition = 10
+        self.addChild(map);
+    }
+    
     func presentEndGameScene(){
         //print("Apresentou EndGame")
         self.removeAllChildren()
@@ -108,7 +120,6 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         let goScene = EndGameScene(size: self.size)
         goScene.scaleMode = self.scaleMode
         self.view?.presentScene(goScene)
-
     }
     
 
