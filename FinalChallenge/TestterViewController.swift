@@ -16,7 +16,7 @@ class TestterViewController: UIViewController {
         super.viewDidLoad()
 
         
-        let scene = SwipeScene(size: CGSize(width: 1024, height: 768))
+        let scene = GameOverSceneMP(size: CGSize(width: 1024, height: 768))
         
         
         let skView = view as! SKView
