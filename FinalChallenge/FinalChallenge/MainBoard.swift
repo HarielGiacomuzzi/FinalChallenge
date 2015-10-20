@@ -30,7 +30,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             if !GameManager.sharedInstance.doOnce{
                 
                 for i in BoardGraph.SharedInstance.nodes{
-                    var texture = self.partsAtlas.textureNamed("square1");
+                    var texture = self.partsAtlas.textureNamed("square");
                     if i.0 == "House"{
                         texture = self.partsAtlas.textureNamed("house");
                     }
@@ -39,19 +39,19 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     }
                     
                     if i.1.nextMoves.count > 1 {
-                        texture = self.partsAtlas.textureNamed("square2");
+                        texture = self.partsAtlas.textureNamed("square");
                     }
                     
                     let x = SKSpriteNode(texture: texture)
-                        let posY = i.1.posY/scaleFactorY;
-                        let posX = i.1.posX/scaleFactorX;
+                    let posY = i.1.posY/scaleFactorY;
+                    let posX = i.1.posX/scaleFactorX;
                     
-                        x.position.x = CGFloat(posX);
-                        x.position.y = CGFloat(posY);
-                        x.zPosition = 10
-                        i.1.posX = posX;
-                        i.1.posY = posY;
-                        x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
+                    x.position.x = CGFloat(posX);
+                    x.position.y = CGFloat(posY);
+                    x.zPosition = 10
+                    i.1.posX = posX;
+                    i.1.posY = posY;
+                    x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
                     
                     self.addChild(x);
                     
@@ -69,7 +69,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(p)
                     p.nodeSprite?.setScale(0.5)
                     p.nodeSprite?.anchorPoint = CGPointMake(0.5, 0.25)
-                    
+                    p.nodeSprite?.zPosition = 20
                     self.addChild(p.nodeSprite!)
                 }
                 
@@ -77,7 +77,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                 GameManager.sharedInstance.playerTurnEnded(nil)
             }else{
                 for i in BoardGraph.SharedInstance.nodes{
-                    var texture = self.partsAtlas.textureNamed("square1");
+                    var texture = self.partsAtlas.textureNamed("square");
                     if i.0 == "House"{
                         texture = self.partsAtlas.textureNamed("house");
                     }
@@ -86,7 +86,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     }
                     
                     if i.1.nextMoves.count > 1 {
-                        texture = self.partsAtlas.textureNamed("square2");
+                        texture = self.partsAtlas.textureNamed("square");
                     }
                     
                     let x = SKSpriteNode(texture: texture)
@@ -95,6 +95,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     x.position.y = CGFloat(i.1.posY);
                     x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
                     
+                    x.zPosition = 10
                     self.addChild(x);
                 }
                 
@@ -108,7 +109,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     func setupMap(){
         map.position.x = CGFloat((self.view?.frame.width)!/2);
         map.position.y = CGFloat((self.view?.frame.height)!/2);
-        map.zPosition = 10
+        map.zPosition = 5
         self.addChild(map);
     }
     

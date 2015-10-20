@@ -75,8 +75,6 @@ class PlayerNode: SKSpriteNode {
     }
     
     func walkTo(point:CGPoint, completion:() -> ()) {
-        //print(point)
-        //print(position)
         let textures = decideDirection(point)
         let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.1)
         let movement = SKAction.moveTo(point, duration: 1.0)
@@ -94,12 +92,12 @@ class PlayerNode: SKSpriteNode {
         if sidewaysMovement > updownMovement {
             if point.x > position.x { //right
                 if xScale > 0 {
-                    xScale = -1
+                    xScale = -1 * fabs(xScale)
                 }
                 return walkingSideways
             } else { //left
                 if xScale < 0 {
-                    xScale = 1
+                    xScale = fabs(xScale)
                 }
                 return walkingSideways
             }
