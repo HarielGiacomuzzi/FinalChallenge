@@ -44,12 +44,6 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         ConnectionManager.sharedInstance.browser?.delegate = self
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_GameSetup", object: nil);
-        /*
-        turnSelector.dataSource = self
-        turnSelector.delegate = self
-        
-        turnSelectorComponents = ["5","10","20"]
-        */
         
         scene = SetupPartyScene(size: CGSize(width: 1024, height: 768))
         scene!.viewController = self
