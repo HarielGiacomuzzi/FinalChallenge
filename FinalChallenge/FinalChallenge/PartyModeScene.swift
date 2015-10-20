@@ -31,6 +31,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var go : SKSpriteNode?
     var numberOfTurns : SKLabelNode?
     var tutorialNode : SKSpriteNode?
+    var tutorialClass : TutorialNodeScene?
     
     var charInitialPosition : CGFloat?
     
@@ -118,7 +119,13 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         
-        self.setTutorialScene()
+        //self.setTutorialScene()
+        
+        tutorialClass = TutorialNodeScene(texture: SKTexture(imageNamed: "tutorialscene1iphone"), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
+        tutorialClass?.t = [SKTexture(imageNamed: "tutorialscene1iphone"), SKTexture(imageNamed: "tutorialscene2iphone"),SKTexture(imageNamed: "tutorialscene3iphone")]
+        tutorialClass?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        tutorialClass?.zPosition = 400
+        self.addChild(tutorialClass!)
     }
     
     func setTutorialScene(){
@@ -235,7 +242,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                     case "wizardCard" : aux = "wizard"
                     default : break
                     }
-                    if touchedNode.name! == aux {
+                    if touchedNode.name == aux {
                         let sequence = SKAction.sequence([SKAction.rotateByAngle(degToRad(-4.0), duration: 0.1),
                             SKAction.rotateByAngle(0.0, duration: 0.1),
                             SKAction.rotateByAngle(degToRad(4.0), duration: 0.1)])
@@ -251,8 +258,8 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let touch : UITouch? = touches.first as UITouch?
         
         if let location = touch?.locationInNode(self) {
-            if (tutorialNode!.containsPoint(location)){
-                tutorialNode?.removeFromParent()
+            if (tutorialClass!.containsPoint(location)){
+                tutorialClass?.removeFromParent()
             }
             let touchedNode = self.nodeAtPoint(location)
             if touchedNode.name == "back"{
