@@ -32,10 +32,10 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                 for i in BoardGraph.SharedInstance.nodes{
                     var texture = self.partsAtlas.textureNamed("square");
                     if i.0 == "House"{
-                        texture = self.partsAtlas.textureNamed("house");
+                        texture = self.partsAtlas.textureNamed("square");
                     }
                     if i.0 == "Store" {
-                        texture = self.partsAtlas.textureNamed("shop");
+                        texture = self.partsAtlas.textureNamed("square");
                     }
                     
                     if i.1.nextMoves.count > 1 {
@@ -79,10 +79,10 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                 for i in BoardGraph.SharedInstance.nodes{
                     var texture = self.partsAtlas.textureNamed("square");
                     if i.0 == "House"{
-                        texture = self.partsAtlas.textureNamed("house");
+                        texture = self.partsAtlas.textureNamed("square");
                     }
                     if i.0 == "Store" {
-                        texture = self.partsAtlas.textureNamed("shop");
+                        texture = self.partsAtlas.textureNamed("square");
                     }
                     
                     if i.1.nextMoves.count > 1 {
@@ -94,6 +94,16 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     x.position.x = CGFloat(i.1.posX);
                     x.position.y = CGFloat(i.1.posY);
                     x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
+                    
+                    //add trap to board
+                    if let item = i.1.item {
+                        if item.usable {
+                            let usable = item as! ActiveCard
+                            if usable.used {
+                                addTrap(CGFloat(i.1.posX), y: CGFloat(i.1.posY))
+                            }
+                        }
+                    }
                     
                     x.zPosition = 10
                     self.addChild(x);
@@ -123,6 +133,24 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         self.view?.presentScene(goScene)
     }
     
+    func addTrap(x:CGFloat, y:CGFloat) {
+        let trap = SKSpriteNode(imageNamed: "trap")
+        trap.position = CGPointMake(x, y)
+        trap.name = "trap"
+        trap.zPosition = 15
+        addChild(trap)
+        
+    }
+    
+    func removeTrap(x:CGFloat, y:CGFloat) {
+        let nodes = nodesAtPoint(CGPointMake(x, y))
+        for node in nodes {
+            if node.name == "trap" {
+                node.removeFromParent()
+            }
+
+        }
+    }
 
     
     deinit{

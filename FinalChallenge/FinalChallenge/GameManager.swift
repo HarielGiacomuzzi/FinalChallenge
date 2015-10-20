@@ -200,6 +200,8 @@ class GameManager : NSObject {
                 }
                 let whereIsPlayer = BoardGraph.SharedInstance.whereIs(p)
                 BoardGraph.SharedInstance.setItem(setCard, nodeName: whereIsPlayer!) // return true if card was set
+                let boardNode = BoardGraph.SharedInstance.getBoardNode(whereIsPlayer!)
+                addTrap(boardNode)
                 break;
             }
         }
@@ -407,5 +409,15 @@ class GameManager : NSObject {
         player.nodeSprite?.walkTo(points, completion: completion)
         
     }
+    
+    func addTrap(boardNode:BoardNode) {
+        boardGameViewController?.scene.addTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
+    }
+    
+    func removeTrap(boardNode:BoardNode) {
+        boardGameViewController?.scene.removeTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
+    }
+    
+
         
 }

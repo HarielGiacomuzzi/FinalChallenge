@@ -350,4 +350,8 @@ class BoardGraph : NSObject{
             }
         }
     }
+    
+    func getBoardNode(name:String) -> BoardNode {
+        return nodes[name]!
+    }
 }
