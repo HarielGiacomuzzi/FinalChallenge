@@ -21,6 +21,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     var go : SKSpriteNode?
     var numberOfTurns : SKLabelNode?
     var back : SKLabelNode?
+    let fontSize : CGFloat = 20.0
     // characters nodes
     let char1 : SKSpriteNode = SKSpriteNode(imageNamed: "knight")
     let char2 : SKSpriteNode = SKSpriteNode(imageNamed: "ranger")
@@ -45,7 +46,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     var popupAtlas:SKTextureAtlas!
     
     var tutorialNode : SKSpriteNode?
-    
+    var tutorialClass : TutorialNodeScene?
     // colisions
     let boundaryCategoryMask: UInt32 =  0x1 << 1
     let fallingCategoryMask: UInt32 =  0x1 << 2
@@ -83,8 +84,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
                                     
                                 default: break
                                 }
-                                
-                                
                                 break
                             }
                         }
@@ -99,11 +98,17 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         popupAtlas = SKTextureAtlas(named: "popup")
-        self.setTutorialScene()
+        //self.setTutorialScene()
+
+        tutorialClass = TutorialNodeScene(texture: SKTexture(imageNamed: "tutorialscene1ipad"), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
+        tutorialClass?.t = [SKTexture(imageNamed: "tutorialscene1ipad"), SKTexture(imageNamed: "tutorialscene2ipad"),SKTexture(imageNamed: "tutorialscene3ipad")]
+        tutorialClass?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        tutorialClass?.zPosition = 400
+        self.addChild(tutorialClass!)
     }
     
     func setTutorialScene(){
-        tutorialNode = SKSpriteNode(color: UIColor.blueColor(), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
+        tutorialNode = SKSpriteNode(color: UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 0.8), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
         tutorialNode?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         tutorialNode?.zPosition = 10
         tutorialNode?.name = "tutorial"
@@ -119,16 +124,78 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         text.text = "Two or more Players"
         text.position.y = tutorialNode!.frame.height/3.2
         text.zPosition = 11
-        text.fontSize = 20
+        text.fontSize = self.fontSize
         
-        let sprite1 = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: tutorialNode!.frame.width/2, height: tutorialNode!.frame.height/5))
+        let d = SKNode()
+        
+        let desc = SKLabelNode(fontNamed: "GillSans-Bold")
+        desc.name = "desc 0"
+        desc.text = "To play this mode you will need at least"
+        desc.position = CGPointMake(desc.position.x, desc.position.y)
+        desc.fontColor = UIColor.whiteColor()
+        desc.fontSize = self.fontSize
+        d.addChild(desc)
+        
+        let desc1 = SKLabelNode(fontNamed: "GillSans-Bold")
+        desc1.name = "desc 1"
+        desc1.text = "two or more iPhones with iOS 8.0 or later."
+        desc1.position = CGPointMake(desc1.position.x, desc1.position.y - 30)
+        desc1.fontColor = UIColor.whiteColor()
+        desc1.fontSize = self.fontSize
+        d.addChild(desc1)
+        
+        let desc2 = SKLabelNode(fontNamed: "GillSans-Bold")
+        desc2.name = "desc 2"
+        desc2.text = "To connect with players press Connect and"
+        desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 60)
+        desc2.fontColor = UIColor.whiteColor()
+        desc2.fontSize = self.fontSize
+        d.addChild(desc2)
+        
+        let desc3 = SKLabelNode(fontNamed: "GillSans-Bold")
+        desc3.name = "desc 3"
+        desc3.text = "chose the players by pressing their names"
+        desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 90)
+        desc3.fontColor = UIColor.whiteColor()
+        desc3.fontSize = self.fontSize
+        d.addChild(desc3)
+        
+        let desc4 = SKLabelNode(fontNamed: "GillSans-Bold")
+        desc4.name = "desc 4"
+        desc4.text = "and wait to confirm connection, now press done"
+        desc4.position = CGPointMake(desc4.position.x, desc4.position.y - 120)
+        desc4.fontColor = UIColor.whiteColor()
+        desc4.fontSize = self.fontSize
+        d.addChild(desc4)
+        
+        let desc5 = SKLabelNode(fontNamed: "GillSans-Bold")
+        desc5.name = "desc 5"
+        desc5.text = "and select you avatar on your iPhone. With all"
+        desc5.position = CGPointMake(desc5.position.x, desc5.position.y - 150)
+        desc5.fontColor = UIColor.whiteColor()
+        desc5.fontSize = self.fontSize
+        d.addChild(desc5)
+        
+        let desc6 = SKLabelNode(fontNamed: "GillSans-Bold")
+        desc6.name = "desc 6"
+        desc6.text = "set, select the number of turns and press GO."
+        desc6.position = CGPointMake(desc6.position.x, desc6.position.y - 180)
+        desc6.fontColor = UIColor.whiteColor()
+        desc6.fontSize = self.fontSize
+        d.addChild(desc6)
+        
+        d.zPosition = 1002
+        d.position.y = tutorialNode!.frame.height/3
+        
+        /*let sprite1 = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: tutorialNode!.frame.width/2, height: tutorialNode!.frame.height/5))
         sprite1.name = "Tutorial sprite"
         sprite1.position.y = tutorialNode!.frame.height/5
-        sprite1.zPosition = 11
+        sprite1.zPosition = 11*/
         
         tutorialNode?.addChild(tutorialText)
-        tutorialNode?.addChild(text)
-        tutorialNode?.addChild(sprite1)
+        //tutorialNode?.addChild(text)
+        tutorialNode?.addChild(d)
+        //tutorialNode?.addChild(sprite1)
         self.addChild(tutorialNode!)
     }
     
@@ -196,7 +263,8 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
 
         
         
-      /*let spawn = SKAction.runBlock({() in self.spawnItem()})
+        /*
+        let spawn = SKAction.runBlock({() in self.spawnItem()})
         
         let delay = SKAction.waitForDuration(0.7, withRange: 1.4)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
@@ -293,9 +361,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
         
+        /*
         if(tutorialNode!.containsPoint(location)){
             tutorialNode?.removeFromParent()
-        }
+        }*/
         
         if(go!.containsPoint(location)){
             go!.texture = greenButtonOff

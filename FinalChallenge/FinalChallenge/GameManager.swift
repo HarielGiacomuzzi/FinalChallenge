@@ -84,6 +84,7 @@ class GameManager : NSObject {
     func playerTurn(player:Player?){
         let location = BoardGraph.SharedInstance.whereIs(player!)
         BoardGraph.SharedInstance.pickItem(location!, player: player!)
+        BoardGraph.SharedInstance.giveCoins(location!, player: player!)
     }
     
     //dice response
@@ -137,7 +138,7 @@ class GameManager : NSObject {
         movePlayerOnBoard(nodeList, player: p, completion: {() in
             let alert = AlertPath(title: "Select a Path", message: "Please Select a Path to Follow", preferredStyle: .Alert)
             for node in currentNode.nextMoves {
-                let title = "Path: \(BoardGraph.SharedInstance.keyFor(node))"
+                let title = self.getRelativePosition(currentNode, node2: node)
                 let action = UIAlertAction(title: title, style: .Default, handler: {action -> Void in
                     BoardGraph.SharedInstance.alertRef!.node = node
                     self.movePlayerOneSquare(p, node: node, remaining: remaining-1)
@@ -150,6 +151,24 @@ class GameManager : NSObject {
 
         })
         
+    }
+    
+    func getRelativePosition(node1:BoardNode, node2:BoardNode) -> String {
+        let leftRight = fabs(fabs(node1.posX) - fabs(node2.posX))
+        let upDown = fabs(fabs(node1.posY) - fabs(node2.posY))
+        if leftRight > upDown {
+            if node2.posX > node1.posX {
+                return "right"
+            } else {
+                return "left"
+            }
+        } else {
+            if node2.posY > node1.posY {
+                return "up"
+            } else {
+                return "down"
+            }
+        }
     }
     
     //moves player one block ahead
@@ -191,26 +210,20 @@ class GameManager : NSObject {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
         let cardName = dic["card"] as! String
         
-        //print("player \(playerName) tried to buy card \(cardName)")
-        
         guard !players.isEmpty else {
             return
         }
         
         let player = getPlayer(playerName)
-        //print(player.playerIdentifier)
         let card =  CardManager.ShareInstance.getCard(cardName)
-        //print(card.cardName)
         
         var status = " "
         var worked = false
         
         if player.items.count >= 5 {
             status = "You already have the maximum ammount of cards"
-            //print("ta lotado")
         } else if player.coins <= card.storeValue {
             status = "You don't have enough money"
-            //print("faltou money")
         } else {
             status = "You have successfully bought a card"
             worked = true
@@ -219,8 +232,6 @@ class GameManager : NSObject {
         if worked {
             player.coins -= card.storeValue
             player.items.append(card)
-            //print("player comprou gostoso")
-            //print("player coins \(player.coins) | player items \(player.items)")
         }
         
         let dataDic = ["player":playerName, "status":status, "worked":worked, "playerMoney":player.coins, "card":cardName]

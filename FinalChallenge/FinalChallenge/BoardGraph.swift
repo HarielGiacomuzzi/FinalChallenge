@@ -157,13 +157,15 @@ class BoardGraph : NSObject{
     // inform the player witch card he got from the boardNode
     func sendCardToPlayer(nodeName : String, player:Player){
         let card = nodes[nodeName]!.item
-        player.items.append(card!)
-        
-        let cardData = ["player":player.playerIdentifier, "item": card!.cardName]
-        let dic = ["addCard":" ", "dataDic" : cardData]
-        
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        nodes[nodeName]?.item = nil
+        if player.items.count < 5 {
+            player.items.append(card!)
+            
+            let cardData = ["player":player.playerIdentifier, "item": card!.cardName]
+            let dic = ["addCard":" ", "dataDic" : cardData]
+            
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+            nodes[nodeName]?.item = nil
+        }
         
     }
     
@@ -192,6 +194,14 @@ class BoardGraph : NSObject{
             return true
         }
         return false;
+    }
+    
+    //gives the house cois to player and sets it to 0
+    func giveCoins(nodeName : String, player : Player) {
+        if nodes[nodeName]?.coins > 0 {
+            GameManager.sharedInstance.updatePlayerMoney(player, value: nodes[nodeName]!.coins!)
+        }
+        nodes[nodeName]?.coins = 0
     }
     
     // activate cards funcions

@@ -19,6 +19,8 @@ class iPhonePlayerViewController: UIViewController {
     var partyModeScene : PartyModeScene?
     var gamePadScene : GamePadScene?
     var endGameScene : EndGameIphoneScene?
+    
+    var notificationArray : [NotificationNode] = []
 
     var playerColor : UIColor!
     var playerMoney = 0
@@ -80,7 +82,7 @@ class iPhonePlayerViewController: UIViewController {
         let value = dic["value"] as! Int
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
 
-            setNotification("You got \(playerMoney - value) moneys")
+            setNotification("You got \(value - playerMoney) moneys")
             playerMoney = value
             playerScene?.updateMoney(playerMoney)
         } else {
@@ -95,6 +97,7 @@ class iPhonePlayerViewController: UIViewController {
 
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerCards.append(card)
+            setNotification("You got teh card \(card) :)")
             if playerScene != nil {
                 playerScene!.addCard(card)
             }
@@ -111,6 +114,7 @@ class iPhonePlayerViewController: UIViewController {
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerScene!.removeCard(card)
             playerCards.removeObject(card)
+            setNotification("You lost teh card \(card) :(")
         } else {
             
         }
@@ -135,6 +139,8 @@ class iPhonePlayerViewController: UIViewController {
             let player = dic["player"] as! String
             let card = dic["card"] as! String
             if player == ConnectionManager.sharedInstance.peerID!.displayName {
+                setNotification(status)
+                
                 playerMoney = dic["playerMoney"] as! Int
                 if worked {
                     playerCards.append(card)
@@ -163,6 +169,7 @@ class iPhonePlayerViewController: UIViewController {
         playerScene?.cardsString = playerCards
         skView?.presentScene(playerScene)
         playerScene?.updateMoney(playerMoney)
+        setNotificationsInNewScene()
     }
     
     func loadStore(cards:[String]) {
@@ -176,6 +183,7 @@ class iPhonePlayerViewController: UIViewController {
         }
         storeScene?.scaleMode = .AspectFit
         skView?.presentScene(storeScene)
+        setNotificationsInNewScene()
     }
     
     func loadPartyModeScene() {
@@ -185,6 +193,7 @@ class iPhonePlayerViewController: UIViewController {
         
         partyModeScene?.viewController = self
         skView?.presentScene(partyModeScene)
+        setNotificationsInNewScene()
     }
     
     func loadGamePad(minigame:Minigame) {
@@ -200,6 +209,7 @@ class iPhonePlayerViewController: UIViewController {
         gamePadScene?.viewController = self
         skView?.presentScene(gamePadScene)
         gamePadScene?.backgroundColor = playerColor
+        setNotificationsInNewScene()
     }
     
     func loadEndGameScene() {
@@ -207,6 +217,7 @@ class iPhonePlayerViewController: UIViewController {
         
         endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
         skView?.presentScene(endGameScene)
+        setNotificationsInNewScene()
     }
     
     func setAllScenesNil() {
@@ -216,12 +227,48 @@ class iPhonePlayerViewController: UIViewController {
         gamePadScene = nil
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for notification in notificationArray {
+            notification.removeFromParent()
+        }
+        notificationArray = []
+    }
+    
     
     // MARK: - Aux Functions
     
     func setNotification(text:String) {
-//        let notification = NotificationNode(text: text)
-//        notification.position = CGPointMake(skView!.scene!.frame.size.width/2, skView!.scene!.frame.size.height/2)
-//        skView?.scene!.addChild(notification)
+        let notification = NotificationNode(text: text)
+        notificationArray.append(notification)
+
+        setNotificationsInNewScene()
     }
+    
+    func setNotificationsInNewScene() {
+        
+        //adds notifications to scene
+        for notification in notificationArray {
+            if notification.parent != nil {
+                notification.removeFromParent()
+            }
+            skView?.scene?.addChild(notification)
+        }
+        
+        //fixes notifications positions
+        let notificationHeight = notificationArray.first?.calculateAccumulatedFrame().height
+        var fullsize:CGFloat = 0.0
+        var start:CGFloat = 0.0
+        for _ in notificationArray {
+            fullsize += notificationHeight!
+        }
+        start = skView!.scene!.frame.size.height/2 - fullsize/2
+        
+        for notification in notificationArray {
+            let positionY = start + notificationHeight!/2
+            notification.position = CGPointMake(skView!.scene!.frame.size.width/2, positionY)
+            start = positionY + notificationHeight!/2
+        }
+        
+    }
+
 }

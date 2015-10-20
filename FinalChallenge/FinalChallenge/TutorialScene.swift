@@ -95,8 +95,8 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         barName.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2.7)
         barName.zPosition = 1100
         
-        nameText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
-        nameText.text = "Fish Race"
+        nameText = SKLabelNode(fontNamed: "GillSans-Bold")
+        nameText.text = "Flappy Fish"
         nameText.position.y = nameText.position.y - 10
         nameText.zPosition = 1101
         
@@ -105,49 +105,49 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         
         let d = SKNode()
         if !GameManager.sharedInstance.isMultiplayer{
-            let desc = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc = SKLabelNode(fontNamed: "GillSans-Bold")
             desc.text = "Avoid the rocks while swimming through the river."
             desc.position = CGPointMake(desc.position.x, desc.position.y)
             desc.fontColor = UIColor.blackColor()
             desc.fontSize = fontSize
             d.addChild(desc)
         
-            let desc2 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc2 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc2.text = "Grab bubbles to gain a little boost. Press on "
             desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
             desc2.fontColor = UIColor.blackColor()
             desc2.fontSize = fontSize
             d.addChild(desc2)
         
-            let desc3 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc3 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc3.text = "the upper part of the screen to swim up and the "
             desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
             desc3.fontColor = UIColor.blackColor()
             desc3.fontSize = fontSize
             d.addChild(desc3)
         
-            let desc4 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc4 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc4.text = "botton to swim down"
             desc4.position = CGPointMake(desc4.position.x, desc4.position.y - 90)
             desc4.fontColor = UIColor.blackColor()
             desc4.fontSize = fontSize
             d.addChild(desc4)
         } else {
-            let desc = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc = SKLabelNode(fontNamed: "GillSans-Bold")
             desc.text = "Avoid the rocks while swimming through the river."
             desc.position = CGPointMake(desc.position.x, desc.position.y)
             desc.fontColor = UIColor.blackColor()
             desc.fontSize = fontSize
             d.addChild(desc)
             
-            let desc2 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc2 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc2.text = "Grab bubbles to gain a little boost. Check your"
             desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
             desc2.fontColor = UIColor.blackColor()
             desc2.fontSize = fontSize
             d.addChild(desc2)
             
-            let desc3 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc3 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc3.text = "device to check the game controls."
             desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
             desc3.fontColor = UIColor.blackColor()
@@ -256,8 +256,8 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         barName.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2.7)
         barName.zPosition = 1100
         
-        nameText = SKLabelNode(fontNamed: "MarkerFelt-Wide")
-        nameText.text = "Bomber Bots"
+        nameText = SKLabelNode(fontNamed: "GillSans-Bold")
+        nameText.text = "Bomb Game"
         nameText.position.y = nameText.position.y - 10
         nameText.zPosition = 1101
         
@@ -266,42 +266,42 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         
         let d = SKNode()
         if !GameManager.sharedInstance.isMultiplayer{
-            let desc = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc = SKLabelNode(fontNamed: "GillSans-Bold")
             desc.text = "Throw the bomb to other robots and don't let it "
             desc.position = CGPointMake(desc.position.x, desc.position.y)
             desc.fontColor = UIColor.blackColor()
             desc.fontSize = fontSize
             d.addChild(desc)
             
-            let desc2 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc2 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc2.text = "explode on your hands! While traveling or left "
             desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
             desc2.fontColor = UIColor.blackColor()
             desc2.fontSize = fontSize
             d.addChild(desc2)
             
-            let desc3 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc3 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc3.text = "unchecked, the bomb timer will go down until "
             desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
             desc3.fontColor = UIColor.blackColor()
             desc3.fontSize = fontSize
             d.addChild(desc3)
             
-            let desc4 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc4 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc4.text = "some bot grab it again."
             desc4.position = CGPointMake(desc4.position.x, desc4.position.y - 90)
             desc4.fontColor = UIColor.blackColor()
             desc4.fontSize = fontSize
             d.addChild(desc4)
             
-            let desc5 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc5 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc5.text = "While handling the bomb, swipe to throw "
             desc5.position = CGPointMake(desc5.position.x, desc5.position.y - 120)
             desc5.fontColor = UIColor.blackColor()
             desc5.fontSize = fontSize
             d.addChild(desc5)
             
-            let desc6 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc6 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc6.text = "to the desired angle."
             desc6.position = CGPointMake(desc6.position.x, desc6.position.y - 150)
             desc6.fontColor = UIColor.blackColor()
@@ -309,35 +309,35 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
             d.addChild(desc6)
 
         } else {//"Throw the bomb to other robots and don't let it explode on your hands! While traveling or left unchecked, the bomb timer will go down until some bot grab it. Check your device to check the game controls"
-            let desc = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc = SKLabelNode(fontNamed: "GillSans-Bold")
             desc.text = "Throw the bomb to other robots and don't let it "
             desc.position = CGPointMake(desc.position.x, desc.position.y)
             desc.fontColor = UIColor.blackColor()
             desc.fontSize = fontSize
             d.addChild(desc)
             
-            let desc2 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc2 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc2.text = "explode on your hands! While traveling or left "
             desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
             desc2.fontColor = UIColor.blackColor()
             desc2.fontSize = fontSize
             d.addChild(desc2)
             
-            let desc3 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc3 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc3.text = "unchecked, the bomb timer will go down until "
             desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
             desc3.fontColor = UIColor.blackColor()
             desc3.fontSize = fontSize
             d.addChild(desc3)
             
-            let desc4 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc4 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc4.text = "some bot grab it again. Check your"
             desc4.position = CGPointMake(desc4.position.x, desc4.position.y - 90)
             desc4.fontColor = UIColor.blackColor()
             desc4.fontSize = fontSize
             d.addChild(desc4)
             
-            let desc5 = SKLabelNode(fontNamed: "MarkerFelt-Wide")
+            let desc5 = SKLabelNode(fontNamed: "GillSans-Bold")
             desc5.text = "device to check the game controls."
             desc5.position = CGPointMake(desc5.position.x, desc5.position.y - 120)
             desc5.fontColor = UIColor.blackColor()
