@@ -89,11 +89,6 @@ class BoardNode : NSObject{
     
     func insertPLayer(player : Player?){
         currentPlayers.append(player!);
-        // vê se tem moedas na casa e dá elas pro player
-        if coins > 0 {
-            GameManager.sharedInstance.updatePlayerMoney(player!, value: coins!);
-        }
-        coins = 0;
     }
     
     func hasPlayer(player : NSObject) -> Bool{

@@ -79,7 +79,7 @@ class PlayerNode: SKSpriteNode {
         //print(position)
         let textures = decideDirection(point)
         let animation = SKAction.animateWithTextures(textures, timePerFrame: 0.1)
-        let movement = SKAction.moveTo(point, duration: 2.0)
+        let movement = SKAction.moveTo(point, duration: 1.0)
         
         self.runAction(SKAction.repeatActionForever(animation))
         self.runAction(movement, completion: {() in

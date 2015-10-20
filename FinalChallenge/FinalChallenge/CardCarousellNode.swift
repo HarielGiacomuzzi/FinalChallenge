@@ -71,7 +71,6 @@ class CardCarouselNode: SKNode {
             let location = touch.locationInNode(self)
             if location == checkTouch {
                 let touchedNode = nodeAtPoint(location)
-                print("chekctouch")
                 if centerIndex > 0 {
                     if touchedNode.parent == cards[centerIndex-1] {
                         centerIndex--
@@ -90,8 +89,6 @@ class CardCarouselNode: SKNode {
         }
         
         let centerCard = cards[centerIndex]
-        print(centerCard.position.y)
-        print(centerPoint.y)
         if centerCard.position.y > centerPoint.y {
             removeCard()
             //manda a carta

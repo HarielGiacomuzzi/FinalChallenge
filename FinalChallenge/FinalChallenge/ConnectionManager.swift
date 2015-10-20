@@ -284,6 +284,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         // if it's time to open gamepad
             if message.valueForKey("openController") != nil {
                 userInfo.updateValue(message.valueForKey("gameName") as! NSObject, forKey: "gameName")
+                userInfo.updateValue(message.valueForKey("playerColorDic") as! NSObject, forKey: "playerColorDic")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_OpenController", object: nil, userInfo: userInfo)
                 return
             }

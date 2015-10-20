@@ -157,13 +157,15 @@ class BoardGraph : NSObject{
     // inform the player witch card he got from the boardNode
     func sendCardToPlayer(nodeName : String, player:Player){
         let card = nodes[nodeName]!.item
-        player.items.append(card!)
-        
-        let cardData = ["player":player.playerIdentifier, "item": card!.cardName]
-        let dic = ["addCard":" ", "dataDic" : cardData]
-        
-        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        nodes[nodeName]?.item = nil
+        if player.items.count < 5 {
+            player.items.append(card!)
+            
+            let cardData = ["player":player.playerIdentifier, "item": card!.cardName]
+            let dic = ["addCard":" ", "dataDic" : cardData]
+            
+            ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+            nodes[nodeName]?.item = nil
+        }
         
     }
     
@@ -194,6 +196,14 @@ class BoardGraph : NSObject{
         return false;
     }
     
+    //gives the house cois to player and sets it to 0
+    func giveCoins(nodeName : String, player : Player) {
+        if nodes[nodeName]?.coins > 0 {
+            GameManager.sharedInstance.updatePlayerMoney(player, value: nodes[nodeName]!.coins!)
+        }
+        nodes[nodeName]?.coins = 0
+    }
+    
     // activate cards funcions
     func activateCard(card:ActiveCard, targetPlayer:Player){
         switch(card.cardName){
@@ -222,6 +232,44 @@ class BoardGraph : NSObject{
     }
    
     
+    
+    /* ******************************** */
+    /* WALK ATUAL ESTA AQUI !!!!!!!! */
+    /* ******************************** */
+    
+    private func walk(quantity : Int, node : BoardNode, var list : [BoardNode], view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
+
+        if quantity == 0 || node.nextMoves.count > 1 || node.isSpecialNode {
+            return (list, quantity, node)
+        }
+        
+        list.append(node.nextMoves.first!)
+        return walk(quantity - 1, node: node.nextMoves.first!, list : list, view: view);
+    }
+    
+    //returns the list of nodes the player have moved
+    func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
+
+        let a = walk(quantity, node: nodeFor(player)!, list: [], view: view);
+        nodeFor(player)?.removePlayer(player);
+        a.nodeList.last?.insertPLayer(player);
+        return a;
+    }
+    
+    //used to move to the next node in cases you have to choose, or when you're blocked
+    func walkToNode(player:Player, node:BoardNode) {
+        nodeFor(player)?.removePlayer(player)
+        node.insertPLayer(player)
+    }
+    
+    //TODO: walk backwards
+    
+    /* ******************************** */
+    /* WALK ATUAL TERMINA AQUI !!!!!!!! */
+    /* ******************************** */
+    
+    
+    
     // Recursive* not Recursivo
     private func walkRecursivo(qtd : Int, node : BoardNode) -> [BoardNode]{
         var lista : [BoardNode] = [];
@@ -240,30 +288,6 @@ class BoardGraph : NSObject{
             }
         }
         return lista
-    }
-    
-    func walk(quantity : Int, node : BoardNode, var lista : [BoardNode], view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
-        if quantity == 0 {
-            return (lista, quantity, node)
-        }
-        
-        if node.nextMoves.count > 1 {
-            return (lista,quantity,node)
-        }
-        lista.append(node)
-        return walk(quantity - 1, node: node.nextMoves.first!, lista : lista, view: view);
-    }
-    
-    func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
-        let a = walk(quantity, node: nodeFor(player)!, lista: [], view: view);
-        nodeFor(player)?.removePlayer(player);
-        a.nodeList.last?.insertPLayer(player);
-        return a;
-    }
-    
-    func walkToNode(player:Player, node:BoardNode) {
-        nodeFor(player)?.removePlayer(player)
-        node.insertPLayer(player)
     }
     
     // Jhonny Walker keep walking

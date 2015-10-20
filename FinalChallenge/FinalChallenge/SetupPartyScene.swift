@@ -402,7 +402,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         let location: CGPoint = touch.locationInNode(self)
         
         if(go!.containsPoint(location)){
-            print("apertei o botao de GO")
+//            print("apertei o botao de GO")
             var canGo = false
             for p in GameManager.sharedInstance.players{
                 if p.avatar == nil {
@@ -424,7 +424,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         if(connect!.containsPoint(location)){
-            print("apertei o botao de CONNECT")
+//            print("apertei o botao de CONNECT")
             viewController.ConnectPlayers()
             
         }
