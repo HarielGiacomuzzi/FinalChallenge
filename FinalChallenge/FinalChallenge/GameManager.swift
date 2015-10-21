@@ -51,6 +51,8 @@ class GameManager : NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerAskedToBuyCard:", name: "ConnectionManager_BuyCard", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "leaveStore:", name: "ConnectionManager_CloseStore", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addTrap:", name: "BoardNode_TrapAdded", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeTrap:", name: "BoardNode_TrapRemoved", object: nil);
     }
     
     func restartGameManager(){
@@ -200,8 +202,6 @@ class GameManager : NSObject {
                 }
                 let whereIsPlayer = BoardGraph.SharedInstance.whereIs(p)
                 BoardGraph.SharedInstance.setItem(setCard, nodeName: whereIsPlayer!) // return true if card was set
-                let boardNode = BoardGraph.SharedInstance.getBoardNode(whereIsPlayer!)
-                addTrap(boardNode)
                 break;
             }
         }
@@ -410,11 +410,23 @@ class GameManager : NSObject {
         
     }
     
-    func addTrap(boardNode:BoardNode) {
+//    func addTrap(boardNode:BoardNode) {
+//        boardGameViewController?.scene.addTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
+//    }
+    
+    func addTrap(data: NSNotification) {
+        print("addtrap")
+        let boardNode = data.object as! BoardNode
+        print(boardNode)
         boardGameViewController?.scene.addTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
     }
     
-    func removeTrap(boardNode:BoardNode) {
+//    func removeTrap(boardNode:BoardNode) {
+//        boardGameViewController?.scene.removeTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
+//    }
+    
+    func removeTrap(data: NSNotification) {
+        let boardNode = data.object as! BoardNode
         boardGameViewController?.scene.removeTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
     }
     

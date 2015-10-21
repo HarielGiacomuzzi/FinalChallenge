@@ -148,8 +148,31 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             if node.name == "trap" {
                 node.removeFromParent()
             }
-
         }
+    }
+    
+    func showDiceNumber(number:Int, player: PlayerNode) {
+        var position = player.position
+        position.y += player.frame.height/2
+        let label = SKLabelNode(text: "\(number)")
+        label.position = position
+        addChild(label)
+        let action = SKAction.scaleTo(2.0, duration: 1.0)
+        label.runAction(action, completion: {() in
+            label.removeFromParent()
+        })
+    }
+    
+    func showMoney(player:PlayerNode) {
+        var position = player.position
+        position.y += player.frame.height/2
+        let coinNode = SKSpriteNode(imageNamed: "coinParticle")
+        coinNode.position = position
+        addChild(coinNode)
+        let action = SKAction.scaleTo(2.0, duration: 1.0)
+        coinNode.runAction(action, completion: {() in
+            coinNode.removeFromParent()
+        })
     }
 
     
