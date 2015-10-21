@@ -156,6 +156,8 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         position.y += player.frame.height/2
         let label = SKLabelNode(text: "\(number)")
         label.position = position
+        label.zPosition = 400
+        label.fontName = "GillSans-Bold"
         addChild(label)
         let action = SKAction.scaleTo(2.0, duration: 1.0)
         label.runAction(action, completion: {() in
@@ -177,6 +179,6 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
 
     
     deinit{
-        //print("A main board saiu")
+        print("A main board saiu")
     }
 }

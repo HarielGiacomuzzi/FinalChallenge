@@ -93,6 +93,7 @@ class GameManager : NSObject {
     func diceReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
+                    boardGameViewController?.scene.showDiceNumber(data["diceResult"] as! Int, player: p.nodeSprite!)
                     let tuple = BoardGraph.SharedInstance.walkList(data["diceResult"] as! Int, player: p, view: boardViewController)
                     movePlayerOnBoardComplete(p, nodeList: tuple.nodeList, remaining: tuple.remaining, currentNode: tuple.currentNode)
                     break;
@@ -410,10 +411,6 @@ class GameManager : NSObject {
         
     }
     
-//    func addTrap(boardNode:BoardNode) {
-//        boardGameViewController?.scene.addTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
-//    }
-    
     func addTrap(data: NSNotification) {
         print("addtrap")
         let boardNode = data.object as! BoardNode
@@ -421,14 +418,11 @@ class GameManager : NSObject {
         boardGameViewController?.scene.addTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
     }
     
-//    func removeTrap(boardNode:BoardNode) {
-//        boardGameViewController?.scene.removeTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
-//    }
-    
     func removeTrap(data: NSNotification) {
         let boardNode = data.object as! BoardNode
         boardGameViewController?.scene.removeTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
     }
+    
     
 
         

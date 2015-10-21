@@ -14,7 +14,6 @@ class BoardNode : NSObject{
     var posY = 0.0;
     var item : Card? {
         didSet {
-            print("didset")
             if item != nil {
                 if item!.usable {
                     let usableItem = item as! ActiveCard
