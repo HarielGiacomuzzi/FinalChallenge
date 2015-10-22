@@ -73,7 +73,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         let bubbleTexture = bubbleAtlas.textureNamed("bubble%200")
         let bubble : SKSpriteNode = SKSpriteNode(texture: bubbleTexture)
         bubble.zPosition = 10
-        bubble.position = CGPoint(x: self.frame.width/2 - 80, y: self.frame.height/2 - 45)
+        bubble.position = CGPoint(x: self.frame.width/2 + 80, y: self.frame.height/2 + 45)
         self.addChild(bubble)
         bubble.name = "Gives small burst"
         spriteArray.append(bubble)
@@ -91,13 +91,14 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         self.addChild(background)
         
         barName = SKSpriteNode(imageNamed: "setUpBanner")
-        barName.size.height = barName.size.height/3
+        barName.size.height = self.size.height * 0.18
         barName.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2.7)
         barName.zPosition = 1100
         
         nameText = SKLabelNode(fontNamed: "GillSans-Bold")
         nameText.text = "Fish Race"
-        nameText.position.y = nameText.position.y - 10
+        nameText.setScale(1.5)
+        nameText.position.y = nameText.position.y
         nameText.zPosition = 1101
         
         barName.addChild(nameText)
@@ -251,14 +252,16 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         background.alpha = 0.9
         self.addChild(background)
         
+        
         barName = SKSpriteNode(imageNamed: "setUpBanner")
-        barName.size.height = barName.size.height/3
+        barName.size.height = self.size.height * 0.18
         barName.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2.7)
         barName.zPosition = 1100
         
         nameText = SKLabelNode(fontNamed: "GillSans-Bold")
         nameText.text = "Bomber Bots"
-        nameText.position.y = nameText.position.y - 10
+        nameText.setScale(1.5)
+        nameText.position.y = nameText.position.y
         nameText.zPosition = 1101
         
         barName.addChild(nameText)
