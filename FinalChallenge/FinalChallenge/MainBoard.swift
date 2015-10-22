@@ -53,6 +53,16 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     i.1.posY = posY;
                     x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
                     
+                    //arrumar a posicao quando tiver os quadradinhos no lugar certo ja
+                    if i.0 == "Bau1" || i.0 == "Bau2" {
+                        let chest = SKSpriteNode(imageNamed: "chest0")
+                        chest.position = CGPointMake(CGFloat(i.1.posX), CGFloat(i.1.posY))
+                        chest.position.y = chest.position.y + x.frame.height + ((chest.frame.size.height/2)/CGFloat(scaleFactorY))
+                        print(chest.position)
+                        chest.zPosition = 17
+                        addChild(chest)
+                    }
+                    
                     self.addChild(x);
                     
                     GameManager.sharedInstance.doOnce = true
@@ -94,6 +104,16 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     x.position.x = CGFloat(i.1.posX);
                     x.position.y = CGFloat(i.1.posY);
                     x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
+                    
+                    //arrumar a posicao quando tiver os quadradinhos no lugar certo ja
+                    if i.0 == "Bau1" || i.0 == "Bau2" {
+                        let chest = SKSpriteNode(imageNamed: "chest0")
+                        chest.position = CGPointMake(CGFloat(i.1.posX), CGFloat(i.1.posY))
+                        chest.position.y = chest.position.y + x.frame.height + ((chest.frame.size.height/2)/CGFloat(scaleFactorY))
+                        print(chest.position)
+                        chest.zPosition = 17
+                        addChild(chest)
+                    }
                     
                     //add trap to board
                     if let item = i.1.item {
@@ -181,6 +201,28 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         coinNode.runAction(action, completion: {() in
             coinNode.removeFromParent()
         })
+    }
+    
+    func showCard(player:PlayerNode, good:Bool) {
+        var position = player.position
+        position.y += player.frame.height
+        let cardNode = SKSpriteNode(imageNamed: "trapCardBase")
+        cardNode.setScale(0.5)
+        cardNode.position = position
+        cardNode.zPosition = 400
+        if !good {
+            cardNode.color = UIColor.redColor()
+            cardNode.colorBlendFactor = 0.4
+        }
+        addChild(cardNode)
+        let action = SKAction.scaleTo(1.0, duration: 1.0)
+        cardNode.runAction(action, completion: {() in
+            cardNode.removeFromParent()
+        })
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        showCard((GameManager.sharedInstance.players.first?.nodeSprite)!, good: true)
     }
     
     deinit{
