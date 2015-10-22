@@ -142,15 +142,15 @@ class BoardNode : NSObject{
                 case 0: let it = StealGoldCard()
                         it.used = false
                         self.item = it
-                        //print("Card StealGoldCard added")
+                        print("Card StealGoldCard added")
                 case 1: let it = MoveBackCard()
                         it.used = false
                         self.item = it
-                        //print("Card MoveBackCard added")
+                        print("Card MoveBackCard added")
                 case 2: let it = LoseCard()
                         it.used = false
                         self.item = it
-                        //print("Card LoseCard added")
+                        print("Card LoseCard added")
                 default: break
                 }
             
@@ -167,11 +167,17 @@ class BoardNode : NSObject{
         self.father = father;
         self.posX = posX;
         self.posY = posY;
-        let it = StealGoldCard()
-        it.used = false
-        self.item = it
         
+        //add only treasurecards in all houses
+        //let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
+        //self.item = it
         
-        //self.setupItems()
+        //add only stealgoldcard in all houses
+        //let it = StealGoldCard()
+        //it.used = false
+        //self.item = it
+        
+        // add ramdonly the itens
+        self.setupItems()
     }
 }

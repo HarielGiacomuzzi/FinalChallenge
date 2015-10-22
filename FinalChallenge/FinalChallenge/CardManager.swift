@@ -56,17 +56,15 @@ class CardManager{
     //cards = enum
     func getCard(card:Cards) -> Card {
         switch(card){
-        case .StealGoldCard:
-            return StealGoldCard()
-        case .MoveBackCard :
-            return MoveBackCard()
-        case .LoseCard :
-            let card = LoseCard()
-            //print(card)
-            return card
-        default: break
+        case .StealGoldCard: return StealGoldCard()
+        case .MoveBackCard : return MoveBackCard()
+        case .LoseCard : return LoseCard()
+        case .BronzeCard : return self.generateTreasureCard(Cards.BronzeCard)
+        case .SilverCard : return self.generateTreasureCard(Cards.SilverCard)
+        case .GoldCard : return self.generateTreasureCard(Cards.GoldCard)
+        case .PlatinumCard : return self.generateTreasureCard(Cards.PlatinumCard)
+        case .DiamondCard : return self.generateTreasureCard(Cards.DiamondCard)
         }
-        return StealGoldCard()
     }
 
     func getRandomCard(isUsable : Bool)-> ActiveCard {

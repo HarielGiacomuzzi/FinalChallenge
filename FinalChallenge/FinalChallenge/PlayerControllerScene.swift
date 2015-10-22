@@ -145,6 +145,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
     }
     
     func sendCard(card: SKNode) {
+        
         AudioSource.sharedInstance.cardSound()
         for c in (viewController?.playerCards)!{
             if c == card.name{
