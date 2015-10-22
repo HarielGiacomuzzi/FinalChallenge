@@ -64,7 +64,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
                     if (GameManager.sharedInstance.players[i].avatar! == GameManager.sharedInstance.players[j].avatar!){
                         
                         //print("Entrou na mudanca 3")
-                        var aux = GameManager.sharedInstance.players[j].avatar
+                        let aux = GameManager.sharedInstance.players[j].avatar
                         GameManager.sharedInstance.players[j].avatar = nil
                         for avatar in viewController.arrayAvatars{
                             //print("Entrou na mudanca 4")

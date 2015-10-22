@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2605B2471BD9630900DAE7D1 /* Firage - Expedition.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2605B2461BD9630900DAE7D1 /* Firage - Expedition.mp3 */; settings = {ASSET_TAGS = (); }; };
+		2605B2491BD9649500DAE7D1 /* Black Fire Upon Us 8-Bit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2605B2481BD9649500DAE7D1 /* Black Fire Upon Us 8-Bit.mp3 */; settings = {ASSET_TAGS = (); }; };
+		2605B24B1BD965FF00DAE7D1 /* 02 Super Marleyo - Jammin' (8bit Remix).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2605B24A1BD965FF00DAE7D1 /* 02 Super Marleyo - Jammin' (8bit Remix).mp3 */; settings = {ASSET_TAGS = (); }; };
 		262C07F11BD0298A00246DF5 /* TestterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262C07F01BD0298A00246DF5 /* TestterViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		262C07F31BD02B3400246DF5 /* roboPadAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 262C07F21BD02B3400246DF5 /* roboPadAssets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		264D0CDE1B9F6AE6005B7EE9 /* SetupParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */; };
@@ -144,6 +147,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2605B2461BD9630900DAE7D1 /* Firage - Expedition.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Firage - Expedition.mp3"; sourceTree = "<group>"; };
+		2605B2481BD9649500DAE7D1 /* Black Fire Upon Us 8-Bit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Black Fire Upon Us 8-Bit.mp3"; sourceTree = "<group>"; };
+		2605B24A1BD965FF00DAE7D1 /* 02 Super Marleyo - Jammin' (8bit Remix).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "02 Super Marleyo - Jammin' (8bit Remix).mp3"; sourceTree = "<group>"; };
 		262C07F01BD0298A00246DF5 /* TestterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestterViewController.swift; sourceTree = "<group>"; };
 		262C07F21BD02B3400246DF5 /* roboPadAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = roboPadAssets.xcassets; sourceTree = "<group>"; };
 		264D0CDD1B9F6AE6005B7EE9 /* SetupParticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupParticle.swift; sourceTree = "<group>"; };
@@ -467,6 +473,7 @@
 		B5B9291F1BC6F4EB00DD2C46 /* FlappyFish Sound */ = {
 			isa = PBXGroup;
 			children = (
+				2605B24A1BD965FF00DAE7D1 /* 02 Super Marleyo - Jammin' (8bit Remix).mp3 */,
 				B5DD1B491B8F73D300AA1EB6 /* wavesSound.wav */,
 				B5DD1B531B8F90EC00AA1EB6 /* funMusic.mp3 */,
 				B5DD1B511B8F8D0500AA1EB6 /* bubbleSound2.wav */,
@@ -479,6 +486,7 @@
 		B5B929201BC6F4FC00DD2C46 /* BombGame */ = {
 			isa = PBXGroup;
 			children = (
+				2605B2481BD9649500DAE7D1 /* Black Fire Upon Us 8-Bit.mp3 */,
 				B5DD1B4B1B8F745700AA1EB6 /* explosionSound.wav */,
 			);
 			name = BombGame;
@@ -487,6 +495,7 @@
 		B5B929211BC6F50E00DD2C46 /* MainGame */ = {
 			isa = PBXGroup;
 			children = (
+				2605B2461BD9630900DAE7D1 /* Firage - Expedition.mp3 */,
 				B5B929221BC6F51900DD2C46 /* iphone */,
 			);
 			name = MainGame;
@@ -720,7 +729,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
+						DevelopmentTeam = DVXNNDG4U4;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -764,10 +773,13 @@
 				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
 				B5DD1B501B8F888200AA1EB6 /* bubbleSound.mp3 in Resources */,
 				B5DD1B4A1B8F73D300AA1EB6 /* wavesSound.wav in Resources */,
+				2605B2471BD9630900DAE7D1 /* Firage - Expedition.mp3 in Resources */,
+				2605B24B1BD965FF00DAE7D1 /* 02 Super Marleyo - Jammin' (8bit Remix).mp3 in Resources */,
 				2682DF6F1BB4838900ACF1A6 /* popup.atlas in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */,
+				2605B2491BD9649500DAE7D1 /* Black Fire Upon Us 8-Bit.mp3 in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
 				262C07F31BD02B3400246DF5 /* roboPadAssets.xcassets in Resources */,

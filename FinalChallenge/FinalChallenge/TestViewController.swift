@@ -14,7 +14,8 @@ class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let scene = TestScene(size: CGSize(width: 1024, height: 768))
+//        let scene = TestScene(size: CGSize(width: 1024, height: 768))
+        let scene = GameOverSceneMP(size: CGSize(width: 1024, height: 768))
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
