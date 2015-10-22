@@ -24,6 +24,7 @@ class CardCarouselNode: SKNode {
     var movingUp = false
     var movingDown = false
     var checkTouch:CGPoint = CGPointMake(0.0, 0.0)
+    var distanceToMoveDown:CGFloat?
     weak var delegate:CardCarousellDelegate?
     
     // MARK: - Initialization
@@ -152,7 +153,16 @@ class CardCarouselNode: SKNode {
     func moveDown(newPos:CGFloat) {
         let centerCard = cards[centerIndex]
         if newPos < centerPoint.y {
-            centerCard.position.y = newPos
+            if let min = distanceToMoveDown {
+                
+                if newPos > -min {
+                    centerCard.position.y = newPos
+                } else {
+                    centerCard.position.y = -min
+                }
+            } else {
+                centerCard.position.y = newPos
+            }
         } else {
             centerCard.position = centerPoint
         }

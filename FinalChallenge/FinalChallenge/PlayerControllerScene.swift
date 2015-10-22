@@ -172,7 +172,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
     }
     
     func diceRolled(sender: SKSpriteNode) {
-        let diceResult = 10 //Int(arc4random_uniform(6)+1)
+        let diceResult = 5 //Int(arc4random_uniform(6)+1)
         let aux = NSMutableDictionary();
         aux.setValue(diceResult, forKey: "diceResult");
         aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
