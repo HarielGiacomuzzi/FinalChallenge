@@ -441,9 +441,10 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     func handleColisionPlayerPowerup(player player:SKPhysicsBody,powerup:SKPhysicsBody) {
         self.runAction(AudioSource.sharedInstance.playBubbleSound())
         let playerNode:FlappyPlayerNode = player.node as! FlappyPlayerNode
-        let powerupNode:FlappyPowerupNode = powerup.node as! FlappyPowerupNode
-        playerNode.boostAndStop()
-        powerupNode.blowUp()
+        if let powerupNode = powerup.node as? FlappyPowerupNode {
+            playerNode.boostAndStop()
+            powerupNode.blowUp()
+        }
     }
 
     

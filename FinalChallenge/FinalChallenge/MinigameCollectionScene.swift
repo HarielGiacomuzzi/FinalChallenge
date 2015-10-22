@@ -89,6 +89,7 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         let carousel = CardCarouselNode(cardsArray: minigameSprites, startIndex: 0)
         carousel.setScale(0.3)
         carousel.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+        carousel.distanceToMoveDown = 500
         carousel.canRemoveWithSwipeUp = false
         carousel.canRemoveWithSwipeDown = true
         carousel.delegate = self
@@ -123,6 +124,21 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         boundary.physicsBody?.categoryBitMask = boundaryCategoryMask
         boundary.position = CGPoint(x: self.frame.width/2, y: -200)
         self.addChild(boundary)
+        
+        
+        let supahstation : SKSpriteNode = SKSpriteNode(imageNamed: "supahstation")
+        supahstation.position = CGPoint(x: self.frame.width/2 - 20, y: self.frame.height/2 - 150)
+        self.addChild(supahstation)
+        supahstation.zPosition = 4
+        supahstation.setScale(0.4)
+    
+        
+        let supahstation2: SKSpriteNode = SKSpriteNode(imageNamed: "supahstation2")
+        supahstation2.position = CGPoint(x: supahstation.position.x, y: supahstation.position.y - 37)
+        self.addChild(supahstation2)
+        supahstation2.zPosition = 100
+        supahstation2.setScale(0.4)
+    
     }
     
     func spawnItem(){

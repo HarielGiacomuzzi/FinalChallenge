@@ -227,6 +227,9 @@ class GameOverSceneMP : MinigameScene {
                 first.removeFromParent()
             })
             
+            guard self.player2 != nil else {
+                return
+            }
             
             let second = SKLabelNode(fontNamed: "GillSans-Bold")
             second.text = "+20 gold"
@@ -264,7 +267,9 @@ class GameOverSceneMP : MinigameScene {
                     second.removeFromParent()
                 })
                 
-                
+                guard self.player3 != nil else {
+                    return
+                }
                 
                 let third = SKLabelNode(fontNamed: "GillSans-Bold")
                 third.text = "+5 gold"
