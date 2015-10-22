@@ -13,7 +13,15 @@ import UIKit
 class Player : NSObject {
     //var playerName:String!
     var playerIdentifier:String!
-    var coins:Int = 1000
+    var coins:Int = 100 {
+        didSet {
+            if coins > oldValue {
+                NSNotificationCenter.defaultCenter().postNotificationName("Player_CoinsAdded", object: self)
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName("Player_CoinsRemoved", object: self)                
+            }
+        }
+    }
     var x:Double!
     var y:Double!
     var avatar : String?

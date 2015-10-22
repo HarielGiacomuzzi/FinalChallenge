@@ -165,18 +165,23 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         })
     }
     
-    func showMoney(player:PlayerNode) {
+    func showMoney(player:PlayerNode, good:Bool) {
         var position = player.position
-        position.y += player.frame.height/2
-        let coinNode = SKSpriteNode(imageNamed: "coinParticle")
+        position.y += player.frame.height
+        let coinNode = SKSpriteNode(imageNamed: "coinparticle")
+        coinNode.setScale(0.5)
         coinNode.position = position
+        coinNode.zPosition = 400
+        if !good {
+            coinNode.color = UIColor.redColor()
+            coinNode.colorBlendFactor = 0.4
+        }
         addChild(coinNode)
-        let action = SKAction.scaleTo(2.0, duration: 1.0)
+        let action = SKAction.scaleTo(1.0, duration: 1.0)
         coinNode.runAction(action, completion: {() in
             coinNode.removeFromParent()
         })
     }
-
     
     deinit{
         print("A main board saiu")
