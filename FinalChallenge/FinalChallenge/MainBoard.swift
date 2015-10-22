@@ -207,7 +207,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         var position = player.position
         position.y += player.frame.height
         let cardNode = SKSpriteNode(imageNamed: "trapCardBase")
-        cardNode.setScale(0.5)
+        cardNode.setScale(0.05)
         cardNode.position = position
         cardNode.zPosition = 400
         if !good {
