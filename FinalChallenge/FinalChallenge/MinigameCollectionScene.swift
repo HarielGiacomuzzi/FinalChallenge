@@ -70,7 +70,7 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         bg.name = "bg"
         bg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         bg.zPosition = 0
-        self.backgroundColor = UIColor.whiteColor()
+  //      self.backgroundColor = UIColor.whiteColor()
         
         self.setupMinigames()
         

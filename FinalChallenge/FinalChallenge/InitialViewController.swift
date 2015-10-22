@@ -26,6 +26,7 @@ class InitialViewController: UIViewController
     var rightCover = UIImageView()
     var strap = UIImageView()
     var pin = UIImageView()
+    var gameLogo = UIImageView()
     var opened = false
     
     // MARK: - ViewController Lifecycle
@@ -86,6 +87,8 @@ class InitialViewController: UIViewController
         setupPin()
         
         setupStrap()
+        
+        setupLogo()
         
         mainView.bringSubviewToFront(singlePlayerButton)
         mainView.bringSubviewToFront(partyModeButton)
@@ -172,6 +175,7 @@ class InitialViewController: UIViewController
                         
                 })
         })
+        hideLogo()
         self.opened = true
     }
     
@@ -190,6 +194,7 @@ class InitialViewController: UIViewController
                         
                 })
         })
+        showLogo()
         self.opened = false
         
     }
@@ -248,6 +253,45 @@ class InitialViewController: UIViewController
 
     deinit{
         //print("Retirou a initialviewcontroller")
+    }
+    
+    func setupLogo(){
+        
+        let logo = UIImage(named: "dalogo")
+        let logoHeight = logo!.size.height
+        let logoWidth = logo!.size.width
+        
+        let xScale = screenWidth / logoWidth
+        let yScale = screenHeight / logoHeight
+        let xPosition = screenWidth/2
+        let yPosition = screenHeight/2
+        
+        let finalWidth = logoWidth  * xScale * 0.65
+        let finalHeigth = logoHeight * yScale * 0.65
+
+        let logoRect = CGRectMake(xPosition - finalWidth/2, yPosition - finalHeigth/2 , finalWidth, finalHeigth)
+        
+        gameLogo = UIImageView(frame: logoRect)
+        gameLogo.image = logo
+        gameLogo.contentMode = .ScaleAspectFit
+        gameLogo.clipsToBounds = true
+        
+        
+        mainView.addSubview(gameLogo)
+
+    }
+    
+    func showLogo(){
+        UIView.animateWithDuration(0.7, delay: 0.8, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.gameLogo.alpha = 1.0
+            }, completion: nil)
+    }
+    
+    func hideLogo(){
+        UIView.animateWithDuration(0.7, delay: 0.8, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+            self.gameLogo.alpha = 0
+            }, completion: nil)
+
     }
     
 }
