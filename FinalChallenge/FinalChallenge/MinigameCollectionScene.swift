@@ -89,6 +89,7 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         let carousel = CardCarouselNode(cardsArray: minigameSprites, startIndex: 0)
         carousel.setScale(0.3)
         carousel.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+        carousel.distanceToMoveDown = 500
         carousel.canRemoveWithSwipeUp = false
         carousel.canRemoveWithSwipeDown = true
         carousel.delegate = self
