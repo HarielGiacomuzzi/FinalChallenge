@@ -201,7 +201,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             return;
         }
         
-        if state == MCSessionState.Connected && self.lastSyncMessage != nil{
+        if state == MCSessionState.Connected && self.lastSyncMessage != nil {
             //print(self.lastSyncMessage)
             self.sendDictionaryToPeer(self.lastSyncMessage, reliable: true);
         }
