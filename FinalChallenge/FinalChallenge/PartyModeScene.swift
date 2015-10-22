@@ -26,6 +26,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var canSelectAvatar = false
     
     var banner : SKSpriteNode?
+    var info : SKSpriteNode?
     var turns : SKSpriteNode?
     var connect : SKSpriteNode?
     var go : SKSpriteNode?
@@ -45,6 +46,8 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_IphoneGameSetup", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeView:", name: "ConnectionManager_IphoneChangeView", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "avatarIsSelectable:", name: "ConnectionManager_canSelectAvatar", object: nil);
+        
+        self.userInteractionEnabled = false
         
         banner = SKSpriteNode(imageNamed: "setUpBanner")
         self.addChild(banner!)
@@ -119,43 +122,15 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         
-        //self.setTutorialScene()
-        
+        self.setTutorialScene()
+    }
+    
+    func setTutorialScene(){
         tutorialClass = TutorialNodeScene(texture: SKTexture(imageNamed: "tutorialscene1iphone"), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
         tutorialClass?.t = [SKTexture(imageNamed: "tutorialscene1iphone"), SKTexture(imageNamed: "tutorialscene2iphone"),SKTexture(imageNamed: "tutorialscene3iphone")]
         tutorialClass?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         tutorialClass?.zPosition = 400
         self.addChild(tutorialClass!)
-    }
-    
-    func setTutorialScene(){
-        tutorialNode = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
-        tutorialNode?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-        tutorialNode?.zPosition = 10000
-        tutorialNode?.name = "tutorial"
-        
-        let tutorialText = SKLabelNode(fontNamed: "GillSans-Bold")
-        tutorialText.name = "tutorial label"
-        tutorialText.text = "Tutorial"
-        tutorialText.position.y = tutorialNode!.frame.height/2.5
-        tutorialText.zPosition = 11000
-        
-        let text = SKLabelNode(fontNamed: "GillSans-Bold")
-        text.name = "tutorial label"
-        text.text = "Two or more Players"
-        text.position.y = tutorialNode!.frame.height/3.2
-        text.zPosition = 11000
-        text.fontSize = 20
-        
-        let sprite1 = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: tutorialNode!.frame.width/2, height: tutorialNode!.frame.height/5))
-        sprite1.name = "Tutorial sprite"
-        sprite1.position.y = tutorialNode!.frame.height/5
-        sprite1.zPosition = 11000
-        
-        tutorialNode?.addChild(tutorialText)
-        tutorialNode?.addChild(text)
-        tutorialNode?.addChild(sprite1)
-        self.addChild(tutorialNode!)
     }
     
     override func willMoveFromView(view: SKView) {
@@ -260,6 +235,11 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         if let location = touch?.locationInNode(self) {
             if (tutorialClass!.containsPoint(location)){
                 tutorialClass?.removeFromParent()
+            }
+            
+            if info!.containsPoint(location) {
+                self.userInteractionEnabled = false
+                self.setTutorialScene()
             }
             let touchedNode = self.nodeAtPoint(location)
             if touchedNode.name == "back"{
@@ -367,9 +347,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         }
         
     }
-    
-    
-    
+
     func setObjects(){
         
         //setup particles
@@ -380,6 +358,12 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(globParticles!)
         globParticles?.zPosition = 1
         
+        info = SKSpriteNode(imageNamed: "infoimage")
+        info!.name = "info"
+        info!.setScale(0.5)
+        info!.position = CGPoint(x: self.frame.width/1.1, y: (self.frame.height)*0.87)
+        info?.zPosition = 5
+        self.addChild(info!)
         
         //for some reason this code dont wornk on the iPhone, the phone trys to mantein a 40 fps just like the iPad, but for some reason starts dropping
         /*let spawn = SKAction.runBlock({() in self.spawnItem()})

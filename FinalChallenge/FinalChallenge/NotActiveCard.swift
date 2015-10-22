@@ -12,11 +12,12 @@ class NotActiveCard : Card {
     
     var endGameValue = Int()
     
-    override init() {
+    init(name : String , value : Int) {
         super.init()
+        self.cardName = name
+        self.imageName = "treasurecard"
         self.usable = false
-        self.storeValue = 100
-        self.endGameValue = 200
+        self.storeValue = 100 + value
+        self.endGameValue = value
     }
-    
 }
