@@ -173,11 +173,11 @@ class BoardNode : NSObject{
         //self.item = it
         
         //add only stealgoldcard in all houses
-        //let it = StealGoldCard()
-        //it.used = false
-        //self.item = it
+        let it = StealGoldCard()
+        it.used = false
+        self.item = it
         
         // add ramdonly the itens
-        self.setupItems()
+        //self.setupItems()
     }
 }

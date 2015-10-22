@@ -55,11 +55,10 @@ class FlappyGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func didMoveToView(view: SKView) {
-
         
         beginCountDown(completion: {self.createPlayersAndObstacles()})
-        
         setupWalls()
+        AudioSource.sharedInstance.flappyFishSound()
         
         // setup physics
         self.physicsWorld.gravity = CGVectorMake( 0.0, 0.0 )

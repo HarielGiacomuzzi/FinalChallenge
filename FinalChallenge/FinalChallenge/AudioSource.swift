@@ -15,6 +15,7 @@ class AudioSource: NSObject, AVAudioPlayerDelegate {
     var url : NSURL!
     var avPlayer : AVAudioPlayer!
     var error : NSError?
+    var audioStop = false
     
     //flappyFish sound effects
     var bubbleSound : SKAction!
@@ -48,7 +49,15 @@ class AudioSource: NSObject, AVAudioPlayerDelegate {
     }
     
     func flappyFishSound(){
-        readAudioFile("funMusic", ext: "mp3", audioLoop: true)
+        readAudioFile("flappymusic", ext: "mp3", audioLoop: true)
+    }
+    
+    func bombGameSound(){
+        readAudioFile("bombgame", ext: "mp3", audioLoop: true)
+    }
+    
+    func mainGameSound(){
+        readAudioFile("maingame", ext: "mp3", audioLoop: true)
     }
     
     func readAudioFile(fileName:String, ext:String, audioLoop:Bool){ // prepara audio
@@ -81,7 +90,9 @@ class AudioSource: NSObject, AVAudioPlayerDelegate {
     }
     
     func stopAudio(){
+        soundTimer.invalidate()
         avPlayer.stop()
+        
     }
     
 }
