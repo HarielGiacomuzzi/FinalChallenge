@@ -47,10 +47,14 @@ class GameManager : NSObject {
     
     override init(){
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "diceReceived:", name: "ConnectionManager_DiceResult", object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerAskedToBuyCard:", name: "ConnectionManager_BuyCard", object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "leaveStore:", name: "ConnectionManager_CloseStore", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "diceReceived:", name: "ConnectionManager_DiceResult", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerAskedToBuyCard:", name: "ConnectionManager_BuyCard", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "leaveStore:", name: "ConnectionManager_CloseStore", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "addTrap:", name: "BoardNode_TrapAdded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeTrap:", name: "BoardNode_TrapRemoved", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCoinsAdded:", name: "Player_CoinsAdded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCoinsRemoved:", name: "Player_CoinsRemoved", object: nil)
     }
     
     func restartGameManager(){
@@ -91,6 +95,7 @@ class GameManager : NSObject {
     func diceReceived(data : [String : NSObject]){
             for p in players{
                 if p.playerIdentifier == (data["peerID"] as! String){
+                    boardGameViewController?.scene.showDiceNumber(data["diceResult"] as! Int, player: p.nodeSprite!)
                     let tuple = BoardGraph.SharedInstance.walkList(data["diceResult"] as! Int, player: p, view: boardViewController)
                     movePlayerOnBoardComplete(p, nodeList: tuple.nodeList, remaining: tuple.remaining, currentNode: tuple.currentNode)
                     break;
@@ -407,5 +412,35 @@ class GameManager : NSObject {
         player.nodeSprite?.walkTo(points, completion: completion)
         
     }
+    
+    func addTrap(data: NSNotification) {
+        print("addtrap")
+        let boardNode = data.object as! BoardNode
+        print(boardNode)
+        boardGameViewController?.scene.addTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
+    }
+    
+    func removeTrap(data: NSNotification) {
+        let boardNode = data.object as! BoardNode
+        boardGameViewController?.scene.removeTrap(CGFloat(boardNode.posX), y: CGFloat(boardNode.posY))
+    }
+    
+    func animateCoinsAdded(data: NSNotification) {
+        let player = data.object as! Player
+        if let scene = boardGameViewController?.scene {
+            print("mandei")
+            scene.showMoney(player.nodeSprite!, good:true)
+        }
+    }
+    
+    func animateCoinsRemoved(data: NSNotification) {
+        let player = data.object as! Player
+        if let scene = boardGameViewController?.scene {
+            scene.showMoney(player.nodeSprite!, good:false)
+        }
+    }
+    
+    
+
         
 }

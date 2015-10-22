@@ -12,7 +12,20 @@ class BoardNode : NSObject{
     var nextMoves : [BoardNode] = [];
     var posX = 0.0;
     var posY = 0.0;
-    var item : Card?
+    var item : Card? {
+        didSet {
+            if item != nil {
+                if item!.usable {
+                    let usableItem = item as! ActiveCard
+                    if usableItem.used {
+                        NSNotificationCenter.defaultCenter().postNotificationName("BoardNode_TrapAdded", object: self)
+                    }
+                }
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName("BoardNode_TrapRemoved", object: self)
+            }
+        }
+    }
     var isSpecialNode = false;
     var coins : Int?
     var nextNames : [String] = [];
