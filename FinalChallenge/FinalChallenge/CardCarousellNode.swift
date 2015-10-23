@@ -91,11 +91,11 @@ class CardCarouselNode: SKNode {
         
         let centerCard = cards[centerIndex]
         if centerCard.position.y > centerPoint.y {
-            removeCard()
-            //manda a carta
+            delegate?.sendCard(centerCard)
+            centerCard.position = centerPoint
         } else if centerCard.position.y < centerPoint.y {
             delegate?.sendCard(centerCard)
-            centerCard.position = centerPoint 
+            centerCard.position = centerPoint
         } else {
             fixCardsZPosition()
             centerCard.position = centerPoint
@@ -214,7 +214,6 @@ class CardCarouselNode: SKNode {
     func removeCard(index:Int) {
         
         if !cards.isEmpty {
-            delegate?.sendCard(cards[index])
             cards[index].removeFromParent()
             cards.removeAtIndex(index)
             
@@ -222,10 +221,8 @@ class CardCarouselNode: SKNode {
                 if centerIndex >= cards.count {
                     centerIndex = cards.count - 1
                 }
-                let centerCard = cards[centerIndex]
-                centerCard.position = centerPoint
-                centerCard.setScale(1.0)
                 fixCardsZPosition()
+                fixCardsXPosition()
             }
         }
     }

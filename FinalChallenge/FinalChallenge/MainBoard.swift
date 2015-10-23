@@ -221,9 +221,9 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         })
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        showCard((GameManager.sharedInstance.players.first?.nodeSprite)!, good: true)
-    }
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        showCard((GameManager.sharedInstance.players.first?.nodeSprite)!, good: true)
+//    }
     
     deinit{
         print("A main board saiu")
