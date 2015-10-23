@@ -11,6 +11,9 @@ import SpriteKit
 class EndGameScene : SKScene{
     
     override func didMoveToView(view: SKView) {
+        
+        AudioSource.sharedInstance.stopAudio()
+        
         ConnectionManager.sharedInstance.closeConections()
         
         let background = SKTexture(imageNamed: "setupBG")

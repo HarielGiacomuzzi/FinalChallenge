@@ -269,6 +269,7 @@ class GameManager : NSObject {
     }
     
     func endGameScene(){
+        print("Chamaram o fim de jogo")
         self.gameEnded = true
         let end = "gameEnded"
         let e = ["gameEnded":end]

@@ -20,6 +20,8 @@ class GameOverSceneMP : MinigameScene {
     
     override func didMoveToView(view: SKView) {
         
+        AudioSource.sharedInstance.stopAudio()
+        
         //precisa estar do maior pro menor
         for i in 0..<players.count{
             

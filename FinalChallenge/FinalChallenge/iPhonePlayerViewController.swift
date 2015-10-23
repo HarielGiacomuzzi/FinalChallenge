@@ -216,7 +216,6 @@ class iPhonePlayerViewController: UIViewController {
     
     func loadEndGameScene() {
         setAllScenesNil()
-        
         endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
         skView?.presentScene(endGameScene)
         setNotificationsInNewScene()
@@ -227,6 +226,7 @@ class iPhonePlayerViewController: UIViewController {
         storeScene = nil
         partyModeScene = nil
         gamePadScene = nil
+        endGameScene = nil
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

@@ -20,9 +20,10 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
     var barName : SKSpriteNode!
     
     override func didMoveToView(view: SKView) {
-        
+        if GameManager.sharedInstance.isMultiplayer{
+            AudioSource.sharedInstance.stopAudio()
+        }
         setObjects()
-        
     }
     
     func setObjects(){
@@ -41,7 +42,6 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
         }
     }
 
-    
     func setFlappyFish(){
         
         let fundo : SKSpriteNode = SKSpriteNode(imageNamed: "flappystatic")

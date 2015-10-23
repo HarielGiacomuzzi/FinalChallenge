@@ -24,6 +24,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
             GameManager.sharedInstance.boardViewController = self.viewController;
             GameManager.sharedInstance.isOnBoard = true;
+            AudioSource.sharedInstance.mainGameSound()
             let scaleFactorX = Double(2048/(self.view?.frame.width)!);
             let scaleFactorY = Double(1536/(self.view?.frame.height)!);
             setupMap()

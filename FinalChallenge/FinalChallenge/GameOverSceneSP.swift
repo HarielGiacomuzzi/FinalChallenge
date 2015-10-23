@@ -23,6 +23,9 @@ class GameOverSceneSP : MinigameScene{
     
     override func didMoveToView(view: SKView) {
         //self.backgroundColor = UIColor.redColor()
+        
+        
+        
         let background = SKTexture(imageNamed: "setupBG")
         let bg = SKSpriteNode(texture: background, size: background.size())
         self.addChild(bg)
@@ -42,6 +45,7 @@ class GameOverSceneSP : MinigameScene{
     func setupFlappyFishGameOver(){
         
         //print("entrou aqui ta sacando 2")
+        AudioSource.sharedInstance.stopAudio()
         
         let restartGame = SKLabelNode(fontNamed: "GillSans-Bold")
         restartGame.text = "Restart Game"
@@ -66,6 +70,9 @@ class GameOverSceneSP : MinigameScene{
     }
     
     func setupBombGameOver(){
+        
+        AudioSource.sharedInstance.stopAudio()
+        
         let restartGame = SKLabelNode(fontNamed: "GillSans-Bold")
         restartGame.text = "Restart Game"
         restartGame.name = "Restart Game"
