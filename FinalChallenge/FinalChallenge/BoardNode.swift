@@ -127,9 +127,9 @@ class BoardNode : NSObject{
         }
         
         
-        let it = StealGoldCard()
-        it.used = false
-        self.item = it
+        //let it = StealGoldCard()
+        //it.used = false
+        //self.item = it
     }
     
     // defines witch item the node will carry
@@ -138,25 +138,25 @@ class BoardNode : NSObject{
         
         switch(willBeUsable){
         case 0: let witchOneWillBe : Int = (random() % 3) // this number may vary
-        switch(witchOneWillBe){
-        case 0: let it = StealGoldCard()
-        it.used = false
-        self.item = it
-            //print("Card StealGoldCard added")
-        case 1: let it = MoveBackCard()
-        it.used = false
-        self.item = it
-            //print("Card MoveBackCard added")
-        case 2: let it = LoseCard()
-        it.used = false
-        self.item = it
-            //print("Card LoseCard added")
-        default: break
-            }
+                switch(witchOneWillBe){
+                case 0: let it = StealGoldCard()
+                        it.used = false
+                        self.item = it
+                        print("Card StealGoldCard added")
+                case 1: let it = MoveBackCard()
+                        it.used = false
+                        self.item = it
+                        print("Card MoveBackCard added")
+                case 2: let it = LoseCard()
+                        it.used = false
+                        self.item = it
+                        print("Card LoseCard added")
+                default: break
+                }
             
         case 1: //print("Collectable card added")
-            let it = NotActiveCard() //we may need to pass a value
-            self.item = it
+                let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
+                self.item = it
             
         default: break
         }
@@ -167,11 +167,17 @@ class BoardNode : NSObject{
         self.father = father;
         self.posX = posX;
         self.posY = posY;
+        
+        //add only treasurecards in all houses
+        //let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
+        //self.item = it
+        
+        //add only stealgoldcard in all houses
         let it = StealGoldCard()
         it.used = false
         self.item = it
         
-        
+        // add ramdonly the itens
         //self.setupItems()
     }
 }

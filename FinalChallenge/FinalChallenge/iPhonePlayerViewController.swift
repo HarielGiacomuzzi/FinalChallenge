@@ -109,15 +109,17 @@ class iPhonePlayerViewController: UIViewController {
     
     func removeCard(data : NSNotification) {
         let dic = data.userInfo!["dataDic"] as! NSDictionary
-        let playerName = dic["player"] as! String
+        let playerName = dic["playerName"] as! String
         let card = dic["item"] as! String
-        if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
+        let status = dic["status"] as! String
+        let sent = dic["sent"] as! Bool
+        if playerName == ConnectionManager.sharedInstance.peerID!.displayName && sent {
             playerScene!.removeCard(card)
             playerCards.removeObject(card)
-            setNotification("You lost teh card \(card) :(")
         } else {
             
         }
+        setNotification(status)
     }
     
     func openStore(data : NSNotification) {
@@ -214,7 +216,6 @@ class iPhonePlayerViewController: UIViewController {
     
     func loadEndGameScene() {
         setAllScenesNil()
-        
         endGameScene = EndGameIphoneScene(size: CGSize(width: 1334, height: 750))
         skView?.presentScene(endGameScene)
         setNotificationsInNewScene()
@@ -225,6 +226,7 @@ class iPhonePlayerViewController: UIViewController {
         storeScene = nil
         partyModeScene = nil
         gamePadScene = nil
+        endGameScene = nil
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

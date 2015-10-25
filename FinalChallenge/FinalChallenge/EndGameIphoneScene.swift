@@ -45,7 +45,8 @@ class EndGameIphoneScene : SKScene{
             
             if touchedNode.name == "back"{
                 _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
-                // self.view?.presentScene(nil)
+                //self.view?.presentScene(nil)
+                ConnectionManager.sharedInstance.closeConections()
                 GameManager.sharedInstance.restartGameManager()
                 GameManager.sharedInstance.dismissPlayerViewController()
             }
@@ -53,7 +54,7 @@ class EndGameIphoneScene : SKScene{
     }
     
     deinit{
-        //print("retirou a endgamescene")
+        //print("retirou a endgamescene do iphone")
     }
     
 }

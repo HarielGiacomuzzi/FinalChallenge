@@ -48,7 +48,7 @@ class GameManager : NSObject {
     override init(){
         super.init()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "diceReceived:", name: "ConnectionManager_DiceResult", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "mr3:", name: "ConnectionManager_SendCard", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "cardReceived:", name: "ConnectionManager_SendCard", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerAskedToBuyCard:", name: "ConnectionManager_BuyCard", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "leaveStore:", name: "ConnectionManager_CloseStore", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addTrap:", name: "BoardNode_TrapAdded", object: nil)
@@ -187,27 +187,46 @@ class GameManager : NSObject {
     
 
     // manda a carta a ser adicionada no boardGame
-    func mr3(data : NSNotification){
+    func cardReceived(data : NSNotification){
         let dic = data.userInfo!["dataDic"] as! NSDictionary
+        
+        var status = " "
+        var sent = false
+        let playerName = data.userInfo!["peerID"] as! String
         
         for p in players{
             if p.playerIdentifier == (data.userInfo!["peerID"] as! String){
                 let card = dic["item"] as! String
-                var setCard = ActiveCard()
                 for c in p.items{
-                    if card == c.cardName{
-                        p.items.removeObject(c)
-                        setCard = c as! ActiveCard
-                        setCard.used = true
-                        setCard.cardOwner = p
+                    if card == c.cardName {
+                        if let activeCard = c as? ActiveCard {
+                            let whereIsPlayer = BoardGraph.SharedInstance.whereIs(p)
+                            activeCard.used = true
+                            if BoardGraph.SharedInstance.setItem(activeCard, nodeName: whereIsPlayer!) {
+                                p.items.removeObject(c)
+                                activeCard.used = true
+                                activeCard.cardOwner = p
+                                sent = true
+                                status = "Trap was set up"
+                            } else {
+                                activeCard.used = false
+                                status = "Can't set this card on this spot right now"
+                            }
+                        }
+                        if let _ = c as? NotActiveCard {
+                            status = "Can't use this type of card right now"
+                        }
                         break
                     }
                 }
-                let whereIsPlayer = BoardGraph.SharedInstance.whereIs(p)
-                BoardGraph.SharedInstance.setItem(setCard, nodeName: whereIsPlayer!) // return true if card was set
-                break;
+                break
             }
         }
+        let item = dic["item"] as! String
+        let dataDic = ["sent":sent, "status": status, "item": item, "playerName": playerName]
+        let dicc = ["removeCard":" ","dataDic":dataDic]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dicc, reliable: true)
+        
     }
     
     func playerAskedToBuyCard(data : NSNotification) {
@@ -250,6 +269,7 @@ class GameManager : NSObject {
     }
     
     func endGameScene(){
+        print("Chamaram o fim de jogo")
         self.gameEnded = true
         let end = "gameEnded"
         let e = ["gameEnded":end]

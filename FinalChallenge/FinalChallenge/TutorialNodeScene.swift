@@ -79,7 +79,9 @@ class TutorialNodeScene : SKSpriteNode {
             }
         }
         if(closeButton!.containsPoint(location)){
+            self.parent?.userInteractionEnabled = true
             self.removeFromParent()
+            
         }
 
     }

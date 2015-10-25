@@ -91,6 +91,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     }
     
     override func didMoveToView(view: SKView) {
+        AudioSource.sharedInstance.bombGameSound()
         startGame()
 
     }

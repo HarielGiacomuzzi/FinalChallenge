@@ -32,7 +32,7 @@ class CardSprite: SKNode {
         image = SKSpriteNode(texture: texture2)
         image.zPosition = 2
         addChild(image)
-        nameLabel = SKLabelNode(text: card.cardName)
+        nameLabel = SKLabelNode(text: self.cardName)
         let maxSize = baseSprite.position.y + baseSprite.frame.height/2
         let minSize = image.position.y + image.size.height/2
         let midSize = minSize + ((maxSize - minSize) / 2)
