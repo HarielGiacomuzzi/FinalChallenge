@@ -53,7 +53,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
-        carousel.canRemoveWithSwipeUp = false        
+        carousel.canRemoveWithSwipeUp = false
     }
     
     func createSquaresAndAnimate() {
@@ -141,24 +141,24 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
         }
     }
     func removeCard(card:String) {
-        print("finge que a carta foi removida")
-    }
-    
-    func sendCard(card: SKNode) {
-        
         AudioSource.sharedInstance.cardSound()
-        for c in (viewController?.playerCards)!{
-            if c == card.name{
-                viewController?.playerCards.removeObject(c)
+        for i in 0..<carousel.cards.count {
+            if card == carousel.cards[i].name {
+                carousel.removeCard(i)
                 break
             }
         }
+        carousel.canRemoveWithSwipeUp = false
+    }
+    
+    func sendCard(card: SKNode) {
         let sentCardSprite = card as! CardSprite
         let sentCard = sentCardSprite.cardName
         let cardData = ["player":playerName, "item": sentCard]
         let dic = ["sendCard":" ", "dataDic" : cardData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-        carousel.canRemoveWithSwipeUp = false
+        
+//        removeCard(sentCardSprite.cardName)
         
     }
     

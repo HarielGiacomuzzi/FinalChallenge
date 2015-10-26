@@ -208,7 +208,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         var position = player.position
         position.y += player.frame.height
         let cardNode = SKSpriteNode(imageNamed: "trapCardBase")
-        cardNode.setScale(0.05)
+        cardNode.setScale(0.025)
         cardNode.position = position
         cardNode.zPosition = 400
         if !good {
@@ -216,15 +216,15 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
             cardNode.colorBlendFactor = 0.4
         }
         addChild(cardNode)
-        let action = SKAction.scaleTo(1.0, duration: 1.0)
+        let action = SKAction.scaleTo(0.05, duration: 1.0)
         cardNode.runAction(action, completion: {() in
             cardNode.removeFromParent()
         })
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        showCard((GameManager.sharedInstance.players.first?.nodeSprite)!, good: true)
-    }
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        showCard((GameManager.sharedInstance.players.first?.nodeSprite)!, good: true)
+//    }
     
     deinit{
         print("A main board saiu")
