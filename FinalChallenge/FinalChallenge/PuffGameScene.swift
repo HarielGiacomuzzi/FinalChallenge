@@ -103,21 +103,29 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
            
             for p in self.players{
                 //if p.playerIdentifier == data.userInfo!["peerID"] as? String{
-                        p.sprite!.xScale = (p.sprite!.xScale+1);
-                        p.sprite!.yScale = (p.sprite!.yScale+1);
-                        if p.sprite!.xScale > 30{
-                            explodePuff(p.sprite!)
-                        }
+//                        p.sprite!.xScale = (p.sprite!.xScale+1);
+//                        p.sprite!.yScale = (p.sprite!.yScale+1);
+//                        if p.sprite!.xScale > 30{
+//                            explodePuff(p.sprite!)
+//                        }
                         //break;
-                    if data.userInfo!["directionX"] as! PlayerAction == PlayerAction.Left{
-                        p.sprite?.position.x--
+                    if data.userInfo!["directionX"]! as! String == PlayerAction.Left.rawValue{
+                        if p.sprite?.position.x > 0{
+                            p.sprite?.position.x = CGFloat((p.sprite?.position.x)!-5)
+                        }
                     }else{
-                         p.sprite?.position.x++
+                        if p.sprite?.position.x < self.view!.frame.width{
+                         p.sprite?.position.x = CGFloat((p.sprite?.position.x)!+5)
+                        }
                     }
-                if data.userInfo!["directionY"] as! PlayerAction == PlayerAction.Up{
-                    p.sprite?.position.y++
+                if data.userInfo!["directionY"] as! String == PlayerAction.Up.rawValue{
+                    if p.sprite?.position.y < self.view!.frame.height{
+                        p.sprite?.position.y = CGFloat((p.sprite?.position.y)!+5)
+                    }
                 }else{
-                    p.sprite?.position.y--
+                    if p.sprite?.position.y > 0{
+                       p.sprite?.position.y = CGFloat((p.sprite?.position.y)!-5)
+                    }
                 }
                 }
                 //}
