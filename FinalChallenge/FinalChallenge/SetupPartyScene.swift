@@ -14,6 +14,8 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     weak var viewController : PartyModeViewControllerIPAD!
     
+    var tutorialManager: TutorialManager!
+    
     // set buttons and nodes
     var banner : SKSpriteNode?
     var turns : SKSpriteNode?
@@ -45,9 +47,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     let arrowOff : SKTexture = SKTexture(imageNamed: "arrowButtonOff")
     
     var popupAtlas:SKTextureAtlas!
-    
-    //var tutorialNode : SKSpriteNode?
-    var tutorialClass : TutorialNodeScene?
     
     // colisions
     let boundaryCategoryMask: UInt32 =  0x1 << 1
@@ -97,19 +96,23 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMoveToView(view: SKView) {
         setObjects()
-        self.userInteractionEnabled = false
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         popupAtlas = SKTextureAtlas(named: "popup")
         self.setTutorialScene()
     }
     
-    func setTutorialScene(){
-        tutorialClass = TutorialNodeScene(texture: SKTexture(imageNamed: "tutorialscene1ipad"), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
-        tutorialClass?.t = [SKTexture(imageNamed: "tutorialscene1ipad"), SKTexture(imageNamed: "tutorialscene2ipad"),SKTexture(imageNamed: "tutorialscene3ipad")]
-        tutorialClass?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-        tutorialClass?.zPosition = 400
-        self.addChild(tutorialClass!)
+    
+    func setTutorialScene() {
+        var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+        
+        tuples.append((nil, "this game requires 2-4 players", nil))
+        tuples.append((connect, "Click here to connect", nil))
+        tuples.append((turns, "Click here to choose the number of turns", nil))
+        tuples.append((go, "Click here to go to the game", nil))
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false)
+        tutorialManager.showInfo()
+        
     }
     
     func setObjects(){
@@ -309,7 +312,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if info!.containsPoint(location){
-            self.userInteractionEnabled = true
             self.setTutorialScene()
         }
     }

@@ -17,8 +17,6 @@ class PlayerNode: SKSpriteNode {
     var walkingSideways:[SKTexture] = []
     
     init(named:String) {
-        
-        
         let playerSpriteAtlas = SKTextureAtlas(named: "charSprites")
         
         self.named = named

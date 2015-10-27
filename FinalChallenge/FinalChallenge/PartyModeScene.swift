@@ -13,6 +13,8 @@ private let movableAvatarNodeName = "movable"
 
 class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     
+    var tutorialManager: TutorialManager!
+    
     weak var viewController : iPhonePlayerViewController?
     let background = SKSpriteNode(imageNamed: "board_beta")
     var selectedNode = SKSpriteNode()
@@ -31,8 +33,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var connect : SKSpriteNode?
     var go : SKSpriteNode?
     var numberOfTurns : SKLabelNode?
-    var tutorialNode : SKSpriteNode?
-    var tutorialClass : TutorialNodeScene?
     
     var charInitialPosition : CGFloat?
     
@@ -126,11 +126,18 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setTutorialScene(){
-        tutorialClass = TutorialNodeScene(texture: SKTexture(imageNamed: "tutorialscene1iphone"), size: CGSize(width: self.frame.width/1.3, height: self.frame.height/1.3))
-        tutorialClass?.t = [SKTexture(imageNamed: "tutorialscene1iphone"), SKTexture(imageNamed: "tutorialscene2iphone"),SKTexture(imageNamed: "tutorialscene3iphone")]
-        tutorialClass?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-        tutorialClass?.zPosition = 400
-        self.addChild(tutorialClass!)
+        var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+        
+        tuples.append((nil, "wait for ipad to connect", nil))
+        let moveUp = SKAction.moveTo(CGPointMake(arrayAvatarSprite[2].position.x, arrayAvatarSprite[2].position.y + 40), duration: 0.5)
+        let moveDown = SKAction.moveTo(CGPointMake(arrayAvatarSprite[2].position.x, arrayAvatarSprite[2].position.y), duration: 0.5)
+        
+        let sequence = SKAction.sequence([moveUp, moveDown])
+        let animation = SKAction.repeatActionForever(sequence)
+        tuples.append((arrayAvatarSprite[2], "Swipe the cards up", animation))
+
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true)
+        tutorialManager.showInfo()
     }
     
     override func willMoveFromView(view: SKView) {
@@ -233,9 +240,9 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let touch : UITouch? = touches.first as UITouch?
         
         if let location = touch?.locationInNode(self) {
-            if (tutorialClass!.containsPoint(location)){
-                tutorialClass?.removeFromParent()
-            }
+//            if (tutorialClass!.containsPoint(location)){
+//                tutorialClass?.removeFromParent()
+//            }
             
             if info!.containsPoint(location) {
                 self.userInteractionEnabled = false

@@ -11,6 +11,8 @@ import SpriteKit
 class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     let partsAtlas = SKTextureAtlas(named: "puffGame")
     
+    var players = [PuffPlayer]()
+    
     var spikeWallRight = SKNode()
     var spikeWallLeft = SKNode()
     var spikeWallTop = SKNode()
@@ -28,17 +30,19 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         let width = (self.frame.width-20)/CGFloat(GameManager.sharedInstance.players.count*2)
         
         for p in GameManager.sharedInstance.players{
+            let player = PuffPlayer(name: "aaa")
             let sprite = SKShapeNode(circleOfRadius: 10.0);
-            p.x = Double(width)*Double(count);
-            p.y = Double((self.frame.height/2));
+            player.x = Double(width)*Double(count);
+            player.y = Double((self.frame.height/2));
             count--;
             sprite.zPosition = 100;
-            sprite.position.x = CGFloat(p.x)
-            sprite.position.y = CGFloat(p.y)
+            sprite.position.x = CGFloat(player.x!)
+            sprite.position.y = CGFloat(player.y!)
             sprite.fillColor = UIColor.blueColor();
-            p.nodeSprite = PlayerNode(named: p.avatar!);
+            player.sprite = sprite
+            self.players.append(player)
             
-            self.addChild(p.nodeSprite!)
+            self.addChild(player.sprite!)
         }
         
         setupSpikes();
@@ -86,30 +90,42 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(spikeWallTop);
         self.addChild(spikeWallRight);
         self.addChild(spikeWallLeft);
+        
+        spikeWallTop.runAction(SKAction.repeatActionForever(actionWallTop!));
+        spikeWallDown.runAction(SKAction.repeatActionForever(actionWallDown!));
+        spikeWallLeft.runAction(SKAction.repeatActionForever(actionWallLeft!));
+        spikeWallRight.runAction(SKAction.repeatActionForever(actionWallRight!));
     }
     
     func messageReceived(data : NSNotification){
         if let message = data.userInfo!["actionReceived"] as? String{
             _ = PlayerAction(rawValue: message)
            
-            for p in GameManager.sharedInstance.players{
-                if p.playerIdentifier == data.userInfo!["peerID"] as? String{
-                        p.nodeSprite!.xScale = (p.nodeSprite!.xScale+1);
-                        p.nodeSprite!.yScale = (p.nodeSprite!.yScale+1);
-                        if p.nodeSprite!.xScale > 30{
-                            explodePuff(p.nodeSprite!)
+            for p in self.players{
+                //if p.playerIdentifier == data.userInfo!["peerID"] as? String{
+                        p.sprite!.xScale = (p.sprite!.xScale+1);
+                        p.sprite!.yScale = (p.sprite!.yScale+1);
+                        if p.sprite!.xScale > 30{
+                            explodePuff(p.sprite!)
                         }
-                        break;
+                        //break;
+                    if data.userInfo!["directionX"] as! PlayerAction == PlayerAction.Left{
+                        p.sprite?.position.x--
+                    }else{
+                         p.sprite?.position.x++
+                    }
+                if data.userInfo!["directionY"] as! PlayerAction == PlayerAction.Up{
+                    p.sprite?.position.y++
+                }else{
+                    p.sprite?.position.y--
                 }
+                }
+                //}
             }
         }
-    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-            spikeWallTop.runAction(SKAction.repeatActionForever(actionWallTop!));
-            spikeWallDown.runAction(SKAction.repeatActionForever(actionWallDown!));
-            spikeWallLeft.runAction(SKAction.repeatActionForever(actionWallLeft!));
-            spikeWallRight.runAction(SKAction.repeatActionForever(actionWallRight!));
+        
     }
     
     
