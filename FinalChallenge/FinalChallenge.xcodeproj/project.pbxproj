@@ -76,6 +76,7 @@
 		B5279F8D1BB06CB00015DBE7 /* ActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */; settings = {ASSET_TAGS = (); }; };
 		B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */; settings = {ASSET_TAGS = (); }; };
 		B5279F931BB08C7D0015DBE7 /* StealGoldCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */; settings = {ASSET_TAGS = (); }; };
+		B54766201BDFD4D6008E31DD /* accelerometerPadAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B547661F1BDFD4D6008E31DD /* accelerometerPadAssets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		B552F3101BD17375005FB7BC /* TutorialNodeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552F30F1BD17375005FB7BC /* TutorialNodeScene.swift */; settings = {ASSET_TAGS = (); }; };
 		B579AB681BB332E700B9D181 /* MoveBackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579AB671BB332E700B9D181 /* MoveBackCard.swift */; settings = {ASSET_TAGS = (); }; };
 		B579AB6A1BB3358800B9D181 /* LoseOneCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579AB691BB3358800B9D181 /* LoseOneCard.swift */; settings = {ASSET_TAGS = (); }; };
@@ -217,6 +218,7 @@
 		B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveCard.swift; sourceTree = "<group>"; };
 		B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotActiveCard.swift; sourceTree = "<group>"; };
 		B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StealGoldCard.swift; sourceTree = "<group>"; };
+		B547661F1BDFD4D6008E31DD /* accelerometerPadAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = accelerometerPadAssets.xcassets; sourceTree = "<group>"; };
 		B552F30F1BD17375005FB7BC /* TutorialNodeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialNodeScene.swift; sourceTree = "<group>"; };
 		B579AB671BB332E700B9D181 /* MoveBackCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveBackCard.swift; sourceTree = "<group>"; };
 		B579AB691BB3358800B9D181 /* LoseOneCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoseOneCard.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 				5ED294DF1BBD9C030073B148 /* GamePadScene.swift */,
 				5ED294E11BBD9D380073B148 /* SwipeScene.swift */,
 				262C07F21BD02B3400246DF5 /* roboPadAssets.xcassets */,
+				B547661F1BDFD4D6008E31DD /* accelerometerPadAssets.xcassets */,
 			);
 			name = GamePads;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				2661C40C1BB082A9003A49F9 /* tutorialassets.xcassets in Resources */,
 				5EE219F81BD0280800D6EF98 /* coinParticle.sks in Resources */,
 				26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */,
+				B54766201BDFD4D6008E31DD /* accelerometerPadAssets.xcassets in Resources */,
 				B57B33671B86566E000E5F53 /* GameOver.xib in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
 				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,

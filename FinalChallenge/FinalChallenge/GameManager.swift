@@ -27,6 +27,10 @@ class GameManager : NSObject {
     var isOnStore = false
     var gameEnded = false
     
+    //iphone only usage
+    var playerColor = UIColor.clearColor()
+    var activePlayer = [String]()
+    
     //this variable is used to store the player movement while he is on store
     var movementClosure: () -> () = {}
     
@@ -42,8 +46,8 @@ class GameManager : NSObject {
     
     // some arrays
     var minigameOrderArray : [Minigame] = []
-    var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
-    //var allMinigames : [Minigame] = [.FlappyFish]
+    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
+    var allMinigames : [Minigame] = [.BombGame]
     
     override init(){
         super.init()
@@ -55,6 +59,7 @@ class GameManager : NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeTrap:", name: "BoardNode_TrapRemoved", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCoinsAdded:", name: "Player_CoinsAdded", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCoinsRemoved:", name: "Player_CoinsRemoved", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateIphoneColors:", name: "ConnectionManager_ColorSet", object: nil)
     }
     
     func restartGameManager(){
@@ -408,7 +413,24 @@ class GameManager : NSObject {
         return aux
     }
     
-// update users position may be used with keyboard functions
+    func sendPlayersColors(){
+        let arrayColor = self.activePlayer
+        let array = ["arrayColor":arrayColor]
+        let dic = ["ColorSet":" ", "arrayColor":array]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+    }
+    
+    func updateIphoneColors(data: NSNotification){
+        let dictionary = data.userInfo!["arrayColor"] as! NSDictionary
+        let arr = dictionary["arrayColor"] as! [String]
+        
+        self.activePlayer = arr
+        
+        //print("Array: \(self.activePlayer)")
+       
+    }
+    
+    // update users position may be used with keyboard functions
     func updatePlayerPosition(move:Int, player:Player){
         BoardGraph.SharedInstance.walk(move, player: player, view: boardViewController);
     }
@@ -460,7 +482,14 @@ class GameManager : NSObject {
         }
     }
     
-    
+    func playerHoldingBomb(player:String){
+        let p = player
+        let swipe = ["lightSwipe":p]
+        let dic = ["SwipeActive":" ", "lightSwipe":swipe]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        
+        //print("Array: \(self.activePlayer)")
+    }
 
         
 }

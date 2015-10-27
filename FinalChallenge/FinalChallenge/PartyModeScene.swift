@@ -281,15 +281,19 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                 switch avatarName {
                 case "knight":
                     avatar = ["avatar":"knight"]
+                    GameManager.sharedInstance.playerColor = UIColor.redColor()
                     viewController!.playerColor = UIColor.redColor()
                 case "ranger":
                     avatar = ["avatar":"ranger"]
+                    GameManager.sharedInstance.playerColor = UIColor.whiteColor()
                     viewController!.playerColor = UIColor.whiteColor()
                 case "thief":
                     avatar = ["avatar":"thief"]
+                    GameManager.sharedInstance.playerColor = UIColor.blackColor()
                     viewController!.playerColor = UIColor.blackColor()
                 case "wizard":
                     avatar = ["avatar":"wizard"]
+                    GameManager.sharedInstance.playerColor = UIColor.blueColor()
                     viewController!.playerColor = UIColor.blueColor()
                 default:
                     ()
