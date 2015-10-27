@@ -47,8 +47,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeView:", name: "ConnectionManager_IphoneChangeView", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "avatarIsSelectable:", name: "ConnectionManager_canSelectAvatar", object: nil);
         
-        self.userInteractionEnabled = false
-        
         banner = SKSpriteNode(imageNamed: "setUpBanner")
         self.addChild(banner!)
         banner!.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
@@ -288,15 +286,19 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                 switch avatarName {
                 case "knight":
                     avatar = ["avatar":"knight"]
+                    GameManager.sharedInstance.playerColor = UIColor.redColor()
                     viewController!.playerColor = UIColor.redColor()
                 case "ranger":
                     avatar = ["avatar":"ranger"]
+                    GameManager.sharedInstance.playerColor = UIColor.whiteColor()
                     viewController!.playerColor = UIColor.whiteColor()
                 case "thief":
                     avatar = ["avatar":"thief"]
+                    GameManager.sharedInstance.playerColor = UIColor.blackColor()
                     viewController!.playerColor = UIColor.blackColor()
                 case "wizard":
                     avatar = ["avatar":"wizard"]
+                    GameManager.sharedInstance.playerColor = UIColor.blueColor()
                     viewController!.playerColor = UIColor.blueColor()
                 default:
                     ()

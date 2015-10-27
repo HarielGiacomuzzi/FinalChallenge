@@ -362,6 +362,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             playerWithBomb = playerNode
             bombShouldTick = false
             playerActive = playerNode.identifier
+            GameManager.sharedInstance.playerHoldingBomb(playerActive)
             if bombShouldExplode {
                 
                 explodePlayer(playerNode, explodedBomb: bombNode)
