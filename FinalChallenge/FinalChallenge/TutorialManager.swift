@@ -26,6 +26,15 @@ class TutorialManager: NSObject, InformationNodeDelegate {
         self.tuples = tuples
         self.scene = scene
         self.isIphone = isIphone
+        removeUserInteraction()
+    }
+    
+    func removeUserInteraction() {
+        for tuple in tuples {
+            if let node = tuple.node {
+                node.userInteractionEnabled = false
+            }
+        }
     }
     
     func showInfo() {
@@ -34,6 +43,7 @@ class TutorialManager: NSObject, InformationNodeDelegate {
         }
         
         if let node = tuples.first!.node {
+            node.userInteractionEnabled = true
             setupArrow(node)
             if let animation = tuples.first!.animation {
                 setupAnimation(node, animation: animation)
@@ -103,5 +113,16 @@ class TutorialManager: NSObject, InformationNodeDelegate {
             infoBox.removeFromParent()
         }
     }
+    
+    func buttonActivated(node:SKSpriteNode) {
+        if let tuple = tuples.first {
+            if let node2 = tuple.node {
+                if node == node2 {
+                    closeInformation()
+                }
+            }
+        }
+    }
+    
     
 }

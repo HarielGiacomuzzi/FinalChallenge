@@ -47,8 +47,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeView:", name: "ConnectionManager_IphoneChangeView", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "avatarIsSelectable:", name: "ConnectionManager_canSelectAvatar", object: nil);
         
-        self.userInteractionEnabled = false
-        
         banner = SKSpriteNode(imageNamed: "setUpBanner")
         self.addChild(banner!)
         banner!.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
