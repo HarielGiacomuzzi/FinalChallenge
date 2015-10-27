@@ -68,11 +68,9 @@ class BoardNode : NSObject{
             //print("criei cards")
             for _ in 0...2 {
                 cards.append(CardManager.ShareInstance.getRandomCard(true))
-                //print("appendei \(cards[i]) to cards")
             }
             for _ in 0...1 {
                 cards.append(CardManager.ShareInstance.getRandomCard(false))
-                //print("appendei \(cards[i]) to cards")
             }
             //print(cards)
             var cardsString: [String] = []
@@ -81,9 +79,7 @@ class BoardNode : NSObject{
             }
             let dataDic = ["cards":cardsString,"player":player.playerIdentifier]
             let dic = ["openStore":" ", "dataDic":dataDic]
-            //print("vou enviar msg pra abrir a loja")
             ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
-            //print("enviei")
             GameManager.sharedInstance.isOnStore = true;
             
             break
@@ -110,7 +106,6 @@ class BoardNode : NSObject{
                 return true;
             }
         }
-        
         return false;
     }
     
@@ -125,11 +120,6 @@ class BoardNode : NSObject{
             self.item = nil
         default: break
         }
-        
-        
-        //let it = StealGoldCard()
-        //it.used = false
-        //self.item = it
     }
     
     // defines witch item the node will carry
@@ -137,7 +127,8 @@ class BoardNode : NSObject{
         let willBeUsable : Int = (random() % 2)
         
         switch(willBeUsable){
-        case 0: let witchOneWillBe : Int = (random() % 3) // this number may vary
+        case 0:
+                let witchOneWillBe : Int = (random() % 3) // this number may vary
                 switch(witchOneWillBe){
                 case 0: let it = StealGoldCard()
                         it.used = false
@@ -154,7 +145,7 @@ class BoardNode : NSObject{
                 default: break
                 }
             
-        case 1: //print("Collectable card added")
+        case 1:
                 let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
                 self.item = it
             

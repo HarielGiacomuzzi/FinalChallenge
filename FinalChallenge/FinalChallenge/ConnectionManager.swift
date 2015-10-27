@@ -390,6 +390,20 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_TheGameEnded", object: nil, userInfo: userInfo)
                 return
             }
+        //notifies iphone players location
+            if message.valueForKey("ColorSet") != nil {
+                //print(message)
+                userInfo.updateValue(message.valueForKey("arrayColor") as! NSObject, forKey: "arrayColor")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ColorSet", object: nil, userInfo: userInfo)
+                return
+            }
+        //notifies swipepad that you can throw bomb
+            if message.valueForKey("SwipeActive") != nil {
+                //print(message)
+                userInfo.updateValue(message.valueForKey("lightSwipe") as! NSObject, forKey: "lightSwipe")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_SwipeActive", object: nil, userInfo: userInfo)
+                return
+            }
         
         }
         // if I dont know what it is I will send the default message

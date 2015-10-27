@@ -13,6 +13,8 @@ enum PlayerAction : String  {
     case Down = "Down"
     case Swipe = "Swipe"
     case PuffGrow = "Grow"
+    case Left = "Left"
+    case Right = "Right"
 }
 
 enum Minigame : String {
