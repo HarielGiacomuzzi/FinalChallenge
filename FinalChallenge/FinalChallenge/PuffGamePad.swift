@@ -13,27 +13,34 @@ import UIKit
 class PuffGamePad: UIViewController {
     var gameManager : GameManager?
     
+    lazy var motionManager : CMMotionManager = {
+        let motion = CMMotionManager()
+        motion.gyroUpdateInterval = 0.1
+        return motion
+        }()
+
     override func viewDidLoad() {
         super.viewDidLoad();
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeController:", name: "ConnectionManager_CloseController", object: nil);
+        self.startAcelerometer()
         
-        if motionManager.accelerometerAvailable{
-            let queue = NSOperationQueue()
-            motionManager.startAccelerometerUpdatesToQueue(queue, withHandler:
-                {data, error in
-                    
-                    if let _ = data{
-                        
-                    }
-                    else{
-                        return
-                    }
-                    self.sendData(data!.acceleration.y)
-                }
-            )
-        } else {
-            //print("Accelerometer is not available", terminator: "")
-        }
+//        if motionManager.accelerometerAvailable{
+//            let queue = NSOperationQueue()
+//            motionManager.startAccelerometerUpdatesToQueue(queue, withHandler:
+//                {data, error in
+//                    
+//                    if let _ = data{
+//                        
+//                    }
+//                    else{
+//                        return
+//                    }
+//                    self.sendData(data!.acceleration.y)
+//                }
+//            )
+//        } else {
+//            //print("Accelerometer is not available", terminator: "")
+//        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -41,15 +48,7 @@ class PuffGamePad: UIViewController {
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true);
     }
     
-    lazy var motionManager : CMMotionManager = {
-        let motion = CMMotionManager()
-        motion.accelerometerUpdateInterval = 1.0/10.0
-        return motion
-        }()
-    
-    
     func sendData(y:Double) {
-        
         if y > 0{
             let action = ["way":PlayerAction.Down.rawValue]
             let dic = ["controllerAction":"", "action":action]
@@ -66,4 +65,42 @@ class PuffGamePad: UIViewController {
         
     }
     
+    // - x (up)
+    // +x (down)
+    // +y (right)
+    // -y (left)
+    func startAcelerometer(){
+    
+        if motionManager.accelerometerAvailable{
+            let queue = NSOperationQueue()
+            motionManager.startGyroUpdatesToQueue(queue, withHandler:
+                {data, error in
+                    if let _ = data{
+    
+                    }
+                    else{
+                        return
+                    }
+                    
+                   var dic = ["PuffGamePad":" ", "action":PlayerAction.PuffGrow.rawValue]
+                    if data?.rotationRate.x <= 0{
+                    dic.updateValue(PlayerAction.Up.rawValue, forKey: "directionY")
+                    }else{
+                    dic.updateValue(PlayerAction.Down.rawValue, forKey: "directionY")
+                    }
+                    if data?.rotationRate.y <= 0{
+                        dic.updateValue(PlayerAction.Left.rawValue, forKey: "directionX")
+                    }else{
+                    dic.updateValue(PlayerAction.Right.rawValue, forKey: "directionX")
+                    }
+                    
+            
+                ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true);
+                    
+                }
+    )
+    } else {
+    print("Accelerometer is not available", terminator: "")
+    }
+    }
 }
