@@ -227,7 +227,6 @@
 		B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotActiveCard.swift; sourceTree = "<group>"; };
 		B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StealGoldCard.swift; sourceTree = "<group>"; };
 		B547661F1BDFD4D6008E31DD /* accelerometerPadAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = accelerometerPadAssets.xcassets; sourceTree = "<group>"; };
-		B552F30F1BD17375005FB7BC /* TutorialNodeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialNodeScene.swift; sourceTree = "<group>"; };
 		B579AB671BB332E700B9D181 /* MoveBackCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveBackCard.swift; sourceTree = "<group>"; };
 		B579AB691BB3358800B9D181 /* LoseOneCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoseOneCard.swift; sourceTree = "<group>"; };
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
@@ -370,7 +369,6 @@
 				B5AFAD0E1B9608F70005F19E /* PartyModeScene.swift */,
 				B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */,
 				26547BB41B9F68DF003DFD73 /* SetupPartyScene SK */,
-				B552F30F1BD17375005FB7BC /* TutorialNodeScene.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
