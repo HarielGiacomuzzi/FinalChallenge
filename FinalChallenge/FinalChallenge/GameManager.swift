@@ -426,7 +426,7 @@ class GameManager : NSObject {
         
         self.activePlayer = arr
         
-        //print("Array: \(self.activePlayer)")
+        print("Array: \(self.activePlayer)")
        
     }
     

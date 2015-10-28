@@ -23,9 +23,6 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveCard:", name: "ConnectionManager_SendCard", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "closeStore:", name: "ConnectionManager_CloseStore", object: nil);
         
-        //print(CardManager.ShareInstance.getRandomCard(false))
-        //print(CardManager.ShareInstance.getRandomCard(false))
-        
 
 }
 
@@ -126,7 +123,6 @@ class ViewController: UIViewController, MCBrowserViewControllerDelegate {
         let player = GameManager.sharedInstance.players.first!.playerIdentifier
         let dataDic = ["cards":cards, "player":player]
         let dic = ["openStore" : " ", "dataDic" : dataDic]
-        //print("?")
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
     }
     
