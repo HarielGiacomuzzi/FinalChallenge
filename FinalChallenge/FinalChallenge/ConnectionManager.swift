@@ -270,6 +270,8 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         // if we receive the commad of a controller
             if message.valueForKey("PuffGamePad") != nil {
                 userInfo.updateValue(message.valueForKey("action") as! NSObject, forKey: "actionReceived")
+                userInfo.updateValue(message.valueForKey("directionX") as! NSObject, forKey: "directionX")
+                userInfo.updateValue(message.valueForKey("directionY") as! NSObject, forKey: "directionY")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_PuffGamePadAction", object: nil, userInfo: userInfo)
                 return
             }
