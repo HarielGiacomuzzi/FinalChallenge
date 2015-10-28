@@ -13,6 +13,9 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     
     var players = [PuffPlayer]()
     
+    let playerCategory : UInt32 = 0x1 << 0
+    let spikeCategory : UInt32 = 0x1 << 1
+    
     var spikeWallRight = SKNode()
     var spikeWallLeft = SKNode()
     var spikeWallTop = SKNode()
@@ -46,6 +49,8 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         setupSpikes();
+        self.physicsWorld.gravity = CGVectorMake(0,0);
+        self.physicsWorld.contactDelegate = self;
 
     }
     
@@ -76,6 +81,31 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             spike.zRotation = CGFloat(-1.57079633);
             spikeWallLeft.addChild(spike);
         }
+        
+        // CONFIGURAÇÃO DA FISICA
+        spikeWallDown.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: CGFloat(self.view!.frame.width), height: partsAtlas.textureNamed("spike").size().height))
+        spikeWallDown.physicsBody?.dynamic = true
+        spikeWallDown.physicsBody?.categoryBitMask = self.spikeCategory
+        spikeWallDown.physicsBody?.contactTestBitMask = self.playerCategory
+        spikeWallDown.physicsBody?.collisionBitMask = 0
+
+        spikeWallTop.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: CGFloat(self.view!.frame.width), height: partsAtlas.textureNamed("spike").size().height))
+        spikeWallTop.physicsBody?.dynamic = true
+        spikeWallTop.physicsBody?.categoryBitMask = self.spikeCategory
+        spikeWallTop.physicsBody?.contactTestBitMask = self.playerCategory
+        spikeWallTop.physicsBody?.collisionBitMask = 0
+        
+        spikeWallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: partsAtlas.textureNamed("spike").size().height, height: CGFloat((self.view?.frame.size.height)!)))
+        spikeWallRight.physicsBody?.dynamic = true
+        spikeWallRight.physicsBody?.categoryBitMask = self.spikeCategory
+        spikeWallRight.physicsBody?.contactTestBitMask = self.playerCategory
+        spikeWallRight.physicsBody?.collisionBitMask = 0
+        
+        spikeWallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: partsAtlas.textureNamed("spike").size().height, height: CGFloat((self.view?.frame.size.height)!)))
+        spikeWallLeft.physicsBody?.dynamic = true
+        spikeWallLeft.physicsBody?.categoryBitMask = self.spikeCategory
+        spikeWallLeft.physicsBody?.contactTestBitMask = self.playerCategory
+        spikeWallLeft.physicsBody?.collisionBitMask = 0
         
         let down = SKAction.moveBy(CGVector(dx: 0, dy: partsAtlas.textureNamed("spike").size().height*1.5), duration: NSTimeInterval(1.5))
         actionWallDown = SKAction.sequence([down, down.reversedAction()]);
