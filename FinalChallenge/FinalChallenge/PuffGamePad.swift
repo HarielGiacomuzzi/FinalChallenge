@@ -16,7 +16,7 @@ class PuffGamePad: UIViewController {
     lazy var motionManager : CMMotionManager = {
         let motion = CMMotionManager()
         //motion.gyroUpdateInterval = 0.3
-        motion.accelerometerUpdateInterval = 0.05
+        motion.accelerometerUpdateInterval = 0.1
         return motion
         }()
 

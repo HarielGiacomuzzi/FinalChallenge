@@ -34,18 +34,24 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         
         for p in GameManager.sharedInstance.players{
             let player = PuffPlayer(name: "aaa")
-            let sprite = SKShapeNode(circleOfRadius: 10.0);
+            let spriteNode = SKSpriteNode(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 15.0, height: 15.0))
             player.x = Double(width)*Double(count);
             player.y = Double((self.frame.height/2));
             count--;
-            sprite.zPosition = 100;
-            sprite.position.x = CGFloat(player.x!)
-            sprite.position.y = CGFloat(player.y!)
-            sprite.fillColor = UIColor.blueColor();
-            player.sprite = sprite
+            spriteNode.zPosition = 100;
+            spriteNode.position.x = CGFloat(player.x!)
+            spriteNode.position.y = CGFloat(player.y!)
+            player.sprite = spriteNode
             self.players.append(player)
-            
             self.addChild(player.sprite!)
+            
+            //tem que mudar o formato do corpo fisico :)
+            player.sprite!.physicsBody = SKPhysicsBody(rectangleOfSize: spriteNode.size)
+            player.sprite!.physicsBody?.dynamic = true
+            player.sprite!.physicsBody?.categoryBitMask = self.playerCategory
+            player.sprite!.physicsBody?.contactTestBitMask = self.spikeCategory
+            player.sprite!.physicsBody?.collisionBitMask = 0
+            player.sprite!.physicsBody?.usesPreciseCollisionDetection = true
         }
         
         setupSpikes();
@@ -54,58 +60,90 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
+    func didBeginContact(contact: SKPhysicsContact) {
+        var player : SKPhysicsBody?
+        var spike : SKPhysicsBody?
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask
+        {
+            player = contact.bodyA;
+            spike = contact.bodyB;
+        }
+        else
+        {
+            player = contact.bodyB;
+            spike = contact.bodyA;
+        }
+        
+        if ((player!.categoryBitMask & self.playerCategory) != 0 &&
+            (spike!.categoryBitMask & self.spikeCategory) != 0)
+        {
+           self.playerColidedWithSpike((player?.node)! , spike: (spike?.node)!)
+        }
+        
+    }
+    
+    func playerColidedWithSpike(player : SKNode, spike : SKNode){
+        self.explodePuff(player)
+    }
+    
     func setupSpikes(){
         for i in 0...Int(self.view!.frame.width/partsAtlas.textureNamed("spike").size().width){
             let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width, -partsAtlas.textureNamed("spike").size().height);
+            spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width - self.view!.frame.width/2, -partsAtlas.textureNamed("spike").size().height + partsAtlas.textureNamed("spike").size().height);
             spikeWallDown.addChild(spike)
         }
         
         for i in 0...Int(self.view!.frame.width/partsAtlas.textureNamed("spike").size().width){
             let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width, self.view!.frame.height+partsAtlas.textureNamed("spike").size().height);
+            spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width  - self.view!.frame.width/2, partsAtlas.textureNamed("spike").size().height - partsAtlas.textureNamed("spike").size().height);
             spike.zRotation = CGFloat(3.14159265);
             spikeWallTop.addChild(spike)
         }
         
         for i in 0...Int(self.view!.frame.width/partsAtlas.textureNamed("spike").size().width){
             let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(self.view!.frame.width+partsAtlas.textureNamed("spike").size().width, CGFloat(i)*partsAtlas.textureNamed("spike").size().height);
+            spike.position = CGPointMake(partsAtlas.textureNamed("spike").size().width - partsAtlas.textureNamed("spike").size().height, CGFloat(i)*partsAtlas.textureNamed("spike").size().height - self.view!.frame.height/2);
             spike.zRotation = CGFloat(1.57079633);
             spikeWallRight.addChild(spike)
         }
         
         for i in 0...Int(self.view!.frame.height/partsAtlas.textureNamed("spike").size().height){
             let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(-partsAtlas.textureNamed("spike").size().width, CGFloat(i)*partsAtlas.textureNamed("spike").size().height);
+            spike.position = CGPointMake(-partsAtlas.textureNamed("spike").size().width + partsAtlas.textureNamed("spike").size().height, CGFloat(i)*partsAtlas.textureNamed("spike").size().height - self.view!.frame.height/2);
             spike.zRotation = CGFloat(-1.57079633);
             spikeWallLeft.addChild(spike);
         }
         
         // CONFIGURAÇÃO DA FISICA
         spikeWallDown.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: CGFloat(self.view!.frame.width), height: partsAtlas.textureNamed("spike").size().height))
+        //spikeWallDown.physicsBody?.
         spikeWallDown.physicsBody?.dynamic = true
         spikeWallDown.physicsBody?.categoryBitMask = self.spikeCategory
         spikeWallDown.physicsBody?.contactTestBitMask = self.playerCategory
         spikeWallDown.physicsBody?.collisionBitMask = 0
+        spikeWallDown.position = CGPointMake(CGFloat(self.view!.frame.width/2), -partsAtlas.textureNamed("spike").size().height)
 
         spikeWallTop.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: CGFloat(self.view!.frame.width), height: partsAtlas.textureNamed("spike").size().height))
         spikeWallTop.physicsBody?.dynamic = true
         spikeWallTop.physicsBody?.categoryBitMask = self.spikeCategory
         spikeWallTop.physicsBody?.contactTestBitMask = self.playerCategory
         spikeWallTop.physicsBody?.collisionBitMask = 0
+        spikeWallTop.position = CGPointMake(CGFloat(self.view!.frame.width/2), CGFloat(self.view!.frame.height + partsAtlas.textureNamed("spike").size().height))
         
         spikeWallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: partsAtlas.textureNamed("spike").size().height, height: CGFloat((self.view?.frame.size.height)!)))
         spikeWallRight.physicsBody?.dynamic = true
         spikeWallRight.physicsBody?.categoryBitMask = self.spikeCategory
         spikeWallRight.physicsBody?.contactTestBitMask = self.playerCategory
         spikeWallRight.physicsBody?.collisionBitMask = 0
+        spikeWallRight.position = CGPointMake(self.view!.frame.width + partsAtlas.textureNamed("spike").size().height, self.view!.frame.height/2)
         
         spikeWallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: partsAtlas.textureNamed("spike").size().height, height: CGFloat((self.view?.frame.size.height)!)))
         spikeWallLeft.physicsBody?.dynamic = true
         spikeWallLeft.physicsBody?.categoryBitMask = self.spikeCategory
         spikeWallLeft.physicsBody?.contactTestBitMask = self.playerCategory
         spikeWallLeft.physicsBody?.collisionBitMask = 0
+        spikeWallLeft.position = CGPointMake(-partsAtlas.textureNamed("spike").size().height, self.view!.frame.height/2)
         
         let down = SKAction.moveBy(CGVector(dx: 0, dy: partsAtlas.textureNamed("spike").size().height*1.5), duration: NSTimeInterval(1.5))
         actionWallDown = SKAction.sequence([down, down.reversedAction()]);
