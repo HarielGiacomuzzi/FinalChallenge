@@ -402,8 +402,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
                 viewController.gotoBoardGame()
                 for p in GameManager.sharedInstance.players{
                     GameManager.sharedInstance.updatePlayerMoney(p, value: p.coins)
+                    GameManager.sharedInstance.activePlayer.append(p.avatar!)
+                    print(p.avatar)
                 }
-                
+                GameManager.sharedInstance.sendPlayersColors()
             }
         }
         if sender == connect {

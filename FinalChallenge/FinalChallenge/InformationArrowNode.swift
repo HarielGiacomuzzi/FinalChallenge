@@ -19,7 +19,9 @@ class InformationArrowNode: SKSpriteNode {
         self.pointingRight = pointingRight
         self.nodeToPoint = nodeToPoint
         super.init(texture: atlas.textureNamed("arrow0"), color: UIColor.clearColor(), size: atlas.textureNamed("arrow13").size())
+        anchorPoint = CGPointMake(1.0,0.5)
         positionArrow()
+        
     }
     
     func animate() {

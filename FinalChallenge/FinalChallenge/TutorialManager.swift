@@ -78,13 +78,13 @@ class TutorialManager: NSObject, InformationNodeDelegate {
         infoBox = InformationBoxNode(isIphone: isIphone, text: text)
         infoBox.delegate = self
         
-        if node?.position.y > scene.frame.size.height/2 {
-            infoBox.position = CGPointMake(scene.frame.size.width/2, infoBox.calculateAccumulatedFrame().height/2)
-        } else {
-            infoBox.position = CGPointMake(scene.frame.size.width/2, scene.frame.size.height - infoBox.calculateAccumulatedFrame().height/2)
+        infoBox.position = CGPointMake(scene.frame.size.width/2, infoBox.calculateAccumulatedFrame().height/2)
+        if let n = node {
+            if n.position.y < scene.frame.size.height/2 {
+                infoBox.position = CGPointMake(scene.frame.size.width/2, scene.frame.size.height - infoBox.calculateAccumulatedFrame().height/2)
+            }
         }
         
-        infoBox.position = CGPointMake(scene.frame.size.width/2, infoBox.calculateAccumulatedFrame().height/2)
         infoBox.zPosition = 10000
         
         scene.addChild(infoBox)

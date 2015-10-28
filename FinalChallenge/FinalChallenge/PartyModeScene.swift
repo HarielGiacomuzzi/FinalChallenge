@@ -36,8 +36,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     
     var charInitialPosition : CGFloat?
     
-    var closeInformationWhenShowingCharacterGambi = false
-    
     // colisions
     let boundaryCategoryMask: UInt32 =  0x1 << 1
     let fallingCategoryMask: UInt32 =  0x1 << 2
@@ -134,9 +132,8 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     func handlePanFrom(recognizer : UIPanGestureRecognizer) {
         if recognizer.state == .Began {
             
-            if closeInformationWhenShowingCharacterGambi {
+            if tutorialManager != nil {
                 tutorialManager.closeInformation()
-                closeInformationWhenShowingCharacterGambi = false
             }
             
             var touchLocation = recognizer.locationInView(recognizer.view)
@@ -467,7 +464,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true)
         tutorialManager.showInfo()
-        closeInformationWhenShowingCharacterGambi = true
     }
     
     func connectionChanged(data: NSNotification) {
