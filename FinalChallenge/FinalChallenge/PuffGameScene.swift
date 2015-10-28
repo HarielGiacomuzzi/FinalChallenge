@@ -34,7 +34,25 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         
         for p in GameManager.sharedInstance.players{
             let player = PuffPlayer(name: "aaa")
-            let spriteNode = SKSpriteNode(texture: nil, color: UIColor.blueColor(), size: CGSize(width: 15.0, height: 15.0))
+            let head = SKSpriteNode(texture: partsAtlas.textureNamed("babyHead"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("babyHead").size())
+            head.zPosition = 1
+            head.position = CGPointMake(0, 0)
+            let helmet = SKSpriteNode(texture: partsAtlas.textureNamed("helmet"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmet").size())
+            helmet.zPosition = 2
+            helmet.position = CGPointMake(0, 0)
+            let helmetReflex = SKSpriteNode(texture: partsAtlas.textureNamed("helmetReflex"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmetReflex").size())
+            helmetReflex.zPosition = 3
+            helmetReflex.position = CGPointMake(0, 0)
+            let body = SKSpriteNode(texture: partsAtlas.textureNamed("babyBody"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
+            body.zPosition = 0
+            body.position = CGPointMake(helmet.position.x, -helmet.size.height+22)
+            let spriteNode = SKSpriteNode()
+            spriteNode.addChild(head)
+            spriteNode.addChild(helmet)
+            spriteNode.addChild(helmetReflex)
+            spriteNode.addChild(body)
+            spriteNode.size = helmet.size
+//            let spriteNode = SKSpriteNode(texture: partsAtlas.textureNamed("babyHead"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
             player.x = Double(width)*Double(count);
             player.y = Double((self.frame.height/2));
             count--;
@@ -85,6 +103,10 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     
     func playerColidedWithSpike(player : SKNode, spike : SKNode){
         self.explodePuff(player)
+    }
+    
+    func playerColidedWihtPlayer(playerA : SKNode, playerB : SKNode){
+        //playerB.physicsBody.applyForce()
     }
     
     func setupSpikes(){
