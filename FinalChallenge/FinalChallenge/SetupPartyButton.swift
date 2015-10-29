@@ -13,12 +13,27 @@ class SetupPartyButton: SKSpriteNode {
     
     var textureOn:SKTexture!
     var textureOff:SKTexture!
+    lazy var maskSprite = SKSpriteNode()
+    
     weak var delegate:SetupPartyButtonDelegate?
+    
+    override var userInteractionEnabled:Bool {
+        didSet {
+            if !userInteractionEnabled {
+                if maskSprite.parent == nil {
+                    addChild(maskSprite)                    
+                }
+            } else {
+                maskSprite.removeFromParent()
+            }
+        }
+    }
     
     init(textureOn: SKTexture, textureOff: SKTexture) {
         self.textureOn = textureOn
         self.textureOff = textureOff
         super.init(texture: textureOn, color: UIColor.clearColor(), size: textureOn.size())
+        setupMaskSprite()
         userInteractionEnabled = true
     }
     
@@ -34,6 +49,14 @@ class SetupPartyButton: SKSpriteNode {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         texture = textureOn
         
+    }
+    
+    func setupMaskSprite() {
+        maskSprite = SKSpriteNode(texture: texture)
+        maskSprite.zPosition = 999999
+        maskSprite.colorBlendFactor = 1.0
+        maskSprite.color = UIColor.blackColor()
+        maskSprite.alpha = 0.5
     }
 
 }

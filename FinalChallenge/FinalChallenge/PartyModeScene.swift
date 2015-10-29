@@ -448,7 +448,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         tuples.append((nil, "wait for ipad to connect", nil))
         
-        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true)
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 1.0)
         tutorialManager.showInfo()
     }
     
@@ -462,7 +462,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let animation = SKAction.repeatActionForever(sequence)
         tuples.append((arrayAvatarSprite[2], "Swipe the cards up", animation))
         
-        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true)
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 1.0)
         tutorialManager.showInfo()
     }
     

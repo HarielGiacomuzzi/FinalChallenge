@@ -109,13 +109,12 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     
     func setTutorialScene() {
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
-        
         tuples.append((nil, "this game requires 2-4 players", nil))
         tuples.append((turns, "Click here to choose the number of turns", nil))
         tuples.append((connect, "Click here to connect", nil))
         tuples.append((nil, "Wait for the players to connect", nil))
         go?.userInteractionEnabled = false
-        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false)
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
         tutorialManager.showInfo()
         
     }
@@ -334,7 +333,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
             var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
             
             tuples.append((go, "You can press go now", nil))
-            tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false)
+            tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
             tutorialManager.showInfo()
         }
         

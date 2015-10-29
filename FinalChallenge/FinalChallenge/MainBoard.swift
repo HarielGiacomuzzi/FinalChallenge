@@ -253,7 +253,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         tuples.append((tutorialNodes["Bau1"],"Here is the chest",nil))
         
         
-        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false)
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
         tutorialManager.showInfo()
     }
 }

@@ -19,6 +19,8 @@ class PlayerButtonNode: SKNode {
     var background:SKSpriteNode!
     var number:SKLabelNode!
     
+    weak var delegate: PlayerButtonDelegate?
+    
     init(textureOn:SKTexture, textureOff:SKTexture, openRight:Bool) {
 
         self.textureOn = textureOn
@@ -48,6 +50,8 @@ class PlayerButtonNode: SKNode {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        delegate?.buttonClicked(self)
         button.texture = textureOff
         openBackground()
     }
@@ -106,4 +110,8 @@ class PlayerButtonNode: SKNode {
         self.number.text = "\(number)"
     }
     
+}
+
+protocol PlayerButtonDelegate : class {
+    func buttonClicked(sender:SKNode)
 }
