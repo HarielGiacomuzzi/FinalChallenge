@@ -22,6 +22,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     var connect : SKSpriteNode?
     var go : SKSpriteNode?
     var numberOfTurns : SKLabelNode?
+    var connectLabel : SKLabelNode?
     var back : SKLabelNode?
     let fontSize : CGFloat = 20.0
     var info : SKSpriteNode?
@@ -139,7 +140,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         // set the turn select banners
         turns = SKSpriteNode(texture: yellowTurnsOn, size: yellowTurnsOn.size())
         self.addChild(turns!)
-        turns!.position = CGPoint(x: self.frame.width * 0.35, y: banner!.position.y - 110)
+        turns!.position = CGPoint(x: self.frame.width/2, y: banner!.position.y - 110)
         turns?.zPosition = 4
         
         // set the connect players button
@@ -149,13 +150,25 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         connect!.position = CGPoint(x: turns!.position.x, y: turns!.position.y - 90)
         connect?.zPosition = 4
         
+        connectLabel = SKLabelNode(fontNamed: "Helvetica Neue")
+        connectLabel!.text = "Connect"
+        connectLabel?.zPosition = 5
+        connect?.addChild(connectLabel!)
+        
         // set the GO BUTTON
         go = SKSpriteNode(texture: greenButton, size: greenButton.size())
         self.addChild(go!)
-        go!.position = CGPoint(x: self.frame.width * 0.75, y: (connect!.position.y + turns!.position.y)/2)
+        go!.position = CGPoint(x: self.frame.width/1.1, y: self.frame.height/14)
         go!.name = "goButton"
         go?.zPosition = 4
         
+        let gotext = SKLabelNode(fontNamed: "Helvetica Neue")
+        gotext.text = "GO"
+        gotext.position.x = gotext.position.x - 25
+        gotext.zPosition = 5
+        gotext.fontSize = 32
+        gotext.fontColor = UIColor(red: 250/255, green: 52/255, blue: 67/255, alpha: 1)
+        go!.addChild(gotext)
         // set the turn controll buttons
 
         
@@ -254,10 +267,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touch: UITouch = touches.first as UITouch!
-        let location: CGPoint = touch.locationInNode(self)
+        //let touch: UITouch = touches.first as UITouch!
+        //xlet location: CGPoint = touch.locationInNode(self)
 
-        if(go!.containsPoint(location)){
+        /*if(go!.containsPoint(location)){
             go!.texture = greenButtonOff
         }else{
             go!.texture = greenButton
@@ -266,14 +279,14 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         if(connect!.containsPoint(location)){
             connect!.texture = yellowButtonOff
         }else{
-            connect!.texture = yellowButton
+
         }
         
         if(turns!.containsPoint(location)){
             turns!.texture = yellowTurnsOff
         }else{
             turns!.texture = yellowTurnsOn
-        }
+        }*/
         
         
         
@@ -288,6 +301,8 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
             tutorialNode?.removeFromParent()
         }*/
         
+    
+        
         if(go!.containsPoint(location)){
             go!.texture = greenButtonOff
         }else{
@@ -296,8 +311,12 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         
         if(connect!.containsPoint(location)){
             connect!.texture = yellowButtonOff
+            connectLabel?.fontColor = UIColor.blackColor()
+            connectLabel?.position = CGPoint(x: (connectLabel?.position.x)!, y: ((connectLabel?.position.y)!-10))
         }else{
-            connect!.texture = yellowButton
+            //connect!.texture = yellowButton
+            //connectLabel?.fontColor = UIColor.whiteColor()
+            //connectLabel?.position = CGPoint(x: (connectLabel?.position.x)!, y: ((connectLabel?.position.y)!+10))
         }
         
         
@@ -346,13 +365,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
                 for p in GameManager.sharedInstance.players{
                     GameManager.sharedInstance.updatePlayerMoney(p, value: p.coins)
                     GameManager.sharedInstance.activePlayer.append(p.avatar!)
-                    //GameManager.sharedInstance.sendPlayersColors()
                 }
                 GameManager.sharedInstance.sendPlayersColors()
             }
         }
         if(connect!.containsPoint(location)){
-//            print("apertei o botao de CONNECT")
+//            print("apertei o botao de CONNECT")\
+            connectLabel?.position = CGPoint(x: (connectLabel?.position.x)!, y: ((connectLabel?.position.y)!+10))
             viewController.ConnectPlayers()
             
         }

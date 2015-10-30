@@ -49,10 +49,10 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         self.userInteractionEnabled = false
         
-        banner = SKSpriteNode(imageNamed: "setUpBanner")
+        banner = SKSpriteNode(imageNamed: "setUpBannerIphone")
         self.addChild(banner!)
         banner!.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
-        banner!.size.height = banner!.size.height/2
+        //banner!.size.height = banner!.size.height/2
         banner?.zPosition = 4
         banner?.name = "banner"
         

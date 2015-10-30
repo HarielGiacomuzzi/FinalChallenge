@@ -382,7 +382,6 @@ class GameManager : NSObject {
             vc.dismissViewControllerAnimated(false, completion: nil)
             if let vc2 = self.ipadAvatarViewController {
                 vc2.dismissViewControllerAnimated(false, completion: nil)
-                
             }
         }
     }

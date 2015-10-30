@@ -12,11 +12,11 @@ enum Cards : String {
     case StealGoldCard = "StealGoldCard"
     case MoveBackCard = "MoveBackCard"
     case LoseCard = "LoseCard"
-    case BronzeCard = "Bronze Card"
-    case SilverCard = "Silver Card"
-    case GoldCard = "Gold Card"
-    case PlatinumCard = "Platinum Card"
-    case DiamondCard = "Diamond Card"
+    case ChineseVase = "Chinese Vase"
+    case FrostMourne = "Frost Mourne"
+    case HolyGrail = "Holy Grail"
+    case Lamp = "Lamp"
+    case Skull = "Skull"
 }
 
 class CardManager{
@@ -49,6 +49,12 @@ class CardManager{
                 return MoveBackCard()
             case "LoseCard" :
                 return LoseCard()
+            case "Chinese Vase":
+                return self.generateTreasureCard(Cards.ChineseVase)
+            case "Frost Mourne" : return self.generateTreasureCard(Cards.FrostMourne)
+            case "Holy Grail" : return self.generateTreasureCard(Cards.HolyGrail)
+            case "Lamp" : return self.generateTreasureCard(Cards.Lamp)
+            case "Skull" : return self.generateTreasureCard(Cards.Skull)
             default :
                 return Card()
         }
@@ -59,11 +65,11 @@ class CardManager{
         case .StealGoldCard: return StealGoldCard()
         case .MoveBackCard : return MoveBackCard()
         case .LoseCard : return LoseCard()
-        case .BronzeCard : return self.generateTreasureCard(Cards.BronzeCard)
-        case .SilverCard : return self.generateTreasureCard(Cards.SilverCard)
-        case .GoldCard : return self.generateTreasureCard(Cards.GoldCard)
-        case .PlatinumCard : return self.generateTreasureCard(Cards.PlatinumCard)
-        case .DiamondCard : return self.generateTreasureCard(Cards.DiamondCard)
+        case .ChineseVase : return self.generateTreasureCard(Cards.ChineseVase)
+        case .FrostMourne : return self.generateTreasureCard(Cards.FrostMourne)
+        case .HolyGrail : return self.generateTreasureCard(Cards.HolyGrail)
+        case .Lamp : return self.generateTreasureCard(Cards.Lamp)
+        case .Skull : return self.generateTreasureCard(Cards.Skull)
         }
     }
 
@@ -94,31 +100,25 @@ class CardManager{
         let rand = Int(arc4random_uniform(5))
         
         switch(rand){
-        case 0 : return self.generateTreasureCard(Cards.BronzeCard)
-        case 1 : return self.generateTreasureCard(Cards.SilverCard)
-        case 2 : return self.generateTreasureCard(Cards.GoldCard)
-        case 3 : return self.generateTreasureCard(Cards.PlatinumCard)
-        case 4 : return self.generateTreasureCard(Cards.DiamondCard)
+        case 0 : return self.generateTreasureCard(Cards.ChineseVase)
+        case 1 : return self.generateTreasureCard(Cards.FrostMourne)
+        case 2 : return self.generateTreasureCard(Cards.HolyGrail)
+        case 3 : return self.generateTreasureCard(Cards.Lamp)
+        case 4 : return self.generateTreasureCard(Cards.Skull)
         default : break
         }
-        return self.generateTreasureCard(Cards.GoldCard)
+        return self.generateTreasureCard(Cards.HolyGrail)
     }
     func generateTreasureCard(name:Cards) -> NotActiveCard{
         var card : NotActiveCard? = nil
         
         switch(name){
-        case Cards.BronzeCard : card = NotActiveCard(name: "Bronze Card", value: 10)
-                             card?.imageName = "bronzecard"
-        case Cards.SilverCard : card = NotActiveCard(name: "Silver Card", value: 50)
-                             card?.imageName = "silvercard"
-        case Cards.GoldCard :  card = NotActiveCard(name: "Gold Card", value: 100)
-                            card?.imageName = "goldcard"
-        case Cards.PlatinumCard : card = NotActiveCard(name: "Platinum Card", value: 200)
-                               card?.imageName = "platinumcard"
-        case Cards.DiamondCard: card = NotActiveCard(name: "Diamond Card", value: 500)
-                               card?.imageName = "diamondcard"
-        default : card = NotActiveCard(name: "Gold Card", value: 100)
-                    card?.imageName = "goldcard"
+        case Cards.ChineseVase : card = NotActiveCard(name: "Chinese Vase", value: 10, im: "chinavase")
+        case Cards.FrostMourne : card = NotActiveCard(name: "Frost Mourne", value: 50, im: "frostmourne")
+        case Cards.HolyGrail :   card = NotActiveCard(name: "Holy Grail", value: 100, im: "holygrail")
+        case Cards.Lamp : card = NotActiveCard(name: "Lamp", value: 200, im: "lamp")
+        case Cards.Skull: card = NotActiveCard(name: "Skull", value: 500, im: "skull")
+        default : card = NotActiveCard(name: "Holy Grail", value: 100, im: "holygrail")
         }
         return card!
     }

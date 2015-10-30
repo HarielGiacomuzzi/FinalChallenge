@@ -29,7 +29,7 @@ class PlayerButtonNode: SKNode {
         button = SKSpriteNode(texture: textureOn)
         button.zPosition = 5
 
-        for i in 0...22 {
+        for i in 0...19 {
             animationArray.append(SKTexture(imageNamed: "buttonAnimation\(i)"))
         }
         background = SKSpriteNode(texture: animationArray[0])
