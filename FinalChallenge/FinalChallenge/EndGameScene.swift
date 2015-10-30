@@ -36,7 +36,6 @@ class EndGameScene : SKScene{
         backToMain.position = CGPoint(x: self.frame.width/2, y: self.frame.height/5)
         backToMain.zPosition = 5
         self.addChild(backToMain)
-        
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         

@@ -79,11 +79,11 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     }
     
     func setupTopBar() {
-        let topBarTexture = SKTexture(imageNamed: "setUpBanner")
+        let topBarTexture = SKTexture(imageNamed: "setUpBannerIphone")
         let topBarSprite = SKSpriteNode(texture: topBarTexture)
-        topBarSprite.position = CGPointMake(frame.size.width / 2, frame.size.height - topBarSprite.size.height / 2)
+        topBarSprite.position = CGPointMake(frame.size.width / 2, frame.size.height / 1.2)
         topBarSprite.zPosition = 20
-        
+        topBarSprite.setScale(2)
         addChild(topBarSprite)
         let text = SKLabelNode(text: playerName)
         text.position = CGPointMake(topBarSprite.position.x, topBarSprite.position.y)

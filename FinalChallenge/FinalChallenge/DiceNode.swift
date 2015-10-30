@@ -53,13 +53,13 @@ class DiceNode: SKSpriteNode {
     
     func deactivateDice() {
         texture = textureOff
-        setScale(0.5)
+        //setScale(0.5)
         active = false
     }
     
     func activateDice() {
         texture = textureOn
-        setScale(1.0)
+        //setScale(1.0)
         active = true
     }
     

@@ -17,18 +17,31 @@ class CardSprite: SKNode {
     var image:SKSpriteNode!
     var nameLabel:SKLabelNode!
     var priceLabel:SKLabelNode?
+    var atlas : SKTextureAtlas?
+    var texture = [SKTexture]()
+    var move : SKAction?
     
     init(cardName:String) {
         super.init()
         self.cardName = cardName
         self.card = CardManager.ShareInstance.getCard(cardName)
         self.name = cardName
-        let atlas = SKTextureAtlas(named: "cards")
-        let texture = atlas.textureNamed("trapCardBase")
-        baseSprite = SKSpriteNode(texture: texture)
+        print(card)
+        if self.card.usable{
+            atlas = SKTextureAtlas(named: "cards")
+            texture = [atlas!.textureNamed("trapCardBase")]
+            move = SKAction.animateWithTextures(texture, timePerFrame: 1000000000)
+        } else {
+            atlas = SKTextureAtlas(named: "cards2")
+            texture = [atlas!.textureNamed("lootCard1"), atlas!.textureNamed("lootCard2")]
+            move = SKAction.animateWithTextures(texture, timePerFrame: 0.5)
+        }
+        
+        baseSprite = SKSpriteNode(texture: texture[0])
         baseSprite.zPosition = 1
         addChild(baseSprite)
-        let texture2 = atlas.textureNamed(card.imageName)
+        
+        let texture2 = atlas!.textureNamed(card.imageName)
         image = SKSpriteNode(texture: texture2)
         image.zPosition = 2
         addChild(image)
@@ -41,6 +54,7 @@ class CardSprite: SKNode {
         nameLabel.fontSize = 45
         nameLabel.fontName = "GillSans-Bold"
         addChild(nameLabel)
+        self.baseSprite.runAction(SKAction.repeatActionForever(move!))
     }
     
     func setPrice() {
