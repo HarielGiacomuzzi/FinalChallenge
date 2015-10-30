@@ -12,6 +12,7 @@ import UIKit
 
 class PuffGamePad: UIViewController {
     var gameManager : GameManager?
+    var grow = false
     
     lazy var motionManager : CMMotionManager = {
         let motion = CMMotionManager()
@@ -39,7 +40,11 @@ class PuffGamePad: UIViewController {
                         return
                     }
                     
-                    var dic = ["PuffGamePad":" ", "action":PlayerAction.PuffGrow.rawValue]
+                    var dic = ["PuffGamePad":" ", "action":" "]
+                    if self.grow{
+                        dic.updateValue(PlayerAction.PuffGrow.rawValue, forKey: "action")
+                        self.grow = false
+                    }
                     if data?.acceleration.x <= 0{
                         dic.updateValue(PlayerAction.Up.rawValue, forKey: "directionY")
                     }else{
@@ -63,8 +68,7 @@ class PuffGamePad: UIViewController {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        let dic = ["PuffGamePad":" ", "action":PlayerAction.PuffGrow.rawValue]
-//        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true);
+        self.grow = true
     }
     
     

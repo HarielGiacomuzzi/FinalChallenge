@@ -8,6 +8,11 @@
 
 import SpriteKit
 
+// OVERLOADS
+func * (left: CGSize, right: CGFloat) -> CGSize {
+    return CGSizeMake(left.width * right, left.height * right)
+}
+
 class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     let partsAtlas = SKTextureAtlas(named: "puffGame")
     
@@ -34,25 +39,41 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         
         for p in GameManager.sharedInstance.players{
             let player = PuffPlayer(name: "aaa")
-            let head = SKSpriteNode(texture: partsAtlas.textureNamed("babyHead"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("babyHead").size())
+            
+            let head = SKSpriteNode(texture: partsAtlas.textureNamed("babyHead"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33))
             head.zPosition = 1
             head.position = CGPointMake(0, 0)
-            let helmet = SKSpriteNode(texture: partsAtlas.textureNamed("helmet"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmet").size())
+            
+            let helmet = SKSpriteNode(texture: partsAtlas.textureNamed("helmet"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmet").size()*CGFloat(0.33))
             helmet.zPosition = 2
             helmet.position = CGPointMake(0, 0)
-            let helmetReflex = SKSpriteNode(texture: partsAtlas.textureNamed("helmetReflex"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmetReflex").size())
+            
+            let helmetReflex = SKSpriteNode(texture: partsAtlas.textureNamed("helmetReflex"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmetReflex").size()*CGFloat(0.33))
             helmetReflex.zPosition = 3
             helmetReflex.position = CGPointMake(0, 0)
+            
             let body = SKSpriteNode(texture: partsAtlas.textureNamed("babyBody"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
             body.zPosition = 0
-            body.position = CGPointMake(helmet.position.x, -helmet.size.height+22)
+            body.position = CGPointMake(helmet.position.x,  -(partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33)).height-30)
+            
+            let arm = SKSpriteNode(texture: partsAtlas.textureNamed("babyArm"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
+            arm.zPosition = 0
+            arm.position = CGPointMake(arm.position.x, -helmet.size.height+22)
+            
+            let leg = SKSpriteNode(texture: partsAtlas.textureNamed("babyLeg"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
+            leg.zPosition = 0
+            leg.position = CGPointMake(leg.position.x, -helmet.size.height+22+body.size.height)
+
+            body.addChild(leg)
+            body.addChild(arm)
+            
             let spriteNode = SKSpriteNode()
             spriteNode.addChild(head)
             spriteNode.addChild(helmet)
             spriteNode.addChild(helmetReflex)
             spriteNode.addChild(body)
             spriteNode.size = helmet.size
-//            let spriteNode = SKSpriteNode(texture: partsAtlas.textureNamed("babyHead"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
+
             player.x = Double(width)*Double(count);
             player.y = Double((self.frame.height/2));
             count--;
@@ -188,17 +209,14 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func messageReceived(data : NSNotification){
-        if let message = data.userInfo!["actionReceived"] as? String{
-            _ = PlayerAction(rawValue: message)
-           
             for p in self.players{
-                //if p.playerIdentifier == data.userInfo!["peerID"] as? String{
-//                        p.sprite!.xScale = (p.sprite!.xScale+1);
-//                        p.sprite!.yScale = (p.sprite!.yScale+1);
-//                        if p.sprite!.xScale > 30{
-//                            explodePuff(p.sprite!)
-//                        }
-                        //break;
+                    if data.userInfo!["actionReceived"] as! String == PlayerAction.PuffGrow.rawValue{
+                        p.sprite!.xScale += 0.1
+                        p.sprite!.yScale += 0.1
+                        if p.sprite!.xScale > 30{
+                            explodePuff(p.sprite!)
+                        }
+                    }
                     if data.userInfo!["directionX"]! as! String == PlayerAction.Left.rawValue{
                         if p.sprite?.position.x > 0{
                             p.sprite?.position.x = CGFloat((p.sprite?.position.x)!-5)
@@ -208,19 +226,17 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
                          p.sprite?.position.x = CGFloat((p.sprite?.position.x)!+5)
                         }
                     }
-                if data.userInfo!["directionY"] as! String == PlayerAction.Up.rawValue{
-                    if p.sprite?.position.y < self.view!.frame.height{
-                        p.sprite?.position.y = CGFloat((p.sprite?.position.y)!+5)
+                    if data.userInfo!["directionY"] as! String == PlayerAction.Up.rawValue{
+                        if p.sprite?.position.y < self.view!.frame.height{
+                            p.sprite?.position.y = CGFloat((p.sprite?.position.y)!+5)
+                        }
+                    }else{
+                        if p.sprite?.position.y > 0{
+                           p.sprite?.position.y = CGFloat((p.sprite?.position.y)!-5)
+                        }
                     }
-                }else{
-                    if p.sprite?.position.y > 0{
-                       p.sprite?.position.y = CGFloat((p.sprite?.position.y)!-5)
-                    }
-                }
-                }
-                //}
             }
-        }
+    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
