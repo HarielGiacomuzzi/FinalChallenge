@@ -63,6 +63,7 @@
 		5E9EB3351BDE97CB003974EB /* TutorialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9EB3341BDE97CB003974EB /* TutorialManager.swift */; };
 		5E9EB33B1BDEA4D6003974EB /* tutorial.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E9EB33A1BDEA4D6003974EB /* tutorial.atlas */; };
 		5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA49E091B87B59100AC51F8 /* MinigameScene.swift */; };
+		5EAE54F01BE3F184006A26DC /* GlobalFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAE54EF1BE3F184006A26DC /* GlobalFlags.swift */; };
 		5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */; };
 		5EC7FF8A1BC81E9500494CE4 /* charSprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5EC7FF891BC81E9500494CE4 /* charSprites.atlas */; };
 		5ED294DB1BBD96B50073B148 /* cards.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5ED294DA1BBD96B50073B148 /* cards.atlas */; };
@@ -208,6 +209,7 @@
 		5E9EB3341BDE97CB003974EB /* TutorialManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialManager.swift; sourceTree = "<group>"; };
 		5E9EB33A1BDEA4D6003974EB /* tutorial.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = tutorial.atlas; sourceTree = "<group>"; };
 		5EA49E091B87B59100AC51F8 /* MinigameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameScene.swift; sourceTree = "<group>"; };
+		5EAE54EF1BE3F184006A26DC /* GlobalFlags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFlags.swift; sourceTree = "<group>"; };
 		5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPowerupNode.swift; sourceTree = "<group>"; };
 		5EC7FF891BC81E9500494CE4 /* charSprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = charSprites.atlas; sourceTree = "<group>"; };
 		5ED294DA1BBD96B50073B148 /* cards.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = cards.atlas; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 				4445D7C41B98C99F0049B787 /* AlertPath.swift */,
 				5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */,
 				447891DA1BBEF2120094E16B /* CardManager.swift */,
+				5EAE54EF1BE3F184006A26DC /* GlobalFlags.swift */,
 				5E9EB3331BDE9793003974EB /* Tutorial */,
 			);
 			name = Utils;
@@ -852,6 +855,7 @@
 				5E7E45BC1B960AC600249B8A /* MinigameDescriptionViewController.swift in Sources */,
 				5E5A64A61BC6EC6B00D5AC09 /* TestViewController.swift in Sources */,
 				5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */,
+				5EAE54F01BE3F184006A26DC /* GlobalFlags.swift in Sources */,
 				B5DD1B471B8F712A00AA1EB6 /* AudioSource.swift in Sources */,
 				B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */,
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
