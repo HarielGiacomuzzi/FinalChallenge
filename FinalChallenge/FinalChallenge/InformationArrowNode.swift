@@ -14,13 +14,14 @@ class InformationArrowNode: SKSpriteNode {
     var pointingRight = true
     var nodeToPoint: SKNode!
     var atlas = SKTextureAtlas(named: "tutorial")
+    weak var delegate: ArrowDelegate?
     
     init(pointingRight: Bool, nodeToPoint: SKNode) {
         self.pointingRight = pointingRight
         self.nodeToPoint = nodeToPoint
         super.init(texture: atlas.textureNamed("arrow0"), color: UIColor.clearColor(), size: atlas.textureNamed("arrow13").size())
         anchorPoint = CGPointMake(1.0,0.5)
-        positionArrow()
+        userInteractionEnabled = true
         
     }
     
@@ -46,7 +47,7 @@ class InformationArrowNode: SKSpriteNode {
         if pointingRight {
             position.x = nodeToPoint.position.x - nodeToPoint.frame.size.width/2
         } else {
-            xScale = -1
+            xScale = -1 * fabs(xScale)
             position.x = nodeToPoint.position.x + nodeToPoint.frame.size.width/2
         }
     }
@@ -54,6 +55,13 @@ class InformationArrowNode: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        delegate?.arrowTouched()
+    }
 
 }
 
+protocol ArrowDelegate: class {
+    func arrowTouched()
+}
