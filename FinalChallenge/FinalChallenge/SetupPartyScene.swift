@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
+class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelegate {
     
     
     weak var viewController : PartyModeViewControllerIPAD!
@@ -18,14 +18,15 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     // set buttons and nodes
     var banner : SKSpriteNode?
-    var turns : SKSpriteNode?
-    var connect : SKSpriteNode?
-    var go : SKSpriteNode?
+    var turns : SetupPartyButton?
+    var connect : SetupPartyButton?
+    var go : SetupPartyButton?
     var numberOfTurns : SKLabelNode?
     var connectLabel : SKLabelNode?
     var back : SKLabelNode?
     let fontSize : CGFloat = 20.0
     var info : SKSpriteNode?
+    
     // characters nodes
     let char1 : SKSpriteNode = SKSpriteNode(imageNamed: "knight")
     let char2 : SKSpriteNode = SKSpriteNode(imageNamed: "ranger")
@@ -52,6 +53,9 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     // colisions
     let boundaryCategoryMask: UInt32 =  0x1 << 1
     let fallingCategoryMask: UInt32 =  0x1 << 2
+    
+    //flags
+    var canGo = false
 
     var turnCounter = 5
     
@@ -106,12 +110,12 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     func setTutorialScene() {
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
-        
         tuples.append((nil, "this game requires 2-4 players", nil))
-        tuples.append((connect, "Click here to connect", nil))
         tuples.append((turns, "Click here to choose the number of turns", nil))
-        tuples.append((go, "Click here to go to the game", nil))
-        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false)
+        tuples.append((connect, "Click here to connect", nil))
+        tuples.append((nil, "Wait for the players to connect", nil))
+        go?.userInteractionEnabled = false
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
         tutorialManager.showInfo()
         
     }
@@ -138,14 +142,17 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         banner?.zPosition = 4
        
         // set the turn select banners
-        turns = SKSpriteNode(texture: yellowTurnsOn, size: yellowTurnsOn.size())
+        turns = SetupPartyButton(textureOn: yellowTurnsOn, textureOff: yellowTurnsOff)
+        turns?.delegate = self
         self.addChild(turns!)
         turns!.position = CGPoint(x: self.frame.width/2, y: banner!.position.y - 110)
         turns?.zPosition = 4
         
+        
         // set the connect players button
         
-        connect = SKSpriteNode(texture: yellowButton, size: yellowButton.size())
+        connect = SetupPartyButton(textureOn: yellowButton, textureOff: yellowButtonOff)
+        connect!.delegate = self
         self.addChild(connect!)
         connect!.position = CGPoint(x: turns!.position.x, y: turns!.position.y - 90)
         connect?.zPosition = 4
@@ -156,7 +163,8 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         connect?.addChild(connectLabel!)
         
         // set the GO BUTTON
-        go = SKSpriteNode(texture: greenButton, size: greenButton.size())
+        go = SetupPartyButton(textureOn: greenButton, textureOff: greenButtonOff)
+        go?.delegate = self
         self.addChild(go!)
         go!.position = CGPoint(x: self.frame.width/1.1, y: self.frame.height/14)
         go!.name = "goButton"
@@ -175,10 +183,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         numberOfTurns = SKLabelNode(fontNamed: "Helvetica Neue")
         numberOfTurns?.text = "max turns : 5"
         numberOfTurns?.fontSize = 30
-        numberOfTurns?.position = CGPoint(x: turns!.position.x, y: turns!.position.y)
+//        numberOfTurns?.position = CGPoint(x: turns!.position.x, y: turns!.position.y)
         numberOfTurns?.zPosition = 5
         GameManager.sharedInstance.totalGameTurns = self.turnCounter
-        self.addChild(numberOfTurns!)
+        turns!.addChild(numberOfTurns!)
         
         
         //setup background
@@ -441,6 +449,15 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
     
     func riseCharacter(char : SKSpriteNode, identifier : String){
         
+        checkIfCanGo()
+        if canGo {
+            var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+            
+            tuples.append((go, "You can press go now", nil))
+            tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
+            tutorialManager.showInfo()
+        }
+        
         if let oldPopupNode = childNodeWithName("popup \(identifier)") {
             oldPopupNode.removeFromParent()
         }
@@ -482,6 +499,48 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate {
         })
     }
     
+    func checkIfCanGo() {
+        for p in GameManager.sharedInstance.players{
+            if p.avatar == nil {
+                canGo = false
+                break
+            }else{
+                canGo = true
+            }
+        }
+    }
+    
+    func buttonTouched(sender: SetupPartyButton) {
+        tutorialManager.buttonActivated(sender)
+        
+        if sender == go {
+            checkIfCanGo()
+            if canGo{
+                self.view?.presentScene(nil)
+                BoardGraph.SharedInstance.loadBoard("board_3");
+                viewController.turns = turnCounter
+                viewController.gotoBoardGame()
+                for p in GameManager.sharedInstance.players{
+                    GameManager.sharedInstance.updatePlayerMoney(p, value: p.coins)
+                    GameManager.sharedInstance.activePlayer.append(p.avatar!)
+                    print(p.avatar)
+                }
+                GameManager.sharedInstance.sendPlayersColors()
+            }
+        }
+        if sender == connect {
+            viewController.ConnectPlayers()
+        }
+        if sender == turns {
+            turnCounter = turnCounter + 5
+            if turnCounter > 30 {
+                turnCounter = 5
+            }
+            
+            numberOfTurns?.text = "max turns : \(turnCounter)"
+            GameManager.sharedInstance.totalGameTurns = turnCounter
+        }
+    }
     
     deinit{
         //print("SetupScene do Ipad foi retirada")

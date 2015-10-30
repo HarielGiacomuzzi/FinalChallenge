@@ -11,6 +11,8 @@ import SpriteKit
 
 class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     
+    var tutorialManager: TutorialManager!
+    
     weak var viewController : iPhonePlayerViewController?
     var playerName = "Player Name"
     var topBarLimit:CGFloat = 0.0
@@ -30,6 +32,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         let backgroundTexture = SKTexture(imageNamed: "backscreen")
         let background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPointMake(frame.size.width / 2, frame.size.height  / 2)
+        background.setScale(2.0)
         addChild(background)
         
         self.backgroundColor = UIColor.whiteColor()
@@ -39,6 +42,8 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         setupButtons()
         setupMindingoSalesman()
         setupCards()
+        
+        setTutorial()
     }
     
     deinit {
@@ -183,6 +188,15 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     
     func cardChosen(sender: SKNode) {
         chosenCard = sender as? CardSprite
+    }
+    
+    func setTutorial() {
+        var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+        
+        tuples.append((nil, "Welcome to Loot Rush", nil))
+        
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true,boxScale:2.0)
+        tutorialManager.showInfo()
     }
     
 }

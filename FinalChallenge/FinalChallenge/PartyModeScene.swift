@@ -42,6 +42,8 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     
     override init(size: CGSize) {
         super.init(size: size)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "connectionChanged:", name: "ConnectionManager_ConnectionStatusChanged", object: nil)
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_IphoneGameSetup", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeView:", name: "ConnectionManager_IphoneChangeView", object: nil);
@@ -125,27 +127,17 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.setTutorialScene()
     }
     
-    func setTutorialScene(){
-        var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
-        
-        tuples.append((nil, "wait for ipad to connect", nil))
-        let moveUp = SKAction.moveTo(CGPointMake(arrayAvatarSprite[2].position.x, arrayAvatarSprite[2].position.y + 40), duration: 0.5)
-        let moveDown = SKAction.moveTo(CGPointMake(arrayAvatarSprite[2].position.x, arrayAvatarSprite[2].position.y), duration: 0.5)
-        
-        let sequence = SKAction.sequence([moveUp, moveDown])
-        let animation = SKAction.repeatActionForever(sequence)
-        tuples.append((arrayAvatarSprite[2], "Swipe the cards up", animation))
-
-        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true)
-        tutorialManager.showInfo()
-    }
-    
     override func willMoveFromView(view: SKView) {
         view.removeGestureRecognizer(gestureRecognizer)
     }
     
     func handlePanFrom(recognizer : UIPanGestureRecognizer) {
         if recognizer.state == .Began {
+            
+            if tutorialManager != nil {
+                tutorialManager.closeInformation()
+            }
+            
             var touchLocation = recognizer.locationInView(recognizer.view)
             touchLocation = self.convertPointFromView(touchLocation)
             self.selectNodeForTouch(touchLocation)
@@ -240,12 +232,8 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let touch : UITouch? = touches.first as UITouch?
         
         if let location = touch?.locationInNode(self) {
-//            if (tutorialClass!.containsPoint(location)){
-//                tutorialClass?.removeFromParent()
-//            }
             
             if info!.containsPoint(location) {
-                self.userInteractionEnabled = false
                 self.setTutorialScene()
             }
             let touchedNode = self.nodeAtPoint(location)
@@ -455,6 +443,38 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    // Mark :- Tutorial Related Functions
+    
+    func setTutorialScene(){
+        var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+        
+        tuples.append((nil, "wait for ipad to connect", nil))
+        
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 1.0)
+        tutorialManager.showInfo()
+    }
+    
+    func teachHowToChooseCharacter() {
+        var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+        
+        let moveUp = SKAction.moveTo(CGPointMake(arrayAvatarSprite[2].position.x, arrayAvatarSprite[2].position.y + 40), duration: 0.5)
+        let moveDown = SKAction.moveTo(CGPointMake(arrayAvatarSprite[2].position.x, arrayAvatarSprite[2].position.y), duration: 0.5)
+        
+        let sequence = SKAction.sequence([moveUp, moveDown])
+        let animation = SKAction.repeatActionForever(sequence)
+        tuples.append((arrayAvatarSprite[2], "Swipe the cards up", animation))
+        
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 1.0)
+        tutorialManager.showInfo()
+    }
+    
+    func connectionChanged(data: NSNotification) {
+        let state = data.userInfo!["state"] as! Int
+        
+        if state == 2 { //Connected
+            teachHowToChooseCharacter()
+        }
+    }
 }
 
 

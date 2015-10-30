@@ -35,6 +35,7 @@ class PuffGameViewController : UIViewController {
             let skView = self.view as! SKView
             skView.showsFPS = false
             skView.showsNodeCount = false
+            skView.showsPhysics = true
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true

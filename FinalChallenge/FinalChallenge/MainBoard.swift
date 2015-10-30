@@ -9,10 +9,15 @@
 import SpriteKit
 
 class MainBoard: SKScene, SKPhysicsContactDelegate {
+    
+    var tutorialManager: TutorialManager!
+    
     weak var viewController: UIViewController?
     var realPlayer : Player?
     let map = SKSpriteNode(imageNamed: "map")
     let partsAtlas = SKTextureAtlas(named: "Board")
+    
+    var tutorialNodes: [String: SKNode] = [:]
 
     override func update(currentTime: NSTimeInterval) {
         if !self.paused && GameManager.sharedInstance.gameEnded{
@@ -65,6 +70,10 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     }
                     
                     self.addChild(x);
+                
+                    if i.0 == "House" || i.0 == "Store" || i.0 == "Bau1" {
+                        tutorialNodes[i.0] = x
+                    }
                     
                     GameManager.sharedInstance.doOnce = true
                 }
@@ -84,7 +93,10 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     self.addChild(p.nodeSprite!)
                 }
                 
+                tutorialNodes["Player"] = GameManager.sharedInstance.players.first?.nodeSprite
                 
+                setTutorial()
+            
                 GameManager.sharedInstance.playerTurnEnded(nil)
             }else{
                 for i in BoardGraph.SharedInstance.nodes{
@@ -128,6 +140,8 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     
                     x.zPosition = 10
                     self.addChild(x);
+                    
+
                 }
                 
                 for p in GameManager.sharedInstance.players{
@@ -228,5 +242,18 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     
     deinit{
         print("A main board saiu")
+    }
+    
+    func setTutorial() {
+        var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+        
+        tuples.append((tutorialNodes["Player"],"Here is the player",nil))
+        tuples.append((tutorialNodes["House"],"Here is the house",nil))
+        tuples.append((tutorialNodes["Store"],"Here is the store",nil))
+        tuples.append((tutorialNodes["Bau1"],"Here is the chest",nil))
+        
+        
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
+        tutorialManager.showInfo()
     }
 }

@@ -108,7 +108,9 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
     }
     @IBAction func ConnectPlayers() {
-        self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in}
+        self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in
+            self.scene?.connect?.texture = self.scene?.connect?.textureOn
+        }
     }
     
     @IBAction func gotoBoardGame(){
@@ -141,6 +143,20 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
             }
         }
         
+        //defines the player avatar image or right now the color
+        for p in GameManager.sharedInstance.players {
+            if identifier == p.playerIdentifier{
+                p.avatar = message
+                switch(message){
+                case "knight": p.color = UIColor.redColor()
+                case "ranger": p.color = UIColor.whiteColor()
+                case "thief": p.color = UIColor.blackColor()
+                case "wizard": p.color = UIColor.blueColor()
+                default: break
+                }
+            }
+        }
+        
         
         switch(identifier){
         case GameManager.sharedInstance.players[0].playerIdentifier : // player1Image.image = UIImage(named: message)
@@ -160,23 +176,8 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
 
         default: break
         }
-        //defines the player avatar image or right now the color
-        for p in GameManager.sharedInstance.players {
-            if identifier == p.playerIdentifier{
-                p.avatar = message
-                switch(message){
-                    case "knight": p.color = UIColor.redColor()
-                    case "ranger": p.color = UIColor.whiteColor()
-                    case "thief": p.color = UIColor.blackColor()
-                    case "wizard": p.color = UIColor.blueColor()
-                    default: break
-                }
-            }
-        }
-        //print("Mensagem: \(message) e Identifier: \(identifier)")
-        
-        //print(arrayAvatars)
-        
+
+
         updateIphoneUsersData()
     }
 

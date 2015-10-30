@@ -9,7 +9,9 @@
 import UIKit
 import SpriteKit
 
-class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
+class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, PlayerButtonDelegate {
+    
+    var tutorialManager: TutorialManager!
     
     var moneyButton : PlayerButtonNode!
     var lootButton : PlayerButtonNode!
@@ -26,6 +28,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
         let backgroundTexture = SKTexture(imageNamed: "backscreen")
         let background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPointMake(frame.size.width / 2, frame.size.height  / 2)
+        background.setScale(2.0)
         addChild(background)
 
         self.backgroundColor = UIColor.whiteColor()
@@ -44,6 +47,8 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
         if !cards.isEmpty {
             setupCardCarousel(cards)
         }
+        
+        setTutorial()
 
     }
     
@@ -89,6 +94,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
 
         addChild(moneyButton)
         moneyButton.zPosition = 100
+        moneyButton.delegate = self
         
         let lootButtonTextureOn = SKTexture(imageNamed: "button1On")
         let lootButtonTextureOff = SKTexture(imageNamed: "button1Off")
@@ -98,6 +104,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
         
         addChild(lootButton)
         lootButton.zPosition = 100
+        lootButton.delegate = self
     }
     
     func setupTopBar() {
@@ -186,6 +193,23 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate {
     
     deinit {
         print("player view scene deinit")
+    }
+    
+    func setTutorial() {
+        var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+        
+        tuples.append((nil, "Welcome to Loot Rush", nil))
+        tuples.append((moneyButton, "Touch this button to see your money", nil))
+        tuples.append((lootButton, "Touch this button to see your loot", nil))
+        
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
+        tutorialManager.showInfo()
+    }
+    
+    func buttonClicked(sender: SKNode) {
+        if tutorialManager != nil {
+            tutorialManager.buttonActivated(sender)
+        }
     }
     
 }
