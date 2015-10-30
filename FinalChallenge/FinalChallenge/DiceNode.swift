@@ -16,12 +16,28 @@ class DiceNode: SKSpriteNode {
     var active = false
     weak var delegate:DiceDelegate?
     
+    var maskSprite = SKSpriteNode()
+    
+    override var userInteractionEnabled:Bool {
+        didSet {
+            if !userInteractionEnabled {
+                if maskSprite.parent == nil {
+                    addChild(maskSprite)
+                }
+            } else {
+                maskSprite.removeFromParent()
+            }
+        }
+    }
+    
+    
     init() {
         textureOn = SKTexture(imageNamed: "dadoOn")
         textureOff = SKTexture(imageNamed: "dadoOff")
         super.init(texture: textureOff, color: UIColor.clearColor(), size: textureOn.size())
         userInteractionEnabled = true
         deactivateDice()
+        setupMaskSprite()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -45,6 +61,14 @@ class DiceNode: SKSpriteNode {
         texture = textureOn
         //setScale(1.0)
         active = true
+    }
+    
+    func setupMaskSprite() {
+        maskSprite = SKSpriteNode(texture: texture)
+        maskSprite.zPosition = 999999
+        maskSprite.colorBlendFactor = 1.0
+        maskSprite.color = UIColor.blackColor()
+        maskSprite.alpha = 0.5
     }
 
 }

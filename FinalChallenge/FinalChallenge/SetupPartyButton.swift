@@ -59,7 +59,7 @@ class SetupPartyButton: SKSpriteNode {
     
     func setupMaskSprite() {
         maskSprite = SKSpriteNode(texture: texture)
-        maskSprite.zPosition = 999999
+        maskSprite.zPosition = 1
         maskSprite.colorBlendFactor = 1.0
         maskSprite.color = UIColor.blackColor()
         maskSprite.alpha = 0.5
