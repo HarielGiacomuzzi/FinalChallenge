@@ -94,8 +94,9 @@
 		B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */; };
 		B5AFAD151BA09BD40005F19E /* GameOverSceneSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */; };
 		B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */; };
-		B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */; };
-		B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5CD203A1BBDA86600D184F6 /* avatar.atlas */; };
+		B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */; settings = {ASSET_TAGS = (); }; };
+		B5C9DCAD1BE1427F0081EE0C /* cards2.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5C9DCAC1BE1427F0081EE0C /* cards2.atlas */; settings = {ASSET_TAGS = (); }; };
+		B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5CD203A1BBDA86600D184F6 /* avatar.atlas */; settings = {ASSET_TAGS = (); }; };
 		B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */; };
 		B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */; };
 		B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */; };
@@ -241,6 +242,7 @@
 		B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneSP.swift; sourceTree = "<group>"; };
 		B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameCollectionScene.swift; sourceTree = "<group>"; };
 		B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cardThrowSound.wav; sourceTree = "<group>"; };
+		B5C9DCAC1BE1427F0081EE0C /* cards2.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = cards2.atlas; sourceTree = "<group>"; };
 		B5CD203A1BBDA86600D184F6 /* avatar.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = avatar.atlas; sourceTree = "<group>"; };
 		B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				5ED294DA1BBD96B50073B148 /* cards.atlas */,
+				B5C9DCAC1BE1427F0081EE0C /* cards2.atlas */,
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E1C59C81BB0771200BCDE1C /* CardSprite.swift */,
 				5ED294DC1BBD9A700073B148 /* GamePads */,
@@ -751,7 +754,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = DVXNNDG4U4;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -795,6 +798,7 @@
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
 				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
 				B5DD1B501B8F888200AA1EB6 /* bubbleSound.mp3 in Resources */,
+				B5C9DCAD1BE1427F0081EE0C /* cards2.atlas in Resources */,
 				B5DD1B4A1B8F73D300AA1EB6 /* wavesSound.wav in Resources */,
 				2605B2471BD9630900DAE7D1 /* maingame.mp3 in Resources */,
 				2605B24B1BD965FF00DAE7D1 /* flappymusic.mp3 in Resources */,
@@ -1064,7 +1068,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1080,7 +1084,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

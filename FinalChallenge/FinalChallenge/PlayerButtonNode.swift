@@ -19,6 +19,20 @@ class PlayerButtonNode: SKNode {
     var background:SKSpriteNode!
     var number:SKLabelNode!
     
+    var maskSprite = SKSpriteNode()
+    
+    override var userInteractionEnabled:Bool {
+        didSet {
+            if !userInteractionEnabled {
+                if maskSprite.parent == nil {
+                    addChild(maskSprite)
+                }
+            } else {
+                maskSprite.removeFromParent()
+            }
+        }
+    }
+    
     weak var delegate: PlayerButtonDelegate?
     
     init(textureOn:SKTexture, textureOff:SKTexture, openRight:Bool) {
@@ -31,7 +45,7 @@ class PlayerButtonNode: SKNode {
         button = SKSpriteNode(texture: textureOn)
         button.zPosition = 5
 
-        for i in 0...22 {
+        for i in 0...19 {
             animationArray.append(SKTexture(imageNamed: "buttonAnimation\(i)"))
         }
         background = SKSpriteNode(texture: animationArray[0])
@@ -42,6 +56,7 @@ class PlayerButtonNode: SKNode {
         addChild(button)
         userInteractionEnabled = true
         setupText()
+        setupMaskSprite()
         
     }
     
@@ -108,6 +123,14 @@ class PlayerButtonNode: SKNode {
     
     func updateNumber(number:Int) {
         self.number.text = "\(number)"
+    }
+    
+    func setupMaskSprite() {
+        maskSprite = SKSpriteNode(texture: textureOn)
+        maskSprite.zPosition = 999999
+        maskSprite.colorBlendFactor = 1.0
+        maskSprite.color = UIColor.blackColor()
+        maskSprite.alpha = 0.5
     }
     
 }

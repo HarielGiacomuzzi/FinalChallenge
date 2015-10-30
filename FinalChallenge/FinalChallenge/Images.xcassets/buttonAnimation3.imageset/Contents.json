@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "buttonAnimation3.png",
+      "filename" : "infobarBar4.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "buttonAnimation3@2x.png",
+      "filename" : "infobarBar4@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "buttonAnimation3@3x.png",
+      "filename" : "infobarBar4@3x.png",
       "scale" : "3x"
     }
   ],

@@ -57,6 +57,9 @@ class CardCarouselNode: SKNode {
     // MARK: - Touch Events
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        delegate?.carouselTouched()
+        
         for touch: AnyObject in touches {
             
             let location = touch.locationInNode(self)
@@ -283,9 +286,14 @@ class CardCarouselNode: SKNode {
         }
     }
     
+    func getCenterCard() -> SKNode {
+        return cards[centerIndex]
+    }
+    
     
 }
 
 protocol CardCarousellDelegate : class {
     func sendCard(card:SKNode)
+    func carouselTouched()
 }
