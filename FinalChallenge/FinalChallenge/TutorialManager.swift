@@ -17,15 +17,18 @@ class TutorialManager: NSObject, InformationNodeDelegate {
     var infoBox: InformationBoxNode!
     var infoArrow: InformationArrowNode!
     
+    var boxScale: CGFloat = 1.0
+    
     var isIphone = false
     
     var nodeOriginalPosition = CGPointMake(0.0, 0.0)
     
-    init(tuples: [(node:SKNode?, text:String?, animation: SKAction?)], scene: SKScene, isIphone: Bool) {
+    init(tuples: [(node:SKNode?, text:String?, animation: SKAction?)], scene: SKScene, isIphone: Bool, boxScale: CGFloat) {
         super.init()
         self.tuples = tuples
         self.scene = scene
         self.isIphone = isIphone
+        self.boxScale = boxScale
         removeUserInteraction()
     }
     
@@ -78,6 +81,8 @@ class TutorialManager: NSObject, InformationNodeDelegate {
         infoBox = InformationBoxNode(isIphone: isIphone, text: text)
         infoBox.delegate = self
         
+        infoBox.setScale(boxScale)
+        
         infoBox.position = CGPointMake(scene.frame.size.width/2, infoBox.calculateAccumulatedFrame().height/2)
         if let n = node {
             if n.position.y < scene.frame.size.height/2 {
@@ -88,6 +93,10 @@ class TutorialManager: NSObject, InformationNodeDelegate {
         infoBox.zPosition = 10000
         
         scene.addChild(infoBox)
+        
+        print("infobox size: \(infoBox.calculateAccumulatedFrame())")
+        print("frame size: \(scene.frame.size)")
+        print("infobox position: \(infoBox.position)")
     }
     
     func closeInformation() {
@@ -114,7 +123,7 @@ class TutorialManager: NSObject, InformationNodeDelegate {
         }
     }
     
-    func buttonActivated(node:SKSpriteNode) {
+    func buttonActivated(node:SKNode) {
         if let tuple = tuples.first {
             if let node2 = tuple.node {
                 if node == node2 {
