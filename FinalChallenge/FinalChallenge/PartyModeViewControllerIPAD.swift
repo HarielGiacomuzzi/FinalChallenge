@@ -110,6 +110,7 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     @IBAction func ConnectPlayers() {
         self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in
             self.scene?.connect?.texture = self.scene?.connect?.textureOn
+            self.scene?.connect?.textLabel?.position.y = ((self.scene?.connect?.posOn)!)
         }
     }
     

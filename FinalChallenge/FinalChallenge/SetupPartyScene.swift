@@ -21,11 +21,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     var turns : SetupPartyButton?
     var connect : SetupPartyButton?
     var go : SetupPartyButton?
+    var backButton : SetupPartyButton?
     var numberOfTurns : SKLabelNode?
     var connectLabel : SKLabelNode?
     var back : SKLabelNode?
     let fontSize : CGFloat = 20.0
     var info : SKSpriteNode?
+    var titleLabel : SKLabelNode?
     
     // characters nodes
     let char1 : SKSpriteNode = SKSpriteNode(imageNamed: "knight")
@@ -122,12 +124,22 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     
     func setObjects(){
         
-        back = SKLabelNode(fontNamed: "GillSans-Bold") // will be a texture probably
+        backButton = SetupPartyButton(textureOn: greenButton, textureOff: greenButtonOff)
+        backButton?.delegate = self
+        backButton?.zPosition = 6
+        backButton?.position = CGPoint(x: backButton!.frame.width/3, y: self.frame.height/12)
+        self.addChild(backButton!)
+        
+        back = SKLabelNode(fontNamed: "Helvetica Neue") // will be a texture probably
         back!.name = "back"
         back!.text = "Back"
-        back!.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
-        back?.zPosition = 5
-        self.addChild(back!)
+        //back!.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
+        back!.position.x = back!.position.x - back!.frame.width/2 + 25
+        back?.fontSize = 60
+        back?.zPosition = 7
+        back?.fontColor = UIColor(red: 250/255, green: 52/255, blue: 67/255, alpha: 1)
+        backButton?.textLabel = back
+        backButton!.addChild(back!)
         
         info = SKSpriteNode(imageNamed: "infoimage")
         info!.name = "info"
@@ -141,6 +153,14 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         banner!.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
         banner?.zPosition = 4
        
+        titleLabel = SKLabelNode(fontNamed: "Helvetica Neue")
+        titleLabel?.text = "Setup Party Mode"
+        titleLabel?.zPosition = 5
+        titleLabel!.position.y = titleLabel!.position.y - 25
+        titleLabel?.fontSize = 80
+        titleLabel?.fontColor = UIColor(red: 255/255, green: 242/255, blue: 202/255, alpha: 1)
+        banner?.addChild(titleLabel!)
+        
         // set the turn select banners
         turns = SetupPartyButton(textureOn: yellowTurnsOn, textureOff: yellowTurnsOff)
         turns?.delegate = self
@@ -159,6 +179,8 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         
         connectLabel = SKLabelNode(fontNamed: "Helvetica Neue")
         connectLabel!.text = "Connect"
+        connectLabel?.fontColor = UIColor.blackColor()
+        connect!.textLabel = connectLabel
         connectLabel?.zPosition = 5
         connect?.addChild(connectLabel!)
         
@@ -166,16 +188,18 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         go = SetupPartyButton(textureOn: greenButton, textureOff: greenButtonOff)
         go?.delegate = self
         self.addChild(go!)
-        go!.position = CGPoint(x: self.frame.width/1.1, y: self.frame.height/14)
+        go!.position = CGPoint(x: self.frame.width - go!.frame.width/6, y: self.frame.height/12)
         go!.name = "goButton"
         go?.zPosition = 4
         
         let gotext = SKLabelNode(fontNamed: "Helvetica Neue")
         gotext.text = "GO"
-        gotext.position.x = gotext.position.x - 25
+        gotext.position.x = gotext.position.x - 15
+        gotext.position.y = gotext.position.y - 5
         gotext.zPosition = 5
-        gotext.fontSize = 32
+        gotext.fontSize = 60
         gotext.fontColor = UIColor(red: 250/255, green: 52/255, blue: 67/255, alpha: 1)
+        go?.textLabel = gotext
         go!.addChild(gotext)
         // set the turn controll buttons
 
@@ -183,9 +207,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         numberOfTurns = SKLabelNode(fontNamed: "Helvetica Neue")
         numberOfTurns?.text = "max turns : 5"
         numberOfTurns?.fontSize = 30
-//        numberOfTurns?.position = CGPoint(x: turns!.position.x, y: turns!.position.y)
         numberOfTurns?.zPosition = 5
+        numberOfTurns?.fontColor = UIColor.blackColor()
         GameManager.sharedInstance.totalGameTurns = self.turnCounter
+        turns!.textLabel = numberOfTurns
         turns!.addChild(numberOfTurns!)
         
         
@@ -274,65 +299,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
  
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //let touch: UITouch = touches.first as UITouch!
-        //xlet location: CGPoint = touch.locationInNode(self)
-
-        /*if(go!.containsPoint(location)){
-            go!.texture = greenButtonOff
-        }else{
-            go!.texture = greenButton
-        }
-        
-        if(connect!.containsPoint(location)){
-            connect!.texture = yellowButtonOff
-        }else{
-
-        }
-        
-        if(turns!.containsPoint(location)){
-            turns!.texture = yellowTurnsOff
-        }else{
-            turns!.texture = yellowTurnsOn
-        }*/
-        
-        
-        
-    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
-        
-        /*
-        if(tutorialNode!.containsPoint(location)){
-            tutorialNode?.removeFromParent()
-        }*/
-        
-    
-        
-        if(go!.containsPoint(location)){
-            go!.texture = greenButtonOff
-        }else{
-            go!.texture = greenButton
-        }
-        
-        if(connect!.containsPoint(location)){
-            connect!.texture = yellowButtonOff
-            connectLabel?.fontColor = UIColor.blackColor()
-            connectLabel?.position = CGPoint(x: (connectLabel?.position.x)!, y: ((connectLabel?.position.y)!-10))
-        }else{
-            //connect!.texture = yellowButton
-            //connectLabel?.fontColor = UIColor.whiteColor()
-            //connectLabel?.position = CGPoint(x: (connectLabel?.position.x)!, y: ((connectLabel?.position.y)!+10))
-        }
-        
-        
-        if(turns!.containsPoint(location)){
-            turns!.texture = yellowTurnsOff
-        }else{
-            turns!.texture = yellowTurnsOn
-        }
         
         if(back!.containsPoint(location)){
             viewController.dismissViewControllerAnimated(false, completion: nil)
@@ -341,59 +311,6 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         if info!.containsPoint(location){
             self.setTutorialScene()
         }
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-
-        go?.texture = greenButton
-        connect?.texture = yellowButton
-        turns?.texture = yellowTurnsOn
-
-        
-        
-        let touch: UITouch = touches.first as UITouch!
-        let location: CGPoint = touch.locationInNode(self)
-        
-        if(go!.containsPoint(location)){
-//            print("apertei o botao de GO")
-            var canGo = false
-            for p in GameManager.sharedInstance.players{
-                if p.avatar == nil {
-                    canGo = false
-                    break
-                }else{
-                    canGo = true
-                }
-            }
-            if canGo{
-                self.view?.presentScene(nil)
-                BoardGraph.SharedInstance.loadBoard("board_3");
-                viewController.turns = turnCounter
-                viewController.gotoBoardGame()
-                for p in GameManager.sharedInstance.players{
-                    GameManager.sharedInstance.updatePlayerMoney(p, value: p.coins)
-                    GameManager.sharedInstance.activePlayer.append(p.avatar!)
-                }
-                GameManager.sharedInstance.sendPlayersColors()
-            }
-        }
-        if(connect!.containsPoint(location)){
-//            print("apertei o botao de CONNECT")\
-            connectLabel?.position = CGPoint(x: (connectLabel?.position.x)!, y: ((connectLabel?.position.y)!+10))
-            viewController.ConnectPlayers()
-            
-        }
-
-        if(turns!.containsPoint(location)){
-            turnCounter = turnCounter + 5
-            if turnCounter > 30 {
-                turnCounter = 5
-            }
-            
-            numberOfTurns?.text = "max turns : \(turnCounter)"
-            GameManager.sharedInstance.totalGameTurns = turnCounter
-        }
-
     }
     
     func spawnItem(){

@@ -14,6 +14,8 @@ class SetupPartyButton: SKSpriteNode {
     var textureOn:SKTexture!
     var textureOff:SKTexture!
     lazy var maskSprite = SKSpriteNode()
+    var textLabel : SKLabelNode?
+    var posOn : CGFloat!
     
     weak var delegate:SetupPartyButtonDelegate?
     
@@ -43,12 +45,16 @@ class SetupPartyButton: SKSpriteNode {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         texture = textureOff
+        posOn = textLabel?.position.y
+        textLabel?.position.y = ((textLabel?.position.y)! - 10)
+        
         delegate?.buttonTouched(self)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("touches ended")
         texture = textureOn
-        
+        textLabel?.position.y = posOn
     }
     
     func setupMaskSprite() {
