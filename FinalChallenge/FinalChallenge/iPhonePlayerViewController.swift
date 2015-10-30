@@ -26,20 +26,37 @@ class iPhonePlayerViewController: UIViewController {
     var playerMoney = 0
     var playerCards:[String] = []
     
-    //flags
-    var diceTaught: Bool {
-        get {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            if let diceTaught = defaults.boolForKey("diceTaught") {
-                
-            }
-        }
-        set {
-        
-        }
-    }
-    var cardTaught = false
-    var gameTaught = false
+//    //Flags stored directly into User Defaults
+//    var diceTaught: Bool {
+//        get {
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            return defaults.boolForKey("diceTaught")
+//        }
+//        set {
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            defaults.setBool(newValue, forKey: "diceTaught")
+//        }
+//    }
+//    var cardTaught: Bool {
+//        get {
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            return defaults.boolForKey("cardTaught")
+//        }
+//        set {
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            defaults.setBool(newValue, forKey: "cardTaught")
+//        }
+//    }
+//    var gameTaught: Bool {
+//        get {
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            return defaults.boolForKey("gameTaught")
+//        }
+//        set {
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            defaults.setBool(newValue, forKey: "gameTaught")
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -74,12 +91,12 @@ class iPhonePlayerViewController: UIViewController {
         if let scene = playerScene {
             if scene.carousel != nil {
                 scene.carousel.canRemoveWithSwipeUp = true
-                if !cardTaught {
+                if !GlobalFlags.cardTaught {
                     scene.teachCardsUse()
                 }
             }
             scene.dice.activateDice()
-            if !diceTaught {
+            if !GlobalFlags.diceTaught {
                 scene.teachDice()
             }
         }

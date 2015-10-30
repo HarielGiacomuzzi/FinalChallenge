@@ -43,7 +43,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
             let card = CardSprite(cardName: cardString)
             cards.append(card)
         }
-        if !viewController!.gameTaught {
+        if !GlobalFlags.gameTaught {
             setTutorial()
         }
         if !cards.isEmpty {
@@ -209,7 +209,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
         tutorialManager.showInfo()
-        viewController!.gameTaught = true
+        GlobalFlags.gameTaught = true
     }
     
     func teachDice() {
@@ -226,7 +226,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
             tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
             tutorialManager.showInfo()
         }
-        viewController!.diceTaught = true
+        GlobalFlags.diceTaught = true
     }
     
     func teachCardsUse() {
@@ -243,7 +243,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
         tutorialManager.showInfo()
-        viewController!.cardTaught = true
+        GlobalFlags.cardTaught = true
     }
     
     func buttonClicked(sender: SKNode) {

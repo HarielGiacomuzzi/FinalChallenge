@@ -122,7 +122,9 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         
-        self.setTutorialScene()
+        if !GlobalFlags.welcomeTutorialIphone {
+            self.setTutorialScene()
+        }
     }
     
     override func willMoveFromView(view: SKView) {
@@ -450,6 +452,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 1.0)
         tutorialManager.showInfo()
+        GlobalFlags.welcomeTutorialIphone = true
     }
     
     func teachHowToChooseCharacter() {
@@ -470,7 +473,10 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let state = data.userInfo!["state"] as! Int
         
         if state == 2 { //Connected
-            teachHowToChooseCharacter()
+            if !GlobalFlags.chooseCharTaught {
+                teachHowToChooseCharacter()
+                GlobalFlags.chooseCharTaught = true
+            }
         }
     }
 }

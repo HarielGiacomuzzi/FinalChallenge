@@ -103,7 +103,9 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         popupAtlas = SKTextureAtlas(named: "popup")
-        self.setTutorialScene()
+        if !GlobalFlags.welcomeTutorialIpad {
+            self.setTutorialScene()
+        }
     }
     
     
@@ -116,6 +118,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         go?.userInteractionEnabled = false
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
         tutorialManager.showInfo()
+        GlobalFlags.welcomeTutorialIpad = true
         
     }
     
@@ -328,13 +331,8 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     
     func riseCharacter(char : SKSpriteNode, identifier : String){
         
-        checkIfCanGo()
-        if canGo {
-            var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
-            
-            tuples.append((go, "You can press go now", nil))
-            tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
-            tutorialManager.showInfo()
+        if !GlobalFlags.goTaught {
+            teachHowToGo()
         }
         
         if let oldPopupNode = childNodeWithName("popup \(identifier)") {
@@ -378,6 +376,18 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         })
     }
     
+    func teachHowToGo() {
+        checkIfCanGo()
+        if canGo {
+            var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+            
+            tuples.append((go, "You can press go now", nil))
+            tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
+            tutorialManager.showInfo()
+        }
+        GlobalFlags.goTaught = true
+    }
+    
     func checkIfCanGo() {
         for p in GameManager.sharedInstance.players{
             if p.avatar == nil {
@@ -390,7 +400,9 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     }
     
     func buttonTouched(sender: SetupPartyButton) {
-        tutorialManager.buttonActivated(sender)
+        if tutorialManager != nil {
+            tutorialManager.buttonActivated(sender)
+        }
         
         if sender == go {
             checkIfCanGo()
