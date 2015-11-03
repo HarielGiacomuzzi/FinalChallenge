@@ -63,6 +63,7 @@
 		5E9EB3351BDE97CB003974EB /* TutorialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9EB3341BDE97CB003974EB /* TutorialManager.swift */; };
 		5E9EB33B1BDEA4D6003974EB /* tutorial.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5E9EB33A1BDEA4D6003974EB /* tutorial.atlas */; };
 		5EA49E0A1B87B59100AC51F8 /* MinigameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA49E091B87B59100AC51F8 /* MinigameScene.swift */; };
+		5EAE54F01BE3F184006A26DC /* GlobalFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAE54EF1BE3F184006A26DC /* GlobalFlags.swift */; };
 		5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */; };
 		5EC7FF8A1BC81E9500494CE4 /* charSprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5EC7FF891BC81E9500494CE4 /* charSprites.atlas */; };
 		5ED294DB1BBD96B50073B148 /* cards.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5ED294DA1BBD96B50073B148 /* cards.atlas */; };
@@ -94,8 +95,9 @@
 		B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */; };
 		B5AFAD151BA09BD40005F19E /* GameOverSceneSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */; };
 		B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */; };
-		B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */; };
-		B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5CD203A1BBDA86600D184F6 /* avatar.atlas */; };
+		B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */; settings = {ASSET_TAGS = (); }; };
+		B5C9DCAD1BE1427F0081EE0C /* cards2.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5C9DCAC1BE1427F0081EE0C /* cards2.atlas */; settings = {ASSET_TAGS = (); }; };
+		B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5CD203A1BBDA86600D184F6 /* avatar.atlas */; settings = {ASSET_TAGS = (); }; };
 		B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */; };
 		B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */; };
 		B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */; };
@@ -208,6 +210,7 @@
 		5E9EB3341BDE97CB003974EB /* TutorialManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialManager.swift; sourceTree = "<group>"; };
 		5E9EB33A1BDEA4D6003974EB /* tutorial.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = tutorial.atlas; sourceTree = "<group>"; };
 		5EA49E091B87B59100AC51F8 /* MinigameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameScene.swift; sourceTree = "<group>"; };
+		5EAE54EF1BE3F184006A26DC /* GlobalFlags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFlags.swift; sourceTree = "<group>"; };
 		5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPowerupNode.swift; sourceTree = "<group>"; };
 		5EC7FF891BC81E9500494CE4 /* charSprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = charSprites.atlas; sourceTree = "<group>"; };
 		5ED294DA1BBD96B50073B148 /* cards.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = cards.atlas; sourceTree = "<group>"; };
@@ -241,6 +244,7 @@
 		B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneSP.swift; sourceTree = "<group>"; };
 		B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinigameCollectionScene.swift; sourceTree = "<group>"; };
 		B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cardThrowSound.wav; sourceTree = "<group>"; };
+		B5C9DCAC1BE1427F0081EE0C /* cards2.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = cards2.atlas; sourceTree = "<group>"; };
 		B5CD203A1BBDA86600D184F6 /* avatar.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = avatar.atlas; sourceTree = "<group>"; };
 		B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				5ED294DA1BBD96B50073B148 /* cards.atlas */,
+				B5C9DCAC1BE1427F0081EE0C /* cards2.atlas */,
 				DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */,
 				5E1C59C81BB0771200BCDE1C /* CardSprite.swift */,
 				5ED294DC1BBD9A700073B148 /* GamePads */,
@@ -659,6 +664,7 @@
 				4445D7C41B98C99F0049B787 /* AlertPath.swift */,
 				5E70C7D21B9A0DB1005C753B /* NoAnimationSegue.swift */,
 				447891DA1BBEF2120094E16B /* CardManager.swift */,
+				5EAE54EF1BE3F184006A26DC /* GlobalFlags.swift */,
 				5E9EB3331BDE9793003974EB /* Tutorial */,
 			);
 			name = Utils;
@@ -751,7 +757,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = DVXNNDG4U4;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -795,6 +801,7 @@
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
 				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
 				B5DD1B501B8F888200AA1EB6 /* bubbleSound.mp3 in Resources */,
+				B5C9DCAD1BE1427F0081EE0C /* cards2.atlas in Resources */,
 				B5DD1B4A1B8F73D300AA1EB6 /* wavesSound.wav in Resources */,
 				2605B2471BD9630900DAE7D1 /* maingame.mp3 in Resources */,
 				2605B24B1BD965FF00DAE7D1 /* flappymusic.mp3 in Resources */,
@@ -852,6 +859,7 @@
 				5E7E45BC1B960AC600249B8A /* MinigameDescriptionViewController.swift in Sources */,
 				5E5A64A61BC6EC6B00D5AC09 /* TestViewController.swift in Sources */,
 				5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */,
+				5EAE54F01BE3F184006A26DC /* GlobalFlags.swift in Sources */,
 				B5DD1B471B8F712A00AA1EB6 /* AudioSource.swift in Sources */,
 				B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */,
 				26CF809C1B8CD67E00DFCB73 /* FireBombSpark.swift in Sources */,
@@ -1064,7 +1072,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1080,7 +1088,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge;
+				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

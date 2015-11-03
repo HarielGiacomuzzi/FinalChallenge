@@ -26,6 +26,11 @@ class iPhonePlayerViewController: UIViewController {
     var playerMoney = 0
     var playerCards:[String] = []
     
+    //flags
+    var diceTaught = false
+    var cardTaught = false
+    var gameTaught = false
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         
@@ -46,19 +51,29 @@ class iPhonePlayerViewController: UIViewController {
         skView?.showsNodeCount = false
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
-//        playerCards = ["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"]
-        loadPartyModeScene()
-//        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
-//        loadPlayerView()
+ //       playerCards = ["StealGoldCard","StealGoldCard","StealGoldCard","Skull","Lamp"]
+ //       loadPartyModeScene()
+       loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
+//       loadPlayerView()
     }
     
     // MARK: - Message Received Functions
     
     func playerTurn(data : NSNotification){
-        if playerScene?.carousel != nil {
-            playerScene?.carousel.canRemoveWithSwipeUp = true
+        
+        if let scene = playerScene {
+            if scene.carousel != nil {
+                scene.carousel.canRemoveWithSwipeUp = true
+                if !GlobalFlags.cardTaught {
+                    scene.teachCardsUse()
+                }
+            }
+            scene.dice.activateDice()
+            if !GlobalFlags.diceTaught {
+                scene.teachDice()
+            }
         }
-        playerScene?.dice.activateDice()
+        
         setNotification("Your Turn")
         
     }

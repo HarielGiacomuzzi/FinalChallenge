@@ -9,13 +9,19 @@
 import UIKit
 import SpriteKit
 
-class TutorialManager: NSObject, InformationNodeDelegate {
+class TutorialManager: NSObject, InformationNodeDelegate, ArrowDelegate {
     
-    var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+    var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = [] {
+        didSet {
+            removeUserInteraction()
+        }
+    }
     
     weak var scene: SKScene!
     var infoBox: InformationBoxNode!
     var infoArrow: InformationArrowNode!
+    
+    var isActive = false
     
     var boxScale: CGFloat = 1.0
     
@@ -42,8 +48,10 @@ class TutorialManager: NSObject, InformationNodeDelegate {
     
     func showInfo() {
         guard !tuples.isEmpty else {
+            isActive = false
             return
         }
+        isActive = true
         
         if let node = tuples.first!.node {
             node.userInteractionEnabled = true
@@ -62,13 +70,15 @@ class TutorialManager: NSObject, InformationNodeDelegate {
     
     func setupArrow(node:SKNode) {
         if node.position.x > scene.frame.size.width / 2 {
-            infoArrow = InformationArrowNode(pointingRight: false, nodeToPoint: node)
-        } else {
             infoArrow = InformationArrowNode(pointingRight: true, nodeToPoint: node)
+        } else {
+            infoArrow = InformationArrowNode(pointingRight: false, nodeToPoint: node)
         }
-        
+        infoArrow.setScale(boxScale)
+        infoArrow.positionArrow()
         infoArrow.zPosition = 10000
         scene.addChild(infoArrow)
+        infoArrow.delegate = self
         infoArrow.animate()
     }
     
@@ -93,10 +103,6 @@ class TutorialManager: NSObject, InformationNodeDelegate {
         infoBox.zPosition = 10000
         
         scene.addChild(infoBox)
-        
-        print("infobox size: \(infoBox.calculateAccumulatedFrame())")
-        print("frame size: \(scene.frame.size)")
-        print("infobox position: \(infoBox.position)")
     }
     
     func closeInformation() {
@@ -106,11 +112,13 @@ class TutorialManager: NSObject, InformationNodeDelegate {
         if infoBox != nil {
             infoBox.removeFromParent()
         }
-        if tuples.first!.animation != nil {
+        if tuples.first?.animation != nil {
             tuples.first!.node?.removeAllActions()
             tuples.first!.node?.position = nodeOriginalPosition
         }
-        tuples.removeFirst()
+        if !tuples.isEmpty {
+            tuples.removeFirst()
+        }
         showInfo()
     }
     
@@ -131,6 +139,10 @@ class TutorialManager: NSObject, InformationNodeDelegate {
                 }
             }
         }
+    }
+    
+    func arrowTouched() {
+        closeInformation()
     }
     
     

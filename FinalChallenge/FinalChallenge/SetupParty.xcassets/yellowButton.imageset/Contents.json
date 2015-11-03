@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "connectOn.png"
+      "filename" : "barButtonON.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "connectOn@2x.png"
+      "filename" : "barButtonON@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "connectOn@3x.png"
+      "filename" : "barButtonON@3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

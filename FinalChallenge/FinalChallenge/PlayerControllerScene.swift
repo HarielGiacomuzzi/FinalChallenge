@@ -43,12 +43,12 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
             let card = CardSprite(cardName: cardString)
             cards.append(card)
         }
-        print(cards)
+        if !GlobalFlags.gameTaught {
+            setTutorial()
+        }
         if !cards.isEmpty {
             setupCardCarousel(cards)
         }
-        
-        setTutorial()
 
     }
     
@@ -88,9 +88,10 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     func setupButtons() {
         let moneyButtonTextureOn = SKTexture(imageNamed: "button2On")
         let moneyButtonTextureOff = SKTexture(imageNamed: "button2Off")
-        moneyButton = PlayerButtonNode(textureOn: moneyButtonTextureOn, textureOff: moneyButtonTextureOff, openRight: false)
         
-        moneyButton.position = CGPointMake((frame.size.width - moneyButton.button.size.width / 2) - 20, (moneyButton.button.size.height / 2) - 20)
+        moneyButton = PlayerButtonNode(textureOn: moneyButtonTextureOn, textureOff: moneyButtonTextureOff, openRight: true)
+        
+        moneyButton.position = CGPointMake((moneyButton.button.size.width / 2), self.frame.height/4)
 
         addChild(moneyButton)
         moneyButton.zPosition = 100
@@ -100,7 +101,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         let lootButtonTextureOff = SKTexture(imageNamed: "button1Off")
         lootButton = PlayerButtonNode(textureOn: lootButtonTextureOn, textureOff: lootButtonTextureOff, openRight: true)
         
-        lootButton.position = CGPointMake(lootButton.button.size.width/2 + 20, (lootButton.button.size.height/2) - 20)
+        lootButton.position = CGPointMake(lootButton.button.size.width/2, self.frame.height/2)
         
         addChild(lootButton)
         lootButton.zPosition = 100
@@ -108,11 +109,11 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     }
     
     func setupTopBar() {
-        let topBarTexture = SKTexture(imageNamed: "setUpBanner")
-        let topBarSprite = SKSpriteNode(texture: topBarTexture)
-        topBarSprite.position = CGPointMake(frame.size.width / 2, frame.size.height - topBarSprite.size.height / 2)
+        let topBarSprite = SKSpriteNode(imageNamed: "setUpBannerIphone")
+        topBarSprite.position = CGPointMake(frame.size.width/2, frame.size.height/1.2)
         topBarSprite.zPosition = 20
-
+        //topBarSprite.size.height = topBarSprite.size.height/2
+        topBarSprite.setScale(2)
         addChild(topBarSprite)
         let text = SKLabelNode(text: playerName)
         text.position = CGPointMake(topBarSprite.position.x, topBarSprite.position.y)
@@ -169,17 +170,22 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         
     }
     
+    func carouselTouched() {
+        buttonClicked(carousel)
+    }
+    
     
     func createDice() {
         dice = DiceNode()
         dice.zPosition = 30
-        dice.position = CGPointMake(moneyButton.position.x, frame.size.height/2)
+        dice.position = CGPointMake(self.frame.size.width - dice.frame.size.width/3, frame.size.height/2)
         addChild(dice)
         dice.delegate = self
 
     }
     
     func diceRolled(sender: SKSpriteNode) {
+        buttonClicked(sender)
         let diceResult = 5 //Int(arc4random_uniform(6)+1)
         let aux = NSMutableDictionary();
         aux.setValue(diceResult, forKey: "diceResult");
@@ -204,6 +210,41 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
         tutorialManager.showInfo()
+        GlobalFlags.gameTaught = true
+    }
+    
+    func teachDice() {
+        if tutorialManager != nil {
+            tutorialManager.tuples.append((dice, "this is the dice", nil))
+            if !tutorialManager.isActive {
+                tutorialManager.showInfo()
+            }
+        } else {
+            var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+            
+            tuples.append((dice, "this is the dice", nil))
+            
+            tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
+            tutorialManager.showInfo()
+        }
+        GlobalFlags.diceTaught = true
+    }
+    
+    func teachCardsUse() {
+//        let card = carousel.getCenterCard()
+        var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
+        
+        let moveUp = SKAction.moveTo(CGPointMake(carousel.position.x, carousel.position.y + 40), duration: 0.5)
+        let moveDown = SKAction.moveTo(CGPointMake(carousel.position.x, carousel.position.y), duration: 0.5)
+        
+        let sequence = SKAction.sequence([moveUp, moveDown])
+        let animation = SKAction.repeatActionForever(sequence)
+        
+        tuples.append((carousel, "You can set up a trap by throwing it to the board", animation))
+        
+        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
+        tutorialManager.showInfo()
+        GlobalFlags.cardTaught = true
     }
     
     func buttonClicked(sender: SKNode) {

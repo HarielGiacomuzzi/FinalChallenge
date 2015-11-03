@@ -13,6 +13,14 @@ func * (left: CGSize, right: CGFloat) -> CGSize {
     return CGSizeMake(left.width * right, left.height * right)
 }
 
+func / (left: CGSize, right: Int) -> CGSize {
+    return CGSizeMake(left.width / CGFloat(right),left.height / CGFloat(right))
+}
+
+func + (left: CGSize, right: CGSize) -> CGSize {
+    return CGSizeMake(left.width + right.width,left.height + right.height)
+}
+
 class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     let partsAtlas = SKTextureAtlas(named: "puffGame")
     
@@ -36,6 +44,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         
         var count = GameManager.sharedInstance.players.count
         let width = (self.frame.width-20)/CGFloat(GameManager.sharedInstance.players.count*2)
+        let scaleFactor = CGFloat(0.33)
         
         for p in GameManager.sharedInstance.players{
             let player = PuffPlayer(name: "aaa")
@@ -48,13 +57,13 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             head.position = CGPointMake(0, 0)
             head.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33))
             
-            let helmet = SKSpriteNode(texture: partsAtlas.textureNamed("helmet"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmet").size()*CGFloat(0.33))
-            helmet.zPosition = 2
+            let helmet = SKSpriteNode(texture: partsAtlas.textureNamed("helmet"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmet").size()*CGFloat(scaleFactor))
+            helmet.zPosition = 3
             helmet.position = CGPointMake(0, 0)
             helmet.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("helmet").size()*CGFloat(0.33))
             
-            let helmetReflex = SKSpriteNode(texture: partsAtlas.textureNamed("helmetReflex"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmetReflex").size()*CGFloat(0.33))
-            helmetReflex.zPosition = 3
+            let helmetReflex = SKSpriteNode(texture: partsAtlas.textureNamed("helmetReflex"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmetReflex").size()*CGFloat(scaleFactor))
+            helmetReflex.zPosition = 4
             helmetReflex.position = CGPointMake(0, 0)
             
             let body = SKSpriteNode(texture: partsAtlas.textureNamed("babyBody"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
@@ -72,8 +81,11 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             leg.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 30.0, height: 30.0))
             leg.position = CGPointMake(leg.position.x, -helmet.size.height+22+body.size.height)
 
-            body.addChild(leg)
-            body.addChild(arm)
+            let legLeft = SKSpriteNode(texture: partsAtlas.textureNamed("babyLeg"), color: UIColor.blueColor(), size:partsAtlas.textureNamed("babyLeg").size()*CGFloat(scaleFactor))
+            legLeft.zPosition = 0
+            legLeft.zRotation = CGFloat(1.5708)
+            legLeft.xScale = -legLeft.xScale
+            legLeft.position = CGPointMake(-aux2.width/2.5,-aux1.height-body.size.height)
             
             
             //----------------------------------------------------------------------------
@@ -87,6 +99,10 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             spriteNode.addChild(helmet)
             spriteNode.addChild(helmetReflex)
             spriteNode.addChild(body)
+            spriteNode.addChild(armRight)
+            spriteNode.addChild(armLeft)
+            spriteNode.addChild(legRight)
+            spriteNode.addChild(legLeft)
             spriteNode.size = helmet.size
 
             player.x = Double(width)*Double(count);
@@ -99,7 +115,6 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             self.players.append(player)
             self.addChild(player.sprite!)
             
-            //tem que mudar o formato do corpo fisico :)
             player.sprite!.physicsBody = SKPhysicsBody(rectangleOfSize: spriteNode.size)
             player.sprite!.physicsBody?.dynamic = true
             player.sprite!.physicsBody?.categoryBitMask = self.playerCategory

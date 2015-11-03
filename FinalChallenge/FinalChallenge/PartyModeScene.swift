@@ -49,10 +49,10 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "changeView:", name: "ConnectionManager_IphoneChangeView", object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "avatarIsSelectable:", name: "ConnectionManager_canSelectAvatar", object: nil);
         
-        banner = SKSpriteNode(imageNamed: "setUpBanner")
+        banner = SKSpriteNode(imageNamed: "setUpBannerIphone")
         self.addChild(banner!)
-        banner!.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
-        banner!.size.height = banner!.size.height/2
+        banner!.position = CGPointMake(frame.size.width/2, frame.size.height/1.2)
+        //banner!.size.height = banner!.size.height/2
         banner?.zPosition = 4
         banner?.name = "banner"
         
@@ -60,8 +60,8 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         titleLabel.text = "Choose your Character"
         titleLabel.name = "label"
         titleLabel.zPosition = 5
-        titleLabel.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
-        self.addChild(titleLabel)
+        // titleLabel.position = CGPoint(x: self.frame.width/2, y: (self.frame.height)*0.85)
+        banner!.addChild(titleLabel)
         
         let back = SKLabelNode(fontNamed: "GillSans-Bold") // will be a texture probably
         back.name = "back"
@@ -122,7 +122,9 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVectorMake( 0.0, -5.0 )
         self.physicsWorld.contactDelegate = self
         
-        self.setTutorialScene()
+        if !GlobalFlags.welcomeTutorialIphone {
+            self.setTutorialScene()
+        }
     }
     
     override func willMoveFromView(view: SKView) {
@@ -450,6 +452,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 1.0)
         tutorialManager.showInfo()
+        GlobalFlags.welcomeTutorialIphone = true
     }
     
     func teachHowToChooseCharacter() {
@@ -470,7 +473,10 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         let state = data.userInfo!["state"] as! Int
         
         if state == 2 { //Connected
-            teachHowToChooseCharacter()
+            if !GlobalFlags.chooseCharTaught {
+                teachHowToChooseCharacter()
+                GlobalFlags.chooseCharTaught = true
+            }
         }
     }
 }

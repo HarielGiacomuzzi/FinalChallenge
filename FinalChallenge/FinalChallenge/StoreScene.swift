@@ -43,7 +43,9 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         setupMindingoSalesman()
         setupCards()
         
-        setTutorial()
+        if !GlobalFlags.storeTaught {
+            setTutorial()
+        }
     }
     
     deinit {
@@ -77,11 +79,11 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     }
     
     func setupTopBar() {
-        let topBarTexture = SKTexture(imageNamed: "setUpBanner")
+        let topBarTexture = SKTexture(imageNamed: "setUpBannerIphone")
         let topBarSprite = SKSpriteNode(texture: topBarTexture)
-        topBarSprite.position = CGPointMake(frame.size.width / 2, frame.size.height - topBarSprite.size.height / 2)
+        topBarSprite.position = CGPointMake(frame.size.width / 2, frame.size.height / 1.2)
         topBarSprite.zPosition = 20
-        
+        topBarSprite.setScale(2)
         addChild(topBarSprite)
         let text = SKLabelNode(text: playerName)
         text.position = CGPointMake(topBarSprite.position.x, topBarSprite.position.y)
@@ -92,7 +94,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         
         moneyLabel = SKLabelNode(text: "$\(viewController!.playerMoney)")
         moneyLabel.position = topBarSprite.position
-        moneyLabel.position.x = frame.size.width - moneyLabel.frame.size.width
+        moneyLabel.position.x = frame.size.width - moneyLabel.frame.size.width*2
         moneyLabel.fontName = "GillSans-Bold"
         moneyLabel.fontSize = 70
         moneyLabel.zPosition = 30
@@ -153,7 +155,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     func buyResponse(status:String,worked:Bool, money:Int, card:String) {
         if worked {
             moneyLabel.text = "$\(money)"
-            moneyLabel.position.x = frame.size.width - moneyLabel.frame.size.width
+            moneyLabel.position.x = frame.size.width - moneyLabel.frame.size.width*2
             if chosenCard?.cardName == card {
                 cardShow.removeCard(chosenCard!)
                 chosenCard = nil
@@ -193,10 +195,12 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     func setTutorial() {
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
-        tuples.append((nil, "Welcome to Loot Rush", nil))
+        tuples.append((nil, "This is the store", nil))
+        tuples.append((nil, "You can buy stuff on the store", nil))
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true,boxScale:2.0)
         tutorialManager.showInfo()
+        GlobalFlags.storeTaught = true
     }
     
 }

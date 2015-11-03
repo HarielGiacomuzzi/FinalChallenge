@@ -206,6 +206,10 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
         }
     }
     
+    func carouselTouched() {
+        
+    }
+    
     deinit{
         //print("MinigameCollectionScene did deinit")
     }

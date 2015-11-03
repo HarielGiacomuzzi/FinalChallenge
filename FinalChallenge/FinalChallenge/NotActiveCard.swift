@@ -12,10 +12,10 @@ class NotActiveCard : Card {
     
     var endGameValue = Int()
     
-    init(name : String , value : Int) {
+    init(name : String , value : Int, im:String) {
         super.init()
         self.cardName = name
-        self.imageName = "treasurecard"
+        self.imageName = im
         self.usable = false
         self.storeValue = 100 + value
         self.endGameValue = value

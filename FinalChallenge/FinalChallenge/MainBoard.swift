@@ -95,7 +95,9 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                 
                 tutorialNodes["Player"] = GameManager.sharedInstance.players.first?.nodeSprite
                 
-                setTutorial()
+                if !GlobalFlags.boardTaught {
+                    setTutorial()
+                }
             
                 GameManager.sharedInstance.playerTurnEnded(nil)
             }else{
@@ -255,5 +257,6 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
         tutorialManager.showInfo()
+        GlobalFlags.boardTaught = true
     }
 }
