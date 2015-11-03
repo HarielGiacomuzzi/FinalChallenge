@@ -247,12 +247,14 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     }
     
     func setTutorial() {
+        let strings = TutorialManager.loadStringsPlist("board")
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
-        
-        tuples.append((tutorialNodes["Player"],"Here is the player",nil))
-        tuples.append((tutorialNodes["House"],"Here is the house",nil))
-        tuples.append((tutorialNodes["Store"],"Here is the store",nil))
-        tuples.append((tutorialNodes["Bau1"],"Here is the chest",nil))
+        tuples.append((nil,strings[0],nil))
+        tuples.append((nil,strings[1],nil))
+        tuples.append((tutorialNodes["Player"],strings[2],nil))
+        tuples.append((tutorialNodes["Store"],strings[3],nil))
+        tuples.append((tutorialNodes["House"],strings[4],nil))
+        tuples.append((tutorialNodes["Bau1"],strings[5],nil))
         
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)

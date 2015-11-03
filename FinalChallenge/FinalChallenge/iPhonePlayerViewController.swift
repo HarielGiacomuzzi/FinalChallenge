@@ -26,38 +26,6 @@ class iPhonePlayerViewController: UIViewController {
     var playerMoney = 0
     var playerCards:[String] = []
     
-//    //Flags stored directly into User Defaults
-//    var diceTaught: Bool {
-//        get {
-//            let defaults = NSUserDefaults.standardUserDefaults()
-//            return defaults.boolForKey("diceTaught")
-//        }
-//        set {
-//            let defaults = NSUserDefaults.standardUserDefaults()
-//            defaults.setBool(newValue, forKey: "diceTaught")
-//        }
-//    }
-//    var cardTaught: Bool {
-//        get {
-//            let defaults = NSUserDefaults.standardUserDefaults()
-//            return defaults.boolForKey("cardTaught")
-//        }
-//        set {
-//            let defaults = NSUserDefaults.standardUserDefaults()
-//            defaults.setBool(newValue, forKey: "cardTaught")
-//        }
-//    }
-//    var gameTaught: Bool {
-//        get {
-//            let defaults = NSUserDefaults.standardUserDefaults()
-//            return defaults.boolForKey("gameTaught")
-//        }
-//        set {
-//            let defaults = NSUserDefaults.standardUserDefaults()
-//            defaults.setBool(newValue, forKey: "gameTaught")
-//        }
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad();
         

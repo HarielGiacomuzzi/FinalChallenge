@@ -36,6 +36,7 @@
 		5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0E06091B8E384300CE166E /* CGVector+Extension.swift */; };
 		5E1C59C91BB0771200BCDE1C /* CardSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1C59C81BB0771200BCDE1C /* CardSprite.swift */; };
 		5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2095981BB973F2002FC8AF /* StoreScene.swift */; };
+		5E25495A1BE9313C0055638C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2549591BE9313C0055638C /* String+Extension.swift */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
 		5E4299321BB9880E004B1DF9 /* StoreButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */; };
 		5E4299341BB9914F004B1DF9 /* CardShowNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4299331BB9914F004B1DF9 /* CardShowNode.swift */; };
@@ -66,6 +67,7 @@
 		5EAE54F01BE3F184006A26DC /* GlobalFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAE54EF1BE3F184006A26DC /* GlobalFlags.swift */; };
 		5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */; };
 		5EC7FF8A1BC81E9500494CE4 /* charSprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5EC7FF891BC81E9500494CE4 /* charSprites.atlas */; };
+		5ED264721BE92095008994C9 /* TutorialTexts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5ED264711BE92095008994C9 /* TutorialTexts.plist */; };
 		5ED294DB1BBD96B50073B148 /* cards.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5ED294DA1BBD96B50073B148 /* cards.atlas */; };
 		5ED294DE1BBD9AAA0073B148 /* AccelerometerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294DD1BBD9AAA0073B148 /* AccelerometerScene.swift */; };
 		5ED294E01BBD9C030073B148 /* GamePadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294DF1BBD9C030073B148 /* GamePadScene.swift */; };
@@ -95,9 +97,9 @@
 		B5AFAD111B9761960005F19E /* PartyModeViewControllerIPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD101B9761960005F19E /* PartyModeViewControllerIPAD.swift */; };
 		B5AFAD151BA09BD40005F19E /* GameOverSceneSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD141BA09BD40005F19E /* GameOverSceneSP.swift */; };
 		B5AFAD1A1BA1E6380005F19E /* MinigameCollectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD191BA1E6380005F19E /* MinigameCollectionScene.swift */; };
-		B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */; settings = {ASSET_TAGS = (); }; };
-		B5C9DCAD1BE1427F0081EE0C /* cards2.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5C9DCAC1BE1427F0081EE0C /* cards2.atlas */; settings = {ASSET_TAGS = (); }; };
-		B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5CD203A1BBDA86600D184F6 /* avatar.atlas */; settings = {ASSET_TAGS = (); }; };
+		B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B5B929231BC6F52400DD2C46 /* cardThrowSound.wav */; };
+		B5C9DCAD1BE1427F0081EE0C /* cards2.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5C9DCAC1BE1427F0081EE0C /* cards2.atlas */; };
+		B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5CD203A1BBDA86600D184F6 /* avatar.atlas */; };
 		B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5DD1B3B1B8799B200AA1EB6 /* GameOverScene.sks */; };
 		B5DD1B3E1B87AE9D00AA1EB6 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3D1B87AE9D00AA1EB6 /* GameManager.swift */; };
 		B5DD1B401B8B7B1F00AA1EB6 /* CustomGameOverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD1B3F1B8B7B1F00AA1EB6 /* CustomGameOverCell.swift */; };
@@ -183,6 +185,7 @@
 		5E0E06091B8E384300CE166E /* CGVector+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGVector+Extension.swift"; sourceTree = "<group>"; };
 		5E1C59C81BB0771200BCDE1C /* CardSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSprite.swift; sourceTree = "<group>"; };
 		5E2095981BB973F2002FC8AF /* StoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreScene.swift; sourceTree = "<group>"; };
+		5E2549591BE9313C0055638C /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
 		5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreButtonNode.swift; sourceTree = "<group>"; };
 		5E4299331BB9914F004B1DF9 /* CardShowNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardShowNode.swift; sourceTree = "<group>"; };
@@ -213,6 +216,7 @@
 		5EAE54EF1BE3F184006A26DC /* GlobalFlags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFlags.swift; sourceTree = "<group>"; };
 		5EB9EE6E1B8412A90003C980 /* FlappyPowerupNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyPowerupNode.swift; sourceTree = "<group>"; };
 		5EC7FF891BC81E9500494CE4 /* charSprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = charSprites.atlas; sourceTree = "<group>"; };
+		5ED264711BE92095008994C9 /* TutorialTexts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TutorialTexts.plist; sourceTree = "<group>"; };
 		5ED294DA1BBD96B50073B148 /* cards.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = cards.atlas; sourceTree = "<group>"; };
 		5ED294DD1BBD9AAA0073B148 /* AccelerometerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerScene.swift; sourceTree = "<group>"; };
 		5ED294DF1BBD9C030073B148 /* GamePadScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadScene.swift; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 				5E8F9DE01B7D1663004514D0 /* Array+Extension.swift */,
 				5E0E06091B8E384300CE166E /* CGVector+Extension.swift */,
 				5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */,
+				5E2549591BE9313C0055638C /* String+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -394,6 +399,7 @@
 				5E9EB32F1BDE89DF003974EB /* InformationBoxNode.swift */,
 				5E9EB3311BDE8A44003974EB /* InformationArrowNode.swift */,
 				5E9EB3341BDE97CB003974EB /* TutorialManager.swift */,
+				5ED264711BE92095008994C9 /* TutorialTexts.plist */,
 				5E9EB33A1BDEA4D6003974EB /* tutorial.atlas */,
 			);
 			name = Tutorial;
@@ -757,7 +763,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
+						DevelopmentTeam = ZX7GUMJ35C;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -820,6 +826,7 @@
 				DBF7C0C21B98D50E0010FCFE /* PuffGameControl.sks in Resources */,
 				2661C40C1BB082A9003A49F9 /* tutorialassets.xcassets in Resources */,
 				5EE219F81BD0280800D6EF98 /* coinParticle.sks in Resources */,
+				5ED264721BE92095008994C9 /* TutorialTexts.plist in Resources */,
 				26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */,
 				B57B33671B86566E000E5F53 /* GameOver.xib in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
@@ -919,6 +926,7 @@
 				DB458B781B5409B90066B38C /* ViewController.swift in Sources */,
 				B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */,
 				5E7DCE911B82447B00229F04 /* FlappyPlayerNode.swift in Sources */,
+				5E25495A1BE9313C0055638C /* String+Extension.swift in Sources */,
 				447891DB1BBEF2120094E16B /* CardManager.swift in Sources */,
 				5E9EB3321BDE8A44003974EB /* InformationArrowNode.swift in Sources */,
 				5ED294E21BBD9D380073B148 /* SwipeScene.swift in Sources */,

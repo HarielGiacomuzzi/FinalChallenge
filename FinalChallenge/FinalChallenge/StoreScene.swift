@@ -193,10 +193,12 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     }
     
     func setTutorial() {
+        let strings = TutorialManager.loadStringsPlist("store")
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
-        tuples.append((nil, "This is the store", nil))
-        tuples.append((nil, "You can buy stuff on the store", nil))
+        tuples.append((nil, strings[0], nil))
+        tuples.append((nil, strings[1], nil))
+        tuples.append((nil, strings[2], nil))
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true,boxScale:2.0)
         tutorialManager.showInfo()

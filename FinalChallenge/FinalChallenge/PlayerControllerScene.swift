@@ -201,11 +201,11 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     }
     
     func setTutorial() {
+        let strings = TutorialManager.loadStringsPlist("controllerBasic")
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
-        tuples.append((nil, "Welcome to Loot Rush", nil))
-        tuples.append((moneyButton, "Touch this button to see your money", nil))
-        tuples.append((lootButton, "Touch this button to see your loot", nil))
+        tuples.append((moneyButton, strings[0], nil))
+        tuples.append((lootButton, strings[1], nil))
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
         tutorialManager.showInfo()
@@ -213,15 +213,16 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     }
     
     func teachDice() {
+        let strings = TutorialManager.loadStringsPlist("teachDice")
         if tutorialManager != nil {
-            tutorialManager.tuples.append((dice, "this is the dice", nil))
+            tutorialManager.tuples.append((dice, strings[0], nil))
             if !tutorialManager.isActive {
                 tutorialManager.showInfo()
             }
         } else {
             var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
             
-            tuples.append((dice, "this is the dice", nil))
+            tuples.append((dice, strings[0], nil))
             
             tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
             tutorialManager.showInfo()
@@ -230,6 +231,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     }
     
     func teachCardsUse() {
+        let strings = TutorialManager.loadStringsPlist("teachCard")
 //        let card = carousel.getCenterCard()
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
@@ -239,7 +241,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         let sequence = SKAction.sequence([moveUp, moveDown])
         let animation = SKAction.repeatActionForever(sequence)
         
-        tuples.append((carousel, "You can set up a trap by throwing it to the board", animation))
+        tuples.append((carousel, strings[0], animation))
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
         tutorialManager.showInfo()
