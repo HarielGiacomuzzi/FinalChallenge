@@ -52,7 +52,7 @@ class PlayerButtonNode: SKNode {
         if !openRight {
             background.xScale = -1.0
         }
-
+        
         addChild(button)
         userInteractionEnabled = true
         setupText()
@@ -81,9 +81,9 @@ class PlayerButtonNode: SKNode {
         
         number = SKLabelNode(text: "0")
         if openRight {
-            number.position = CGPointMake(background.position.x + background.size.width - button.size.width - 20, background.position.y)
+            number.position = CGPointMake(background.position.x + background.frame.size.width - button.frame.size.width - 100 , background.position.y - number.frame.size.height/2 )
         } else {
-            number.position = CGPointMake(background.position.x - background.size.width.mod() + button.size.width + 20, background.position.y)
+            number.position = CGPointMake(background.position.x - background.size.width.mod() + button.size.width + 20, background.position.y - number.frame.size.height/2)
         }
 
         number.hidden = true
@@ -99,7 +99,7 @@ class PlayerButtonNode: SKNode {
         if openRight {
             let leftButtonLeftPoint = button.position.x - button.size.width/2
             let leftButtonTopPoint = button.position.y + button.size.height/2
-            background.position = CGPointMake(leftButtonLeftPoint + background.size.width/2, (leftButtonTopPoint - background.size.height/2) + 15)
+            background.position = CGPointMake(leftButtonLeftPoint + background.size.width/2, (leftButtonTopPoint - background.size.height/2)-10)
         } else {
             let rightButtonTopPoint = button.position.y + button.size.height/2
             let rightButtonRightPoint = button.position.x + button.size.width/2
