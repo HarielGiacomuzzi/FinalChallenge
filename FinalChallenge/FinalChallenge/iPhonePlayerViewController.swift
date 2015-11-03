@@ -64,12 +64,12 @@ class iPhonePlayerViewController: UIViewController {
         if let scene = playerScene {
             if scene.carousel != nil {
                 scene.carousel.canRemoveWithSwipeUp = true
-                if !cardTaught {
+                if !GlobalFlags.cardTaught {
                     scene.teachCardsUse()
                 }
             }
             scene.dice.activateDice()
-            if !diceTaught {
+            if !GlobalFlags.diceTaught {
                 scene.teachDice()
             }
         }

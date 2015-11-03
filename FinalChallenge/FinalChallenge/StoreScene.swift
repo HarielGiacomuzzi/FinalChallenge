@@ -43,7 +43,9 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         setupMindingoSalesman()
         setupCards()
         
-        setTutorial()
+        if !GlobalFlags.storeTaught {
+            setTutorial()
+        }
     }
     
     deinit {
@@ -193,10 +195,12 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     func setTutorial() {
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
-        tuples.append((nil, "Welcome to Loot Rush", nil))
+        tuples.append((nil, "This is the store", nil))
+        tuples.append((nil, "You can buy stuff on the store", nil))
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true,boxScale:2.0)
         tutorialManager.showInfo()
+        GlobalFlags.storeTaught = true
     }
     
 }
