@@ -59,6 +59,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             
             let helmet = SKSpriteNode(texture: partsAtlas.textureNamed("helmet"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmet").size()*CGFloat(scaleFactor))
             helmet.zPosition = 3
+            helmet.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("helmet").size()*CGFloat(scaleFactor))
             helmet.position = CGPointMake(0, 0)
             helmet.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("helmet").size()*CGFloat(0.33))
             
@@ -85,6 +86,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             legLeft.zPosition = 0
             legLeft.zRotation = CGFloat(1.5708)
             legLeft.xScale = -legLeft.xScale
+            legLeft.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyLeg").size()*CGFloat(scaleFactor))
             legLeft.position = CGPointMake(-aux2.width/2.5,-aux1.height-body.size.height)
             
             
@@ -104,7 +106,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             spriteNode.addChild(legRight)
             spriteNode.addChild(legLeft)
             spriteNode.size = helmet.size
-
+ 
             player.x = Double(width)*Double(count);
             player.y = Double((self.frame.height/2));
             count--;
@@ -114,15 +116,31 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             player.sprite = spriteNode
             self.players.append(player)
             self.addChild(player.sprite!)
-            
-            player.sprite!.physicsBody = SKPhysicsBody(rectangleOfSize: spriteNode.size)
-            player.sprite!.physicsBody?.dynamic = true
-            player.sprite!.physicsBody?.categoryBitMask = self.playerCategory
-            player.sprite!.physicsBody?.contactTestBitMask = self.spikeCategory
-            player.sprite!.physicsBody?.collisionBitMask = 0
-            player.sprite!.physicsBody?.usesPreciseCollisionDetection = true
-        }
+//            
+//            player.sprite!.physicsBody = SKPhysicsBody(rectangleOfSize: spriteNode.size)
+//            player.sprite!.physicsBody?.dynamic = true
+//            player.sprite!.physicsBody?.categoryBitMask = self.playerCategory
+//            player.sprite!.physicsBody?.contactTestBitMask = self.spikeCategory
+//            player.sprite!.physicsBody?.collisionBitMask = 0
+//            player.sprite!.physicsBody?.usesPreciseCollisionDetection = true
         
+            let armLeftJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: armLeft.physicsBody!, anchor: CGPointMake(-aux2.width-5,-(aux1 + aux2).height+15))
+            self.scene!.physicsWorld.addJoint(armLeftJoint)
+            
+            
+            let armRightJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: armRight.physicsBody!, anchor:CGPointMake(aux2.width+5,-(aux1 + aux2).height+15))
+            self.scene?.physicsWorld.addJoint(armRightJoint)
+            
+            let legLeftJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: legLeft.physicsBody!, anchor:CGPointMake(-aux2.width/2.5,-aux1.height-body.size.height))
+            self.scene?.physicsWorld.addJoint(legLeftJoint)
+            
+            let legRightJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: legRight.physicsBody!, anchor:CGPointMake(aux2.width/2.5, -aux1.height-body.size.height))
+            self.scene?.physicsWorld.addJoint(legRightJoint)
+            
+            let headJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: head.physicsBody!, anchor:CGPointMake(0, 0))
+            self.scene?.physicsWorld.addJoint(headJoint)
+        }
+     
         setupSpikes();
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
