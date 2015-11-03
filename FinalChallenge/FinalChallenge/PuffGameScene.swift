@@ -40,13 +40,18 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         for p in GameManager.sharedInstance.players{
             let player = PuffPlayer(name: "aaa")
             
+            //----------------------------------------------------------------------------
+            // Creates the Player Body
+            //----------------------------------------------------------------------------
             let head = SKSpriteNode(texture: partsAtlas.textureNamed("babyHead"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33))
             head.zPosition = 1
             head.position = CGPointMake(0, 0)
+            head.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33))
             
             let helmet = SKSpriteNode(texture: partsAtlas.textureNamed("helmet"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmet").size()*CGFloat(0.33))
             helmet.zPosition = 2
             helmet.position = CGPointMake(0, 0)
+            helmet.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("helmet").size()*CGFloat(0.33))
             
             let helmetReflex = SKSpriteNode(texture: partsAtlas.textureNamed("helmetReflex"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmetReflex").size()*CGFloat(0.33))
             helmetReflex.zPosition = 3
@@ -54,18 +59,28 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             
             let body = SKSpriteNode(texture: partsAtlas.textureNamed("babyBody"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
             body.zPosition = 0
+            body.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 30.0, height: 30.0))
             body.position = CGPointMake(helmet.position.x,  -(partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33)).height-30)
             
             let arm = SKSpriteNode(texture: partsAtlas.textureNamed("babyArm"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
             arm.zPosition = 0
+            arm.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 30.0, height: 30.0))
             arm.position = CGPointMake(arm.position.x, -helmet.size.height+22)
             
             let leg = SKSpriteNode(texture: partsAtlas.textureNamed("babyLeg"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
             leg.zPosition = 0
+            leg.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 30.0, height: 30.0))
             leg.position = CGPointMake(leg.position.x, -helmet.size.height+22+body.size.height)
 
             body.addChild(leg)
             body.addChild(arm)
+            
+            
+            //----------------------------------------------------------------------------
+            // Creates the Player Body Joints
+            //----------------------------------------------------------------------------
+            //let armJoint = SKPhysicsJoint
+            
             
             let spriteNode = SKSpriteNode()
             spriteNode.addChild(head)
