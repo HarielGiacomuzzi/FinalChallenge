@@ -88,9 +88,10 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     func setupButtons() {
         let moneyButtonTextureOn = SKTexture(imageNamed: "button2On")
         let moneyButtonTextureOff = SKTexture(imageNamed: "button2Off")
-        moneyButton = PlayerButtonNode(textureOn: moneyButtonTextureOn, textureOff: moneyButtonTextureOff, openRight: false)
         
-        moneyButton.position = CGPointMake((frame.size.width - moneyButton.button.size.width / 2) - 20, (moneyButton.button.size.height / 2) - 20)
+        moneyButton = PlayerButtonNode(textureOn: moneyButtonTextureOn, textureOff: moneyButtonTextureOff, openRight: true)
+        
+        moneyButton.position = CGPointMake((moneyButton.button.size.width / 2), self.frame.height/4)
 
         addChild(moneyButton)
         moneyButton.zPosition = 100
@@ -100,7 +101,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         let lootButtonTextureOff = SKTexture(imageNamed: "button1Off")
         lootButton = PlayerButtonNode(textureOn: lootButtonTextureOn, textureOff: lootButtonTextureOff, openRight: true)
         
-        lootButton.position = CGPointMake(lootButton.button.size.width/2 + 20, (lootButton.button.size.height/2) - 20)
+        lootButton.position = CGPointMake(lootButton.button.size.width/2, self.frame.height/2)
         
         addChild(lootButton)
         lootButton.zPosition = 100
@@ -177,7 +178,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     func createDice() {
         dice = DiceNode()
         dice.zPosition = 30
-        dice.position = CGPointMake(moneyButton.position.x, frame.size.height/2)
+        dice.position = CGPointMake(self.frame.size.width - dice.frame.size.width/3, frame.size.height/2)
         addChild(dice)
         dice.delegate = self
 
