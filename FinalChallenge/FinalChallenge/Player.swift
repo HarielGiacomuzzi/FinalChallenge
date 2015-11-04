@@ -27,7 +27,15 @@ class Player : NSObject {
     var avatar : String?
     var nodeSprite : PlayerNode?
     var color = UIColor()
-    var items:[Card] = []
+    var items:[Card] = [] {
+        didSet {
+            if items.count > oldValue.count {
+                NSNotificationCenter.defaultCenter().postNotificationName("Player_CardAdded", object: self)
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName("Player_CardRemoved", object: self)
+            }
+        }
+    }
     var itemsInHouse : [Card] = []
     var lastMessage : NSDictionary?
     

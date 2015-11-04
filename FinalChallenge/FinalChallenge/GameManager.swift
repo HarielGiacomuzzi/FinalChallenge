@@ -59,6 +59,8 @@ class GameManager : NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeTrap:", name: "BoardNode_TrapRemoved", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCoinsAdded:", name: "Player_CoinsAdded", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCoinsRemoved:", name: "Player_CoinsRemoved", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCardAdded:", name: "Player_CardAdded", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCardRemoved:", name: "Player_CardRemoved", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateIphoneColors:", name: "ConnectionManager_ColorSet", object: nil)
     }
     
@@ -478,6 +480,20 @@ class GameManager : NSObject {
         let player = data.object as! Player
         if let scene = boardGameViewController?.scene {
             scene.showMoney(player.nodeSprite!, good:false)
+        }
+    }
+    
+    func animateCardAdded(data: NSNotification) {
+        let player = data.object as! Player
+        if let scene = boardGameViewController?.scene {
+            scene.showCard(player.nodeSprite!, good: true)
+        }
+    }
+    
+    func animateCardRemoved(data: NSNotification) {
+        let player = data.object as! Player
+        if let scene = boardGameViewController?.scene {
+            scene.showCard(player.nodeSprite!, good: false)
         }
     }
     

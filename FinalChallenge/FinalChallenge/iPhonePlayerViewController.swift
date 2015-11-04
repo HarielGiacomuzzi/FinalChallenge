@@ -127,11 +127,11 @@ class iPhonePlayerViewController: UIViewController {
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName && sent {
             playerScene!.removeCard(card)
             playerCards.removeObject(card)
-        } else {
-            
         }
-        let string = NotificationManager.loadStringsPlist(status, replaceable: "")
-        setNotification(string)
+        if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
+            let string = NotificationManager.loadStringsPlist(status, replaceable: "")
+            setNotification(string)
+        }
     }
     
     func openStore(data : NSNotification) {
