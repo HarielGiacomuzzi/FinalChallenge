@@ -26,7 +26,10 @@ class GameManager : NSObject {
     var isOnBoard = false
     var isOnStore = false
     var gameEnded = false
-    
+    var dicex2 = false
+    var escapeFlag = false
+    var halfFlag = false
+    var doubleDice = false
     //iphone only usage
     var playerColor = UIColor.clearColor()
     var activePlayer = [String]()
@@ -60,6 +63,8 @@ class GameManager : NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCoinsAdded:", name: "Player_CoinsAdded", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateCoinsRemoved:", name: "Player_CoinsRemoved", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateIphoneColors:", name: "ConnectionManager_ColorSet", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setHalfMovement:", name: "ConnectionManager_HalfMove", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "set2Dice:", name: "ConnectionManager_DoubleMove", object: nil)
     }
     
     func restartGameManager(){
@@ -98,14 +103,21 @@ class GameManager : NSObject {
     
     //dice response
     func diceReceived(data : [String : NSObject]){
-            for p in players{
-                if p.playerIdentifier == (data["peerID"] as! String){
-                    boardGameViewController?.scene.showDiceNumber(data["diceResult"] as! Int, player: p.nodeSprite!)
-                    let tuple = BoardGraph.SharedInstance.walkList(data["diceResult"] as! Int, player: p, view: boardViewController)
-                    movePlayerOnBoardComplete(p, nodeList: tuple.nodeList, remaining: tuple.remaining, currentNode: tuple.currentNode)
-                    break;
-                }
+        
+        var result = data["diceResult"] as! Int
+        
+        if (dicex2){
+            result = result * 2
+            dicex2 = false
+        }
+        for p in players{
+            if p.playerIdentifier == (data["peerID"] as! String){
+                boardGameViewController?.scene.showDiceNumber(result, player: p.nodeSprite!)
+                let tuple = BoardGraph.SharedInstance.walkList(result, player: p, view: boardViewController)
+                movePlayerOnBoardComplete(p, nodeList: tuple.nodeList, remaining: tuple.remaining, currentNode: tuple.currentNode)
+                break;
             }
+        }
     }
     
     //handles movement and all its possibilities
@@ -163,6 +175,28 @@ class GameManager : NSObject {
         
     }
     
+    func setHalfMovement(data:NSNotification){
+        let dic = data.userInfo!["dataDic"] as! NSDictionary
+        let playerName = dic["player"] as! String
+        let setHalfMovement = dic["half"] as! Bool
+        if UIDevice.currentDevice().name == playerName {
+            halfFlag = setHalfMovement
+        } else {
+            halfFlag = false
+        }
+    }
+    
+    func set2Dice(data:NSNotification){
+        let dic = data.userInfo!["dataDic"] as! NSDictionary
+        let playerName = dic["player"] as! String
+        let setDoubleMovement = dic["double"] as! Bool
+        if UIDevice.currentDevice().name == playerName {
+            doubleDice = setDoubleMovement
+        } else {
+            doubleDice = false
+        }
+    }
+    
     func getRelativePosition(node1:BoardNode, node2:BoardNode) -> String {
         let leftRight = fabs(fabs(node1.posX) - fabs(node2.posX))
         let upDown = fabs(fabs(node1.posY) - fabs(node2.posY))
@@ -207,15 +241,29 @@ class GameManager : NSObject {
                         if let activeCard = c as? ActiveCard {
                             let whereIsPlayer = BoardGraph.SharedInstance.whereIs(p)
                             activeCard.used = true
-                            if BoardGraph.SharedInstance.setItem(activeCard, nodeName: whereIsPlayer!) {
-                                p.items.removeObject(c)
-                                activeCard.used = true
-                                activeCard.cardOwner = p
-                                sent = true
-                                status = "Trap was set up"
+                            if(activeCard.trap){
+                                if BoardGraph.SharedInstance.setItem(activeCard, nodeName: whereIsPlayer!) {
+                                    p.items.removeObject(c)
+                                    activeCard.used = true
+                                    activeCard.cardOwner = p
+                                    sent = true
+                                    status = "Trap was set up"
+                                } else {
+                                    activeCard.used = false
+                                    status = "Can't set this card on this spot right now"
+                                }
                             } else {
-                                activeCard.used = false
-                                status = "Can't set this card on this spot right now"
+                                // case not trap
+                                switch(activeCard.cardName){
+                                case "Double Speed": let card = activeCard as! DoubleSpeed
+                                                     card.activate(p)
+                                case "Escape Traps": let card = activeCard as! EscapeTraps
+                                                     card.activate(p)
+                                case "Extra Dice": let card = activeCard as! ExtraDice
+                                                     card.activate(p)
+                                default : break
+                                }
+                                p.items.removeObject(c)
                             }
                         }
                         if let _ = c as? NotActiveCard {

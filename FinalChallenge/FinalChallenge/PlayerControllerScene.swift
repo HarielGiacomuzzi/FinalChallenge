@@ -186,8 +186,16 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     
     func diceRolled(sender: SKSpriteNode) {
         buttonClicked(sender)
-        let diceResult = 5 //Int(arc4random_uniform(6)+1)
+        var diceResult = Int(arc4random_uniform(6)+1)
+        let diceResult2 = Int(arc4random_uniform(6)+1)
         let aux = NSMutableDictionary();
+        if GameManager.sharedInstance.halfFlag{
+            diceResult = diceResult/2
+            GameManager.sharedInstance.halfFlag = false
+        }
+        if GameManager.sharedInstance.doubleDice {
+            diceResult += diceResult2
+        }
         aux.setValue(diceResult, forKey: "diceResult");
         aux.setValue(ConnectionManager.sharedInstance.peerID!.displayName, forKey: "playerID");
         ConnectionManager.sharedInstance.sendDictionaryToPeer(aux, reliable: true);
