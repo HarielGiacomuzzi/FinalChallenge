@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>teachCard</key>
+	<array>
+		<string>Swipe the card up to use it</string>
+	</array>
+	<key>teachDice</key>
+	<array>
+		<string>Press the dice to walk on board</string>
+	</array>
+	<key>controllerBasic</key>
+	<array>
+		<string>Touch this button to see your money</string>
+		<string>Touch this button to see your Loot Points</string>
+	</array>
+	<key>store</key>
+	<array>
+		<string>Welcome to the store</string>
+		<string>Click on the cards to select the card to buy</string>
+		<string>Click buy to buy or leave to leave</string>
+	</array>
+	<key>board</key>
+	<array>
+		<string>Welcome to the Loot Rush world.</string>
+		<string>Walk on the board to collect traps.</string>
+		<string>You are here.</string>
+		<string>Here is the store, you can buy traps and valuables.</string>
+		<string>Here is the castle, bring back your treasures to get points</string>
+		<string>Here is the chest, good things can be found here.</string>
+	</array>
+	<key>teachSelectChar</key>
+	<array>
+		<string>Swipe the card up to select character</string>
+	</array>
+	<key>connectionIphone</key>
+	<array>
+		<string>Welcome to Loot Rush.</string>
+		<string>This game requires 2-4 players.</string>
+		<string>This iPhone will work as your gamepad</string>
+		<string>Wait for the board invitation.</string>
+	</array>
+	<key>teachGo</key>
+	<array>
+		<string>You can press go now</string>
+	</array>
+	<key>connectionIpad</key>
+	<array>
+		<string>Welcome to Loot Rush</string>
+		<string>This game requires 2-4 players</string>
+		<string>This iPad will work as the board</string>
+		<string>You need iPhones to work as the game pads</string>
+		<string>Press this button to select the number of turns</string>
+		<string>Press this button to connect</string>
+		<string>Wait for the players to connect</string>
+	</array>
+</dict>
+</plist>

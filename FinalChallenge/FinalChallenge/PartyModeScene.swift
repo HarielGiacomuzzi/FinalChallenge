@@ -446,16 +446,23 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     // Mark :- Tutorial Related Functions
     
     func setTutorialScene(){
+        let strings = TutorialManager.loadStringsPlist("connectionIphone")
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
-        tuples.append((nil, "wait for ipad to connect", nil))
+        tuples.append((nil, strings[0], nil))
+        tuples.append((nil, strings[1], nil))
+        tuples.append((nil, strings[2], nil))
+        tuples.append((nil, strings[3], nil))
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 1.0)
         tutorialManager.showInfo()
         GlobalFlags.welcomeTutorialIphone = true
     }
+
     
     func teachHowToChooseCharacter() {
+        
+        let strings = TutorialManager.loadStringsPlist("teachSelectChar")
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
         let moveUp = SKAction.moveTo(CGPointMake(arrayAvatarSprite[2].position.x, arrayAvatarSprite[2].position.y + 40), duration: 0.5)
@@ -463,7 +470,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         let sequence = SKAction.sequence([moveUp, moveDown])
         let animation = SKAction.repeatActionForever(sequence)
-        tuples.append((arrayAvatarSprite[2], "Swipe the cards up", animation))
+        tuples.append((arrayAvatarSprite[2], strings[0], animation))
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 1.0)
         tutorialManager.showInfo()
