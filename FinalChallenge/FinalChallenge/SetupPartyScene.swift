@@ -133,12 +133,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         
         backButton = SetupPartyButton(textureOn: greenButton, textureOff: greenButtonOff)
         backButton?.delegate = self
+        backButton?.name = "back"
         backButton?.zPosition = 6
         backButton?.position = CGPoint(x: backButton!.frame.width/3, y: self.frame.height/12)
         self.addChild(backButton!)
         
         back = SKLabelNode(fontNamed: "Helvetica Neue") // will be a texture probably
-        back!.name = "back"
+        back!.name = "backLabel"
         back!.text = "Back"
         //back!.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
         back!.position.x = back!.position.x - back!.frame.width/2 + 25
@@ -311,7 +312,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
         
-        if(back!.containsPoint(location)){
+        if(backButton!.containsPoint(location)){
             viewController.dismissViewControllerAnimated(false, completion: nil)
         }
         
@@ -462,9 +463,11 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
                 GameManager.sharedInstance.sendPlayersColors()
             }
         }
+        
         if sender == connect {
             viewController.ConnectPlayers()
         }
+        
         if sender == turns {
             turnCounter = turnCounter + 5
             if turnCounter > 30 {
@@ -473,6 +476,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
             
             numberOfTurns?.text = "max turns : \(turnCounter)"
             GameManager.sharedInstance.totalGameTurns = turnCounter
+        }
+        
+        if sender == backButton {
+            self.viewController.dismissViewControllerAnimated(false, completion: nil)
         }
     }
     
