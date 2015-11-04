@@ -13,15 +13,19 @@ class InformationBoxNode: SKNode {
     
     var background: SKSpriteNode!
     var textNode: SKLabelNode!
+    var textNode2: SKLabelNode!
     weak var delegate: InformationNodeDelegate?
     var atlas = SKTextureAtlas(named: "tutorial")
+    var isIphone = false
 
     
     init(isIphone: Bool, text: String) {
         super.init()
+         self.isIphone = isIphone
         loadSprite(isIphone)
         loadText(text)
         loadTouchToContinueText()
+        self.isIphone = isIphone
 
         userInteractionEnabled = true
     }
@@ -41,11 +45,26 @@ class InformationBoxNode: SKNode {
     }
     
     func loadText(text: String) {
-        textNode = SKLabelNode(text: text)
+        let texts = text.separateInCharacter(50)
+        textNode = SKLabelNode(text: texts[0])
         textNode.fontName = "Helvetica-Bold"
         textNode.fontSize = 40
+        if isIphone {
+            textNode.fontSize = 20
+        }
         textNode.zPosition = 2
+        textNode.position.y = textNode.frame.size.height
         addChild(textNode)
+        
+        textNode2 = SKLabelNode(text: texts[1])
+        textNode2.fontName = "Helvetica-Bold"
+        textNode2.fontSize = 40
+        if isIphone {
+            textNode2.fontSize = 20
+        }
+        textNode2.zPosition = 2
+//        textNode2.position.y = -textNode.frame.size.height
+        addChild(textNode2)
     }
     
     func loadTouchToContinueText() {
@@ -54,6 +73,9 @@ class InformationBoxNode: SKNode {
         node.fontName = "Helvetica-Bold"
         node.zPosition = 2
         node.fontSize = 20
+        if isIphone {
+            node.fontSize = 10
+        }
         addChild(node)
     }
     

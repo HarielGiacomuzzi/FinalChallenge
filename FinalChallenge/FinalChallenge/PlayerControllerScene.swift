@@ -29,9 +29,9 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         let background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPointMake(frame.size.width / 2, frame.size.height  / 2)
         background.setScale(2.0)
-        addChild(background)
-
-        self.backgroundColor = UIColor.whiteColor()
+        //addChild(background)
+        
+        self.backgroundColor = UIColor.init(red: 30/255, green: 183/255, blue: 249/255, alpha: 1)
         
         createSquaresAndAnimate()
         setupTopBar()
@@ -54,7 +54,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     
     func setupCardCarousel(cards:[CardSprite]) {
         carousel = CardCarouselNode(cardsArray: cards, startIndex: 0)
-        carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 2)
+        carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 1.7)
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
@@ -73,7 +73,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         
         while(pos.y > -squareTexture.size().height/2) {
             let squaresNode = SKSpriteNode(texture: squareTexture)
-            squaresNode.zPosition = 1
+            squaresNode.zPosition = 2
             squaresNode.alpha = 0.5
         
             squaresNode.position = pos
@@ -202,11 +202,11 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     }
     
     func setTutorial() {
+        let strings = TutorialManager.loadStringsPlist("controllerBasic")
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
-        tuples.append((nil, "Welcome to Loot Rush", nil))
-        tuples.append((moneyButton, "Touch this button to see your money", nil))
-        tuples.append((lootButton, "Touch this button to see your loot", nil))
+        tuples.append((moneyButton, strings[0], nil))
+        tuples.append((lootButton, strings[1], nil))
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
         tutorialManager.showInfo()
@@ -214,15 +214,16 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     }
     
     func teachDice() {
+        let strings = TutorialManager.loadStringsPlist("teachDice")
         if tutorialManager != nil {
-            tutorialManager.tuples.append((dice, "this is the dice", nil))
+            tutorialManager.tuples.append((dice, strings[0], nil))
             if !tutorialManager.isActive {
                 tutorialManager.showInfo()
             }
         } else {
             var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
             
-            tuples.append((dice, "this is the dice", nil))
+            tuples.append((dice, strings[0], nil))
             
             tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
             tutorialManager.showInfo()
@@ -231,6 +232,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     }
     
     func teachCardsUse() {
+        let strings = TutorialManager.loadStringsPlist("teachCard")
 //        let card = carousel.getCenterCard()
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
@@ -240,7 +242,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         let sequence = SKAction.sequence([moveUp, moveDown])
         let animation = SKAction.repeatActionForever(sequence)
         
-        tuples.append((carousel, "You can set up a trap by throwing it to the board", animation))
+        tuples.append((carousel, strings[0], animation))
         
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
         tutorialManager.showInfo()

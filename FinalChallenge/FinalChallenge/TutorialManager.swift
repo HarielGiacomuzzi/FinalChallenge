@@ -95,7 +95,7 @@ class TutorialManager: NSObject, InformationNodeDelegate, ArrowDelegate {
         
         infoBox.position = CGPointMake(scene.frame.size.width/2, infoBox.calculateAccumulatedFrame().height/2)
         if let n = node {
-            if n.position.y < scene.frame.size.height/2 {
+            if n.position.y < infoBox.position.y + infoBox.calculateAccumulatedFrame().height/2 {
                 infoBox.position = CGPointMake(scene.frame.size.width/2, scene.frame.size.height - infoBox.calculateAccumulatedFrame().height/2)
             }
         }
@@ -143,6 +143,12 @@ class TutorialManager: NSObject, InformationNodeDelegate, ArrowDelegate {
     
     func arrowTouched() {
         closeInformation()
+    }
+    
+    static func loadStringsPlist(name:String) -> [String] {
+        let path = NSBundle.mainBundle().pathForResource("TutorialTexts", ofType: "plist")
+        let dict = NSDictionary(contentsOfFile: path!)
+        return dict![name] as! [String]
     }
     
     
