@@ -42,6 +42,7 @@
 		5E4299341BB9914F004B1DF9 /* CardShowNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4299331BB9914F004B1DF9 /* CardShowNode.swift */; };
 		5E51FBE61BD0315E00F482A6 /* endgameassets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E51FBE51BD0315E00F482A6 /* endgameassets.xcassets */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
+		5E59AE911BEA6459006C4E9B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59AE901BEA6459006C4E9B /* NotificationManager.swift */; };
 		5E5A64A41BC6E26B00D5AC09 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A64A31BC6E26B00D5AC09 /* PlayerNode.swift */; };
 		5E5A64A61BC6EC6B00D5AC09 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A64A51BC6EC6B00D5AC09 /* TestViewController.swift */; };
 		5E5A64A81BC6EC7C00D5AC09 /* TestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A64A71BC6EC7C00D5AC09 /* TestScene.swift */; };
@@ -76,7 +77,6 @@
 		5EE219F61BD0161300D6EF98 /* DiceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE219F51BD0161300D6EF98 /* DiceNode.swift */; };
 		5EE219F81BD0280800D6EF98 /* coinParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5EE219F71BD0280800D6EF98 /* coinParticle.sks */; };
 		5EE219FA1BD028D700D6EF98 /* EndGameParticleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE219F91BD028D700D6EF98 /* EndGameParticleNode.swift */; };
-		5EE267D71BC2A49D0006E5BD /* NotificationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE267D61BC2A49D0006E5BD /* NotificationNode.swift */; };
 		5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */; };
 		B503E3F41BAB2FA400C6284A /* GameOverSceneMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */; };
 		B51663EF1B7D0D720040A1B4 /* GamePadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51663EE1B7D0D720040A1B4 /* GamePadController.swift */; };
@@ -191,6 +191,7 @@
 		5E4299331BB9914F004B1DF9 /* CardShowNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardShowNode.swift; sourceTree = "<group>"; };
 		5E51FBE51BD0315E00F482A6 /* endgameassets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = endgameassets.xcassets; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
+		5E59AE901BEA6459006C4E9B /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		5E5A64A31BC6E26B00D5AC09 /* PlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 		5E5A64A51BC6EC6B00D5AC09 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		5E5A64A71BC6EC7C00D5AC09 /* TestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestScene.swift; sourceTree = "<group>"; };
@@ -225,7 +226,6 @@
 		5EE219F51BD0161300D6EF98 /* DiceNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceNode.swift; sourceTree = "<group>"; };
 		5EE219F71BD0280800D6EF98 /* coinParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = coinParticle.sks; sourceTree = "<group>"; };
 		5EE219F91BD028D700D6EF98 /* EndGameParticleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameParticleNode.swift; sourceTree = "<group>"; };
-		5EE267D61BC2A49D0006E5BD /* NotificationNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNode.swift; sourceTree = "<group>"; };
 		5EF605F21B9CE49E0075504E /* CGFloat+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		B503E3F31BAB2FA400C6284A /* GameOverSceneMP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverSceneMP.swift; sourceTree = "<group>"; };
 		B51663EE1B7D0D720040A1B4 /* GamePadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadController.swift; sourceTree = "<group>"; };
@@ -360,8 +360,8 @@
 				5ED294DC1BBD9A700073B148 /* GamePads */,
 				5E2BAEE91BBB432D001C70EB /* PlayerScene */,
 				5E2BAEEA1BBB433B001C70EB /* StoreScene */,
-				5EE267D61BC2A49D0006E5BD /* NotificationNode.swift */,
 				B5840CC71BC43E1D006E741B /* EndGameIphoneScene.swift */,
+				5E59AE901BEA6459006C4E9B /* NotificationManager.swift */,
 			);
 			name = PlayerControllerView;
 			sourceTree = "<group>";
@@ -876,7 +876,6 @@
 				DB495B211BC6E32800A8E0DE /* BoardNode.swift in Sources */,
 				5ED294E01BBD9C030073B148 /* GamePadScene.swift in Sources */,
 				B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */,
-				5EE267D71BC2A49D0006E5BD /* NotificationNode.swift in Sources */,
 				5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */,
 				5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */,
 				DBE862071B8552C800C8099E /* MainBoard.swift in Sources */,
@@ -914,6 +913,7 @@
 				B5840CC81BC43E1D006E741B /* EndGameIphoneScene.swift in Sources */,
 				5E5A64A81BC6EC7C00D5AC09 /* TestScene.swift in Sources */,
 				5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */,
+				5E59AE911BEA6459006C4E9B /* NotificationManager.swift in Sources */,
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,
