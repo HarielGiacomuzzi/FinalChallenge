@@ -21,6 +21,14 @@ func + (left: CGSize, right: CGSize) -> CGSize {
     return CGSizeMake(left.width + right.width,left.height + right.height)
 }
 
+func - (left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPointMake(left.x - right.x,left.y - right.y)
+}
+
+func + (left: CGPoint, right: CGPoint) -> CGPoint {
+    return CGPointMake(left.x + right.x,left.y + right.y)
+}
+
 class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     let partsAtlas = SKTextureAtlas(named: "puffGame")
     
@@ -55,7 +63,6 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             let head = SKSpriteNode(texture: partsAtlas.textureNamed("babyHead"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33))
             head.zPosition = 1
             head.position = CGPointMake(0, 0)
-            head.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33))
             
             let helmet = SKSpriteNode(texture: partsAtlas.textureNamed("helmet"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmet").size()*CGFloat(scaleFactor))
             helmet.zPosition = 3
@@ -67,20 +74,29 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             helmetReflex.zPosition = 4
             helmetReflex.position = CGPointMake(0, 0)
             
-            let body = SKSpriteNode(texture: partsAtlas.textureNamed("babyBody"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
-            body.zPosition = 0
-            body.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 30.0, height: 30.0))
-            body.position = CGPointMake(helmet.position.x,  -(partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33)).height-30)
+            let body = SKSpriteNode(texture: partsAtlas.textureNamed("babyBody"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("babyBody").size()*CGFloat(scaleFactor))
+            body.zPosition = 1
+            var aux1 = partsAtlas.textureNamed("babyHead").size()*CGFloat(scaleFactor)/2
+            var aux2 = partsAtlas.textureNamed("babyBody").size()*CGFloat(scaleFactor)/2
+            body.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("body").size()*CGFloat(scaleFactor))
+            body.position = CGPointMake(helmet.position.x,  -(aux1 + aux2).height+15)
             
-            let arm = SKSpriteNode(texture: partsAtlas.textureNamed("babyArm"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
-            arm.zPosition = 0
-            arm.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 30.0, height: 30.0))
-            arm.position = CGPointMake(arm.position.x, -helmet.size.height+22)
+            let armRight = SKSpriteNode(texture: partsAtlas.textureNamed("babyArm"), color: UIColor.blueColor(), size:partsAtlas.textureNamed("babyArm").size()*CGFloat(scaleFactor))
+            armRight.zPosition = 0
+            armRight.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyArm").size()*CGFloat(scaleFactor))
+            armRight.position = CGPointMake(aux2.width+5,-(aux1 + aux2).height+15)
             
-            let leg = SKSpriteNode(texture: partsAtlas.textureNamed("babyLeg"), color: UIColor.blueColor(), size: CGSize(width: 30.0, height: 30.0))
-            leg.zPosition = 0
-            leg.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 30.0, height: 30.0))
-            leg.position = CGPointMake(leg.position.x, -helmet.size.height+22+body.size.height)
+            let armLeft = SKSpriteNode(texture: partsAtlas.textureNamed("babyArm"), color: UIColor.blueColor(), size:partsAtlas.textureNamed("babyArm").size()*CGFloat(scaleFactor))
+            armLeft.zPosition = 0
+            armLeft.xScale = -armLeft.xScale
+            armLeft.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyArm").size()*CGFloat(scaleFactor))
+            armLeft.position = CGPointMake(-aux2.width-5,-(aux1 + aux2).height+15)
+            
+            let legRight = SKSpriteNode(texture: partsAtlas.textureNamed("babyLeg"), color: UIColor.blueColor(), size:partsAtlas.textureNamed("babyLeg").size()*CGFloat(scaleFactor))
+            legRight.zPosition = 0
+            legRight.zRotation = CGFloat(4.71239)
+            legRight.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyLeg").size()*CGFloat(scaleFactor))
+            legRight.position = CGPointMake(aux2.width/2.5, -aux1.height-body.size.height)
 
             let legLeft = SKSpriteNode(texture: partsAtlas.textureNamed("babyLeg"), color: UIColor.blueColor(), size:partsAtlas.textureNamed("babyLeg").size()*CGFloat(scaleFactor))
             legLeft.zPosition = 0
@@ -116,7 +132,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             player.sprite = spriteNode
             self.players.append(player)
             self.addChild(player.sprite!)
-//            
+            
 //            player.sprite!.physicsBody = SKPhysicsBody(rectangleOfSize: spriteNode.size)
 //            player.sprite!.physicsBody?.dynamic = true
 //            player.sprite!.physicsBody?.categoryBitMask = self.playerCategory
@@ -124,21 +140,21 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
 //            player.sprite!.physicsBody?.collisionBitMask = 0
 //            player.sprite!.physicsBody?.usesPreciseCollisionDetection = true
         
-            let armLeftJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: armLeft.physicsBody!, anchor: CGPointMake(-aux2.width-5,-(aux1 + aux2).height+15))
-            self.scene!.physicsWorld.addJoint(armLeftJoint)
+            let armLeftJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: armLeft.physicsBody!, anchor:spriteNode.position + CGPointMake(-aux2.width-5,-(aux1 + aux2).height+15))
+            body.scene!.physicsWorld.addJoint(armLeftJoint)
             
             
-            let armRightJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: armRight.physicsBody!, anchor:CGPointMake(aux2.width+5,-(aux1 + aux2).height+15))
-            self.scene?.physicsWorld.addJoint(armRightJoint)
+            let armRightJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: armRight.physicsBody!, anchor:spriteNode.position + CGPointMake(aux2.width+5,-(aux1 + aux2).height+15))
+            body.scene?.physicsWorld.addJoint(armRightJoint)
             
-            let legLeftJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: legLeft.physicsBody!, anchor:CGPointMake(-aux2.width/2.5,-aux1.height-body.size.height))
-            self.scene?.physicsWorld.addJoint(legLeftJoint)
+            let legLeftJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: legLeft.physicsBody!, anchor:spriteNode.position + CGPointMake(-aux2.width/2.5,-aux1.height-body.size.height))
+            body.scene?.physicsWorld.addJoint(legLeftJoint)
             
-            let legRightJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: legRight.physicsBody!, anchor:CGPointMake(aux2.width/2.5, -aux1.height-body.size.height))
-            self.scene?.physicsWorld.addJoint(legRightJoint)
+            let legRightJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: legRight.physicsBody!, anchor:spriteNode.position + CGPointMake(aux2.width/2.5, -aux1.height-body.size.height))
+            body.scene?.physicsWorld.addJoint(legRightJoint)
             
-            let headJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: head.physicsBody!, anchor:CGPointMake(0, 0))
-            self.scene?.physicsWorld.addJoint(headJoint)
+            let headJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: helmet.physicsBody!, anchor:spriteNode.position + helmet.position)
+            body.scene?.physicsWorld.addJoint(headJoint)
         }
      
         setupSpikes();
