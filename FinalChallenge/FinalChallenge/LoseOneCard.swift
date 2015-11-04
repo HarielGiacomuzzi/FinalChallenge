@@ -14,6 +14,7 @@ class LoseCard : ActiveCard{
         super.init()
         self.cardName = "LoseCard"
         imageName = "losecard"
+        self.desc = "This card takes another  card from a player."
     }
     
     override func activate(targetPlayer:Player) {

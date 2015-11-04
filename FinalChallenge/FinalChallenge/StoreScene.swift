@@ -35,7 +35,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         background.setScale(2.0)
         addChild(background)
         
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.init(red: 30/255, green: 183/255, blue: 249/255, alpha: 1)
         
         createSquaresAndAnimate()
         setupTopBar()

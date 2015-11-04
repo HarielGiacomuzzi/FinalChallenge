@@ -15,4 +15,5 @@ class Card : NSObject{
     var storeValue = Int()
     var cardOwner = Player()
     var imageName = String()
+    var desc = String()
 }

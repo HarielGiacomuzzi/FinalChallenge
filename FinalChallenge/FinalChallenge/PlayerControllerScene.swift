@@ -29,9 +29,9 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         let background = SKSpriteNode(texture: backgroundTexture)
         background.position = CGPointMake(frame.size.width / 2, frame.size.height  / 2)
         background.setScale(2.0)
-        addChild(background)
-
-        self.backgroundColor = UIColor.whiteColor()
+        //addChild(background)
+        
+        self.backgroundColor = UIColor.init(red: 30/255, green: 183/255, blue: 249/255, alpha: 1)
         
         createSquaresAndAnimate()
         setupTopBar()
@@ -54,7 +54,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     
     func setupCardCarousel(cards:[CardSprite]) {
         carousel = CardCarouselNode(cardsArray: cards, startIndex: 0)
-        carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 2)
+        carousel.position = CGPointMake(self.frame.size.width/2, topBarLimit / 1.7)
         carousel.zPosition = 30
         carousel.delegate = self
         self.addChild(carousel)
@@ -73,7 +73,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         
         while(pos.y > -squareTexture.size().height/2) {
             let squaresNode = SKSpriteNode(texture: squareTexture)
-            squaresNode.zPosition = 1
+            squaresNode.zPosition = 2
             squaresNode.alpha = 0.5
         
             squaresNode.position = pos
