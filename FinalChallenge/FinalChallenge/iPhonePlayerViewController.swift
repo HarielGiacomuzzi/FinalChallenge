@@ -20,7 +20,7 @@ class iPhonePlayerViewController: UIViewController {
     var gamePadScene : GamePadScene?
     var endGameScene : EndGameIphoneScene?
     
-    var notificationArray : [NotificationNode] = []
+    var notificationManager: NotificationManager?
 
     var playerColor : UIColor!
     var playerMoney = 0
@@ -46,10 +46,10 @@ class iPhonePlayerViewController: UIViewController {
         skView?.showsNodeCount = false
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
-        playerCards = ["StealGoldCard","LoseCard","MoveBackCard","Skull","Lamp"]
- //     loadPartyModeScene()
+//        playerCards = ["StealGoldCard","LoseCard","MoveBackCard","Skull","Lamp"]
+      loadPartyModeScene()
  //       loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
-        loadPlayerView()
+//        loadPlayerView()
     }
     
     // MARK: - Message Received Functions
@@ -68,8 +68,8 @@ class iPhonePlayerViewController: UIViewController {
                 scene.teachDice()
             }
         }
-        
-        setNotification("Your Turn")
+        let string = NotificationManager.loadStringsPlist("yourTurn", replaceable: "")
+        setNotification(string)
         
     }
     
@@ -91,8 +91,8 @@ class iPhonePlayerViewController: UIViewController {
         let playerName = dic["player"] as! String
         let value = dic["value"] as! Int
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
-
-            setNotification("You got \(value - playerMoney) moneys")
+            let string = NotificationManager.loadStringsPlist("gotMoney", replaceable: "\(value - playerMoney)")
+            setNotification(string)
             playerMoney = value
             playerScene?.updateMoney(playerMoney)
         } else {
@@ -107,7 +107,8 @@ class iPhonePlayerViewController: UIViewController {
 
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerCards.append(card)
-            setNotification("You got teh card \(card) :)")
+            let string = NotificationManager.loadStringsPlist("gotCard", replaceable: card)
+            setNotification(string)
             if playerScene != nil {
                 playerScene!.addCard(card)
             }
@@ -129,7 +130,8 @@ class iPhonePlayerViewController: UIViewController {
         } else {
             
         }
-        setNotification(status)
+        let string = NotificationManager.loadStringsPlist(status, replaceable: "")
+        setNotification(string)
     }
     
     func openStore(data : NSNotification) {
@@ -151,7 +153,8 @@ class iPhonePlayerViewController: UIViewController {
             let player = dic["player"] as! String
             let card = dic["card"] as! String
             if player == ConnectionManager.sharedInstance.peerID!.displayName {
-                setNotification(status)
+                let string = NotificationManager.loadStringsPlist(status, replaceable: "")
+                setNotification(string)
                 
                 playerMoney = dic["playerMoney"] as! Int
                 if worked {
@@ -239,46 +242,26 @@ class iPhonePlayerViewController: UIViewController {
         endGameScene = nil
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for notification in notificationArray {
-            notification.removeFromParent()
-        }
-        notificationArray = []
-    }
-    
     
     // MARK: - Aux Functions
     
     func setNotification(text:String) {
-        let notification = NotificationNode(text: text)
-        notificationArray.append(notification)
-
-        setNotificationsInNewScene()
+        if notificationManager == nil {
+            notificationManager = NotificationManager(notifications: [text], scene: skView!.scene!)
+        } else {
+            notificationManager?.notifications.append(text)
+            if !notificationManager!.isActive {
+                notificationManager!.showInfo()
+            }
+        }
     }
     
     func setNotificationsInNewScene() {
-        
-        //adds notifications to scene
-        for notification in notificationArray {
-            if notification.parent != nil {
-                notification.removeFromParent()
-            }
-            skView?.scene?.addChild(notification)
-        }
-        
-        //fixes notifications positions
-        let notificationHeight = notificationArray.first?.calculateAccumulatedFrame().height
-        var fullsize:CGFloat = 0.0
-        var start:CGFloat = 0.0
-        for _ in notificationArray {
-            fullsize += notificationHeight!
-        }
-        start = skView!.scene!.frame.size.height/2 - fullsize/2
-        
-        for notification in notificationArray {
-            let positionY = start + notificationHeight!/2
-            notification.position = CGPointMake(skView!.scene!.frame.size.width/2, positionY)
-            start = positionY + notificationHeight!/2
+
+        if notificationManager != nil {
+            let notifications = notificationManager!.notifications
+            notificationManager = NotificationManager(notifications: notifications, scene: skView!.scene!)
+            notificationManager!.showInfo()
         }
         
     }
