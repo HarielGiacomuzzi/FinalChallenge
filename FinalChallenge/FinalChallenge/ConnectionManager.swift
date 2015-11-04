@@ -406,6 +406,23 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_SwipeActive", object: nil, userInfo: userInfo)
                 return
             }
+                //player moves half next turn
+            if message.valueForKey("HalfMove") != nil {
+                //print(message)
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                //userInfo.updateValue(message.valueForKey("player") as! NSObject, forKey: "player")
+                //userInfo.updateValue(message.valueForKey("half") as! NSObject, forKey: "half")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_HalfMove", object: nil, userInfo:userInfo)
+                return
+            }
+            if message.valueForKey("DoubleMove") != nil {
+                //print(message)
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                //userInfo.updateValue(message.valueForKey("player") as! NSObject, forKey: "player")
+                //userInfo.updateValue(message.valueForKey("half") as! NSObject, forKey: "half")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DoubleMove", object: nil, userInfo:userInfo)
+                return
+            }
         
         }
         // if I dont know what it is I will send the default message
