@@ -43,6 +43,7 @@
 		5E51FBE61BD0315E00F482A6 /* endgameassets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E51FBE51BD0315E00F482A6 /* endgameassets.xcassets */; };
 		5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */; };
 		5E59AE911BEA6459006C4E9B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E59AE901BEA6459006C4E9B /* NotificationManager.swift */; };
+		5E59AE931BEA7543006C4E9B /* AlertMessages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E59AE921BEA7543006C4E9B /* AlertMessages.plist */; };
 		5E5A64A41BC6E26B00D5AC09 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A64A31BC6E26B00D5AC09 /* PlayerNode.swift */; };
 		5E5A64A61BC6EC6B00D5AC09 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A64A51BC6EC6B00D5AC09 /* TestViewController.swift */; };
 		5E5A64A81BC6EC7C00D5AC09 /* TestScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5A64A71BC6EC7C00D5AC09 /* TestScene.swift */; };
@@ -192,6 +193,7 @@
 		5E51FBE51BD0315E00F482A6 /* endgameassets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = endgameassets.xcassets; sourceTree = "<group>"; };
 		5E531C591B87AA6500BBBD29 /* MessagesEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesEnum.swift; sourceTree = "<group>"; };
 		5E59AE901BEA6459006C4E9B /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		5E59AE921BEA7543006C4E9B /* AlertMessages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AlertMessages.plist; sourceTree = "<group>"; };
 		5E5A64A31BC6E26B00D5AC09 /* PlayerNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
 		5E5A64A51BC6EC6B00D5AC09 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		5E5A64A71BC6EC7C00D5AC09 /* TestScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestScene.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				5E2BAEEA1BBB433B001C70EB /* StoreScene */,
 				B5840CC71BC43E1D006E741B /* EndGameIphoneScene.swift */,
 				5E59AE901BEA6459006C4E9B /* NotificationManager.swift */,
+				5E59AE921BEA7543006C4E9B /* AlertMessages.plist */,
 			);
 			name = PlayerControllerView;
 			sourceTree = "<group>";
@@ -829,6 +832,7 @@
 				5ED264721BE92095008994C9 /* TutorialTexts.plist in Resources */,
 				26CF809A1B8CD59000DFCB73 /* fireBombParticle.sks in Resources */,
 				B57B33671B86566E000E5F53 /* GameOver.xib in Resources */,
+				5E59AE931BEA7543006C4E9B /* AlertMessages.plist in Resources */,
 				5E6039741B85017700F63DC3 /* rock.atlas in Resources */,
 				DB98FEA61B825ED300AD5098 /* board_1.xml in Resources */,
 				5EC7FF8A1BC81E9500494CE4 /* charSprites.atlas in Resources */,

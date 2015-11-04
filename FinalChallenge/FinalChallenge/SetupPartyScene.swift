@@ -316,9 +316,9 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
             viewController.dismissViewControllerAnimated(false, completion: nil)
         }
         
-        if info!.containsPoint(location){
-            self.setTutorialScene()
-        }
+//        if info!.containsPoint(location){
+//            self.setTutorialScene()
+//        }
 
     }
     

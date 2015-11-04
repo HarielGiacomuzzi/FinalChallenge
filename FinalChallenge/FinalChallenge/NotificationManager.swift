@@ -54,4 +54,13 @@ class NotificationManager: NSObject, InformationNodeDelegate {
             scene.addChild(infoBox)
         }
     }
+    
+    static func loadStringsPlist(name: String, replaceable: String) -> String {
+        let path = NSBundle.mainBundle().pathForResource("AlertMessages", ofType: "plist")
+        let dict = NSDictionary(contentsOfFile: path!)
+        let string = dict![name] as! String
+        let newString = string.stringByReplacingOccurrencesOfString("$", withString: replaceable)
+        
+        return newString
+    }
 }

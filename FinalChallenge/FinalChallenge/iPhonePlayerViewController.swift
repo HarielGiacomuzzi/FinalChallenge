@@ -68,8 +68,8 @@ class iPhonePlayerViewController: UIViewController {
                 scene.teachDice()
             }
         }
-        
-        setNotification("Your Turn")
+        let string = NotificationManager.loadStringsPlist("yourTurn", replaceable: "")
+        setNotification(string)
         
     }
     
@@ -91,8 +91,8 @@ class iPhonePlayerViewController: UIViewController {
         let playerName = dic["player"] as! String
         let value = dic["value"] as! Int
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
-
-            setNotification("You got \(value - playerMoney) moneys")
+            let string = NotificationManager.loadStringsPlist("gotMoney", replaceable: "\(value - playerMoney)")
+            setNotification(string)
             playerMoney = value
             playerScene?.updateMoney(playerMoney)
         } else {
@@ -107,7 +107,8 @@ class iPhonePlayerViewController: UIViewController {
 
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerCards.append(card)
-            setNotification("You got teh card \(card) :)")
+            let string = NotificationManager.loadStringsPlist("gotCard", replaceable: card)
+            setNotification(string)
             if playerScene != nil {
                 playerScene!.addCard(card)
             }
@@ -129,7 +130,8 @@ class iPhonePlayerViewController: UIViewController {
         } else {
             
         }
-        setNotification(status)
+        let string = NotificationManager.loadStringsPlist(status, replaceable: "")
+        setNotification(string)
     }
     
     func openStore(data : NSNotification) {
@@ -151,7 +153,8 @@ class iPhonePlayerViewController: UIViewController {
             let player = dic["player"] as! String
             let card = dic["card"] as! String
             if player == ConnectionManager.sharedInstance.peerID!.displayName {
-                setNotification(status)
+                let string = NotificationManager.loadStringsPlist(status, replaceable: "")
+                setNotification(string)
                 
                 playerMoney = dic["playerMoney"] as! Int
                 if worked {

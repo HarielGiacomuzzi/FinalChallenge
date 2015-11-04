@@ -233,9 +233,9 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         if let location = touch?.locationInNode(self) {
             
-            if info!.containsPoint(location) {
-                self.setTutorialScene()
-            }
+//            if info!.containsPoint(location) {
+//                self.setTutorialScene()
+//            }
             let touchedNode = self.nodeAtPoint(location)
             if touchedNode.name == "back"{
                 viewController?.dismissViewControllerAnimated(false, completion: nil)

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>yourTurn</key>
+	<string>Your turn</string>
+	<key>trapSetUp</key>
+	<string>Trap was set up</string>
+	<key>cardBadSpot</key>
+	<string>Can&apos;t set this card on this spot right now</string>
+	<key>cardWrongCard</key>
+	<string>Can&apos;t use this type of card right now</string>
+	<key>gotMoney</key>
+	<string>You got $ money</string>
+	<key>gotCard</key>
+	<string>You got the card $</string>
+	<key>buySuccess</key>
+	<string>You have successfully bought a card</string>
+	<key>buyNoMoney</key>
+	<string>You don&apos;t have enough money</string>
+	<key>buyMaxCards</key>
+	<string>You already have the maximum ammount of cards</string>
+</dict>
+</plist>

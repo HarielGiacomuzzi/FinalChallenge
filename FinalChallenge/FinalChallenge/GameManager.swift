@@ -212,14 +212,14 @@ class GameManager : NSObject {
                                 activeCard.used = true
                                 activeCard.cardOwner = p
                                 sent = true
-                                status = "Trap was set up"
+                                status = "trapSetUp"
                             } else {
                                 activeCard.used = false
-                                status = "Can't set this card on this spot right now"
+                                status = "cardBadSpot"
                             }
                         }
                         if let _ = c as? NotActiveCard {
-                            status = "Can't use this type of card right now"
+                            status = "cardWrongCard"
                         }
                         break
                     }
@@ -250,11 +250,11 @@ class GameManager : NSObject {
         var worked = false
         
         if player.items.count >= 5 {
-            status = "You already have the maximum ammount of cards"
+            status = "buyMaxCards"
         } else if player.coins <= card.storeValue {
-            status = "You don't have enough money"
+            status = "buyNoMoney"
         } else {
-            status = "You have successfully bought a card"
+            status = "buySuccess"
             worked = true
         }
         
