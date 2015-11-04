@@ -113,11 +113,15 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     
     
     func setTutorialScene() {
+        let strings = TutorialManager.loadStringsPlist("connectionIpad")
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
-        tuples.append((nil, "this game requires 2-4 players", nil))
-        tuples.append((turns, "Click here to choose the number of turns", nil))
-        tuples.append((connect, "Click here to connect", nil))
-        tuples.append((nil, "Wait for the players to connect", nil))
+        tuples.append((nil, strings[0], nil))
+        tuples.append((nil, strings[1], nil))
+        tuples.append((nil, strings[2], nil))
+        tuples.append((nil, strings[3], nil))
+        tuples.append((turns, strings[4], nil))
+        tuples.append((connect, strings[5], nil))
+        tuples.append((nil, strings[6], nil))
         go?.userInteractionEnabled = false
         tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
         tutorialManager.showInfo()
@@ -314,6 +318,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         if info!.containsPoint(location){
             self.setTutorialScene()
         }
+
     }
     
     func spawnItem(){
@@ -417,9 +422,9 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     func teachHowToGo() {
         checkIfCanGo()
         if canGo {
+            let strings = TutorialManager.loadStringsPlist("teachGo")
             var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
-            
-            tuples.append((go, "You can press go now", nil))
+            tuples.append((go, strings[0], nil))
             tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
             tutorialManager.showInfo()
         }
@@ -474,6 +479,4 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     deinit{
         //print("SetupScene do Ipad foi retirada")
     }
-    
-    
 }

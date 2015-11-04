@@ -26,11 +26,6 @@ class iPhonePlayerViewController: UIViewController {
     var playerMoney = 0
     var playerCards:[String] = []
     
-    //flags
-    var diceTaught = false
-    var cardTaught = false
-    var gameTaught = false
-    
     override func viewDidLoad() {
         super.viewDidLoad();
         
