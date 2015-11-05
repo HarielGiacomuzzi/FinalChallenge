@@ -49,6 +49,10 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         if !GlobalFlags.storeTaught {
             setTutorial()
         }
+        
+        let card = cardShow.cards![2]
+        chosenCard = card as? CardSprite
+        cardValue?.text = chosenCard!.priceLabel?.text
     }
     
     deinit {
@@ -134,7 +138,6 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         moneyLabel.fontName = "GillSans-Bold"
         moneyLabel.fontSize = 58
         moneyLabel.zPosition = 101
-        moneyLabel.text = "$ 999.999"
         addChild(moneyLabel)
         
     }
@@ -169,7 +172,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         
         cardValue = SKLabelNode(fontNamed: "GillSans-Bold")
         cardValue?.position = CGPoint(x: self.frame.width/2, y: cardCost.frame.height*0.25)
-        cardValue?.text = "1000"
+        cardValue?.text = ""
         self.addChild(cardValue!)
         cardValue?.zPosition = 101
         cardValue?.fontColor = UIColor.blackColor()
@@ -195,6 +198,12 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         cardShow.delegate = self
         addChild(cardShow)
         
+        
+        
+//        chosenCard = cards.first as! CardSprite
+//        cardValue?.text = chosenCard!.priceLabel?.text
+//        cardChosen(chosenCard!)
+
     }
     // MARK: - Messages Received Functions
     
@@ -236,6 +245,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     
     func cardChosen(sender: SKNode) {
         chosenCard = sender as? CardSprite
+        cardValue?.text = chosenCard?.priceLabel?.text
     }
     
     func setTutorial() {
