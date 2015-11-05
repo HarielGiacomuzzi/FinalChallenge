@@ -466,9 +466,24 @@ class GameManager : NSObject {
             aux = abs(value)
             player.coins += value
         }
-        //print("Esse é o jogador: \(player.playerIdentifier)")
         let playerData = ["player":player.playerIdentifier, "value": player.coins]
         let dic = ["updateMoney":" ", "dataDic" : playerData]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        return aux
+    }
+    
+    // used to update users loot
+    func updatePlayerLoot(player:Player, value:Int) ->Int{
+        var aux = 0
+        if value < 0 && player.lootPoints < abs(value) {
+            aux = player.lootPoints
+            player.lootPoints = 0
+        }else{
+            aux = abs(value)
+            player.lootPoints += value
+        }
+        let playerData = ["player":player.playerIdentifier, "value": player.lootPoints]
+        let dic = ["updateLoot":" ", "dataDic" : playerData]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
         return aux
     }

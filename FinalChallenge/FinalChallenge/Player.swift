@@ -22,6 +22,7 @@ class Player : NSObject {
             }
         }
     }
+    var lootPoints:Int = 0
     var x:Double!
     var y:Double!
     var avatar : String?
