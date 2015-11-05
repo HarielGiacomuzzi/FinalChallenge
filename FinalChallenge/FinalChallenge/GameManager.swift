@@ -229,6 +229,11 @@ class GameManager : NSObject {
 
     // manda a carta a ser adicionada no boardGame
     func cardReceived(data : NSNotification){
+        
+        guard !players.isEmpty else {
+            return
+        }
+        
         let dic = data.userInfo!["dataDic"] as! NSDictionary
         
         var status = " "
