@@ -229,6 +229,11 @@ class GameManager : NSObject {
 
     // manda a carta a ser adicionada no boardGame
     func cardReceived(data : NSNotification){
+        
+        guard !players.isEmpty else {
+            return
+        }
+        
         let dic = data.userInfo!["dataDic"] as! NSDictionary
         
         var status = " "
@@ -249,10 +254,10 @@ class GameManager : NSObject {
                                     activeCard.used = true
                                     activeCard.cardOwner = p
                                     sent = true
-                                    status = "Trap was set up"
+                                    status = "trapSetUp"
                                 } else {
                                     activeCard.used = false
-                                    status = "Can't set this card on this spot right now"
+                                    status = "cardBadSpot"
                                 }
                             } else {
                                 // case not trap
@@ -282,6 +287,12 @@ class GameManager : NSObject {
         let dicc = ["removeCard":" ","dataDic":dataDic]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dicc, reliable: true)
         
+    }
+    
+    func removeCard(player: Player, item: Card) {
+        let dataDic = ["playerName": player.playerIdentifier, "item": item.cardName, "sent": true, "status": "cardCastle"]
+        let dicc = ["removeCard":" ","dataDic":dataDic]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dicc, reliable: true)
     }
     
     func playerAskedToBuyCard(data : NSNotification) {

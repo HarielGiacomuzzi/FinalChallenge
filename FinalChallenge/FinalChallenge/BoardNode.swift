@@ -59,6 +59,7 @@ class BoardNode : NSObject{
                 if !item.usable{
                     player.itemsInHouse.append(item);
                     player.items.removeObject(item);
+                    GameManager.sharedInstance.removeCard(player, item: item)
                 }
             }
             break
@@ -89,7 +90,7 @@ class BoardNode : NSObject{
             if arc4random_uniform(UInt32(1)) >= 1{
                 CardManager.ShareInstance.loseCard(player);
             }else{
-                //deve estar funcionando :P, cair no baú e resar xD
+                //deve estar funcionando :P, cair no bau e rezar xD
                 let card = CardManager.ShareInstance.generateRandomTreasureCard()
                 CardManager.ShareInstance.sendCard(player, card: card)
             }
@@ -162,13 +163,13 @@ class BoardNode : NSObject{
         self.posY = posY;
         
         //add only treasurecards in all houses
-        let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
-        self.item = it
+        //let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
+        //self.item = it
         
         //add only stealgoldcard in all houses
-        //let it = StealGoldCard()
-        //it.used = false
-        //self.item = it
+        let it = StealGoldCard()
+        it.used = false
+        self.item = it
         
         // add ramdonly the itens
         //self.setupItems()

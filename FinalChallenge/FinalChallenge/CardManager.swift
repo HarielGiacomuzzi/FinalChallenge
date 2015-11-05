@@ -101,6 +101,10 @@ class CardManager{
     }
     
     func sendCard(player:Player, card:Card){
+        guard player.items.count < 5 else {
+            return
+        }
+        print("continuei")
         player.items.append(card)
         
         let cardData = ["player":player.playerIdentifier, "item": card.cardName]
