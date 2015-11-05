@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "actionButtonOFF Copy.png",
+      "filename" : "littleCastle.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "actionButtonOFF Copy@2x.png",
+      "filename" : "littleCastle@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "actionButtonOFF Copy@3x.png",
+      "filename" : "littleCastle@3x.png",
       "scale" : "3x"
     }
   ],
