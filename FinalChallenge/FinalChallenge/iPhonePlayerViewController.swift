@@ -48,11 +48,12 @@ class iPhonePlayerViewController: UIViewController {
         skView?.showsNodeCount = false
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
-        
-//        playerCards = ["StealGoldCard","LoseCard","MoveBackCard","Skull","Lamp"]
-      loadPartyModeScene()
- //       loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
-//        loadPlayerView()
+
+        //      playerCards = ["StealGoldCard","LoseCard","MoveBackCard","Skull","Lamp"]
+       // loadPartyModeScene()
+        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
+        //loadPlayerView()
+
     }
     
     // MARK: - Message Received Functions
