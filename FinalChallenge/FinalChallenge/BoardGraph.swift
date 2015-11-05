@@ -231,6 +231,7 @@ class BoardGraph : NSObject{
         for _ in 0...Int(arc4random_uniform(50)+1){
             if !aux[Int(arc4random_uniform(UInt32(aux.count)))].isSpecialNode{
                 aux[Int(arc4random_uniform(UInt32(aux.count)))].coins = Int(arc4random_uniform(9)+1)*5
+            
             }
         }
     }

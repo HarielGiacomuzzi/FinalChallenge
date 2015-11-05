@@ -47,6 +47,8 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     if i.1.nextMoves.count > 1 {
                         texture = self.partsAtlas.textureNamed("square");
                     }
+
+                    
                     
                     let x = SKSpriteNode(texture: texture)
                     let posY = i.1.posY/scaleFactorY;
@@ -58,6 +60,16 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     i.1.posX = posX;
                     i.1.posY = posY;
                     x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
+                    
+                    // add gold se existir no mapa
+                    if (i.1.coins > 0){
+                        
+                        
+                        let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
+                        self.addChild(goldCoins)
+                        goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
+                        goldCoins.zPosition = 100
+                    }
                     
                     //arrumar a posicao quando tiver os quadradinhos no lugar certo ja
                     if i.0 == "Bau1" || i.0 == "Bau2" {
@@ -89,7 +101,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(p)
                     p.nodeSprite?.setScale(0.5)
                     p.nodeSprite?.anchorPoint = CGPointMake(0.5, 0.25)
-                    p.nodeSprite?.zPosition = 20
+                    p.nodeSprite?.zPosition = 100
                     self.addChild(p.nodeSprite!)
                 }
                 
@@ -119,6 +131,17 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     x.position.x = CGFloat(i.1.posX);
                     x.position.y = CGFloat(i.1.posY);
                     x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
+                    
+                    
+                    // add gold se existir no mapa
+                    if (i.1.coins > 0){
+                        
+                        
+                        let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
+                        self.addChild(goldCoins)
+                        goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
+                        goldCoins.zPosition = 100
+                    }
                     
                     //arrumar a posicao quando tiver os quadradinhos no lugar certo ja
                     if i.0 == "Bau1" || i.0 == "Bau2" {
