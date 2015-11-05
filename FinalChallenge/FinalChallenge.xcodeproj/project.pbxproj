@@ -781,7 +781,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZX7GUMJ35C;
+						DevelopmentTeam = 2U22ZLUW79;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -897,7 +897,6 @@
 				5ED294E01BBD9C030073B148 /* GamePadScene.swift in Sources */,
 				B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */,
 				B5905A5E1BEA640800786355 /* DoubleSpeed.swift in Sources */,
-				5EE267D71BC2A49D0006E5BD /* NotificationNode.swift in Sources */,
 				5E677F071B8B877F00238881 /* SwipeGamePadControllerViewController.swift in Sources */,
 				5E0E060A1B8E384300CE166E /* CGVector+Extension.swift in Sources */,
 				DBE862071B8552C800C8099E /* MainBoard.swift in Sources */,

@@ -247,10 +247,10 @@ class GameManager : NSObject {
                                     activeCard.used = true
                                     activeCard.cardOwner = p
                                     sent = true
-                                    status = "Trap was set up"
+                                    status = "trapSetUp"
                                 } else {
                                     activeCard.used = false
-                                    status = "Can't set this card on this spot right now"
+                                    status = "cardBadSpot"
                                 }
                             } else {
                                 // case not trap
