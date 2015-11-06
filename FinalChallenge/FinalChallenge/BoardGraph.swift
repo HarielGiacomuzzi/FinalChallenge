@@ -184,8 +184,12 @@ class BoardGraph : NSObject{
                 } else{
                     // caso a carta ja tenha sido usada ela ativa seu efeito
                     //print("A carta era usavel e está sendo usada")
-                    self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
-                    nodes[nodeName]?.item = nil
+                    if !GameManager.sharedInstance.escapeFlag{
+                        self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
+                        nodes[nodeName]?.item = nil
+                    } else {
+                        // faz algo se o jogador escapou da trap
+                    }
                 }
             }
             
@@ -227,6 +231,7 @@ class BoardGraph : NSObject{
         for _ in 0...Int(arc4random_uniform(50)+1){
             if !aux[Int(arc4random_uniform(UInt32(aux.count)))].isSpecialNode{
                 aux[Int(arc4random_uniform(UInt32(aux.count)))].coins = Int(arc4random_uniform(9)+1)*5
+            
             }
         }
     }

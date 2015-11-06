@@ -16,6 +16,8 @@ class MoveBackCard : ActiveCard{
         super.init()
         self.cardName = "MoveBackCard"
         imageName = "returnSquares"
+        self.desc = "This card moves a  player 5 houses back."
+        self.trap = true
     }
     
     override func activate(targetPlayer:Player) {

@@ -131,14 +131,16 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     
     func setObjects(){
         
-        backButton = SetupPartyButton(textureOn: greenButton, textureOff: greenButtonOff)
+        backButton = SetupPartyButton(textureOn: SKTexture(imageNamed: "leaveon"), textureOff: SKTexture(imageNamed: "leaveoff"))
         backButton?.delegate = self
+        backButton?.name = "back"
         backButton?.zPosition = 6
         backButton?.position = CGPoint(x: backButton!.frame.width/3, y: self.frame.height/12)
         self.addChild(backButton!)
         
+        /*
         back = SKLabelNode(fontNamed: "Helvetica Neue") // will be a texture probably
-        back!.name = "back"
+        back!.name = "backLabel"
         back!.text = "Back"
         //back!.position = CGPoint(x: self.frame.width/10, y: (self.frame.height)*0.85)
         back!.position.x = back!.position.x - back!.frame.width/2 + 25
@@ -146,7 +148,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         back?.zPosition = 7
         back?.fontColor = UIColor(red: 250/255, green: 52/255, blue: 67/255, alpha: 1)
         backButton?.textLabel = back
-        backButton!.addChild(back!)
+        backButton!.addChild(back!) */
         
         info = SKSpriteNode(imageNamed: "infoimage")
         info!.name = "info"
@@ -198,7 +200,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         go!.position = CGPoint(x: self.frame.width - go!.frame.width/6, y: self.frame.height/12)
         go!.name = "goButton"
         go?.zPosition = 4
-        
+        /*
         let gotext = SKLabelNode(fontNamed: "Helvetica Neue")
         gotext.text = "GO"
         gotext.position.x = gotext.position.x - 15
@@ -207,7 +209,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         gotext.fontSize = 60
         gotext.fontColor = UIColor(red: 250/255, green: 52/255, blue: 67/255, alpha: 1)
         go?.textLabel = gotext
-        go!.addChild(gotext)
+        go!.addChild(gotext) */
         // set the turn controll buttons
 
         
@@ -311,13 +313,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         let touch: UITouch = touches.first as UITouch!
         let location: CGPoint = touch.locationInNode(self)
         
-        if(back!.containsPoint(location)){
+        if(backButton!.containsPoint(location)){
             viewController.dismissViewControllerAnimated(false, completion: nil)
         }
         
-        if info!.containsPoint(location){
-            self.setTutorialScene()
-        }
+//        if info!.containsPoint(location){
+//            self.setTutorialScene()
+//        }
 
     }
     
@@ -462,9 +464,11 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
                 GameManager.sharedInstance.sendPlayersColors()
             }
         }
+        
         if sender == connect {
             viewController.ConnectPlayers()
         }
+        
         if sender == turns {
             turnCounter = turnCounter + 5
             if turnCounter > 30 {
@@ -473,6 +477,10 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
             
             numberOfTurns?.text = "max turns : \(turnCounter)"
             GameManager.sharedInstance.totalGameTurns = turnCounter
+        }
+        
+        if sender == backButton {
+            self.viewController.dismissViewControllerAnimated(false, completion: nil)
         }
     }
     

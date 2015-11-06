@@ -25,6 +25,8 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     var chosenCard:CardSprite?
     var cardShow:CardShowNode!
     
+    var cardValue : SKLabelNode?
+    
     // MARK: - View Lifecicle
     
     override func didMoveToView(view: SKView) {
@@ -35,17 +37,22 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         background.setScale(2.0)
         addChild(background)
         
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.init(red: 30/255, green: 183/255, blue: 249/255, alpha: 1)
         
         createSquaresAndAnimate()
         setupTopBar()
         setupButtons()
         setupMindingoSalesman()
         setupCards()
+        setupAssets()
         
         if !GlobalFlags.storeTaught {
             setTutorial()
         }
+        
+        let card = cardShow.cards![2]
+        chosenCard = card as? CardSprite
+        cardValue?.text = chosenCard!.priceLabel?.text
     }
     
     deinit {
@@ -88,17 +95,13 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         let text = SKLabelNode(text: playerName)
         text.position = CGPointMake(topBarSprite.position.x, topBarSprite.position.y)
         text.fontSize = 75.0
+        text.fontColor = UIColor(red: 255, green: 242, blue: 202, alpha: 1)
         text.fontName = "GillSans-Bold"
         text.zPosition = 30
         addChild(text)
         
-        moneyLabel = SKLabelNode(text: "$\(viewController!.playerMoney)")
-        moneyLabel.position = topBarSprite.position
-        moneyLabel.position.x = frame.size.width - moneyLabel.frame.size.width*2
-        moneyLabel.fontName = "GillSans-Bold"
-        moneyLabel.fontSize = 70
-        moneyLabel.zPosition = 30
-        addChild(moneyLabel)
+
+   
         
         topBarLimit = topBarSprite.position.y - topBarSprite.frame.size.height/2 + 30
         
@@ -109,7 +112,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         let leaveTextureOn = SKTexture(imageNamed: "leaveon")
         let leaveTextureOff = SKTexture(imageNamed: "leaveoff")
         leaveButton = StoreButtonNode(textureOn: leaveTextureOn, textureOff: leaveTextureOff)
-        leaveButton.position = CGPointMake(frame.size.width - leaveButton.size.width/2, leaveButton.size.height/2)
+        leaveButton.position = CGPointMake(frame.size.width - leaveButton.size.width*0.55, leaveButton.size.height * 0.75)
         leaveButton.zPosition = 35
         addChild(leaveButton)
         leaveButton.delegate = self
@@ -117,19 +120,65 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         let buyTextureOn = SKTexture(imageNamed: "buyon")
         let buyTextureOff = SKTexture(imageNamed: "buyoff")
         buyButton = StoreButtonNode(textureOn: buyTextureOn, textureOff: buyTextureOff)
-        buyButton.position = CGPointMake(frame.size.width - buyButton.size.width/2, leaveButton.size.height + buyButton.size.height/2)
+        buyButton.position = CGPointMake(frame.size.width - buyButton.size.width*0.55, leaveButton.position.y + buyButton.size.height)
         buyButton.zPosition = 35
         addChild(buyButton)
         buyButton.delegate = self
+        
+        
+        let goldTexture = SKTexture(imageNamed: "buttonAnimation19")
+        let playerGoldBar = SKSpriteNode(texture: goldTexture)
+        playerGoldBar.position = CGPoint(x: self.frame.width - playerGoldBar.frame.width * 0.25, y: buyButton.position.y + playerGoldBar.frame.height)
+        self.addChild(playerGoldBar)
+        playerGoldBar.zPosition = 100
+        
+        
+        moneyLabel = SKLabelNode(text: "$\(viewController!.playerMoney)")
+        moneyLabel.position = CGPoint(x: playerGoldBar.position.x * 0.97, y: playerGoldBar.position.y)
+        moneyLabel.fontName = "GillSans-Bold"
+        moneyLabel.fontSize = 58
+        moneyLabel.zPosition = 101
+        addChild(moneyLabel)
         
     }
     
     func setupMindingoSalesman() {
         let mindiTexture = SKTexture(imageNamed: "mindingo")
         let mindingo = SKSpriteNode(texture: mindiTexture)
-        mindingo.zPosition = 21
+        mindingo.zPosition = 25
         mindingo.position = CGPointMake(frame.size.width/2, frame.size.height/2)
         addChild(mindingo)
+        
+
+        
+    }
+    // new assets added to the store
+
+    func setupAssets (){
+        /*
+        let castle = SKTexture(imageNamed: "littleCastle")
+        let castleImage = SKSpriteNode(texture: castle)
+        castleImage.position = CGPoint(x: self.frame.width - castleImage.frame.width/2, y: self.frame.height*0.4)
+        self.addChild(castleImage)
+        castleImage.zPosition = 21
+        castleImage.alpha = 0.65
+        */
+        
+        let costBG = SKTexture(imageNamed: "cardPrice")
+        let cardCost = SKSpriteNode(texture: costBG)
+        cardCost.position = CGPoint(x: self.frame.width/2, y: cardCost.frame.height/2)
+        self.addChild(cardCost)
+        cardCost.zPosition = 100
+        
+        cardValue = SKLabelNode(fontNamed: "GillSans-Bold")
+        cardValue?.position = CGPoint(x: self.frame.width/2, y: cardCost.frame.height*0.25)
+        cardValue?.text = ""
+        self.addChild(cardValue!)
+        cardValue?.zPosition = 101
+        cardValue?.fontColor = UIColor.blackColor()
+        cardValue?.fontSize = 58
+        
+        
     }
     
     func setupCards() {
@@ -142,13 +191,19 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
         }
         
         cardShow = CardShowNode(cardsArray: cards)
-        cardShow.setScale(0.60)
+        cardShow.setScale(0.55)
         let cardFrame = cardShow.calculateAccumulatedFrame()
         cardShow.position = CGPointMake(frame.size.width/2, cardFrame.height*0.75)
         cardShow.zPosition = 35
         cardShow.delegate = self
         addChild(cardShow)
         
+        
+        
+//        chosenCard = cards.first as! CardSprite
+//        cardValue?.text = chosenCard!.priceLabel?.text
+//        cardChosen(chosenCard!)
+
     }
     // MARK: - Messages Received Functions
     
@@ -190,6 +245,7 @@ class StoreScene: SKScene, StoreButtonDelegate, CardShowDelegate {
     
     func cardChosen(sender: SKNode) {
         chosenCard = sender as? CardSprite
+        cardValue?.text = chosenCard?.priceLabel?.text
     }
     
     func setTutorial() {

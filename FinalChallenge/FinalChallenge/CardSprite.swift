@@ -43,17 +43,43 @@ class CardSprite: SKNode {
         
         let texture2 = atlas!.textureNamed(card.imageName)
         image = SKSpriteNode(texture: texture2)
+        let aux = image.position.y
+        image.position.y = image.position.y + baseSprite.frame.size.height/12
         image.zPosition = 2
         addChild(image)
         nameLabel = SKLabelNode(text: self.cardName)
         let maxSize = baseSprite.position.y + baseSprite.frame.height/2
-        let minSize = image.position.y + image.size.height/2
+        let minSize = aux + image.size.height/2
         let midSize = minSize + ((maxSize - minSize) / 2)
         nameLabel.position = CGPointMake(baseSprite.position.x, midSize)
         nameLabel.zPosition = 3
         nameLabel.fontSize = 45
         nameLabel.fontName = "GillSans-Bold"
         addChild(nameLabel)
+        let descArray = card.desc.componentsSeparatedByString("  ")
+        
+        let d = SKNode()
+        
+        let descLabel = SKLabelNode(fontNamed: "GillSans-Bold")
+        let maxSize2 = baseSprite.position.y - baseSprite.frame.height/2
+        let minSize2 = aux - image.size.height/4
+        let midSize2 = minSize2 + ((maxSize2 - minSize2) / 2)
+        descLabel.position = CGPointMake(baseSprite.position.x, midSize2)
+        descLabel.text = descArray[0]
+        descLabel.zPosition = 3
+        descLabel.fontSize = 25
+        descLabel.fontColor = UIColor.blackColor()
+        d.addChild(descLabel)
+        
+        let descLabel1 = SKLabelNode(fontNamed: "GillSans-Bold")
+        descLabel1.position = CGPointMake(baseSprite.position.x, midSize2-25)
+        descLabel1.text = descArray[1]
+        descLabel1.zPosition = 3
+        descLabel1.fontSize = 25
+        descLabel1.fontColor = UIColor.blackColor()
+        d.addChild(descLabel1)
+        
+        self.addChild(d)
         self.baseSprite.runAction(SKAction.repeatActionForever(move!))
     }
     
@@ -63,7 +89,7 @@ class CardSprite: SKNode {
         priceLabel?.fontSize = 45
         priceLabel?.fontName = "GillSans-Bold"
         priceLabel?.fontColor = UIColor(red:0.13, green:0.42, blue:0.16, alpha:1.0)
-        addChild(priceLabel!)
+      //  addChild(priceLabel!)
     }
     
     required init?(coder aDecoder: NSCoder) {

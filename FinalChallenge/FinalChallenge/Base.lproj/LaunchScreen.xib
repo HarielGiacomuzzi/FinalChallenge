@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
@@ -11,18 +10,26 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="xibBG" translatesAutoresizingMaskIntoConstraints="NO" id="ULU-H6-1fZ">
+                    <rect key="frame" x="-8" y="-7" width="497" height="495"/>
+                    <animations/>
+                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dalogo" translatesAutoresizingMaskIntoConstraints="NO" id="Saj-7B-7bg">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                     <animations/>
                 </imageView>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.76094777960000004" green="0.23326994240000001" blue="0.14999999999999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Saj-7B-7bg" secondAttribute="bottom" id="AZP-7E-N4I"/>
                 <constraint firstItem="Saj-7B-7bg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Fes-bu-xev"/>
+                <constraint firstItem="ULU-H6-1fZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KOd-Kt-Cpx"/>
+                <constraint firstAttribute="bottom" secondItem="ULU-H6-1fZ" secondAttribute="bottom" id="PGx-Pq-neo"/>
+                <constraint firstAttribute="trailing" secondItem="ULU-H6-1fZ" secondAttribute="trailing" id="aBz-hr-1NV"/>
                 <constraint firstAttribute="trailing" secondItem="Saj-7B-7bg" secondAttribute="trailing" id="aTC-Ar-Cjw"/>
                 <constraint firstItem="Saj-7B-7bg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wPY-YK-lcR"/>
+                <constraint firstItem="ULU-H6-1fZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zwG-SL-d2h"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -31,5 +38,6 @@
     </objects>
     <resources>
         <image name="dalogo" width="2401" height="1334"/>
+        <image name="xibBG" width="1024" height="768"/>
     </resources>
 </document>

@@ -11,6 +11,7 @@ import Foundation
 class ActiveCard :Card {
     
     var used = Bool()
+    var trap = Bool()
     
     override init() {
         super.init()

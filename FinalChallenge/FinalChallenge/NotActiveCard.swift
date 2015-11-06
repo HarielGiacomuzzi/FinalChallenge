@@ -19,5 +19,6 @@ class NotActiveCard : Card {
         self.usable = false
         self.storeValue = 100 + value
         self.endGameValue = value
+        self.desc = "This card is worth:  \(value) points."
     }
 }

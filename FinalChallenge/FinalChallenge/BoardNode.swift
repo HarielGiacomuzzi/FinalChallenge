@@ -55,24 +55,30 @@ class BoardNode : NSObject{
         }
         switch nodeName{
         case "House":
+            var lootValue = 0
             for item in player.items{
                 if !item.usable{
                     player.itemsInHouse.append(item);
                     player.items.removeObject(item);
+                    if let special = item as? NotActiveCard {
+                        lootValue += special.endGameValue
+                    }
+                    GameManager.sharedInstance.removeCard(player, item: item)
                 }
+
             }
+            player.lootPoints += lootValue
+            GameManager.sharedInstance.updatePlayerLoot(player, value: lootValue)
             break
             
         case "Store":
             var cards: [Card] = []
-            //print("criei cards")
             for _ in 0...2 {
                 cards.append(CardManager.ShareInstance.getRandomCard(true))
             }
             for _ in 0...1 {
                 cards.append(CardManager.ShareInstance.getRandomCard(false))
             }
-            //print(cards)
             var cardsString: [String] = []
             for card in cards {
                 cardsString.append(card.cardName)
@@ -89,7 +95,7 @@ class BoardNode : NSObject{
             if arc4random_uniform(UInt32(1)) >= 1{
                 CardManager.ShareInstance.loseCard(player);
             }else{
-                //deve estar funcionando :P, cair no baú e resar xD
+                //deve estar funcionando :P, cair no bau e rezar xD
                 let card = CardManager.ShareInstance.generateRandomTreasureCard()
                 CardManager.ShareInstance.sendCard(player, card: card)
             }
@@ -166,9 +172,9 @@ class BoardNode : NSObject{
         self.item = it
         
         //add only stealgoldcard in all houses
-        //let it = StealGoldCard()
-        //it.used = false
-        //self.item = it
+//        let it = StealGoldCard()
+//        it.used = false
+//        self.item = it
         
         // add ramdonly the itens
         //self.setupItems()
