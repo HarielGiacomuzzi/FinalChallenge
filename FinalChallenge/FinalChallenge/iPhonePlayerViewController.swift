@@ -50,9 +50,9 @@ class iPhonePlayerViewController: UIViewController {
         skView?.showsPhysics = false
 
         //      playerCards = ["StealGoldCard","LoseCard","MoveBackCard","Skull","Lamp"]
-       // loadPartyModeScene()
-        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
-        //loadPlayerView()
+        loadPartyModeScene()
+//        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
+//        loadPlayerView()
 
     }
     
@@ -260,6 +260,7 @@ class iPhonePlayerViewController: UIViewController {
     // MARK: - Aux Functions
     
     func setNotification(text:String) {
+        print("notificacao chegou")
         if notificationManager == nil {
             notificationManager = NotificationManager(notifications: [text], scene: skView!.scene!)
         } else {
@@ -271,7 +272,6 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func setNotificationsInNewScene() {
-
         if notificationManager != nil {
             let notifications = notificationManager!.notifications
             notificationManager = NotificationManager(notifications: notifications, scene: skView!.scene!)

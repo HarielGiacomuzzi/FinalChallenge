@@ -83,6 +83,7 @@ class GlobalFlags: NSObject {
             defaults.setBool(newValue, forKey: "diceTaught")
         }
     }
+    
     static var cardTaught: Bool {
         get {
             let defaults = NSUserDefaults.standardUserDefaults()
@@ -93,6 +94,7 @@ class GlobalFlags: NSObject {
             defaults.setBool(newValue, forKey: "cardTaught")
         }
     }
+    
     static var gameTaught: Bool {
         get {
             let defaults = NSUserDefaults.standardUserDefaults()

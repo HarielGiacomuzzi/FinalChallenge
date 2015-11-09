@@ -189,17 +189,31 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     }
     
     func showDiceNumber(number:Int, player: PlayerNode) {
+        let diceAtlas = SKTextureAtlas(named: "dices")
         var position = player.position
-        position.y += player.frame.height/2
-        let label = SKLabelNode(text: "\(number)")
-        label.position = position
-        label.zPosition = 400
-        label.fontName = "GillSans-Bold"
-        addChild(label)
-        let action = SKAction.scaleTo(2.0, duration: 1.0)
-        label.runAction(action, completion: {() in
-            label.removeFromParent()
-        })
+        position.y += player.frame.height
+
+        if number <= 6 {
+            let node = SKSpriteNode(texture: diceAtlas.textureNamed("dice\(number)"))
+            node.position = position
+            node.zPosition = 400
+            addChild(node)
+            node.setScale(0.5)
+            let action = SKAction.scaleTo(1.0, duration: 1.0)
+            node.runAction(action, completion: {() in
+                node.removeFromParent()
+            })
+        } else {
+            let label = SKLabelNode(text: "\(number)")
+            label.position = position
+            label.zPosition = 400
+            label.fontName = "GillSans-Bold"
+            addChild(label)
+            let action = SKAction.scaleTo(2.0, duration: 1.0)
+            label.runAction(action, completion: {() in
+                label.removeFromParent()
+            })
+        }
     }
     
     func showMoney(player:PlayerNode, good:Bool) {
