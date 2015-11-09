@@ -151,7 +151,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             do {
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(message!), toPeers: self.session.connectedPeers, withMode: MCSessionSendDataMode.Reliable)
             } catch {
-                //fatalError()
+                fatalError("ERROUUUUU")
             };
             return
         }
@@ -204,6 +204,7 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
         if state == MCSessionState.Connected && self.lastSyncMessage != nil && self.lastSyncMessage?.valueForKey("gameEnded") == nil{
             //print(self.lastSyncMessage)
             self.sendDictionaryToPeer(self.lastSyncMessage, reliable: true);
+            GameManager.sharedInstance.updatePlayerInformation(peerID.displayName)
         }
             
         NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_ConnectionStatusChanged", object: nil, userInfo: userInfo)
@@ -408,18 +409,14 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
             }
                 //player moves half next turn
             if message.valueForKey("HalfMove") != nil {
-                //print(message)
+                print("Mensagem recebida")
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
-                //userInfo.updateValue(message.valueForKey("player") as! NSObject, forKey: "player")
-                //userInfo.updateValue(message.valueForKey("half") as! NSObject, forKey: "half")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_HalfMove", object: nil, userInfo:userInfo)
                 return
             }
             if message.valueForKey("DoubleMove") != nil {
                 //print(message)
                 userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
-                //userInfo.updateValue(message.valueForKey("player") as! NSObject, forKey: "player")
-                //userInfo.updateValue(message.valueForKey("half") as! NSObject, forKey: "half")
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_DoubleMove", object: nil, userInfo:userInfo)
                 return
             }

@@ -70,7 +70,7 @@ class iPhonePlayerViewController: UIViewController {
             }
         }
         let string = NotificationManager.loadStringsPlist("yourTurn", replaceable: "")
-        setNotification(string)
+        setNotification(string!)
         
     }
     
@@ -93,7 +93,7 @@ class iPhonePlayerViewController: UIViewController {
         let value = dic["value"] as! Int
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             let string = NotificationManager.loadStringsPlist("gotMoney", replaceable: "\(value - playerMoney)")
-            setNotification(string)
+            setNotification(string!)
             playerMoney = value
             playerScene?.updateMoney(playerMoney)
         } else {
@@ -109,7 +109,7 @@ class iPhonePlayerViewController: UIViewController {
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             playerCards.append(card)
             let string = NotificationManager.loadStringsPlist("gotCard", replaceable: card)
-            setNotification(string)
+            setNotification(string!)
             if playerScene != nil {
                 playerScene!.addCard(card)
             }
@@ -130,8 +130,9 @@ class iPhonePlayerViewController: UIViewController {
             playerCards.removeObject(card)
         }
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
-            let string = NotificationManager.loadStringsPlist(status, replaceable: "")
-            setNotification(string)
+            if let string = NotificationManager.loadStringsPlist(status, replaceable: "") {
+                setNotification(string)
+            }
         }
     }
     
@@ -155,7 +156,7 @@ class iPhonePlayerViewController: UIViewController {
             let card = dic["card"] as! String
             if player == ConnectionManager.sharedInstance.peerID!.displayName {
                 let string = NotificationManager.loadStringsPlist(status, replaceable: "")
-                setNotification(string)
+                setNotification(string!)
                 
                 playerMoney = dic["playerMoney"] as! Int
                 if worked {
