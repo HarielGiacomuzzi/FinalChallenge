@@ -55,25 +55,30 @@ class BoardNode : NSObject{
         }
         switch nodeName{
         case "House":
+            var lootValue = 0
             for item in player.items{
                 if !item.usable{
                     player.itemsInHouse.append(item);
                     player.items.removeObject(item);
+                    if let special = item as? NotActiveCard {
+                        lootValue += special.endGameValue
+                    }
                     GameManager.sharedInstance.removeCard(player, item: item)
                 }
+
             }
+            player.lootPoints += lootValue
+            GameManager.sharedInstance.updatePlayerLoot(player, value: lootValue)
             break
             
         case "Store":
             var cards: [Card] = []
-            //print("criei cards")
             for _ in 0...2 {
                 cards.append(CardManager.ShareInstance.getRandomCard(true))
             }
             for _ in 0...1 {
                 cards.append(CardManager.ShareInstance.getRandomCard(false))
             }
-            //print(cards)
             var cardsString: [String] = []
             for card in cards {
                 cardsString.append(card.cardName)
@@ -163,8 +168,8 @@ class BoardNode : NSObject{
         self.posY = posY;
         
         //add only treasurecards in all houses
-        //let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
-        //self.item = it
+//        let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
+//        self.item = it
         
         //add only stealgoldcard in all houses
         let it =

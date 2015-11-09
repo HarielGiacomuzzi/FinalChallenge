@@ -331,6 +331,12 @@ class ConnectionManager: NSObject, MCSessionDelegate, NSStreamDelegate, MCBrowse
                 NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateMoney", object: nil, userInfo: userInfo)
                 return
             }
+        // update player loot
+            if message.valueForKey("updateLoot") != nil {
+                userInfo.updateValue(message.valueForKey("dataDic") as! NSObject, forKey: "dataDic")
+                NSNotificationCenter.defaultCenter().postNotificationName("ConnectionManager_UpdateLoot", object: nil, userInfo: userInfo)
+                return
+            }
                 
         // board sends card to player
             if message.valueForKey("addCard") != nil {

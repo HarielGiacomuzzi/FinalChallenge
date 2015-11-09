@@ -24,6 +24,7 @@ class iPhonePlayerViewController: UIViewController {
 
     var playerColor : UIColor!
     var playerMoney = 0
+    var playerLoot = 0
     var playerCards:[String] = []
     
     override func viewDidLoad() {
@@ -34,6 +35,7 @@ class iPhonePlayerViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerTurn:", name: "ConnectionManager_PlayerTurn", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openController:", name: "ConnectionManager_OpenController", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMoney:", name: "ConnectionManager_UpdateMoney", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateLoot:", name: "ConnectionManager_UpdateLoot", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "addCard:", name: "ConnectionManager_AddCard", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "removeCard:", name: "ConnectionManager_RemoveCard", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "openStore:", name: "ConnectionManager_OpenStore", object: nil)
@@ -46,11 +48,12 @@ class iPhonePlayerViewController: UIViewController {
         skView?.showsNodeCount = false
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
-        
-//        playerCards = ["StealGoldCard","LoseCard","MoveBackCard","Skull","Lamp"]
-      loadPartyModeScene()
- //       loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
+
+        //      playerCards = ["StealGoldCard","LoseCard","MoveBackCard","Skull","Lamp"]
+        loadPartyModeScene()
+//        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
 //        loadPlayerView()
+
     }
     
     // MARK: - Message Received Functions
@@ -96,8 +99,17 @@ class iPhonePlayerViewController: UIViewController {
             setNotification(string!)
             playerMoney = value
             playerScene?.updateMoney(playerMoney)
-        } else {
-
+        }
+    }
+    func updateLoot(data : NSNotification) {
+        let dic = data.userInfo!["dataDic"] as! NSDictionary
+        let playerName = dic["player"] as! String
+        let value = dic["value"] as! Int
+        if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
+            let string = NotificationManager.loadStringsPlist("gotLoot", replaceable: "\(value - playerLoot)")
+            setNotification(string)
+            playerLoot = value
+            playerScene?.updateLoot(playerLoot)
         }
     }
     
@@ -186,6 +198,7 @@ class iPhonePlayerViewController: UIViewController {
         playerScene?.cardsString = playerCards
         skView?.presentScene(playerScene)
         playerScene?.updateMoney(playerMoney)
+        playerScene?.updateLoot(playerLoot)
         setNotificationsInNewScene()
     }
     
@@ -248,6 +261,7 @@ class iPhonePlayerViewController: UIViewController {
     // MARK: - Aux Functions
     
     func setNotification(text:String) {
+        print("notificacao chegou")
         if notificationManager == nil {
             notificationManager = NotificationManager(notifications: [text], scene: skView!.scene!)
         } else {
@@ -259,7 +273,6 @@ class iPhonePlayerViewController: UIViewController {
     }
     
     func setNotificationsInNewScene() {
-
         if notificationManager != nil {
             let notifications = notificationManager!.notifications
             notificationManager = NotificationManager(notifications: notifications, scene: skView!.scene!)

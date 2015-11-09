@@ -18,6 +18,7 @@ class NotificationManager: NSObject, InformationNodeDelegate {
     
     init(notifications: [String], scene: SKScene) {
         super.init()
+                print("init notificationmanager")
         self.notifications = notifications
         self.scene = scene
     }

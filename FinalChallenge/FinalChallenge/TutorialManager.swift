@@ -13,6 +13,7 @@ class TutorialManager: NSObject, InformationNodeDelegate, ArrowDelegate {
     
     var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = [] {
         didSet {
+            print("didSetTuples: \(tuples)")
             removeUserInteraction()
         }
     }
@@ -39,8 +40,11 @@ class TutorialManager: NSObject, InformationNodeDelegate, ArrowDelegate {
     }
     
     func removeUserInteraction() {
-        for tuple in tuples {
-            if let node = tuple.node {
+        guard tuples.count > 1 else {
+            return
+        }
+        for i in 1..<tuples.count {
+            if let node = tuples[i].node {
                 node.userInteractionEnabled = false
             }
         }

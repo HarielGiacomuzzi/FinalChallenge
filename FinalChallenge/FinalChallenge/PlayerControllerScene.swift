@@ -49,6 +49,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         if !cards.isEmpty {
             setupCardCarousel(cards)
         }
+        print("PLAYER SCENE LOADED")
 
     }
     

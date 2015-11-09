@@ -47,6 +47,8 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     if i.1.nextMoves.count > 1 {
                         texture = self.partsAtlas.textureNamed("square");
                     }
+
+                    
                     
                     let x = SKSpriteNode(texture: texture)
                     let posY = i.1.posY/scaleFactorY;
@@ -58,6 +60,16 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     i.1.posX = posX;
                     i.1.posY = posY;
                     x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
+                    
+                    // add gold se existir no mapa
+                    if (i.1.coins > 0){
+                        
+                        
+                        let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
+                        self.addChild(goldCoins)
+                        goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
+                        goldCoins.zPosition = 100
+                    }
                     
                     //arrumar a posicao quando tiver os quadradinhos no lugar certo ja
                     if i.0 == "Bau1" || i.0 == "Bau2" {
@@ -89,7 +101,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     BoardGraph.SharedInstance.nodes["01"]?.currentPlayers.append(p)
                     p.nodeSprite?.setScale(0.5)
                     p.nodeSprite?.anchorPoint = CGPointMake(0.5, 0.25)
-                    p.nodeSprite?.zPosition = 20
+                    p.nodeSprite?.zPosition = 100
                     self.addChild(p.nodeSprite!)
                 }
                 
@@ -119,6 +131,17 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     x.position.x = CGFloat(i.1.posX);
                     x.position.y = CGFloat(i.1.posY);
                     x.size = CGSize(width: CGFloat(35), height: CGFloat(35));
+                    
+                    
+                    // add gold se existir no mapa
+                    if (i.1.coins > 0){
+                        
+                        
+                        let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
+                        self.addChild(goldCoins)
+                        goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
+                        goldCoins.zPosition = 100
+                    }
                     
                     //arrumar a posicao quando tiver os quadradinhos no lugar certo ja
                     if i.0 == "Bau1" || i.0 == "Bau2" {
@@ -189,17 +212,31 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     }
     
     func showDiceNumber(number:Int, player: PlayerNode) {
+        let diceAtlas = SKTextureAtlas(named: "dices")
         var position = player.position
-        position.y += player.frame.height/2
-        let label = SKLabelNode(text: "\(number)")
-        label.position = position
-        label.zPosition = 400
-        label.fontName = "GillSans-Bold"
-        addChild(label)
-        let action = SKAction.scaleTo(2.0, duration: 1.0)
-        label.runAction(action, completion: {() in
-            label.removeFromParent()
-        })
+        position.y += player.frame.height
+
+        if number <= 6 {
+            let node = SKSpriteNode(texture: diceAtlas.textureNamed("dice\(number)"))
+            node.position = position
+            node.zPosition = 400
+            addChild(node)
+            node.setScale(0.5)
+            let action = SKAction.scaleTo(1.0, duration: 1.0)
+            node.runAction(action, completion: {() in
+                node.removeFromParent()
+            })
+        } else {
+            let label = SKLabelNode(text: "\(number)")
+            label.position = position
+            label.zPosition = 400
+            label.fontName = "GillSans-Bold"
+            addChild(label)
+            let action = SKAction.scaleTo(2.0, duration: 1.0)
+            label.runAction(action, completion: {() in
+                label.removeFromParent()
+            })
+        }
     }
     
     func showMoney(player:PlayerNode, good:Bool) {

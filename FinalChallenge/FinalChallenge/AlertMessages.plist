@@ -18,6 +18,8 @@
 	<string>You got $ money</string>
 	<key>gotCard</key>
 	<string>You got the card $</string>
+	<key>gotLoot</key>
+	<string>You got loots</string>
 	<key>buySuccess</key>
 	<string>You have successfully bought a card</string>
 	<key>buyNoMoney</key>
