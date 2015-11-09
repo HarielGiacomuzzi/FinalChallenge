@@ -189,6 +189,7 @@ class BoardGraph : NSObject{
                         nodes[nodeName]?.item = nil
                     } else {
                         // faz algo se o jogador escapou da trap
+                        GameManager.sharedInstance.escapeFlag = false
                     }
                 }
             }
@@ -221,7 +222,9 @@ class BoardGraph : NSObject{
             case "LoseCard" :       //print("Fez o efeito da carta LoseCard")
                                     let actionCard = card as! LoseCard
                                     actionCard.activate(targetPlayer)
-            
+            case "Half Speed" :
+                                    let actionCard = card as! HalfSpeed
+                                    actionCard.activate(targetPlayer)
             default: break
         }
     }

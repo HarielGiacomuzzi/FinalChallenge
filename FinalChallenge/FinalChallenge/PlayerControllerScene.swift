@@ -187,7 +187,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     
     func diceRolled(sender: SKSpriteNode) {
         buttonClicked(sender)
-        var diceResult = Int(arc4random_uniform(6)+1)
+        var diceResult = 1 //Int(arc4random_uniform(6)+1)
         let diceResult2 = Int(arc4random_uniform(6)+1)
         let aux = NSMutableDictionary();
         if GameManager.sharedInstance.halfFlag{
