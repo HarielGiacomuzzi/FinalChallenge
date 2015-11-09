@@ -172,8 +172,13 @@ class BoardNode : NSObject{
 //        self.item = it
         
         //add only stealgoldcard in all houses
-        let it = MoveBackCard()
-        it.used = true
+        let it =
+        //StealGoldCard()
+        LoseCard()
+        //MoveBackCard()
+        //HalfSpeed()
+        //DoubleSpeed()
+        it.used = false
         self.item = it
         
         // add ramdonly the itens
