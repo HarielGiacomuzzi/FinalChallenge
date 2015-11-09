@@ -226,6 +226,10 @@ class GameManager : NSObject {
         })
     }
     
+    func movePlayerBack(p: Player, distance: Int) {
+        BoardGraph.SharedInstance.walkBackwards(p, distance: distance)
+    }
+    
 
     // manda a carta a ser adicionada no boardGame
     func cardReceived(data : NSNotification){

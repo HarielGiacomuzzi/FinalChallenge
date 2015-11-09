@@ -269,6 +269,23 @@ class BoardGraph : NSObject{
     
     //TODO: walk backwards
     
+    func walkBackwards(player:Player, var distance: Int) {
+        print("vou printar os pais")
+        for node in nodes {
+            print(node.1.father)
+        }
+//        var node = nodeFor(player)
+//        print(node)
+//        while distance > 0 {
+//            node = node?.father
+//            print(node)
+//            distance--
+//        }
+//        nodeFor(player)?.removePlayer(player)
+//        node!.insertPLayer(player)
+    }
+    
+    
     /* ******************************** */
     /* WALK ATUAL TERMINA AQUI !!!!!!!! */
     /* ******************************** */
@@ -335,7 +352,7 @@ class BoardGraph : NSObject{
         }
     }
     
-    private func walkBackward(qtd : Int, player : Player){
+    func walkBackward(qtd : Int, player : Player){
         let aux = Int(whereIs(player)!);
         nodes[whereIs(player)!]?.removePlayer(player)
         if aux! - qtd < 0{

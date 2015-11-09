@@ -65,10 +65,10 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     if (i.1.coins > 0){
                         
                         
-                        let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
-                        self.addChild(goldCoins)
-                        goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
-                        goldCoins.zPosition = 100
+//                        let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
+//                        self.addChild(goldCoins)
+//                        goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
+//                        goldCoins.zPosition = 100
                     }
                     
                     //arrumar a posicao quando tiver os quadradinhos no lugar certo ja
@@ -137,10 +137,10 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                     if (i.1.coins > 0){
                         
                         
-                        let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
-                        self.addChild(goldCoins)
-                        goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
-                        goldCoins.zPosition = 100
+//                        let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
+//                        self.addChild(goldCoins)
+//                        goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
+//                        goldCoins.zPosition = 100
                     }
                     
                     //arrumar a posicao quando tiver os quadradinhos no lugar certo ja
