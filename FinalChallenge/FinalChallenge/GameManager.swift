@@ -593,6 +593,7 @@ class GameManager : NSObject {
             }
         }
         self.updatePlayerMoney(aux, value: 0)
+        self.updatePlayerLoot(aux, value: 0)
     }
         
 }

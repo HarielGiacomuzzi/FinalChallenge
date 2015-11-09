@@ -107,7 +107,7 @@ class iPhonePlayerViewController: UIViewController {
         let value = dic["value"] as! Int
         if playerName == ConnectionManager.sharedInstance.peerID!.displayName {
             let string = NotificationManager.loadStringsPlist("gotLoot", replaceable: "\(value - playerLoot)")
-            setNotification(string)
+            setNotification(string!)
             playerLoot = value
             playerScene?.updateLoot(playerLoot)
         }
