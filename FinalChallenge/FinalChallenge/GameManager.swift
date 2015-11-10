@@ -30,6 +30,7 @@ class GameManager : NSObject {
     var escapeFlag = false
     var halfFlag = false
     var doubleDice = false
+    
     //iphone only usage
     var playerColor = UIColor.clearColor()
     var activePlayer = [String]()
@@ -80,6 +81,7 @@ class GameManager : NSObject {
         self.isOnMiniGame = false
         self.isMultiplayer = false
         self.playerRank.removeAll()
+        self.activePlayer.removeAll()
         BoardGraph.SharedInstance.destroyGraph();
     }
     

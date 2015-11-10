@@ -107,8 +107,11 @@ class PartyModeViewControllerIPAD : UIViewController, MCBrowserViewControllerDel
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController){
         ConnectionManager.sharedInstance.browser?.dismissViewControllerAnimated(true, completion: { () -> Void in})
     }
+    
     @IBAction func ConnectPlayers() {
-        self.presentViewController(ConnectionManager.sharedInstance.browser!, animated: true) { () -> Void in
+        let b = ConnectionManager.sharedInstance.browser
+        b?.maximumNumberOfPeers = 5
+        self.presentViewController(b!, animated: true) { () -> Void in
             self.scene?.connect?.texture = self.scene?.connect?.textureOn
             self.scene?.connect?.textLabel?.position.y = ((self.scene?.connect?.posOn)!)
         }

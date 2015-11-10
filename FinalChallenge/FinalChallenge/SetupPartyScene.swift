@@ -214,7 +214,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
 
         
         numberOfTurns = SKLabelNode(fontNamed: "Helvetica Neue")
-        numberOfTurns?.text = "max turns : 5"
+        numberOfTurns?.text = "max turns : \(turnCounter)"
         numberOfTurns?.fontSize = 30
         numberOfTurns?.zPosition = 5
         numberOfTurns?.fontColor = UIColor.blackColor()
@@ -434,13 +434,18 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     }
     
     func checkIfCanGo() {
-        for p in GameManager.sharedInstance.players{
-            if p.avatar == nil {
-                canGo = false
-                break
-            }else{
-                canGo = true
+        print("\(GameManager.sharedInstance.players.count)")
+        if GameManager.sharedInstance.players.count > 1{
+            for p in GameManager.sharedInstance.players{
+                if p.avatar == nil {
+                    canGo = false
+                    break
+                }else{
+                    canGo = true
+                }
             }
+        } else {
+            canGo = false
         }
     }
     
@@ -472,7 +477,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         if sender == turns {
             turnCounter = turnCounter + 5
             if turnCounter > 30 {
-                turnCounter = 5
+                turnCounter = 1
             }
             
             numberOfTurns?.text = "max turns : \(turnCounter)"

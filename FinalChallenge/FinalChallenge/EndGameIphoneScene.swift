@@ -38,19 +38,15 @@ class EndGameIphoneScene : SKScene{
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        let touch : UITouch? = touches.first as UITouch!
+        //let touch : UITouch? = touches.first as UITouch!
         
-        if let location = touch?.locationInNode(self) {
-            let touchedNode = self.nodeAtPoint(location)
-            
-            if touchedNode.name == "back"{
-                _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
-                //self.view?.presentScene(nil)
-                ConnectionManager.sharedInstance.closeConections()
-                GameManager.sharedInstance.restartGameManager()
-                GameManager.sharedInstance.dismissPlayerViewController()
-            }
-        }
+        
+        _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
+        //self.view?.presentScene(nil)
+        ConnectionManager.sharedInstance.closeConections()
+        GameManager.sharedInstance.restartGameManager()
+        GameManager.sharedInstance.dismissPlayerViewController()
+    
     }
     
     deinit{
