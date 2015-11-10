@@ -202,7 +202,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         self.addChild(go!)
         go!.position = CGPoint(x: self.frame.width - go!.frame.width/6, y: self.frame.height/12)
         go!.name = "goButton"
-        go?.zPosition = 4
+        go?.zPosition = 40000
         /*
         let gotext = SKLabelNode(fontNamed: "Helvetica Neue")
         gotext.text = "GO"
