@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelegate {
+class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelegate, InfoDelegate {
     
     
     weak var viewController : PartyModeViewControllerIPAD!
@@ -26,7 +26,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     var connectLabel : SKLabelNode?
     var back : SKLabelNode?
     let fontSize : CGFloat = 20.0
-    var info : SKSpriteNode?
+    var info : InfoButtonNode?
     var titleLabel : SKLabelNode?
     
     // characters nodes
@@ -150,10 +150,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         backButton?.textLabel = back
         backButton!.addChild(back!) */
         
-        info = SKSpriteNode(imageNamed: "infoimage")
+        info = InfoButtonNode()
         info!.name = "info"
-        info!.position = CGPoint(x: self.frame.width/1.1, y: (self.frame.height)*0.87)
+        info!.setScale(0.5)
+        
+        info!.position = CGPoint(x: self.frame.width - info!.frame.size.width/2, y: frame.size.height - info!.frame.size.height/2)
         info?.zPosition = 5
+        info?.delegate = self
         self.addChild(info!)
         
         // set the red SETUP GAME banner
@@ -487,6 +490,17 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         if sender == backButton {
             self.viewController.dismissViewControllerAnimated(false, completion: nil)
         }
+    }
+    
+    func infoButtonPressed(sender: InfoButtonNode) {
+        checkIfCanGo()
+        if canGo {
+            teachHowToGo()
+        } else {
+            setTutorialScene()
+        }
+        go?.userInteractionEnabled = true
+        tutorialManager.allowUserInteraction()
     }
     
     deinit{

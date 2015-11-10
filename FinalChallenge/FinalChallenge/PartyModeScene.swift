@@ -11,7 +11,7 @@ import SpriteKit
 
 private let movableAvatarNodeName = "movable"
 
-class PartyModeScene: SKScene, SKPhysicsContactDelegate {
+class PartyModeScene: SKScene, SKPhysicsContactDelegate, InfoDelegate {
     
     var tutorialManager: TutorialManager!
     
@@ -28,7 +28,7 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
     var canSelectAvatar = false
     
     var banner : SKSpriteNode?
-    var info : SKSpriteNode?
+    var info : InfoButtonNode?
     var turns : SKSpriteNode?
     var connect : SKSpriteNode?
     var go : SKSpriteNode?
@@ -233,9 +233,6 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         
         if let location = touch?.locationInNode(self) {
             
-//            if info!.containsPoint(location) {
-//                self.setTutorialScene()
-//            }
             let touchedNode = self.nodeAtPoint(location)
             if touchedNode.name == "back"{
                 viewController?.dismissViewControllerAnimated(false, completion: nil)
@@ -357,11 +354,13 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(globParticles!)
         globParticles?.zPosition = 1
         
-        info = SKSpriteNode(imageNamed: "infoimage")
+        info = InfoButtonNode()
         info!.name = "info"
-        info!.setScale(0.5)
-        info!.position = CGPoint(x: self.frame.width/1.1, y: (self.frame.height)*0.87)
+        info!.setScale(0.25)
+        
+        info!.position = CGPoint(x: self.frame.width - info!.frame.size.width/2, y: frame.size.height - info!.frame.size.height/2)
         info?.zPosition = 5
+        info?.delegate = self
         self.addChild(info!)
         
         //for some reason this code dont wornk on the iPhone, the phone trys to mantein a 40 fps just like the iPad, but for some reason starts dropping
@@ -485,6 +484,17 @@ class PartyModeScene: SKScene, SKPhysicsContactDelegate {
                 GlobalFlags.chooseCharTaught = true
             }
         }
+    }
+    
+    func infoButtonPressed(sender: InfoButtonNode) {
+        let session = ConnectionManager.sharedInstance.session
+        if session.connectedPeers.count > 0 {
+            teachHowToChooseCharacter()
+        } else {
+            setTutorialScene()
+        }
+        
+        tutorialManager.allowUserInteraction()
     }
 }
 
