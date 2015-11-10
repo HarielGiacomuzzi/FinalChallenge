@@ -32,15 +32,17 @@ class CardManager{
     
     // this function takes a card from a player
     func loseCard(player:Player){
-    let value = player.items.count
-    let indexCard : Int = (random() % value)
-    player.items.removeAtIndex(indexCard)
-
-    let removedCard = player.items[indexCard]
-    let cardData = ["player":player.playerIdentifier, "item": removedCard]
-    let dic = ["removeCard":" ", "dataDic" : cardData]
-
-    ConnectionManager.sharedInstance.sendDictionaryToPeer(dic, reliable: true)
+        if player.items.count == 0{
+            // vai acontecer algo se o jogador nao tiver cartas?
+        } else {
+            let value = player.items.count
+            let indexCard : Int = (random() % value)
+            let removedCard = player.items[indexCard].cardName
+            player.items.removeAtIndex(indexCard)
+            let dataDic = ["sent":true, "status": "lostCard", "item": removedCard, "playerName": player.playerIdentifier]
+            let dicc = ["removeCard":" ","dataDic":dataDic]
+        ConnectionManager.sharedInstance.sendDictionaryToPeer(dicc, reliable: true)
+        }
     }
 
     // given a card name this function returns you the corresponding card

@@ -13,7 +13,9 @@ class TutorialManager: NSObject, InformationNodeDelegate, ArrowDelegate {
     
     var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = [] {
         didSet {
-            removeUserInteraction()
+            if !canInteract {
+                removeUserInteraction()
+            }
         }
     }
     
@@ -22,6 +24,8 @@ class TutorialManager: NSObject, InformationNodeDelegate, ArrowDelegate {
     var infoArrow: InformationArrowNode!
     
     var isActive = false
+    
+    var canInteract = false
     
     var boxScale: CGFloat = 1.0
     
@@ -39,11 +43,23 @@ class TutorialManager: NSObject, InformationNodeDelegate, ArrowDelegate {
     }
     
     func removeUserInteraction() {
-        for tuple in tuples {
-            if let node = tuple.node {
+        guard tuples.count > 1 else {
+            return
+        }
+        for i in 1..<tuples.count {
+            if let node = tuples[i].node {
                 node.userInteractionEnabled = false
             }
         }
+    }
+    
+    func allowUserInteraction() {
+        for tuple in tuples {
+            if let node = tuple.node {
+                node.userInteractionEnabled = true
+            }
+        }
+        canInteract = true
     }
     
     func showInfo() {

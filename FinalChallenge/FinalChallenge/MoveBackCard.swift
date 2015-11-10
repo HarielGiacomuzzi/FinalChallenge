@@ -25,6 +25,6 @@ class MoveBackCard : ActiveCard{
     }
     
     func backCard(player: Player){
-        GameManager.sharedInstance.updatePlayerPosition(moveValue, player: player)
+        GameManager.sharedInstance.movePlayerBack(player, distance: 5)
     }
 }

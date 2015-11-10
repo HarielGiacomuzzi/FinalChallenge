@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelegate {
+class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelegate, InfoDelegate {
     
     
     weak var viewController : PartyModeViewControllerIPAD!
@@ -26,7 +26,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     var connectLabel : SKLabelNode?
     var back : SKLabelNode?
     let fontSize : CGFloat = 20.0
-    var info : SKSpriteNode?
+    var info : InfoButtonNode?
     var titleLabel : SKLabelNode?
     
     // characters nodes
@@ -150,10 +150,13 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         backButton?.textLabel = back
         backButton!.addChild(back!) */
         
-        info = SKSpriteNode(imageNamed: "infoimage")
+        info = InfoButtonNode()
         info!.name = "info"
-        info!.position = CGPoint(x: self.frame.width/1.1, y: (self.frame.height)*0.87)
+        info!.setScale(0.5)
+        
+        info!.position = CGPoint(x: self.frame.width - info!.frame.size.width/2, y: frame.size.height - info!.frame.size.height/2)
         info?.zPosition = 5
+        info?.delegate = self
         self.addChild(info!)
         
         // set the red SETUP GAME banner
@@ -199,7 +202,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         self.addChild(go!)
         go!.position = CGPoint(x: self.frame.width - go!.frame.width/6, y: self.frame.height/12)
         go!.name = "goButton"
-        go?.zPosition = 4
+        go?.zPosition = 40000
         /*
         let gotext = SKLabelNode(fontNamed: "Helvetica Neue")
         gotext.text = "GO"
@@ -214,7 +217,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
 
         
         numberOfTurns = SKLabelNode(fontNamed: "Helvetica Neue")
-        numberOfTurns?.text = "max turns : 5"
+        numberOfTurns?.text = "max turns : \(turnCounter)"
         numberOfTurns?.fontSize = 30
         numberOfTurns?.zPosition = 5
         numberOfTurns?.fontColor = UIColor.blackColor()
@@ -434,13 +437,18 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     }
     
     func checkIfCanGo() {
-        for p in GameManager.sharedInstance.players{
-            if p.avatar == nil {
-                canGo = false
-                break
-            }else{
-                canGo = true
+        print("\(GameManager.sharedInstance.players.count)")
+        if GameManager.sharedInstance.players.count > 1{
+            for p in GameManager.sharedInstance.players{
+                if p.avatar == nil {
+                    canGo = false
+                    break
+                }else{
+                    canGo = true
+                }
             }
+        } else {
+            canGo = false
         }
     }
     
@@ -472,7 +480,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         if sender == turns {
             turnCounter = turnCounter + 5
             if turnCounter > 30 {
-                turnCounter = 5
+                turnCounter = 1
             }
             
             numberOfTurns?.text = "max turns : \(turnCounter)"
@@ -482,6 +490,17 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         if sender == backButton {
             self.viewController.dismissViewControllerAnimated(false, completion: nil)
         }
+    }
+    
+    func infoButtonPressed(sender: InfoButtonNode) {
+        checkIfCanGo()
+        if canGo {
+            teachHowToGo()
+        } else {
+            setTutorialScene()
+        }
+        go?.userInteractionEnabled = true
+        tutorialManager.allowUserInteraction()
     }
     
     deinit{
