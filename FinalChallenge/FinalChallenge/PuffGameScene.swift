@@ -57,6 +57,8 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         setupSpikes();
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -0.01)
         self.physicsWorld.contactDelegate = self;
+        setupBackground();
+        setupTowers();
 
     }
     
@@ -383,6 +385,59 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func spawnStars (){
+        let star = SKSpriteNode(texture: randomStars())
+        star.zPosition = -2
+        let y = arc4random_uniform(UInt32((self.view?.frame.height)!))
+        star.position = CGPointMake(CGFloat((self.view?.frame.width)! + 5), CGFloat(y))
+        star.setScale(CGFloat.random(min: 0.10, max: 0.9))
+        star.zRotation = CGFloat.random(min: 1, max: 4)
+        self.addChild(star)
+        
+        let starMovement = SKAction.moveBy(CGVector(dx: -(self.view?.frame.width)!, dy: star.position.y + CGFloat.random(min: -10, max: 10)), duration: NSTimeInterval(CGFloat.random(min: 0.8, max: 2.5)))
+        
+        star.runAction(starMovement) { () -> Void in
+            star.removeFromParent()
+        }
+    }
+    
+    func randomStars()->SKTexture{
+    let a = arc4random_uniform(5)
+        let starAtlas = SKTextureAtlas(named: "babiesAssetsBundle")
+        switch a{
+        case 1 : return starAtlas.textureNamed("bigstar")
+        case 2 : return starAtlas.textureNamed("comet")
+        case 3 : return starAtlas.textureNamed("planet")
+        case 4 : return starAtlas.textureNamed("planetRing")
+        default: return starAtlas.textureNamed("smallStar")
+        }
+    }
+    
+    func setupBackground(){
+        let spawn = SKAction.runBlock({( ) in self.spawnStars()})
+        let delay = SKAction.waitForDuration(0.8, withRange: 1)
+        let spawnThenDelay = SKAction.sequence([spawn, delay])
+        let spawnDelayForever = SKAction.repeatActionForever(spawnThenDelay)
+        self.runAction(spawnDelayForever)
+        let background = SKSpriteNode(imageNamed: "iPad Landscape")
+        background.zPosition = -1
+        background.position = CGPointMake((self.view?.frame.width)!/2, (self.view?.frame.height)!/2)
+        self.addChild(background)
+        self.backgroundColor = UIColor.blackColor()
+    }
+    
+    func setupTowers(){
+        let a = SKTexture(imageNamed: "raioTower")
+        let towerSizeFactor = CGFloat((a.size().height)/2)
+        let positions = [CGPointMake(towerSizeFactor, towerSizeFactor),CGPointMake(towerSizeFactor, (self.view?.frame.height)! - towerSizeFactor), CGPointMake((self.view?.frame.width)! - towerSizeFactor, (self.view?.frame.height)! - towerSizeFactor), CGPointMake((self.view?.frame.width)! - towerSizeFactor, towerSizeFactor)]
+        for i in 0...3{
+        let tower = SKSpriteNode(imageNamed: "raioTower")
+            tower.position = positions[i]
+            self.addChild(tower)
+        }
+    }
+    
+
     override func update(currentTime: NSTimeInterval) {
         //once per frame
     }
