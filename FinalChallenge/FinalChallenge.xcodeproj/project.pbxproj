@@ -194,6 +194,7 @@
 		26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = bombSceneAssets.xcassets; sourceTree = "<group>"; };
 		26E0442F1BF3ACA000822E2C /* endGameParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = endGameParticle.sks; sourceTree = "<group>"; };
 		26E044311BF3AD7F00822E2C /* endParticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = endParticle.swift; sourceTree = "<group>"; };
+		4407485A1BF1039E008F59CD /* babiesAssetsBundle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = babiesAssetsBundle.atlas; sourceTree = "<group>"; };
 		4445D7C41B98C99F0049B787 /* AlertPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPath.swift; sourceTree = "<group>"; };
 		44462C551BF26D310092448C /* raioHorizontal.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = raioHorizontal.atlas; sourceTree = "<group>"; };
 		44462C571BF26D380092448C /* raioVertical.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = raioVertical.atlas; sourceTree = "<group>"; };
@@ -732,6 +733,7 @@
 				B5A7685C1BBEF4B3006819B9 /* EndGameScene.swift */,
 				26E0442F1BF3ACA000822E2C /* endGameParticle.sks */,
 				26E044311BF3AD7F00822E2C /* endParticle.swift */,
+				5ED888D11BF1035900B67BF9 /* dices.atlas */,
 			);
 			name = Board;
 			sourceTree = "<group>";
