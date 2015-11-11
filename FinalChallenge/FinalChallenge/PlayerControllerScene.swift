@@ -9,13 +9,14 @@
 import UIKit
 import SpriteKit
 
-class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, PlayerButtonDelegate {
+class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, PlayerButtonDelegate, InfoDelegate {
     
     var tutorialManager: TutorialManager!
     
     var moneyButton : PlayerButtonNode!
     var lootButton : PlayerButtonNode!
     var carousel : CardCarouselNode!
+    var info : InfoButtonNode?
     var topBarLimit:CGFloat = 0.0
     var playerName = "Player Name"
     var dice : DiceNode!
@@ -49,6 +50,8 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         if !cards.isEmpty {
             setupCardCarousel(cards)
         }
+        
+        setupInfoButton()
 
     }
     
@@ -126,6 +129,17 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         
     }
     
+    func setupInfoButton() {
+        info = InfoButtonNode()
+        info!.name = "info"
+        info!.setScale(0.50)
+        
+        info!.position = CGPoint(x: self.frame.width - info!.frame.size.width/2, y: frame.size.height - info!.frame.size.height/2)
+        info?.zPosition = 50
+        info?.delegate = self
+        self.addChild(info!)
+    }
+    
     func showDice() {
         
     }
@@ -186,7 +200,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     
     func diceRolled(sender: SKSpriteNode) {
         buttonClicked(sender)
-        var diceResult = 10//Int(arc4random_uniform(6)+1)
+        var diceResult = 2 //Int(arc4random_uniform(6)+1)
         let diceResult2 = Int(arc4random_uniform(6)+1)
         let aux = NSMutableDictionary();
         if GameManager.sharedInstance.halfFlag{
@@ -240,8 +254,11 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     }
     
     func teachCardsUse() {
+        guard carousel != nil else {
+            return
+        }
+        
         let strings = TutorialManager.loadStringsPlist("teachCard")
-//        let card = carousel.getCenterCard()
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
         let moveUp = SKAction.moveTo(CGPointMake(carousel.position.x, carousel.position.y + 40), duration: 0.5)
@@ -252,8 +269,15 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         
         tuples.append((carousel, strings[0], animation))
         
-        tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
-        tutorialManager.showInfo()
+        if tutorialManager != nil {
+            tutorialManager.tuples.append((carousel, strings[0], animation))
+            if !tutorialManager.isActive {
+                tutorialManager.showInfo()
+            }
+        } else {
+            tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: true, boxScale: 2.0)
+            tutorialManager.showInfo()
+        }
         GlobalFlags.cardTaught = true
     }
     
@@ -261,6 +285,15 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         if tutorialManager != nil {
             tutorialManager.buttonActivated(sender)
         }
+    }
+    
+    func infoButtonPressed(sender: InfoButtonNode) {
+        setTutorial()
+        if dice.active {
+            teachDice()
+            teachCardsUse()
+        }
+        tutorialManager.allowUserInteraction()
     }
     
 }

@@ -30,6 +30,7 @@ class GameManager : NSObject {
     var escapeFlag = false
     var halfFlag = false
     var doubleDice = false
+    
     //iphone only usage
     var playerColor = UIColor.clearColor()
     var activePlayer = [String]()
@@ -80,6 +81,7 @@ class GameManager : NSObject {
         self.isOnMiniGame = false
         self.isMultiplayer = false
         self.playerRank.removeAll()
+        self.activePlayer.removeAll()
         BoardGraph.SharedInstance.destroyGraph();
     }
     
@@ -112,14 +114,16 @@ class GameManager : NSObject {
             result = result * 2
             dicex2 = false
         }
+    
         for p in players{
             if p.playerIdentifier == (data["peerID"] as! String){
-                boardGameViewController?.scene.showDiceNumber(result, player: p.nodeSprite!)
+                boardGameViewController?.scene.showDiceNumber(result, player: p.nodeSprite!, extraDice: doubleDice)
                 let tuple = BoardGraph.SharedInstance.walkList(result, player: p, view: boardViewController)
                 movePlayerOnBoardComplete(p, nodeList: tuple.nodeList, remaining: tuple.remaining, currentNode: tuple.currentNode)
                 break;
             }
         }
+        doubleDice = false
     }
     
     //handles movement and all its possibilities
@@ -178,12 +182,15 @@ class GameManager : NSObject {
     }
     
     func setHalfMovement(data:NSNotification){
+        print("Caiu na half movement trap")
         let dic = data.userInfo!["dataDic"] as! NSDictionary
         let playerName = dic["player"] as! String
-        let setHalfMovement = dic["half"] as! Bool
+        let setHalfMove = dic["half"] as! Bool
         if UIDevice.currentDevice().name == playerName {
-            halfFlag = setHalfMovement
+            print("Setou o halfflag para true")
+            halfFlag = setHalfMove
         } else {
+            print("Setou o halfflag para false")
             halfFlag = false
         }
     }
@@ -226,6 +233,10 @@ class GameManager : NSObject {
         })
     }
     
+    func movePlayerBack(p: Player, distance: Int) {
+        BoardGraph.SharedInstance.walkBackwards(p, distance: distance)
+    }
+    
 
     // manda a carta a ser adicionada no boardGame
     func cardReceived(data : NSNotification){
@@ -260,6 +271,7 @@ class GameManager : NSObject {
                                     status = "cardBadSpot"
                                 }
                             } else {
+                                sent = true
                                 // case not trap
                                 switch(activeCard.cardName){
                                 case "Double Speed": let card = activeCard as! DoubleSpeed
@@ -571,6 +583,12 @@ class GameManager : NSObject {
         }
     }
     
+    func animatePlayerOnTrap(player: Player) {
+        if let scene = boardGameViewController?.scene {
+            scene.animatePlayerOnTrap(player.nodeSprite!)
+        }
+    }
+    
     func playerHoldingBomb(player:String){
         let p = player
         let swipe = ["lightSwipe":p]
@@ -579,6 +597,17 @@ class GameManager : NSObject {
         
         //print("Array: \(self.activePlayer)")
     }
-
+    
+    func updatePlayerInformation(name:String){
+        var aux = Player()
+        for p in players{
+            if p.playerIdentifier == name {
+                aux = p
+                break
+            }
+        }
+        self.updatePlayerMoney(aux, value: 0)
+        self.updatePlayerLoot(aux, value: 0)
+    }
         
 }

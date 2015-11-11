@@ -66,9 +66,16 @@ class PlayerButtonNode: SKNode {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        delegate?.buttonClicked(self)
-        button.texture = textureOff
-        openBackground()
+        let touch : UITouch? = touches.first as UITouch?
+        
+        if let location = touch?.locationInNode(self) {
+            let touchedNode = self.nodeAtPoint(location)
+            if touchedNode == button{
+                delegate?.buttonClicked(self)
+                button.texture = textureOff
+                openBackground()
+            }
+        }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {

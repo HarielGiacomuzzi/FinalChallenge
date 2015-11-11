@@ -18,6 +18,7 @@ class NotificationManager: NSObject, InformationNodeDelegate {
     
     init(notifications: [String], scene: SKScene) {
         super.init()
+                print("init notificationmanager")
         self.notifications = notifications
         self.scene = scene
     }
@@ -55,12 +56,18 @@ class NotificationManager: NSObject, InformationNodeDelegate {
         }
     }
     
-    static func loadStringsPlist(name: String, replaceable: String) -> String {
+    static func loadStringsPlist(name: String, replaceable: String) -> String? {
+        
         let path = NSBundle.mainBundle().pathForResource("AlertMessages", ofType: "plist")
         let dict = NSDictionary(contentsOfFile: path!)
-        let string = dict![name] as! String
-        let newString = string.stringByReplacingOccurrencesOfString("$", withString: replaceable)
+        let string = dict![name] as? String
+        let newString = string?.stringByReplacingOccurrencesOfString("$", withString: replaceable)
         
-        return newString
+        if newString != nil {
+            return newString
+        } else {
+            return name
+        }
+
     }
 }

@@ -45,7 +45,7 @@ class InformationBoxNode: SKNode {
     }
     
     func loadText(text: String) {
-        let texts = text.separateInCharacter(50)
+        let texts = text.separateInCharacter(40)
         textNode = SKLabelNode(text: texts[0])
         textNode.fontName = "Helvetica-Bold"
         textNode.fontSize = 40

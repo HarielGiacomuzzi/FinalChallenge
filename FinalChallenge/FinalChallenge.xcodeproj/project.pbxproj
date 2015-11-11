@@ -32,6 +32,8 @@
 		26E044301BF3ACA000822E2C /* endGameParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26E0442F1BF3ACA000822E2C /* endGameParticle.sks */; };
 		26E044321BF3AD7F00822E2C /* endParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E044311BF3AD7F00822E2C /* endParticle.swift */; };
 		4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445D7C41B98C99F0049B787 /* AlertPath.swift */; };
+		44462C561BF26D310092448C /* raioHorizontal.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 44462C551BF26D310092448C /* raioHorizontal.atlas */; };
+		44462C581BF26D380092448C /* raioVertical.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 44462C571BF26D380092448C /* raioVertical.atlas */; };
 		4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4473647C1B9A065400C8AD9D /* puffGame.atlas */; };
 		4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */; };
 		447891DB1BBEF2120094E16B /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447891DA1BBEF2120094E16B /* CardManager.swift */; };
@@ -40,6 +42,7 @@
 		5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2095981BB973F2002FC8AF /* StoreScene.swift */; };
 		5E25495A1BE9313C0055638C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2549591BE9313C0055638C /* String+Extension.swift */; };
 		5E3F1CB61B82658600F27D49 /* FlappyStoneNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */; };
+		5E40B8C31BF25493003D7359 /* InfoButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E40B8C21BF25493003D7359 /* InfoButtonNode.swift */; };
 		5E4299321BB9880E004B1DF9 /* StoreButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */; };
 		5E4299341BB9914F004B1DF9 /* CardShowNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4299331BB9914F004B1DF9 /* CardShowNode.swift */; };
 		5E51FBE61BD0315E00F482A6 /* endgameassets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E51FBE51BD0315E00F482A6 /* endgameassets.xcassets */; };
@@ -76,6 +79,7 @@
 		5ED294DE1BBD9AAA0073B148 /* AccelerometerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294DD1BBD9AAA0073B148 /* AccelerometerScene.swift */; };
 		5ED294E01BBD9C030073B148 /* GamePadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294DF1BBD9C030073B148 /* GamePadScene.swift */; };
 		5ED294E21BBD9D380073B148 /* SwipeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED294E11BBD9D380073B148 /* SwipeScene.swift */; };
+		5ED888D21BF1035900B67BF9 /* dices.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5ED888D11BF1035900B67BF9 /* dices.atlas */; };
 		5ED9E87E1B7128060073FB7B /* FlappyGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */; };
 		5EE219F61BD0161300D6EF98 /* DiceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE219F51BD0161300D6EF98 /* DiceNode.swift */; };
 		5EE219F81BD0280800D6EF98 /* coinParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5EE219F71BD0280800D6EF98 /* coinParticle.sks */; };
@@ -123,6 +127,8 @@
 		B5F60BBE1B83C36C00786728 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBD1B83C36C00786728 /* Player.swift */; };
 		B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */; };
 		B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BC11B84FA0400786728 /* MyParticle2.sks */; };
+		DB07CFDF1BF3B27E002E2271 /* starsParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB07CFDE1BF3B27E002E2271 /* starsParticle.sks */; };
+		DB07CFE11BF3B3FD002E2271 /* StarEmiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB07CFE01BF3B3FD002E2271 /* StarEmiter.swift */; };
 		DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB129D681BB31D15002B4862 /* squarePopUp.atlas */; };
 		DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */; };
 		DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB42C9BB1BA9D59400D6D247 /* Board.atlas */; };
@@ -189,6 +195,8 @@
 		26E0442F1BF3ACA000822E2C /* endGameParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = endGameParticle.sks; sourceTree = "<group>"; };
 		26E044311BF3AD7F00822E2C /* endParticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = endParticle.swift; sourceTree = "<group>"; };
 		4445D7C41B98C99F0049B787 /* AlertPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPath.swift; sourceTree = "<group>"; };
+		44462C551BF26D310092448C /* raioHorizontal.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = raioHorizontal.atlas; sourceTree = "<group>"; };
+		44462C571BF26D380092448C /* raioVertical.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = raioVertical.atlas; sourceTree = "<group>"; };
 		4473647C1B9A065400C8AD9D /* puffGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = puffGame.atlas; sourceTree = "<group>"; };
 		4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuffPlayer.swift; sourceTree = "<group>"; };
 		447891DA1BBEF2120094E16B /* CardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
@@ -197,6 +205,7 @@
 		5E2095981BB973F2002FC8AF /* StoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreScene.swift; sourceTree = "<group>"; };
 		5E2549591BE9313C0055638C /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		5E3F1CB51B82658600F27D49 /* FlappyStoneNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyStoneNode.swift; sourceTree = "<group>"; };
+		5E40B8C21BF25493003D7359 /* InfoButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoButtonNode.swift; sourceTree = "<group>"; };
 		5E4299311BB9880E004B1DF9 /* StoreButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreButtonNode.swift; sourceTree = "<group>"; };
 		5E4299331BB9914F004B1DF9 /* CardShowNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardShowNode.swift; sourceTree = "<group>"; };
 		5E51FBE51BD0315E00F482A6 /* endgameassets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = endgameassets.xcassets; sourceTree = "<group>"; };
@@ -233,6 +242,7 @@
 		5ED294DD1BBD9AAA0073B148 /* AccelerometerScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerScene.swift; sourceTree = "<group>"; };
 		5ED294DF1BBD9C030073B148 /* GamePadScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadScene.swift; sourceTree = "<group>"; };
 		5ED294E11BBD9D380073B148 /* SwipeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeScene.swift; sourceTree = "<group>"; };
+		5ED888D11BF1035900B67BF9 /* dices.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = dices.atlas; sourceTree = "<group>"; };
 		5ED9E87D1B7128060073FB7B /* FlappyGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyGameScene.swift; sourceTree = "<group>"; };
 		5EE219F51BD0161300D6EF98 /* DiceNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiceNode.swift; sourceTree = "<group>"; };
 		5EE219F71BD0280800D6EF98 /* coinParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = coinParticle.sks; sourceTree = "<group>"; };
@@ -282,6 +292,8 @@
 		B5F60BBD1B83C36C00786728 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyParticleNode.swift; sourceTree = "<group>"; };
 		B5F60BC11B84FA0400786728 /* MyParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle2.sks; sourceTree = "<group>"; };
+		DB07CFDE1BF3B27E002E2271 /* starsParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = starsParticle.sks; sourceTree = "<group>"; };
+		DB07CFE01BF3B3FD002E2271 /* StarEmiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarEmiter.swift; sourceTree = "<group>"; };
 		DB129D681BB31D15002B4862 /* squarePopUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squarePopUp.atlas; sourceTree = "<group>"; };
 		DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhonePlayerViewController.swift; sourceTree = "<group>"; };
 		DB42C9BB1BA9D59400D6D247 /* Board.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Board.atlas; sourceTree = "<group>"; };
@@ -417,6 +429,7 @@
 				5E9EB32F1BDE89DF003974EB /* InformationBoxNode.swift */,
 				5E9EB3311BDE8A44003974EB /* InformationArrowNode.swift */,
 				5E9EB3341BDE97CB003974EB /* TutorialManager.swift */,
+				5E40B8C21BF25493003D7359 /* InfoButtonNode.swift */,
 				5ED264711BE92095008994C9 /* TutorialTexts.plist */,
 				5E9EB33A1BDEA4D6003974EB /* tutorial.atlas */,
 			);
@@ -726,12 +739,17 @@
 		DBF7C0BD1B98D4920010FCFE /* PuffGame */ = {
 			isa = PBXGroup;
 			children = (
+				DB07CFDE1BF3B27E002E2271 /* starsParticle.sks */,
+				44462C571BF26D380092448C /* raioVertical.atlas */,
+				44462C551BF26D310092448C /* raioHorizontal.atlas */,
+				4407485A1BF1039E008F59CD /* babiesAssetsBundle.atlas */,
 				4473647C1B9A065400C8AD9D /* puffGame.atlas */,
 				DBF7C0BF1B98D4EE0010FCFE /* PuffGameScene.sks */,
 				DBF7C0C11B98D50E0010FCFE /* PuffGameControl.sks */,
 				DBF7C0C31B98D5430010FCFE /* PuffGameScene.swift */,
 				DBF7C0C51B98D8050010FCFE /* PuffGameViewController.swift */,
 				4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */,
+				DB07CFE01BF3B3FD002E2271 /* StarEmiter.swift */,
 			);
 			name = PuffGame;
 			sourceTree = "<group>";
@@ -825,7 +843,9 @@
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				26547BB31B9F4D59003DFD73 /* SetupParty.xcassets in Resources */,
 				5E9EB33B1BDEA4D6003974EB /* tutorial.atlas in Resources */,
+				4407485B1BF1039E008F59CD /* babiesAssetsBundle.atlas in Resources */,
 				26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */,
+				44462C561BF26D310092448C /* raioHorizontal.atlas in Resources */,
 				B5DD1B521B8F8D0500AA1EB6 /* bubbleSound2.wav in Resources */,
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
@@ -843,6 +863,7 @@
 				2605B2491BD9649500DAE7D1 /* bombgame.mp3 in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
+				44462C581BF26D380092448C /* raioVertical.atlas in Resources */,
 				262C07F31BD02B3400246DF5 /* roboPadAssets.xcassets in Resources */,
 				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,
@@ -860,6 +881,7 @@
 				5EC7FF8A1BC81E9500494CE4 /* charSprites.atlas in Resources */,
 				DB73E8141B72838D00F7D7C7 /* Board.sks in Resources */,
 				DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */,
+				5ED888D21BF1035900B67BF9 /* dices.atlas in Resources */,
 				269F18B01B86583000EAD94F /* wind.atlas in Resources */,
 				DB458B7D1B5409B90066B38C /* Images.xcassets in Resources */,
 				4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */,
@@ -872,6 +894,7 @@
 				B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */,
 				B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
+				DB07CFDF1BF3B27E002E2271 /* starsParticle.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,6 +939,7 @@
 				26547BAD1B9F4736003DFD73 /* SetupPartyScene.swift in Sources */,
 				5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */,
 				5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */,
+				DB07CFE11BF3B3FD002E2271 /* StarEmiter.swift in Sources */,
 				DBF7C0C61B98D8050010FCFE /* PuffGameViewController.swift in Sources */,
 				B5AFAD081B94C1DD0005F19E /* MinigameCollectionViewController.swift in Sources */,
 				DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */,
@@ -945,6 +969,7 @@
 				B5905A621BEA642E00786355 /* ExtraDice.swift in Sources */,
 				5E2095991BB973F2002FC8AF /* StoreScene.swift in Sources */,
 				5E59AE911BEA6459006C4E9B /* NotificationManager.swift in Sources */,
+				5E40B8C31BF25493003D7359 /* InfoButtonNode.swift in Sources */,
 				4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */,
 				26B2D9C71B87AC030056015F /* BombTGameScene.swift in Sources */,
 				DBC57FE21B83AEA200CA0232 /* XMLParser.swift in Sources */,

@@ -168,13 +168,19 @@ class BoardNode : NSObject{
         self.posY = posY;
         
         //add only treasurecards in all houses
-        let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
-        self.item = it
+//        let it = CardManager.ShareInstance.generateRandomTreasureCard() //we may need to pass a value
+//        self.item = it
         
         //add only stealgoldcard in all houses
-//        let it = StealGoldCard()
-//        it.used = false
-//        self.item = it
+        let it =
+        //StealGoldCard()
+        //LoseCard()
+        //MoveBackCard()
+        //HalfSpeed()
+        //DoubleSpeed()
+        ExtraDice()
+        it.used = false
+        self.item = it
         
         // add ramdonly the itens
         //self.setupItems()

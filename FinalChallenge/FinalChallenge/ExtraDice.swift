@@ -16,6 +16,7 @@ class ExtraDice: ActiveCard {
     }
     
     override func activate(targetPlayer: Player) {
+        GameManager.sharedInstance.doubleDice = true
         let dataDic = ["player":targetPlayer.playerIdentifier, "double": true]
         let dicc = ["DoubleMove":" ","dataDic":dataDic]
         ConnectionManager.sharedInstance.sendDictionaryToPeer(dicc, reliable: true)

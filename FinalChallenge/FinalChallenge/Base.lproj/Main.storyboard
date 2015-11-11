@@ -616,8 +616,8 @@
         <image name="titleButtonOn" width="203" height="133"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Afr-tR-2lE"/>
-        <segue reference="vFp-2s-lFp"/>
         <segue reference="S5e-fy-Ifo"/>
+        <segue reference="vFp-2s-lFp"/>
+        <segue reference="Afr-tR-2lE"/>
     </inferredMetricsTieBreakers>
 </document>

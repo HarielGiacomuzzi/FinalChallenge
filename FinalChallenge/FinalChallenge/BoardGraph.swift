@@ -172,7 +172,6 @@ class BoardGraph : NSObject{
     //removes item from node and adds item to player
     //sends message to player phone to update item
     func pickItem(nodeName : String, player:Player) -> Bool{
-        
         if haveItem(nodeName) {
             if !isUsable(nodeName){
                 self.sendCardToPlayer(nodeName, player: player)
@@ -187,8 +186,10 @@ class BoardGraph : NSObject{
                     if !GameManager.sharedInstance.escapeFlag{
                         self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
                         nodes[nodeName]?.item = nil
+                        GameManager.sharedInstance.animatePlayerOnTrap(player)
                     } else {
                         // faz algo se o jogador escapou da trap
+                        GameManager.sharedInstance.escapeFlag = false
                     }
                 }
             }
@@ -221,7 +222,9 @@ class BoardGraph : NSObject{
             case "LoseCard" :       //print("Fez o efeito da carta LoseCard")
                                     let actionCard = card as! LoseCard
                                     actionCard.activate(targetPlayer)
-            
+            case "Half Speed" :
+                                    let actionCard = card as! HalfSpeed
+                                    actionCard.activate(targetPlayer)
             default: break
         }
     }
@@ -256,8 +259,10 @@ class BoardGraph : NSObject{
     func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
 
         let a = walk(quantity, node: nodeFor(player)!, list: [], view: view);
-        nodeFor(player)?.removePlayer(player);
-        a.nodeList.last?.insertPLayer(player);
+        if let lastNode = a.nodeList.last {
+            nodeFor(player)?.removePlayer(player);
+            lastNode.insertPLayer(player);
+        }
         return a;
     }
     
@@ -268,6 +273,23 @@ class BoardGraph : NSObject{
     }
     
     //TODO: walk backwards
+    
+    func walkBackwards(player:Player, var distance: Int) {
+        print("vou printar os pais")
+        for node in nodes {
+            print(node.1.father)
+        }
+//        var node = nodeFor(player)
+//        print(node)
+//        while distance > 0 {
+//            node = node?.father
+//            print(node)
+//            distance--
+//        }
+//        nodeFor(player)?.removePlayer(player)
+//        node!.insertPLayer(player)
+    }
+    
     
     /* ******************************** */
     /* WALK ATUAL TERMINA AQUI !!!!!!!! */
@@ -335,7 +357,7 @@ class BoardGraph : NSObject{
         }
     }
     
-    private func walkBackward(qtd : Int, player : Player){
+    func walkBackward(qtd : Int, player : Player){
         let aux = Int(whereIs(player)!);
         nodes[whereIs(player)!]?.removePlayer(player)
         if aux! - qtd < 0{
