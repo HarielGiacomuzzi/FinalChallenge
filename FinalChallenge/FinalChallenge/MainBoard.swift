@@ -211,32 +211,212 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func showDiceNumber(number:Int, player: PlayerNode) {
+    func showDiceNumber(number:Int, player: PlayerNode, extraDice : Bool) {
         let diceAtlas = SKTextureAtlas(named: "dices")
         var position = player.position
         position.y += player.frame.height
-
-        if number <= 6 {
-            let node = SKSpriteNode(texture: diceAtlas.textureNamed("dice\(number)"))
-            node.position = position
-            node.zPosition = 400
-            addChild(node)
-            node.setScale(0.5)
-            let action = SKAction.scaleTo(1.0, duration: 1.0)
-            node.runAction(action, completion: {() in
-                node.removeFromParent()
-            })
+        if !extraDice{
+            if number <= 6 {
+                let node = SKSpriteNode(texture:    diceAtlas.textureNamed("dice\(number)"))
+                node.position = position
+                node.zPosition = 400
+                addChild(node)
+                node.setScale(0.5)
+                let action = SKAction.scaleTo(1.0, duration: 1.0)
+                node.runAction(action, completion: {() in
+                    node.removeFromParent()
+                })
+            }
         } else {
-            let label = SKLabelNode(text: "\(number)")
-            label.position = position
-            label.zPosition = 400
-            label.fontName = "GillSans-Bold"
-            addChild(label)
-            let action = SKAction.scaleTo(2.0, duration: 1.0)
-            label.runAction(action, completion: {() in
-                label.removeFromParent()
-            })
+            switch(number){
+            case 2:
+                    setNumberShow(1, s: 1, player: player)
+            case 3: var f = 0
+                    var s = 0
+                    switch(Int(arc4random_uniform(2))){
+                    case 0:
+                        f = 2
+                        s = 1
+                    case 1:
+                        f = 1
+                        s = 2
+                    default : break
+                    }
+                    setNumberShow(f, s: s, player: player)
+            case 4: var f = 0
+                    var s = 0
+                    switch(Int(arc4random_uniform(3))){
+                    case 0:
+                        f = 2
+                        s = 1
+                    case 1:
+                        f = 1
+                        s = 3
+                    case 2:
+                        f = 3
+                        s = 1
+                    default : break
+                    }
+                    setNumberShow(f, s: s, player: player)
+            case 5: var f = 0
+                    var s = 0
+                    switch(Int(arc4random_uniform(4))){
+                    case 0:
+                        f = 3
+                        s = 2
+                    case 1:
+                        f = 2
+                        s = 3
+                    case 2:
+                        f = 1
+                        s = 4
+                    case 3:
+                        f = 4
+                        s = 1
+                    default : break
+                    }
+                    setNumberShow(f, s: s, player: player)
+            case 6: var f = 0
+                    var s = 0
+                    switch(Int(arc4random_uniform(5))){
+                    case 0:
+                        f = 3
+                        s = 3
+                    case 1:
+                        f = 2
+                        s = 4
+                    case 2:
+                        f = 4
+                        s = 2
+                    case 3:
+                        f = 5
+                        s = 1
+                    case 4:
+                        f = 1
+                        s = 5
+                    default : break
+                    }
+                    setNumberShow(f, s: s, player: player)
+            case 7: var f = 0
+                    var s = 0
+                    switch(Int(arc4random_uniform(6))){
+                    case 0:
+                        f = 1
+                        s = 6
+                    case 1:
+                        f = 6
+                        s = 1
+                    case 2:
+                        f = 5
+                        s = 2
+                    case 3:
+                        f = 2
+                        s = 5
+                    case 4:
+                        f = 4
+                        s = 3
+                    case 5:
+                        f = 3
+                        s = 4
+                    default : break
+                    }
+                    setNumberShow(f, s: s, player: player)
+            case 8: var f = 0
+                    var s = 0
+                    switch(Int(arc4random_uniform(5))){
+                    case 0:
+                        f = 4
+                        s = 4
+                    case 1:
+                        f = 6
+                        s = 2
+                    case 2:
+                        f = 2
+                        s = 6
+                    case 3:
+                        f = 5
+                        s = 3
+                    case 4:
+                        f = 3
+                        s = 5
+                    default : break
+                    }
+                    setNumberShow(f, s: s, player: player)
+            case 9: var f = 0
+                    var s = 0
+                    switch(Int(arc4random_uniform(4))){
+                    case 0:
+                        f = 5
+                        s = 4
+                    case 1:
+                        f = 4
+                        s = 5
+                    case 2:
+                        f = 3
+                        s = 6
+                    case 3:
+                        f = 6
+                        s = 3
+                    default : break
+                    }
+                    setNumberShow(f, s: s, player: player)
+            case 10: var f = 0
+                     var s = 0
+                     switch(Int(arc4random_uniform(3))){
+                     case 0:
+                         f = 5
+                         s = 5
+                     case 1:
+                         f = 4
+                         s = 6
+                     case 2:
+                         f = 6
+                         s = 4
+                     default : break
+                     }
+                     setNumberShow(f, s: s, player: player)
+            case 11: var f = 0
+                     var s = 0
+                     switch(Int(arc4random_uniform(2))){
+                     case 0:
+                         f = 6
+                         s = 5
+                     case 1:
+                         f = 5
+                         s = 6
+                     default : break
+                     }
+                    setNumberShow(f, s: s, player: player)
+            case 12:
+                    setNumberShow(6, s: 6, player: player)
+            default : break
+            }
         }
+    }
+    
+    func setNumberShow(f:Int, s:Int, player : PlayerNode){
+        let diceAtlas = SKTextureAtlas(named: "dices")
+        var position = player.position
+        position.y += player.frame.height
+        let node = SKSpriteNode(texture: diceAtlas.textureNamed("dice\(f)"))
+        let node2 = SKSpriteNode(texture: diceAtlas.textureNamed("dice\(s)"))
+        node.position = position
+        node.zPosition = 400
+        node.position.x = node.position.x - node.frame.size.width/2
+        node2.position = position
+        node2.position.x = node2.position.x + node2.frame.size.width/2
+        node2.zPosition = 400
+        addChild(node)
+        addChild(node2)
+        node.setScale(0.5)
+        node2.setScale(0.5)
+        let action = SKAction.scaleTo(1.0, duration: 1.0)
+        node.runAction(action, completion: {() in
+            node.removeFromParent()
+        })
+        node2.runAction(action, completion: {() in
+            node2.removeFromParent()
+        })
     }
     
     func showMoney(player:PlayerNode, good:Bool) {
