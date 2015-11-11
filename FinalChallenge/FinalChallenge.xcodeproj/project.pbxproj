@@ -29,10 +29,10 @@
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA4D1B94BEE800E94400 /* bombGame.atlas */; };
 		26D6DA541B94CA7700E94400 /* bombSceneAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */; };
-		4407485B1BF1039E008F59CD /* babiesAssetsBundle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4407485A1BF1039E008F59CD /* babiesAssetsBundle.atlas */; settings = {ASSET_TAGS = (); }; };
+		4407485B1BF1039E008F59CD /* babiesAssetsBundle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4407485A1BF1039E008F59CD /* babiesAssetsBundle.atlas */; };
 		4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445D7C41B98C99F0049B787 /* AlertPath.swift */; };
-		44462C561BF26D310092448C /* raioHorizontal.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 44462C551BF26D310092448C /* raioHorizontal.atlas */; settings = {ASSET_TAGS = (); }; };
-		44462C581BF26D380092448C /* raioVertical.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 44462C571BF26D380092448C /* raioVertical.atlas */; settings = {ASSET_TAGS = (); }; };
+		44462C561BF26D310092448C /* raioHorizontal.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 44462C551BF26D310092448C /* raioHorizontal.atlas */; };
+		44462C581BF26D380092448C /* raioVertical.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 44462C571BF26D380092448C /* raioVertical.atlas */; };
 		4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4473647C1B9A065400C8AD9D /* puffGame.atlas */; };
 		4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */; };
 		447891DB1BBEF2120094E16B /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447891DA1BBEF2120094E16B /* CardManager.swift */; };
@@ -126,6 +126,8 @@
 		B5F60BBE1B83C36C00786728 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBD1B83C36C00786728 /* Player.swift */; };
 		B5F60BC01B84ECB500786728 /* FlappyParticleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */; };
 		B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BC11B84FA0400786728 /* MyParticle2.sks */; };
+		DB07CFDF1BF3B27E002E2271 /* starsParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB07CFDE1BF3B27E002E2271 /* starsParticle.sks */; };
+		DB07CFE11BF3B3FD002E2271 /* StarEmiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB07CFE01BF3B3FD002E2271 /* StarEmiter.swift */; };
 		DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB129D681BB31D15002B4862 /* squarePopUp.atlas */; };
 		DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */; };
 		DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB42C9BB1BA9D59400D6D247 /* Board.atlas */; };
@@ -288,6 +290,8 @@
 		B5F60BBD1B83C36C00786728 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		B5F60BBF1B84ECB500786728 /* FlappyParticleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlappyParticleNode.swift; sourceTree = "<group>"; };
 		B5F60BC11B84FA0400786728 /* MyParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle2.sks; sourceTree = "<group>"; };
+		DB07CFDE1BF3B27E002E2271 /* starsParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = starsParticle.sks; sourceTree = "<group>"; };
+		DB07CFE01BF3B3FD002E2271 /* StarEmiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarEmiter.swift; sourceTree = "<group>"; };
 		DB129D681BB31D15002B4862 /* squarePopUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squarePopUp.atlas; sourceTree = "<group>"; };
 		DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhonePlayerViewController.swift; sourceTree = "<group>"; };
 		DB42C9BB1BA9D59400D6D247 /* Board.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Board.atlas; sourceTree = "<group>"; };
@@ -732,6 +736,7 @@
 		DBF7C0BD1B98D4920010FCFE /* PuffGame */ = {
 			isa = PBXGroup;
 			children = (
+				DB07CFDE1BF3B27E002E2271 /* starsParticle.sks */,
 				44462C571BF26D380092448C /* raioVertical.atlas */,
 				44462C551BF26D310092448C /* raioHorizontal.atlas */,
 				4407485A1BF1039E008F59CD /* babiesAssetsBundle.atlas */,
@@ -741,6 +746,7 @@
 				DBF7C0C31B98D5430010FCFE /* PuffGameScene.swift */,
 				DBF7C0C51B98D8050010FCFE /* PuffGameViewController.swift */,
 				4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */,
+				DB07CFE01BF3B3FD002E2271 /* StarEmiter.swift */,
 			);
 			name = PuffGame;
 			sourceTree = "<group>";
@@ -884,6 +890,7 @@
 				B5B929241BC6F52400DD2C46 /* cardThrowSound.wav in Resources */,
 				B5CD203B1BBDA86600D184F6 /* avatar.atlas in Resources */,
 				DBE862091B863BD400C8099E /* MainBoard.sks in Resources */,
+				DB07CFDF1BF3B27E002E2271 /* starsParticle.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +935,7 @@
 				26547BAD1B9F4736003DFD73 /* SetupPartyScene.swift in Sources */,
 				5EB9EE6F1B8412A90003C980 /* FlappyPowerupNode.swift in Sources */,
 				5E8F9DE11B7D1663004514D0 /* Array+Extension.swift in Sources */,
+				DB07CFE11BF3B3FD002E2271 /* StarEmiter.swift in Sources */,
 				DBF7C0C61B98D8050010FCFE /* PuffGameViewController.swift in Sources */,
 				B5AFAD081B94C1DD0005F19E /* MinigameCollectionViewController.swift in Sources */,
 				DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */,
