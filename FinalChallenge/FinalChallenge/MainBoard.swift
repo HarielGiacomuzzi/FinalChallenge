@@ -275,9 +275,20 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         })
     }
     
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 //        showCard((GameManager.sharedInstance.players.first?.nodeSprite)!, good: true)
-//    }
+        animatePlayerOnTrap(GameManager.sharedInstance.players.first!.nodeSprite!)
+    }
+    
+    func animatePlayerOnTrap(player: PlayerNode) {
+        let moveRight = SKAction.moveToX(player.position.x + 5, duration: 0.1)
+        let moveLeft = SKAction.moveToX(player.position.x - 5, duration: 0.1)
+        let sequence = SKAction.sequence([moveRight,moveLeft])
+        let repeatAction = SKAction.repeatAction(sequence, count: 5)
+        let restart = SKAction.moveToX(player.position.x, duration: 0.0)
+        let finalSequence = SKAction.sequence([repeatAction,restart])
+        player.runAction(finalSequence)
+    }
     
     deinit{
         print("A main board saiu")
