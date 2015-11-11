@@ -12,7 +12,7 @@ import SpriteKit
 
 class TestterViewController: UIViewController {
     
-    var scene : GamePadScene?
+    var scene : EndGameScene?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class TestterViewController: UIViewController {
         
         //let scene = GameOverSceneMP(size: CGSize(width: 1024, height: 768))
         
-        scene = AccelerometerScene(size: CGSize(width: 1334, height: 750))
+        scene = EndGameScene(size: CGSize(width: 1334, height: 750))
         
         let skView = view as! SKView
         skView.showsFPS = true

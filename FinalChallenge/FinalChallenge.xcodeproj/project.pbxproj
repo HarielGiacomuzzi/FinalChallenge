@@ -29,6 +29,8 @@
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA4D1B94BEE800E94400 /* bombGame.atlas */; };
 		26D6DA541B94CA7700E94400 /* bombSceneAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */; };
+		26E044301BF3ACA000822E2C /* endGameParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 26E0442F1BF3ACA000822E2C /* endGameParticle.sks */; };
+		26E044321BF3AD7F00822E2C /* endParticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E044311BF3AD7F00822E2C /* endParticle.swift */; };
 		4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445D7C41B98C99F0049B787 /* AlertPath.swift */; };
 		4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4473647C1B9A065400C8AD9D /* puffGame.atlas */; };
 		4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */; };
@@ -91,11 +93,11 @@
 		B57B33671B86566E000E5F53 /* GameOver.xib in Resources */ = {isa = PBXBuildFile; fileRef = B57B33661B86566E000E5F53 /* GameOver.xib */; };
 		B57B33691B8656D7000E5F53 /* GameOverXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57B33681B8656D7000E5F53 /* GameOverXib.swift */; };
 		B5840CC81BC43E1D006E741B /* EndGameIphoneScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5840CC71BC43E1D006E741B /* EndGameIphoneScene.swift */; };
-		B5905A5C1BEA62DC00786355 /* cards3.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5905A5B1BEA62DC00786355 /* cards3.atlas */; settings = {ASSET_TAGS = (); }; };
-		B5905A5E1BEA640800786355 /* DoubleSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5905A5D1BEA640800786355 /* DoubleSpeed.swift */; settings = {ASSET_TAGS = (); }; };
-		B5905A601BEA641B00786355 /* EscapeTraps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5905A5F1BEA641B00786355 /* EscapeTraps.swift */; settings = {ASSET_TAGS = (); }; };
-		B5905A621BEA642E00786355 /* ExtraDice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5905A611BEA642E00786355 /* ExtraDice.swift */; settings = {ASSET_TAGS = (); }; };
-		B5905A641BEA643F00786355 /* HalfSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5905A631BEA643F00786355 /* HalfSpeed.swift */; settings = {ASSET_TAGS = (); }; };
+		B5905A5C1BEA62DC00786355 /* cards3.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B5905A5B1BEA62DC00786355 /* cards3.atlas */; };
+		B5905A5E1BEA640800786355 /* DoubleSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5905A5D1BEA640800786355 /* DoubleSpeed.swift */; };
+		B5905A601BEA641B00786355 /* EscapeTraps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5905A5F1BEA641B00786355 /* EscapeTraps.swift */; };
+		B5905A621BEA642E00786355 /* ExtraDice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5905A611BEA642E00786355 /* ExtraDice.swift */; };
+		B5905A641BEA643F00786355 /* HalfSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5905A631BEA643F00786355 /* HalfSpeed.swift */; };
 		B5A7685D1BBEF4B3006819B9 /* EndGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A7685C1BBEF4B3006819B9 /* EndGameScene.swift */; };
 		B5AFAD081B94C1DD0005F19E /* MinigameCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD071B94C1DD0005F19E /* MinigameCollectionViewController.swift */; };
 		B5AFAD0A1B94C3770005F19E /* CustomMinigameCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AFAD091B94C3770005F19E /* CustomMinigameCollectionView.swift */; };
@@ -184,6 +186,8 @@
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
 		26D6DA4D1B94BEE800E94400 /* bombGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bombGame.atlas; sourceTree = "<group>"; };
 		26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = bombSceneAssets.xcassets; sourceTree = "<group>"; };
+		26E0442F1BF3ACA000822E2C /* endGameParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = endGameParticle.sks; sourceTree = "<group>"; };
+		26E044311BF3AD7F00822E2C /* endParticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = endParticle.swift; sourceTree = "<group>"; };
 		4445D7C41B98C99F0049B787 /* AlertPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPath.swift; sourceTree = "<group>"; };
 		4473647C1B9A065400C8AD9D /* puffGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = puffGame.atlas; sourceTree = "<group>"; };
 		4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuffPlayer.swift; sourceTree = "<group>"; };
@@ -707,12 +711,14 @@
 				DB73E8151B7286A800F7D7C7 /* BoardViewController.swift */,
 				DBC57FE31B83AEC300CA0232 /* BoardScene.swift */,
 				DBE862061B8552C800C8099E /* MainBoard.swift */,
-				B5A7685C1BBEF4B3006819B9 /* EndGameScene.swift */,
 				5EC7FF891BC81E9500494CE4 /* charSprites.atlas */,
 				DB495B201BC6E32800A8E0DE /* BoardNode.swift */,
 				5E5A64A31BC6E26B00D5AC09 /* PlayerNode.swift */,
 				5E5A64A51BC6EC6B00D5AC09 /* TestViewController.swift */,
 				5E5A64A71BC6EC7C00D5AC09 /* TestScene.swift */,
+				B5A7685C1BBEF4B3006819B9 /* EndGameScene.swift */,
+				26E0442F1BF3ACA000822E2C /* endGameParticle.sks */,
+				26E044311BF3AD7F00822E2C /* endParticle.swift */,
 			);
 			name = Board;
 			sourceTree = "<group>";
@@ -829,6 +835,7 @@
 				B5DD1B4A1B8F73D300AA1EB6 /* wavesSound.wav in Resources */,
 				2605B2471BD9630900DAE7D1 /* maingame.mp3 in Resources */,
 				2605B24B1BD965FF00DAE7D1 /* flappymusic.mp3 in Resources */,
+				26E044301BF3ACA000822E2C /* endGameParticle.sks in Resources */,
 				2682DF6F1BB4838900ACF1A6 /* popup.atlas in Resources */,
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
@@ -921,6 +928,7 @@
 				DB73E8121B72834400F7D7C7 /* BoardGraph.swift in Sources */,
 				26B2D9C91B87AE570056015F /* MiniGameViewController.swift in Sources */,
 				B5279F931BB08C7D0015DBE7 /* StealGoldCard.swift in Sources */,
+				26E044321BF3AD7F00822E2C /* endParticle.swift in Sources */,
 				5EF605F31B9CE49E0075504E /* CGFloat+Extension.swift in Sources */,
 				DBF7C0C81B98DDB90010FCFE /* PuffGamePad.swift in Sources */,
 				264D0CDE1B9F6AE6005B7EE9 /* SetupParticle.swift in Sources */,
