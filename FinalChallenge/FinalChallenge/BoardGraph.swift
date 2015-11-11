@@ -260,7 +260,7 @@ class BoardGraph : NSObject{
 
         let a = walk(quantity, node: nodeFor(player)!, list: [], view: view);
         nodeFor(player)?.removePlayer(player);
-        a.nodeList.last?.insertPLayer(player);
+        a.nodeList.last!.insertPLayer(player);
         return a;
     }
     
