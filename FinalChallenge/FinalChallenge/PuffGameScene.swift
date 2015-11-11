@@ -33,6 +33,10 @@ func - (left: CGSize, right: CGSize) -> CGSize {
     return CGSizeMake(left.width - right.width, left.height - left.height)
 }
 
+func - (left: CGSize, right: CGFloat) -> CGSize {
+    return CGSizeMake(left.width - right, left.height - right)
+}
+
 class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     let partsAtlas = SKTextureAtlas(named: "puffGame")
     
@@ -54,7 +58,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "messageReceived:", name: "ConnectionManager_PuffGamePadAction", object: nil);
         setupPlayers();
-        setupSpikes();
+        //setupSpikes();
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -0.01)
         self.physicsWorld.contactDelegate = self;
         setupBackground();
@@ -424,19 +428,110 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         background.position = CGPointMake((self.view?.frame.width)!/2, (self.view?.frame.height)!/2)
         self.addChild(background)
         self.backgroundColor = UIColor.blackColor()
+        
+        // particles
+        
+        weak var particles = StarEmiter(fileNamed: "starsParticle")
+        particles?.position = CGPointMake((self.view?.frame.width)!+30, (self.view?.frame.height)!/2)
+        particles?.zPosition = -2
+        self.addChild(particles!)
     }
     
     func setupTowers(){
         let a = SKTexture(imageNamed: "raioTower")
         let towerSizeFactor = CGFloat((a.size().height)/2)
+        let raiosVerticais = [SKTexture(imageNamed: "raiov1"),SKTexture(imageNamed: "raiov2"),SKTexture(imageNamed: "raiov3")]
+        let raiosHorizontais = [SKTexture(imageNamed: "raio1"),SKTexture(imageNamed: "raio2"),SKTexture(imageNamed: "raio3")]
+        
         let positions = [CGPointMake(towerSizeFactor, towerSizeFactor),CGPointMake(towerSizeFactor, (self.view?.frame.height)! - towerSizeFactor), CGPointMake((self.view?.frame.width)! - towerSizeFactor, (self.view?.frame.height)! - towerSizeFactor), CGPointMake((self.view?.frame.width)! - towerSizeFactor, towerSizeFactor)]
         for i in 0...3{
-        let tower = SKSpriteNode(imageNamed: "raioTower")
+            let tower = SKSpriteNode(imageNamed: "raioTower")
             tower.position = positions[i]
+            tower.zPosition = 1;
             self.addChild(tower)
         }
+        
+        //######################################################
+        //# Cria os raios                                      #
+        //######################################################
+        
+        let dissappear = SKAction.hide()
+        let waitTime = SKAction.waitForDuration(0.5)
+        let appear = SKAction.unhide()
+        let initialHorizontal = SKTexture(imageNamed: "raio1")
+        let initialVertical = SKTexture(imageNamed: "raiov1")
+        
+        let spriteRaio1 = SKSpriteNode(texture: initialHorizontal)
+        spriteRaio1.position = CGPointMake((self.view?.frame.width)!/2, positions[0].y)
+        spriteRaio1.zPosition = 0
+        self.addChild(spriteRaio1)
+        
+        let spriteRaio2 = SKSpriteNode(texture: initialVertical)
+        spriteRaio2.zPosition = 0
+        spriteRaio2.position = CGPointMake(positions[0].x, (self.view?.frame.height)!/2)
+        self.addChild(spriteRaio2)
+        
+        let spriteRaio3 = SKSpriteNode(texture: initialHorizontal)
+        spriteRaio3.zPosition = 0
+        spriteRaio3.position = CGPointMake((self.view?.frame.width)!/2, positions[1].y)
+        self.addChild(spriteRaio3)
+        
+        let spriteRaio4 = SKSpriteNode(texture: initialVertical)
+        spriteRaio4.zPosition = 0
+        spriteRaio4.position = CGPointMake(positions[3].x, (self.view?.frame.height)!/2)
+        self.addChild(spriteRaio4)
+        
+        let raio1 = SKAction.animateWithTextures(raiosHorizontais, timePerFrame: 0.2)
+        let sequence1 = SKAction.sequence([raio1,dissappear,waitTime,appear])
+        spriteRaio1.runAction(SKAction.repeatActionForever(sequence1))
+        
+        let raio2 = SKAction.animateWithTextures(raiosVerticais, timePerFrame: 0.2)
+        let sequence2 = SKAction.sequence([raio2,dissappear,waitTime,appear])
+        spriteRaio2.runAction(SKAction.repeatActionForever(sequence2))
+        
+        let raio3 = SKAction.animateWithTextures(raiosHorizontais, timePerFrame: 0.2)
+        let sequence3 = SKAction.sequence([raio3,dissappear,waitTime,appear])
+        spriteRaio3.runAction(SKAction.repeatActionForever(sequence3))
+        
+        let raio4 = SKAction.animateWithTextures(raiosVerticais, timePerFrame: 0.2)
+        let sequence4 = SKAction.sequence([raio4,dissappear,waitTime,appear])
+        spriteRaio4.runAction(SKAction.repeatActionForever(sequence4))
+        
+        //######################################################
+        //# Coisas da fisica dos raios                         #
+        //######################################################
+        
+        // CONFIGURAÇÃO DA FISICA
+        spriteRaio1.physicsBody = SKPhysicsBody(rectangleOfSize: spriteRaio1.size - spriteRaio1.size.height/2)
+        spriteRaio1.physicsBody?.dynamic = true
+        spriteRaio1.physicsBody?.categoryBitMask = self.spikeCategory
+        spriteRaio1.physicsBody?.contactTestBitMask = self.playerCategory
+        spriteRaio1.physicsBody?.collisionBitMask = 0
+        spriteRaio1.physicsBody?.affectedByGravity = false
+
+        
+        spriteRaio2.physicsBody = SKPhysicsBody(rectangleOfSize: spriteRaio2.size - spriteRaio1.size.height/2)
+        spriteRaio2.physicsBody?.dynamic = true
+        spriteRaio2.physicsBody?.categoryBitMask = self.spikeCategory
+        spriteRaio2.physicsBody?.contactTestBitMask = self.playerCategory
+        spriteRaio2.physicsBody?.collisionBitMask = 0
+        spriteRaio2.physicsBody?.affectedByGravity = false
+        
+        spriteRaio3.physicsBody = SKPhysicsBody(rectangleOfSize: spriteRaio3.size - spriteRaio1.size.height/2)
+        spriteRaio3.physicsBody?.dynamic = true
+        spriteRaio3.physicsBody?.categoryBitMask = self.spikeCategory
+        spriteRaio3.physicsBody?.contactTestBitMask = self.playerCategory
+        spriteRaio3.physicsBody?.collisionBitMask = 0
+        spriteRaio3.physicsBody?.affectedByGravity = false
+        
+        spriteRaio4.physicsBody = SKPhysicsBody(rectangleOfSize: spriteRaio4.size - spriteRaio1.size.height/2)
+        spriteRaio4.physicsBody?.dynamic = true
+        spriteRaio4.physicsBody?.categoryBitMask = self.spikeCategory
+        spriteRaio4.physicsBody?.contactTestBitMask = self.playerCategory
+        spriteRaio4.physicsBody?.collisionBitMask = 0
+        spriteRaio4.physicsBody?.affectedByGravity = false
+
     }
-    
 
     override func update(currentTime: NSTimeInterval) {
         //once per frame
