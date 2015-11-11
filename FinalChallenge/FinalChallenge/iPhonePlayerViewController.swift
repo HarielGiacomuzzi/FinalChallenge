@@ -49,10 +49,10 @@ class iPhonePlayerViewController: UIViewController {
         skView?.ignoresSiblingOrder = true
         skView?.showsPhysics = false
 
-              playerCards = ["StealGoldCard","LoseCard","MoveBackCard","Skull","Lamp"]
-//        loadPartyModeScene()
+//       playerCards = ["StealGoldCard","LoseCard","MoveBackCard","Skull","Lamp"]
+        loadPartyModeScene()
 //        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
-        loadPlayerView()
+//        loadPlayerView()
 
     }
     

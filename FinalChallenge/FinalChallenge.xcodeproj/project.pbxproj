@@ -29,7 +29,10 @@
 		26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 26D019771B84FF0400C5C73D /* bubbleparticle.png */; };
 		26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA4D1B94BEE800E94400 /* bombGame.atlas */; };
 		26D6DA541B94CA7700E94400 /* bombSceneAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */; };
+		4407485B1BF1039E008F59CD /* babiesAssetsBundle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4407485A1BF1039E008F59CD /* babiesAssetsBundle.atlas */; settings = {ASSET_TAGS = (); }; };
 		4445D7C51B98C99F0049B787 /* AlertPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445D7C41B98C99F0049B787 /* AlertPath.swift */; };
+		44462C561BF26D310092448C /* raioHorizontal.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 44462C551BF26D310092448C /* raioHorizontal.atlas */; settings = {ASSET_TAGS = (); }; };
+		44462C581BF26D380092448C /* raioVertical.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 44462C571BF26D380092448C /* raioVertical.atlas */; settings = {ASSET_TAGS = (); }; };
 		4473647D1B9A065400C8AD9D /* puffGame.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4473647C1B9A065400C8AD9D /* puffGame.atlas */; };
 		4473647F1B9A1DE800C8AD9D /* PuffPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */; };
 		447891DB1BBEF2120094E16B /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447891DA1BBEF2120094E16B /* CardManager.swift */; };
@@ -186,7 +189,10 @@
 		26D019771B84FF0400C5C73D /* bubbleparticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleparticle.png; sourceTree = "<group>"; };
 		26D6DA4D1B94BEE800E94400 /* bombGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = bombGame.atlas; sourceTree = "<group>"; };
 		26D6DA531B94CA7700E94400 /* bombSceneAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = bombSceneAssets.xcassets; sourceTree = "<group>"; };
+		4407485A1BF1039E008F59CD /* babiesAssetsBundle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = babiesAssetsBundle.atlas; sourceTree = "<group>"; };
 		4445D7C41B98C99F0049B787 /* AlertPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPath.swift; sourceTree = "<group>"; };
+		44462C551BF26D310092448C /* raioHorizontal.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = raioHorizontal.atlas; sourceTree = "<group>"; };
+		44462C571BF26D380092448C /* raioVertical.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = raioVertical.atlas; sourceTree = "<group>"; };
 		4473647C1B9A065400C8AD9D /* puffGame.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = puffGame.atlas; sourceTree = "<group>"; };
 		4473647E1B9A1DE800C8AD9D /* PuffPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuffPlayer.swift; sourceTree = "<group>"; };
 		447891DA1BBEF2120094E16B /* CardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
@@ -726,6 +732,9 @@
 		DBF7C0BD1B98D4920010FCFE /* PuffGame */ = {
 			isa = PBXGroup;
 			children = (
+				44462C571BF26D380092448C /* raioVertical.atlas */,
+				44462C551BF26D310092448C /* raioHorizontal.atlas */,
+				4407485A1BF1039E008F59CD /* babiesAssetsBundle.atlas */,
 				4473647C1B9A065400C8AD9D /* puffGame.atlas */,
 				DBF7C0BF1B98D4EE0010FCFE /* PuffGameScene.sks */,
 				DBF7C0C11B98D50E0010FCFE /* PuffGameControl.sks */,
@@ -787,7 +796,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
+						DevelopmentTeam = ZX7GUMJ35C;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -825,7 +834,9 @@
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				26547BB31B9F4D59003DFD73 /* SetupParty.xcassets in Resources */,
 				5E9EB33B1BDEA4D6003974EB /* tutorial.atlas in Resources */,
+				4407485B1BF1039E008F59CD /* babiesAssetsBundle.atlas in Resources */,
 				26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */,
+				44462C561BF26D310092448C /* raioHorizontal.atlas in Resources */,
 				B5DD1B521B8F8D0500AA1EB6 /* bubbleSound2.wav in Resources */,
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
@@ -842,6 +853,7 @@
 				2605B2491BD9649500DAE7D1 /* bombgame.mp3 in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
+				44462C581BF26D380092448C /* raioVertical.atlas in Resources */,
 				262C07F31BD02B3400246DF5 /* roboPadAssets.xcassets in Resources */,
 				B5DD1B3C1B8799B200AA1EB6 /* GameOverScene.sks in Resources */,
 				26D019781B84FF0400C5C73D /* bubbleparticle.png in Resources */,

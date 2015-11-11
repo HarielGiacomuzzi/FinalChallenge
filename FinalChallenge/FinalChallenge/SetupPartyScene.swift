@@ -202,7 +202,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         self.addChild(go!)
         go!.position = CGPoint(x: self.frame.width - go!.frame.width/6, y: self.frame.height/12)
         go!.name = "goButton"
-        go?.zPosition = 40000
+        go?.zPosition = 10
         /*
         let gotext = SKLabelNode(fontNamed: "Helvetica Neue")
         gotext.text = "GO"
@@ -438,7 +438,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     
     func checkIfCanGo() {
         print("\(GameManager.sharedInstance.players.count)")
-        if GameManager.sharedInstance.players.count > 1{
+        if GameManager.sharedInstance.players.count > 0{
             for p in GameManager.sharedInstance.players{
                 if p.avatar == nil {
                     canGo = false
