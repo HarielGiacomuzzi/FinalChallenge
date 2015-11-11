@@ -114,6 +114,7 @@ class GameManager : NSObject {
             result = result * 2
             dicex2 = false
         }
+    
         for p in players{
             if p.playerIdentifier == (data["peerID"] as! String){
                 boardGameViewController?.scene.showDiceNumber(result, player: p.nodeSprite!)
@@ -122,6 +123,7 @@ class GameManager : NSObject {
                 break;
             }
         }
+        doubleDice = false
     }
     
     //handles movement and all its possibilities
