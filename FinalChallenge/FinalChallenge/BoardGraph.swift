@@ -172,7 +172,6 @@ class BoardGraph : NSObject{
     //removes item from node and adds item to player
     //sends message to player phone to update item
     func pickItem(nodeName : String, player:Player) -> Bool{
-        
         if haveItem(nodeName) {
             if !isUsable(nodeName){
                 self.sendCardToPlayer(nodeName, player: player)
@@ -187,6 +186,7 @@ class BoardGraph : NSObject{
                     if !GameManager.sharedInstance.escapeFlag{
                         self.activateCard((nodes[nodeName]?.item)! as! ActiveCard, targetPlayer: player)
                         nodes[nodeName]?.item = nil
+                        GameManager.sharedInstance.animatePlayerOnTrap(player)
                     } else {
                         // faz algo se o jogador escapou da trap
                         GameManager.sharedInstance.escapeFlag = false

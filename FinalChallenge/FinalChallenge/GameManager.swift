@@ -581,6 +581,12 @@ class GameManager : NSObject {
         }
     }
     
+    func animatePlayerOnTrap(player: Player) {
+        if let scene = boardGameViewController?.scene {
+            scene.animatePlayerOnTrap(player.nodeSprite!)
+        }
+    }
+    
     func playerHoldingBomb(player:String){
         let p = player
         let swipe = ["lightSwipe":p]
