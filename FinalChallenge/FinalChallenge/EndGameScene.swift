@@ -138,7 +138,7 @@ class EndGameScene : SKScene{
     func showPlayer(p : Player, position : Int){
         
         
-        let textureName : String = "\(position)"
+        let textureName : String = "position\(position)"
         
         
         
