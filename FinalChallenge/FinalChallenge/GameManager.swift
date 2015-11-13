@@ -114,14 +114,16 @@ class GameManager : NSObject {
             result = result * 2
             dicex2 = false
         }
+    
         for p in players{
             if p.playerIdentifier == (data["peerID"] as! String){
-                boardGameViewController?.scene.showDiceNumber(result, player: p.nodeSprite!)
+                boardGameViewController?.scene.showDiceNumber(result, player: p.nodeSprite!, extraDice: doubleDice)
                 let tuple = BoardGraph.SharedInstance.walkList(result, player: p, view: boardViewController)
                 movePlayerOnBoardComplete(p, nodeList: tuple.nodeList, remaining: tuple.remaining, currentNode: tuple.currentNode)
                 break;
             }
         }
+        doubleDice = false
     }
     
     //handles movement and all its possibilities

@@ -259,8 +259,10 @@ class BoardGraph : NSObject{
     func walkList(quantity : Int, player : Player, view : UIViewController?) -> (nodeList:[BoardNode], remaining:Int, currentNode:BoardNode){
 
         let a = walk(quantity, node: nodeFor(player)!, list: [], view: view);
-        nodeFor(player)?.removePlayer(player);
-        a.nodeList.last?.insertPLayer(player);
+        if let lastNode = a.nodeList.last {
+            nodeFor(player)?.removePlayer(player);
+            lastNode.insertPLayer(player);
+        }
         return a;
     }
     

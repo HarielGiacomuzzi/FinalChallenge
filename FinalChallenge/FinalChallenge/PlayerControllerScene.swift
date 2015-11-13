@@ -200,7 +200,7 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
     
     func diceRolled(sender: SKSpriteNode) {
         buttonClicked(sender)
-        var diceResult = 1 //Int(arc4random_uniform(6)+1)
+        var diceResult = 2 //Int(arc4random_uniform(6)+1)
         let diceResult2 = Int(arc4random_uniform(6)+1)
         let aux = NSMutableDictionary();
         if GameManager.sharedInstance.halfFlag{
@@ -259,7 +259,6 @@ class PlayerControllerScene: SKScene, CardCarousellDelegate, DiceDelegate, Playe
         }
         
         let strings = TutorialManager.loadStringsPlist("teachCard")
-//        let card = carousel.getCenterCard()
         var tuples: [(node:SKNode?, text:String?, animation: SKAction?)] = []
         
         let moveUp = SKAction.moveTo(CGPointMake(carousel.position.x, carousel.position.y + 40), duration: 0.5)
