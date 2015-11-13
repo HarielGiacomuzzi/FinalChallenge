@@ -44,6 +44,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     
     let playerCategory : UInt32 = 0x1 << 0
     let spikeCategory : UInt32 = 0x1 << 1
+    var headJoint = SKPhysicsJoint()
     
     var spikeWallRight = SKNode()
     var spikeWallLeft = SKNode()
@@ -106,6 +107,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             head.zPosition = 1
             head.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyHead").size()*CGFloat(0.33))
             head.position = CGPointMake(0, 0)
+            head.name = "internalHead"
             
             let helmet = SKSpriteNode(texture: partsAtlas.textureNamed("helmet"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("helmet").size()*CGFloat(scaleFactor))
             helmet.zPosition = 3
@@ -121,7 +123,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             
             let body = SKSpriteNode(texture: partsAtlas.textureNamed("babyBody"), color: UIColor.blueColor(), size: partsAtlas.textureNamed("babyBody").size()*CGFloat(scaleFactor))
             body.zPosition = 1
-            
+            body.name = "body"
             body.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("body").size()*CGFloat(scaleFactor))
             body.position = CGPointMake(helmet.position.x,  -(aux1 + aux2).height+15)
             body.physicsBody?.mass = CGFloat(10.0)
@@ -132,6 +134,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             armRight.physicsBody?.angularDamping = CGFloat(0.15)
             armRight.position = CGPointMake(aux2.width+5,-(aux1 + aux2).height+15)
             armRight.physicsBody?.mass = CGFloat(2.5)
+            armRight.name = "armR"
             
             let armLeft = SKSpriteNode(texture: partsAtlas.textureNamed("babyArm"), color: UIColor.blueColor(), size:partsAtlas.textureNamed("babyArm").size()*CGFloat(scaleFactor))
             armLeft.zPosition = 0
@@ -140,6 +143,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             armLeft.physicsBody?.angularDamping = CGFloat(0.15)
             armLeft.position = CGPointMake(-aux2.width-5,-(aux1 + aux2).height+15)
             armLeft.physicsBody?.mass = CGFloat(2.5)
+            armLeft.name = "armL"
             
             let legRight = SKSpriteNode(texture: partsAtlas.textureNamed("babyLeg"), color: UIColor.blueColor(), size:partsAtlas.textureNamed("babyLeg").size()*CGFloat(scaleFactor))
             legRight.zPosition = 0
@@ -147,6 +151,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             legRight.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyLeg").size()*CGFloat(0.25))
             legRight.position = CGPointMake(aux2.width/2.5, -aux1.height-body.size.height)
             legRight.physicsBody?.mass = CGFloat(2.5)
+            legRight.name = "legR"
             
             let legLeft = SKSpriteNode(texture: partsAtlas.textureNamed("babyLeg"), color: UIColor.blueColor(), size:partsAtlas.textureNamed("babyLeg").size()*CGFloat(scaleFactor))
             legLeft.zPosition = 0
@@ -155,6 +160,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             legLeft.physicsBody = SKPhysicsBody(rectangleOfSize: partsAtlas.textureNamed("babyLeg").size()*CGFloat(0.25))
             legLeft.position = CGPointMake(-aux2.width/2.5,-aux1.height-body.size.height)
             legLeft.physicsBody?.mass = CGFloat(2.5)
+            legLeft.name = "legL"
             
             
             //----------------------------------------------------------------------------
@@ -189,7 +195,6 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             let armLeftJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: armLeft.physicsBody!, anchor:spriteNode.position + CGPointMake(-aux2.width-5,-(aux1 + aux2).height+15))
             body.scene!.physicsWorld.addJoint(armLeftJoint)
             
-            
             let armRightJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: armRight.physicsBody!, anchor:spriteNode.position + CGPointMake(aux2.width+5,-(aux1 + aux2).height+15))
             body.scene?.physicsWorld.addJoint(armRightJoint)
             
@@ -199,7 +204,7 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             let legRightJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: legRight.physicsBody!, anchor:spriteNode.position + CGPointMake(aux2.width/2.5, -aux1.height-body.size.height))
             body.scene?.physicsWorld.addJoint(legRightJoint)
             
-            let headJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: helmet.physicsBody!, anchor:spriteNode.position + helmet.position)
+            self.headJoint = SKPhysicsJointPin.jointWithBodyA(body.physicsBody!, bodyB: helmet.physicsBody!, anchor:spriteNode.position + helmet.position)
             body.scene?.physicsWorld.addJoint(headJoint)
             
             let faceJoint = SKPhysicsJointPin.jointWithBodyA(helmet.physicsBody!, bodyB: head.physicsBody!, anchor:spriteNode.position + head.position)
@@ -212,13 +217,6 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
             // sets the player's physics
             //----------------------------------------------------------------------------
             
-            //            player.sprite!.physicsBody = SKPhysicsBody(rectangleOfSize: spriteNode.size)
-            //            player.sprite!.physicsBody?.dynamic = true
-            //            player.sprite!.physicsBody?.categoryBitMask = self.playerCategory
-            //            player.sprite!.physicsBody?.contactTestBitMask = self.spikeCategory
-            //            player.sprite!.physicsBody?.collisionBitMask = 0
-            //            player.sprite!.physicsBody?.usesPreciseCollisionDetection = true
-            
             for child in spriteNode.children{
                 child.physicsBody?.dynamic = true;
                 child.physicsBody?.categoryBitMask = self.playerCategory;
@@ -228,93 +226,11 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func playerColidedWithSpike(player : SKNode, spike : SKNode){
-        self.explodePuff(player.parent!)
+        self.puffDied(player.parent!)
     }
     
     func playerColidedWihtPlayer(playerA : SKNode, playerB : SKNode){
         //playerB.physicsBody.applyForce()
-    }
-    
-    func setupSpikes(){
-        for i in 0...Int(self.view!.frame.width/partsAtlas.textureNamed("spike").size().width){
-            let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width - self.view!.frame.width/2, -partsAtlas.textureNamed("spike").size().height + partsAtlas.textureNamed("spike").size().height);
-            spikeWallDown.addChild(spike)
-        }
-        
-        for i in 0...Int(self.view!.frame.width/partsAtlas.textureNamed("spike").size().width){
-            let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(CGFloat(i)*partsAtlas.textureNamed("spike").size().width  - self.view!.frame.width/2, partsAtlas.textureNamed("spike").size().height - partsAtlas.textureNamed("spike").size().height);
-            spike.zRotation = CGFloat(3.14159265);
-            spikeWallTop.addChild(spike)
-        }
-        
-        for i in 0...Int(self.view!.frame.width/partsAtlas.textureNamed("spike").size().width){
-            let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(partsAtlas.textureNamed("spike").size().width - partsAtlas.textureNamed("spike").size().height, CGFloat(i)*partsAtlas.textureNamed("spike").size().height - self.view!.frame.height/2);
-            spike.zRotation = CGFloat(1.57079633);
-            spikeWallRight.addChild(spike)
-        }
-        
-        for i in 0...Int(self.view!.frame.height/partsAtlas.textureNamed("spike").size().height){
-            let spike = SKSpriteNode(texture: partsAtlas.textureNamed("spike"));
-            spike.position = CGPointMake(-partsAtlas.textureNamed("spike").size().width + partsAtlas.textureNamed("spike").size().height, CGFloat(i)*partsAtlas.textureNamed("spike").size().height - self.view!.frame.height/2);
-            spike.zRotation = CGFloat(-1.57079633);
-            spikeWallLeft.addChild(spike);
-        }
-        
-        // CONFIGURAÇÃO DA FISICA
-        spikeWallDown.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: CGFloat(self.view!.frame.width), height: partsAtlas.textureNamed("spike").size().height))
-        //spikeWallDown.physicsBody?.
-        spikeWallDown.physicsBody?.dynamic = true
-        spikeWallDown.physicsBody?.categoryBitMask = self.spikeCategory
-        spikeWallDown.physicsBody?.contactTestBitMask = self.playerCategory
-        spikeWallDown.physicsBody?.collisionBitMask = 0
-        spikeWallDown.physicsBody?.affectedByGravity = false
-        spikeWallDown.position = CGPointMake(CGFloat(self.view!.frame.width/2), -partsAtlas.textureNamed("spike").size().height)
-
-        spikeWallTop.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: CGFloat(self.view!.frame.width), height: partsAtlas.textureNamed("spike").size().height))
-        spikeWallTop.physicsBody?.dynamic = true
-        spikeWallTop.physicsBody?.categoryBitMask = self.spikeCategory
-        spikeWallTop.physicsBody?.contactTestBitMask = self.playerCategory
-        spikeWallTop.physicsBody?.collisionBitMask = 0
-        spikeWallTop.physicsBody?.affectedByGravity = false
-        spikeWallTop.position = CGPointMake(CGFloat(self.view!.frame.width/2), CGFloat(self.view!.frame.height + partsAtlas.textureNamed("spike").size().height))
-        
-        spikeWallRight.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: partsAtlas.textureNamed("spike").size().height, height: CGFloat((self.view?.frame.size.height)!)))
-        spikeWallRight.physicsBody?.dynamic = true
-        spikeWallRight.physicsBody?.categoryBitMask = self.spikeCategory
-        spikeWallRight.physicsBody?.contactTestBitMask = self.playerCategory
-        spikeWallRight.physicsBody?.collisionBitMask = 0
-        spikeWallRight.physicsBody?.affectedByGravity = false
-        spikeWallRight.position = CGPointMake(self.view!.frame.width + partsAtlas.textureNamed("spike").size().height, self.view!.frame.height/2)
-        
-        spikeWallLeft.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: partsAtlas.textureNamed("spike").size().height, height: CGFloat((self.view?.frame.size.height)!)))
-        spikeWallLeft.physicsBody?.dynamic = true
-        spikeWallLeft.physicsBody?.categoryBitMask = self.spikeCategory
-        spikeWallLeft.physicsBody?.contactTestBitMask = self.playerCategory
-        spikeWallLeft.physicsBody?.collisionBitMask = 0
-        spikeWallLeft.physicsBody?.affectedByGravity = false
-        spikeWallLeft.position = CGPointMake(-partsAtlas.textureNamed("spike").size().height, self.view!.frame.height/2)
-        
-        let down = SKAction.moveBy(CGVector(dx: 0, dy: partsAtlas.textureNamed("spike").size().height*1.5), duration: NSTimeInterval(1.5))
-        actionWallDown = SKAction.sequence([down, down.reversedAction()]);
-        let top = SKAction.moveBy(CGVector(dx: 0, dy: -partsAtlas.textureNamed("spike").size().height*1.5), duration: NSTimeInterval(1.5))
-        actionWallTop = SKAction.sequence([top,top.reversedAction()]);
-        let right = SKAction.moveBy(CGVector(dx: -partsAtlas.textureNamed("spike").size().height*1.5, dy: 0), duration: NSTimeInterval(1.5))
-        actionWallRight = SKAction.sequence([right,right.reversedAction()]);
-        let left = SKAction.moveBy(CGVector(dx: partsAtlas.textureNamed("spike").size().height*1.5, dy: 0), duration: NSTimeInterval(1.5))
-        actionWallLeft = SKAction.sequence([left,left.reversedAction()]);
-        
-        self.addChild(spikeWallDown);
-        self.addChild(spikeWallTop);
-        self.addChild(spikeWallRight);
-        self.addChild(spikeWallLeft);
-        
-        spikeWallTop.runAction(SKAction.repeatActionForever(actionWallTop!));
-        spikeWallDown.runAction(SKAction.repeatActionForever(actionWallDown!));
-        spikeWallLeft.runAction(SKAction.repeatActionForever(actionWallLeft!));
-        spikeWallRight.runAction(SKAction.repeatActionForever(actionWallRight!));
     }
     
     func messageReceived(data : NSNotification){
@@ -323,27 +239,30 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
                     if data.userInfo!["actionReceived"] as! String == PlayerAction.PuffGrow.rawValue{
                         p.sprite!.xScale += 0.1
                         p.sprite!.yScale += 0.1
+//                        self.scene?.physicsWorld.removeJoint(headJoint)
+                        self.headJoint = SKPhysicsJointPin.jointWithBodyA((p.sprite?.childNodeWithName("body")!.physicsBody)!, bodyB: (p.sprite?.childNodeWithName("head")!.physicsBody)!, anchor:(p.sprite?.position)! + (p.sprite?.childNodeWithName("head")!.position)!)
+                        self.scene?.physicsWorld.addJoint(headJoint)
                         p.sprite?.childNodeWithName("head")?.physicsBody?.mass =  CGFloat(5) + (p.sprite?.childNodeWithName("head")?.physicsBody?.mass)!
                     }
                     if data.userInfo!["directionX"]! as! String == PlayerAction.Left.rawValue{
                         if p.sprite?.position.x > 0{
-                            p.sprite?.childNodeWithName("head")?.physicsBody?.applyImpulse(CGVectorMake(-250, 0))
+                            p.sprite?.childNodeWithName("head")?.physicsBody?.applyImpulse(CGVectorMake(-100, 0))
                             //p.sprite?.position.x = CGFloat((p.sprite?.position.x)!-5)
                         }
                     }else{
                         if p.sprite?.position.x < self.view!.frame.width{
-                            p.sprite?.childNodeWithName("head")?.physicsBody?.applyImpulse(CGVectorMake(+250, 0))
+                            p.sprite?.childNodeWithName("head")?.physicsBody?.applyImpulse(CGVectorMake(+100, 0))
                             //p.sprite?.position.x = CGFloat((p.sprite?.position.x)!+5)
                         }
                     }
                     if data.userInfo!["directionY"] as! String == PlayerAction.Up.rawValue{
                         if p.sprite?.position.y < self.view!.frame.height{
-                            p.sprite?.childNodeWithName("head")?.physicsBody?.applyImpulse(CGVectorMake(0, +250))
+                            p.sprite?.childNodeWithName("head")?.physicsBody?.applyImpulse(CGVectorMake(0, +100))
                             //p.sprite?.position.y = CGFloat((p.sprite?.position.y)!+5)
                         }
                     }else{
                         if p.sprite?.position.y > 0{
-                           p.sprite?.childNodeWithName("head")?.physicsBody?.applyImpulse(CGVectorMake(0, -250))
+                           p.sprite?.childNodeWithName("head")?.physicsBody?.applyImpulse(CGVectorMake(0, -100))
                            //p.sprite?.position.y = CGFloat((p.sprite?.position.y)!-5)
                         }
                     }
@@ -355,38 +274,36 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    
-    func explodePuff(player:SKNode){
-        if player.hidden == false{
-            player.hidden = true;
+    func puffDied(player : SKNode){
+        let head = player.childNodeWithName("internalHead")
+        let body = player.childNodeWithName("body")
+        let armLeft = player.childNodeWithName("armL")
+        let armRight = player.childNodeWithName("armR")
+        let legLeft = player.childNodeWithName("legL")
+        let legRight = player.childNodeWithName("legR")
+        
+        let headAnimation = [SKTexture(imageNamed: "babyHeadShock"), SKTexture(imageNamed: "babyHead")]
+        let armAnimation = [SKTexture(imageNamed: "babyArmShock"), SKTexture(imageNamed: "babyArm")]
+        let legAnimation = [SKTexture(imageNamed: "babyLegShock"), SKTexture(imageNamed: "babyLeg")]
+        let bodyAnimation = [SKTexture(imageNamed: "babyBodyShock"), SKTexture(imageNamed: "babyBody")]
+        
+        let headAction = SKAction.animateWithTextures(headAnimation, timePerFrame: 0.09)
+        let a = SKAction.repeatAction(headAction, count: 4)
+        let armAction = SKAction.animateWithTextures(armAnimation, timePerFrame: 0.09)
+        let c = SKAction.repeatAction(armAction, count: 4)
+        let legAction = SKAction.animateWithTextures(legAnimation, timePerFrame: 0.09)
+        let d = SKAction.repeatAction(legAction, count: 4)
+        let bodyAction = SKAction.animateWithTextures(bodyAnimation, timePerFrame: 0.09)
+        let b = SKAction.repeatAction(bodyAction, count: 4)
+        
+        head?.runAction(a, completion: { () -> Void in
             player.removeFromParent()
-            let outExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion0"))
-            let midExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion1"))
-            let inExplosion = SKSpriteNode(texture: partsAtlas.textureNamed("explosion2"))
-            
-            let explosionParts : [SKSpriteNode] = [outExplosion, midExplosion , inExplosion]
-            
-            for explosion in explosionParts{
-                
-                let m = explosion.size
-                explosion.size = CGSize(width: explosion.size.width * 0.2, height: explosion.size.height * 0.2)
-                explosion.position = CGPoint(x: player.position.x, y: player.position.y)
-                
-                let crescimento = SKAction.resizeToWidth(m.width * 2, height: m.height * 2, duration: 0.5)
-                
-                let rotacao = CGFloat(arc4random_uniform(5)+1);
-                explosion.physicsBody = SKPhysicsBody(rectangleOfSize: m)
-                explosion.physicsBody?.categoryBitMask = 0x0
-                explosion.physicsBody?.applyAngularImpulse(rotacao)
-                explosion.physicsBody?.dynamic = false
-                
-                self.addChild(explosion)
-                
-                explosion.runAction(crescimento, completion: { () -> Void in
-                    explosion.removeFromParent()
-                })
-            }
-        }
+        })
+        body?.runAction(b)
+        armLeft?.runAction(c)
+        armRight?.runAction(c)
+        legLeft?.runAction(d)
+        legRight?.runAction(d)
     }
     
     func spawnStars (){
@@ -409,17 +326,15 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
     let a = arc4random_uniform(5)
         let starAtlas = SKTextureAtlas(named: "babiesAssetsBundle")
         switch a{
-        case 1 : return starAtlas.textureNamed("bigstar")
         case 2 : return starAtlas.textureNamed("comet")
-        case 3 : return starAtlas.textureNamed("planet")
-        case 4 : return starAtlas.textureNamed("planetRing")
-        default: return starAtlas.textureNamed("smallStar")
+        case 3 : return starAtlas.textureNamed("planetRing")
+        default: return starAtlas.textureNamed("planet")
         }
     }
     
     func setupBackground(){
         let spawn = SKAction.runBlock({( ) in self.spawnStars()})
-        let delay = SKAction.waitForDuration(0.8, withRange: 1)
+        let delay = SKAction.waitForDuration(1.5, withRange: 1)
         let spawnThenDelay = SKAction.sequence([spawn, delay])
         let spawnDelayForever = SKAction.repeatActionForever(spawnThenDelay)
         self.runAction(spawnDelayForever)
@@ -454,7 +369,6 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         //######################################################
         //# Cria os raios                                      #
         //######################################################
-        
         let dissappear = SKAction.hide()
         let waitTime = SKAction.waitForDuration(0.5)
         let appear = SKAction.unhide()
@@ -500,8 +414,6 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         //######################################################
         //# Coisas da fisica dos raios                         #
         //######################################################
-        
-        // CONFIGURAÇÃO DA FISICA
         spriteRaio1.physicsBody = SKPhysicsBody(rectangleOfSize: spriteRaio1.size - spriteRaio1.size.height/2)
         spriteRaio1.physicsBody?.dynamic = true
         spriteRaio1.physicsBody?.categoryBitMask = self.spikeCategory
@@ -509,7 +421,6 @@ class PuffGameScene: SKScene, SKPhysicsContactDelegate {
         spriteRaio1.physicsBody?.collisionBitMask = 0
         spriteRaio1.physicsBody?.affectedByGravity = false
 
-        
         spriteRaio2.physicsBody = SKPhysicsBody(rectangleOfSize: spriteRaio2.size - spriteRaio1.size.height/2)
         spriteRaio2.physicsBody?.dynamic = true
         spriteRaio2.physicsBody?.categoryBitMask = self.spikeCategory
