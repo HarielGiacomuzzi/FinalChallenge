@@ -132,6 +132,7 @@
 		B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */ = {isa = PBXBuildFile; fileRef = B5F60BC11B84FA0400786728 /* MyParticle2.sks */; };
 		DB07CFDF1BF3B27E002E2271 /* starsParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = DB07CFDE1BF3B27E002E2271 /* starsParticle.sks */; };
 		DB07CFE11BF3B3FD002E2271 /* StarEmiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB07CFE01BF3B3FD002E2271 /* StarEmiter.swift */; };
+		DB07CFE31BF3BD5C002E2271 /* babyShock.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB07CFE21BF3BD5C002E2271 /* babyShock.atlas */; };
 		DB129D691BB31D15002B4862 /* squarePopUp.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB129D681BB31D15002B4862 /* squarePopUp.atlas */; };
 		DB1748C01B8CF2DC00201BA2 /* iPhonePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */; };
 		DB42C9BC1BA9D59400D6D247 /* Board.atlas in Resources */ = {isa = PBXBuildFile; fileRef = DB42C9BB1BA9D59400D6D247 /* Board.atlas */; };
@@ -301,6 +302,7 @@
 		B5F60BC11B84FA0400786728 /* MyParticle2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle2.sks; sourceTree = "<group>"; };
 		DB07CFDE1BF3B27E002E2271 /* starsParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = starsParticle.sks; sourceTree = "<group>"; };
 		DB07CFE01BF3B3FD002E2271 /* StarEmiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarEmiter.swift; sourceTree = "<group>"; };
+		DB07CFE21BF3BD5C002E2271 /* babyShock.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; name = babyShock.atlas; path = raioHorizontal.atlas/babyShock.atlas; sourceTree = "<group>"; };
 		DB129D681BB31D15002B4862 /* squarePopUp.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = squarePopUp.atlas; sourceTree = "<group>"; };
 		DB1748BF1B8CF2DC00201BA2 /* iPhonePlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iPhonePlayerViewController.swift; sourceTree = "<group>"; };
 		DB42C9BB1BA9D59400D6D247 /* Board.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Board.atlas; sourceTree = "<group>"; };
@@ -767,6 +769,7 @@
 			isa = PBXGroup;
 			children = (
 				DB07CFDE1BF3B27E002E2271 /* starsParticle.sks */,
+				DB07CFE21BF3BD5C002E2271 /* babyShock.atlas */,
 				44462C571BF26D380092448C /* raioVertical.atlas */,
 				44462C551BF26D310092448C /* raioHorizontal.atlas */,
 				4407485A1BF1039E008F59CD /* babiesAssetsBundle.atlas */,
@@ -832,7 +835,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
+						DevelopmentTeam = DVXNNDG4U4;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -889,6 +892,7 @@
 				B55127E71BF65ADD003051AD /* RopeGameAssets.xcassets in Resources */,
 				2605B2491BD9649500DAE7D1 /* bombgame.mp3 in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
+				DB07CFE31BF3BD5C002E2271 /* babyShock.atlas in Resources */,
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
 				44462C581BF26D380092448C /* raioVertical.atlas in Resources */,
 				262C07F31BD02B3400246DF5 /* roboPadAssets.xcassets in Resources */,
@@ -1166,7 +1170,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1182,7 +1186,7 @@
 				INFOPLIST_FILE = FinalChallenge/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.giacomuzzi.FinalChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -432,12 +432,11 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
             tuples.append((go, strings[0], nil))
             tutorialManager = TutorialManager(tuples: tuples, scene: self, isIphone: false, boxScale: 1.0)
             tutorialManager.showInfo()
+            GlobalFlags.goTaught = true
         }
-        GlobalFlags.goTaught = true
     }
     
     func checkIfCanGo() {
-        print("\(GameManager.sharedInstance.players.count)")
         if GameManager.sharedInstance.players.count > 0{
             for p in GameManager.sharedInstance.players{
                 if p.avatar == nil {

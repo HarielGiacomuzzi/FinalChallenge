@@ -66,6 +66,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                         
                         
                         let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
+                        goldCoins.name = "gold"
                         self.addChild(goldCoins)
                         goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
                         goldCoins.zPosition = 20
@@ -138,6 +139,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
                         
                         
                         let goldCoins = SKSpriteNode(texture: self.partsAtlas.textureNamed("gold"))
+                        goldCoins.name = "gold"
                         self.addChild(goldCoins)
                         goldCoins.position = CGPoint(x: i.1.posX, y: i.1.posY)
                         goldCoins.zPosition = 20
@@ -435,6 +437,11 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
         coinNode.runAction(action, completion: {() in
             coinNode.removeFromParent()
         })
+        for node in nodesAtPoint(player.position) {
+            if node.name == "gold" {
+                node.removeFromParent()
+            }
+        }
     }
     
     func showCard(player:PlayerNode, good:Bool) {
