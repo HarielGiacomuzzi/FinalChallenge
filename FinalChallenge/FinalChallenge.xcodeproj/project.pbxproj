@@ -91,6 +91,9 @@
 		B5279F8D1BB06CB00015DBE7 /* ActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8C1BB06CB00015DBE7 /* ActiveCard.swift */; };
 		B5279F8F1BB06CE10015DBE7 /* NotActiveCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */; };
 		B5279F931BB08C7D0015DBE7 /* StealGoldCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */; };
+		B55127DE1BF50C47003051AD /* RopeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55127DD1BF50C47003051AD /* RopeScene.swift */; settings = {ASSET_TAGS = (); }; };
+		B55127E01BF64C93003051AD /* RopeGamePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55127DF1BF64C93003051AD /* RopeGamePlayer.swift */; settings = {ASSET_TAGS = (); }; };
+		B55127E71BF65ADD003051AD /* RopeGameAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B55127E61BF65ADD003051AD /* RopeGameAssets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		B579AB681BB332E700B9D181 /* MoveBackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579AB671BB332E700B9D181 /* MoveBackCard.swift */; };
 		B579AB6A1BB3358800B9D181 /* LoseOneCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579AB691BB3358800B9D181 /* LoseOneCard.swift */; };
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
@@ -256,6 +259,9 @@
 		B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotActiveCard.swift; sourceTree = "<group>"; };
 		B5279F921BB08C7D0015DBE7 /* StealGoldCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StealGoldCard.swift; sourceTree = "<group>"; };
 		B547661F1BDFD4D6008E31DD /* accelerometerPadAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = accelerometerPadAssets.xcassets; sourceTree = "<group>"; };
+		B55127DD1BF50C47003051AD /* RopeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RopeScene.swift; sourceTree = "<group>"; };
+		B55127DF1BF64C93003051AD /* RopeGamePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RopeGamePlayer.swift; sourceTree = "<group>"; };
+		B55127E61BF65ADD003051AD /* RopeGameAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RopeGameAssets.xcassets; sourceTree = "<group>"; };
 		B579AB671BB332E700B9D181 /* MoveBackCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveBackCard.swift; sourceTree = "<group>"; };
 		B579AB691BB3358800B9D181 /* LoseOneCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoseOneCard.swift; sourceTree = "<group>"; };
 		B57B33641B864EC7000E5F53 /* PlayerParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerParticle.sks; sourceTree = "<group>"; };
@@ -497,6 +503,7 @@
 				DBF7C0BD1B98D4920010FCFE /* PuffGame */,
 				5EA49E0B1B87BB9000AC51F8 /* BombGame */,
 				5ED9E8771B7127760073FB7B /* FlappyGame */,
+				B55127DC1BF50BEC003051AD /* RopeGame */,
 				2682DF6E1BB4838900ACF1A6 /* popup.atlas */,
 				2661C40B1BB082A9003A49F9 /* tutorialassets.xcassets */,
 				5EE219F91BD028D700D6EF98 /* EndGameParticleNode.swift */,
@@ -536,6 +543,24 @@
 				B5279F8E1BB06CE10015DBE7 /* NotActiveCard.swift */,
 			);
 			name = NotActivateCards;
+			sourceTree = "<group>";
+		};
+		B55127DC1BF50BEC003051AD /* RopeGame */ = {
+			isa = PBXGroup;
+			children = (
+				B55127E11BF65748003051AD /* Resources */,
+				B55127DD1BF50C47003051AD /* RopeScene.swift */,
+				B55127DF1BF64C93003051AD /* RopeGamePlayer.swift */,
+			);
+			name = RopeGame;
+			sourceTree = "<group>";
+		};
+		B55127E11BF65748003051AD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B55127E61BF65ADD003051AD /* RopeGameAssets.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		B5B9291F1BC6F4EB00DD2C46 /* FlappyFish Sound */ = {
@@ -845,7 +870,6 @@
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				26547BB31B9F4D59003DFD73 /* SetupParty.xcassets in Resources */,
 				5E9EB33B1BDEA4D6003974EB /* tutorial.atlas in Resources */,
-				4407485B1BF1039E008F59CD /* babiesAssetsBundle.atlas in Resources */,
 				26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */,
 				44462C561BF26D310092448C /* raioHorizontal.atlas in Resources */,
 				B5DD1B521B8F8D0500AA1EB6 /* bubbleSound2.wav in Resources */,
@@ -862,6 +886,7 @@
 				5E60396C1B84F03100F63DC3 /* bubble.atlas in Resources */,
 				DB458B801B5409B90066B38C /* LaunchScreen.xib in Resources */,
 				26547BBA1B9F696E003DFD73 /* setupParticle1.sks in Resources */,
+				B55127E71BF65ADD003051AD /* RopeGameAssets.xcassets in Resources */,
 				2605B2491BD9649500DAE7D1 /* bombgame.mp3 in Resources */,
 				B5F60BBB1B83B76E00786728 /* spark.png in Resources */,
 				DBF7C0C01B98D4EE0010FCFE /* PuffGameScene.sks in Resources */,
@@ -944,6 +969,7 @@
 				DB07CFE11BF3B3FD002E2271 /* StarEmiter.swift in Sources */,
 				DBF7C0C61B98D8050010FCFE /* PuffGameViewController.swift in Sources */,
 				B5AFAD081B94C1DD0005F19E /* MinigameCollectionViewController.swift in Sources */,
+				B55127E01BF64C93003051AD /* RopeGamePlayer.swift in Sources */,
 				DB4E51FF1B714194008333D3 /* ConnectionManager.swift in Sources */,
 				B5AFAD0F1B9608F70005F19E /* PartyModeScene.swift in Sources */,
 				5E531C5A1B87AA6500BBBD29 /* MessagesEnum.swift in Sources */,
@@ -988,6 +1014,7 @@
 				447891DB1BBEF2120094E16B /* CardManager.swift in Sources */,
 				5E9EB3321BDE8A44003974EB /* InformationArrowNode.swift in Sources */,
 				B5905A641BEA643F00786355 /* HalfSpeed.swift in Sources */,
+				B55127DE1BF50C47003051AD /* RopeScene.swift in Sources */,
 				5ED294E21BBD9D380073B148 /* SwipeScene.swift in Sources */,
 				2661C40A1BB07EEC003A49F9 /* TutorialScene.swift in Sources */,
 				5E9EB3351BDE97CB003974EB /* TutorialManager.swift in Sources */,

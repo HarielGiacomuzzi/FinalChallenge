@@ -48,7 +48,7 @@ class MinigameDescriptionViewController: UIViewController {
         
         
         GameManager.sharedInstance.minigameDescriptionViewController = self
-        switch minigame {
+       /* switch minigame {
         case .FlappyFish:
             //scene?.gameNumber = 1
             scene?.gameName = "Flappy Fish"
@@ -84,8 +84,19 @@ class MinigameDescriptionViewController: UIViewController {
             
             
             //      minigameDescription.text = game.objectForKey("description") as! String
-            
-        }
+        case .RopeGame:
+            scene?.gameName = "Tightrope"
+            for miniGameTitle in gameTitle{
+                miniGameTitle.text = "Tightrope"
+            }
+            if(GameManager.sharedInstance.isMultiplayer){
+                for gameDesc in gameDescription{
+                    gameDesc.text = ""
+                }
+            } else {
+                
+            }
+        }*/
         
         
         

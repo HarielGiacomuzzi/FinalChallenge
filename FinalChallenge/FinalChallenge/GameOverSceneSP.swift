@@ -109,6 +109,7 @@ class GameOverSceneSP : MinigameScene{
                 switch(game){
                 case "fish":  scene = FlappyGameScene(size: self.scene!.size)
                 case "bomb":  scene = BombTGameScene(size: self.scene!.size)
+                case "rope":  scene = RopeScene(size: self.scene!.size)
                 default: break
                 }
                 

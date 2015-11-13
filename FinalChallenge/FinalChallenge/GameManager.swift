@@ -50,8 +50,9 @@ class GameManager : NSObject {
     
     // some arrays
     var minigameOrderArray : [Minigame] = []
-    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame]
-    var allMinigames : [Minigame] = [.BombGame]
+    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame, .RopeGame]
+    //var allMinigames : [Minigame] = [.BombGame]
+    var allMinigames : [Minigame] = [.RopeGame]
     
     override init(){
         super.init()
@@ -609,5 +610,15 @@ class GameManager : NSObject {
         self.updatePlayerMoney(aux, value: 0)
         self.updatePlayerLoot(aux, value: 0)
     }
-        
+    
+    func addCoins(){
+        let aux = Array(BoardGraph.SharedInstance.nodes.values)
+        for _ in 0...Int(arc4random_uniform(50)+1){
+            if !aux[Int(arc4random_uniform(UInt32(aux.count)))].isSpecialNode{
+                aux[Int(arc4random_uniform(UInt32(aux.count)))].coins = Int(arc4random_uniform(9)+1)*5
+                
+            }
+        }
+    }
+    
 }

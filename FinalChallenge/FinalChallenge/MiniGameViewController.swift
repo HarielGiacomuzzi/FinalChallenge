@@ -37,6 +37,8 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         case .BombGame:
         //    scene = BombTGameScene(size: CGSize(width: 1024, height: 768))
             name = "BombGame"
+        case .RopeGame:
+            name = "RopeGame"
         }
         
         scene = TutorialScene(size: CGSize(width: 1024, height: 768))

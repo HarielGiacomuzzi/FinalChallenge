@@ -188,6 +188,8 @@ class MinigameCollectionScene : SKScene, CardCarousellDelegate {
             viewController.gameSelected("fish")
         case .BombGame:
             viewController.gameSelected("bomb")
+        case .RopeGame:
+            viewController.gameSelected("rope")
         }
     }
     

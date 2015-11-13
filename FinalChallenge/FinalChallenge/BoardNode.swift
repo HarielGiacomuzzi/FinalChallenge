@@ -136,20 +136,33 @@ class BoardNode : NSObject{
         
         switch(willBeUsable){
         case 0:
-                let witchOneWillBe : Int = (random() % 3) // this number may vary
+                let witchOneWillBe : Int = (random() % 6) // this number may vary
                 switch(witchOneWillBe){
                 case 0: let it = StealGoldCard()
                         it.used = false
                         self.item = it
                         print("Card StealGoldCard added")
-                case 1: let it = MoveBackCard()
-                        it.used = false
-                        self.item = it
-                        print("Card MoveBackCard added")
+                case 1: //let it = MoveBackCard()
+                        //it.used = false
+                        //self.item = it
+                        //print("Card MoveBackCard added")
+                        self.addItem()
                 case 2: let it = LoseCard()
                         it.used = false
                         self.item = it
                         print("Card LoseCard added")
+                case 3: let it = DoubleSpeed()
+                        it.used = false
+                        print("DoubleSpeed added")
+                case 4: let it = EscapeTraps()
+                        it.used = false
+                        print("EscapeTraps added")
+                case 5: let it = ExtraDice()
+                        it.used = false
+                        print("ExtraDice added")
+                case 6: let it = HalfSpeed()
+                        it.used = false
+                        print("HalfSpeed added")
                 default: break
                 }
             
@@ -172,17 +185,17 @@ class BoardNode : NSObject{
 //        self.item = it
         
         //add only stealgoldcard in all houses
-        let it =
+        //let it =
         //StealGoldCard()
         //LoseCard()
         //MoveBackCard()
         //HalfSpeed()
         //DoubleSpeed()
-        ExtraDice()
-        it.used = false
-        self.item = it
+        //ExtraDice()
+        //it.used = false
+        //self.item = it
         
         // add ramdonly the itens
-        //self.setupItems()
+        self.setupItems()
     }
 }

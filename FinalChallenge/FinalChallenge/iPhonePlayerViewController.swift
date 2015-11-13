@@ -234,6 +234,9 @@ class iPhonePlayerViewController: UIViewController {
             gamePadScene = AccelerometerScene(size: CGSize(width: 1334, height: 750))
         case .BombGame:
             gamePadScene = SwipeScene(size: CGSize(width: 1334, height: 750))
+        case .RopeGame:
+            print("need a new pad image")
+            gamePadScene = AccelerometerScene(size: CGSize(width: 1334, height: 750))
         }
         
         gamePadScene?.viewController = self
