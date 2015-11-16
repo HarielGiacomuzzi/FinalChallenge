@@ -37,11 +37,20 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
             
             case "BombGame" :  setBombBots();
             
+            case "RopeGame" : setRopeGame()
         default : break;
             
         }
     }
 
+    func setRopeGame(){
+        goButton = SKSpriteNode(imageNamed: "greenButtonOn")
+        goButton.position = CGPoint(x: self.frame.width/1.2, y: self.frame.height/6)
+        goButton.name = "StartGame"
+        goButton.zPosition = 1001
+        self.addChild(goButton)
+    }
+    
     func setFlappyFish(){
         
         let fundo : SKSpriteNode = SKSpriteNode(imageNamed: "flappystatic")
@@ -364,6 +373,8 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
                                gameController?.scene = goScene
             case "BombGame":   goScene = BombTGameScene(size: self.size)
                                gameController?.scene = goScene
+            case "RopeGame":   goScene = RopeScene(size: self.size)
+                               gameController?.scene = goScene
         default: break
         }
         self.view?.presentScene(goScene)
@@ -438,6 +449,7 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
                 switch(self.gameName){
                 case "FlappyFish": startGame(self.gameName)//start scene
                 case "BombGame": startGame(self.gameName)
+                case "RopeGame": startGame(self.gameName)
                 default: break
                 }
             }

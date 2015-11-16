@@ -23,6 +23,7 @@ class BoardGraph : NSObject{
     func loadBoard(fromFile : String){
         let a = XMLParser();
         a.loadBoardFrom(NSBundle.mainBundle().pathForResource(fromFile, ofType: "xml")!);
+                GameManager.sharedInstance.addCoins()
     }
     
     // returns the total amount of nodes
@@ -57,10 +58,8 @@ class BoardGraph : NSObject{
                 if !aux.1.hasNext(nodes[x]!){
                     aux.1.nextMoves.append(nodes[x]!)
                 }
-//                println("from : \(aux.0) to : \(x)");
             }
             removeItemFromInappropriatePlace();
-            addCoins()
         }
     }
     
@@ -228,17 +227,6 @@ class BoardGraph : NSObject{
             default: break
         }
     }
-    
-    func addCoins(){
-        let aux = Array(nodes.values)
-        for _ in 0...Int(arc4random_uniform(50)+1){
-            if !aux[Int(arc4random_uniform(UInt32(aux.count)))].isSpecialNode{
-                aux[Int(arc4random_uniform(UInt32(aux.count)))].coins = Int(arc4random_uniform(9)+1)*5
-            
-            }
-        }
-    }
-   
     
     
     /* ******************************** */

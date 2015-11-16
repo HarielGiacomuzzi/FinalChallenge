@@ -48,6 +48,8 @@ class MinigameCollectionViewController : UIViewController {
                 minivc.minigame = .FlappyFish
             case "bomb":
                 minivc.minigame = .BombGame
+            case "rope":
+                minivc.minigame = .RopeGame
             default:
                 ()
             }

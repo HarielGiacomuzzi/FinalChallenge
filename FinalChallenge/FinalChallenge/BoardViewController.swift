@@ -82,7 +82,7 @@ class BoardViewController : UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //print("entrou no preperForSegue")
-        if segue.identifier == "gotoMinigame" {
+        if segue.identifier == "gotoMinigame"{
             scene.removeAllActions()
             scene.removeAllChildren()
             scene = nil
@@ -93,7 +93,6 @@ class BoardViewController : UIViewController {
     }
     
     deinit{
-        //print("Deu deinit na board view")
         self.view = nil
     }
     
