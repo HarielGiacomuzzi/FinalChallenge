@@ -27,6 +27,7 @@ class MainBoard: SKScene, SKPhysicsContactDelegate {
     }
 
     override func didMoveToView(view: SKView) {
+            BoardGraph.SharedInstance.createFathers()
             GameManager.sharedInstance.boardViewController = self.viewController;
             GameManager.sharedInstance.isOnBoard = true;
             AudioSource.sharedInstance.mainGameSound()

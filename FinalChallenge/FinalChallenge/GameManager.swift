@@ -51,8 +51,8 @@ class GameManager : NSObject {
     // some arrays
     var minigameOrderArray : [Minigame] = []
     //var allMinigames : [Minigame] = [.FlappyFish, .BombGame, .RopeGame]
-    //var allMinigames : [Minigame] = [.BombGame]
-    var allMinigames : [Minigame] = [.RopeGame]
+    var allMinigames : [Minigame] = [.BombGame]
+//    var allMinigames : [Minigame] = [.RopeGame]
     
     override init(){
         super.init()
@@ -102,8 +102,8 @@ class GameManager : NSObject {
     
     func playerTurn(player:Player?){
         let location = BoardGraph.SharedInstance.whereIs(player!)
-        BoardGraph.SharedInstance.pickItem(location!, player: player!)
         BoardGraph.SharedInstance.giveCoins(location!, player: player!)
+        BoardGraph.SharedInstance.pickItem(location!, player: player!)
     }
     
     //dice response
