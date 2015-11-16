@@ -273,6 +273,7 @@ class GameManager : NSObject {
                             } else {
                                 sent = true
                                 // case not trap
+                                status = "cardUsed"
                                 switch(activeCard.cardName){
                                 case "Double Speed": let card = activeCard as! DoubleSpeed
                                                      card.activate(p)
@@ -565,7 +566,9 @@ class GameManager : NSObject {
     func animateCoinsRemoved(data: NSNotification) {
         let player = data.object as! Player
         if let scene = boardGameViewController?.scene {
-            scene.showMoney(player.nodeSprite!, good:false)
+            if let sprite = player.nodeSprite {
+                scene.showMoney(sprite, good:false)
+            }
         }
     }
     

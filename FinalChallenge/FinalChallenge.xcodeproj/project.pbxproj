@@ -807,7 +807,7 @@
 				TargetAttributes = {
 					DB458B6C1B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2U22ZLUW79;
+						DevelopmentTeam = ZX7GUMJ35C;
 					};
 					DB458B841B5409B90066B38C = {
 						CreatedOnToolsVersion = 6.4;
@@ -845,7 +845,6 @@
 				DB458B7B1B5409B90066B38C /* Main.storyboard in Resources */,
 				26547BB31B9F4D59003DFD73 /* SetupParty.xcassets in Resources */,
 				5E9EB33B1BDEA4D6003974EB /* tutorial.atlas in Resources */,
-				4407485B1BF1039E008F59CD /* babiesAssetsBundle.atlas in Resources */,
 				26D6DA4E1B94BEE800E94400 /* bombGame.atlas in Resources */,
 				44462C561BF26D310092448C /* raioHorizontal.atlas in Resources */,
 				B5DD1B521B8F8D0500AA1EB6 /* bubbleSound2.wav in Resources */,
