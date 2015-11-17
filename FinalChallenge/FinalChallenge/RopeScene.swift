@@ -10,19 +10,27 @@
 import SpriteKit
 import CoreMotion
 
-class RopeScene : MinigameScene{
+class RopeScene : MinigameScene, SKPhysicsContactDelegate{
     
     var player : [RopeGamePlayer] = []
     var singlePlayer : RopeGamePlayer?
+    var goingRight = false
+    var goingLeft = false
+    var stopRotation = false
     
     lazy var motionManager : CMMotionManager = {
         let motion = CMMotionManager()
-        motion.accelerometerUpdateInterval = 1.0/5.0
+        motion.accelerometerUpdateInterval = 1/10
         return motion
         }()
     override func didMoveToView(view: SKView) {
-        
+    
         super.didMoveToView(view)
+        
+        self.physicsWorld.gravity = CGVectorMake(0.0, -250.0)
+        self.physicsWorld.contactDelegate = self
+        
+        AudioSource.sharedInstance.ropeGameSound()
         
         if motionManager.accelerometerAvailable{
             let queue = NSOperationQueue()
@@ -35,7 +43,9 @@ class RopeScene : MinigameScene{
                     else{
                         return
                     }
-                    self.moveCharacter(data!.acceleration.y)
+                    if !self.stopRotation {
+                        self.moveCharacter(data!.acceleration.y)
+                    }
                 }
             )
         } else {
@@ -67,8 +77,8 @@ class RopeScene : MinigameScene{
         base.position = CGPoint(x: self.frame.width/2, y: base.frame.height/2)
         base.zPosition = 4
         self.addChild(base)
-        
-        singlePlayer = RopeGamePlayer(imageNamed: "ropegatow")
+
+        singlePlayer = RopeGamePlayer()
         singlePlayer?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/3)
         singlePlayer?.anchorPoint = CGPoint(x: 0.5, y: 0.0)
         singlePlayer?.zPosition = 5
@@ -78,21 +88,49 @@ class RopeScene : MinigameScene{
     
     func moveCharacter(y:Double){
         if y > 0{
-            singlePlayer?.zRotation = -CGFloat(y)
-            print(singlePlayer?.zRotation)
+           // print(y)
+            singlePlayer?.zRotation += -CGFloat(0.1)
+            goingRight = true
+            goingLeft = false
+            
         }else if y < 0{
-            singlePlayer?.zRotation = -(CGFloat(y))
-            print(singlePlayer?.zRotation)
-        }
-        
-        if(singlePlayer?.zRotation > 0.5){
-            //player cai
-        }
-        if(singlePlayer?.zRotation < -0.5){
-            //player cai
+            //print(y)
+            singlePlayer?.zRotation -= -(CGFloat(0.1))
+            goingRight = false
+            goingLeft = true
+        }else{
+            goingLeft = false
+            goingRight = false
         }
         
     }
+    
+    override func update(currentTime: NSTimeInterval) {
+        if(singlePlayer?.zRotation > 0.9){
+            //player cai
+            //print("player caiu")
+            //singlePlayer?.removeFromParent()
+            singlePlayer?.activePhysicsBody()
+            self.stopRotation = true
+        }
+        if(singlePlayer?.zRotation < -0.9){
+            //player cai
+            //print("player caiu")
+            //singlePlayer?.removeFromParent()
+            singlePlayer?.activePhysicsBody()
+            self.stopRotation = true
+        }
+        if !stopRotation{
+            if !goingLeft{
+                singlePlayer?.zRotation -= CGFloat(0.01)
+            }
+            if !goingRight{
+                singlePlayer?.zRotation += CGFloat(0.01)
+            }
+        }
+    }
+    
+    
     
     
     override func messageReceived(identifier: String, dictionary: NSDictionary) {

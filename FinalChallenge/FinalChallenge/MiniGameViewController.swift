@@ -49,7 +49,7 @@ class MiniGameViewController: UIViewController, UIPopoverPresentationControllerD
         //debug configs
         skView.showsFPS = false
         skView.showsNodeCount = false
-        skView.showsPhysics = false
+        skView.showsPhysics = true
         
         skView.ignoresSiblingOrder = true
         scene!.gameController = self
