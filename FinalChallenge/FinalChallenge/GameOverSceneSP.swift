@@ -23,9 +23,7 @@ class GameOverSceneSP : MinigameScene{
     
     override func didMoveToView(view: SKView) {
         //self.backgroundColor = UIColor.redColor()
-        
-        
-        
+
         let background = SKTexture(imageNamed: "setupBG")
         let bg = SKSpriteNode(texture: background, size: background.size())
         self.addChild(bg)
@@ -34,18 +32,18 @@ class GameOverSceneSP : MinigameScene{
         bg.zPosition = 0
         self.backgroundColor = UIColor.whiteColor()
         
+        AudioSource.sharedInstance.stopAudio()
+        
         switch(game){
         case "fish": self.setupFlappyFishGameOver()
         case "bomb": self.setupBombGameOver()
+        case "rope": self.setupRopeGame()
         default: break
         }
     }
     
     //sets flappyfish game over scene
     func setupFlappyFishGameOver(){
-        
-        //print("entrou aqui ta sacando 2")
-        AudioSource.sharedInstance.stopAudio()
         
         let restartGame = SKLabelNode(fontNamed: "GillSans-Bold")
         restartGame.text = "Restart Game"
@@ -71,8 +69,6 @@ class GameOverSceneSP : MinigameScene{
     
     func setupBombGameOver(){
         
-        AudioSource.sharedInstance.stopAudio()
-        
         let restartGame = SKLabelNode(fontNamed: "GillSans-Bold")
         restartGame.text = "Restart Game"
         restartGame.name = "Restart Game"
@@ -90,6 +86,29 @@ class GameOverSceneSP : MinigameScene{
         let scoreLabel = SKLabelNode(fontNamed: "GillSans-Bold")
         scoreLabel.text = "Winner: \(winner)"
         scoreLabel.name = "Winner"
+        scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2)
+        scoreLabel.zPosition = 2
+        self.addChild(scoreLabel)
+    }
+    
+    func setupRopeGame(){
+        let restartGame = SKLabelNode(fontNamed: "GillSans-Bold")
+        restartGame.text = "Restart Game"
+        restartGame.name = "Restart Game"
+        restartGame.position = CGPointMake(self.size.width/2, 50)
+        restartGame.zPosition = 2
+        self.addChild(restartGame)
+        
+        let returnMinigameScene = SKLabelNode(fontNamed: "GillSans-Bold")
+        returnMinigameScene.text = "Return to Minigames Collection"
+        returnMinigameScene.name = "Return MinigameScene"
+        returnMinigameScene.position = CGPointMake(self.size.width/2, 150)
+        returnMinigameScene.zPosition = 2
+        self.addChild(returnMinigameScene)
+        
+        let scoreLabel = SKLabelNode(fontNamed: "GillSans-Bold")
+        scoreLabel.text = "Final Score: \(score)"
+        scoreLabel.name = "Final Score"
         scoreLabel.position = CGPointMake(self.size.width/2, self.size.height/2)
         scoreLabel.zPosition = 2
         self.addChild(scoreLabel)

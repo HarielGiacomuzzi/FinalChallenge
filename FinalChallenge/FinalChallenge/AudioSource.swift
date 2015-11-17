@@ -56,6 +56,10 @@ class AudioSource: NSObject, AVAudioPlayerDelegate {
         readAudioFile("bombgame", ext: "mp3", audioLoop: true)
     }
     
+    func ropeGameSound(){
+        readAudioFile("ropegamesong", ext: "mp3", audioLoop: true)
+    }
+    
     func mainGameSound(){
         readAudioFile("maingame", ext: "mp3", audioLoop: true)
     }
