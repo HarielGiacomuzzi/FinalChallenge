@@ -262,20 +262,27 @@ class BoardGraph : NSObject{
     
     //TODO: walk backwards
     
-    func walkBackwards(player:Player, var distance: Int) {
-        print("vou printar os pais")
+    func createFathers() {
         for node in nodes {
-            print(node.1.father)
+            for child in node.1.nextMoves {
+                child.father = node.1
+            }
         }
-//        var node = nodeFor(player)
-//        print(node)
-//        while distance > 0 {
-//            node = node?.father
-//            print(node)
-//            distance--
-//        }
-//        nodeFor(player)?.removePlayer(player)
-//        node!.insertPLayer(player)
+    }
+    
+    func walkBackwards(player:Player, var distance: Int) {
+        var node = nodeFor(player)
+        print(node)
+        while distance > 0 {
+            node = node?.father
+            print(node)
+            distance--
+        }
+        if node != nil {
+            nodeFor(player)?.removePlayer(player)
+            node!.insertPLayer(player)
+            player.nodeSprite?.position = CGPointMake(CGFloat(node!.posX), CGFloat(node!.posY))
+        }
     }
     
     

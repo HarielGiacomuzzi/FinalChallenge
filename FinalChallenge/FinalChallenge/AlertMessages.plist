@@ -26,5 +26,7 @@
 	<string>You don&apos;t have enough money</string>
 	<key>buyMaxCards</key>
 	<string>You already have the maximum ammount of cards</string>
+	<key>cardUsed</key>
+	<string>You have used the card $</string>
 </dict>
 </plist>

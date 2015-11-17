@@ -106,6 +106,7 @@ class EndGameScene : SKScene{
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print(gamePlayers)
         
         let touch : UITouch? = touches.first as UITouch!
         
@@ -120,7 +121,8 @@ class EndGameScene : SKScene{
                 GameManager.sharedInstance.dismissBoardGame()
             }
             else{
-                if let playerToShow : Player = gamePlayers.removeFirst(){
+                if !gamePlayers.isEmpty {
+                    let playerToShow: Player = gamePlayers.removeFirst()
                     showPlayer(playerToShow, position: count)
                     count++
                 }
