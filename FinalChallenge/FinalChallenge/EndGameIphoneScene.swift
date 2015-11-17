@@ -12,37 +12,38 @@ import SpriteKit
 class EndGameIphoneScene : SKScene{
     
     override func didMoveToView(view: SKView) {
-        ConnectionManager.sharedInstance.closeConections()
+        
+        let redBanner : SKTexture = SKTexture(imageNamed: "redTitle")
+        // self.backgroundColor = UIColor(red: 14/255, green: 234/255, blue: 158/255, alpha: 1)
         
         let background = SKTexture(imageNamed: "setupBG")
-        let bg = SKSpriteNode(texture: background, size: background.size())
+        let bg = SKSpriteNode(texture: background)
+        bg.size = CGSize(width: self.frame.width, height: self.frame.height * 2)
         self.addChild(bg)
-        bg.name = "bg"
         bg.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         bg.zPosition = 0
-        self.backgroundColor = UIColor.whiteColor()
-
-        let label = SKLabelNode(fontNamed: "GillSans-Bold")
-        label.text = "Game ended someone won, the rest lost, deal with it"
-        label.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-        label.zPosition = 5
-        self.addChild(label)
         
-        let backToMain = SKLabelNode(fontNamed: "GillSans-Bold")
-        backToMain.name = "back"
-        backToMain.text = "Back to Start Screen"
-        backToMain.position = CGPoint(x: self.frame.width/2, y: self.frame.height/5)
-        backToMain.zPosition = 5
-        self.addChild(backToMain)
+        
+        let titleBar : SKSpriteNode = SKSpriteNode(texture: redBanner )
+        titleBar.size = CGSize(width: self.frame.width, height: self.frame.height * 0.3)
+        titleBar.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        self.addChild(titleBar)
+        
+        let titleLabel : SKLabelNode = SKLabelNode(fontNamed: "GillSans-Bold")
+        titleLabel.fontSize = titleBar.size.height * 0.55
+        titleLabel.text = "End Game"
+        titleBar.addChild(titleLabel)
+        titleLabel.position = CGPoint(x: 0, y: -(titleLabel.frame.height/2))
+        titleLabel.zPosition = 21
+        titleBar.zPosition = 20
+        titleLabel.fontColor = UIColor(red: 255/255, green: 242/255, blue: 202/255, alpha: 1)
+        
+
         
     }
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        //let touch : UITouch? = touches.first as UITouch!
-        
-        
-        _ = SKTransition.revealWithDirection(SKTransitionDirection.Down, duration: 1.0)
-        //self.view?.presentScene(nil)
         ConnectionManager.sharedInstance.closeConections()
         GameManager.sharedInstance.restartGameManager()
         GameManager.sharedInstance.dismissPlayerViewController()

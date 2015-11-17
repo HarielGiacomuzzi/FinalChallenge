@@ -53,6 +53,7 @@ class iPhonePlayerViewController: UIViewController {
         loadPartyModeScene()
 //        loadStore(["StealGoldCard","StealGoldCard","StealGoldCard","MoveBackCard","LoseCard"])
 //        loadPlayerView()
+//        loadEndGameScene()
 
     }
     
