@@ -44,11 +44,122 @@ class TutorialScene : MinigameScene, SKPhysicsContactDelegate {
     }
 
     func setRopeGame(){
+        
+        let ground = SKNode()
+        ground.position = CGPointMake(self.frame.size.width / 2, -100)
+        ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, self.frame.size.height * 0.01))
+        self.addChild(ground)
+        
+        let sky = SKSpriteNode(imageNamed: "ropesky")
+        sky.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        sky.zPosition = 1
+        sky.size.height = self.frame.size.height
+        self.addChild(sky)
+        
+        let skyline1 = SKSpriteNode(imageNamed: "ropeskyline1")
+        skyline1.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2+skyline1.frame.height/3)
+        skyline1.zPosition = 2
+        self.addChild(skyline1)
+        
+        let skyline2 = SKSpriteNode(imageNamed: "ropeskyline2")
+        skyline2.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2+skyline2.frame.height/3)
+        skyline2.zPosition = 3
+        self.addChild(skyline2)
+        
+        let base = SKSpriteNode(imageNamed: "ropebase")
+        base.position = CGPoint(x: self.frame.width/2, y: base.frame.height/2)
+        base.zPosition = 4
+        self.addChild(base)
+        
+        let cat = RopeGamePlayer()
+        cat.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        cat.zPosition = 5
+        cat.setScale(0.6)
+        cat.name = "Playable character"
+        self.addChild(cat)
+        spriteArray.append(cat)
+        
+        background = SKSpriteNode(color: UIColor.whiteColor(), size: CGSize(width: self.frame.width, height: self.frame.height/2))
+        background.position = CGPoint(x: self.frame.width/2, y: self.frame.width/10)
+        background.zPosition = 1000
+        background.alpha = 0.9
+        self.addChild(background)
+        
+        barName = SKSpriteNode(imageNamed: "setUpBanner")
+        barName.size.height = self.size.height * 0.18
+        barName.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2.7)
+        barName.zPosition = 1100
+        
+        nameText = SKLabelNode(fontNamed: "GillSans-Bold")
+        nameText.text = "Cats on the Wall"
+        nameText.setScale(1.5)
+        nameText.position.y = nameText.position.y
+        nameText.zPosition = 1101
+        
+        barName.addChild(nameText)
+        self.addChild(barName)
         goButton = SKSpriteNode(imageNamed: "greenButtonOn")
         goButton.position = CGPoint(x: self.frame.width/1.2, y: self.frame.height/6)
         goButton.name = "StartGame"
         goButton.zPosition = 1001
         self.addChild(goButton)
+        
+        let d = SKNode()
+        if !GameManager.sharedInstance.isMultiplayer{
+            let desc = SKLabelNode(fontNamed: "GillSans-Bold")
+            desc.text = "Tilt your device sideways to balance on the wall."
+            desc.position = CGPointMake(desc.position.x, desc.position.y)
+            desc.fontColor = UIColor.blackColor()
+            desc.fontSize = fontSize
+            d.addChild(desc)
+            
+            let desc2 = SKLabelNode(fontNamed: "GillSans-Bold")
+            desc2.text = "Stay on the wall for the longest time."
+            desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
+            desc2.fontColor = UIColor.blackColor()
+            desc2.fontSize = fontSize
+            d.addChild(desc2)
+            
+            let desc3 = SKLabelNode(fontNamed: "GillSans-Bold")
+            desc3.text = "Dont fall or you will lose."
+            desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
+            desc3.fontColor = UIColor.blackColor()
+            desc3.fontSize = fontSize
+            d.addChild(desc3)
+            
+            let desc4 = SKLabelNode(fontNamed: "GillSans-Bold")
+            desc4.text = ""
+            desc4.position = CGPointMake(desc4.position.x, desc4.position.y - 90)
+            desc4.fontColor = UIColor.blackColor()
+            desc4.fontSize = fontSize
+            d.addChild(desc4)
+        } else {
+            let desc = SKLabelNode(fontNamed: "GillSans-Bold")
+            desc.text = "Tilt your device sideways to balance on the wall."
+            desc.position = CGPointMake(desc.position.x, desc.position.y)
+            desc.fontColor = UIColor.blackColor()
+            desc.fontSize = fontSize
+            d.addChild(desc)
+            
+            let desc2 = SKLabelNode(fontNamed: "GillSans-Bold")
+            desc2.text = "Stay on the wall longer than your friends"
+            desc2.position = CGPointMake(desc2.position.x, desc2.position.y - 30)
+            desc2.fontColor = UIColor.blackColor()
+            desc2.fontSize = fontSize
+            d.addChild(desc2)
+            
+            let desc3 = SKLabelNode(fontNamed: "GillSans-Bold")
+            desc3.text = "Dont fall or you will lose."
+            desc3.position = CGPointMake(desc3.position.x, desc3.position.y - 60)
+            desc3.fontColor = UIColor.blackColor()
+            desc3.fontSize = fontSize
+            d.addChild(desc3)
+        }
+        d.zPosition = 1002
+        d.position = CGPoint(x: self.frame.width/3+5, y: self.frame.height/4)
+        
+        self.addChild(d)
+
     }
     
     func setFlappyFish(){
