@@ -95,6 +95,7 @@
 		B55127E01BF64C93003051AD /* RopeGamePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55127DF1BF64C93003051AD /* RopeGamePlayer.swift */; settings = {ASSET_TAGS = (); }; };
 		B55127E71BF65ADD003051AD /* RopeGameAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B55127E61BF65ADD003051AD /* RopeGameAssets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		B55127EA1BFA5243003051AD /* ropegamesong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B55127E91BFA5243003051AD /* ropegamesong.mp3 */; settings = {ASSET_TAGS = (); }; };
+		B55127EB1BFCF87D003051AD /* accelerometerPadAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B547661F1BDFD4D6008E31DD /* accelerometerPadAssets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		B579AB681BB332E700B9D181 /* MoveBackCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579AB671BB332E700B9D181 /* MoveBackCard.swift */; };
 		B579AB6A1BB3358800B9D181 /* LoseOneCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B579AB691BB3358800B9D181 /* LoseOneCard.swift */; };
 		B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = B57B33641B864EC7000E5F53 /* PlayerParticle.sks */; };
@@ -889,6 +890,7 @@
 				B5DD1B521B8F8D0500AA1EB6 /* bubbleSound2.wav in Resources */,
 				B5F60BBA1B83B76E00786728 /* MyParticle.sks in Resources */,
 				B57B33651B864EC7000E5F53 /* PlayerParticle.sks in Resources */,
+				B55127EB1BFCF87D003051AD /* accelerometerPadAssets.xcassets in Resources */,
 				B5F60BC21B84FA0400786728 /* MyParticle2.sks in Resources */,
 				B5DD1B501B8F888200AA1EB6 /* bubbleSound.mp3 in Resources */,
 				B5C9DCAD1BE1427F0081EE0C /* cards2.atlas in Resources */,

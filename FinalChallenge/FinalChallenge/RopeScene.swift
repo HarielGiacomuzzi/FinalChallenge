@@ -22,9 +22,9 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
     var stopRotation = false
     var cont = 1
     
-    var rank = [String()]
-    var winner = String()
-    var losers = [String()]
+    var rank : [String] = []
+    var winner : String?
+    var losers : [String] = []
     
     lazy var motionManager : CMMotionManager = {
         let motion = CMMotionManager()
@@ -110,22 +110,19 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
     func spawnPlayer(){
         let cats = GameManager.sharedInstance.players
         var c = 0
-        let playersNode = SKNode()
         for cat in cats{
             let p = RopeGamePlayer()
             p.identifier = cat.playerIdentifier
             p.color = cat.color
             p.zPosition = 5
-            let offsetFraction = (CGFloat(c) + 1.5)/(CGFloat(cats.count) + 1.0)
-            p.position = CGPoint(x: 0 + offsetFraction, y: 0)
+            let offsetFraction = (CGFloat(c) + 1.0)/(CGFloat(cats.count) + 1.0)
+            p.position = CGPoint(x: self.frame.width/2 + offsetFraction, y: self.frame.height/2.2)
             p.setScale(0.5)
-            playersNode.addChild(p)
-            //self.addChild(p)
+            self.addChild(p)
             player.append(p)
             c++
         }
-        playersNode.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-        self.addChild(playersNode)
+        
     }
     
     func moveCharacter(y:Double){
@@ -153,31 +150,24 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
             for p in player{
                 if p.zRotation > 0.9{
                     p.activePhysicsBody()
-                    player.removeObject(p)
                     p.stopRotation = true
                 }
                 if p.zRotation < -0.9{
                     p.activePhysicsBody()
-                    player.removeObject(p)
                     p.stopRotation = true
                 }
             }
             if player.count == 1 {
                 //endgame
                 winner = player[0].identifier!
+                self.multiPlayerEndGame()
             }
         } else{//singleplayer game
             if(singlePlayer?.zRotation > 0.9){
-                //player cai
-                //print("player caiu")
-                //singlePlayer?.removeFromParent()
                 singlePlayer?.activePhysicsBody()
                 self.stopRotation = true
             }
             if(singlePlayer?.zRotation < -0.9){
-                //player cai
-                //print("player caiu")
-                //singlePlayer?.removeFromParent()
                 singlePlayer?.activePhysicsBody()
                 self.stopRotation = true
             }
@@ -229,8 +219,9 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
     func handlePlayerDeath(playerBody:SKPhysicsBody, wallBody:SKPhysicsBody){
         for p in player{
             if p.physicsBody == playerBody{
-                p.removeFromParent()
                 losers.append(p.identifier!)
+                p.removeFromParent()
+                player.removeObject(p)
             }
         }
     }
@@ -241,7 +232,7 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
     }
     
     func multiPlayerEndGame(){
-        rank.append(winner)
+        rank.append(winner!)
         losers = Array(losers.reverse())
         for loser in losers{
             rank.append(loser)
