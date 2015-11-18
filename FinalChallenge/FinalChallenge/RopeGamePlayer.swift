@@ -12,6 +12,9 @@ class RopeGamePlayer : SKSpriteNode{
     
     let playerCategory : UInt32 = 1 << 0
     let worldCategory : UInt32 = 1 << 1
+    var stopRotation = false
+
+    var identifier:String?
     
     init(){
         let texture = SKTexture(imageNamed: "ropegatow")
@@ -32,4 +35,17 @@ class RopeGamePlayer : SKSpriteNode{
         self.physicsBody?.contactTestBitMask = worldCategory
         self.physicsBody?.mass =  100
     }
+    
+    func goRight(){
+        if !stopRotation{
+            self.zRotation += CGFloat(0.1)
+        }
+    }
+    
+    func goLeft(){
+        if !stopRotation{
+            self.zRotation -= CGFloat(0.1)
+        }
+    }
+    
 }

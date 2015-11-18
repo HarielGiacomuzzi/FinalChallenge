@@ -21,6 +21,11 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
     var goingLeft = false
     var stopRotation = false
     var cont = 1
+    
+    var rank = [String()]
+    var winner = String()
+    var losers = [String()]
+    
     lazy var motionManager : CMMotionManager = {
         let motion = CMMotionManager()
         motion.accelerometerUpdateInterval = 1/10
@@ -56,12 +61,8 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
         }
         self.setScenerio()
     }
-    
+
     func setScenerio(){
-        
-        if !GameManager.sharedInstance.isMultiplayer {
-            self.timerForSinglePlayer()
-        }
         
         let ground = SKNode()
         ground.position = CGPointMake(self.frame.size.width / 2, -100)
@@ -92,13 +93,39 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
         base.position = CGPoint(x: self.frame.width/2, y: base.frame.height/2)
         base.zPosition = 4
         self.addChild(base)
-
-        singlePlayer = RopeGamePlayer()
-        singlePlayer?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/3)
-        singlePlayer?.anchorPoint = CGPoint(x: 0.5, y: 0.0)
-        singlePlayer?.zPosition = 5
-        singlePlayer?.setScale(0.6)
-        self.addChild(singlePlayer!)
+        
+        if !GameManager.sharedInstance.isMultiplayer {
+            self.timerForSinglePlayer()
+            singlePlayer = RopeGamePlayer()
+            singlePlayer?.position = CGPoint(x: self.frame.width/2, y: self.frame.height/3)
+            singlePlayer?.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+            singlePlayer?.zPosition = 5
+            singlePlayer?.setScale(0.6)
+            self.addChild(singlePlayer!)
+        } else {
+            self.spawnPlayer()
+        }
+    }
+    
+    func spawnPlayer(){
+        let cats = GameManager.sharedInstance.players
+        var c = 0
+        let playersNode = SKNode()
+        for cat in cats{
+            let p = RopeGamePlayer()
+            p.identifier = cat.playerIdentifier
+            p.color = cat.color
+            p.zPosition = 5
+            let offsetFraction = (CGFloat(c) + 1.5)/(CGFloat(cats.count) + 1.0)
+            p.position = CGPoint(x: 0 + offsetFraction, y: 0)
+            p.setScale(0.5)
+            playersNode.addChild(p)
+            //self.addChild(p)
+            player.append(p)
+            c++
+        }
+        playersNode.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        self.addChild(playersNode)
     }
     
     func moveCharacter(y:Double){
@@ -121,28 +148,50 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
     }
     
     override func update(currentTime: NSTimeInterval) {
-        if(singlePlayer?.zRotation > 0.9){
-            //player cai
-            //print("player caiu")
-            //singlePlayer?.removeFromParent()
-            singlePlayer?.activePhysicsBody()
-            self.stopRotation = true
-        }
-        if(singlePlayer?.zRotation < -0.9){
-            //player cai
-            //print("player caiu")
-            //singlePlayer?.removeFromParent()
-            singlePlayer?.activePhysicsBody()
-            self.stopRotation = true
-        }
-        if !stopRotation{
-            if !goingLeft{
-                singlePlayer?.zRotation -= CGFloat(0.01)
+        
+        if GameManager.sharedInstance.isMultiplayer{
+            for p in player{
+                if p.zRotation > 0.9{
+                    p.activePhysicsBody()
+                    player.removeObject(p)
+                    p.stopRotation = true
+                }
+                if p.zRotation < -0.9{
+                    p.activePhysicsBody()
+                    player.removeObject(p)
+                    p.stopRotation = true
+                }
             }
-            if !goingRight{
-                singlePlayer?.zRotation += CGFloat(0.01)
+            if player.count == 1 {
+                //endgame
+                winner = player[0].identifier!
+            }
+        } else{//singleplayer game
+            if(singlePlayer?.zRotation > 0.9){
+                //player cai
+                //print("player caiu")
+                //singlePlayer?.removeFromParent()
+                singlePlayer?.activePhysicsBody()
+                self.stopRotation = true
+            }
+            if(singlePlayer?.zRotation < -0.9){
+                //player cai
+                //print("player caiu")
+                //singlePlayer?.removeFromParent()
+                singlePlayer?.activePhysicsBody()
+                self.stopRotation = true
+            }
+            if !stopRotation{
+                if !goingLeft{
+                    singlePlayer?.zRotation -= CGFloat(0.01)
+                }
+                if !goingRight{
+                    singlePlayer?.zRotation += CGFloat(0.01)
+                }
             }
         }
+        
+        
     }
     
     func timerForSinglePlayer(){
@@ -163,9 +212,26 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
     
     func didBeginContact(contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == playerCategory && contact.bodyB.categoryBitMask == worldCategory {
-            singlePlayer?.removeFromParent()
+            if !GameManager.sharedInstance.isMultiplayer{
+                singlePlayer?.removeFromParent()
+            } else{
+                self.handlePlayerDeath(contact.bodyA, wallBody: contact.bodyB)
+            }
         } else if contact.bodyB.categoryBitMask == playerCategory && contact.bodyA.categoryBitMask == worldCategory{
-            singlePlayer?.removeFromParent()
+            if !GameManager.sharedInstance.isMultiplayer{
+                singlePlayer?.removeFromParent()
+            } else{
+                self.handlePlayerDeath(contact.bodyB, wallBody: contact.bodyA)
+            }
+        }
+    }
+    
+    func handlePlayerDeath(playerBody:SKPhysicsBody, wallBody:SKPhysicsBody){
+        for p in player{
+            if p.physicsBody == playerBody{
+                p.removeFromParent()
+                losers.append(p.identifier!)
+            }
         }
     }
     
@@ -174,9 +240,33 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
         self.gameOverSP("rope", winner: "", score: cont)
     }
     
+    func multiPlayerEndGame(){
+        rank.append(winner)
+        losers = Array(losers.reverse())
+        for loser in losers{
+            rank.append(loser)
+        }
+        self.removeAllChildren()
+        self.removeAllActions()
+        SKTransition.flipHorizontalWithDuration(0.5)
+        let goScene = GameOverSceneMP(size: self.size)
+        goScene.players = rank
+        goScene.scaleMode = self.scaleMode
+        self.view?.presentScene(goScene)
+    }
     
     
     override func messageReceived(identifier: String, dictionary: NSDictionary) {
-        
+        for p in player {
+            if p.identifier == identifier {
+                let message = dictionary["way"] as! String
+                let messageEnum = PlayerAction(rawValue: message)
+                if messageEnum == .Up {
+                    p.goRight()
+                } else {
+                    p.goLeft()
+                }
+            }
+        }
     }
 }
