@@ -479,7 +479,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
         if sender == turns {
             turnCounter = turnCounter + 5
             if turnCounter > 30 {
-                turnCounter = 1
+                turnCounter = 5
             }
             
             numberOfTurns?.text = "max turns : \(turnCounter)"

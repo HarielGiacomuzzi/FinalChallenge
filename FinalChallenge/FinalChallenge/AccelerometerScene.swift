@@ -118,7 +118,7 @@ class AccelerometerScene: GamePadScene {
         self.addChild(background!)
         
         playerBarColor = SKSpriteNode(imageNamed: "playercolor")
-        playerBarColor!.color = UIColor.redColor() //(viewController?.playerColor)!
+        playerBarColor!.color = (viewController?.playerColor)!
         playerBarColor!.colorBlendFactor = 0.6
         playerBarColor!.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.1)
         playerBarColor?.size = CGSize(width: self.frame.size.width, height: self.frame.height/5)

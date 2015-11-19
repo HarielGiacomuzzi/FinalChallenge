@@ -114,15 +114,22 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
             let p = RopeGamePlayer()
             p.identifier = cat.playerIdentifier
             p.color = cat.color
+            p.colorBlendFactor = 0.3
             p.zPosition = 5
             let offsetFraction = (CGFloat(c) + 1.0)/(CGFloat(cats.count) + 1.0)
-            p.position = CGPoint(x: self.frame.width/2 + offsetFraction, y: self.frame.height/2.2)
+            
+            switch(c){
+            case 0: p.position = CGPoint(x: self.frame.width/8 + offsetFraction, y: self.frame.height/2.2)
+            case 1: p.position = CGPoint(x: 3*self.frame.width/8 + offsetFraction, y: self.frame.height/2.2)
+            case 2: p.position = CGPoint(x: 5*self.frame.width/8 + offsetFraction, y: self.frame.height/2.2)
+            case 3: p.position = CGPoint(x: 7*self.frame.width/8 + offsetFraction, y: self.frame.height/2.2)
+            default: break
+            }
             p.setScale(0.5)
             self.addChild(p)
             player.append(p)
             c++
         }
-        
     }
     
     func moveCharacter(y:Double){
