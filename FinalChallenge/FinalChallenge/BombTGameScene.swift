@@ -12,7 +12,7 @@ import SpriteKit
 class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     //SET ZOEIRA MODE TO TRUE IF YOU WANT TO THROW THE BOMB EVERYWHERE
-    var zoeiraMode = true
+    var zoeiraMode = false
     
     var walls:[BombWallNode] = [] //0 = north, 1 = south, 2 = east, 3 = west
     var players:[BombPlayerNode] = []//0 = north, 1 = south, 2 = east, 3 = west
@@ -312,7 +312,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
     
     func gameOver(){
         //find last player
-        let winner = String()
+        var winner = String()
         for i in 0...3 {
             if walls[i].hasPlayer {
                 playerRank.append(players[i].identifier) //append last player
@@ -330,6 +330,7 @@ class BombTGameScene : MinigameScene, SKPhysicsContactDelegate {
             self.view?.presentScene(goScene)
             
         } else{
+            winner = "RNGesus won"
             self.gameOverSP("bomb", winner: winner, score: 0)
         }
     }

@@ -13,7 +13,8 @@ class RopeGamePlayer : SKSpriteNode{
     let playerCategory : UInt32 = 1 << 0
     let worldCategory : UInt32 = 1 << 1
     var stopRotation = false
-
+    var goingRight = false
+    var goingLeft = false
     var identifier:String?
     
     init(){
@@ -37,15 +38,19 @@ class RopeGamePlayer : SKSpriteNode{
     }
     
     func goRight(){
+        self.goingLeft = false
         if !stopRotation{
             self.zRotation += CGFloat(0.1)
         }
+        self.goingRight = true
     }
     
     func goLeft(){
+        self.goingRight = false
         if !stopRotation{
             self.zRotation -= CGFloat(0.1)
         }
+        self.goingLeft = true
     }
     
 }

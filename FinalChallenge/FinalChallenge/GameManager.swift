@@ -50,9 +50,9 @@ class GameManager : NSObject {
     
     // some arrays
     var minigameOrderArray : [Minigame] = []
-    //var allMinigames : [Minigame] = [.FlappyFish, .BombGame, .RopeGame]
+    var allMinigames : [Minigame] = [.FlappyFish, .BombGame, .RopeGame]
    // var allMinigames : [Minigame] = [.BombGame]
-    var allMinigames : [Minigame] = [.RopeGame]
+    //var allMinigames : [Minigame] = [.RopeGame]
     
     override init(){
         super.init()

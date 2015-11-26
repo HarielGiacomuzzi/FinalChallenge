@@ -155,15 +155,26 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
         
         if GameManager.sharedInstance.isMultiplayer{
             for p in player{
-                if p.zRotation > 0.9{
+                if p.zRotation > 0.5{
                     p.activePhysicsBody()
                     p.stopRotation = true
                 }
-                if p.zRotation < -0.9{
+                if p.zRotation < -0.5{
                     p.activePhysicsBody()
                     p.stopRotation = true
                 }
             }
+            for p in player{
+                if !p.stopRotation{
+                    if p.goingLeft{
+                        singlePlayer?.zRotation -= CGFloat(0.1)
+                    }
+                    if p.goingRight{
+                        singlePlayer?.zRotation += CGFloat(0.1)
+                    }
+                }
+            }
+            
             if player.count == 1 {
                 //endgame
                 winner = player[0].identifier!
@@ -211,12 +222,14 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
         if contact.bodyA.categoryBitMask == playerCategory && contact.bodyB.categoryBitMask == worldCategory {
             if !GameManager.sharedInstance.isMultiplayer{
                 singlePlayer?.removeFromParent()
+                self.singlePlayerEndGame()
             } else{
                 self.handlePlayerDeath(contact.bodyA, wallBody: contact.bodyB)
             }
         } else if contact.bodyB.categoryBitMask == playerCategory && contact.bodyA.categoryBitMask == worldCategory{
             if !GameManager.sharedInstance.isMultiplayer{
                 singlePlayer?.removeFromParent()
+                self.singlePlayerEndGame()
             } else{
                 self.handlePlayerDeath(contact.bodyB, wallBody: contact.bodyA)
             }
