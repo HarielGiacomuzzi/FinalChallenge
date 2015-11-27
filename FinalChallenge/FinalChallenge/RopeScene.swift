@@ -179,6 +179,9 @@ class RopeScene : MinigameScene, SKPhysicsContactDelegate{
                 //endgame
                 winner = player[0].identifier!
                 self.multiPlayerEndGame()
+            } else if player.count == 0 {
+                winner = GameManager.sharedInstance.players[0].playerIdentifier
+                self.multiPlayerEndGame()
             }
         } else{//singleplayer game
             if(singlePlayer?.zRotation > 0.9){

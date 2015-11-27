@@ -15,7 +15,7 @@
 	<key>cardWrongCard</key>
 	<string>Can&apos;t use this type of card right now</string>
 	<key>gotMoney</key>
-	<string>You got $ money</string>
+	<string>You got $ gold</string>
 	<key>gotCard</key>
 	<string>You got the card $</string>
 	<key>gotLoot</key>

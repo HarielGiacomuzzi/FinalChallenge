@@ -212,15 +212,15 @@ class GameManager : NSObject {
         let upDown = fabs(fabs(node1.posY) - fabs(node2.posY))
         if leftRight > upDown {
             if node2.posX > node1.posX {
-                return "right"
+                return "Right"
             } else {
-                return "left"
+                return "Left"
             }
         } else {
             if node2.posY > node1.posY {
-                return "up"
+                return "Up"
             } else {
-                return "down"
+                return "Down"
             }
         }
     }
