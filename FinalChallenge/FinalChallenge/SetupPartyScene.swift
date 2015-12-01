@@ -437,7 +437,7 @@ class SetupPartyScene: SKScene, SKPhysicsContactDelegate, SetupPartyButtonDelega
     }
     
     func checkIfCanGo() {
-        if GameManager.sharedInstance.players.count > 0{
+        if GameManager.sharedInstance.players.count > 1{
             for p in GameManager.sharedInstance.players{
                 if p.avatar == nil {
                     canGo = false
